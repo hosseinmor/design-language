@@ -2321,7 +2321,8 @@
       "related": [
         "design-system.structure",
         "design-system.governance.documentation-maintenance",
-        "design-system.reference.source-of-truth"
+        "design-system.reference.source-of-truth",
+        "design-system.reference.figma"
       ],
       "topics": [
         "design-system-integration",
@@ -2701,6 +2702,26 @@
       "path": "integrations/component-mapping.md"
     },
     {
+      "id": "design-system.reference.component-mapping-index",
+      "kind": "design-system-reference",
+      "title": "Component Mapping Lookup Index",
+      "summary": "Compact AI retrieval index for locating the exact Figma/design evidence section without loading the full mapping registry; does not certify runtime parity.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.reference.component-mapping",
+        "design-system.reference.figma",
+        "design-system.reference.code",
+        "design-system.reference.storybook"
+      ],
+      "topics": [
+        "component-mapping-index",
+        "design-system-reference"
+      ],
+      "path": "integrations/component-mapping-index.md"
+    },
+    {
       "id": "design-system.reference.figma",
       "kind": "design-system-reference",
       "title": "Figma Reference",
@@ -2710,7 +2731,9 @@
       "last_reviewed": "2026-10-19",
       "related": [
         "design-system.reference.source-of-truth",
-        "design-system.reference.component-mapping"
+        "design-system.reference.component-mapping",
+        "design-system.integration.figma-component-presentation",
+        "design-system.reference.figma-token-compliance"
       ],
       "topics": [
         "design-system-reference",
@@ -2760,7 +2783,7 @@
       "id": "design-system.reference.storybook",
       "kind": "design-system-reference",
       "title": "Storybook Reference",
-      "summary": "Defines Storybook as the executable component reference when registered and records the current absence of a verified JV Design System Storybook source.",
+      "summary": "Storybook owns executable examples and evidence; a reported internal Karbon URL is known but package, build and story mapping remain unverified.",
       "status": "reviewed",
       "owner": "Design System team",
       "last_reviewed": "2026-09-13",
@@ -3078,7 +3101,7 @@
     }
   ],
   "summary": {
-    "documents": 150,
+    "documents": 151,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3097,7 +3120,7 @@
       "design-system-overview": 1,
       "design-system-pattern": 14,
       "design-system-product-variation": 3,
-      "design-system-reference": 8,
+      "design-system-reference": 9,
       "design-system-token": 13
     },
     "by_group": {},
