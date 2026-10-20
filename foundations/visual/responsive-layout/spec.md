@@ -13,6 +13,7 @@ related:
   - design-system.foundation.responsive-layout
   - design-system.pattern.responsive-layout
   - design-system.reference.tailwind
+  - design-system.token.layout.catalog
 ---
 
 # Responsive Layout Specification
@@ -21,43 +22,23 @@ related:
 
 | Range | Query intent | Major layout regions |
 |---|---|---:|
-| `narrow` | width below `768px` | 1 |
-| `regular` | width at or above `768px` | Up to 2 |
-| `wide` | width at or above `1400px` | Up to 3 |
+| `narrow` | Below `breakpoint/medium` | 1 |
+| `regular` | From `breakpoint/medium` to below `breakpoint/xxlarge` | Up to 2 |
+| `wide` | From `breakpoint/xxlarge` upward | Up to 3 |
 
-Viewport ranges are the preferred semantic API for high-level page structure.
+Viewport ranges are the preferred semantic API for high-level page structure. Threshold values are defined in the [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md).
 
 ## Breakpoint ruler
 
-| Token | Value | Tailwind adapter |
-|---|---:|---|
-| `xsmall` | `320px` | `xs` |
-| `small` | `544px` | `sm` |
-| `medium` | `768px` | `md` |
-| `large` | `1012px` | `lg` |
-| `xlarge` | `1280px` | `xl` |
-| `xxlarge` | `1400px` | `2xl` |
+The [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md) owns `breakpoint/xsmall` through `breakpoint/xxlarge`, their approved numeric values, and intended Tailwind adapter names.
 
-Breakpoint values are ruler values for fine-tuning. They must not be interpreted as six separate page modes.
-
-Generated runtime artifacts must originate from one canonical Design System source. Tailwind, CSS custom media, or other framework outputs must not re-author these numbers independently.
+These tokens are a ruler for fine-tuning, not six independent page modes. All generated runtime artifacts must originate from one Design System source. Tailwind/CSS outputs must not re-author these numbers manually.
 
 ## Container and padding tokens
 
-| Token | Value |
-|---|---:|
-| `container/interstitial` | `320px` |
-| `container/medium` | `768px` |
-| `container/large` | `1012px` |
-| `container/xlarge` | `1280px` |
-| `container/full` | `100%` |
-| `content-padding/default` | `16px` |
-| `content-padding/wide` | `24px` |
-| `pane-padding` | `16px` |
+The [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md) owns the exact `container/*`, `content-padding/*`, and `pane-padding` value declarations, including the distinction between published Figma variables and the conceptual `container/full` role.
 
-Content padding is `16px` through `large`, then `24px` at `xlarge` and `xxlarge`. Pane padding remains `16px`.
-
-A numeric container max-width includes its horizontal padding.
+Content padding switches from `content-padding/default` to `content-padding/wide` at `breakpoint/xlarge`; Pane padding stays `pane-padding`. Every numeric container maximum width includes its horizontal padding.
 
 ## Rules
 
@@ -202,20 +183,9 @@ Also test intermediate widths, content expansion, RTL, 200% zoom/reflow, keyboar
 
 ## Tailwind mapping
 
-Tailwind may map the shared ruler to custom screens:
+Tailwind may map the canonical breakpoint ruler into framework screen keys, but the **values and intended keys are owned by** [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md). Framework breakpoints do not replace `narrow / regular / wide` as semantic page structure.
 
-| DS token | Tailwind key | Value |
-|---|---|---:|
-| `xsmall` | `xs` | `320px` |
-| `small` | `sm` | `544px` |
-| `medium` | `md` | `768px` |
-| `large` | `lg` | `1012px` |
-| `xlarge` | `xl` | `1280px` |
-| `xxlarge` | `2xl` | `1400px` |
-
-Tailwind screen keys are an implementation adapter over the breakpoint ruler. They do not replace `narrow / regular / wide` as page-layout semantics.
-
-Exact custom media/variant implementation for viewport ranges and container queries remains Frontend-owned.
+Exact custom media, utility and container-query adapters remain Frontend-owned. No second hard-coded mapping is maintained here.
 
 ## Reference frames
 
