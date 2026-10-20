@@ -3,7 +3,7 @@ id: design-system.pattern.confirmation
 collection: design-system
 type: pattern
 title: Confirmation and Modal Actions
-summary: Cancel is usually Ghost.
+summary: Defines confirmation composition and safe exit decisions, delegating action hierarchy, Dialog anatomy and copy to their owners.
 knowledge_state: unverified
 document_maturity: draft
 related: []
@@ -11,23 +11,17 @@ related: []
 
 # Confirmation and Modal Actions
 
-## Default Modal Combinations
+## Action hierarchy
 
-| Modal type | Default combination |
-|---|---|
-| Standard modal | Primary + Ghost |
-| Modal with a valid alternative | Primary + Tertiary |
-| Approved Brand conversion modal | Brand + Ghost |
-| Brand conversion modal with a valid alternative | Brand + Tertiary |
-| Destructive confirmation | Danger Filled + Ghost |
+Use the shared [Action Hierarchy](../../foundations/interaction/action-hierarchy.md) for Button combinations across action groups; do not define a second preset matrix here. For destructive confirmation, follow [Destructive Actions](destructive-actions.md) and the canonical `Danger Primary` Button Style.
 
-`Brand` is used only when the modal action is an approved product conversion or product-defining moment. Do not use Brand merely because the modal contains the visually strongest action; ordinary confirmation remains Primary.
+The confirmation pattern owns **whether confirmation is appropriate**, the relationship between the consequence and the safe alternative, and behavior of Close/Cancel. The [Dialog component](../components/dialog.md) owns modal anatomy, focus, dismissal and shell behavior. [Confirmation Content](../../foundations/content/patterns/confirmations.md) owns message wording and labels.
 
 ## Cancel
 
 Cancel is usually Ghost.
 
-Tertiary is defensible when a product policy requires a clearer container for Cancel, but the choice must be consistent within that product.
+A Tertiary alternative may be appropriate when a documented product context requires more visual prominence; do not silently establish it as a universal Cancel default.
 
 The final cross-product rule remains open.
 

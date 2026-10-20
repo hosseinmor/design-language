@@ -29,25 +29,11 @@ Typical uses include:
 
 Do not use Magic merely as a decorative purple treatment.
 
-## Color Semantics
+## Color ownership
 
-```text
-surface/magic-muted
-→ subtle AI card, section, chip, or container
+The [Color Semantics](../tokens/color/semantics.md) and [Color Usage](../tokens/color/usage.md) documents own Magic role names, token inventories and combinations. Do not maintain a second token catalog in this pattern.
 
-surface/magic-emphasis
-surface/magic-emphasis-hover
-surface/magic-emphasis-active
-→ strong interactive AI action or entry point
-
-fg/magic
-→ AI icon, label, sparkle, or inline emphasis
-
-line/magic
-→ AI-specific outline/indicator when required by anatomy
-```
-
-The component's interaction model still determines which states exist. A passive AI container does not gain Hover or Active merely because Magic Emphasis has those state tokens available.
+An AI indicator must not override normal selection, focus, disabled or error behavior. A passive AI container does not become interactive merely by consuming Magic roles.
 
 ## Semantic Boundary
 
@@ -62,9 +48,9 @@ If an AI feature is also selected, disabled, focused, or in error, compose the r
 
 ## Component Composition
 
-Use shared Semantic Color tokens directly where the component anatomy can express the pattern. Do not create an `ai-card/*` or `ai-button/*` Color-token family solely to rename Magic roles.
+A card/section, chip/label, icon/inline indicator, and action entry are **different compositions**. Reuse the appropriate canonical component and give the AI affordance an understandable visible or accessible label. Use shared Magic roles only where they convey AI meaning; selection and action hierarchy still come from the component's own interaction contract.
 
-Component-specific tokens require a stable AI component contract that cannot be represented by the existing Semantic vocabulary.
+This document does not authorize a new `ai-card/*` or `ai-button/*` token family. If a repeated AI-specific interaction or composition cannot use existing components, propose a separate reviewed component/pattern contract.
 
 ## Accessibility
 
@@ -89,6 +75,6 @@ Exact product-level component mappings remain owned by the corresponding compone
 
 ## Related Documents
 
-- `../tokens/color/semantics.md`
-- `../tokens/color/usage.md`
-- `../tokens/color/semantics.md`
+- [Color Semantics](../tokens/color/semantics.md)
+- [Color Usage](../tokens/color/usage.md)
+- [Content for AI disclosure](../../foundations/content/patterns/ai-content-and-disclosure.md)

@@ -34,11 +34,9 @@ topics:
 
 ## وضعیت منبع
 
-اسناد `design-system.pattern.loading-and-progress` و
-`design-system.experience-rule.loading` هنوز scaffold و unverified هستند.
-قواعد قطعی این سند از قراردادهای canonical دسترس‌پذیری، Button و مرزهای الگوهای
-Error و Notification می‌آیند. مدت انتظار، threshold نمایش، ETA، رفتار دقیق
-Skeleton و امکان لغو را نباید از این سند استنتاج کرد.
+سند [`design-system.pattern.loading-and-progress`](../../../design-system/patterns/loading-and-progress.md) اکنون قرارداد نهایی و تأییدشدهٔ Design System برای انتخاب Loading/Progress و ترکیب Progress Circle، Progress Bar و Skeleton است. سند `design-system.experience-rule.loading` همچنان فقط جایگاه TBD برای اصول تعاملی احتمالی است و منبع رفتار اجرایی محسوب نمی‌شود.
+
+این سند مالک **محتوای وضعیت و زبان پیام‌ها** است، نه انتخاب کامپوننت یا پیاده‌سازی Runtime. زمان انتظار، threshold نمایش، ETA و امکان لغو را بدون تأیید Product/Runtime نباید استنتاج کرد.
 
 ## هدف
 
@@ -148,8 +146,7 @@ Skeleton یک treatment دیداری برای ساختار در انتظار ا�
 تعریف نکنید. استفاده از Skeleton نیاز به busy/status درست را، هرجا برای فهم
 کاربر لازم است، حذف نمی‌کند.
 
-جزئیات انتخاب Skeleton در برابر spinner و شکل دقیق placeholder هنوز در pattern
-canonical Design System تثبیت نشده است؛ این سند آن‌ها را اختراع نمی‌کند.
+برای انتخاب Skeleton در برابر spinner به [پترن Loading and Progress](../../../design-system/patterns/loading-and-progress.md) رجوع کنید. این سند شکل دقیق placeholder، timing یا cancellation تعریف نمی‌کند.
 
 ## دسترس‌پذیری
 

@@ -35,33 +35,14 @@ Error
 
 `Danger` is **not** a fifth notification severity. Danger describes destructive intent before an action; Error describes a failure/problem state.
 
-## Component Model
+## Presentation choice
 
-The pattern has two independent component presentations that share severity semantics:
+| User need | Presentation |
+|---|---|
+| Message persists with a content region, requires reading or action in context | Inline Notification |
+| Short transient feedback after an action, with no requirement to remain in layout | Toast |
 
-### Inline Notification
-
-Use when the message should remain visible near the affected content or when users may need time to read or act on it.
-
-Baseline visual semantics:
-- muted severity surface;
-- readable neutral message content;
-- severity cue through the status icon;
-- no elevation shadow.
-
-Inline Notification remains in the content flow and follows the width of its related content region.
-
-### Toast
-
-Use for short transient feedback that does not need to remain in the layout, such as routine confirmation after an action.
-
-Toast is a floating component and uses `Shadow/Floating`.
-
-Normal is the default neutral-surface treatment. High is the approved inverse-surface treatment.
-
-Toast is a visual presentation, not a semantic role and not another severity.
-
-Do not combine Inline Notification and Toast into a single Figma `Type` axis. Their placement, persistence, elevation, timing, and responsive behavior are different enough to keep separate component identities.
+The [Notification component contract](../components/notification.md) owns the separate Inline/Toast anatomies, exact visual treatments, Action Slot and Dismiss composition. Severity (`Info`, `Success`, `Warning`, `Error`) is independent of presentation. Danger is pre-action intent, not a Notification severity.
 
 ## Rules and States
 
@@ -91,7 +72,7 @@ Do not use Error merely because destructive actions and errors may share a red h
 
 Notification actions reuse existing Button/Link semantics. Do not create notification-specific action styles only because an action appears inside feedback.
 
-The Figma components expose a native Action Slot so Link/Button keep their own geometry and properties.
+The component's Action Slot preserves the embedded Button/Link's own geometry and properties.
 
 Use:
 - Link for navigation;

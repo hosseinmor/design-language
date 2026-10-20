@@ -75,7 +75,11 @@ When the current step is submitting:
 
 - The triggered Button enters Loading.
 - Repeated submission is blocked.
-- Back and competing actions are disabled until the request completes.
+- Availability of Back, Cancel, Exit and competing actions during submission is **flow-specific**. Product Knowledge or the approved feature flow must determine whether they remain available, require a safety confirmation, or are temporarily unavailable; do not globally disable them based on this draft pattern.
+
+## Ownership and open decisions
+
+This pattern owns generic step navigation and action composition, not feature-specific permissions, submission cancellation support, or navigation policy. Exact runtime transitions and eligibility remain Product Knowledge/code-owned.
 
 ## Related Documents
 

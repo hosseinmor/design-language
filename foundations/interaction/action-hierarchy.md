@@ -19,7 +19,7 @@ Only one action in a group may use the strongest visual presence:
 
 - Brand
 - Primary
-- Danger Filled
+- Danger Primary
 
 All other actions must be at least one level lower.
 
@@ -32,7 +32,7 @@ All other actions must be at least one level lower.
 | Operational action with Cancel | Primary + Ghost |
 | Operational action with a valid alternative | Primary + Tertiary |
 | Two important operational paths with clear hierarchy | Primary + Secondary |
-| Final destructive confirmation with Cancel | Danger Filled + Ghost |
+| Final destructive confirmation with Cancel | Danger Primary + Ghost |
 
 ## Limited Combinations
 
@@ -46,7 +46,7 @@ Keep an action group to two Buttons whenever possible.
 
 When three actions are necessary:
 
-- Main action → Brand, Primary, or Danger Filled
+- Main action → Brand, Primary, or Danger Primary
 - Supporting action → Tertiary or Secondary
 - Exit or third action → Ghost, visually separated from the first two
 
@@ -77,6 +77,8 @@ The nature of the control still takes priority:
 - Exit or low-emphasis operation → Ghost
 
 ## Scope
+
+This document owns visual hierarchy and combinations **across action groups**. Button Style/API names are defined only by the [Button component](../../design-system/components/button.md). Destructive-action stages are defined in the [Destructive Actions pattern](../../design-system/patterns/destructive-actions.md).
 
 This document owns hierarchy across action groups.
 

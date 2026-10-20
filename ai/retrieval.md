@@ -33,3 +33,10 @@ overview/design-language.md
 Future MCP tooling should expose registry lookup and live-source joins. It must
 return provenance, verification state, and source timestamps, and must never
 write generated observations back as canonical rules without review.
+
+## Drafts, scaffolds and ownership boundaries
+
+- A `draft` or `scaffold` document is retrievable for **known gaps or proposed design direction**, never as proof of an approved rule.
+- When a draft merely routes to a verified component/pattern/accessibility contract, retrieve the **owning reviewed source** for normative decisions.
+- A usage pattern does not override a component API or visual specification; a component does not override shared interaction foundations or business rules.
+- When sources disagree on exact implementation names, prefer verified live code/Figma sources and report the discrepancy rather than guessing.
