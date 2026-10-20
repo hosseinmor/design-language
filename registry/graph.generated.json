@@ -1754,7 +1754,77 @@
     },
     {
       "from": "design-system.experience-rule.contextual-guidance",
+      "to": "design-system.foundation.elevation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.contextual-guidance",
       "to": "design-system.pattern.tour",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.disabled-and-read-only",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.disabled-and-read-only",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.error-recovery",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.error-recovery",
+      "to": "design-system.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.feedback",
+      "to": "design-system.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.feedback",
+      "to": "design-system.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.focus",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.loading",
+      "to": "design-system.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.responsive-interaction",
+      "to": "design-system.accessibility.responsive-and-zoom",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.responsive-interaction",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.validation",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.validation",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.validation",
+      "to": "design-system.component.text-input",
       "type": "related"
     },
     {
@@ -1928,6 +1998,16 @@
       "type": "related"
     },
     {
+      "from": "design-system.pattern.bulk-actions",
+      "to": "design-system.experience-rule.selection",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.bulk-actions",
+      "to": "design-system.pattern.data-views",
+      "type": "related"
+    },
+    {
       "from": "design-system.pattern.data-views",
       "to": "design-system.accessibility.tables-and-data-visualization",
       "type": "related"
@@ -1935,6 +2015,26 @@
     {
       "from": "design-system.pattern.data-views",
       "to": "design-system.component.table",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.empty-states",
+      "to": "content.pattern.empty-states",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.empty-states",
+      "to": "design-system.component.empty-state",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.form-submission",
+      "to": "design-system.experience-rule.validation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.form-submission",
+      "to": "design-system.pattern.loading-and-progress",
       "type": "related"
     },
     {
@@ -1985,6 +2085,16 @@
     {
       "from": "design-system.pattern.responsive-layout",
       "to": "design-system.foundation.responsive-layout-spec",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.search-and-filtering",
+      "to": "design-system.component.chip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.search-and-filtering",
+      "to": "design-system.component.search",
       "type": "related"
     },
     {
