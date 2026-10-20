@@ -20,6 +20,15 @@ This registry prevents AI and humans from guessing runtime component APIs from F
 
 A mapping is considered verified only when both sides are supported by their owning live sources.
 
+## Retrieval and evidence boundary
+
+This file is a **large design-to-code mapping evidence register**, not a fully populated runtime parity registry. Start from the [Component Mapping Lookup Index](component-mapping-index.md), find the exact component's `###` heading and read only that subsection.
+
+- Treat verified Figma IDs/keys as **design identity evidence only**. An unregistered runtime source is not `verified` because a design has been handed off.
+- The owning Code package, compiled API, tests and Storybook build must be verified separately before asserting runtime parity or shipment.
+- Historical snapshots and PR-status notes are evidence recorded at the time; do not treat them as live issue/PR state unless rechecked.
+- This register is for cross-source evidence and unresolved matches, not a replacement for component usage/semantic rules.
+
 ## Mapping fields
 
 For each mapped component record:
