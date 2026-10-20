@@ -1,0 +1,229 @@
+schema_version: "0.1"
+id: content.component.button
+title: قرارداد محتوایی Button
+status: draft
+language: fa-IR
+scope:
+  - button-label
+  - call-to-action
+  - confirmation-action
+  - loading-action
+  - accessible-name
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  localization: content.foundation.localization
+  patterns:
+    - content.pattern.confirmation
+    - content.pattern.loading-and-progress
+  design_system:
+    - button
+    - design-system.experience-rule.action-hierarchy
+
+goal: >
+  برچسب Button باید action و نتیجهٔ واقعی activation را با کوتاه‌ترین عبارت
+  دقیق و متمایز بیان کند، بدون آن‌که رفتار محصول یا state تأییدنشده‌ای بسازد.
+
+tone_profile: button_or_menu_label
+
+sources:
+  - id: design_system_button
+    type: design_system_component
+    reference: button
+    state: verified
+  - id: action_hierarchy
+    type: design_system_experience_rule
+    reference: design-system.experience-rule.action-hierarchy
+    state: draft
+  - id: confirmation_pattern
+    type: content_pattern
+    reference: content.pattern.confirmation
+    state: draft
+  - id: loading_pattern
+    type: content_pattern
+    reference: content.pattern.loading-and-progress
+    state: draft
+  - id: product_voice
+    type: content_foundation
+    reference: content.foundation.product_voice
+    state: draft
+  - id: terminology
+    type: content_foundation
+    reference: content.foundation.terminology
+    state: draft
+  - id: localization
+    type: content_foundation
+    reference: content.foundation.localization
+    state: draft
+  - id: product_content_decisions
+    type: operational_decision
+    state: working_decisions
+
+source_boundaries:
+  source_derived:
+    - Button برای action است و navigation باید Link semantics داشته باشد.
+    - Button استاندارد label دیداری یک‌خطی و توصیف‌کنندهٔ نتیجه دارد.
+    - accessible name معمولاً از label دیداری می‌آید.
+    - Loading هویت و هندسهٔ Button را حفظ و activation تکراری را متوقف می‌کند.
+    - Danger فقط برای intent مخرب است.
+  product_content_decisions:
+    - الگوی فارسی label، disambiguation و قواعد شکل نوشتاری.
+    - منع generic label در تصمیم پیامددار و همسویی label با feedback state.
+  excluded:
+    - رفتار business، destination و recoverability هر flow.
+    - انتخاب runtime component API، placement و visual token.
+    - سقف سراسری نویسه یا policy مقدار پویا که هنوز تأیید نشده است.
+
+label_model:
+  inputs:
+    - action
+    - object_or_scope_when_needed
+    - result_or_destination
+    - surrounding_context
+    - confirmed_consequence_and_recoverability
+  forms:
+    - pattern: "{action}"
+      use_when: context موضوع و نتیجه را بدون ابهام مشخص می‌کند.
+    - pattern: "{action} {object}"
+      use_when: موضوع برای فهم یا تمایز لازم است.
+    - pattern: "{action} {scope_or_result}"
+      use_when: دامنه یا نتیجه تصمیم را روشن می‌کند.
+  selection_rule: کوتاه‌ترین label دقیق و متمایز را در context واقعی انتخاب کنید.
+
+component_selection:
+  action: Button
+  navigation: Link semantics
+  icon_only_action: Icon Button
+  specialized_control: قرارداد کنترل تخصصی
+
+state_model:
+  idle: label action واقعی را نام می‌برد.
+  loading: label پایه و هویت action ثابت می‌مانند؛ status جدا فقط در صورت نیاز.
+  success: feedback پس از نتیجهٔ تأییدشده از pattern مناسب می‌آید.
+  error: failure و recovery پس از state واقعی از pattern Error می‌آیند.
+
+rules:
+  - id: BTN-001
+    obligation: must
+    dimension: meaning
+    key: name_action_result
+    statement: label باید action یا نتیجهٔ واقعی activation را روشن کند.
+    evidence: [design_system_button, product_content_decisions]
+  - id: BTN-002
+    obligation: must
+    dimension: clarity
+    key: shortest_unambiguous_label
+    statement: کوتاه‌ترین label دقیق و بدون ابهام در context واقعی انتخاب شود.
+    evidence: [design_system_button, product_voice, product_content_decisions]
+  - id: BTN-003
+    obligation: must
+    dimension: scope
+    key: include_object_when_needed
+    statement: object یا scope هرجا برای فهم، تمایز یا consequence لازم است در label بیاید.
+    evidence: [confirmation_pattern, product_content_decisions]
+  - id: BTN-004
+    obligation: must_not
+    dimension: meaning
+    key: generic_consequential_label
+    statement: در action پیامددار، «بله»، «خیر»، «تأیید» یا «انجام» به‌تنهایی label نباشد.
+    evidence: [confirmation_pattern]
+  - id: BTN-005
+    obligation: must_not
+    dimension: product_truth
+    key: announce_outcome_early
+    statement: label پیش از activation نباید completion، success یا failure را اعلام کند.
+    evidence: [loading_pattern, product_content_decisions]
+  - id: BTN-006
+    obligation: must
+    dimension: component_selection
+    key: action_not_navigation
+    statement: Button برای action استفاده شود و navigation مستقل Link semantics داشته باشد.
+    evidence: [design_system_button]
+  - id: BTN-007
+    obligation: must
+    dimension: hierarchy
+    key: style_follows_meaning
+    statement: Brand، Primary و Danger از معنی، hierarchy و consequence تأییدشده انتخاب شوند، نه از شدت واژهٔ label.
+    evidence: [design_system_button, action_hierarchy]
+  - id: BTN-008
+    obligation: must_not
+    dimension: tone
+    key: promotional_pressure
+    statement: label نباید ادعای تبلیغاتی، فشار احساسی یا فوریت ساختگی را برای تقویت CTA اضافه کند.
+    evidence: [product_voice, product_content_decisions]
+  - id: BTN-009
+    obligation: must
+    dimension: terminology
+    key: canonical_audience_term
+    statement: object با اصطلاح canonical همان audience و surface نامیده شود.
+    evidence: [terminology]
+  - id: BTN-010
+    obligation: must_not
+    dimension: product_truth
+    key: expose_internal_term
+    statement: implementation name، API field یا نام داخلی نباید به label کاربر منتقل شود.
+    evidence: [terminology, product_content_decisions]
+  - id: BTN-011
+    obligation: must
+    dimension: loading
+    key: preserve_loading_identity
+    statement: در Loading هویت label پایه ثابت بماند و با status طولانی جایگزین نشود.
+    evidence: [design_system_button, loading_pattern]
+  - id: BTN-012
+    obligation: must
+    dimension: confirmation
+    key: explicit_safe_exit
+    statement: در confirmation، action اصلی و راه خروج امن labelهای صریح و غیرهم‌معنا داشته باشند.
+    evidence: [confirmation_pattern]
+  - id: BTN-013
+    obligation: must
+    dimension: accessibility
+    key: visible_accessible_alignment
+    statement: label دیداری و accessible name باید از نظر نتیجهٔ action همسو باشند.
+    evidence: [design_system_button, product_content_decisions]
+  - id: BTN-014
+    obligation: must
+    dimension: accessibility
+    key: distinguish_repeated_actions
+    statement: Buttonهای هم‌نام با action یا object متفاوت باید از طریق label یا context برنامه‌وار کافی متمایز شوند.
+    evidence: [design_system_button, product_content_decisions]
+  - id: BTN-015
+    obligation: must
+    dimension: localization
+    key: localize_dynamic_content
+    statement: عدد، identifier و variable پویا در label باید از قرارداد localization و bidi پیروی کند.
+    evidence: [localization]
+  - id: BTN-016
+    obligation: must_not
+    dimension: form
+    key: sentence_punctuation_or_decoration
+    statement: label نباید جملهٔ توضیحی، punctuation پایانی، emoji یا تأکید تزئینی باشد.
+    evidence: [product_voice, product_content_decisions]
+
+examples:
+  concise:
+    - ذخیره
+    - بازگشت
+  object_specific:
+    - ذخیرهٔ تغییرات
+    - ارسال رزومه
+    - افزودن کارجو
+  consequential:
+    - حذف آگهی
+    - خروج بدون ذخیره
+    - ادامهٔ ویرایش
+  avoid:
+    - بله
+    - تأیید
+    - انجام
+    - کلیک کنید
+    - همین حالا شانس طلایی‌تان را فعال کنید!
+
+unknowns:
+  - حداکثر سراسری نویسه یا واژه برای Button تأیید نشده است.
+  - policy سراسری برای نام یا count پویا در label تأیید نشده است.
+  - مقصد و label دقیق Back/Continue در هر flow باید از همان flow بیاید.
+  - label دوزبانه و transliteration به تصمیم Localization و context نیاز دارد.
+
+evaluation_source: ../../../ai/evals/content/button-content-cases.yml

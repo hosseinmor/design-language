@@ -1,0 +1,332 @@
+schema_version: "0.1"
+id: content.eval.localization_cases
+foundation_id: content.foundation.localization
+language: fa-IR
+
+cases:
+  - id: persian_surface_declares_language_and_direction
+    context:
+      surface_language: fa-IR
+      surface_direction: rtl
+      logical_layout: true
+    content:
+      root_language: fa-IR
+      root_direction: rtl
+      alignment: logical-start
+    expected:
+      valid: true
+      checked_rules: [LOC-001, LOC-003]
+      violations: []
+
+  - id: meaningful_english_passage_is_marked
+    context:
+      surrounding_language: fa-IR
+      passage_language: en
+      passage_direction: ltr
+    content:
+      message: راهنمای GitHub
+      passage_semantics: lang=en dir=ltr
+    expected:
+      valid: true
+      checked_rules: [LOC-002, LOC-004]
+      violations: []
+
+  - id: runtime_name_uses_auto_isolation
+    context:
+      surrounding_direction: rtl
+      runtime_value_type: person_name
+      runtime_direction: unknown
+    content:
+      template: رزومهٔ {candidate_name} دریافت شد.
+      variable_direction: auto-isolated
+    expected:
+      valid: true
+      checked_rules: [LOC-004, LOC-015]
+      violations: []
+
+  - id: email_preserves_ltr_contract
+    context:
+      surrounding_direction: rtl
+      runtime_value_type: email
+    content:
+      message: ارسال به name@example.com انجام نشد.
+      value_direction: ltr-isolated
+      digit_conversion: false
+    expected:
+      valid: true
+      checked_rules: [LOC-004, LOC-006, LOC-015]
+      violations: []
+
+  - id: quantity_uses_confirmed_formatter_and_unit
+    context:
+      value_type: quantity
+      locale: fa-IR
+      numbering_system_confirmed: true
+      unit_confirmed: true
+    content:
+      value: 100
+      display: ۱۰۰ نویسه
+      formatter: locale-aware
+    expected:
+      valid: true
+      checked_rules: [LOC-007, LOC-008]
+      violations: []
+
+  - id: date_uses_confirmed_calendar_timezone_and_formatter
+    context:
+      value_type: datetime
+      calendar_confirmed: true
+      timezone_confirmed: true
+      precision_confirmed: true
+    content:
+      formatter: locale-aware
+      calendar: product-configured
+      timezone: product-configured
+      display: ۹ مهر ۱۴۰۵، ساعت ۱۴:۳۰
+    expected:
+      valid: true
+      checked_rules: [LOC-007, LOC-009, LOC-010, LOC-018]
+      violations: []
+
+  - id: translation_key_has_complete_message_and_context
+    context:
+      surface: job_application_confirmation
+      intent: confirmed_success
+      action_result: submitted
+    content:
+      source_message: درخواست شغلی ارسال شد.
+      translation_unit: complete-message
+      variable_types: []
+    expected:
+      valid: true
+      checked_rules: [LOC-012, LOC-013]
+      violations: []
+
+  - id: canonical_job_post_term_is_preserved
+    context:
+      concept: job_post
+      audience: jobseeker
+      preferred_term: آگهی شغلی
+    message: این آگهی شغلی ۳ روز پیش منتشر شده است.
+    expected:
+      valid: true
+      checked_rules: [LOC-007, LOC-014]
+      violations: []
+
+  - id: count_uses_message_formatter
+    context:
+      value_type: count
+      grammar_variation_required: true
+      terminology_concept: job_application
+    content:
+      template: "{count, plural, one {# درخواست شغلی} other {# درخواست شغلی}}"
+      formatter: plural
+    expected:
+      valid: true
+      checked_rules: [LOC-012, LOC-014, LOC-016]
+      violations: []
+
+  - id: missing_value_has_whole_message_fallback
+    context:
+      variable: company_name
+      value_present: false
+      approved_fallback_present: true
+    content:
+      selected_message: اطلاعات سازمان در دسترس نیست.
+      raw_placeholder_visible: false
+    expected:
+      valid: true
+      checked_rules: [LOC-017]
+      violations: []
+
+  - id: base_language_missing
+    context:
+      surface_language: fa-IR
+      root_language_declared: false
+      root_direction_declared: false
+    content:
+      root_language: null
+      root_direction: null
+    expected:
+      valid: false
+      checked_rules: [LOC-001]
+      violations: [LOC-001]
+
+  - id: rtl_is_only_visual_alignment
+    context:
+      surface_language: fa-IR
+      css_text_align_right: true
+      logical_layout: false
+    content:
+      root_direction: null
+      placement_terms: [left, right]
+    expected:
+      valid: false
+      checked_rules: [LOC-001, LOC-003]
+      violations: [LOC-001, LOC-003]
+
+  - id: meaningful_language_change_is_unmarked
+    context:
+      surrounding_language: fa-IR
+      passage_language: en
+      language_metadata_present: false
+    message: برای ادامه Read the instructions را انتخاب کنید.
+    expected:
+      valid: false
+      checked_rules: [LOC-002]
+      violations: [LOC-002]
+
+  - id: dynamic_name_breaks_punctuation
+    context:
+      surrounding_direction: rtl
+      runtime_value_type: person_name
+      runtime_direction: unknown
+      isolation_present: false
+    content:
+      template: رزومهٔ {candidate_name}، دریافت شد.
+      candidate_name: Alex Smith
+    expected:
+      valid: false
+      checked_rules: [LOC-004, LOC-015]
+      violations: [LOC-004, LOC-015]
+
+  - id: invisible_bidi_controls_are_authored_into_copy
+    context:
+      semantic_markup_available: true
+      invisible_controls_in_source_copy: true
+    content:
+      approach: embedded-directional-control-characters
+    expected:
+      valid: false
+      checked_rules: [LOC-005]
+      violations: [LOC-005]
+
+  - id: identifier_is_treated_as_quantity
+    context:
+      value_type: tracking_id
+      identifier_contract: latin-digits-no-grouping
+    content:
+      source_value: JV-120045
+      display: JV-۱۲٬۰۰۴۵
+      quantity_grouping_applied: true
+    expected:
+      valid: false
+      checked_rules: [LOC-006, LOC-007]
+      violations: [LOC-006, LOC-007]
+
+  - id: number_is_formatted_with_string_replacements
+    context:
+      value_type: amount
+      locale: fa-IR
+      formatter_available: true
+    content:
+      implementation: replace-comma-and-digits
+      typed_value_preserved: false
+    expected:
+      valid: false
+      checked_rules: [LOC-007, LOC-009]
+      violations: [LOC-007, LOC-009]
+
+  - id: numeric_token_mixes_digit_systems
+    context:
+      value_type: quantity
+      token_boundary: single-number
+    message: ۱۲3 درخواست شغلی
+    expected:
+      valid: false
+      checked_rules: [LOC-008]
+      violations: [LOC-008]
+
+  - id: persian_language_is_used_to_infer_calendar
+    context:
+      surface_language: fa-IR
+      calendar_confirmed: false
+      timezone_confirmed: false
+    content:
+      implementation: "{day}/{month}/{year}"
+      assumed_calendar: persian
+      assumed_timezone: Asia/Tehran
+    expected:
+      valid: false
+      checked_rules: [LOC-009, LOC-010, LOC-018]
+      violations: [LOC-009, LOC-010, LOC-018]
+
+  - id: relative_deadline_lacks_clock_context
+    context:
+      value_type: deadline
+      timezone_confirmed: false
+      precision_required: true
+    message: تا فردا فرصت دارید.
+    expected:
+      valid: false
+      checked_rules: [LOC-010, LOC-011]
+      violations: [LOC-010, LOC-011]
+
+  - id: translated_sentence_is_built_from_fragments
+    context:
+      target_language_order_may_change: true
+      grammar_variation_required: true
+    content:
+      fragments: ["{count}", " درخواست شغلی", " پیدا شد"]
+      complete_message_key: false
+    expected:
+      valid: false
+      checked_rules: [LOC-012, LOC-016]
+      violations: [LOC-012, LOC-016]
+
+  - id: translation_key_has_no_context
+    context:
+      source_text: ادامه
+      possible_intents: [continue_flow, save_and_continue, confirm]
+      translator_context_present: false
+    content:
+      key: common.continue
+      source_message: ادامه
+    expected:
+      valid: false
+      checked_rules: [LOC-013]
+      violations: [LOC-013]
+
+  - id: translation_collapses_job_post_into_position
+    context:
+      concept: job_post
+      audience: jobseeker
+    message: این موقعیت شغلی ۳ روز پیش منتشر شده است.
+    expected:
+      valid: false
+      checked_rules: [LOC-014]
+      violations: [LOC-014]
+
+  - id: raw_variable_controls_markup
+    context:
+      runtime_value_type: user_free_text
+      escaped: false
+      isolation_present: false
+    content:
+      template: "<span>{user_title}</span>"
+      user_title: "</span><script>…</script>"
+    expected:
+      valid: false
+      checked_rules: [LOC-004, LOC-015]
+      violations: [LOC-004, LOC-015]
+
+  - id: raw_missing_placeholder_is_exposed
+    context:
+      variable: company_name
+      value_present: false
+      approved_fallback_present: false
+    message: درخواست شما برای {company_name} ارسال شد.
+    expected:
+      valid: false
+      checked_rules: [LOC-017]
+      violations: [LOC-017]
+
+  - id: universal_persian_digit_policy_is_invented
+    context:
+      product_digit_policy_confirmed: false
+      identifiers_in_scope: true
+    message: همهٔ اعداد در تمام محصولات باید همیشه به رقم فارسی تبدیل شوند.
+    expected:
+      valid: false
+      checked_rules: [LOC-006, LOC-018]
+      violations: [LOC-006, LOC-018]

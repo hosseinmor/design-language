@@ -1,0 +1,264 @@
+schema_version: "0.1"
+id: content.component.text-input
+title: قرارداد محتوایی Text Input
+status: draft
+language: fa-IR
+scope:
+  - field-label
+  - placeholder
+  - helper-text
+  - validation-error
+  - requiredness
+  - input-value
+  - adornment-action
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  localization: content.foundation.localization
+  patterns:
+    - content.pattern.instructions-and-helper-text
+    - content.pattern.error
+  design_system:
+    - design-system.component.text-input
+    - design-system.accessibility.forms
+
+goal: >
+  Text Input باید با roleهای متمایز و مرتبط Label، Placeholder، Helper، Value و
+  Error، purpose و requirement واقعی یک مقدار تک‌خطی را بدون تکرار یا اختراع
+  رفتار محصول قابل‌فهم کند.
+
+tone_profile: form_helper
+
+sources:
+  - id: design_system_text_input
+    type: design_system_component
+    reference: design-system.component.text-input
+    state: verified
+  - id: accessibility_forms
+    type: accessibility_standard
+    reference: design-system.accessibility.forms
+    state: canonical
+  - id: instruction_pattern
+    type: content_pattern
+    reference: content.pattern.instructions-and-helper-text
+    state: verified
+  - id: error_pattern
+    type: content_pattern
+    reference: content.pattern.error
+    state: verified
+  - id: product_voice
+    type: content_foundation
+    reference: content.foundation.product_voice
+    state: draft
+  - id: terminology
+    type: content_foundation
+    reference: content.foundation.terminology
+    state: draft
+  - id: localization
+    type: content_foundation
+    reference: content.foundation.localization
+    state: draft
+  - id: product_content_decisions
+    type: operational_decision
+    state: working_decisions
+
+source_boundaries:
+  source_derived:
+    - Text Input برای مقدار تک‌خطی است و رفتار native input را حفظ می‌کند.
+    - accessible name معنادار لازم است و Placeholder جای Label نیست.
+    - Helper و Error مرتبط‌اند و Error متنی در invalid state لازم است.
+    - Required، Read only، Disabled و Invalid stateهای متمایزند.
+    - requirement ضروری فقط پشت Info یا Tooltip قرار نمی‌گیرد.
+  product_content_decisions:
+    - الگوی فارسی roleها، جلوگیری از تکرار و انتقال Helper به Error.
+    - حفظ terminology، value و requirement در stateهای مختلف.
+  excluded:
+    - business validation، timing، focus strategy و واقعی‌بودن requiredness.
+    - runtime API، visual token، input type و autocomplete token هر field.
+    - normalization و Warning policy حل‌نشده.
+
+role_model:
+  label:
+    question: این field چیست؟
+    persistence: مستقل از Placeholder و Value قابل‌دریافت می‌ماند.
+  placeholder:
+    question: کدام example یا format hint غیرضروری مفید است؟
+    persistence: با ورود Value ناپدید می‌شود.
+  helper:
+    question: کدام context یا requirement تأییدشده پیش از failure مفید است؟
+    persistence: در state عادی در supporting region قرار می‌گیرد.
+  value:
+    question: مقدار واقعی کاربر یا سیستم چیست؟
+    persistence: از state واقعی input می‌آید.
+  error:
+    question: کدام شرط نقض شده و اصلاح معلوم چیست؟
+    persistence: در invalid state جای Helper treatment را می‌گیرد.
+
+state_model:
+  default: Label و در صورت نیاز Placeholder یا Helper نمایش داده می‌شوند.
+  filled: Value واقعی جای Placeholder را می‌گیرد؛ Filled فقط authoring switch است.
+  invalid: Error متنی و مرتبط جای Helper treatment را می‌گیرد.
+  disabled: کنترل برای interaction unavailable است.
+  readonly: Value خواندنی و focusable می‌ماند اما قابل‌ویرایش نیست.
+
+component_selection:
+  single_line_text: Text Input
+  multi_line_text: Textarea
+  fixed_options: selection control
+  password: Password Input
+  specialized_query: Search
+  immutable_content: ordinary readable content
+
+rules:
+  - id: TXT-001
+    obligation: must
+    dimension: classification
+    key: classify_field_roles
+    statement: نقش Label، Placeholder، Helper، Value و Error پیش از نوشتن مشخص شود.
+    evidence: [design_system_text_input, instruction_pattern]
+  - id: TXT-002
+    obligation: must
+    dimension: label
+    key: label_names_purpose
+    statement: Label purpose field را با اصطلاح همان surface مستقل از Placeholder و Value نام ببرد.
+    evidence: [design_system_text_input, instruction_pattern, terminology]
+  - id: TXT-003
+    obligation: must_not
+    dimension: placeholder
+    key: placeholder_as_label_or_requirement
+    statement: Placeholder تنها Label، accessible name یا محل requirement ضروری نباشد.
+    evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
+  - id: TXT-004
+    obligation: must
+    dimension: placeholder
+    key: placeholder_adds_optional_context
+    statement: Placeholder فقط در صورت افزودن example یا format hint کوتاه و غیرضروری استفاده شود.
+    evidence: [design_system_text_input, instruction_pattern]
+  - id: TXT-005
+    obligation: must
+    dimension: example
+    key: distinguish_example_from_value
+    statement: exampleی که ممکن است Value واقعی برداشت شود با contextی مانند «مثال:» مشخص شود.
+    evidence: [instruction_pattern, product_content_decisions]
+  - id: TXT-006
+    obligation: must
+    dimension: helper
+    key: helper_adds_verified_field_context
+    statement: Helper کوتاه، field-specific، غیرتکراری و شامل context تأییدشده‌ای فراتر از Label باشد.
+    evidence: [design_system_text_input, instruction_pattern]
+  - id: TXT-007
+    obligation: must_not
+    dimension: guidance
+    key: hide_required_guidance
+    statement: instruction، requirement، Error یا consequence ضروری فقط پشت Info یا Tooltip پنهان نشود.
+    evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
+  - id: TXT-008
+    obligation: must
+    dimension: product_truth
+    key: verified_constraints_only
+    statement: limit، format، reason، privacy، storage، consequence و validation فقط از product truth نوشته شوند.
+    evidence: [instruction_pattern, error_pattern, product_content_decisions]
+  - id: TXT-009
+    obligation: must
+    dimension: requiredness
+    key: visible_programmatic_requiredness
+    statement: requiredness واقعی با convention دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
+    evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
+  - id: TXT-010
+    obligation: must_not
+    dimension: duplication
+    key: duplicate_role_wording
+    statement: Label، Placeholder و Helper با wording تکراری پر نشوند.
+    evidence: [instruction_pattern, product_content_decisions]
+  - id: TXT-011
+    obligation: must
+    dimension: error
+    key: actionable_textual_error
+    statement: Error شرط نقض‌شده و اصلاح معلوم را متنی و بدون اتکا به رنگ بیان کند.
+    evidence: [design_system_text_input, accessibility_forms, error_pattern]
+  - id: TXT-012
+    obligation: must
+    dimension: transition
+    key: preserve_requirement_on_error
+    statement: وقتی Error جای Helper treatment را می‌گیرد، requirement ضروری در Error یا Instruction ماندگار حفظ شود.
+    evidence: [design_system_text_input, instruction_pattern]
+  - id: TXT-013
+    obligation: must
+    dimension: accessibility
+    key: associate_name_description_error
+    statement: accessible name، Helper و Error با input مربوط برنامه‌وار مرتبط شوند.
+    evidence: [design_system_text_input, accessibility_forms, instruction_pattern, error_pattern]
+  - id: TXT-014
+    obligation: must
+    dimension: terminology
+    key: error_preserves_label_term
+    statement: Error نام field و object را با همان terminology Label و surface حفظ کند.
+    evidence: [error_pattern, terminology]
+  - id: TXT-015
+    obligation: must
+    dimension: value
+    key: preserve_real_value
+    statement: Value واقعی کاربر یا سیستم مطابق type field حفظ شود و برای لحن برند بازنویسی نشود.
+    evidence: [design_system_text_input, product_content_decisions]
+  - id: TXT-016
+    obligation: must
+    dimension: state
+    key: distinguish_disabled_readonly
+    statement: Disabled و Read only مطابق state واقعی و semantics متمایز استفاده شوند.
+    evidence: [design_system_text_input, accessibility_forms]
+  - id: TXT-017
+    obligation: must
+    dimension: adornment
+    key: interactive_trailing_action_name
+    statement: Trailing تعاملی action و accessible name معنادار داشته باشد و از icon تزئینی متمایز شود.
+    evidence: [design_system_text_input]
+  - id: TXT-018
+    obligation: must
+    dimension: localization
+    key: preserve_type_and_bidi_contract
+    statement: email، URL، identifier، quantity و free text بر اساس type و قرارداد localization و bidi نمایش داده شوند.
+    evidence: [design_system_text_input, localization]
+  - id: TXT-019
+    obligation: must_not
+    dimension: component_selection
+    key: overload_single_line_input
+    statement: متن چندخطی، optionهای ثابت یا رفتار تخصصی به Text Input عمومی تحمیل نشود.
+    evidence: [design_system_text_input]
+  - id: TXT-020
+    obligation: must_not
+    dimension: input_behavior
+    key: unjustified_input_restriction
+    statement: paste، autofill یا password manager بدون محدودیت مشخص و تأییدشده ممنوع نشود.
+    evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
+  - id: TXT-021
+    obligation: must_not
+    dimension: state
+    key: invent_warning_or_normalization_policy
+    statement: Warning، normalization، input purpose یا state حل‌نشده به‌عنوان policy قطعی ساخته نشود.
+    evidence: [design_system_text_input, localization, product_content_decisions]
+
+examples:
+  email:
+    label: ایمیل
+    placeholder: name@example.com
+  job_title:
+    label: عنوان شغلی
+    placeholder: "مثال: طراح محصول"
+  character_limit:
+    label: دربارهٔ من
+    helper: حداکثر ۱۰۰ نویسه
+    condition: limit_confirmed
+  invalid_email:
+    label: ایمیل
+    error: ایمیل را با قالب name@example.com وارد کنید.
+
+unknowns:
+  - convention Required/Optional هر product form
+  - validation timing و focus strategy هر Form/Product
+  - input type و autocomplete token هر field
+  - normalization ارقام، فاصله و حروف عربی/فارسی
+  - Warning state تا زمان use case تأییدشده
+  - semantics و copy actionهای تخصصی Trailing
+
+evaluation_source: ../../../ai/evals/content/text-input-content-cases.yml

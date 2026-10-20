@@ -1,0 +1,142 @@
+schema_version: "0.1"
+id: content.eval.error_cases
+pattern_id: content.pattern.error
+language: fa-IR
+
+cases:
+  - id: required_mobile_is_actionable
+    context:
+      presentation: field
+      field_label: شماره موبایل
+    message: شماره موبایل را وارد کنید.
+    expected:
+      valid: true
+      checked_rules: [ERR-001, ERR-002, ERR-003, ERR-004, ERR-005, ERR-008]
+      violations: []
+
+  - id: email_format_is_explicit
+    context:
+      presentation: field
+      field_label: ایمیل
+    message: ایمیل را با قالب name@example.com وارد کنید.
+    expected:
+      valid: true
+      checked_rules: [ERR-001, ERR-002, ERR-003, ERR-004, ERR-005, ERR-008]
+      violations: []
+
+  - id: retryable_application_failure
+    context:
+      presentation: inline_notification
+      operation: ارسال درخواست شغلی
+      retry_confirmed_safe: true
+    message: درخواست شغلی ارسال نشد. اتصال اینترنت را بررسی و دوباره تلاش کنید.
+    expected:
+      valid: true
+      checked_rules: [ERR-001, ERR-002, ERR-003, ERR-007, ERR-008]
+      violations: []
+
+  - id: valid_data_is_preserved
+    context:
+      presentation: form_submission
+      recoverable: true
+      unrelated_valid_input_preserved: true
+    message: تغییرات ذخیره نشد. دوباره تلاش کنید.
+    expected:
+      valid: true
+      checked_rules: [ERR-001, ERR-002, ERR-007, ERR-009]
+      violations: []
+
+  - id: field_error_is_programmatically_linked
+    context:
+      presentation: field
+      error_is_text: true
+      programmatically_associated: true
+      discoverable_after_submit: true
+    message: رمز عبور باید حداقل ۸ نویسه داشته باشد.
+    expected:
+      valid: true
+      checked_rules: [ERR-001, ERR-002, ERR-010]
+      violations: []
+
+  - id: generic_failure_has_no_recovery
+    context:
+      presentation: toast
+    message: خطایی رخ داد.
+    expected:
+      valid: false
+      checked_rules: [ERR-001, ERR-002, ERR-005]
+      violations: [ERR-001, ERR-002, ERR-005]
+
+  - id: invalid_only_is_not_actionable
+    context:
+      presentation: field
+      field_label: ایمیل
+    message: نامعتبر است.
+    expected:
+      valid: false
+      checked_rules: [ERR-001, ERR-002, ERR-003, ERR-005]
+      violations: [ERR-002, ERR-003, ERR-005]
+
+  - id: user_is_blamed
+    context:
+      presentation: field
+      field_label: ایمیل
+    message: شما ایمیل را اشتباه وارد کرده‌اید.
+    expected:
+      valid: false
+      checked_rules: [ERR-002, ERR-004]
+      violations: [ERR-002, ERR-004]
+
+  - id: internal_code_replaces_explanation
+    context:
+      presentation: toast
+      operation: ذخیرهٔ رزومه
+    message: ResumeServiceError 503
+    expected:
+      valid: false
+      checked_rules: [ERR-001, ERR-002, ERR-006]
+      violations: [ERR-001, ERR-002, ERR-006]
+
+  - id: unverified_cause_and_retry
+    context:
+      presentation: inline_notification
+      cause_confirmed: false
+      retry_confirmed_safe: false
+    message: به‌دلیل قطعی سرور، رزومه ذخیره نشد. دوباره تلاش کنید.
+    expected:
+      valid: false
+      checked_rules: [ERR-002, ERR-007]
+      violations: [ERR-002, ERR-007]
+
+  - id: branded_error_is_distracting
+    context:
+      presentation: toast
+      operation: بارگذاری رزومه
+    message: اوه! نگران نباشید؛ قهرمان مسیر شغلی، دوباره امتحانش کنید 🚀
+    expected:
+      valid: false
+      checked_rules: [ERR-001, ERR-003, ERR-008]
+      violations: [ERR-001, ERR-003, ERR-008]
+
+  - id: recoverable_error_clears_valid_data
+    context:
+      presentation: form_submission
+      recoverable: true
+      unrelated_valid_input_preserved: false
+    message: اطلاعات ذخیره نشد. دوباره تلاش کنید.
+    expected:
+      valid: false
+      checked_rules: [ERR-009]
+      violations: [ERR-009]
+
+  - id: color_only_field_error
+    context:
+      presentation: field
+      error_is_text: false
+      programmatically_associated: false
+      discoverable_after_submit: false
+    message: ""
+    expected:
+      valid: false
+      checked_rules: [ERR-001, ERR-010]
+      violations: [ERR-001, ERR-010]

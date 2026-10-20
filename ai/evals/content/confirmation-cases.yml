@@ -1,0 +1,221 @@
+schema_version: "0.1"
+id: content.eval.confirmation_cases
+pattern_id: content.pattern.confirmation
+language: fa-IR
+
+cases:
+  - id: irreversible_job_post_delete
+    context:
+      confirmation_needed: true
+      destructive: true
+      treatment: danger-primary
+      recoverability_confirmed: irreversible
+      safe_exit_available: true
+    content:
+      title: آگهی را حذف می‌کنید؟
+      body: آگهی «کارشناس فروش» حذف می‌شود و امکان بازگردانی آن نیست.
+      primary_action: حذف آگهی
+      safe_exit: انصراف
+    expected:
+      valid: true
+      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-007, CNF-009, CNF-011, CNF-012]
+      violations: []
+
+  - id: discard_unsaved_changes
+    context:
+      confirmation_needed: true
+      destructive: true
+      treatment: danger-primary
+      safe_exit_available: true
+    content:
+      title: تغییرات ذخیره‌نشده را کنار می‌گذارید؟
+      body: اگر خارج شوید، تغییرات این صفحه ذخیره نمی‌شود.
+      primary_action: خروج بدون ذخیره
+      safe_exit: ادامهٔ ویرایش
+    expected:
+      valid: true
+      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-005, CNF-006, CNF-007, CNF-008, CNF-009, CNF-012]
+      violations: []
+
+  - id: remove_organization_access
+    context:
+      confirmation_needed: true
+      destructive: true
+      treatment: danger-primary
+      safe_exit_available: true
+      recovery_path_confirmed: true
+    content:
+      title: دسترسی مریم احمدی را حذف می‌کنید؟
+      body: مریم احمدی دیگر به پنل سازمان دسترسی نخواهد داشت. برای بازگرداندن دسترسی باید دوباره او را دعوت کنید.
+      primary_action: حذف دسترسی
+      safe_exit: انصراف
+    expected:
+      valid: true
+      checked_rules: [CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-009, CNF-012]
+      violations: []
+
+  - id: bulk_delete_with_exact_scope
+    context:
+      confirmation_needed: true
+      destructive: true
+      treatment: danger-primary
+      selected_count: 3
+    content:
+      title: ۳ درخواست شغلی را حذف می‌کنید؟
+      body: این اقدام روی هر ۳ درخواست شغلی اثر می‌گذارد و امکان بازگردانی آن‌ها نیست.
+      primary_action: حذف ۳ درخواست شغلی
+      safe_exit: انصراف
+    expected:
+      valid: true
+      checked_rules: [CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-010]
+      violations: []
+
+  - id: routine_reversible_action_skips_confirmation
+    context:
+      confirmation_needed: false
+      low_risk: true
+      easily_reversible: true
+      undo_confirmed: true
+    content:
+      title: ""
+      body: ""
+      primary_action: بایگانی آگهی
+      safe_exit: ""
+    expected:
+      valid: true
+      checked_rules: [CNF-001, CNF-009]
+      violations: []
+
+  - id: generic_yes_no_actions
+    context:
+      confirmation_needed: true
+      destructive: true
+      treatment: danger-primary
+    content:
+      title: مطمئن هستید؟
+      body: این مورد حذف خواهد شد.
+      primary_action: بله
+      safe_exit: خیر
+    expected:
+      valid: false
+      checked_rules: [CNF-002, CNF-003, CNF-005, CNF-006, CNF-007]
+      violations: [CNF-002, CNF-005, CNF-006, CNF-007]
+
+  - id: generic_confirm_action
+    context:
+      confirmation_needed: true
+      destructive: true
+    content:
+      title: حذف آگهی
+      body: آگهی حذف می‌شود.
+      primary_action: تأیید
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [CNF-004, CNF-005, CNF-006, CNF-007]
+      violations: [CNF-004, CNF-005, CNF-007]
+
+  - id: emotional_pressure_to_keep_subscription
+    context:
+      confirmation_needed: true
+      destructive: false
+      treatment: primary
+    content:
+      title: واقعاً می‌خواهید فرصت‌های طلایی را از دست بدهید؟
+      body: با لغو اشتراک، آیندهٔ شغلی خود را به خطر می‌اندازید.
+      primary_action: با تأسف لغو می‌کنم
+      safe_exit: حفظ فرصت‌های من
+    expected:
+      valid: false
+      checked_rules: [CNF-005, CNF-006, CNF-008]
+      violations: [CNF-008]
+
+  - id: danger_used_for_reversible_negative_action
+    context:
+      confirmation_needed: true
+      destructive: false
+      easily_reversible: true
+      treatment: danger-primary
+    content:
+      title: آگهی را غیرفعال می‌کنید؟
+      body: می‌توانید آگهی را بعداً دوباره فعال کنید.
+      primary_action: غیرفعال‌کردن آگهی
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [CNF-004, CNF-005, CNF-006, CNF-009]
+      violations: [CNF-009]
+
+  - id: bulk_scope_is_missing
+    context:
+      confirmation_needed: true
+      destructive: true
+      selected_count: 12
+    content:
+      title: موارد انتخاب‌شده را حذف می‌کنید؟
+      body: این موارد حذف می‌شوند.
+      primary_action: حذف موارد
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [CNF-002, CNF-003, CNF-010]
+      violations: [CNF-002, CNF-003, CNF-010]
+
+  - id: recovery_is_invented
+    context:
+      confirmation_needed: true
+      destructive: true
+      recovery_path_confirmed: false
+    content:
+      title: دسترسی را حذف می‌کنید؟
+      body: بعداً می‌توانید این دسترسی را با یک کلیک برگردانید.
+      primary_action: حذف دسترسی
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [CNF-004]
+      violations: [CNF-004]
+
+  - id: completion_is_announced_before_activation
+    context:
+      confirmation_needed: true
+      destructive: true
+    content:
+      title: آگهی حذف شد
+      body: این آگهی دیگر نمایش داده نمی‌شود.
+      primary_action: حذف آگهی
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [CNF-011]
+      violations: [CNF-011]
+
+  - id: no_safe_exit
+    context:
+      confirmation_needed: true
+      destructive: true
+      safe_exit_available: false
+    content:
+      title: آگهی را حذف می‌کنید؟
+      body: این آگهی حذف می‌شود و امکان بازگردانی آن نیست.
+      primary_action: حذف آگهی
+      safe_exit: ""
+    expected:
+      valid: false
+      checked_rules: [CNF-006, CNF-012]
+      violations: [CNF-006, CNF-012]
+
+  - id: unnecessary_confirmation_for_routine_action
+    context:
+      confirmation_needed: false
+      low_risk: true
+      easily_reversible: true
+    content:
+      title: فیلتر را پاک می‌کنید؟
+      body: همهٔ فیلترها پاک می‌شوند.
+      primary_action: پاک‌کردن فیلترها
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [CNF-001]
+      violations: [CNF-001]

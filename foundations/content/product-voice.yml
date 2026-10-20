@@ -1,0 +1,195 @@
+schema_version: "0.1"
+id: content.foundation.product_voice
+title: مدل اجرایی صدای محصول جاب‌ویژن
+status: draft
+language: fa-IR
+scope:
+  - product-ui
+  - transactional-content
+  - ai-generated-product-content
+
+description: >
+  منبع machine-readable صدای محصول جاب‌ویژن. این مدل، شواهد هویت کلامی برند را
+  از قواعد اجرایی مخصوص رابط محصول جدا می‌کند تا لحن هر سطح با ریسک و وظیفهٔ
+  کاربر تنظیم شود.
+
+sources:
+  - id: verbal_identity_v2
+    title: کلید کلام برند، نسخهٔ ۲، پاییز ۱۴۰۴
+    type: brand_guideline
+    state: reviewed_source
+    relevant_pages: [6, 7, 8, 13, 14, 21, 22, 26, 29, 30, 31, 32, 33]
+  - id: product_content_decisions
+    title: تصمیم‌های Product Content System
+    type: operational_decision
+    state: working_decisions
+  - id: accessibility_corpus
+    title: راهنمای دسترس‌پذیری Design System
+    type: product_standard
+    state: canonical
+
+precedence:
+  - product_truth_and_safety
+  - accessibility_and_usability
+  - interaction_pattern_and_component_contract
+  - terminology_and_persian_language
+  - brand_expression
+
+source_derived:
+  language_register:
+    default: persian_standard_written
+    statement: زبان پایه، فارسی معیار نوشتاری است.
+    exceptions:
+      - surface: social_media
+        rule: شکسته‌نویسی فقط به‌شکل محدود و اصولی مجاز است.
+    evidence: [verbal_identity_v2]
+  narrator:
+    brand_reference: [جاب‌ویژن, ما]
+    audience_address: شما
+    rule: >
+      در پیام‌های مهم و حیاتی، حضور نام جاب‌ویژن می‌تواند اعتبار و جایگاه
+      فرستنده را روشن‌تر کند؛ در بقیهٔ موارد خطاب مستقیم می‌تواند مؤثرتر باشد.
+    evidence: [verbal_identity_v2]
+  voice_axes:
+    - id: confident_warm
+      source_label: مطمئن اما گرم
+      meaning:
+        - دقیق، شفاف، مستند و مرتبط
+        - صمیمی، راحت و مستقیم
+        - همراه با پیشنهاد یا راه‌حل در صورت امکان
+      evidence: [verbal_identity_v2]
+    - id: encouraging_respectful
+      source_label: انگیزه‌بخش اما محترم
+      source_label_variant: انگیزه‌بخش اما مطمئن
+      ambiguity: >
+        عنوان نمای کلی و عنوان اسلاید جزئیات یکسان نیستند؛ بنابراین مدل اجرایی
+        از ابعاد مستقل انگیزش، احترام و اطمینان استفاده می‌کند.
+      meaning:
+        - تمرکز بر پیشرفت به‌جای کمبود
+        - تأکید بر توانایی و مسیر بعدی بدون وعدهٔ اغراق‌آمیز
+      evidence: [verbal_identity_v2]
+  product_surface_guidance:
+    rules:
+      - متن دقیق، شفاف، کوتاه، روان و محترمانه باشد.
+      - واژه‌های شکسته، غیررسمی، شعاری و اغراق‌آمیز استفاده نشوند.
+      - قواعد دستور زبان و نیم‌فاصله رعایت شوند.
+      - فهم مخاطب بر نمایش شخصیت برند اولویت دارد.
+    evidence: [verbal_identity_v2]
+
+operational_model:
+  principle: >
+    صدای برند ثابت می‌ماند، اما شدت ابعاد لحن با وظیفه، ریسک و حالت کاربر
+    تغییر می‌کند. در سطوح تراکنشی، وضوح و بازیابی بر بیان برند مقدم‌اند.
+  dimensions:
+    clarity:
+      definition: میزان صراحت، دقت و قابل‌اقدام بودن پیام
+      levels: [maximum, high, medium, low, none]
+    warmth:
+      definition: میزان نزدیکی و توجه انسانی بدون خودمانی‌شدن
+      levels: [maximum, high, medium, low, none]
+    encouragement:
+      definition: میزان تأکید بر توانایی، پیشرفت یا گام بعدی
+      levels: [maximum, high, medium, low, none]
+    brand_expression:
+      definition: میزان حضور واژگان، ریتم و شخصیت متمایز برند
+      levels: [maximum, high, medium, low, none]
+  tone_profiles:
+    button_or_menu_label:
+      clarity: maximum
+      warmth: low
+      encouragement: none
+      brand_expression: none
+    form_helper:
+      clarity: maximum
+      warmth: low
+      encouragement: low
+      brand_expression: none
+    validation_error:
+      clarity: maximum
+      warmth: low
+      encouragement: none
+      brand_expression: none
+    informational_feedback:
+      clarity: high
+      warmth: low
+      encouragement: none
+      brand_expression: low
+    warning_feedback:
+      clarity: maximum
+      warmth: low
+      encouragement: none
+      brand_expression: none
+    error_feedback:
+      clarity: maximum
+      warmth: low
+      encouragement: none
+      brand_expression: none
+    loading_feedback:
+      clarity: high
+      warmth: low
+      encouragement: none
+      brand_expression: none
+    consequential_confirmation:
+      clarity: maximum
+      warmth: low
+      encouragement: none
+      brand_expression: none
+    destructive_confirmation:
+      clarity: maximum
+      warmth: low
+      encouragement: none
+      brand_expression: none
+    success_feedback:
+      clarity: high
+      warmth: medium
+      encouragement: low
+      brand_expression: low
+    empty_state:
+      clarity: high
+      warmth: medium
+      encouragement: medium
+      brand_expression: medium
+    onboarding:
+      clarity: high
+      warmth: high
+      encouragement: high
+      brand_expression: medium
+    ai_feature:
+      clarity: high
+      warmth: medium
+      encouragement: low
+      brand_expression: low
+    ai_assistant:
+      clarity: high
+      warmth: medium
+      encouragement: medium
+      brand_expression: low
+      conditional: >
+        انگیزش فقط وقتی مجاز است که محدودیت، عدم قطعیت و نتیجهٔ واقعی قابلیت
+        را نپوشاند.
+
+rules:
+  - id: VOICE-001
+    obligation: must
+    statement: پیام باید قبل از هر چیز معنی، وضعیت یا اقدام بعدی را روشن کند.
+    evidence: [product_content_decisions]
+  - id: VOICE-002
+    obligation: must
+    statement: متن محصول باید با فارسی معیار نوشتاری و خطاب «شما» نوشته شود.
+    evidence: [verbal_identity_v2, product_content_decisions]
+  - id: VOICE-003
+    obligation: must
+    statement: ادعای متن باید با product truth و وضعیت واقعی سیستم منطبق باشد.
+    evidence: [product_content_decisions]
+  - id: VOICE-004
+    obligation: must_not
+    statement: گرمی نباید به شکسته‌نویسی، لحن بیش‌ازحد خودمانی یا شوخی در وضعیت حساس تبدیل شود.
+    evidence: [verbal_identity_v2, product_content_decisions]
+  - id: VOICE-005
+    obligation: must_not
+    statement: انگیزش نباید نتیجه، زمان، شانس یا توانایی سیستم را تضمین کند.
+    evidence: [product_content_decisions]
+  - id: VOICE-006
+    obligation: must_not
+    statement: بیان برند نباید بازیابی خطا، دسترس‌پذیری یا فهم پیام را تضعیف کند.
+    evidence: [accessibility_corpus, product_content_decisions]

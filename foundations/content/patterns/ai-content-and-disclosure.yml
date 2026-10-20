@@ -1,0 +1,280 @@
+schema_version: "0.1"
+id: content.pattern.ai-content-and-disclosure
+title: الگوی محتوای تقویت‌شده با هوش مصنوعی و Disclosure
+status: draft
+language: fa-IR
+scope:
+  - ai-entry-point
+  - ai-generated-content
+  - ai-suggested-content
+  - ai-transformed-content
+  - ai-analysis
+  - ai-assistant
+  - ai-automation
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  error_pattern: content.pattern.error
+  notification_pattern: content.pattern.notifications
+  loading_pattern: content.pattern.loading-and-progress
+  product_behavior_source: external_product_knowledge_or_authorized_input
+  design_system:
+    - design-system.pattern.ai-entry-points
+    - design-system.token.semantic-tokens
+    - design-system.accessibility.content
+
+source_boundary:
+  confirmed:
+    - هوش مصنوعی نام فناوری است.
+    - قابلیت‌های هوشمند نام خانوادهٔ قابلیت‌های تقویت‌شده با AI است.
+    - دستیار هوشمند فقط برای تجربهٔ مستقل و assistant-like است.
+    - دستیار هوشمند رزومه نمونهٔ محصولی تأییدشده است.
+    - نقش semantic خانوادهٔ Magic برای قابلیت‌های AI-assisted و AI-generated رزرو شده است.
+  product_content_decisions:
+    - نوع مشارکت AI و وضعیت خروجی باید قابل‌فهم باشد.
+    - disclosure باید نزدیک action یا output مهم و پیش از اثر پیامددار قرار گیرد.
+    - بازبینی به‌عنوان کنترل کاربر بیان شود، نه انتقال تقصیر.
+    - رنگ و آیکن نباید تنها نشانهٔ نقش AI باشند.
+  unresolved_policy:
+    - data_use_and_retention
+    - model_training
+    - consent_and_opt_out
+    - output_ownership
+    - confidence_definition
+    - bias_explainability_and_appeal
+    - copied_or_exported_disclosure
+
+goal: >
+  کاربر نقش واقعی هوش مصنوعی، نوع و وضعیت خروجی، کنترل‌های موجود و محدودیت‌های
+  مرتبط را در زمان تصمیم بفهمد، بدون اینکه سیستم به‌عنوان انسان، مرجع قطعی یا
+  تضمین‌کنندهٔ نتیجه معرفی شود.
+
+tone_profiles:
+  feature: ai_feature
+  assistant: ai_assistant
+
+experience_model:
+  technology:
+    meaning: فناوری یا سامانهٔ زیربنایی مبتنی بر مدل‌های AI
+    preferred_term: هوش مصنوعی
+  feature:
+    meaning: action، پیشنهاد، تحلیل یا automation محدود
+    naming: نام action و در صورت نیاز «با هوش مصنوعی»
+  feature_family:
+    meaning: چند قابلیت محصول که با AI تقویت می‌شوند.
+    preferred_term: قابلیت‌های هوشمند
+  assistant:
+    meaning: تجربهٔ مستقل و تعاملی با رفتار دستیارگونه
+    preferred_term: دستیار هوشمند
+    lexicon_instance: دستیار هوشمند رزومه
+
+output_model:
+  generated:
+    meaning: AI محتوای تازه‌ای از ورودی یا دستور می‌سازد.
+  suggested:
+    meaning: AI گزینه‌ای برای پذیرش، ویرایش یا رد ارائه می‌کند.
+  transformed:
+    meaning: AI محتوای موجود کاربر را بازنویسی یا تبدیل می‌کند.
+  analyzed:
+    meaning: AI ارزیابی، دسته‌بندی، score یا insight ارائه می‌کند.
+  automated:
+    meaning: سیستم actionی را بر اساس rule یا خروجی مدل انجام می‌دهد.
+
+disclosure_model:
+  disclose_when:
+    - نقش AI برای اعتماد، تفسیر، تصمیم، بازبینی یا ارائهٔ داده مهم است.
+    - نقش AI از context روشن نیست.
+  placement:
+    entry_point: پیش از شروع action در صورت relevance
+    consequential_action: پیش از commitment
+    output: نزدیک label و کنترل‌های خروجی
+    apply_or_publish: پیش از اثر نهایی در صورت نیاز به بازبینی
+  repetition: یک disclosure واضح در context پایدار؛ نه تکرار در هر جمله
+  visual_boundary: رنگ Magic، sparkle یا آیکن به‌تنهایی disclosure نیست.
+
+rules:
+  - id: AIC-001
+    obligation: must
+    dimension: classification
+    key: classify_experience_and_output
+    statement: نوع تجربه، نقش AI و نوع خروجی پیش از نوشتن مشخص شود.
+  - id: AIC-002
+    obligation: must_not
+    dimension: terminology
+    key: mislabel_feature_as_assistant
+    statement: محاسبه، پیشنهاد، بازنویسی یا automation محدود بدون تجربهٔ assistant-like «دستیار هوشمند» نامیده نشود.
+  - id: AIC-003
+    obligation: must
+    dimension: disclosure
+    key: disclose_material_ai_role
+    statement: نقش AI وقتی بر اعتماد، تفسیر، تصمیم، بازبینی یا ارائهٔ داده اثر دارد و از context روشن نیست معرفی شود.
+  - id: AIC-004
+    obligation: must
+    dimension: disclosure
+    key: place_disclosure_near_decision
+    statement: disclosure نزدیک action یا output مرتبط و پیش از commitment پیامددار قرار گیرد.
+  - id: AIC-005
+    obligation: must
+    dimension: content
+    key: name_ai_contribution_accurately
+    statement: مشارکت AI با نام دقیق action یا نوع خروجی بیان شود.
+  - id: AIC-006
+    obligation: must
+    dimension: output_status
+    key: distinguish_suggestion_from_final
+    statement: خروجی پیشنهادی یا draft از محتوای نهایی، منتشرشده یا تصمیم انسانی متمایز بماند.
+  - id: AIC-007
+    obligation: must
+    dimension: action
+    key: name_supported_user_control
+    statement: action موجود برای پذیرش، ویرایش، رد، تولید دوباره یا جایگزینی با اثر واقعی آن نام‌گذاری شود.
+  - id: AIC-008
+    obligation: must_not
+    dimension: product_truth
+    key: guarantee_quality_or_outcome
+    statement: دقت، کامل‌بودن، بی‌طرفی، بهترین‌بودن یا نتیجهٔ downstream تضمین نشود.
+  - id: AIC-009
+    obligation: must_not
+    dimension: product_truth
+    key: invent_confidence
+    statement: confidence، score یا درصد دقت بدون تعریف، منبع و interpretation معتبر نمایش داده نشود.
+  - id: AIC-010
+    obligation: must
+    dimension: limitations
+    key: make_known_limit_actionable
+    statement: محدودیت معلوم یا نیاز به بازبینی در نزدیک‌ترین context مرتبط و به‌شکل قابل‌اقدام بیان شود.
+  - id: AIC-011
+    obligation: must_not
+    dimension: provenance
+    key: imply_human_authorship
+    statement: خروجی AI به‌عنوان متن کارشناس، تصمیم انسانی یا حقیقت قطعی معرفی نشود.
+  - id: AIC-012
+    obligation: must_not
+    dimension: data_policy
+    key: invent_data_claims
+    statement: privacy، retention، model training، sharing، consent، opt-out یا ownership بدون policy معتبر ادعا نشود.
+  - id: AIC-013
+    obligation: must_not
+    dimension: tone
+    key: shift_blame_to_user
+    statement: بازبینی با سرزنش، تهدید یا انتقال کامل مسئولیت به کاربر بیان نشود.
+  - id: AIC-014
+    obligation: must_not
+    dimension: automation
+    key: collapse_recommendation_into_decision
+    statement: پیشنهاد، score یا تحلیل AI به‌عنوان تصمیم خودکار یا نتیجهٔ قطعی معرفی نشود مگر همان automation در product truth تأیید شده باشد.
+  - id: AIC-015
+    obligation: must
+    dimension: state
+    key: use_shared_async_patterns
+    statement: Loading، Success و Error قابلیت AI از pattern مشترک و state واقعی پیروی کنند.
+  - id: AIC-016
+    obligation: must_not
+    dimension: accessibility
+    key: visual_only_disclosure
+    statement: نقش AI فقط با رنگ Magic، sparkle، animation یا آیکن منتقل نشود.
+  - id: AIC-017
+    obligation: must
+    dimension: terminology
+    key: use_canonical_ai_terms
+    statement: نام فناوری، خانوادهٔ قابلیت، دستیار و نمونهٔ محصول از اصطلاحات canonical همان سطح استفاده کند.
+  - id: AIC-018
+    obligation: must_not
+    dimension: action
+    key: invent_user_control
+    statement: قابلیت ویرایش، رد، تولید دوباره، بازگشت یا لغو وقتی واقعاً پشتیبانی نمی‌شود وعده داده نشود.
+
+anatomy:
+  entry_point:
+    pattern: "{specific_action_or_benefit} {ai_disclosure_when_needed}"
+  output:
+    required_when_material:
+      - source_or_type_label
+      - output_status
+    conditional:
+      - review_guidance
+      - supported_action
+      - known_limitation
+  review_pattern: پیشنهاد را بازبینی و در صورت نیاز ویرایش کنید.
+
+action_model:
+  use_suggestion: پیشنهاد را بدون ادعای نهایی‌بودن وارد flow می‌کند.
+  replace_text: متن فعلی را جایگزین می‌کند و باید همین اثر را نام ببرد.
+  regenerate: فقط وقتی generation دوباره واقعاً پشتیبانی می‌شود.
+  edit: فقط وقتی خروجی یا مقصد قابل‌ویرایش است.
+  reject: label می‌تواند بر اساس context «رد کردن» یا «نادیده گرفتن» باشد و باید اثر واقعی را منعکس کند.
+
+safety_boundaries:
+  no_guarantees:
+    - accuracy
+    - completeness
+    - neutrality
+    - best_result
+    - hiring_outcome
+  no_unverified_data_claims:
+    - storage
+    - model_training
+    - confidentiality
+    - third_party_sharing
+    - deletion
+    - opt_out
+  no_unverified_human_traits:
+    - knowledge
+    - emotion
+    - intent
+    - professional_judgment
+
+state_model:
+  loading_owner: content.pattern.loading-and-progress
+  success_owner: content.pattern.notifications
+  error_owner: content.pattern.error
+  rule: وضعیت فقط با state واقعی تغییر کند و output پیشنهادی پیش از acceptance نهایی معرفی نشود.
+
+accessibility:
+  disclosure: label متنی هرجا تشخیص AI مهم است؛ نه فقط رنگ یا آیکن
+  accessible_name: label دیداری action در نام قابل‌دسترسی حفظ شود.
+  dynamic_output: نتیجهٔ مهم با کم‌مزاحمت‌ترین سازوکار کافی قابل دریافت باشد.
+  focus: صرفاً برای badge، spinner یا خروجی AI جابه‌جا نشود.
+
+templates:
+  entry_action:
+    label: "{action} با هوش مصنوعی"
+  suggested_output:
+    label: پیشنهاد هوش مصنوعی
+    guidance: پیشنهاد را بازبینی و در صورت نیاز ویرایش کنید.
+    action: استفاده از پیشنهاد
+  replace_existing_text:
+    label: پیشنهاد بازنویسی‌شده
+    action: جایگزینی متن
+  loading:
+    message: در حال آماده‌کردن پیشنهاد متن…
+  success:
+    message: پیشنهاد جدید آماده شد.
+  error:
+    message: پیشنهاد آماده نشد. دوباره تلاش کنید.
+
+examples:
+  rewrite_entry:
+    experience: feature
+    output: transformed
+    label: بهبود متن با هوش مصنوعی
+  resume_assistant:
+    experience: assistant
+    label: دستیار هوشمند رزومه
+  suggested_text:
+    output: suggested
+    label: پیشنهاد هوش مصنوعی
+    guidance: پیشنهاد را بازبینی و در صورت نیاز ویرایش کنید.
+    action: استفاده از پیشنهاد
+
+unknowns:
+  - data use، retention، sharing و model training
+  - consent، opt-out و deletion
+  - ownership و حقوق استفاده از output
+  - تعریف confidence و quality threshold
+  - bias، explainability و appeal path
+  - حفظ provenance پس از copy، export یا publish
+  - رفتار product-specific automation و human oversight
+
+evaluation_source: ../../../ai/evals/content/ai-content-cases.yml

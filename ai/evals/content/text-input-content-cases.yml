@@ -1,0 +1,402 @@
+schema_version: "0.1"
+id: content.eval.text_input_content_cases
+component_id: content.component.text-input
+language: fa-IR
+
+cases:
+  - id: email_with_label_and_format_example
+    context:
+      component: Text Input
+      field: email
+      accessible_name_source: visible_label
+      format_example_optional: true
+    content:
+      label: ایمیل
+      placeholder: name@example.com
+    expected:
+      valid: true
+      checked_rules: [TXT-001, TXT-002, TXT-003, TXT-004, TXT-010, TXT-013, TXT-018]
+      violations: []
+
+  - id: marked_job_title_example
+    context:
+      component: Text Input
+      field: job_title
+      example_may_look_like_value: true
+    content:
+      label: عنوان شغلی
+      placeholder: "مثال: طراح محصول"
+    expected:
+      valid: true
+      checked_rules: [TXT-002, TXT-004, TXT-005, TXT-010]
+      violations: []
+
+  - id: confirmed_character_limit_helper
+    context:
+      component: Text Input
+      field: short_biography
+      max_characters: 100
+      limit_confirmed: true
+    content:
+      label: دربارهٔ من
+      helper: حداکثر ۱۰۰ نویسه
+    expected:
+      valid: true
+      checked_rules: [TXT-002, TXT-006, TXT-008, TXT-010, TXT-013]
+      violations: []
+
+  - id: required_mobile_is_visible_and_programmatic
+    context:
+      component: Text Input
+      field: mobile
+      required: true
+      marker_convention_explained: true
+      programmatic_required: true
+    content:
+      label: شماره موبایل
+      required_indicator: الزامی
+    expected:
+      valid: true
+      checked_rules: [TXT-002, TXT-009, TXT-013]
+      violations: []
+
+  - id: actionable_email_error
+    context:
+      component: Text Input
+      field: email
+      invalid: true
+      error_association_present: true
+      format_confirmed: true
+    content:
+      label: ایمیل
+      error: ایمیل را با قالب name@example.com وارد کنید.
+    expected:
+      valid: true
+      checked_rules: [TXT-008, TXT-011, TXT-013, TXT-014]
+      violations: []
+
+  - id: essential_job_title_requirement_survives_error
+    context:
+      component: Text Input
+      invalid: true
+      helper_replaced: true
+      max_length: 100
+      requirement_confirmed: true
+    content:
+      label: عنوان شغلی
+      error: عنوان شغلی باید حداکثر ۱۰۰ نویسه داشته باشد.
+    expected:
+      valid: true
+      checked_rules: [TXT-008, TXT-011, TXT-012, TXT-013, TXT-014]
+      violations: []
+
+  - id: user_value_preserved
+    context:
+      component: Text Input
+      field: display_name
+      value_source: user
+      editable: true
+    content:
+      label: نام نمایشی
+      value: sara_dev
+    expected:
+      valid: true
+      checked_rules: [TXT-002, TXT-015, TXT-018]
+      violations: []
+
+  - id: readonly_identifier_remains_readable
+    context:
+      component: Text Input
+      field: tracking_id
+      editable: false
+      still_relevant_to_form: true
+      state: readonly
+      bidi_isolated: true
+    content:
+      label: شماره پیگیری
+      value: JV-4821
+    expected:
+      valid: true
+      checked_rules: [TXT-015, TXT-016, TXT-018]
+      violations: []
+
+  - id: clear_value_trailing_action
+    context:
+      component: Text Input
+      trailing_interactive: true
+      keyboard_behavior_defined: true
+    content:
+      label: جست‌وجو
+      trailing_action_accessible_name: پاک‌کردن عبارت جست‌وجو
+    expected:
+      valid: true
+      checked_rules: [TXT-002, TXT-017]
+      violations: []
+
+  - id: placeholder_is_only_label
+    context:
+      component: Text Input
+      visible_label_present: false
+      alternative_accessible_name_present: false
+    content:
+      placeholder: ایمیل خود را وارد کنید
+    expected:
+      valid: false
+      checked_rules: [TXT-002, TXT-003, TXT-013]
+      violations: [TXT-002, TXT-003, TXT-013]
+
+  - id: required_format_only_in_placeholder
+    context:
+      component: Text Input
+      field: national_id
+      exact_format_required: true
+      persistent_instruction_present: false
+    content:
+      label: کد ملی
+      placeholder: ۱۰ رقم، بدون خط تیره
+    expected:
+      valid: false
+      checked_rules: [TXT-003, TXT-004, TXT-007]
+      violations: [TXT-003, TXT-004, TXT-007]
+
+  - id: placeholder_repeats_label
+    context:
+      component: Text Input
+      field: email
+    content:
+      label: ایمیل
+      placeholder: ایمیل
+      helper: ایمیل خود را وارد کنید.
+    expected:
+      valid: false
+      checked_rules: [TXT-004, TXT-006, TXT-010]
+      violations: [TXT-004, TXT-006, TXT-010]
+
+  - id: unmarked_example_looks_prefilled
+    context:
+      component: Text Input
+      actual_value_empty: true
+      example_may_look_like_value: true
+    content:
+      label: عنوان شغلی
+      placeholder: طراح محصول
+    expected:
+      valid: false
+      checked_rules: [TXT-005]
+      violations: [TXT-005]
+
+  - id: invented_limit_in_helper
+    context:
+      component: Text Input
+      field: job_title
+      max_characters_confirmed: false
+    content:
+      label: عنوان شغلی
+      helper: حداکثر ۵۰ نویسه
+    expected:
+      valid: false
+      checked_rules: [TXT-006, TXT-008]
+      violations: [TXT-008]
+
+  - id: unsupported_privacy_claim
+    context:
+      component: Text Input
+      field: mobile
+      privacy_behavior_confirmed: false
+    content:
+      label: شماره موبایل
+      helper: شماره شما کاملاً محرمانه می‌ماند.
+    expected:
+      valid: false
+      checked_rules: [TXT-006, TXT-008]
+      violations: [TXT-008]
+
+  - id: mandatory_guidance_only_in_info
+    context:
+      component: Text Input
+      instruction_required_for_completion: true
+      persistent_instruction_present: false
+      info_only: true
+    content:
+      label: تاریخ شروع
+      info: تاریخ را به تقویم شمسی وارد کنید.
+    expected:
+      valid: false
+      checked_rules: [TXT-007, TXT-008]
+      violations: [TXT-007]
+
+  - id: unexplained_visual_required_marker
+    context:
+      component: Text Input
+      required: true
+      marker: asterisk
+      marker_meaning_explained: false
+      programmatic_required: false
+    content:
+      label: شماره موبایل *
+    expected:
+      valid: false
+      checked_rules: [TXT-009, TXT-013]
+      violations: [TXT-009, TXT-013]
+
+  - id: generic_color_only_error
+    context:
+      component: Text Input
+      invalid: true
+      red_border: true
+      error_text_present: false
+      programmatic_invalid: false
+    content:
+      label: ایمیل
+    expected:
+      valid: false
+      checked_rules: [TXT-011, TXT-013]
+      violations: [TXT-011, TXT-013]
+
+  - id: generic_invalid_error
+    context:
+      component: Text Input
+      field: email
+      invalid: true
+      recovery_known: true
+    content:
+      label: ایمیل
+      error: نامعتبر است.
+    expected:
+      valid: false
+      checked_rules: [TXT-011, TXT-014]
+      violations: [TXT-011, TXT-014]
+
+  - id: helper_requirement_disappears_on_error
+    context:
+      component: Text Input
+      invalid: true
+      helper_replaced: true
+      essential_requirement_preserved: false
+    content:
+      label: عنوان شغلی
+      error: عنوان شغلی نامعتبر است.
+    expected:
+      valid: false
+      checked_rules: [TXT-011, TXT-012]
+      violations: [TXT-011, TXT-012]
+
+  - id: error_uses_different_field_term
+    context:
+      component: Text Input
+      canonical_field_label: درخواست شغلی
+      invalid: true
+    content:
+      label: درخواست شغلی
+      error: اپلیکیشن را کامل کنید.
+    expected:
+      valid: false
+      checked_rules: [TXT-011, TXT-014]
+      violations: [TXT-014]
+
+  - id: user_value_rewritten_for_tone
+    context:
+      component: Text Input
+      value_source: user
+      original_value: Senior Developer
+      rewrite_authorized: false
+    content:
+      label: عنوان شغلی
+      value: توسعه‌دهندهٔ ارشد و پرتلاش
+    expected:
+      valid: false
+      checked_rules: [TXT-015]
+      violations: [TXT-015]
+
+  - id: readonly_value_is_disabled
+    context:
+      component: Text Input
+      value_should_remain_readable_and_focusable: true
+      state: disabled
+    content:
+      label: شماره پیگیری
+      value: JV-4821
+    expected:
+      valid: false
+      checked_rules: [TXT-016]
+      violations: [TXT-016]
+
+  - id: interactive_trailing_icon_without_name
+    context:
+      component: Text Input
+      trailing_interactive: true
+      icon: close
+    content:
+      label: جست‌وجو
+      trailing_action_accessible_name: ""
+    expected:
+      valid: false
+      checked_rules: [TXT-017]
+      violations: [TXT-017]
+
+  - id: raw_mixed_direction_identifier
+    context:
+      component: Text Input
+      field: tracking_id
+      surrounding_direction: rtl
+      bidi_isolated: false
+    content:
+      label: شماره پیگیری
+      value: JV-4821
+    expected:
+      valid: false
+      checked_rules: [TXT-018]
+      violations: [TXT-018]
+
+  - id: multiline_content_forced_into_text_input
+    context:
+      component: Text Input
+      expected_content: multi_line_biography
+    content:
+      label: دربارهٔ من
+      helper: چند پاراگراف دربارهٔ تجربه‌های خود بنویسید.
+    expected:
+      valid: false
+      checked_rules: [TXT-019]
+      violations: [TXT-019]
+
+  - id: email_paste_and_autofill_blocked
+    context:
+      component: Text Input
+      field: email
+      justified_constraint: false
+      paste_disabled: true
+      autofill_disabled: true
+    content:
+      label: ایمیل
+      helper: ایمیل را تایپ کنید؛ جای‌گذاری و تکمیل خودکار مجاز نیست.
+    expected:
+      valid: false
+      checked_rules: [TXT-008, TXT-020]
+      violations: [TXT-008, TXT-020]
+
+  - id: invented_warning_state
+    context:
+      component: Text Input
+      warning_use_case_confirmed: false
+      state: warning
+    content:
+      label: حقوق مورد انتظار
+      helper: این مبلغ ممکن است شانس استخدام شما را کم کند.
+    expected:
+      valid: false
+      checked_rules: [TXT-008, TXT-021]
+      violations: [TXT-008, TXT-021]
+
+  - id: invented_digit_normalization_policy
+    context:
+      component: Text Input
+      field: identifier
+      normalization_policy_confirmed: false
+    content:
+      label: شناسه
+      helper: همهٔ ارقام لاتین به‌طور خودکار به فارسی تبدیل می‌شوند.
+    expected:
+      valid: false
+      checked_rules: [TXT-008, TXT-018, TXT-021]
+      violations: [TXT-008, TXT-021]

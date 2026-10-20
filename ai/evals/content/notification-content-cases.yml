@@ -1,0 +1,425 @@
+schema_version: "0.1"
+id: content.eval.notification_content_cases
+component_id: content.component.notification
+language: fa-IR
+
+cases:
+  - id: persistent_inline_warning
+    context:
+      component: Inline Notification
+      persistence_required: true
+      severity: warning
+      risk_confirmed: true
+    content:
+      message: اتصال ناپایدار است
+      description: ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
+    expected:
+      valid: true
+      checked_rules: [NTC-001, NTC-003, NTC-005, NTC-006, NTC-008, NTC-015]
+      violations: []
+
+  - id: concise_confirmed_success_toast
+    context:
+      component: Toast
+      severity: success
+      save_confirmed: true
+      context_clear: true
+      losing_message_not_blocking: true
+    content:
+      message: تغییرات رزومه ذخیره شد.
+    expected:
+      valid: true
+      checked_rules: [NTC-001, NTC-003, NTC-005, NTC-007, NTC-018, NTC-020, NTC-022]
+      violations: []
+
+  - id: toast_title_adds_object_context
+    context:
+      component: Toast
+      severity: success
+      outcome_confirmed: true
+      title_needed: true
+    content:
+      title: تغییرات رزومه
+      message: ذخیره شد.
+    expected:
+      valid: true
+      checked_rules: [NTC-005, NTC-007, NTC-018, NTC-020]
+      violations: []
+
+  - id: inline_error_with_retry
+    context:
+      component: Inline Notification
+      severity: error
+      failure_confirmed: true
+      retry_available: true
+      recovery_must_persist: true
+    content:
+      message: رزومه بارگذاری نشد
+      description: اتصال اینترنت را بررسی و دوباره تلاش کنید.
+      action:
+        type: button
+        label: تلاش دوباره
+    expected:
+      valid: true
+      checked_rules: [NTC-001, NTC-003, NTC-005, NTC-006, NTC-009, NTC-010, NTC-018, NTC-019]
+      violations: []
+
+  - id: navigation_action_uses_link
+    context:
+      component: Inline Notification
+      severity: info
+      action_behavior: navigate
+      destination_available: true
+    content:
+      message: نتیجهٔ بررسی رزومه آماده است
+      action:
+        type: link
+        label: مشاهدهٔ نتیجه
+    expected:
+      valid: true
+      checked_rules: [NTC-003, NTC-005, NTC-009, NTC-010]
+      violations: []
+
+  - id: confirmed_undo_toast
+    context:
+      component: Toast
+      severity: success
+      undo_available: true
+      undo_safe: true
+      sufficient_time_guaranteed: true
+    content:
+      message: آگهی از ذخیره‌شده‌ها حذف شد.
+      action:
+        type: button
+        label: بازگردانی
+    expected:
+      valid: true
+      checked_rules: [NTC-005, NTC-009, NTC-010, NTC-011, NTC-018]
+      violations: []
+
+  - id: persian_dismiss_name
+    context:
+      component: Toast
+      dismissible: true
+      close_icon_present: true
+    content:
+      message: تغییرات رزومه ذخیره شد.
+      dismiss_accessible_name: بستن
+      dismiss_tooltip: بستن
+    expected:
+      valid: true
+      checked_rules: [NTC-005, NTC-012]
+      violations: []
+
+  - id: timed_toast_indicator
+    context:
+      component: Toast
+      auto_dismiss: true
+      timeout_indicator_visible: true
+      exact_duration_runtime_owned: true
+    content:
+      message: تغییرات رزومه ذخیره شد.
+      timeout_indicator_meaning: زمان باقی‌مانده تا بسته‌شدن اعلان
+    expected:
+      valid: true
+      checked_rules: [NTC-013, NTC-014]
+      violations: []
+
+  - id: routine_success_is_non_interruptive
+    context:
+      component: Toast
+      severity: success
+      routine_update: true
+      announcement: polite
+      focus_preserved: true
+    content:
+      message: تغییرات ذخیره شد.
+    expected:
+      valid: true
+      checked_rules: [NTC-015, NTC-016, NTC-017]
+      violations: []
+
+  - id: formatted_bulk_result
+    context:
+      component: Inline Notification
+      severity: success
+      count: 3
+      locale_formatted: true
+    content:
+      message: ۳ درخواست شغلی بایگانی شد.
+    expected:
+      valid: true
+      checked_rules: [NTC-005, NTC-018, NTC-020, NTC-021]
+      violations: []
+
+  - id: type_axis_combines_components
+    context:
+      component: Notification
+      type_axis: [inline, toast]
+    content:
+      message: تغییرات ذخیره شد.
+    expected:
+      valid: false
+      checked_rules: [NTC-001, NTC-002]
+      violations: [NTC-001, NTC-002]
+
+  - id: danger_used_as_notification_severity
+    context:
+      component: Inline Notification
+      severity: danger
+      before_destructive_action: true
+    content:
+      message: این اقدام آگهی را حذف می‌کند.
+    expected:
+      valid: false
+      checked_rules: [NTC-003, NTC-004]
+      violations: [NTC-003, NTC-004]
+
+  - id: high_contrast_used_as_severity
+    context:
+      component: Toast
+      severity: high
+      contrast: normal
+    content:
+      message: تغییرات ذخیره شد.
+    expected:
+      valid: false
+      checked_rules: [NTC-003, NTC-004]
+      violations: [NTC-003, NTC-004]
+
+  - id: generic_message_without_result
+    context:
+      component: Toast
+      severity: success
+      outcome_confirmed: true
+    content:
+      message: عملیات با موفقیت انجام شد.
+    expected:
+      valid: false
+      checked_rules: [NTC-005, NTC-022]
+      violations: [NTC-005, NTC-022]
+
+  - id: inline_description_repeats_message
+    context:
+      component: Inline Notification
+      severity: error
+    content:
+      message: رزومه بارگذاری نشد
+      description: بارگذاری رزومه ناموفق بود.
+    expected:
+      valid: false
+      checked_rules: [NTC-006]
+      violations: [NTC-006]
+
+  - id: toast_title_repeats_message
+    context:
+      component: Toast
+      severity: success
+    content:
+      title: تغییرات ذخیره شد
+      message: تغییرات ذخیره شد.
+    expected:
+      valid: false
+      checked_rules: [NTC-007]
+      violations: [NTC-007]
+
+  - id: generic_severity_title
+    context:
+      component: Toast
+      severity: error
+      failure_confirmed: true
+    content:
+      title: خطا
+      message: درخواست شغلی ارسال نشد.
+    expected:
+      valid: false
+      checked_rules: [NTC-007]
+      violations: [NTC-007]
+
+  - id: critical_recovery_in_transient_toast
+    context:
+      component: Toast
+      severity: error
+      auto_dismiss: true
+      recovery_required: true
+      recovery_available_elsewhere: false
+    content:
+      message: پرداخت ناموفق بود. برای بازیابی مبلغ، درخواست پشتیبانی ثبت کنید.
+      action:
+        type: link
+        label: ثبت درخواست پشتیبانی
+    expected:
+      valid: false
+      checked_rules: [NTC-001, NTC-008, NTC-011, NTC-019]
+      violations: [NTC-001, NTC-008, NTC-011, NTC-019]
+
+  - id: multiple_notification_actions
+    context:
+      component: Inline Notification
+      severity: error
+      actions_available: 2
+    content:
+      message: رزومه بارگذاری نشد.
+      actions:
+        - تلاش دوباره
+        - تماس با پشتیبانی
+    expected:
+      valid: false
+      checked_rules: [NTC-009]
+      violations: [NTC-009]
+
+  - id: navigation_uses_button_semantics
+    context:
+      component: Inline Notification
+      action_behavior: navigate
+      action_component: Button
+    content:
+      message: نتیجهٔ بررسی آماده است.
+      action: مشاهدهٔ نتیجه
+    expected:
+      valid: false
+      checked_rules: [NTC-010]
+      violations: [NTC-010]
+
+  - id: unavailable_undo_action
+    context:
+      component: Toast
+      severity: success
+      undo_available: false
+      auto_dismiss: true
+    content:
+      message: آگهی حذف شد.
+      action: بازگردانی
+    expected:
+      valid: false
+      checked_rules: [NTC-009, NTC-011, NTC-018]
+      violations: [NTC-009, NTC-011]
+
+  - id: dismiss_tooltip_without_accessible_name
+    context:
+      component: Toast
+      dismissible: true
+    content:
+      message: تغییرات ذخیره شد.
+      dismiss_accessible_name: ""
+      dismiss_tooltip: بستن
+    expected:
+      valid: false
+      checked_rules: [NTC-012]
+      violations: [NTC-012]
+
+  - id: invented_timeout_and_stack
+    context:
+      component: Toast
+      runtime_timing_confirmed: false
+      stacking_confirmed: false
+    content:
+      message: این اعلان دقیقاً ۵ ثانیه نمایش داده می‌شود و بالای اعلان قبلی قرار می‌گیرد.
+    expected:
+      valid: false
+      checked_rules: [NTC-013]
+      violations: [NTC-013]
+
+  - id: timeout_indicator_called_progress
+    context:
+      component: Toast
+      auto_dismiss: true
+      timeout_indicator_visible: true
+      operation_completed: true
+    content:
+      message: تغییرات ذخیره شد.
+      timeout_indicator_meaning: پیشرفت ذخیره‌سازی
+    expected:
+      valid: false
+      checked_rules: [NTC-014]
+      violations: [NTC-014]
+
+  - id: every_error_is_assertive
+    context:
+      component: Toast
+      severity: error
+      urgent: false
+      announcement: assertive
+    content:
+      message: فیلتر ذخیره نشد.
+    expected:
+      valid: false
+      checked_rules: [NTC-015]
+      violations: [NTC-015]
+
+  - id: toast_steals_focus
+    context:
+      component: Toast
+      focus_moved_to_toast: true
+      user_action_required_immediately: false
+    content:
+      message: تغییرات ذخیره شد.
+    expected:
+      valid: false
+      checked_rules: [NTC-016]
+      violations: [NTC-016]
+
+  - id: duplicated_success_feedback
+    context:
+      component: Toast
+      focus_already_moved_to_result: true
+      polite_announcement_present: true
+      toast_duplicates_same_event: true
+    content:
+      message: درخواست شغلی ارسال شد.
+    expected:
+      valid: false
+      checked_rules: [NTC-017]
+      violations: [NTC-017]
+
+  - id: optimistic_success_before_response
+    context:
+      component: Toast
+      severity: success
+      outcome_confirmed: false
+      request_in_flight: true
+    content:
+      message: درخواست شغلی ارسال شد.
+    expected:
+      valid: false
+      checked_rules: [NTC-018, NTC-022]
+      violations: [NTC-018, NTC-022]
+
+  - id: wrong_internal_term
+    context:
+      component: Inline Notification
+      audience: employer
+      canonical_term: درخواست شغلی
+      internal_term: application_entity
+    content:
+      message: ApplicationEntity دریافت شد.
+    expected:
+      valid: false
+      checked_rules: [NTC-005, NTC-020]
+      violations: [NTC-005, NTC-020]
+
+  - id: raw_identifier_without_bidi_isolation
+    context:
+      component: Inline Notification
+      surrounding_direction: rtl
+      identifier: JV-4821
+      bidi_isolated: false
+    content:
+      message: درخواست JV-4821 به‌روزرسانی شد.
+    expected:
+      valid: false
+      checked_rules: [NTC-021]
+      violations: [NTC-021]
+
+  - id: celebratory_routine_success
+    context:
+      component: Toast
+      severity: success
+      routine_action: true
+    content:
+      title: عالی بود! 🎉
+      message: شما فوق‌العاده‌اید؛ تغییرات ذخیره شد!
+    expected:
+      valid: false
+      checked_rules: [NTC-007, NTC-022]
+      violations: [NTC-007, NTC-022]

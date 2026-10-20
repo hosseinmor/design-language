@@ -1,0 +1,296 @@
+schema_version: "0.1"
+id: content.component.notification
+title: قرارداد محتوایی Notification
+status: draft
+language: fa-IR
+scope:
+  - inline-notification
+  - toast
+  - notification-message
+  - notification-action
+  - dismiss
+  - timeout-indicator
+  - announcement
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  localization: content.foundation.localization
+  components:
+    - content.component.button
+  patterns:
+    - content.pattern.notifications
+    - content.pattern.error
+    - content.pattern.confirmation
+  design_system:
+    - design-system.component.notification
+    - design-system.accessibility.dynamic-content-and-feedback
+
+goal: >
+  outcome یا state واقعی باید در anatomy درست Inline Notification یا Toast با
+  Message مستقل، context لازم، حداکثر یک action و announcement متناسب قرار
+  بگیرد؛ بدون اختراع timing، stacking یا runtime behavior.
+
+tone_profiles:
+  info: informational_feedback
+  success: success_feedback
+  warning: warning_feedback
+  error: error_feedback
+
+sources:
+  - id: design_system_notification
+    type: design_system_component
+    reference: design-system.component.notification
+    state: verified
+  - id: notification_pattern
+    type: content_pattern
+    reference: content.pattern.notifications
+    state: verified
+  - id: error_pattern
+    type: content_pattern
+    reference: content.pattern.error
+    state: verified
+  - id: confirmation_pattern
+    type: content_pattern
+    reference: content.pattern.confirmation
+    state: verified
+  - id: dynamic_feedback_accessibility
+    type: accessibility_standard
+    reference: design-system.accessibility.dynamic-content-and-feedback
+    state: canonical
+  - id: button_contract
+    type: content_component
+    reference: content.component.button
+    state: draft
+  - id: product_voice
+    type: content_foundation
+    reference: content.foundation.product_voice
+    state: draft
+  - id: terminology
+    type: content_foundation
+    reference: content.foundation.terminology
+    state: draft
+  - id: localization
+    type: content_foundation
+    reference: content.foundation.localization
+    state: draft
+  - id: product_content_decisions
+    type: operational_decision
+    state: working_decisions
+
+source_boundaries:
+  source_derived:
+    - Inline Notification و Toast دو component identity مستقل‌اند.
+    - severityهای استاندارد Info، Success، Warning و Error هستند.
+    - Inline Message و Toast Message required و بخش‌های دیگر conditional هستند.
+    - Notification حداکثر یک action و dismiss label فارسی «بستن» دارد.
+    - timeout indicator عمر auto-dismiss است، نه task progress.
+    - severity و announcement urgency مستقل‌اند و Toast focus نمی‌گیرد.
+  product_content_decisions:
+    - الگوی فارسی Message، Description، Title و action.
+    - جلوگیری از تکرار roleها و mapping recovery به presentation ماندگار.
+  excluded:
+    - timeout duration، stacking، queue، placement و default dismissibility.
+    - runtime semantic props و live-region implementation.
+    - business outcome، recovery و Undo availability.
+
+component_model:
+  inline_notification:
+    identity: persistent_contextual_feedback
+    required: [message]
+    optional: [description, action, dismiss]
+  toast:
+    identity: transient_floating_feedback
+    required: [message]
+    optional: [title, action, dismiss, timeout_indicator]
+  shared_type_axis: forbidden
+
+severity_model:
+  allowed: [info, success, warning, error]
+  excluded:
+    danger: destructive intent before action
+    high: Toast contrast treatment
+
+role_model:
+  message: نتیجه یا وضعیت اصلی و مستقل
+  description: context، consequence یا recovery تکمیلی Inline Notification
+  title: دسته‌بندی یا object تکمیلی و اختیاری Toast
+  action: حداکثر یک navigation یا operation معنادار
+  dismiss: پنهان‌کردن feedback با accessible name «بستن»
+  timeout_indicator: باقی‌ماندهٔ عمر auto-dismiss Toast
+
+action_model:
+  navigation: Link
+  operation: Button
+  maximum: 1
+  undo: requires_confirmed_safe_available_recovery
+  transient_requirement: action ضروری به Toast ناپایدار وابسته نباشد.
+  high_toast_button: not_handoff_ready
+
+accessibility_model:
+  urgency: independent_from_visual_severity
+  routine_success: non_interruptive
+  toast_focus: preserve_existing_focus
+  interactive_action: keyboard_accessible_without_autofocus
+  duplicate_feedback: avoid
+
+rules:
+  - id: NTC-001
+    obligation: must
+    dimension: selection
+    key: choose_component_by_persistence
+    statement: Inline Notification یا Toast از context، persistence و نیاز به action انتخاب شود، نه فقط severity.
+    evidence: [design_system_notification, notification_pattern]
+  - id: NTC-002
+    obligation: must_not
+    dimension: identity
+    key: shared_type_axis
+    statement: Inline Notification و Toast یک component با Type axis مشترک فرض نشوند.
+    evidence: [design_system_notification]
+  - id: NTC-003
+    obligation: must
+    dimension: severity
+    key: use_standard_severity
+    statement: severity فقط یکی از Info، Success، Warning یا Error و مطابق معنی state باشد.
+    evidence: [design_system_notification, notification_pattern]
+  - id: NTC-004
+    obligation: must_not
+    dimension: severity
+    key: danger_or_contrast_as_severity
+    statement: Danger یا High contrast به‌عنوان severity پنجم استفاده نشود.
+    evidence: [design_system_notification, notification_pattern, confirmation_pattern]
+  - id: NTC-005
+    obligation: must
+    dimension: message
+    key: required_independent_message
+    statement: Message required باشد و نتیجه یا وضعیت واقعی را مستقل و روشن نام ببرد.
+    evidence: [design_system_notification, notification_pattern]
+  - id: NTC-006
+    obligation: must
+    dimension: inline_description
+    key: description_adds_context
+    statement: Inline Description فقط context، consequence یا recovery تکمیلی و غیرتکراری اضافه کند.
+    evidence: [design_system_notification, product_content_decisions]
+  - id: NTC-007
+    obligation: must
+    dimension: toast_title
+    key: optional_title_adds_context
+    statement: Toast Title فقط در صورت افزودن دسته‌بندی یا object تازه استفاده شود و Message را تکرار نکند.
+    evidence: [design_system_notification, product_content_decisions]
+  - id: NTC-008
+    obligation: must_not
+    dimension: content
+    key: long_or_critical_transient_content
+    statement: متن بلند، confirmation، instruction حیاتی یا recovery ماندگار در Toast گذرا قرار نگیرد.
+    evidence: [design_system_notification, notification_pattern]
+  - id: NTC-009
+    obligation: must
+    dimension: action
+    key: one_meaningful_action
+    statement: Notification حداکثر یک action معنادار و واقعاً قابل‌استفاده داشته باشد.
+    evidence: [design_system_notification, notification_pattern]
+  - id: NTC-010
+    obligation: must
+    dimension: action
+    key: match_link_button_semantics
+    statement: navigation از Link و operation از Button با label نتیجه‌محور استفاده کند.
+    evidence: [design_system_notification, button_contract]
+  - id: NTC-011
+    obligation: must
+    dimension: action
+    key: confirmed_undo_and_transient_action
+    statement: Undo یا action ضروری فقط با behavior تأییدشده و فرصت دسترسی کافی ارائه شود.
+    evidence: [notification_pattern, dynamic_feedback_accessibility]
+  - id: NTC-012
+    obligation: must
+    dimension: dismiss
+    key: accessible_dismiss_name
+    statement: Dismiss موجود accessible name و Tooltip فارسی «بستن» داشته باشد.
+    evidence: [design_system_notification, notification_pattern]
+  - id: NTC-013
+    obligation: must_not
+    dimension: product_truth
+    key: invent_runtime_behavior
+    statement: timing، stacking، queue، placement یا dismissibility تعریف‌نشده ساخته نشود.
+    evidence: [design_system_notification, notification_pattern]
+  - id: NTC-014
+    obligation: must
+    dimension: timeout
+    key: timeout_indicator_is_lifetime
+    statement: Timeout indicator فقط عمر auto-dismiss Toast را نشان دهد و task progress نامیده نشود.
+    evidence: [design_system_notification]
+  - id: NTC-015
+    obligation: must
+    dimension: accessibility
+    key: separate_urgency_from_severity
+    statement: announcement urgency مستقل از visual severity و با کم‌مزاحمت‌ترین سازوکار کافی تعیین شود.
+    evidence: [design_system_notification, dynamic_feedback_accessibility, notification_pattern]
+  - id: NTC-016
+    obligation: must_not
+    dimension: focus
+    key: move_focus_to_toast
+    statement: focus فقط به‌دلیل ظاهرشدن Toast جابه‌جا نشود و action autofocus نگیرد.
+    evidence: [design_system_notification, dynamic_feedback_accessibility]
+  - id: NTC-017
+    obligation: must_not
+    dimension: accessibility
+    key: duplicate_event_feedback
+    statement: یک event بی‌دلیل با Toast، focus move و live announcement تکرار نشود.
+    evidence: [notification_pattern, dynamic_feedback_accessibility]
+  - id: NTC-018
+    obligation: must
+    dimension: product_truth
+    key: confirmed_outcome_only
+    statement: Success فقط پس از outcome تأییدشده و Error فقط پس از failure واقعی اعلام شود.
+    evidence: [notification_pattern, error_pattern]
+  - id: NTC-019
+    obligation: must
+    dimension: recovery
+    key: keep_required_recovery_available
+    statement: recovery یا action لازم در presentation ماندگار و قابل‌دسترسی باقی بماند.
+    evidence: [notification_pattern, error_pattern, dynamic_feedback_accessibility]
+  - id: NTC-020
+    obligation: must
+    dimension: terminology
+    key: preserve_surface_terms
+    statement: action و object با terminology همان audience و surface نامیده شوند.
+    evidence: [terminology]
+  - id: NTC-021
+    obligation: must
+    dimension: localization
+    key: format_and_isolate_variables
+    statement: count، amount، date، identifier، نام و متن دوجهته با formatter و bidi contract معتبر نمایش داده شوند.
+    evidence: [localization]
+  - id: NTC-022
+    obligation: must_not
+    dimension: tone
+    key: generic_or_hyped_feedback
+    statement: پیام کلی، تبلیغاتی، هیجانی، ایموجی‌محور یا success زودهنگام نوشته نشود.
+    evidence: [product_voice, notification_pattern]
+
+examples:
+  inline_warning:
+    severity: warning
+    message: اتصال ناپایدار است
+    description: ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
+  success_toast:
+    severity: success
+    message: تغییرات رزومه ذخیره شد.
+    condition: save_confirmed
+  error_inline_with_action:
+    severity: error
+    message: رزومه بارگذاری نشد
+    description: اتصال اینترنت را بررسی و دوباره تلاش کنید.
+    action: تلاش دوباره
+    condition: retry_confirmed
+
+unknowns:
+  - Toast timeout duration
+  - stacking، queue و simultaneous limit
+  - responsive placement
+  - default dismissibility و persistence
+  - actionable Toast timing و fallback
+  - executable announcement behavior
+  - inverse Button و Icon Button treatment برای High Toast
+
+evaluation_source: ../../../ai/evals/content/notification-content-cases.yml

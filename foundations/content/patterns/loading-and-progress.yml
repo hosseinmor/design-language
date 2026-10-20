@@ -1,0 +1,205 @@
+schema_version: "0.1"
+id: content.pattern.loading-and-progress
+title: الگوی محتوایی بارگذاری و پیشرفت
+status: draft
+language: fa-IR
+scope:
+  - local-loading
+  - region-busy
+  - determinate-progress
+  - indeterminate-progress
+  - long-running-operation
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  error_pattern: content.pattern.error
+  notification_pattern: content.pattern.notifications
+  design_system:
+    - design-system.accessibility.dynamic-content-and-feedback
+    - design-system.accessibility.focus-management
+    - button
+
+source_state:
+  canonical:
+    - design-system.accessibility.dynamic-content-and-feedback
+    - design-system.accessibility.focus-management
+    - button
+  scaffold_not_authoritative:
+    - design-system.pattern.loading-and-progress
+    - design-system.experience-rule.loading
+
+goal: >
+  کاربر به‌اندازهٔ لازم بفهمد چه عملیات یا محتوایی در جریان است، آیا پیشرفت
+  واقعاً قابل‌اندازه‌گیری است و چه زمانی عملیات واقعاً پایان یافته یا شکست
+  خورده است، بدون ادعای زمانی یا انتقال فوکوس ساختگی.
+
+tone_profile: loading_feedback
+
+taxonomy:
+  local_control:
+    meaning: یک کنترل یا action مشخص در حال اجراست.
+    content_job: زمینهٔ action را حفظ کنید و متن جدا را فقط در صورت نیاز اضافه کنید.
+  region_busy:
+    meaning: محتوای اصلی یک ناحیه یا صفحه هنوز آماده نیست.
+    content_job: ناحیه و محتوای در انتظار را قابل‌فهم نگه دارید.
+  determinate_progress:
+    meaning: مقدار کل و مقدار انجام‌شده معتبر و قابل‌اندازه‌گیری‌اند.
+    content_job: درصد، تعداد یا مرحله را فقط از state واقعی نشان دهید.
+  indeterminate_progress:
+    meaning: عملیات در جریان است اما مقدار باقی‌مانده معتبر نیست.
+    content_job: فعالیت جاری را بدون درصد، تعداد یا ETA بیان کنید.
+  not_loading:
+    empty: دریافت کامل شده اما محتوایی وجود ندارد.
+    error: عملیات شکست خورده است.
+    disabled: action اکنون مجاز یا در دسترس نیست.
+    success: عملیات با نتیجهٔ تأییدشده پایان یافته است.
+
+rules:
+  - id: LDP-001
+    obligation: must
+    dimension: classification
+    key: classify_scope_and_progress
+    statement: scope محلی یا ناحیه‌ای و نوع progress معین یا نامعین پیش از نوشتن مشخص شود.
+  - id: LDP-002
+    obligation: must
+    dimension: content
+    key: name_running_action
+    statement: وقتی متن وضعیت لازم است، action و object واقعی و قابل‌فهم نام برده شوند.
+  - id: LDP-003
+    obligation: must
+    dimension: product_truth
+    key: determinate_requires_measurement
+    statement: progress فقط وقتی معین معرفی شود که مقدار کل و مقدار انجام‌شده معتبر و قابل‌اندازه‌گیری‌اند.
+  - id: LDP-004
+    obligation: must
+    dimension: product_truth
+    key: values_from_actual_state
+    statement: درصد، تعداد، مرحله و مقدار باقی‌مانده فقط از state واقعی و قابل‌اعتماد محصول بیایند.
+  - id: LDP-005
+    obligation: must_not
+    dimension: product_truth
+    key: fabricate_indeterminate_values
+    statement: برای progress نامعین درصد، تعداد، مرحله یا ETA ساخته نشود.
+  - id: LDP-006
+    obligation: must_not
+    dimension: content
+    key: generic_wait_only
+    statement: عبارت کلی مانند «لطفاً منتظر بمانید» یا «در حال پردازش» بدون زمینه کل پیام نباشد.
+  - id: LDP-007
+    obligation: must_not
+    dimension: product_truth
+    key: promise_time_or_near_completion
+    statement: زمان پایان، کوتاه‌بودن انتظار یا نزدیک‌بودن پایان بدون منبع معتبر وعده داده نشود.
+  - id: LDP-008
+    obligation: must
+    dimension: terminology
+    key: preserve_surface_terms
+    statement: نام action و object با اصطلاح همان مخاطب و سطح UI هماهنگ بماند.
+  - id: LDP-009
+    obligation: must_not
+    dimension: state
+    key: collapse_loading_states
+    statement: Loading با Disabled، Empty، Error یا Success یکی گرفته نشود.
+  - id: LDP-010
+    obligation: must
+    dimension: transition
+    key: transition_from_actual_result
+    statement: انتقال به Success، Error یا Cancelled فقط پس از دریافت state واقعی انجام شود.
+  - id: LDP-011
+    obligation: must_not
+    dimension: tone
+    key: entertaining_wait_copy
+    statement: برای سرگرم‌کردن کاربر از شعار، ایموجی، تحسین یا متن چرخشی استفاده نشود.
+  - id: LDP-012
+    obligation: must
+    dimension: interaction
+    key: prevent_duplicate_activation
+    statement: فعال‌سازی تکراریِ زیان‌آور هنگام اجرای عملیات متوقف و زمینهٔ action حفظ شود.
+  - id: LDP-013
+    obligation: must_not
+    dimension: accessibility
+    key: move_focus_to_indicator
+    statement: فوکوس فقط برای قابل‌کشف‌کردن spinner یا progress indicator جابه‌جا نشود.
+  - id: LDP-014
+    obligation: must
+    dimension: accessibility
+    key: expose_important_busy_state
+    statement: وضعیت مهم loading یا progress بدون تغییر فوکوس با semantics درست و کم‌مزاحمت قابل دریافت باشد.
+  - id: LDP-015
+    obligation: must_not
+    dimension: accessibility
+    key: announce_every_update
+    statement: هر تغییر جزئی progress به‌صورت مزاحم announce نشود.
+  - id: LDP-016
+    obligation: must_not
+    dimension: product_truth
+    key: invent_cancellation_or_background
+    statement: cancellation، ادامهٔ پس‌زمینه‌ای یا خروج امن بدون رفتار تأییدشده وعده داده نشود.
+  - id: LDP-017
+    obligation: must_not
+    dimension: design_system_boundary
+    key: invent_timing_or_skeleton_behavior
+    statement: threshold نمایش، timing یا رفتار دقیق Skeleton از scaffoldهای تأییدنشده استنتاج نشود.
+
+anatomy:
+  required_when_text_is_needed:
+    - running_action_or_state
+    - object_or_scope
+  conditional:
+    - actual_progress_value
+    - confirmed_user_option
+  indeterminate_pattern: "در حال {action} {object}…"
+  determinate_pattern: "در حال {action} {object} — {actual_progress}"
+
+state_model:
+  sequence: [idle, loading_or_progress, result]
+  results: [success, error, cancelled]
+  success_owner: content.pattern.notifications
+  error_owner: content.pattern.error
+  rule: نتیجه فقط پس از state تأییدشده جای Loading را می‌گیرد.
+
+action_model:
+  repeated_activation: در صورت زیان‌آوربودن متوقف شود.
+  cancellation: فقط وقتی رفتار cancellation و اثر آن تأیید شده است.
+  competing_actions: policy آن‌ها متعلق به flow است، نه content pattern.
+
+accessibility:
+  busy_state: semantics فقط وقتی state واقعی را درست توصیف می‌کند.
+  focus: trigger را در صورت باقی‌ماندن حفظ کنید؛ فوکوس را به indicator نبرید.
+  announcement: milestone یا تغییر ضروری را با کم‌مزاحمت‌ترین روش کافی اعلام کنید.
+  motion: معنی progress نباید فقط به animation وابسته باشد.
+
+templates:
+  local_indeterminate:
+    message: "در حال {action} {object}…"
+  region_indeterminate:
+    message: "در حال بارگذاری {region_content}…"
+  determinate_count:
+    message: "در حال {action} {object} — {completed_count} از {total_count}"
+  determinate_size:
+    message: "در حال بارگذاری {object} — {completed_size} از {total_size}"
+
+examples:
+  save_resume:
+    type: local_control
+    progress: indeterminate
+    message: در حال ذخیرهٔ تغییرات رزومه…
+  load_job_ads:
+    type: region_busy
+    progress: indeterminate
+    message: در حال بارگذاری آگهی‌های شغلی…
+  upload_resume:
+    type: determinate_progress
+    message: در حال بارگذاری رزومه — ۳ از ۵ مگابایت
+    condition: byte_progress_is_reliable
+
+unknowns:
+  - threshold زمانی نمایش indicator یا status text
+  - انتخاب دقیق Skeleton در برابر spinner برای هر layout
+  - ETA و روش محاسبهٔ قابل‌اعتماد آن در هر flow
+  - امکان و اثر cancellation در هر operation
+  - policy ادامهٔ پس‌زمینه‌ای و notification پس از پایان
+  - cadence مناسب announcement برای هر نوع progress
+
+evaluation_source: ../../../ai/evals/content/loading-progress-cases.yml

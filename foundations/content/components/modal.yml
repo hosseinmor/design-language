@@ -1,0 +1,288 @@
+schema_version: "0.1"
+id: content.component.modal
+title: قرارداد محتوایی Modal
+status: draft
+language: fa-IR
+scope:
+  - modal-title
+  - modal-body
+  - modal-actions
+  - confirmation-dialog
+  - modal-form
+  - dismissal-copy
+  - modal-feedback
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  localization: content.foundation.localization
+  components:
+    - content.component.button
+    - content.component.text-input
+  patterns:
+    - content.pattern.confirmation
+    - content.pattern.error
+    - content.pattern.loading-and-progress
+  design_system:
+    - design-system.component.modal
+    - design-system.accessibility.focus-management
+
+goal: >
+  محتوای Modal باید یک task، decision یا response واقعاً blocking را بدون اتکا
+  به background با Title روشن، context لازم و actionهای دقیق قابل‌فهم کند؛ بدون
+  اختراع dismissal، focus یا product behavior.
+
+tone_profiles:
+  focused_task: form_helper
+  neutral_confirmation: consequential_confirmation
+  destructive_confirmation: destructive_confirmation
+  response_required_information: informational_feedback
+
+sources:
+  - id: design_system_modal
+    type: design_system_component
+    reference: design-system.component.modal
+    state: unverified_draft
+  - id: accessibility_focus
+    type: accessibility_standard
+    reference: design-system.accessibility.focus-management
+    state: canonical
+  - id: confirmation_pattern
+    type: content_pattern
+    reference: content.pattern.confirmation
+    state: verified
+  - id: error_pattern
+    type: content_pattern
+    reference: content.pattern.error
+    state: verified
+  - id: loading_pattern
+    type: content_pattern
+    reference: content.pattern.loading-and-progress
+    state: verified
+  - id: button_contract
+    type: content_component
+    reference: content.component.button
+    state: draft
+  - id: text_input_contract
+    type: content_component
+    reference: content.component.text-input
+    state: draft
+  - id: product_voice
+    type: content_foundation
+    reference: content.foundation.product_voice
+    state: draft
+  - id: terminology
+    type: content_foundation
+    reference: content.foundation.terminology
+    state: draft
+  - id: localization
+    type: content_foundation
+    reference: content.foundation.localization
+    state: draft
+  - id: product_content_decisions
+    type: operational_decision
+    state: working_decisions
+
+source_boundaries:
+  source_derived:
+    - Modal context موقت و blocking برای task یا decision متمرکز است.
+    - Title روشن و accessible name همسو لازم‌اند.
+    - محتوا باید بدون background پوشیده‌شده قابل‌فهم باشد.
+    - feedback منفعل و task طولانی معمولاً Modal نیستند.
+    - optimistic close بدون flow policy معتبر مجاز نیست.
+  product_content_decisions:
+    - مدل فارسی Title، Body، acknowledgement، action و dismissal wording.
+    - جلوگیری از تکرار و انتقال Loading/Error داخل Modal.
+  excluded:
+    - Escape، backdrop، size، scrolling، initial focus و nested Modal policy.
+    - business consequence، validation، recovery و auto-close هر flow.
+    - visual token، Figma property و runtime API.
+
+modal_types:
+  confirmation:
+    purpose: تصمیم آگاهانه پیش از action پیامددار
+    content: [title, consequence, recoverability, primary_action, safe_exit]
+  focused_task:
+    purpose: انجام task یا form کوتاه در context موقت
+    content: [title, task_content, submit_action, exit]
+  response_required_information:
+    purpose: فهم اطلاعات مهم و ارائهٔ پاسخ صریح
+    content: [title, necessary_body, acknowledgement_or_action]
+
+anatomy:
+  required:
+    - title
+  conditional:
+    - body
+    - task_content
+    - inline_feedback
+    - actions
+    - dismiss_control
+  role_rule: هر بخش یک وظیفهٔ اصلی دارد و اطلاعات تازه‌ای به task یا decision اضافه می‌کند.
+
+state_model:
+  idle: Title، context و actionهای معتبر نمایش داده می‌شوند.
+  loading: هویت action و Modal context تا transition تأییدشده حفظ می‌شوند.
+  success: outcome فقط پس از نتیجهٔ واقعی اعلام و transition مطابق flow اجرا می‌شود.
+  error: failure و recovery معلوم در همان context در دسترس می‌مانند.
+
+dismissal_model:
+  when_control_exists: accessible name معنادار مانند «بستن» لازم است.
+  safe_exit: label نتیجهٔ خروج یا بازگشت را روشن می‌کند.
+  data_loss: consequence مطابق product truth به confirmation نیاز دارد.
+  unresolved: [escape, backdrop, universal_close_icon, non_dismissible_mechanism]
+
+component_selection:
+  blocking_focused_task_or_decision: Modal
+  passive_feedback: Notification or Toast
+  simple_disclosure: inline disclosure
+  long_or_navigation_heavy_task: page or dedicated flow
+  underlying_page_remains_interactive: non-modal component
+
+rules:
+  - id: MOD-001
+    obligation: must
+    dimension: selection
+    key: require_blocking_context
+    statement: Modal فقط برای task، decision یا response متمرکزی استفاده شود که واقعاً context blocking می‌خواهد.
+    evidence: [design_system_modal, product_content_decisions]
+  - id: MOD-002
+    obligation: must
+    dimension: title
+    key: title_names_task_or_decision
+    statement: Title باید task، decision یا موضوع response را روشن نام ببرد.
+    evidence: [design_system_modal, confirmation_pattern, product_content_decisions]
+  - id: MOD-003
+    obligation: must_not
+    dimension: title
+    key: generic_title
+    statement: «توجه»، «هشدار»، «پیام»، «تأیید» یا «مطمئن هستید؟» به‌تنهایی Title نباشند.
+    evidence: [confirmation_pattern, product_content_decisions]
+  - id: MOD-004
+    obligation: must
+    dimension: context
+    key: self_contained_without_background
+    statement: Title و content اصلی بدون مراجعه به background پوشیده‌شده قابل‌فهم باشند.
+    evidence: [design_system_modal, accessibility_focus]
+  - id: MOD-005
+    obligation: must
+    dimension: accessibility
+    key: visible_accessible_title_alignment
+    statement: visible Title و accessible name Modal از نظر معنی همسو و برنامه‌وار مرتبط باشند.
+    evidence: [design_system_modal]
+  - id: MOD-006
+    obligation: must
+    dimension: body
+    key: body_adds_necessary_context
+    statement: Body فقط context، consequence یا requirement لازم و تأییدشده‌ای فراتر از Title اضافه کند.
+    evidence: [design_system_modal, product_content_decisions]
+  - id: MOD-007
+    obligation: must_not
+    dimension: duplication
+    key: duplicate_title_body_actions
+    statement: Title، Body و actionها با wording تکراری پر نشوند.
+    evidence: [product_content_decisions]
+  - id: MOD-008
+    obligation: must
+    dimension: confirmation
+    key: confirmation_names_consequence
+    statement: Confirmation باید action، object، consequence، scope و recoverability معلوم را روشن کند.
+    evidence: [confirmation_pattern]
+  - id: MOD-009
+    obligation: must
+    dimension: action
+    key: explicit_primary_and_safe_exit
+    statement: action اصلی نتیجهٔ activation و action ثانویه خروج امن یا بازگشت را صریح نام ببرند.
+    evidence: [confirmation_pattern, button_contract]
+  - id: MOD-010
+    obligation: must_not
+    dimension: action
+    key: generic_decision_actions
+    statement: برای تصمیم پیامددار از «بله»، «خیر»، «تأیید» یا «ادامه» به‌تنهایی استفاده نشود.
+    evidence: [confirmation_pattern, button_contract]
+  - id: MOD-011
+    obligation: must
+    dimension: dismissal
+    key: name_available_dismiss_action
+    statement: dismiss control موجود accessible name معنادار داشته باشد و با safe exit متفاوت اشتباه نشود.
+    evidence: [design_system_modal, product_content_decisions]
+  - id: MOD-012
+    obligation: must_not
+    dimension: product_truth
+    key: invent_dismissal_or_focus_behavior
+    statement: Escape، backdrop، auto-close، initial focus یا non-dismissible behavior بدون contract معتبر وعده داده نشود.
+    evidence: [design_system_modal, accessibility_focus]
+  - id: MOD-013
+    obligation: must
+    dimension: data_loss
+    key: disclose_dismissal_data_loss
+    statement: اگر خروج باعث data loss می‌شود، consequence و مسیر تصمیم مطابق product truth روشن شوند.
+    evidence: [design_system_modal, confirmation_pattern]
+  - id: MOD-014
+    obligation: must
+    dimension: loading
+    key: preserve_context_during_loading
+    statement: در Loading هویت action و Modal context تا outcome یا transition تأییدشده حفظ شوند.
+    evidence: [design_system_modal, loading_pattern, button_contract]
+  - id: MOD-015
+    obligation: must_not
+    dimension: state
+    key: announce_or_close_before_outcome
+    statement: success اعلام نشود و Modal پیش از outcome واقعی و policy تأییدشده بسته نشود.
+    evidence: [design_system_modal, loading_pattern]
+  - id: MOD-016
+    obligation: must
+    dimension: error
+    key: preserve_recovery_in_context
+    statement: Failure قابل‌بازیابی با دادهٔ معتبر و recovery معلوم در همان context قابل‌فهم بماند.
+    evidence: [design_system_modal, error_pattern]
+  - id: MOD-017
+    obligation: must
+    dimension: terminology
+    key: preserve_surface_terms
+    statement: object، field و action با terminology همان surface و audience نامیده شوند.
+    evidence: [terminology, text_input_contract, button_contract]
+  - id: MOD-018
+    obligation: must
+    dimension: localization
+    key: format_and_isolate_variables
+    statement: نام، count، amount، identifier و متن دوجهته با formatter و bidi contract معتبر نمایش داده شوند.
+    evidence: [localization]
+  - id: MOD-019
+    obligation: must_not
+    dimension: scope
+    key: force_complex_task_into_modal
+    statement: task طولانی، چندمرحله‌ای یا navigation-heavy به Modal عمومی تحمیل نشود.
+    evidence: [design_system_modal]
+  - id: MOD-020
+    obligation: must_not
+    dimension: tone
+    key: pressure_or_premature_success
+    statement: Title، Body یا actionها با ترس، فوریت ساختگی، فشار احساسی یا success زودهنگام تصمیم را جهت ندهند.
+    evidence: [product_voice, confirmation_pattern]
+
+examples:
+  focused_form:
+    title: ویرایش اطلاعات تماس
+    primary_action: ذخیرهٔ تغییرات
+    safe_exit: انصراف
+  destructive_confirmation:
+    title: آگهی را حذف می‌کنید؟
+    body: آگهی «کارشناس فروش» حذف می‌شود و امکان بازگردانی آن نیست.
+    primary_action: حذف آگهی
+    safe_exit: انصراف
+    condition: irreversible_deletion_confirmed
+  acknowledgement:
+    title: تغییرات شرایط استفاده
+    acknowledgement: متوجه شدم
+    condition: explicit_response_required
+
+unknowns:
+  - Escape، backdrop و Close behavior
+  - initial-focus configuration و action-layout defaults
+  - size، scrolling و sticky regions
+  - nested/stacked Modal policy
+  - auto-close policy پس از success
+  - مرز Modal با Drawer یا page در flowهای محصول
+
+evaluation_source: ../../../ai/evals/content/modal-content-cases.yml

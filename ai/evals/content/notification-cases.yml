@@ -1,0 +1,240 @@
+schema_version: "0.1"
+id: content.eval.notification_cases
+pattern_id: content.pattern.notifications
+language: fa-IR
+
+cases:
+  - id: confirmed_resume_save_toast
+    context:
+      event: save_resume
+      completion_confirmed: true
+      presentation: toast
+      context_is_clear: true
+    content:
+      severity: success
+      message: تغییرات رزومه ذخیره شد.
+    expected:
+      valid: true
+      checked_rules: [NTF-001, NTF-002, NTF-003, NTF-004, NTF-005, NTF-008, NTF-009]
+      violations: []
+
+  - id: confirmed_application_submission
+    context:
+      event: submit_job_application
+      completion_confirmed: true
+      presentation: toast
+    content:
+      severity: success
+      message: درخواست شغلی ارسال شد.
+    expected:
+      valid: true
+      checked_rules: [NTF-003, NTF-004, NTF-005, NTF-008]
+      violations: []
+
+  - id: persistent_information_inline
+    context:
+      event: document_requirement
+      persistence_required: true
+      presentation: inline_notification
+    content:
+      severity: info
+      message: برای بررسی درخواست جذب، شناسهٔ مالیاتی سازمان لازم است.
+    expected:
+      valid: true
+      checked_rules: [NTF-001, NTF-002, NTF-003, NTF-004, NTF-006]
+      violations: []
+
+  - id: detected_connection_warning
+    context:
+      event: unstable_connection
+      condition_detected: true
+      presentation: inline_notification
+    content:
+      severity: warning
+      message: اتصال ناپایدار است؛ ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
+    expected:
+      valid: true
+      checked_rules: [NTF-001, NTF-002, NTF-003, NTF-006, NTF-010]
+      violations: []
+
+  - id: undo_for_removed_saved_job
+    context:
+      event: remove_saved_job
+      completion_confirmed: true
+      undo_available: true
+      presentation: toast
+    content:
+      severity: success
+      message: آگهی از ذخیره‌شده‌ها حذف شد.
+      action: بازگردانی
+    expected:
+      valid: true
+      checked_rules: [NTF-003, NTF-004, NTF-005, NTF-007]
+      violations: []
+
+  - id: non_interruptive_result_update
+    context:
+      event: filter_results_updated
+      focus_preserved: true
+      programmatic_status_available: true
+      presentation: in_place
+    content:
+      severity: info
+      message: ۱۲ آگهی شغلی پیدا شد.
+    expected:
+      valid: true
+      checked_rules: [NTF-002, NTF-003, NTF-004, NTF-011, NTF-012, NTF-013]
+      violations: []
+
+  - id: generic_success_message
+    context:
+      event: save_resume
+      completion_confirmed: true
+    content:
+      severity: success
+      message: عملیات با موفقیت انجام شد.
+    expected:
+      valid: false
+      checked_rules: [NTF-003, NTF-008]
+      violations: [NTF-003, NTF-008]
+
+  - id: premature_success
+    context:
+      event: submit_job_application
+      completion_confirmed: false
+      request_in_progress: true
+    content:
+      severity: success
+      message: درخواست شغلی ارسال شد.
+    expected:
+      valid: false
+      checked_rules: [NTF-001, NTF-005]
+      violations: [NTF-001, NTF-005]
+
+  - id: celebratory_routine_success
+    context:
+      event: save_profile
+      completion_confirmed: true
+    content:
+      severity: success
+      message: عالی بود! پروفایل فوق‌العاده‌تان ذخیره شد 🎉
+    expected:
+      valid: false
+      checked_rules: [NTF-003, NTF-009]
+      violations: [NTF-009]
+
+  - id: danger_as_notification_severity
+    context:
+      event: destructive_intent
+      action_not_started: true
+    content:
+      severity: danger
+      message: این آگهی برای همیشه حذف می‌شود.
+    expected:
+      valid: false
+      checked_rules: [NTF-001, NTF-010]
+      violations: [NTF-001, NTF-010]
+
+  - id: destructive_warning_as_error
+    context:
+      event: destructive_intent
+      action_not_started: true
+    content:
+      severity: error
+      message: با حذف حساب، همهٔ داده‌ها پاک می‌شوند.
+    expected:
+      valid: false
+      checked_rules: [NTF-001, NTF-010]
+      violations: [NTF-001, NTF-010]
+
+  - id: long_critical_toast
+    context:
+      persistence_required: true
+      action_required_for_continuation: true
+      presentation: toast
+    content:
+      severity: warning
+      message: برای ادامه باید اطلاعات سازمان را بازبینی کنید و مدارک خواسته‌شده را بارگذاری کنید.
+      action: بازبینی اطلاعات سازمان
+    expected:
+      valid: false
+      checked_rules: [NTF-002, NTF-006, NTF-007]
+      violations: [NTF-002]
+
+  - id: notification_with_two_actions
+    context:
+      presentation: inline_notification
+    content:
+      severity: info
+      message: نسخهٔ جدید رزومه آماده است.
+      primary_action: دانلود رزومه
+      secondary_action: مشاهدهٔ رزومه
+    expected:
+      valid: false
+      checked_rules: [NTF-007]
+      violations: [NTF-007]
+
+  - id: toast_receives_focus
+    context:
+      presentation: toast
+      focus_moved_to_toast: true
+    content:
+      severity: success
+      message: تغییرات ذخیره شد.
+    expected:
+      valid: false
+      checked_rules: [NTF-012]
+      violations: [NTF-012]
+
+  - id: all_errors_are_assertive
+    context:
+      event: recoverable_background_failure
+      visual_severity: error
+      announcement: assertive
+      urgency_justified: false
+    content:
+      severity: error
+      message: به‌روزرسانی انجام نشد. دوباره تلاش کنید.
+    expected:
+      valid: false
+      checked_rules: [NTF-011]
+      violations: [NTF-011]
+
+  - id: duplicate_feedback_channels
+    context:
+      event: save_profile
+      focus_moved_to_status: true
+      live_announcement: true
+      toast_present: true
+      redundancy_justified: false
+    content:
+      severity: success
+      message: پروفایل ذخیره شد.
+    expected:
+      valid: false
+      checked_rules: [NTF-013]
+      violations: [NTF-013]
+
+  - id: invented_timeout_and_stack
+    context:
+      runtime_policy_confirmed: false
+      presentation: toast
+    content:
+      severity: info
+      message: این پیام پس از ۵ ثانیه بسته و زیر اعلان قبلی قرار می‌گیرد.
+    expected:
+      valid: false
+      checked_rules: [NTF-003, NTF-014]
+      violations: [NTF-014]
+
+  - id: internal_code_as_feedback
+    context:
+      event: application_failure
+      internal_code: ATS_SUBMIT_422
+    content:
+      severity: error
+      message: ATS_SUBMIT_422
+    expected:
+      valid: false
+      checked_rules: [NTF-003, NTF-004, NTF-006]
+      violations: [NTF-003, NTF-004, NTF-006]

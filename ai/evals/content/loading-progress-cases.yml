@@ -1,0 +1,268 @@
+schema_version: "0.1"
+id: content.eval.loading_progress_cases
+pattern_id: content.pattern.loading-and-progress
+language: fa-IR
+
+cases:
+  - id: local_resume_save
+    context:
+      scope: local_control
+      progress_type: indeterminate
+      operation_in_progress: true
+      duplicate_activation_prevented: true
+    message: در حال ذخیرهٔ تغییرات رزومه…
+    expected:
+      valid: true
+      checked_rules: [LDP-001, LDP-002, LDP-005, LDP-006, LDP-008, LDP-009, LDP-012]
+      violations: []
+
+  - id: job_ads_region_loading
+    context:
+      scope: region_busy
+      progress_type: indeterminate
+      operation_in_progress: true
+    message: در حال بارگذاری آگهی‌های شغلی…
+    expected:
+      valid: true
+      checked_rules: [LDP-001, LDP-002, LDP-005, LDP-006, LDP-008, LDP-009]
+      violations: []
+
+  - id: reliable_resume_upload_progress
+    context:
+      scope: local_control
+      progress_type: determinate
+      completed_bytes: 3145728
+      total_bytes: 5242880
+      measurement_reliable: true
+    message: در حال بارگذاری رزومه — ۳ از ۵ مگابایت
+    expected:
+      valid: true
+      checked_rules: [LDP-001, LDP-002, LDP-003, LDP-004, LDP-008]
+      violations: []
+
+  - id: batch_resume_processing
+    context:
+      scope: region_busy
+      progress_type: determinate
+      completed_count: 18
+      total_count: 24
+      measurement_reliable: true
+    message: در حال پردازش ۲۴ رزومه — ۱۸ مورد انجام شد
+    expected:
+      valid: true
+      checked_rules: [LDP-001, LDP-002, LDP-003, LDP-004, LDP-008]
+      violations: []
+
+  - id: preserved_focus_with_status
+    context:
+      scope: local_control
+      trigger_remains_present: true
+      focus_preserved: true
+      busy_semantics_accurate: true
+      announcement: polite
+    message: در حال ارسال درخواست شغلی…
+    expected:
+      valid: true
+      checked_rules: [LDP-002, LDP-008, LDP-012, LDP-013, LDP-014, LDP-015]
+      violations: []
+
+  - id: confirmed_success_transition
+    context:
+      previous_state: loading
+      current_state: success
+      completion_confirmed: true
+    message: درخواست شغلی ارسال شد.
+    expected:
+      valid: true
+      checked_rules: [LDP-009, LDP-010]
+      violations: []
+
+  - id: confirmed_error_transition
+    context:
+      previous_state: loading
+      current_state: error
+      failure_confirmed: true
+    message: رزومه بارگذاری نشد. دوباره تلاش کنید.
+    expected:
+      valid: true
+      checked_rules: [LDP-009, LDP-010]
+      violations: []
+
+  - id: generic_processing_only
+    context:
+      scope: region_busy
+      action_and_object_available: true
+    message: در حال پردازش…
+    expected:
+      valid: false
+      checked_rules: [LDP-002, LDP-006]
+      violations: [LDP-002, LDP-006]
+
+  - id: generic_wait_only
+    context:
+      scope: region_busy
+      action_and_object_available: true
+    message: لطفاً منتظر بمانید.
+    expected:
+      valid: false
+      checked_rules: [LDP-002, LDP-006]
+      violations: [LDP-002, LDP-006]
+
+  - id: fake_indeterminate_percentage
+    context:
+      progress_type: indeterminate
+      measurement_reliable: false
+    message: در حال بررسی درخواست‌ها — ۷۵٪
+    expected:
+      valid: false
+      checked_rules: [LDP-001, LDP-003, LDP-004, LDP-005]
+      violations: [LDP-003, LDP-004, LDP-005]
+
+  - id: spinner_animation_as_progress
+    context:
+      progress_type: determinate
+      value_source: animation_cycle
+      measurement_reliable: false
+    message: ۹۰٪ انجام شد.
+    expected:
+      valid: false
+      checked_rules: [LDP-003, LDP-004]
+      violations: [LDP-003, LDP-004]
+
+  - id: unsupported_eta
+    context:
+      progress_type: indeterminate
+      eta_source_available: false
+    message: رزومه تا ۳۰ ثانیهٔ دیگر بارگذاری می‌شود.
+    expected:
+      valid: false
+      checked_rules: [LDP-004, LDP-005, LDP-007]
+      violations: [LDP-004, LDP-005, LDP-007]
+
+  - id: unsupported_nearly_done
+    context:
+      progress_type: indeterminate
+      remaining_work_known: false
+    message: تقریباً تمام شد؛ فقط چند لحظهٔ دیگر.
+    expected:
+      valid: false
+      checked_rules: [LDP-005, LDP-007]
+      violations: [LDP-005, LDP-007]
+
+  - id: loading_mislabeled_as_empty
+    context:
+      request_in_progress: true
+      result_received: false
+    message: آگهی شغلی‌ای وجود ندارد.
+    expected:
+      valid: false
+      checked_rules: [LDP-001, LDP-009, LDP-010]
+      violations: [LDP-001, LDP-009, LDP-010]
+
+  - id: loading_mislabeled_as_disabled
+    context:
+      operation_in_progress: true
+      action_permission_changed: false
+      visual_state: disabled
+    message: ذخیرهٔ رزومه غیرفعال است.
+    expected:
+      valid: false
+      checked_rules: [LDP-009, LDP-012]
+      violations: [LDP-009]
+
+  - id: premature_success_transition
+    context:
+      previous_state: loading
+      current_state: in_progress
+      completion_confirmed: false
+    message: رزومه بارگذاری شد.
+    expected:
+      valid: false
+      checked_rules: [LDP-009, LDP-010]
+      violations: [LDP-009, LDP-010]
+
+  - id: entertaining_rotating_copy
+    context:
+      operation_in_progress: true
+      rotating_messages: true
+    message: داریم جادو می‌کنیم! ✨
+    expected:
+      valid: false
+      checked_rules: [LDP-002, LDP-006, LDP-011]
+      violations: [LDP-002, LDP-006, LDP-011]
+
+  - id: duplicate_submission_allowed
+    context:
+      operation_in_progress: true
+      repeated_activation_harmful: true
+      duplicate_activation_prevented: false
+    message: در حال ارسال درخواست شغلی…
+    expected:
+      valid: false
+      checked_rules: [LDP-012]
+      violations: [LDP-012]
+
+  - id: focus_moved_to_spinner
+    context:
+      operation_in_progress: true
+      focus_moved_to_indicator: true
+      progress_is_not_interactive_context: true
+    message: در حال بارگذاری آگهی‌های شغلی…
+    expected:
+      valid: false
+      checked_rules: [LDP-013, LDP-014]
+      violations: [LDP-013]
+
+  - id: important_progress_not_exposed
+    context:
+      long_running: true
+      focus_unchanged: true
+      busy_semantics_available: false
+      status_announcement_available: false
+    message: در حال پردازش رزومه‌ها…
+    expected:
+      valid: false
+      checked_rules: [LDP-014]
+      violations: [LDP-014]
+
+  - id: every_percent_announced_assertively
+    context:
+      progress_type: determinate
+      each_percent_announced: true
+      announcement: assertive
+      urgency_justified: false
+    message: پیشرفت ۴۱٪ است.
+    expected:
+      valid: false
+      checked_rules: [LDP-015]
+      violations: [LDP-015]
+
+  - id: invented_cancel_action
+    context:
+      cancellation_supported: false
+      operation_in_progress: true
+    content:
+      message: در حال بارگذاری رزومه…
+      action: لغو
+    expected:
+      valid: false
+      checked_rules: [LDP-016]
+      violations: [LDP-016]
+
+  - id: invented_background_continuation
+    context:
+      background_policy_confirmed: false
+    message: می‌توانید صفحه را ببندید؛ پردازش در پس‌زمینه ادامه دارد.
+    expected:
+      valid: false
+      checked_rules: [LDP-007, LDP-016]
+      violations: [LDP-016]
+
+  - id: invented_two_second_threshold
+    context:
+      design_system_threshold_confirmed: false
+    message: اگر بارگذاری بیشتر از ۲ ثانیه طول کشید، Skeleton را نمایش دهید.
+    expected:
+      valid: false
+      checked_rules: [LDP-017]
+      violations: [LDP-017]

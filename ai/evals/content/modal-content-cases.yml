@@ -1,0 +1,374 @@
+schema_version: "0.1"
+id: content.eval.modal_content_cases
+component_id: content.component.modal
+language: fa-IR
+
+cases:
+  - id: focused_contact_edit_form
+    context:
+      component: Modal
+      modal_type: focused_task
+      blocking_required: true
+      dismissible: true
+    content:
+      title: ویرایش اطلاعات تماس
+      fields: [ایمیل, شماره موبایل]
+      primary_action: ذخیرهٔ تغییرات
+      safe_exit: انصراف
+      close_accessible_name: بستن
+    expected:
+      valid: true
+      checked_rules: [MOD-001, MOD-002, MOD-004, MOD-005, MOD-006, MOD-007, MOD-009, MOD-011, MOD-017]
+      violations: []
+
+  - id: irreversible_job_post_confirmation
+    context:
+      component: Modal
+      modal_type: confirmation
+      destructive: true
+      recoverability_confirmed: irreversible
+      treatment: danger-primary
+    content:
+      title: آگهی را حذف می‌کنید؟
+      body: آگهی «کارشناس فروش» حذف می‌شود و امکان بازگردانی آن نیست.
+      primary_action: حذف آگهی
+      safe_exit: انصراف
+    expected:
+      valid: true
+      checked_rules: [MOD-001, MOD-002, MOD-003, MOD-004, MOD-006, MOD-007, MOD-008, MOD-009, MOD-010, MOD-017, MOD-020]
+      violations: []
+
+  - id: discard_unsaved_changes
+    context:
+      component: Modal
+      modal_type: confirmation
+      unsaved_data: true
+      consequence_confirmed: true
+    content:
+      title: تغییرات ذخیره‌نشده را کنار می‌گذارید؟
+      body: اگر خارج شوید، تغییرات این صفحه ذخیره نمی‌شود.
+      primary_action: خروج بدون ذخیره
+      safe_exit: ادامهٔ ویرایش
+    expected:
+      valid: true
+      checked_rules: [MOD-002, MOD-004, MOD-008, MOD-009, MOD-010, MOD-013]
+      violations: []
+
+  - id: explicit_acknowledgement
+    context:
+      component: Modal
+      modal_type: response_required_information
+      explicit_response_required: true
+    content:
+      title: تغییرات شرایط استفاده
+      body: برای ادامه، نسخهٔ جدید شرایط استفاده را بررسی کنید.
+      acknowledgement: متوجه شدم
+    expected:
+      valid: true
+      checked_rules: [MOD-001, MOD-002, MOD-004, MOD-006, MOD-009]
+      violations: []
+
+  - id: loading_preserves_modal_context
+    context:
+      component: Modal
+      modal_type: focused_task
+      state: loading
+      outcome_known: false
+      modal_remains_open: true
+    content:
+      title: ویرایش اطلاعات تماس
+      primary_action: ذخیرهٔ تغییرات
+    expected:
+      valid: true
+      checked_rules: [MOD-014, MOD-015]
+      violations: []
+
+  - id: recoverable_submit_error_in_context
+    context:
+      component: Modal
+      modal_type: focused_task
+      state: error
+      entered_data_preserved: true
+      retry_confirmed: true
+    content:
+      title: ویرایش اطلاعات تماس
+      error: اطلاعات تماس ذخیره نشد. دوباره تلاش کنید.
+      primary_action: تلاش دوباره
+      safe_exit: انصراف
+    expected:
+      valid: true
+      checked_rules: [MOD-009, MOD-015, MOD-016, MOD-017]
+      violations: []
+
+  - id: bulk_delete_with_formatted_count
+    context:
+      component: Modal
+      modal_type: confirmation
+      selected_count: 3
+      count_source: live_selection
+      locale_formatted: true
+      destructive: true
+    content:
+      title: ۳ درخواست شغلی را حذف می‌کنید؟
+      body: این اقدام روی هر ۳ درخواست شغلی اثر می‌گذارد و امکان بازگردانی آن‌ها نیست.
+      primary_action: حذف ۳ درخواست شغلی
+      safe_exit: انصراف
+    expected:
+      valid: true
+      checked_rules: [MOD-004, MOD-008, MOD-009, MOD-017, MOD-018]
+      violations: []
+
+  - id: passive_success_forced_into_modal
+    context:
+      component: Modal
+      feedback_passive: true
+      response_required: false
+    content:
+      title: موفقیت
+      body: تغییرات با موفقیت ذخیره شد.
+      acknowledgement: باشه
+    expected:
+      valid: false
+      checked_rules: [MOD-001, MOD-002, MOD-020]
+      violations: [MOD-001, MOD-002]
+
+  - id: generic_attention_title
+    context:
+      component: Modal
+      modal_type: confirmation
+      object: آگهی
+    content:
+      title: توجه
+      body: این آگهی حذف می‌شود.
+      primary_action: ادامه
+      safe_exit: لغو
+    expected:
+      valid: false
+      checked_rules: [MOD-002, MOD-003, MOD-008, MOD-009, MOD-010]
+      violations: [MOD-002, MOD-003, MOD-008, MOD-009, MOD-010]
+
+  - id: generic_are_you_sure_title
+    context:
+      component: Modal
+      modal_type: confirmation
+      destructive: true
+    content:
+      title: مطمئن هستید؟
+      body: این مورد حذف خواهد شد.
+      primary_action: بله
+      safe_exit: خیر
+    expected:
+      valid: false
+      checked_rules: [MOD-002, MOD-003, MOD-004, MOD-008, MOD-009, MOD-010]
+      violations: [MOD-002, MOD-003, MOD-004, MOD-008, MOD-009, MOD-010]
+
+  - id: depends_on_obscured_background
+    context:
+      component: Modal
+      background_unavailable: true
+      object_not_named_in_modal: true
+    content:
+      title: حذف مورد
+      body: مورد انتخاب‌شده در جدول زیر حذف می‌شود.
+      primary_action: حذف
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [MOD-002, MOD-004, MOD-006, MOD-008, MOD-009]
+      violations: [MOD-002, MOD-004, MOD-006, MOD-008, MOD-009]
+
+  - id: accessible_title_changes_task
+    context:
+      component: Modal
+      modal_type: focused_task
+    content:
+      title: ویرایش اطلاعات تماس
+      accessible_name: حذف حساب کاربری
+    expected:
+      valid: false
+      checked_rules: [MOD-005]
+      violations: [MOD-005]
+
+  - id: body_repeats_title
+    context:
+      component: Modal
+      modal_type: focused_task
+      additional_context_needed: false
+    content:
+      title: افزودن سابقهٔ شغلی
+      body: سابقهٔ شغلی خود را اضافه کنید.
+      primary_action: افزودن سابقهٔ شغلی
+    expected:
+      valid: false
+      checked_rules: [MOD-006, MOD-007]
+      violations: [MOD-006, MOD-007]
+
+  - id: invented_recoverability
+    context:
+      component: Modal
+      modal_type: confirmation
+      recovery_path_confirmed: false
+    content:
+      title: دسترسی را حذف می‌کنید؟
+      body: بعداً می‌توانید این دسترسی را با یک کلیک برگردانید.
+      primary_action: حذف دسترسی
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [MOD-006, MOD-008]
+      violations: [MOD-006, MOD-008]
+
+  - id: ambiguous_primary_and_exit_actions
+    context:
+      component: Modal
+      modal_type: confirmation
+      primary_action: cancel_interview
+    content:
+      title: مصاحبه را لغو می‌کنید؟
+      primary_action: لغو
+      safe_exit: لغو
+    expected:
+      valid: false
+      checked_rules: [MOD-008, MOD-009, MOD-010]
+      violations: [MOD-008, MOD-009, MOD-010]
+
+  - id: dismiss_icon_without_accessible_name
+    context:
+      component: Modal
+      dismissible: true
+      close_icon_present: true
+    content:
+      title: ویرایش اطلاعات تماس
+      close_accessible_name: ""
+    expected:
+      valid: false
+      checked_rules: [MOD-011]
+      violations: [MOD-011]
+
+  - id: invented_backdrop_instruction
+    context:
+      component: Modal
+      backdrop_behavior_confirmed: false
+    content:
+      title: ویرایش اطلاعات تماس
+      body: برای خروج، بیرون کادر کلیک کنید.
+    expected:
+      valid: false
+      checked_rules: [MOD-006, MOD-012]
+      violations: [MOD-006, MOD-012]
+
+  - id: universal_primary_initial_focus_claim
+    context:
+      component: Modal
+      initial_focus_policy_confirmed: false
+      destructive: true
+    content:
+      title: آگهی را حذف می‌کنید؟
+      instruction: دکمهٔ حذف به‌صورت پیش‌فرض انتخاب شده است.
+    expected:
+      valid: false
+      checked_rules: [MOD-012, MOD-020]
+      violations: [MOD-012]
+
+  - id: data_loss_on_close_is_hidden
+    context:
+      component: Modal
+      unsaved_data: true
+      close_discards_data: true
+      consequence_confirmed: true
+      consequence_disclosed: false
+    content:
+      title: ویرایش اطلاعات تماس
+      close_accessible_name: بستن
+    expected:
+      valid: false
+      checked_rules: [MOD-011, MOD-013]
+      violations: [MOD-013]
+
+  - id: premature_success_and_optimistic_close
+    context:
+      component: Modal
+      state: loading
+      outcome_known: false
+      closes_immediately: true
+    content:
+      title: اطلاعات تماس ذخیره شد
+      primary_action: ذخیره شد
+    expected:
+      valid: false
+      checked_rules: [MOD-002, MOD-014, MOD-015, MOD-020]
+      violations: [MOD-002, MOD-014, MOD-015, MOD-020]
+
+  - id: toast_only_recovery_after_modal_failure
+    context:
+      component: Modal
+      state: error
+      modal_closed: true
+      recovery_only_in_transient_toast: true
+      entered_data_preserved: false
+    content:
+      toast: خطایی رخ داد.
+    expected:
+      valid: false
+      checked_rules: [MOD-015, MOD-016]
+      violations: [MOD-015, MOD-016]
+
+  - id: internal_entity_term_in_modal
+    context:
+      component: Modal
+      audience: employer
+      canonical_term: درخواست شغلی
+      internal_term: application_entity
+    content:
+      title: ApplicationEntity را حذف می‌کنید؟
+      primary_action: حذف ApplicationEntity
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [MOD-002, MOD-017]
+      violations: [MOD-002, MOD-017]
+
+  - id: raw_dynamic_identifier_breaks_direction
+    context:
+      component: Modal
+      surrounding_direction: rtl
+      identifier: JV-4821
+      bidi_isolated: false
+    content:
+      title: درخواست JV-4821 را حذف می‌کنید؟
+      primary_action: حذف درخواست
+      safe_exit: انصراف
+    expected:
+      valid: false
+      checked_rules: [MOD-018]
+      violations: [MOD-018]
+
+  - id: multi_step_application_forced_into_modal
+    context:
+      component: Modal
+      steps: 7
+      navigation_heavy: true
+      dedicated_flow_available: true
+    content:
+      title: تکمیل درخواست شغلی
+      body: هفت مرحله را برای ارسال درخواست کامل کنید.
+      primary_action: شروع
+    expected:
+      valid: false
+      checked_rules: [MOD-001, MOD-019]
+      violations: [MOD-001, MOD-019]
+
+  - id: emotional_pressure_in_confirmation
+    context:
+      component: Modal
+      modal_type: confirmation
+      urgency_confirmed: false
+    content:
+      title: واقعاً می‌خواهید این فرصت طلایی را از دست بدهید؟
+      body: با خروج، آیندهٔ شغلی خود را به خطر می‌اندازید.
+      primary_action: با تأسف خارج می‌شوم
+      safe_exit: حفظ فرصت من
+    expected:
+      valid: false
+      checked_rules: [MOD-002, MOD-006, MOD-020]
+      violations: [MOD-002, MOD-006, MOD-020]

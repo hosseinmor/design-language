@@ -1,0 +1,193 @@
+schema_version: "0.1"
+id: content.eval.empty_state_cases
+pattern_id: content.pattern.empty-states
+language: fa-IR
+
+cases:
+  - id: saved_jobs_first_use
+    context:
+      state_type: first_use
+      collection: saved_jobs
+      destination_confirmed: true
+    content:
+      title: هنوز آگهی‌ای ذخیره نکرده‌اید
+      explanation: آگهی‌های شغلی موردنظرتان را ذخیره کنید تا بعداً دوباره بررسی‌شان کنید.
+      primary_action: مشاهدهٔ آگهی‌های شغلی
+    expected:
+      valid: true
+      checked_rules: [EST-001, EST-002, EST-003, EST-004, EST-005, EST-006, EST-007, EST-008, EST-009, EST-011]
+      violations: []
+
+  - id: saved_searches_first_use
+    context:
+      state_type: first_use
+      collection: saved_searches
+      destination_confirmed: true
+    content:
+      title: هنوز جست‌وجویی ذخیره نکرده‌اید
+      explanation: جست‌وجوی خود را ذخیره کنید تا بعداً با همان شرایط به نتایج برگردید.
+      primary_action: جست‌وجوی شغل
+    expected:
+      valid: true
+      checked_rules: [EST-002, EST-004, EST-005, EST-006, EST-007, EST-009]
+      violations: []
+
+  - id: job_search_no_results
+    context:
+      state_type: no_results
+      active_query: طراح محصول
+      active_location: شیراز
+      clear_filters_available: true
+    content:
+      title: برای «طراح محصول» در شیراز آگهی شغلی‌ای پیدا نشد
+      explanation: عبارت جست‌وجو یا فیلترها را تغییر دهید.
+      primary_action: پاک‌کردن فیلترها
+    expected:
+      valid: true
+      checked_rules: [EST-001, EST-002, EST-003, EST-004, EST-005, EST-006, EST-010]
+      violations: []
+
+  - id: recommendation_cold_start_with_confirmed_requirement
+    context:
+      state_type: cold_start
+      requirement_confirmed: true
+      requirement: job_preferences
+    content:
+      title: هنوز پیشنهادی برای شما نداریم
+      explanation: برای شروع، ترجیحات شغلی خود را تکمیل کنید.
+      primary_action: تکمیل ترجیحات شغلی
+    expected:
+      valid: true
+      checked_rules: [EST-001, EST-002, EST-003, EST-004, EST-005, EST-006, EST-008]
+      violations: []
+
+  - id: read_only_empty_without_action
+    context:
+      state_type: empty_collection
+      valid_action_available: false
+    content:
+      message: گزارش این بازه اکنون داده‌ای ندارد.
+    expected:
+      valid: true
+      checked_rules: [EST-001, EST-002, EST-003, EST-011]
+      violations: []
+
+  - id: dynamic_empty_preserves_orientation
+    context:
+      state_type: post_removal_empty
+      status_announced: true
+      focus_target: empty_state_action
+    content:
+      title: دیگر آگهی ذخیره‌شده‌ای ندارید
+      primary_action: مشاهدهٔ آگهی‌های شغلی
+    expected:
+      valid: true
+      checked_rules: [EST-002, EST-004, EST-005, EST-012]
+      violations: []
+
+  - id: generic_empty_message
+    context:
+      state_type: empty_collection
+      valid_action_available: true
+    content:
+      message: موردی وجود ندارد.
+    expected:
+      valid: false
+      checked_rules: [EST-002, EST-004, EST-009]
+      violations: [EST-002, EST-004, EST-009]
+
+  - id: error_mislabeled_as_empty
+    context:
+      state_type: error
+      request_failed: true
+    content:
+      title: هنوز درخواستی ندارید
+      primary_action: جست‌وجوی شغل
+    expected:
+      valid: false
+      checked_rules: [EST-001, EST-003, EST-005]
+      violations: [EST-001, EST-003, EST-005]
+
+  - id: loading_mislabeled_as_empty
+    context:
+      state_type: loading
+      request_in_progress: true
+    content:
+      message: آگهی شغلی‌ای وجود ندارد.
+    expected:
+      valid: false
+      checked_rules: [EST-001, EST-003]
+      violations: [EST-001, EST-003]
+
+  - id: permission_mislabeled_as_empty
+    context:
+      state_type: permission
+      data_existence_unknown: true
+    content:
+      title: این سازمان همکار دیگری ندارد
+      primary_action: افزودن همکار
+    expected:
+      valid: false
+      checked_rules: [EST-001, EST-003, EST-005, EST-011]
+      violations: [EST-001, EST-003, EST-005, EST-011]
+
+  - id: user_is_blamed_for_cold_start
+    context:
+      state_type: cold_start
+      requirement_confirmed: true
+    content:
+      title: چون رزومه‌تان را ناقص گذاشته‌اید، پیشنهادی ندارید
+      primary_action: کاملش کنید
+    expected:
+      valid: false
+      checked_rules: [EST-005, EST-006, EST-007]
+      violations: [EST-005, EST-006, EST-007]
+
+  - id: future_results_are_promised
+    context:
+      state_type: cold_start
+      future_content_confirmed: false
+    content:
+      title: فعلاً پیشنهادی ندارید
+      explanation: به‌زودی بهترین فرصت‌های شغلی را برای شما پیدا می‌کنیم.
+    expected:
+      valid: false
+      checked_rules: [EST-003, EST-008]
+      violations: [EST-003, EST-008]
+
+  - id: no_results_ignores_active_filters
+    context:
+      state_type: no_results
+      active_filter_count: 4
+      clear_filters_available: true
+    content:
+      title: هیچ آگهی شغلی‌ای وجود ندارد
+      primary_action: شروع کنید
+    expected:
+      valid: false
+      checked_rules: [EST-002, EST-004, EST-005, EST-010]
+      violations: [EST-004, EST-005, EST-010]
+
+  - id: unavailable_action_is_invented
+    context:
+      state_type: empty_collection
+      valid_action_available: false
+    content:
+      title: هنوز گزارشی ندارید
+      primary_action: ساخت گزارش
+    expected:
+      valid: false
+      checked_rules: [EST-004, EST-005, EST-011]
+      violations: [EST-004, EST-005, EST-011]
+
+  - id: dynamic_empty_loses_focus
+    context:
+      state_type: post_removal_empty
+      status_announced: false
+      focus_target: body
+    content:
+      title: فهرست خالی است
+    expected:
+      valid: false
+      checked_rules: [EST-012]
+      violations: [EST-012]

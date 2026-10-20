@@ -1,0 +1,1417 @@
+schema_version: "0.2"
+id: content.foundation.terminology
+title: واژه‌نامهٔ محتوای محصول جاب‌ویژن
+status: draft
+language: fa-IR
+scope:
+  - product-ui
+  - product-documentation
+  - ai-generated-product-content
+
+description: >
+  مدل معنایی اصطلاحات جاب‌ویژن. این فایل مفهوم محصول، نام کدی و برچسب
+  مناسب هر مخاطب را از هم جدا می‌کند. واژه‌های allowed، avoid و forbidden
+  فقط در محدوده‌ای که برایشان تعریف شده اعمال می‌شوند.
+
+precedence:
+  - product_truth_and_safety
+  - accessibility_and_usability
+  - domain_and_surface_rules
+  - persian_language_rules
+  - brand_expression
+
+sources:
+  - id: source_glossary
+    title: واژه‌نامهٔ جاب‌ویژن
+    url: https://docs-jv.jvoffice.ir/contents/00-glossary/
+    state: draft
+    role: product_truth_and_code_mapping
+    reviewed_on: 2026-09-23
+  - id: product_content_decisions
+    title: تصمیم‌های Product Content System
+    state: working_decisions
+    role: user_facing_language
+  - id: candidate_runtime_review
+    title: تجربهٔ فعلی پنل کارجو جاب‌ویژن
+    url: https://jobvision.ir/my-cv
+    state: observed
+    role: runtime_product_evidence
+    reviewed_on: 2026-09-23
+
+policy:
+  concept_and_label:
+    - هر id یک مفهوم مستقل را نشان می‌دهد، نه صرفاً یک رشتهٔ متنی را.
+    - canonical_internal نام مرجع مفهوم در دانش محصول است.
+    - preferred برچسب مناسب هر مخاطب یا سطح را تعیین می‌کند.
+  term_severity:
+    allowed: واژهٔ مجاز ولی نه لزوماً انتخاب اول
+    avoid: ترجیحاً استفاده نشود؛ خطای non-blocking
+    forbidden: در scope مشخص استفاده نشود؛ خطای blocking
+  context_rules:
+    - forbidden_as_synonym فقط جایگزینی نادرست یک مفهوم را منع می‌کند و ممنوعیت مطلق واژه نیست.
+    - واژهٔ کوتاه فقط زمانی مجاز است که مفهوم در همان سطح بدون ابهام باشد.
+    - نام‌های code_only نباید مستقیماً وارد UI کارجو یا کارفرما شوند.
+  unresolved_marker: needs_decision
+
+terms:
+  # Core employment concepts
+  - id: job_post
+    concept_kind: entity
+    canonical_internal: آگهی
+    definition:
+      source: اعلان یک موقعیت شغلی توسط سازمان.
+      product_content: >
+        موجودیت منتشرشده در جاب‌ویژن که اطلاعات یک موقعیت شغلی را
+        به کارجو نمایش می‌دهد.
+    preferred:
+      default: آگهی شغلی
+      jobseeker: آگهی شغلی
+      employer: آگهی
+      admin: آگهی
+    forbidden_as_synonym:
+      - موقعیت شغلی
+      - فرصت شغلی
+      - آگهی استخدام
+      - وکنسی
+    domains: [jobseeker, employer, ats, admin]
+    visibility: [public, internal]
+    relations:
+      represents: job_position
+      distinct_from: [job_position, job_opportunity]
+    code_bindings: [JobPost]
+    status: stable
+    evidence: [source_glossary, product_content_decisions]
+
+  - id: job_position
+    concept_kind: entity
+    canonical_internal: موقعیت شغلی
+    definition:
+      product_content: نقش یا جایگاه واقعی‌ای که یک سازمان برای آن نیرو می‌خواهد.
+    preferred:
+      default: موقعیت شغلی
+    use_when:
+      - اشاره به خود نقش یا جایگاه
+      - اقدام یا تصمیم جذب برای یک نقش
+    forbidden_as_synonym_of: [job_post, job_opportunity]
+    domains: [jobseeker, employer, ats]
+    visibility: [public, internal]
+    relations:
+      represented_by: job_post
+      distinct_from: [job_post, job_opportunity]
+    status: stable
+    evidence: [product_content_decisions]
+
+  - id: job_opportunity
+    concept_kind: communication_concept
+    canonical_internal: فرصت شغلی
+    definition:
+      product_content: امکان پیدا کردن یا شروع یک شغل؛ نه یک موجودیت دقیق محصول.
+    preferred:
+      default: فرصت شغلی
+    use_when: [discovery, recommendation, general_product_copy]
+    avoid_when: [specific_product_entity, status_or_metadata]
+    forbidden_as_synonym_of: [job_post, job_position]
+    domains: [jobseeker, marketing]
+    visibility: [public]
+    relations:
+      distinct_from: [job_post, job_position]
+    status: stable
+    evidence: [product_content_decisions]
+
+  - id: recruitment
+    concept_kind: process
+    canonical_internal: جذب
+    definition:
+      product_content: >
+        فرایند پیدا کردن، بررسی، ارزیابی و پیش بردن افراد تا رسیدن
+        به تصمیم استخدام.
+    preferred:
+      default: جذب
+    examples: [فرایند جذب, درخواست جذب, تیم جذب, در حال جذب]
+    forbidden_as_synonym_of: [hiring]
+    relations:
+      leads_to: hiring
+      distinct_from: [hiring]
+    domains: [employer, ats]
+    visibility: [public, internal]
+    status: stable
+    evidence: [product_content_decisions]
+
+  - id: hiring
+    concept_kind: outcome
+    canonical_internal: استخدام
+    definition:
+      product_content: >
+        تصمیم یا نتیجه‌ای که فرد در آن برای یک موقعیت وارد رابطهٔ استخدامی می‌شود.
+    preferred:
+      default: استخدام
+    examples: [استخدام شد, تاریخ استخدام, تصمیم استخدام]
+    forbidden_as_synonym_of: [recruitment]
+    relations:
+      result_of: recruitment
+      distinct_from: [recruitment]
+    domains: [employer, ats, jobseeker]
+    visibility: [public, internal]
+    status: stable
+    evidence: [product_content_decisions]
+
+  # People and organizations
+  - id: employer_organization
+    concept_kind: entity
+    canonical_internal: سازمان
+    definition:
+      source: کارفرمای ثبت‌شده در سامانه که می‌تواند آگهی منتشر کند.
+      product_content: سازمانی که از محصولات کارفرمایی جاب‌ویژن استفاده می‌کند.
+    preferred:
+      default: سازمان
+      jobseeker: شرکت
+      employer: سازمان
+      ats: سازمان
+      admin: سازمان
+    allowed: [سازمان, شرکت]
+    avoid: [مجموعه, بنگاه]
+    forbidden_as_synonym:
+      - term: کارفرما
+        scope: entity_label
+    domains: [jobseeker, employer, ats, admin]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [employer_actor, operator]
+    code_bindings: [Company]
+    status: stable
+    evidence: [source_glossary, product_content_decisions]
+
+  - id: employer_actor
+    concept_kind: role
+    canonical_internal: کارفرما
+    definition:
+      product_content: فرد یا نقش انسانی‌ای که از طرف یک سازمان در فرایند جذب نیرو عمل می‌کند.
+    preferred:
+      default: کارفرما
+    forbidden_as_synonym_of: [employer_organization]
+    domains: [jobseeker, employer, ats]
+    visibility: [public, internal]
+    relations:
+      acts_for: employer_organization
+      distinct_from: [employer_organization, operator]
+    status: stable
+    evidence: [product_content_decisions]
+
+  - id: operator
+    concept_kind: role
+    canonical_internal: رابط
+    definition:
+      source: کاربری که از طرف یک سازمان در پنل کارفرما کار می‌کند.
+    preferred:
+      default: رابط
+    source_forbidden: [اپراتور, کاربر سازمان, نمایندهٔ کارفرما]
+    domains: [employer, admin]
+    visibility: [internal, admin]
+    relations:
+      acts_for: employer_organization
+      distinct_from: [employer_actor, job_fair_applier]
+    code_bindings: [Operator]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: system_operator
+    concept_kind: role
+    canonical_internal: رابط سیستمی
+    definition:
+      source: رابطی که توسط جاب‌ویژن از طرف سازمان ساخته می‌شود.
+    domains: [employer, admin]
+    visibility: [internal, admin]
+    code_bindings: [Operator]
+    status: needs_decision
+    open_questions:
+      - نشانگر سیستمی و تفاوت رفتاری آن با رابط عادی دقیقاً چیست؟
+    evidence: [source_glossary]
+
+  - id: jobseeker
+    concept_kind: role
+    canonical_internal: کارجو
+    definition:
+      source: کاربری که برای یافتن شغل ثبت‌نام کرده است.
+      product_content: >
+        فردی که در جاب‌ویژن به دنبال فرصت شغلی است یا برای یک موقعیت
+        درخواست شغلی فرستاده است.
+    preferred:
+      default: کارجو
+    avoid: [متقاضی, داوطلب]
+    forbidden_as_synonym: [کاندید, کاندیدا, جویای کار]
+    domains: [jobseeker, employer]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [ats_candidate]
+    code_bindings: [Candidate]
+    status: stable
+    evidence: [source_glossary, product_content_decisions]
+
+  - id: ats_candidate
+    concept_kind: role
+    canonical_internal: کاندیدا
+    definition:
+      product_content: >
+        فردی که در ATS برای یک یا چند موقعیت شغلی در حال بررسی است؛
+        چه خودش درخواست شغلی فرستاده باشد و چه recruiter او را اضافه کرده باشد.
+    preferred:
+      ats: کاندیدا
+    allowed: [کاندیدای جذب]
+    avoid: [متقاضی, کارجو, داوطلب]
+    domains: [ats]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [jobseeker]
+    status: stable
+    evidence: [product_content_decisions]
+
+  - id: industry
+    concept_kind: taxonomy
+    canonical_internal: صنعت
+    definition:
+      source: حوزهٔ فعالیت کسب‌وکار سازمان که از بیس‌دیتا انتخاب می‌شود.
+    preferred:
+      default: صنعت
+    source_forbidden: [حوزهٔ فعالیت, زمینهٔ کاری, رستهٔ شغلی]
+    relations:
+      distinct_from: [job_category]
+    code_bindings: [CompanyIndustry]
+    domains: [jobseeker, employer, admin]
+    visibility: [public, internal]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: company_authentication
+    concept_kind: process
+    canonical_internal: احراز هویت سازمان
+    definition:
+      source: >
+        جریان سه‌گامی اثبات ارتباط رابط با اشخاص ثبت‌شدهٔ سازمان؛ شامل
+        کد پیامکی، شاهکار و تطبیق با فهرست اشخاص سازمان.
+    preferred:
+      default: احراز هویت سازمان
+    source_forbidden: [تأیید سازمان, وریفای سازمان, احراز شاهکار]
+    relations:
+      distinct_from: [company_activation]
+    code_bindings: [CompanyAuthentication]
+    domains: [employer, admin]
+    visibility: [public, internal]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: similar_company
+    concept_kind: system_flag
+    canonical_internal: سازمان مشابه
+    definition:
+      source: >
+        سازمانی که یکی از پنج فیلد نام ثبتی، نام فارسی، نام انگلیسی،
+        وب‌سایت یا تلفنش دقیقاً با سازمان دیگری برابر است.
+    preferred:
+      admin: سازمان مشابه
+    source_forbidden: [سازمان تکراری, سازمان دوتایی]
+    domains: [admin]
+    visibility: [admin, internal]
+    code_bindings: [SimilarCompanyId, SimilarReasonId]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: merge_company
+    concept_kind: admin_action
+    canonical_internal: ادغام سازمان
+    definition:
+      source: انتقال داده و موجودی یک سازمان به سازمان دیگر و حذف سازمان مبدأ.
+    preferred:
+      admin: ادغام سازمان
+    source_forbidden: [مرج, یکی‌سازی سازمان]
+    domains: [admin]
+    visibility: [admin, internal]
+    code_bindings: [MergeCompany]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: company_formal_info
+    concept_kind: data_object
+    canonical_internal: اطلاعات رسمی سازمان
+    definition:
+      source: هویت فاکتوری سازمان شامل شناسهٔ ملی، عنوان حقوقی، نشانی و کد پستی.
+    preferred:
+      employer: اطلاعات رسمی سازمان
+      billing: اطلاعات رسمی
+      admin: اطلاعات رسمی سازمان
+    source_forbidden: [اطلاعات حقوقی, اطلاعات فاکتور, اطلاعات مالیاتی]
+    domains: [employer, billing, admin]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [company_authentication, company_profile]
+      reconciles_source_entries: [company_formal_info, formal_info]
+    code_bindings: [CompanyFormalInfo]
+    status: stable
+    evidence: [source_glossary]
+
+  - id: account_manager
+    concept_kind: internal_role
+    canonical_internal: اکانت‌منیجر
+    definition:
+      source: کارمند جاب‌ویژن که مسئول مجموعه‌ای از سازمان‌هاست؛ تخصیص بر اساس صنعت.
+    preferred:
+      internal: اکانت‌منیجر
+    source_forbidden: [مدیر حساب, مسئول فروش]
+    domains: [sales, admin]
+    visibility: [internal, admin]
+    code_bindings: [AccountManager]
+    status: draft
+    evidence: [source_glossary]
+
+  # Resume and application concepts
+  - id: blue_collar_job_post
+    concept_kind: derived_classification
+    canonical_internal: آگهی یقه آبی
+    definition:
+      source: آگهی‌ای که همهٔ دسته‌های شغلی‌اش سطح شغلی پیش‌فرض ۲ دارند.
+    preferred:
+      default: آگهی یقه آبی
+    source_forbidden: [آگهی کارگری, آگهی سطح پایین, مشاغل ساده]
+    domains: [jobseeker, employer, admin]
+    visibility: [public, internal]
+    code_bindings: [IsBlueCollarJob, isLowLevel]
+    status: draft
+    notes:
+      - منطق تشخیص در صفحهٔ جزئیات با کارت و جست‌وجو یکسان نیست.
+    evidence: [source_glossary]
+
+  - id: resume
+    concept_kind: entity
+    canonical_internal: رزومه
+    definition:
+      source: سند مهارت‌ها و سوابق کارجو.
+      product_content: >
+        مفهوم واحد اطلاعات حرفه‌ای کارجو که می‌تواند نسخه‌های زبانی فارسی
+        و انگلیسی داشته باشد.
+    preferred:
+      default: رزومه
+    avoid: [CV, سی‌وی]
+    forbidden_as_synonym: [پروفایل کاری, پروفایل کارجو]
+    domains: [jobseeker, employer, ats]
+    visibility: [public, internal]
+    relations:
+      has_variant: resume_language_variant
+      distinct_from: [candidate_profile, personal_resume_file, resume_snapshot]
+    code_bindings: [Cv]
+    status: stable
+    evidence: [source_glossary, product_content_decisions]
+
+  - id: resume_language_variant
+    concept_kind: localized_representation
+    canonical_internal: نسخهٔ زبانی رزومه
+    definition:
+      product_content: >
+        بازنمایی فارسی یا انگلیسی همان رزومه که محتوای زبانی و شاخص تکمیل
+        مخصوص خود را دارد، اما در مدل محتوایی رزومهٔ مستقل دیگری نیست.
+    preferred:
+      default: نسخهٔ زبانی رزومه
+      persian: رزومهٔ فارسی
+      english: رزومهٔ انگلیسی
+    avoid: [رزومهٔ دوم, رزومهٔ جداگانه]
+    domains: [jobseeker, employer, application]
+    visibility: [public, internal]
+    relations:
+      variant_of: resume
+      distinct_from: [personal_resume_file, resume_snapshot]
+    status: stable
+    notes:
+      - این مدل محتوایی دربارهٔ تعداد رکوردها یا ساختار ذخیره‌سازی ادعا نمی‌کند.
+    evidence: [product_content_decisions]
+
+  - id: resume_completion_percentage
+    concept_kind: metric
+    canonical_internal: درصد تکمیل رزومه
+    definition:
+      source: عدد صفر تا صد برای میزان پرشدن رزومه؛ برای فارسی و انگلیسی جداست.
+    preferred:
+      default: درصد تکمیل رزومه
+    source_forbidden: [درصد رزومه, کامل بودن رزومه]
+    domains: [jobseeker]
+    visibility: [public, internal]
+    relations:
+      computed_for: resume_language_variant
+    code_bindings: [CompletionPercentageFa, CompletionPercentageEn]
+    status: draft
+    notes:
+      - صددرصد بودن لزوماً به معنای رزومهٔ پرمحتوا نیست.
+    evidence: [source_glossary]
+
+  - id: personal_resume_file
+    concept_kind: artifact
+    canonical_internal: رزومهٔ شخصی
+    definition:
+      source: فایلی که کارجو خودش بارگذاری می‌کند، در برابر رزومهٔ ساختاریافتهٔ جاب‌ویژن.
+    preferred:
+      default: رزومهٔ شخصی
+    source_forbidden: [رزومهٔ آپلودی, فایل رزومه]
+    domains: [jobseeker, employer]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [resume]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: recommendation
+    concept_kind: resume_section
+    canonical_internal: توصیه‌نامه
+    definition:
+      source: متنی که هم‌کار سابق دربارهٔ کارجو می‌نویسد.
+    preferred:
+      default: توصیه‌نامه
+    source_forbidden: [رفرنس, معرفی‌نامه]
+    domains: [jobseeker, employer]
+    visibility: [public, internal]
+    code_bindings: [CvFormerColleague.RecommendationText]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: job_application
+    concept_kind: entity_and_action
+    canonical_internal: درخواست شغلی
+    definition:
+      source: اقدام کارجو برای ارسال رزومه به یک آگهی مشخص.
+    preferred:
+      full: درخواست شغلی
+      contextual: درخواست
+    action_labels:
+      allowed: [ارسال رزومه]
+    source_forbidden_as_entity_label: [اپلای, ارسال رزومه, تقاضا, درخواست]
+    rules:
+      - در متن مستقل، notification و متن چنددامنه‌ای همیشه «درخواست شغلی» نوشته شود.
+      - «درخواست» فقط در سطحی مجاز است که موضوع از عنوان یا ساختار صفحه روشن باشد.
+      - «ارسال رزومه» نام عمل است، نه نام موجودیت.
+    domains: [jobseeker, employer, ats]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [hiring_request, interview_invitation, generic_request]
+    code_bindings: [Application]
+    status: draft
+    eval_rules:
+      - TERM_AMBIGUOUS_WITHOUT_CONTEXT
+    evidence: [source_glossary, product_content_decisions]
+
+  - id: hiring_request
+    concept_kind: entity
+    canonical_internal: درخواست جذب
+    definition:
+      product_content: درخواست داخلی سازمان برای آغاز یا پیش‌برد جذب نیرو.
+    preferred:
+      default: درخواست جذب
+    forbidden_as_synonym_of: [job_application, generic_request]
+    domains: [employer, ats]
+    visibility: [internal]
+    relations:
+      distinct_from: [job_application]
+      part_of: recruitment
+    status: stable
+    evidence: [product_content_decisions]
+
+  - id: resume_snapshot
+    concept_kind: internal_artifact
+    canonical_internal: اسنپشات رزومه
+    definition:
+      source: نسخهٔ کامل و منجمدشدهٔ رزومه در لحظهٔ ارسال درخواست شغلی.
+    preferred:
+      internal: اسنپشات رزومه
+      user_facing_explanation: نسخهٔ رزومه در زمان ارسال درخواست شغلی
+    source_forbidden: [عکس فوری, اسنپ‌شات, نسخهٔ رزومه, رزومهٔ ذخیره‌شده]
+    domains: [application, employer, admin]
+    visibility: [internal, admin]
+    relations:
+      snapshot_of: resume
+    code_bindings: [ApplicationCandidate]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: employer_assistant
+    concept_kind: automation
+    canonical_internal: دستیار کارفرما
+    definition:
+      source: >
+        سازوکاری که درخواست‌های شغلی بی‌تصمیمِ گذشته از مهلت آگهی را
+        خودکار رد می‌کند و دو روز پیش از آن به رابط‌ها یادآوری می‌دهد.
+    preferred:
+      default: دستیار کارفرما
+    source_forbidden_as_feature_name: [رد خودکار, اسیستنت]
+    domains: [employer, application]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [ai_assistant, external_ai_screener]
+    code_bindings: [EmployerAssistantSilentDays]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: application_withdrawal
+    concept_kind: user_action
+    canonical_internal: انصراف
+    definition:
+      source: پس گرفتن درخواست شغلی توسط کارجو، با یکی از چهار دلیل مشخص.
+    preferred:
+      default: انصراف
+    source_forbidden: [کنسل, لغو درخواست شغلی]
+    domains: [jobseeker, application]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [application_rejection]
+    code_bindings: [IsCanceled, ApplicationCancellationReasonEnum]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: rejection_queue
+    concept_kind: application_status
+    canonical_internal: صف رد
+    definition:
+      source: >
+        وضعیت درخواست‌هایی که دستیار هوشمند بیرونی ضعیف تشخیص داده
+        تا سازمان آن‌ها را مرور کند.
+    preferred:
+      internal: صف رد
+    source_forbidden: [صف حذف, لیست رد]
+    domains: [application, employer]
+    visibility: [internal, admin]
+    code_bindings: [ApplicationStatusEnum.RejectionQueue]
+    status: needs_decision
+    notes:
+      - طبق منبع، پردازشگر این وضعیت اکنون غیرفعال است.
+    evidence: [source_glossary]
+
+  - id: interview_experience
+    concept_kind: user_generated_content
+    canonical_internal: تجربهٔ مصاحبه
+    definition:
+      source: روایت کارجو از فرایند مصاحبهٔ یک سازمان.
+    preferred:
+      default: تجربهٔ مصاحبه
+    source_forbidden: [نظر مصاحبه, بازخورد مصاحبه]
+    domains: [jobseeker, company]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [company_review]
+    code_bindings: [InterviewExperience]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: company_review
+    concept_kind: user_generated_content
+    canonical_internal: نظر سازمان
+    definition:
+      source: امتیاز و نظر کارجو دربارهٔ سازمان.
+    preferred:
+      default: نظر سازمان
+      jobseeker: نظر دربارهٔ شرکت
+    source_forbidden: [ریویو, نقد سازمان]
+    domains: [jobseeker, company]
+    visibility: [public, internal]
+    code_bindings: [CompanyReview]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: follow_company
+    concept_kind: user_action
+    canonical_internal: دنبال کردن سازمان
+    definition:
+      source: اقدام کارجو برای باخبر شدن از آگهی‌های تازهٔ یک سازمان.
+    preferred:
+      jobseeker: دنبال کردن شرکت
+      internal: دنبال کردن سازمان
+    source_forbidden: [فالو کردن, عضویت در سازمان]
+    domains: [jobseeker, company]
+    visibility: [public, internal]
+    code_bindings: [CandidateFollowedCompany]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: career_guide
+    concept_kind: content_product
+    canonical_internal: مجله شغلی
+    definition:
+      source: محتوای معرفی مشاغل، مسیر شغلی و آمار حقوق.
+    preferred:
+      default: مجله شغلی
+    source_forbidden: [راهنمای شغلی, بلاگ شغلی]
+    domains: [jobseeker, content]
+    visibility: [public, internal]
+    code_bindings: [CareerGuide]
+    status: draft
+    evidence: [source_glossary]
+
+  # Billing and commercial concepts
+  - id: package
+    concept_kind: owned_entitlement_container
+    canonical_internal: بسته
+    definition:
+      source: >
+        آنچه یک سازمان مشخص خریده یا از ادمین گرفته و با تاریخ انقضا
+        و مانده در اختیار دارد.
+    preferred:
+      default: بسته
+    source_forbidden: [پلن, اشتراک, طرح]
+    domains: [employer, billing]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [package_type, paid_service, plan]
+      contains: paid_service
+    code_bindings: [Package]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: package_type
+    concept_kind: catalog_item
+    canonical_internal: نوع بسته
+    definition:
+      source: قلم کاتالوگ فروش؛ چیزی که در فروشگاه دکمهٔ خرید دارد.
+    preferred:
+      internal: نوع بسته
+      store: بسته
+    source_forbidden: [بستهٔ فروش, محصول, آیتم فروشگاه]
+    domains: [billing, store, admin]
+    visibility: [public, internal, admin]
+    relations:
+      distinct_from: [package, paid_service]
+    code_bindings: [PackageType]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: coupon
+    concept_kind: discount_instrument
+    canonical_internal: کد تخفیف
+    definition:
+      source: رشته‌ای که هنگام تسویه وارد می‌شود و از مبلغ سفارش کم می‌کند.
+    preferred:
+      default: کد تخفیف
+    source_forbidden: [کوپن, کد نخفیف, ووچر, کد هدیه]
+    domains: [billing, store]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [festival]
+    code_bindings: [Coupon]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: festival
+    concept_kind: sales_campaign
+    canonical_internal: جشنواره
+    definition:
+      source: کمپین فروش زمان‌دار با صفحه و فهرست نوع‌بسته‌های اختصاصی.
+    preferred:
+      default: جشنواره
+    source_forbidden: [فستیوال, کمپین تخفیف]
+    domains: [billing, store, marketing]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [coupon, job_fair]
+    code_bindings: [Festival]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: order
+    concept_kind: transaction
+    canonical_internal: سفارش
+    definition:
+      source: سرآیند یک خرید؛ چه چیزی، با چه قیمت و از چه منابعی تسویه شده است.
+    preferred:
+      default: سفارش
+    source_forbidden: [اردر, خرید]
+    domains: [billing, store]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [invoice]
+    code_bindings: [Order]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: invoice
+    concept_kind: accounting_document
+    canonical_internal: فاکتور
+    definition:
+      source: سند حسابداری سفارش؛ رسمی یا غیررسمی.
+    preferred:
+      default: فاکتور
+    source_forbidden: [صورت‌حساب, انویس]
+    domains: [billing]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [proforma_invoice, order]
+    code_bindings: [Invoice]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: wallet
+    concept_kind: monetary_balance
+    canonical_internal: کیف پول
+    definition:
+      source: اعتبار ریالی سازمان نزد جاب‌ویژن.
+    preferred:
+      default: کیف پول
+    source_forbidden: [والت, اعتبار, موجودی]
+    domains: [billing, employer]
+    visibility: [public, internal]
+    code_bindings: [PaymentServiceAdapter]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: moadiyan
+    concept_kind: external_system
+    canonical_internal: سامانه مؤدیان
+    definition:
+      source: سامانه‌ای که فاکتورهای رسمی به آن ارسال می‌شوند تا شمارهٔ مالیاتی بگیرند.
+    preferred:
+      default: سامانه مؤدیان
+    source_forbidden: [سامانه مالیاتی, مودیان]
+    domains: [billing, admin]
+    visibility: [public, internal]
+    code_bindings: [MoadiyanServiceAdapter]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: paid_service
+    concept_kind: entitlement
+    canonical_internal: سرویس
+    definition:
+      source: کوچک‌ترین حقی که می‌توان خرید و مصرف کرد.
+    preferred:
+      internal: سرویس
+    source_forbidden: [خدمت پولی, آیتم بسته]
+    domains: [billing, employer]
+    visibility: [internal, admin]
+    relations:
+      contained_by: package
+      distinct_from: [package, package_type]
+    code_bindings: [PaidService]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: paid_service_tier
+    concept_kind: internal_pricing_class
+    canonical_internal: سطح
+    definition:
+      source: >
+        بازهٔ قیمتی آگهی از ۱ تا ۸ که سیستم از دستهٔ شغلی، ارشدیت،
+        شهر و گروه سازمان تشخیص می‌دهد و سازمان آن را نمی‌بیند.
+    preferred:
+      internal: سطح
+    source_forbidden: [تیر, ردهٔ قیمت, سطح سرویس]
+    domains: [billing, jobpost]
+    visibility: [internal, admin]
+    relations:
+      determines: price
+      distinct_from: [plan, seniority_level]
+    code_bindings: [PaidServiceTier]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: plan
+    concept_kind: service_level
+    canonical_internal: پلن
+    definition:
+      source: سطح خدماتی که سازمان برای آگهی می‌خرد.
+    preferred:
+      default: پلن
+    source_forbidden: [طرح, بسته]
+    domains: [billing, employer, jobpost]
+    visibility: [public, internal]
+    relations:
+      determines: services
+      distinct_from: [package, paid_service_tier]
+    code_bindings: [PaidServicePlan]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: premium_subscription
+    concept_kind: subscription
+    canonical_internal: اشتراک ویژه
+    definition:
+      source: اصطلاحی ثبت‌شده در کد که تعریف محصول و امکاناتش هنوز مشخص نشده است.
+    domains: [unknown]
+    visibility: [code_only, internal]
+    relations:
+      distinct_from: [package, plan, paid_service]
+    code_bindings: [PremiumSubscription]
+    status: needs_decision
+    avoid_when:
+      - در هر محتوای کاربر-facing تا زمان مشخص شدن مالک، مزایا و lifecycle محصول.
+    open_questions:
+      - برای کارجوست یا سازمان؟
+      - چه امکاناتی ارائه می‌کند؟
+      - آیا با Premium Insights سمت کارجو ارتباط دارد یا concept مستقلی است؟
+      - lifecycle، قیمت‌گذاری و وضعیت‌های فعال، منقضی و لغوشده چیست؟
+    notes:
+      - وجود نام کدی برای اثبات محصول فعال یا label عمومی کافی نیست.
+    evidence: [source_glossary]
+
+  - id: activation_round
+    concept_kind: internal_lifecycle_interval
+    canonical_internal: راند فعال‌سازی
+    definition:
+      source: بازهٔ پیوسته‌ای که آگهی در آن روی سایت بوده است.
+    preferred:
+      internal: راند فعال‌سازی
+    source_forbidden: [دور فعال‌سازی, دورهٔ انتشار]
+    domains: [jobpost, analytics]
+    visibility: [internal, admin]
+    relations:
+      distinct_from: [reshot]
+    code_bindings: [JobPostActivationRound]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: reshot
+    concept_kind: job_post_action
+    canonical_internal: تازه‌سازی
+    definition:
+      source: بازگرداندن آگهی به بالای فهرست‌ها بدون تغییر وضعیت.
+    preferred:
+      default: تازه‌سازی
+    source_forbidden: [ریشات, تمدید, بامپ]
+    domains: [jobpost, employer, admin]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [reactivation, activation_round]
+    code_bindings: [Reshot]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: auto_publish
+    concept_kind: internal_automation
+    canonical_internal: انتشار خودکار
+    definition:
+      source: تأیید و فعال‌سازی آگهی توسط سرویس هوش مصنوعی، بدون دخالت پنل ادمین.
+    preferred:
+      internal: انتشار خودکار
+    source_forbidden: [اتوپابلیش, تأیید هوشمند]
+    domains: [jobpost, admin, ai]
+    visibility: [internal, admin]
+    relations:
+      uses: ai_technology
+    code_bindings: [AutoPublish, AutoActivation]
+    status: draft
+    evidence: [source_glossary]
+
+  # Scores and calculations
+  - id: company_score
+    concept_kind: metric
+    canonical_internal: امتیاز سازمان
+    definition:
+      source: عدد حاصل از محبوبیت، تجربهٔ مصاحبه و تغییر وضعیت درخواست شغلی.
+    preferred:
+      default: امتیاز سازمان
+    source_forbidden: [رتبهٔ سازمان, نمرهٔ کارفرما]
+    domains: [company, scoring]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [company_rank, industry_rank]
+    code_bindings: [CompanyOverallScore]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: popularity_score
+    concept_kind: metric
+    canonical_internal: امتیاز محبوبیت
+    definition:
+      source: میانگین بازخورد کلی کارکنان فعلی و سابق سازمان.
+    preferred:
+      default: امتیاز محبوبیت
+    source_forbidden: [پاپیولاریتی, امتیاز بازدید]
+    domains: [company, scoring]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [job_post_popularity]
+    code_bindings: [CompanyReviewScore]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: job_post_popularity
+    concept_kind: internal_metric
+    canonical_internal: محبوبیت آگهی
+    definition:
+      source: معیار کدی حاصل از تعداد بازدید آگهی‌ها که اکنون در هیچ امتیازی اثر ندارد.
+    preferred:
+      internal: محبوبیت آگهی
+    domains: [jobpost, scoring]
+    visibility: [code_only, internal]
+    relations:
+      distinct_from: [popularity_score]
+    code_bindings: [JobPostPopularity]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: company_rank
+    concept_kind: metric
+    canonical_internal: رتبهٔ سازمان
+    definition:
+      source: جایگاه سازمان در فهرست کل سازمان‌ها بر اساس امتیاز.
+    preferred:
+      default: رتبهٔ سازمان
+    source_forbidden: [رنک, جایگاه سازمان]
+    domains: [company, scoring]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [company_score, industry_rank]
+    code_bindings: [CompanyOverallScore.Rank]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: industry_rank
+    concept_kind: metric
+    canonical_internal: رتبه در صنعت
+    definition:
+      source: جایگاه سازمان درون هر صنعتی که به آن تعلق دارد.
+    preferred:
+      default: رتبه در صنعت
+    source_forbidden: [رتبهٔ صنعتی, رنک صنعت]
+    domains: [company, scoring]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [company_rank]
+    code_bindings: [CompanyOverallScores_CompanyIndustryRank]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: application_responsiveness
+    concept_kind: metric
+    canonical_internal: پاسخ‌گویی به درخواست‌های شغلی
+    definition:
+      source: سهم درخواست‌های شغلی تعیین‌وضعیت‌شده.
+    preferred:
+      default: پاسخ‌گویی به درخواست‌های شغلی
+    source_forbidden: [نرخ پاسخ, ریسپانسیونس]
+    domains: [application, scoring]
+    visibility: [public, internal]
+    code_bindings: [ApplicationChangeStatus_Score]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: matching_score
+    concept_kind: metric
+    canonical_internal: امتیاز تطبیق
+    definition:
+      source: میزان تناسب یک رزومه با یک آگهی.
+    preferred:
+      default: امتیاز تطبیق
+    source_forbidden: [نمرهٔ تطابق, امتیاز همخوانی, انطباق]
+    domains: [resume, jobpost, matching]
+    visibility: [public, internal]
+    code_bindings: [MatchingScore]
+    status: draft
+    evidence: [source_glossary]
+
+  # Employer tools
+  - id: talent_search
+    concept_kind: product_capability
+    canonical_internal: بانک رزومه
+    definition:
+      source: جست‌وجوی فعال کارفرما در میان رزومه‌ها.
+    preferred:
+      default: بانک رزومه
+    source_forbidden: [سرچ رزومه, جست‌وجوی استعداد]
+    domains: [employer, resume]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [talent_pool, suggested_resume]
+    code_bindings: [TalentSearch, TalentPool-Api]
+    status: draft
+    notes:
+      - نام سرویس TalentPool-Api به حوزهٔ تلنت پول تعلق ندارد و نباید مبنای label شود.
+    evidence: [source_glossary]
+
+  - id: talent_pool
+    concept_kind: product_capability
+    canonical_internal: تلنت پول
+    definition:
+      source: مجموعهٔ پوشه‌ها و رزومه‌های ذخیره‌شدهٔ سازمان.
+    preferred:
+      default: تلنت پول
+    source_forbidden: [مخزن استعداد, استخر استعداد, آرشیو رزومه]
+    domains: [employer, resume]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [talent_search]
+    code_bindings: [Folder, FolderCv]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: resume_access
+    concept_kind: entitlement
+    canonical_internal: دسترسی به رزومه
+    definition:
+      source: حق دائمی سازمان برای دیدن اطلاعات تماس یک رزومه.
+    preferred:
+      employer: دسترسی به رزومه
+      user_facing_explanation: امکان مشاهدهٔ اطلاعات تماس
+    source_forbidden: [مالکیت رزومه, رزومهٔ خریده‌شده]
+    domains: [employer, resume, billing]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [resume_view]
+    code_bindings: [CompanyCv, CvAccessReasonsEnum]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: bookmarked_resumes
+    concept_kind: system_folder
+    canonical_internal: نشان‌شده‌ها
+    definition:
+      source: پوشهٔ سیستمی رزومه‌های پسندیده‌شده اما هنوز خریداری‌نشده.
+    preferred:
+      employer: نشان‌شده‌ها
+    source_forbidden: [علاقه‌مندی‌ها, بوکمارک]
+    domains: [employer, talent_pool]
+    visibility: [public, internal]
+    code_bindings: [FolderTypeEnum.Systemic_Bookmarked]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: gateway
+    concept_kind: technical_execution_point
+    canonical_internal: gateway
+    definition:
+      source: نقطه‌ای در مسیر اجرا که یک قاعده را می‌سنجد و در صورت رد، عمل را متوقف می‌کند.
+    preferred:
+      technical: gateway
+    source_forbidden: [دروازه, گیت, شرط ورود]
+    grammar:
+      plural: gatewayها
+    domains: [engineering, product_knowledge]
+    visibility: [code_only, internal]
+    relations:
+      distinct_from: [business_rule]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: pipeline
+    concept_kind: technical_process
+    canonical_internal: پایپ‌لاین
+    definition:
+      source: زنجیرهٔ مرحله‌به‌مرحله‌ای که یک محاسبه در آن انجام می‌شود.
+    preferred:
+      technical: پایپ‌لاین
+    source_forbidden: [خط لوله, زنجیره پردازش]
+    domains: [engineering, product_knowledge]
+    visibility: [code_only, internal]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: suggested_resume
+    concept_kind: recommendation
+    canonical_internal: رزومهٔ پیشنهادی
+    definition:
+      source: رزومه‌هایی که سیستم به سازمان پیشنهاد می‌دهد.
+    preferred:
+      default: رزومهٔ پیشنهادی
+    source_forbidden: [رزومه پیشنهاد شده, سرچ خودکار]
+    domains: [employer, resume, matching]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [talent_search]
+    code_bindings: [SuggestedCv]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: employer_branding
+    concept_kind: product_capability
+    canonical_internal: برندینگ کارفرمایی
+    definition:
+      source: >
+        صفحهٔ معرفی کامل سازمان برای کارجو شامل رسانه، اعضای تیم، داستان موفقیت،
+        مراحل استخدام، ارزش‌ها و گزارش‌های نیروی انسانی.
+    preferred:
+      default: برندینگ کارفرمایی
+    source_forbidden: [امپلویر برندینگ, صفحهٔ اختصاصی سازمان]
+    domains: [employer, jobseeker, company]
+    visibility: [public, internal]
+    code_bindings: [CompanyBranding]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: job_fair
+    concept_kind: event
+    canonical_internal: نمایشگاه کار
+    definition:
+      source: رویداد زمان‌دار حضوری یا آنلاین که چند سازمان در آن آگهی ارائه می‌کنند.
+    preferred:
+      default: نمایشگاه کار
+    source_forbidden: [جاب فیر, رویداد استخدام, اکسپو]
+    domains: [jobseeker, employer, events]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [festival]
+    code_bindings: [JobFair]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: job_fair_job_post
+    concept_kind: job_post_variant
+    canonical_internal: آگهی نمایشگاهی
+    definition:
+      source: آگهی وابسته به نمایشگاه که رایگان است و در جست‌وجوی عادی دیده نمی‌شود.
+    preferred:
+      default: آگهی نمایشگاهی
+    source_forbidden: [آگهی رویداد, آگهی غرفه]
+    domains: [events, jobpost]
+    visibility: [public, internal]
+    relations:
+      subtype_of: job_post
+      part_of: job_fair
+    code_bindings: [JobPost.JobFairId]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: job_fair_applier
+    concept_kind: internal_role
+    canonical_internal: اپراتور غرفه
+    definition:
+      source: نقشی که در نمایشگاه حضوری از طرف کارجو درخواست ثبت می‌کند.
+    preferred:
+      internal: اپراتور غرفه
+    source_forbidden: [اپراتور نمایشگاه, مسئول غرفه]
+    domains: [events, admin]
+    visibility: [internal, admin]
+    relations:
+      distinct_from: [operator]
+    code_bindings: [UserRoles.JobFairApplier]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: assessment
+    concept_kind: product_capability
+    canonical_internal: آزمون
+    definition:
+      source: ابزار ارزیابی کارجو.
+    preferred:
+      default: آزمون
+    source_forbidden: [اسسمنت, تست, ارزیابی]
+    domains: [jobseeker, employer, ats]
+    visibility: [public, internal]
+    code_bindings: [Assessment]
+    status: draft
+    evidence: [source_glossary]
+
+  # AI concepts
+  - id: ai_technology
+    concept_kind: technology
+    canonical_internal: هوش مصنوعی
+    definition:
+      product_content: فناوری یا سامانه‌ای که از مدل‌های هوش مصنوعی استفاده می‌کند.
+    preferred:
+      default: هوش مصنوعی
+    domains: [ai, all]
+    visibility: [public, internal]
+    relations:
+      distinct_from: [ai_feature_family, ai_assistant]
+    status: stable
+    evidence: [product_content_decisions]
+
+  - id: ai_feature_family
+    concept_kind: feature_family
+    canonical_internal: قابلیت‌های هوشمند
+    definition:
+      product_content: مجموعه‌ای از قابلیت‌های محصول که با هوش مصنوعی تقویت می‌شوند.
+    preferred:
+      default: قابلیت‌های هوشمند
+    domains: [ai, all]
+    visibility: [public, internal]
+    relations:
+      uses: ai_technology
+      distinct_from: [ai_assistant]
+    status: stable
+    evidence: [product_content_decisions]
+
+  - id: ai_assistant
+    concept_kind: persona
+    canonical_internal: دستیار هوشمند
+    definition:
+      product_content: >
+        تجربه‌ای با رفتار مستقل و assistant-like که کاربر می‌تواند با آن تعامل کند.
+    preferred:
+      default: دستیار هوشمند
+    use_when:
+      - قابلیت تعامل مستقل و رفتار دستیارگونه دارد.
+    avoid_when:
+      - فقط یک محاسبه، پیشنهاد یا automation مبتنی بر AI انجام می‌شود.
+    domains: [ai]
+    visibility: [public, internal]
+    relations:
+      uses: ai_technology
+      has_instance: resume_ai_assistant
+      distinct_from: [ai_feature_family, employer_assistant, external_ai_screener]
+    status: stable
+    evidence: [product_content_decisions]
+
+  - id: resume_ai_assistant
+    concept_kind: ai_product_experience
+    canonical_internal: دستیار هوشمند رزومه
+    definition:
+      source: >
+        تجربه‌ای در صفحهٔ رزومهٔ کارجو برای ارزیابی و بهبود رزومه با
+        هوش مصنوعی، دریافت بازخورد و شروع ارزیابی جدید.
+      product_content: >
+        نمونهٔ محصولی دستیار هوشمند برای تحلیل و بهبود رزومهٔ کارجو.
+    preferred:
+      full: دستیار هوشمند ارزیابی و بهبود رزومه
+      contextual: دستیار هوشمند رزومه
+    domains: [ai, jobseeker, resume]
+    visibility: [public, internal]
+    relations:
+      instance_of: ai_assistant
+      uses: ai_technology
+      distinct_from: [employer_assistant, external_ai_screener]
+    status: stable
+    evidence: [candidate_runtime_review, product_content_decisions]
+
+  - id: external_ai_screener
+    concept_kind: external_automation
+    canonical_internal: ابزار غربالگری بیرونی
+    definition:
+      source: ابزار بیرونی‌ای که در تعریف صف رد، درخواست‌های ضعیف را تشخیص می‌دهد.
+    preferred:
+      internal: ابزار غربالگری بیرونی
+    domains: [ai, application]
+    visibility: [code_only, internal]
+    relations:
+      distinct_from: [ai_assistant, employer_assistant]
+    status: needs_decision
+    open_questions:
+      - نام رسمی ابزار چیست و آیا هنوز در محصول فعال است؟
+    notes:
+      - تا تأیید نام و وضعیت، این عبارت فقط توصیف داخلی است و نام محصول نیست.
+    evidence: [source_glossary]
+
+  # Surface names
+  - id: candidate_panel
+    concept_kind: surface
+    canonical_internal: پنل کارجو
+    definition:
+      source: وب‌سایت jobvision.ir.
+    preferred:
+      default: پنل کارجو
+    source_forbidden: [سایت اصلی, فرانت]
+    domains: [jobseeker]
+    visibility: [internal, documentation]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: employer_panel
+    concept_kind: surface
+    canonical_internal: پنل کارفرما
+    definition:
+      source: وب‌سایت employer.jobvision.ir.
+    preferred:
+      default: پنل کارفرما
+    source_forbidden: [پنل سازمان‌ها]
+    domains: [employer]
+    visibility: [public, internal, documentation]
+    status: draft
+    evidence: [source_glossary]
+
+  - id: admin_panel
+    concept_kind: surface
+    canonical_internal: پنل ادمین
+    definition:
+      source: وب‌سایت admin.jvoffice.ir.
+    preferred:
+      default: پنل ادمین
+    source_forbidden: [بک‌آفیس, پنل مدیریت]
+    domains: [admin]
+    visibility: [internal, documentation]
+    status: draft
+    evidence: [source_glossary]
+
+decision_log:
+  - id: DEC-001
+    term_ids: [job_post]
+    decided_on: 2026-09-23
+    outcome: >
+      «آگهی شغلی» برچسب پیش‌فرض و برچسب تجربهٔ کارجو است؛ «آگهی» فقط
+      در پنل کارفرما و ادمین، جایی که context روشن است، ترجیح دارد.
+    rationale: >
+      صورت کامل در سطح عمومی از ابهام با آگهی‌های غیرشغلی جلوگیری می‌کند؛
+      صورت کوتاه در سطوح تخصصی تکرار غیرضروری «شغلی» را کم می‌کند.
+
+  - id: DEC-002
+    term_ids: [ats_candidate, jobseeker]
+    decided_on: 2026-09-23
+    outcome: >
+      برچسب فارسی candidate در ATS «کاندیدا» است. «کارجو» فقط برای فردی
+      به کار می‌رود که در جاب‌ویژن به دنبال شغل است.
+    rationale: >
+      کاندیدای ATS ممکن است بدون ارسال درخواست و مستقیماً توسط recruiter
+      اضافه شده باشد؛ بنابراین «متقاضی» و «کارجو» همهٔ اعضای این مجموعه را
+      پوشش نمی‌دهند.
+
+  - id: DEC-003
+    term_ids: [company_formal_info]
+    decided_on: 2026-09-23
+    outcome: >
+      «اطلاعات رسمی سازمان» و «اطلاعات رسمی» یک concept هستند. نام مرجع
+      «اطلاعات رسمی سازمان» است و برچسب کوتاه فقط در context پرداخت و فاکتور
+      استفاده می‌شود.
+    rationale: >
+      هر دو عبارت به یک مجموعه‌داده شامل شناسهٔ ملی، عنوان حقوقی، نشانی و
+      کد پستی اشاره می‌کنند و تفاوت آن‌ها صرفاً در میزان وضوح label است.
+
+  - id: DEC-006
+    term_ids: [resume, resume_language_variant, resume_completion_percentage]
+    decided_on: 2026-09-23
+    outcome: >
+      در مدل محتوایی، رزومهٔ فارسی و رزومهٔ انگلیسی دو نسخهٔ زبانی از concept
+      رزومه‌اند و به‌عنوان دو نوع entity مستقل شمرده نمی‌شوند.
+    rationale: >
+      واژه‌نامه یک concept کدی `Cv` را ثبت می‌کند، در حالی که شاخص‌های
+      `CompletionPercentageFa` و `CompletionPercentageEn` و فیلدهای دوزبانه
+      تفاوت بازنمایی‌های زبانی را نشان می‌دهند. این تصمیم دربارهٔ زبان محصول
+      است و ساختار ذخیره‌سازی را تعیین نمی‌کند.
+
+  - id: DEC-005
+    term_ids:
+      - ai_technology
+      - ai_feature_family
+      - ai_assistant
+      - resume_ai_assistant
+      - employer_assistant
+      - external_ai_screener
+    decided_on: 2026-09-23
+    outcome: >
+      فناوری، خانواده قابلیت‌ها، الگوی دستیار و نمونه‌های محصولی از هم جدا
+      می‌مانند. دستیار هوشمند رزومه نمونهٔ تأییدشدهٔ ai_assistant است؛ دستیار
+      کارفرما automation مستقلی است و ابزار غربالگری بیرونی integration داخلی
+      نامطمئنی است.
+    rationale: >
+      تجربهٔ فعلی کارجو نام و رفتار دستیار هوشمند رزومه را نشان می‌دهد، اما
+      واژه‌نامه برای دستیار کارفرما فقط رفتار automation و برای ابزار بیرونی
+      وضعیت نامشخص یا غیرفعال ثبت کرده است. یکسان گرفتن آن‌ها مرز قابلیت، persona
+      و integration را از بین می‌برد.
+
+decision_queue:
+
+  - id: DEC-004
+    term_ids: [premium_subscription]
+    question: مخاطب، امکانات و مدل محصول اشتراک ویژه چیست؟
+    recommendation: تا دریافت product truth در محتوای جدید استفاده نشود.
+    impact: high
+    evidence_needed:
+      - مالک و مخاطب اشتراک
+      - فهرست مزایا و entitlementها
+      - lifecycle و مدل قیمت‌گذاری
+      - نسبت با Premium Insights سمت کارجو
+
+evals:
+  blocking:
+    - id: TERM_WRONG_ENTITY_SYNONYM
+      rule: یک اصطلاح از forbidden_as_synonym برای نام‌گذاری entity دیگر استفاده شده است.
+    - id: INTERNAL_TERM_EXPOSED
+      rule: اصطلاح code_only یا internal-only در UI عمومی دیده می‌شود.
+    - id: RECRUITMENT_HIRING_COLLAPSED
+      rule: جذب و استخدام به‌عنوان مترادف استفاده شده‌اند.
+    - id: RESUME_LANGUAGE_VARIANT_AS_SEPARATE_ENTITY
+      rule: نسخهٔ فارسی یا انگلیسی به‌عنوان رزومه‌ای مستقل از مفهوم رزومه شمرده شده است.
+    - id: AI_CAPABILITY_MISLABELED_AS_ASSISTANT
+      rule: یک محاسبه، پیشنهاد یا automation بدون تجربهٔ دستیارگونه «دستیار هوشمند» نامیده شده است.
+  non_blocking:
+    - id: TERM_NOT_PREFERRED_FOR_SURFACE
+      rule: واژه مجاز است اما preferred همان سطح نیست.
+    - id: TERM_AMBIGUOUS_WITHOUT_CONTEXT
+      rule: صورت کوتاه اصطلاح بیرون از context روشن استفاده شده است.

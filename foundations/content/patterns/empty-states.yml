@@ -1,0 +1,176 @@
+schema_version: "0.1"
+id: content.pattern.empty-states
+title: الگوی محتوایی وضعیت‌های خالی
+status: draft
+language: fa-IR
+scope:
+  - first-use
+  - empty-collection
+  - no-search-results
+  - no-filter-results
+  - cold-start
+  - post-removal-empty
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  error_pattern: content.pattern.error
+  design_system:
+    - design-system.component.empty-state
+    - design-system.pattern.empty-states
+    - design-system.pattern.search-and-filtering
+    - design-system.accessibility.focus-management
+
+goal: >
+  کاربر بفهمد چه محتوایی اکنون وجود ندارد، این وضعیت در صورت معلوم‌بودن چرا
+  رخ داده و برای ساختن محتوا، تغییر شرایط یا ادامهٔ task چه اقدام معناداری دارد.
+
+tone_profile: empty_state
+
+taxonomy:
+  first_use:
+    meaning: کاربر هنوز محتوایی از این نوع ایجاد یا ذخیره نکرده است.
+    content_job: ارزش مجموعه را کوتاه توضیح دهید و اقدام ایجاد یا کشف را ارائه کنید.
+  empty_collection:
+    meaning: مجموعه در وضعیت فعلی هیچ آیتمی ندارد.
+    content_job: نام مجموعه و اقدام بعدی معتبر را روشن کنید.
+  no_results:
+    meaning: query، filter یا sort فعلی نتیجه‌ای برنگردانده است.
+    content_job: شرایط فعال را منعکس و راه تغییر یا پاک‌کردن آن‌ها را ارائه کنید.
+  cold_start:
+    meaning: محصول هنوز دادهٔ کافی برای محتوای شخصی‌سازی‌شده ندارد.
+    content_job: فقط requirement تأییدشده برای شروع را توضیح دهید.
+  post_removal_empty:
+    meaning: آخرین آیتم پس از اقدام کاربر از مجموعه خارج شده است.
+    content_job: زمینهٔ مجموعه را حفظ و مقصد یا اقدام بعدی منطقی را ارائه کنید.
+  not_empty_state:
+    loading: هنوز معلوم نیست داده‌ای وجود دارد یا نه؛ loading pattern لازم است.
+    error: داده دریافت نشده است؛ error pattern لازم است.
+    permission: وجود داده نامعلوم یا پنهان است؛ access guidance لازم است.
+    eligibility: کاربر هنوز واجد شرایط نیست؛ eligibility guidance لازم است.
+
+rules:
+  - id: EST-001
+    obligation: must
+    dimension: classification
+    key: classify_cause
+    statement: پیش از نوشتن، نوع وضعیت خالی و تفاوت آن با loading، error، permission و eligibility مشخص شود.
+  - id: EST-002
+    obligation: must
+    dimension: content
+    key: name_empty_content
+    statement: محتوای خالی را با نام قابل‌فهم و مطابق UI مشخص کنید.
+  - id: EST-003
+    obligation: must
+    dimension: product_truth
+    key: explain_known_cause_only
+    statement: علت فقط وقتی بیان شود که از وضعیت واقعی محصول معلوم است.
+  - id: EST-004
+    obligation: must
+    dimension: recovery
+    key: offer_meaningful_next_step
+    statement: وقتی اقدام معتبر وجود دارد، یک گام اصلی مرتبط با همین وضعیت ارائه کنید.
+  - id: EST-005
+    obligation: must
+    dimension: recovery
+    key: action_changes_state
+    statement: اقدام باید بتواند محتوا ایجاد کند، شرایط را تغییر دهد یا کاربر را به مقصد مرتبط ببرد.
+  - id: EST-006
+    obligation: must
+    dimension: terminology
+    key: use_canonical_terms
+    statement: نام entity، مجموعه و action باید از اصطلاحات همان مخاطب و سطح استفاده کند.
+  - id: EST-007
+    obligation: must_not
+    dimension: tone
+    key: blame_or_shame
+    statement: نبود محتوا را به کوتاهی، ضعف یا اشتباه کاربر نسبت ندهید.
+  - id: EST-008
+    obligation: must_not
+    dimension: product_truth
+    key: promise_future_content
+    statement: زمان، تعداد، کیفیت یا رسیدن محتوای آینده را بدون product truth وعده ندهید.
+  - id: EST-009
+    obligation: must_not
+    dimension: content
+    key: generic_empty_only
+    statement: «چیزی اینجا نیست» یا «موردی وجود ندارد» نباید کل پیام باشد.
+  - id: EST-010
+    obligation: must
+    dimension: search
+    key: reflect_active_conditions
+    statement: در no-results، query یا فیلترهای مؤثر و راه تغییر آن‌ها روشن باشد.
+  - id: EST-011
+    obligation: must_not
+    dimension: action
+    key: invent_unavailable_action
+    statement: وقتی اقدام معتبر یا مجاز وجود ندارد، CTA ساختگی اضافه نکنید.
+  - id: EST-012
+    obligation: must
+    dimension: accessibility
+    key: preserve_orientation
+    statement: پس از خالی‌شدن پویا، فوکوس و اعلام وضعیت باید جای کاربر و اقدام بعدی را قابل‌فهم نگه دارد.
+
+anatomy:
+  required:
+    - message
+  conditional:
+    - title
+    - explanation
+    - primary_action
+    - secondary_action
+  message_pattern: "[چه چیزی اکنون وجود ندارد]. [علت معلوم یا ارزش مجموعه]. [گام بعدی معتبر]."
+  action_limit: یک اقدام اصلی؛ اقدام دوم فقط وقتی مسیر مستقل و معناداری دارد.
+  rule: >
+    پیام باید بدون تصویر نیز کامل باشد. تصویر یا آیکن می‌تواند از درک حمایت کند
+    اما نباید معنی وضعیت یا اقدام را به‌تنهایی حمل کند.
+
+action_selection:
+  first_use:
+    prefer: ایجاد نخستین آیتم یا رفتن به مسیر کشف مرتبط
+  no_results:
+    prefer: پاک‌کردن فیلترها، تغییر جست‌وجو یا بازگشت به مجموعهٔ گسترده‌تر
+  cold_start:
+    prefer: تکمیل requirement تأییدشده یا مشاهدهٔ توضیح نحوهٔ شروع
+  no_valid_action:
+    rule: پیام را بدون CTA نگه دارید و اقدام غیرواقعی نسازید.
+  labels:
+    rule: action و destination را نام ببرید؛ از «شروع کنید» یا «ادامه» به‌تنهایی پرهیز کنید.
+
+templates:
+  first_use:
+    title: "هنوز {item} ندارید"
+    explanation: "{value_of_collection}."
+    primary_action: "{create_or_discover_action}"
+  no_results:
+    title: "{item}ی با این {search_or_filters} پیدا نشد"
+    explanation: "{active_conditions}."
+    primary_action: "{change_or_clear_action}"
+  cold_start:
+    title: "هنوز {personalized_content} برای شما نداریم"
+    explanation: "برای شروع، {confirmed_requirement}."
+    primary_action: "{complete_requirement_action}"
+  no_action:
+    message: "{collection} اکنون خالی است."
+
+examples:
+  saved_jobs_first_use:
+    title: هنوز آگهی‌ای ذخیره نکرده‌اید
+    explanation: آگهی‌های شغلی موردنظرتان را ذخیره کنید تا بعداً دوباره بررسی‌شان کنید.
+    primary_action: مشاهدهٔ آگهی‌های شغلی
+  saved_searches_first_use:
+    title: هنوز جست‌وجویی ذخیره نکرده‌اید
+    explanation: جست‌وجوی خود را ذخیره کنید تا بعداً با همان شرایط به نتایج برگردید.
+    primary_action: جست‌وجوی شغل
+  job_search_no_results:
+    title: آگهی شغلی‌ای با این جست‌وجو پیدا نشد
+    explanation: عبارت جست‌وجو یا فیلترها را تغییر دهید.
+    primary_action: پاک‌کردن فیلترها
+
+unknowns:
+  - اگر علت نبود محتوا معلوم نیست، توضیح علّی نسازید.
+  - اگر action یا destination هنوز تعریف نشده، CTA اضافه نکنید.
+  - اگر readiness یا eligibility لازم معلوم نیست، کاربر را به تکمیل دادهٔ خاصی هدایت نکنید.
+  - اگر نتایج ممکن است با refresh یا زمان تغییر کنند، زمان یا نتیجهٔ آینده را تضمین نکنید.
+
+evaluation_source: ../../../ai/evals/content/empty-state-cases.yml

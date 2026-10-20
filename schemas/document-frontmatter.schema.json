@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jvoffice.ir/design-language/schemas/document-frontmatter.schema.json",
+  "title": "Design Language document frontmatter",
+  "type": "object",
+  "required": ["id", "title", "summary"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "collection": { "type": "string", "minLength": 1 },
+    "type": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "knowledge_state": { "type": "string" },
+    "document_maturity": { "type": "string" },
+    "owner": { "type": "string" },
+    "last_reviewed": { "type": "string", "format": "date" },
+    "related": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,325 @@
+schema_version: "0.1"
+id: content.eval.instruction_helper_cases
+pattern_id: content.pattern.instructions-and-helper-text
+language: fa-IR
+
+cases:
+  - id: email_label_and_format_example
+    context:
+      field: email
+      accepted_format_confirmed: true
+    content:
+      label: ایمیل
+      placeholder: name@example.com
+    expected:
+      valid: true
+      checked_rules: [INS-001, INS-002, INS-004, INS-005, INS-006, INS-008, INS-009, INS-012]
+      violations: []
+
+  - id: job_title_example_is_marked
+    context:
+      field: job_title
+      example_may_look_like_value: true
+    content:
+      label: عنوان شغلی
+      placeholder: "مثال: طراح محصول"
+    expected:
+      valid: true
+      checked_rules: [INS-002, INS-004, INS-008, INS-009, INS-011, INS-012]
+      violations: []
+
+  - id: confirmed_upload_constraints
+    context:
+      field: personal_resume
+      accepted_type: PDF
+      max_size_mb: 5
+      constraints_confirmed: true
+    content:
+      label: رزومهٔ شخصی
+      helper: فقط فایل PDF، حداکثر ۵ مگابایت
+    expected:
+      valid: true
+      checked_rules: [INS-001, INS-002, INS-006, INS-008, INS-009, INS-012]
+      violations: []
+
+  - id: password_requirements_before_entry
+    context:
+      field: password
+      min_length: 8
+      requirement_confirmed: true
+      instruction_visible_before_entry: true
+    content:
+      label: رمز عبور
+      helper: رمز عبور باید حداقل ۸ نویسه داشته باشد.
+    expected:
+      valid: true
+      checked_rules: [INS-002, INS-003, INS-006, INS-008, INS-013, INS-020]
+      violations: []
+
+  - id: requiredness_is_visible_and_programmatic
+    context:
+      field: mobile
+      required: true
+      visual_convention_explained: true
+      programmatic_required: true
+    content:
+      label: شماره موبایل
+      requirement: الزامی
+    expected:
+      valid: true
+      checked_rules: [INS-002, INS-010, INS-019]
+      violations: []
+
+  - id: group_instruction_once
+    context:
+      control_type: checkbox_group
+      group_association_present: true
+      at_least_one_required: true
+      requirement_confirmed: true
+    content:
+      group_label: نرم‌افزارهای مورد استفاده
+      instruction: حداقل یک نرم‌افزار را انتخاب کنید.
+    expected:
+      valid: true
+      checked_rules: [INS-001, INS-002, INS-003, INS-006, INS-009, INS-019]
+      violations: []
+
+  - id: essential_requirement_survives_error
+    context:
+      field: password
+      invalid: true
+      helper_replaced_by_error: true
+      min_length: 8
+    content:
+      label: رمز عبور
+      error: رمز عبور باید حداقل ۸ نویسه داشته باشد.
+    expected:
+      valid: true
+      checked_rules: [INS-006, INS-013, INS-014, INS-019]
+      violations: []
+
+  - id: character_count_with_real_unit
+    context:
+      field: biography
+      current_characters: 24
+      max_characters: 100
+      hard_limit_confirmed: true
+    content:
+      label: دربارهٔ من
+      helper: حداکثر ۱۰۰ نویسه
+      count: ۲۴ از ۱۰۰ نویسه
+    expected:
+      valid: true
+      checked_rules: [INS-006, INS-008, INS-018]
+      violations: []
+
+  - id: specific_help_link
+    context:
+      help_destination_available: true
+      topic: تکمیل رزومه
+    content:
+      label: سوابق شغلی
+      help_link: راهنمای تکمیل سوابق شغلی
+    expected:
+      valid: true
+      checked_rules: [INS-012, INS-017]
+      violations: []
+
+  - id: placeholder_is_only_label
+    context:
+      field: email
+      visible_label_present: false
+      alternative_accessible_name_present: false
+    message: ایمیل خود را وارد کنید
+    expected:
+      valid: false
+      checked_rules: [INS-002, INS-004, INS-019]
+      violations: [INS-002, INS-004, INS-019]
+
+  - id: essential_format_only_in_placeholder
+    context:
+      field: national_id
+      exact_format_required: true
+      persistent_instruction_present: false
+    content:
+      label: کد ملی
+      placeholder: ۱۰ رقم، بدون خط تیره
+    expected:
+      valid: false
+      checked_rules: [INS-003, INS-005]
+      violations: [INS-003, INS-005]
+
+  - id: repeated_label_placeholder_helper
+    context:
+      field: email
+    content:
+      label: ایمیل
+      placeholder: ایمیل
+      helper: ایمیل خود را وارد کنید.
+    expected:
+      valid: false
+      checked_rules: [INS-008, INS-009]
+      violations: [INS-008, INS-009]
+
+  - id: invented_file_limit
+    context:
+      field: personal_resume
+      max_size_confirmed: false
+    content:
+      label: رزومهٔ شخصی
+      helper: حداکثر ۲ مگابایت
+    expected:
+      valid: false
+      checked_rules: [INS-006]
+      violations: [INS-006]
+
+  - id: mandatory_instruction_hidden_in_tooltip
+    context:
+      instruction_required_for_completion: true
+      persistent_instruction_present: false
+      tooltip_only: true
+    content:
+      label: تاریخ شروع
+      tooltip: تاریخ را به تقویم شمسی وارد کنید.
+    expected:
+      valid: false
+      checked_rules: [INS-003, INS-007]
+      violations: [INS-003, INS-007]
+
+  - id: asterisk_without_explanation
+    context:
+      required: true
+      marker: asterisk
+      marker_meaning_explained: false
+      programmatic_required: false
+    content:
+      label: شماره موبایل *
+    expected:
+      valid: false
+      checked_rules: [INS-010, INS-019]
+      violations: [INS-010, INS-019]
+
+  - id: unmarked_example_looks_prefilled
+    context:
+      field: job_title
+      example_may_look_like_value: true
+      actual_value_empty: true
+    content:
+      label: عنوان شغلی
+      placeholder: طراح محصول
+    expected:
+      valid: false
+      checked_rules: [INS-011]
+      violations: [INS-011]
+
+  - id: wrong_entity_term_in_helper
+    context:
+      field: job_application
+      canonical_term: درخواست شغلی
+    content:
+      label: درخواست شغلی
+      helper: اپلیکیشن شما برای کارفرما ارسال می‌شود.
+    expected:
+      valid: false
+      checked_rules: [INS-012]
+      violations: [INS-012]
+
+  - id: helper_remains_after_invalid_state
+    context:
+      field: email
+      invalid: true
+      error_present: false
+    content:
+      label: ایمیل
+      helper: ایمیل را وارد کنید.
+    expected:
+      valid: false
+      checked_rules: [INS-013, INS-014]
+      violations: [INS-013, INS-014]
+
+  - id: essential_rules_disappear_on_error
+    context:
+      field: password
+      invalid: true
+      helper_replaced_by_error: true
+      multiple_requirements: true
+      relevant_requirement_preserved: false
+    content:
+      label: رمز عبور
+      error: رمز عبور نامعتبر است.
+    expected:
+      valid: false
+      checked_rules: [INS-013, INS-014]
+      violations: [INS-013, INS-014]
+
+  - id: unsupported_privacy_reason
+    context:
+      field: mobile
+      privacy_policy_confirmed: false
+    content:
+      label: شماره موبایل
+      helper: شماره شما کاملاً محرمانه می‌ماند.
+    expected:
+      valid: false
+      checked_rules: [INS-006, INS-015]
+      violations: [INS-006, INS-015]
+
+  - id: patronizing_instruction
+    context:
+      task_complexity: unknown
+    message: فقط کافی است به‌سادگی اطلاعات خود را وارد کنید.
+    expected:
+      valid: false
+      checked_rules: [INS-008, INS-016]
+      violations: [INS-008, INS-016]
+
+  - id: ambiguous_more_link
+    context:
+      multiple_help_links_on_page: true
+    content:
+      label: رزومهٔ شخصی
+      help_link: بیشتر
+    expected:
+      valid: false
+      checked_rules: [INS-017]
+      violations: [INS-017]
+
+  - id: count_without_unit_or_limit
+    context:
+      field: biography
+      max_limit_confirmed: false
+      unit_visible: false
+    content:
+      label: دربارهٔ من
+      count: ۲۴/۱۰۰
+    expected:
+      valid: false
+      checked_rules: [INS-006, INS-018]
+      violations: [INS-006, INS-018]
+
+  - id: helper_not_programmatically_associated
+    context:
+      field: email
+      helper_visible: true
+      helper_association_present: false
+    content:
+      label: ایمیل
+      helper: نتیجهٔ بازیابی حساب به این ایمیل ارسال می‌شود.
+    expected:
+      valid: false
+      checked_rules: [INS-019]
+      violations: [INS-019]
+
+  - id: paste_and_password_manager_blocked
+    context:
+      field: password
+      justified_security_constraint: false
+      paste_disabled: true
+      password_manager_disabled: true
+    content:
+      label: رمز عبور
+      helper: رمز عبور را تایپ کنید؛ جای‌گذاری و مدیر رمز عبور مجاز نیست.
+    expected:
+      valid: false
+      checked_rules: [INS-006, INS-015, INS-020]
+      violations: [INS-006, INS-015, INS-020]

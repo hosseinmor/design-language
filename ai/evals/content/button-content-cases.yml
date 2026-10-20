@@ -1,0 +1,311 @@
+schema_version: "0.1"
+id: content.eval.button_content_cases
+component_id: content.component.button
+language: fa-IR
+
+cases:
+  - id: concise_save_in_clear_context
+    context:
+      component: Button
+      visible_object: تغییرات پروفایل
+      action: save
+      consequence_known: true
+    content:
+      label: ذخیره
+      accessible_name: ذخیره
+    expected:
+      valid: true
+      checked_rules: [BTN-001, BTN-002, BTN-003, BTN-013, BTN-016]
+      violations: []
+
+  - id: submit_resume_with_object
+    context:
+      component: Button
+      action: submit
+      object: موقعیت شغلی
+      audience: candidate
+    content:
+      label: ارسال رزومه
+      accessible_name: ارسال رزومه
+    expected:
+      valid: true
+      checked_rules: [BTN-001, BTN-002, BTN-003, BTN-009, BTN-013]
+      violations: []
+
+  - id: navigation_uses_link_semantics
+    context:
+      behavior: navigate
+      destination: صفحهٔ رزومه
+      semantics: link
+    content:
+      label: مشاهدهٔ رزومه
+      accessible_name: مشاهدهٔ رزومه
+    expected:
+      valid: true
+      checked_rules: [BTN-001, BTN-006, BTN-013]
+      violations: []
+
+  - id: explicit_destructive_confirmation
+    context:
+      component: Button
+      confirmation: true
+      destructive: true
+      treatment: danger-primary
+      safe_exit_available: true
+    content:
+      primary_label: حذف آگهی
+      safe_exit_label: انصراف
+    expected:
+      valid: true
+      checked_rules: [BTN-001, BTN-003, BTN-004, BTN-007, BTN-012]
+      violations: []
+
+  - id: cancellation_action_has_distinct_exit
+    context:
+      component: Button
+      confirmation: true
+      primary_action: cancel_interview
+      safe_exit_available: true
+    content:
+      primary_label: لغو مصاحبه
+      safe_exit_label: بازگشت
+    expected:
+      valid: true
+      checked_rules: [BTN-001, BTN-003, BTN-004, BTN-012]
+      violations: []
+
+  - id: loading_preserves_action_identity
+    context:
+      component: Button
+      state: loading
+      base_label: ذخیرهٔ تغییرات
+      duplicate_activation_prevented: true
+    content:
+      label: ذخیرهٔ تغییرات
+      separate_status: در حال ذخیرهٔ تغییرات…
+    expected:
+      valid: true
+      checked_rules: [BTN-001, BTN-005, BTN-011]
+      violations: []
+
+  - id: dynamic_count_uses_localization_contract
+    context:
+      component: Button
+      action: delete
+      count: 3
+      count_source: runtime
+      locale_formatted: true
+      destructive: true
+    content:
+      label: حذف ۳ درخواست شغلی
+      accessible_name: حذف ۳ درخواست شغلی
+    expected:
+      valid: true
+      checked_rules: [BTN-003, BTN-007, BTN-009, BTN-013, BTN-015]
+      violations: []
+
+  - id: repeated_edit_actions_have_programmatic_context
+    context:
+      component: Button
+      repeated_in_list: true
+      programmatic_context_available: true
+    content:
+      label: ویرایش
+      accessible_name: ویرایش آگهی «کارشناس فروش»
+    expected:
+      valid: true
+      checked_rules: [BTN-002, BTN-003, BTN-013, BTN-014]
+      violations: []
+
+  - id: generic_confirm_for_consequential_action
+    context:
+      component: Button
+      confirmation: true
+      destructive: true
+      object: آگهی
+    content:
+      primary_label: تأیید
+      safe_exit_label: لغو
+    expected:
+      valid: false
+      checked_rules: [BTN-001, BTN-003, BTN-004, BTN-012]
+      violations: [BTN-001, BTN-003, BTN-004]
+
+  - id: completion_announced_before_activation
+    context:
+      component: Button
+      state: idle
+      action: save
+    content:
+      label: تغییرات ذخیره شد
+    expected:
+      valid: false
+      checked_rules: [BTN-001, BTN-005]
+      violations: [BTN-005]
+
+  - id: navigation_implemented_as_action_button
+    context:
+      behavior: navigate
+      destination: صفحهٔ رزومه
+      semantics: button
+    content:
+      label: مشاهدهٔ رزومه
+    expected:
+      valid: false
+      checked_rules: [BTN-006]
+      violations: [BTN-006]
+
+  - id: danger_selected_for_reversible_negative_action
+    context:
+      component: Button
+      action: deactivate
+      destructive: false
+      reversible: true
+      treatment: danger-primary
+    content:
+      label: غیرفعال‌کردن آگهی
+    expected:
+      valid: false
+      checked_rules: [BTN-007]
+      violations: [BTN-007]
+
+  - id: promotional_pressure_in_cta
+    context:
+      component: Button
+      action: upgrade
+      urgency_confirmed: false
+    content:
+      label: همین حالا فرصت طلایی را بگیر!
+    expected:
+      valid: false
+      checked_rules: [BTN-008, BTN-016]
+      violations: [BTN-008, BTN-016]
+
+  - id: wrong_audience_term
+    context:
+      component: Button
+      audience: candidate
+      canonical_object: رزومه
+      internal_term: candidate_profile
+    content:
+      label: ارسال پروفایل کاندید
+    expected:
+      valid: false
+      checked_rules: [BTN-009, BTN-010]
+      violations: [BTN-009, BTN-010]
+
+  - id: loading_label_replaced_with_status
+    context:
+      component: Button
+      state: loading
+      base_label: ذخیرهٔ تغییرات
+    content:
+      label: لطفاً صبر کنید، در حال ذخیرهٔ تغییرات شما هستیم…
+    expected:
+      valid: false
+      checked_rules: [BTN-002, BTN-011, BTN-016]
+      violations: [BTN-002, BTN-011, BTN-016]
+
+  - id: confirmation_actions_are_synonyms
+    context:
+      component: Button
+      confirmation: true
+      primary_action: cancel_subscription
+      safe_exit_available: true
+    content:
+      primary_label: لغو اشتراک
+      safe_exit_label: لغو
+    expected:
+      valid: false
+      checked_rules: [BTN-004, BTN-012]
+      violations: [BTN-012]
+
+  - id: accessible_name_changes_result
+    context:
+      component: Button
+      action: save_draft
+    content:
+      label: ذخیرهٔ پیش‌نویس
+      accessible_name: انتشار آگهی
+    expected:
+      valid: false
+      checked_rules: [BTN-013]
+      violations: [BTN-013]
+
+  - id: indistinguishable_repeated_delete_actions
+    context:
+      component: Button
+      repeated_in_list: true
+      programmatic_context_available: false
+      objects_differ: true
+    content:
+      label: حذف
+      accessible_name: حذف
+    expected:
+      valid: false
+      checked_rules: [BTN-003, BTN-013, BTN-014]
+      violations: [BTN-003, BTN-014]
+
+  - id: raw_identifier_without_bidi_handling
+    context:
+      component: Button
+      identifier: JV-4821
+      surrounding_direction: rtl
+      bidi_isolated: false
+    content:
+      label: بازکردن درخواست JV-4821
+    expected:
+      valid: false
+      checked_rules: [BTN-015]
+      violations: [BTN-015]
+
+  - id: sentence_punctuation_and_emoji
+    context:
+      component: Button
+      action: continue
+      destination_visible: true
+    content:
+      label: ادامه دهید! 🚀
+    expected:
+      valid: false
+      checked_rules: [BTN-002, BTN-008, BTN-016]
+      violations: [BTN-008, BTN-016]
+
+  - id: ambiguous_duplicate_primary_actions
+    context:
+      component: Button
+      actions_in_group:
+        - save_draft
+        - publish
+      labels_are_identical: true
+    content:
+      labels: [ادامه, ادامه]
+    expected:
+      valid: false
+      checked_rules: [BTN-001, BTN-002, BTN-003]
+      violations: [BTN-001, BTN-002, BTN-003]
+
+  - id: invented_recovery_claim_in_label
+    context:
+      component: Button
+      action: delete
+      recovery_confirmed: false
+    content:
+      label: حذف و بازیابی بعدی
+    expected:
+      valid: false
+      checked_rules: [BTN-001, BTN-005]
+      violations: [BTN-001]
+
+  - id: standard_button_without_visible_label
+    context:
+      component: Button
+      icon_only: true
+      icon_button_used: false
+    content:
+      label: ""
+      accessible_name: حذف آگهی
+    expected:
+      valid: false
+      checked_rules: [BTN-001, BTN-006, BTN-013]
+      violations: [BTN-001, BTN-006]

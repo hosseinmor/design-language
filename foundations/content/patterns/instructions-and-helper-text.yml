@@ -1,0 +1,251 @@
+schema_version: "0.1"
+id: content.pattern.instructions-and-helper-text
+title: الگوی دستورالعمل‌ها و متن راهنما
+status: draft
+language: fa-IR
+scope:
+  - field-label
+  - form-instruction
+  - helper-text
+  - placeholder
+  - example
+  - required-optional
+  - group-guidance
+  - character-count
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  error_pattern: content.pattern.error
+  design_system:
+    - design-system.accessibility.forms
+    - design-system.accessibility.content
+    - design-system.experience-rule.contextual-guidance
+    - design-system.component.text-input
+    - design-system.component.textarea
+
+goal: >
+  کاربر پیش از نیاز، purpose کنترل، requirement واقعی، قالب و محدودیت لازم را
+  بفهمد و بتواند بدون آزمون‌وخطا مقدار قابل‌قبول وارد کند؛ بدون اینکه Label،
+  Placeholder، Helper و Error نقش یکدیگر را بگیرند.
+
+tone_profile: form_helper
+
+content_roles:
+  label:
+    job: نام و purpose کنترل یا گروه را مشخص می‌کند.
+    persistence: مستقل از مقدار ورودی قابل‌دریافت می‌ماند.
+  instruction:
+    job: اطلاعات لازم برای تکمیل task، form، step یا group را پیش از نیاز می‌دهد.
+    persistence: تا زمانی که برای task مرتبط است در دسترس می‌ماند.
+  helper:
+    job: context یا راهنمای کوتاه و field-specific را هنگام ورود مقدار نشان می‌دهد.
+    persistence: در حالت عادی قابل‌مشاهده است و ممکن است در Error treatment جایگزین شود.
+  placeholder:
+    job: example، hint یا expected format تکمیلی را نشان می‌دهد.
+    persistence: با ورود مقدار ناپدید می‌شود و منبع ضروری نیست.
+  example:
+    job: نمونهٔ concrete از مقدار قابل‌قبول را نشان می‌دهد.
+    persistence: در Placeholder یا Helper با نقش روشن قرار می‌گیرد.
+  error:
+    job: مشکل تشخیص‌داده‌شده و راه اصلاح را بعد از validation بیان می‌کند.
+    owner: content.pattern.error
+  count:
+    job: metadata مقدار فعلی و limit واقعی را با واحد روشن نمایش می‌دهد.
+
+rules:
+  - id: INS-001
+    obligation: must
+    dimension: classification
+    key: classify_content_role
+    statement: نقش هر متن به‌عنوان Label، Instruction، Helper، Placeholder، Example، Count یا Error پیش از نوشتن مشخص شود.
+  - id: INS-002
+    obligation: must
+    dimension: label
+    key: label_identifies_purpose
+    statement: Label purpose کنترل یا گروه را مستقل از Placeholder و مقدار ورودی مشخص کند.
+  - id: INS-003
+    obligation: must
+    dimension: timing
+    key: instruction_before_need
+    statement: instruction لازم برای تکمیل task پیش از نیاز و تا زمان مرتبط‌بودن در دسترس باشد.
+  - id: INS-004
+    obligation: must_not
+    dimension: placeholder
+    key: placeholder_as_label
+    statement: Placeholder جای Label یا accessible name استفاده نشود.
+  - id: INS-005
+    obligation: must_not
+    dimension: placeholder
+    key: essential_info_in_placeholder
+    statement: requirement، consequence یا instruction ضروری فقط در Placeholder قرار نگیرد.
+  - id: INS-006
+    obligation: must
+    dimension: product_truth
+    key: verified_constraints_only
+    statement: قالب، limit، واحد، نوع فایل، دلیل، مقصد و consequence فقط مطابق product truth نوشته شود.
+  - id: INS-007
+    obligation: must_not
+    dimension: placement
+    key: hide_essential_guidance
+    statement: requirement، Error، consequence یا policy ضروری فقط پشت Tooltip، Info یا surface گذرا پنهان نشود.
+  - id: INS-008
+    obligation: must
+    dimension: helper
+    key: helper_adds_field_context
+    statement: Helper کوتاه، مرتبط با همان field و دارای اطلاعاتی فراتر از Label باشد.
+  - id: INS-009
+    obligation: must_not
+    dimension: content
+    key: duplicate_across_roles
+    statement: Label، Placeholder و Helper با یک wording تکراری پر نشوند.
+  - id: INS-010
+    obligation: must
+    dimension: requiredness
+    key: communicate_requiredness
+    statement: requiredness با convention یکدست، cue دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
+  - id: INS-011
+    obligation: must
+    dimension: example
+    key: distinguish_example_from_value
+    statement: Example وقتی ممکن است با value واقعی اشتباه شود با نشانه‌ای مانند «مثال:» از مقدار جدا شود.
+  - id: INS-012
+    obligation: must
+    dimension: terminology
+    key: preserve_surface_terms
+    statement: نام field، object، action و واحد با terminology همان surface و audience هماهنگ بماند.
+  - id: INS-013
+    obligation: must
+    dimension: validation
+    key: separate_helper_from_error
+    statement: Helper requirement را پیش از failure توضیح دهد و Error پس از validation شرط نقض‌شده و recovery را بیان کند.
+  - id: INS-014
+    obligation: must
+    dimension: validation
+    key: preserve_essential_requirement_on_error
+    statement: وقتی Error جای Helper treatment را می‌گیرد، requirement ضروری در Error یا Instruction ماندگار باقی بماند.
+  - id: INS-015
+    obligation: must_not
+    dimension: product_truth
+    key: invent_security_or_privacy
+    statement: محدودیت امنیتی، دلیل جمع‌آوری، privacy، storage یا رفتار فایل بدون منبع معتبر ادعا نشود.
+  - id: INS-016
+    obligation: must_not
+    dimension: tone
+    key: patronize_or_blame
+    statement: instruction کاربر را سرزنش نکند و task را با «واضح»، «ساده» یا «فقط کافی است» قضاوت نکند.
+  - id: INS-017
+    obligation: must
+    dimension: action
+    key: meaningful_help_action
+    statement: Link یا action راهنما purpose یا destination قابل‌فهم داشته باشد.
+  - id: INS-018
+    obligation: must
+    dimension: count
+    key: count_has_real_limit_and_unit
+    statement: Count فقط با limit، واحد و رفتار واقعی استفاده شود و واحد آن در context قابل‌فهم باشد.
+  - id: INS-019
+    obligation: must
+    dimension: accessibility
+    key: associate_guidance
+    statement: Helper، Error و group instruction با کنترل یا گروه مربوط برنامه‌وار مرتبط شوند.
+  - id: INS-020
+    obligation: must_not
+    dimension: input
+    key: unjustified_paste_or_autofill_restriction
+    statement: paste، autofill یا password manager بدون محدودیت مشخص و توجیه‌شده ممنوع معرفی نشود.
+
+anatomy:
+  field:
+    sequence:
+      - label_and_requiredness
+      - control
+      - helper_or_error
+      - optional_count
+  group:
+    sequence:
+      - group_label_or_question
+      - group_instruction
+      - controls
+      - group_error
+  rule: هر بخش فقط وقتی نمایش داده شود که نقش واقعی و اطلاعات تازه‌ای دارد.
+
+placement_model:
+  persistent:
+    - label
+    - mandatory_instruction
+    - essential_consequence
+    - group_question
+  supporting_row:
+    - helper
+    - error
+    - count
+  contextual_disclosure:
+    - supplementary_explanation
+    - learn_more
+  placeholder:
+    - short_example
+    - supplementary_format_hint
+
+requiredness_model:
+  visible: معنی required یا optional بدون اتکا به رنگ قابل‌فهم باشد.
+  programmatic: state واقعی به control منتقل شود.
+  consistency: یک convention در محدودهٔ form حفظ شود.
+  forbidden: قراردادن تنها cue در Placeholder
+
+validation_transition:
+  before_error: Helper می‌تواند requirement واقعی را توضیح دهد.
+  on_error: Error شرط نقض‌شده و recovery معلوم را بیان می‌کند.
+  essential_information: در Error یا Instruction ماندگار حفظ می‌شود.
+  owner: content.pattern.error
+
+specialized_guidance:
+  password:
+    show: قواعد واقعی پیش از ورود
+    avoid: ممنوعیت ساختگی paste یا password manager
+  upload:
+    show: نوع، حجم و تعداد فایل فقط اگر enforcement واقعی دارد.
+    avoid: ادعای تبدیل، ذخیره، اشتراک‌گذاری یا حذف بدون product truth
+  count:
+    show: مقدار فعلی، limit و واحد واقعی
+    avoid: announcement مزاحم برای هر تغییر جزئی
+  conditional_field:
+    show: instruction همراه context جدید و در ترتیب منطقی
+    avoid: requirement پنهان که submission را مسدود می‌کند.
+
+templates:
+  field_label: "{field_name}"
+  required_instruction: "برای ادامه، {verified_requirement}."
+  format_helper: "{field_name} را با قالب {accepted_format} وارد کنید."
+  limit_helper: "حداکثر {limit} {unit}"
+  example_placeholder: "مثال: {valid_example}"
+  upload_helper: "فقط فایل {accepted_type}، حداکثر {max_size}"
+  consequence_helper: "{value} در {confirmed_destination} نمایش داده می‌شود."
+  help_link: "راهنمای {specific_topic}"
+
+examples:
+  email:
+    label: ایمیل
+    placeholder: name@example.com
+  job_title:
+    label: عنوان شغلی
+    placeholder: "مثال: طراح محصول"
+  resume_upload:
+    label: رزومهٔ شخصی
+    helper: فقط فایل PDF، حداکثر ۵ مگابایت
+    condition: file_policy_confirmed
+  biography:
+    label: دربارهٔ من
+    helper: حداکثر ۱۰۰ نویسه
+    count: ۲۴ از ۱۰۰ نویسه
+    condition: character_limit_confirmed
+
+unknowns:
+  - convention دقیق mark کردن required در برابر optional در هر product form
+  - business requirement، validation و limit هر field
+  - فرمت canonical تاریخ، شماره و عدد در localization
+  - file type، size، count، storage و processing هر upload
+  - رفتار prevention در برابر warning برای عبور از character limit
+  - سطح مناسب progressive disclosure برای راهنماهای طولانی هر flow
+
+evaluation_source: ../../../ai/evals/content/instruction-helper-cases.yml

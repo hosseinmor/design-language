@@ -1,0 +1,269 @@
+schema_version: "0.1"
+id: content.eval.ai_content_cases
+pattern_id: content.pattern.ai-content-and-disclosure
+language: fa-IR
+
+cases:
+  - id: accurate_rewrite_entry
+    context:
+      experience_type: feature
+      output_type: transformed
+      ai_role_not_obvious: true
+    message: بهبود متن با هوش مصنوعی
+    expected:
+      valid: true
+      checked_rules: [AIC-001, AIC-002, AIC-003, AIC-005, AIC-017]
+      violations: []
+
+  - id: confirmed_resume_assistant_name
+    context:
+      experience_type: assistant
+      assistant_like_behavior: true
+      confirmed_product_instance: resume_ai_assistant
+    message: دستیار هوشمند رزومه
+    expected:
+      valid: true
+      checked_rules: [AIC-001, AIC-002, AIC-005, AIC-017]
+      violations: []
+
+  - id: suggested_output_with_review
+    context:
+      output_type: suggested
+      output_status: draft
+      editing_supported: true
+    content:
+      label: پیشنهاد هوش مصنوعی
+      guidance: پیشنهاد را بازبینی و در صورت نیاز ویرایش کنید.
+      action: استفاده از پیشنهاد
+    expected:
+      valid: true
+      checked_rules: [AIC-003, AIC-004, AIC-005, AIC-006, AIC-007, AIC-010, AIC-013, AIC-017, AIC-018]
+      violations: []
+
+  - id: replace_text_action_is_explicit
+    context:
+      output_type: transformed
+      current_text_will_be_replaced: true
+      replacement_supported: true
+    content:
+      label: پیشنهاد بازنویسی‌شده
+      action: جایگزینی متن
+    expected:
+      valid: true
+      checked_rules: [AIC-005, AIC-006, AIC-007, AIC-018]
+      violations: []
+
+  - id: ai_loading_uses_shared_pattern
+    context:
+      state: loading
+      progress_type: indeterminate
+    message: در حال آماده‌کردن پیشنهاد متن…
+    expected:
+      valid: true
+      checked_rules: [AIC-005, AIC-015]
+      violations: []
+
+  - id: ai_success_after_confirmed_result
+    context:
+      state: success
+      output_ready: true
+      completion_confirmed: true
+    message: پیشنهاد جدید آماده شد.
+    expected:
+      valid: true
+      checked_rules: [AIC-006, AIC-015]
+      violations: []
+
+  - id: ai_recoverable_error
+    context:
+      state: error
+      failure_confirmed: true
+      retry_supported: true
+    message: پیشنهاد آماده نشد. دوباره تلاش کنید.
+    expected:
+      valid: true
+      checked_rules: [AIC-007, AIC-015, AIC-018]
+      violations: []
+
+  - id: single_action_called_assistant
+    context:
+      experience_type: feature
+      assistant_like_behavior: false
+      output_type: transformed
+    message: دستیار هوشمند بازنویسی
+    expected:
+      valid: false
+      checked_rules: [AIC-001, AIC-002, AIC-005, AIC-017]
+      violations: [AIC-001, AIC-002, AIC-005, AIC-017]
+
+  - id: hidden_ai_role_for_material_output
+    context:
+      output_type: generated
+      ai_role_not_obvious: true
+      output_affects_public_profile: true
+    content:
+      label: متن پیشنهادی
+      action: انتشار
+    expected:
+      valid: false
+      checked_rules: [AIC-003, AIC-004, AIC-005]
+      violations: [AIC-003, AIC-004, AIC-005]
+
+  - id: late_disclosure_after_publish
+    context:
+      output_type: generated
+      disclosure_timing: after_publish
+      publish_is_consequential: true
+    message: این متن پس از انتشار با هوش مصنوعی ساخته شده است.
+    expected:
+      valid: false
+      checked_rules: [AIC-003, AIC-004]
+      violations: [AIC-004]
+
+  - id: suggestion_presented_as_final
+    context:
+      output_type: suggested
+      accepted_by_user: false
+    message: متن نهایی رزومه آماده است.
+    expected:
+      valid: false
+      checked_rules: [AIC-005, AIC-006, AIC-011]
+      violations: [AIC-005, AIC-006]
+
+  - id: ambiguous_apply_action
+    context:
+      output_type: transformed
+      current_text_will_be_replaced: true
+    content:
+      label: پیشنهاد جدید
+      action: ادامه
+    expected:
+      valid: false
+      checked_rules: [AIC-006, AIC-007]
+      violations: [AIC-007]
+
+  - id: guaranteed_hiring_outcome
+    context:
+      output_type: generated
+      outcome_evidence_available: false
+    message: این متن شانس استخدام شما را تضمین می‌کند.
+    expected:
+      valid: false
+      checked_rules: [AIC-008]
+      violations: [AIC-008]
+
+  - id: unsupported_accuracy_score
+    context:
+      output_type: analyzed
+      confidence_defined: false
+      evidence_available: false
+    message: دقت این تحلیل ۹۸٪ است.
+    expected:
+      valid: false
+      checked_rules: [AIC-008, AIC-009]
+      violations: [AIC-008, AIC-009]
+
+  - id: vague_disclaimer_without_guidance
+    context:
+      output_type: suggested
+      review_relevant: true
+      editing_supported: true
+    message: هوش مصنوعی ممکن است اشتباه کند.
+    expected:
+      valid: false
+      checked_rules: [AIC-010]
+      violations: [AIC-010]
+
+  - id: ai_output_called_expert_copy
+    context:
+      output_type: generated
+      human_expert_involved: false
+    message: متن تأییدشدهٔ کارشناس منابع انسانی
+    expected:
+      valid: false
+      checked_rules: [AIC-005, AIC-011]
+      violations: [AIC-005, AIC-011]
+
+  - id: unverified_training_claim
+    context:
+      model_training_policy_confirmed: false
+    message: اطلاعات شما برای آموزش هوش مصنوعی استفاده نمی‌شود.
+    expected:
+      valid: false
+      checked_rules: [AIC-012]
+      violations: [AIC-012]
+
+  - id: unverified_confidentiality_claim
+    context:
+      confidentiality_policy_confirmed: false
+    message: محتوای رزومهٔ شما کاملاً محرمانه می‌ماند.
+    expected:
+      valid: false
+      checked_rules: [AIC-012]
+      violations: [AIC-012]
+
+  - id: blame_shifting_review_copy
+    context:
+      output_type: suggested
+      review_relevant: true
+    message: مسئولیت هر اشتباه در این پیشنهاد کاملاً با شماست.
+    expected:
+      valid: false
+      checked_rules: [AIC-010, AIC-013]
+      violations: [AIC-010, AIC-013]
+
+  - id: recommendation_called_final_decision
+    context:
+      output_type: analyzed
+      automation_confirmed: false
+      human_decision_required: true
+    message: هوش مصنوعی تصمیم گرفت این کارجو رد شود.
+    expected:
+      valid: false
+      checked_rules: [AIC-008, AIC-011, AIC-014]
+      violations: [AIC-011, AIC-014]
+
+  - id: premature_ai_success
+    context:
+      state: loading
+      output_ready: false
+    message: پیشنهاد آماده شد.
+    expected:
+      valid: false
+      checked_rules: [AIC-006, AIC-015]
+      violations: [AIC-006, AIC-015]
+
+  - id: magic_color_only_disclosure
+    context:
+      ai_role_material: true
+      visual_treatment: magic
+      text_label_present: false
+    content:
+      icon: sparkle
+      accessible_name: بهبود متن
+    expected:
+      valid: false
+      checked_rules: [AIC-003, AIC-016]
+      violations: [AIC-003, AIC-016]
+
+  - id: wrong_ai_family_term
+    context:
+      experience_type: technology
+      surface: public
+    message: دستیارهای هوشمند جاب‌ویژن این امتیاز را محاسبه می‌کنند.
+    expected:
+      valid: false
+      checked_rules: [AIC-001, AIC-002, AIC-017]
+      violations: [AIC-001, AIC-002, AIC-017]
+
+  - id: invented_regenerate_control
+    context:
+      output_type: generated
+      regeneration_supported: false
+    content:
+      label: پیشنهاد هوش مصنوعی
+      action: تولید دوباره
+    expected:
+      valid: false
+      checked_rules: [AIC-007, AIC-018]
+      violations: [AIC-007, AIC-018]

@@ -1,0 +1,193 @@
+schema_version: "0.1"
+id: content.pattern.notifications
+title: الگوی محتوایی اعلان‌ها و بازخورد نتیجه
+status: draft
+language: fa-IR
+scope:
+  - inline-feedback
+  - inline-notification
+  - toast
+  - outcome-feedback
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  error_pattern: content.pattern.error
+  confirmation_pattern: content.pattern.confirmation
+  design_system:
+    - design-system.component.notification
+    - design-system.pattern.notifications
+    - design-system.accessibility.dynamic-content-and-feedback
+
+goal: >
+  کاربر بدون قطع بی‌دلیل task بفهمد چه نتیجه یا وضعیتی رخ داده، به کدام action
+  یا object مربوط است و در صورت نیاز چه گام بعدی معناداری دارد.
+
+tone_profiles:
+  info: informational_feedback
+  success: success_feedback
+  warning: warning_feedback
+  error: error_feedback
+
+severity_model:
+  info:
+    meaning: واقعیت یا تغییر وضعیت خنثی که دانستن آن برای task مفید است.
+  success:
+    meaning: action واقعاً کامل و نتیجهٔ مورد انتظار ثبت یا اعمال شده است.
+  warning:
+    meaning: ریسک، محدودیت یا وضعیت ناپایداری که هنوز شکست قطعی نیست.
+  error:
+    meaning: action یا سیستم شکست خورده است؛ recovery از error pattern می‌آید.
+  excluded:
+    danger: نیت مخرب پیش از action است و severity اعلان محسوب نمی‌شود.
+
+presentation_model:
+  in_place:
+    use_when: نتیجه مستقیماً به یک کنترل، فیلد، ردیف یا ناحیه تعلق دارد.
+    persistence: تابع زمینه و رفتار همان ناحیه
+  inline_notification:
+    use_when: پیام باید باقی بماند، به یک بخش مربوط است، برای ادامه لازم است یا action دارد.
+    persistence: persistent_by_meaning
+  toast:
+    use_when: بازخورد کوتاه و گذراست، زمینه روشن است و ازدست‌رفتن پیام task را مختل نمی‌کند.
+    persistence: transient
+  modal:
+    use_when: فقط وقتی پاسخ یا تصمیم کاربر پیش از ادامه لازم است، نه برای بازخورد منفعل.
+
+rules:
+  - id: NTF-001
+    obligation: must
+    dimension: classification
+    key: classify_meaning_and_persistence
+    statement: رویداد، severity معنایی و نیاز به ماندگاری پیش از نوشتن مشخص شود.
+  - id: NTF-002
+    obligation: must
+    dimension: placement
+    key: choose_presentation_by_context
+    statement: شکل نمایش از زمینه، ماندگاری و نیاز به اقدام انتخاب شود، نه فقط از severity.
+  - id: NTF-003
+    obligation: must
+    dimension: content
+    key: name_actual_result
+    statement: نتیجه یا وضعیت واقعی با action و object قابل‌فهم نام برده شود.
+  - id: NTF-004
+    obligation: must
+    dimension: terminology
+    key: preserve_surface_terms
+    statement: نام action و object با اصطلاح همان مخاطب و سطح UI هماهنگ بماند.
+  - id: NTF-005
+    obligation: must
+    dimension: product_truth
+    key: confirm_before_success
+    statement: Success فقط پس از تأیید کامل‌شدن action اعلام شود.
+  - id: NTF-006
+    obligation: must
+    dimension: content
+    key: include_relevant_consequence
+    statement: اگر نتیجه روی ادامهٔ task اثر دارد، پیامد یا گام بعدی معلوم بیان شود.
+  - id: NTF-007
+    obligation: must
+    dimension: action
+    key: one_available_action
+    statement: حداکثر یک action معنادار و واقعاً در دسترس ارائه شود.
+  - id: NTF-008
+    obligation: must_not
+    dimension: content
+    key: generic_outcome_only
+    statement: عبارت کلی مانند «عملیات با موفقیت انجام شد» بدون نام نتیجه کل پیام نباشد.
+  - id: NTF-009
+    obligation: must_not
+    dimension: tone
+    key: celebratory_hype
+    statement: موفقیت معمولی با تحسین، هیجان، شعار یا ایموجی بزرگ‌نمایی نشود.
+  - id: NTF-010
+    obligation: must_not
+    dimension: severity
+    key: confuse_danger_warning_error
+    statement: Danger به‌عنوان severity اعلان یا Error برای هشدار نیت مخرب پیش از action استفاده نشود.
+  - id: NTF-011
+    obligation: must
+    dimension: accessibility
+    key: separate_severity_from_urgency
+    statement: فوریت announcement مستقل از severity بصری و با کم‌مزاحمت‌ترین سازوکار کافی تعیین شود.
+  - id: NTF-012
+    obligation: must_not
+    dimension: accessibility
+    key: move_focus_to_toast
+    statement: فوکوس فقط به‌دلیل ظاهرشدن Toast جابه‌جا نشود.
+  - id: NTF-013
+    obligation: must_not
+    dimension: accessibility
+    key: duplicate_feedback
+    statement: یک رویداد بی‌دلیل با تغییر فوکوس، live announcement و Toast به‌طور تکراری اعلام نشود.
+  - id: NTF-014
+    obligation: must_not
+    dimension: product_truth
+    key: invent_runtime_behavior
+    statement: زمان نمایش، محل، stacking یا dismissibility تعریف‌نشده اختراع نشود.
+
+anatomy:
+  required:
+    - message
+  conditional:
+    - title
+    - consequence_or_next_step
+    - action
+    - dismiss
+  message_pattern: "[نتیجه یا وضعیت مشخص]. [پیامد مهم یا گام بعدی معلوم]."
+  action_limit: حداکثر یک action
+  dismiss_label: بستن
+
+action_model:
+  navigation: Link
+  operation: Button
+  undo:
+    rule: فقط وقتی بازیابی واقعاً پیاده‌سازی، امن و در بازهٔ لازم قابل‌دسترسی است.
+  transient_action:
+    rule: action ضروری نباید به پیام گذرا وابسته باشد مگر runtime زمان کافی را تضمین کند.
+
+accessibility:
+  announcement: وضعیت مهم بدون تغییر فوکوس باید برنامه‌وار قابل دریافت باشد.
+  urgency: severity بصری به‌تنهایی politeness یا role را تعیین نمی‌کند.
+  focus: برای ظاهرشدن Toast فوکوس را منتقل نکنید.
+  redundancy: اگر focus نتیجه و زمینه را روشن می‌کند، announcement جدا ممکن است لازم نباشد.
+
+templates:
+  success:
+    message: "{object_or_action} {confirmed_result}."
+    optional_follow_up: "{important_consequence_or_next_step}."
+  info:
+    message: "{neutral_state_or_change}."
+  warning:
+    message: "{detected_risk_or_limitation}. {known_effect_or_next_step}."
+  error:
+    message: "{failed_action_or_state}. {known_recovery}."
+
+examples:
+  resume_saved:
+    severity: success
+    presentation: toast
+    message: تغییرات رزومه ذخیره شد.
+  application_submitted:
+    severity: success
+    presentation: toast
+    message: درخواست شغلی ارسال شد.
+  unstable_connection:
+    severity: warning
+    presentation: inline_notification
+    message: اتصال ناپایدار است؛ ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
+  saved_job_removed_with_undo:
+    severity: success
+    presentation: toast
+    message: آگهی از ذخیره‌شده‌ها حذف شد.
+    action: بازگردانی
+    condition: undo_available_and_accessible
+
+unknowns:
+  - مدت دقیق نمایش خودکار Toast
+  - تعداد و ترتیب Toastهای هم‌زمان
+  - جای‌گذاری و stacking در viewportهای مختلف
+  - dismissibility پیش‌فرض هر نوع اعلان
+  - رفتار action در Toast با سطح High تا زمان تثبیت inverse Button
+
+evaluation_source: ../../../ai/evals/content/notification-cases.yml

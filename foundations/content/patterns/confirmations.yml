@@ -1,0 +1,186 @@
+schema_version: "0.1"
+id: content.pattern.confirmation
+title: الگوی محتوایی تأیید و اقدام مخرب
+status: draft
+language: fa-IR
+scope:
+  - consequential-action
+  - destructive-action
+  - unsaved-changes
+  - access-removal
+  - irreversible-cancellation
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  design_system:
+    - design-system.pattern.confirmation
+    - design-system.pattern.destructive-actions
+    - design-system.experience-rule.action-hierarchy
+    - design-system.component.modal
+    - button
+
+goal: >
+  کاربر پیش از یک اقدام پیامددار، عمل، موضوع، دامنه و امکان بازگشت را بفهمد و
+  بتواند میان انجام اقدام و خروج امن تصمیم آگاهانه بگیرد.
+
+tone_profile: consequential_confirmation
+destructive_tone_profile: destructive_confirmation
+
+decision_model:
+  no_confirmation:
+    use_when:
+      - پیامد کم‌ریسک، مورد انتظار و به‌آسانی قابل‌بازگشت است.
+      - Undo امن و در دسترس، بازیابی را بهتر از توقف پیش از اقدام ممکن می‌کند.
+    result: اقدام را مستقیم انجام دهید و در صورت نیاز بازخورد یا Undo بدهید.
+  neutral_confirmation:
+    use_when:
+      - اقدام پیامد مهم دارد اما مخرب یا دشواربازگشت نیست.
+      - کاربر باید پیش از ادامه، دامنه یا نتیجه را دوباره بررسی کند.
+    action_treatment: Primary + Ghost
+  destructive_confirmation:
+    use_when:
+      - داده حذف می‌شود.
+      - دسترسی برداشته می‌شود.
+      - لغو غیرقابل‌بازگشت است.
+      - پیامد جدی و دشواربازگشت دیگری وجود دارد.
+    action_treatment: Danger Primary + Ghost
+  negative_but_not_destructive:
+    rule: >
+      فعل منفی مانند ردکردن، بستن یا غیرفعال‌کردن به‌تنهایی دلیل استفاده از
+      confirmation مخرب یا Danger نیست؛ recoverability و consequence تعیین‌کننده‌اند.
+
+rules:
+  - id: CNF-001
+    obligation: must
+    dimension: decision
+    key: confirm_only_when_needed
+    statement: confirmation فقط برای تصمیمی استفاده شود که پیامد، ریسک یا ابهام معنادار دارد.
+  - id: CNF-002
+    obligation: must
+    dimension: content
+    key: name_action_and_object
+    statement: عمل و موضوع آن را مشخص کنید.
+  - id: CNF-003
+    obligation: must
+    dimension: content
+    key: explain_consequence
+    statement: نتیجهٔ مستقیم و مهم اقدام را توضیح دهید.
+  - id: CNF-004
+    obligation: must
+    dimension: product_truth
+    key: state_recoverability
+    statement: امکان بازگشت، بازیابی یا دائمی‌بودن را مطابق رفتار واقعی محصول روشن کنید.
+  - id: CNF-005
+    obligation: must
+    dimension: action_label
+    key: label_result
+    statement: برچسب اقدام اصلی باید نتیجهٔ فعال‌سازی را توصیف کند.
+  - id: CNF-006
+    obligation: must
+    dimension: action_label
+    key: label_safe_exit
+    statement: اقدام ثانویه باید راه خروج امن یا ادامهٔ task را بدون ابهام نشان دهد.
+  - id: CNF-007
+    obligation: must_not
+    dimension: action_label
+    key: generic_yes_no_confirm
+    statement: برای تصمیم پیامددار از «بله»، «خیر»، «تأیید» یا «ادامه» به‌تنهایی استفاده نکنید.
+  - id: CNF-008
+    obligation: must_not
+    dimension: tone
+    key: emotional_pressure
+    statement: با ترساندن، شرم، فوریت ساختگی یا لحن تبلیغاتی کاربر را به تصمیم هل ندهید.
+  - id: CNF-009
+    obligation: must
+    dimension: hierarchy
+    key: danger_only_for_destructive
+    statement: Danger فقط برای اقدام واقعاً مخرب یا دشواربازگشت استفاده شود.
+  - id: CNF-010
+    obligation: must
+    dimension: scope
+    key: identify_scope
+    statement: در اقدام گروهی یا چندموضوعی، تعداد و دامنهٔ اثر را مشخص کنید.
+  - id: CNF-011
+    obligation: must_not
+    dimension: product_truth
+    key: imply_completion_before_action
+    statement: متن پیش از اقدام نباید انجام‌شدن یا موفقیت نتیجه را القا کند.
+  - id: CNF-012
+    obligation: must
+    dimension: interaction
+    key: preserve_informed_choice
+    statement: کاربر باید بتواند پیش از اجرا جزئیات لازم را بخواند و از تصمیم خارج شود.
+
+anatomy:
+  required:
+    - title
+    - primary_action
+    - safe_exit
+  conditional:
+    - consequence
+    - recoverability
+    - affected_scope
+  title_pattern: "{object} را {action} می‌کنید؟"
+  body_pattern: "{consequence}. {recoverability}."
+  primary_action_pattern: "{action} {object}"
+  rule: >
+    عنوان تصمیم را نام می‌برد، بدنه پیامد و بازگشت‌پذیری را توضیح می‌دهد و
+    دکمه‌ها نتیجه و خروج امن را مشخص می‌کنند.
+
+placement:
+  modal:
+    use_when: تصمیم باید پیش از بازگشت به صفحه حل یا رد شود.
+    component: design-system.component.modal
+    rule: عنوان و توضیح باید بدون مراجعه به محتوای پوشیدهٔ پشت Modal قابل‌فهم باشند.
+  inline:
+    use_when: تصمیم محلی است و حفظ زمینهٔ اطراف برای فهم آن لازم است.
+  toast:
+    use_when: هرگز برای گرفتن تأیید پیش از اقدام استفاده نشود.
+    allowed_after_action: فقط برای بازخورد نتیجه یا Undo، مطابق pattern بازخورد.
+
+action_labels:
+  destructive_examples:
+    - حذف آگهی
+    - حذف دسترسی
+    - خروج بدون ذخیره
+  neutral_examples:
+    - غیرفعال‌کردن آگهی
+    - لغو مصاحبه
+  safe_exit_examples:
+    - انصراف
+    - ادامهٔ ویرایش
+    - بازگشت
+  ambiguity_rule: >
+    وقتی اقدام اصلی خود «لغو» است، دکمهٔ خروج از confirmation را «لغو» ننامید؛
+    از «انصراف»، «بازگشت» یا label دقیق task استفاده کنید.
+
+templates:
+  irreversible_delete:
+    title: "{object} را حذف می‌کنید؟"
+    body: "{object_with_name} حذف می‌شود و امکان بازگردانی آن نیست."
+    primary_action: "حذف {object}"
+    safe_exit: انصراف
+  remove_access:
+    title: "دسترسی {person} را حذف می‌کنید؟"
+    body: "{person} دیگر به {scope} دسترسی نخواهد داشت. {recoverability}."
+    primary_action: حذف دسترسی
+    safe_exit: انصراف
+  discard_unsaved_changes:
+    title: تغییرات ذخیره‌نشده را کنار می‌گذارید؟
+    body: اگر خارج شوید، تغییرات این صفحه ذخیره نمی‌شود.
+    primary_action: خروج بدون ذخیره
+    safe_exit: ادامهٔ ویرایش
+  bulk_action:
+    title: "{count} {object_plural} را {action} می‌کنید؟"
+    body: "این اقدام روی {count} {object_plural} اثر می‌گذارد. {consequence}."
+    primary_action: "{action} {count} {object_plural}"
+    safe_exit: انصراف
+
+unknowns:
+  - اگر recoverability معلوم نیست، دائمی یا قابل‌بازگشت بودن را حدس نزنید.
+  - اگر اثر بر objectهای وابسته معلوم نیست، scope را قطعی بیان نکنید.
+  - اگر action منفی است اما destructive بودن آن تأیید نشده، Danger انتخاب نکنید.
+  - اگر flow الزام تأیید دوباره، ورود عبارت یا احراز هویت ندارد، آن را به متن تحمیل نکنید.
+
+evaluation_source: ../../../ai/evals/content/confirmation-cases.yml

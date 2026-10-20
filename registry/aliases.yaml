@@ -1,0 +1,6 @@
+schema_version: 1
+aliases:
+  design-language: design-system.design-language
+  design-system: design-system.overview
+  karbon: design-language.integration.karbon
+  content-guidelines: content.content-guidelines

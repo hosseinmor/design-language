@@ -1,0 +1,2997 @@
+{
+  "schema_version": 1,
+  "documents": [
+    {
+      "id": "accordion",
+      "kind": "design-system-component",
+      "title": "Accordion",
+      "summary": "Accordion groups related disclosure items so users can reveal supporting content in place while keeping the page scannable.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "accordion",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/accordion.md"
+    },
+    {
+      "id": "button",
+      "kind": "design-system-component",
+      "title": "Button",
+      "summary": "Buttons trigger actions through a constrained hierarchy of Brand, operational, low-emphasis, and destructive styles.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "button",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/button.md"
+    },
+    {
+      "id": "content.component.button",
+      "kind": "content-content-component",
+      "title": "Button Content",
+      "summary": "Defines how Persian Button labels name actions, outcomes, objects, exits, destructive consequences, and loading states without duplicating the Design System Button contract.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.localization",
+        "content.pattern.confirmation",
+        "content.pattern.loading-and-progress",
+        "design-system.experience-rule.action-hierarchy",
+        "button"
+      ],
+      "topics": [
+        "accessibility",
+        "action-label",
+        "button",
+        "call-to-action",
+        "components",
+        "content",
+        "content-content-component",
+        "destructive-action",
+        "loading",
+        "persian"
+      ],
+      "path": "foundations/content/components/button.md"
+    },
+    {
+      "id": "content.component.modal",
+      "kind": "content-content-component",
+      "title": "Modal Content",
+      "summary": "Defines the Persian content contract for focused blocking dialogs across titles, body copy, actions, dismissal wording, confirmations, forms, loading, errors, and accessible naming.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.localization",
+        "content.component.button",
+        "content.component.text-input",
+        "content.pattern.confirmation",
+        "content.pattern.error",
+        "content.pattern.loading-and-progress",
+        "design-system.component.modal",
+        "design-system.accessibility.focus-management"
+      ],
+      "topics": [
+        "accessibility",
+        "actions",
+        "components",
+        "confirmation",
+        "content",
+        "content-content-component",
+        "dialog",
+        "errors",
+        "forms",
+        "modal",
+        "persian"
+      ],
+      "path": "foundations/content/components/modal.md"
+    },
+    {
+      "id": "content.component.notification",
+      "kind": "content-content-component",
+      "title": "Notification Content",
+      "summary": "Defines how outcome and status content maps into the distinct Inline Notification and Toast anatomies, including severity, message roles, actions, dismissal, timeout indicators, and accessible announcements.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.localization",
+        "content.component.button",
+        "content.pattern.notifications",
+        "content.pattern.error",
+        "content.pattern.confirmation",
+        "design-system.component.notification",
+        "design-system.accessibility.dynamic-content-and-feedback"
+      ],
+      "topics": [
+        "accessibility",
+        "components",
+        "content",
+        "content-content-component",
+        "feedback",
+        "inline-notification",
+        "notification",
+        "persian",
+        "severity",
+        "toast"
+      ],
+      "path": "foundations/content/components/notification.md"
+    },
+    {
+      "id": "content.component.text-input",
+      "kind": "content-content-component",
+      "title": "Text Input Content",
+      "summary": "Defines the Persian content contract for a single-line Text Input across label, placeholder, helper, error, requiredness, values, states, adornment actions, and accessible relationships.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.localization",
+        "content.pattern.instructions-and-helper-text",
+        "content.pattern.error",
+        "design-system.component.text-input",
+        "design-system.accessibility.forms"
+      ],
+      "topics": [
+        "accessibility",
+        "components",
+        "content",
+        "content-content-component",
+        "forms",
+        "helper-text",
+        "labels",
+        "persian",
+        "placeholder",
+        "text-input",
+        "validation"
+      ],
+      "path": "foundations/content/components/text-input.md"
+    },
+    {
+      "id": "content.content-guidelines",
+      "kind": "content-content-guideline",
+      "title": "Content Guidelines",
+      "summary": "Routes shared product-content decisions across voice, terminology, localization, patterns, component contracts, and executable evaluations.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.localization",
+        "content.component.button",
+        "content.component.text-input",
+        "content.component.modal",
+        "content.component.notification",
+        "content.pattern.error",
+        "content.pattern.confirmation",
+        "content.pattern.empty-states",
+        "content.pattern.notifications",
+        "content.pattern.loading-and-progress",
+        "content.pattern.ai-content-and-disclosure",
+        "content.pattern.instructions-and-helper-text"
+      ],
+      "topics": [
+        "content",
+        "content-content-guideline",
+        "content-guidelines"
+      ],
+      "path": "foundations/content/content-guidelines.md"
+    },
+    {
+      "id": "content.localization",
+      "kind": "content-content-guideline",
+      "title": "Persian Localization",
+      "summary": "Defines the source-backed Persian language, RTL, mixed-direction text, locale formatting, translation, product-name, and dynamic-variable contract for product content.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.content-guidelines",
+        "content.product-voice",
+        "content.terminology",
+        "content.pattern.instructions-and-helper-text",
+        "design-system.accessibility.content",
+        "design-system.accessibility.forms",
+        "design-system.experience-rule.contextual-guidance"
+      ],
+      "topics": [
+        "bidi",
+        "content",
+        "content-content-guideline",
+        "dates",
+        "localization",
+        "numbers",
+        "persian",
+        "rtl",
+        "translation",
+        "variables"
+      ],
+      "path": "foundations/content/localization.md"
+    },
+    {
+      "id": "content.pattern.ai-content-and-disclosure",
+      "kind": "content-content-pattern",
+      "title": "AI-Assisted Content and Disclosure",
+      "summary": "Defines naming, disclosure, output status, review, uncertainty, action, and trust boundaries for AI-assisted product experiences.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.pattern.error",
+        "content.pattern.notifications",
+        "content.pattern.loading-and-progress",
+        "design-system.pattern.ai-entry-points",
+        "design-system.token.semantic-tokens",
+        "design-system.accessibility.content"
+      ],
+      "topics": [
+        "ai-assistant",
+        "ai-content",
+        "ai-content-and-disclosure",
+        "ai-disclosure",
+        "content",
+        "content-content-pattern",
+        "generated-content",
+        "human-review",
+        "patterns",
+        "persian",
+        "suggested-content",
+        "ux-writing"
+      ],
+      "path": "foundations/content/patterns/ai-content-and-disclosure.md"
+    },
+    {
+      "id": "content.pattern.confirmation",
+      "kind": "content-content-pattern",
+      "title": "Confirmations and Destructive Actions",
+      "summary": "Defines when confirmation is necessary and how to name actions, consequences, recoverability, scope, and safe exits.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.pattern.error",
+        "design-system.pattern.confirmation",
+        "design-system.pattern.destructive-actions",
+        "design-system.experience-rule.action-hierarchy",
+        "design-system.component.modal",
+        "button"
+      ],
+      "topics": [
+        "action-labels",
+        "confirmation",
+        "confirmations",
+        "content",
+        "content-content-pattern",
+        "destructive-actions",
+        "modal-content",
+        "patterns",
+        "persian",
+        "ux-writing"
+      ],
+      "path": "foundations/content/patterns/confirmations.md"
+    },
+    {
+      "id": "content.pattern.empty-states",
+      "kind": "content-content-pattern",
+      "title": "Empty States",
+      "summary": "Defines empty-state classification, message anatomy, actions, terminology, product-truth boundaries, and recovery guidance.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.pattern.error",
+        "design-system.component.empty-state",
+        "design-system.pattern.empty-states",
+        "design-system.pattern.search-and-filtering",
+        "design-system.accessibility.focus-management"
+      ],
+      "topics": [
+        "accessibility",
+        "cold-start",
+        "content",
+        "content-content-pattern",
+        "empty-states",
+        "first-use",
+        "no-results",
+        "patterns",
+        "persian",
+        "ux-writing"
+      ],
+      "path": "foundations/content/patterns/empty-states.md"
+    },
+    {
+      "id": "content.pattern.error",
+      "kind": "content-content-pattern",
+      "title": "Error Messages",
+      "summary": "Defines the content, tone, recovery, placement, accessibility, and evaluation contract for product error messages.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "design-system.component.text-input",
+        "design-system.component.notification",
+        "design-system.component.modal",
+        "design-system.pattern.notifications",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.dynamic-content-and-feedback"
+      ],
+      "topics": [
+        "accessibility",
+        "content",
+        "content-content-pattern",
+        "errors",
+        "patterns",
+        "persian",
+        "recovery",
+        "ux-writing",
+        "validation"
+      ],
+      "path": "foundations/content/patterns/errors.md"
+    },
+    {
+      "id": "content.pattern.instructions-and-helper-text",
+      "kind": "content-content-pattern",
+      "title": "Instructions and Helper Text",
+      "summary": "Defines the roles, timing, placement, wording, validation boundary, and accessibility contract for labels, instructions, helper text, placeholders, examples, and requirement indicators.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.pattern.error",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.content",
+        "design-system.experience-rule.contextual-guidance",
+        "design-system.component.text-input",
+        "design-system.component.textarea"
+      ],
+      "topics": [
+        "accessibility",
+        "content",
+        "content-content-pattern",
+        "examples",
+        "forms",
+        "helper-text",
+        "instructions",
+        "instructions-and-helper-text",
+        "labels",
+        "patterns",
+        "persian",
+        "placeholders",
+        "required-optional",
+        "ux-writing"
+      ],
+      "path": "foundations/content/patterns/instructions-and-helper-text.md"
+    },
+    {
+      "id": "content.pattern.loading-and-progress",
+      "kind": "content-content-pattern",
+      "title": "Loading and Progress Content",
+      "summary": "Defines classification, status language, progress truth, transitions, and accessibility for asynchronous product operations.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.pattern.error",
+        "content.pattern.notifications",
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "design-system.accessibility.focus-management",
+        "button",
+        "design-system.pattern.loading-and-progress"
+      ],
+      "topics": [
+        "accessibility",
+        "async-status",
+        "content",
+        "content-content-pattern",
+        "loading",
+        "loading-and-progress",
+        "patterns",
+        "persian",
+        "progress",
+        "skeleton",
+        "ux-writing"
+      ],
+      "path": "foundations/content/patterns/loading-and-progress.md"
+    },
+    {
+      "id": "content.pattern.notifications",
+      "kind": "content-content-pattern",
+      "title": "Notifications and Outcome Feedback",
+      "summary": "Defines severity, presentation, content, actions, and accessibility for inline notifications, Toasts, and in-place outcome feedback.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.product-voice",
+        "content.terminology",
+        "content.pattern.error",
+        "content.pattern.confirmation",
+        "content.pattern.empty-states",
+        "design-system.component.notification",
+        "design-system.pattern.notifications",
+        "design-system.accessibility.dynamic-content-and-feedback"
+      ],
+      "topics": [
+        "accessibility",
+        "content",
+        "content-content-pattern",
+        "inline-notification",
+        "notifications",
+        "patterns",
+        "persian",
+        "success-feedback",
+        "toast",
+        "ux-writing"
+      ],
+      "path": "foundations/content/patterns/notifications.md"
+    },
+    {
+      "id": "content.product-voice",
+      "kind": "content-content-foundation",
+      "title": "JobVision Product Voice",
+      "summary": "Defines the evidence-backed product voice, operational tone dimensions, precedence, and surface profiles for JobVision UI content.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.content-guidelines",
+        "content.terminology",
+        "content.localization",
+        "content.pattern.error",
+        "content.pattern.confirmation",
+        "content.pattern.empty-states",
+        "content.pattern.notifications",
+        "content.pattern.loading-and-progress",
+        "content.pattern.ai-content-and-disclosure",
+        "content.pattern.instructions-and-helper-text",
+        "design-system.accessibility.content"
+      ],
+      "topics": [
+        "ai-generated-product-content",
+        "content",
+        "content-content-foundation",
+        "persian",
+        "product-voice",
+        "tone",
+        "ux-writing"
+      ],
+      "path": "foundations/content/product-voice.md"
+    },
+    {
+      "id": "content.terminology",
+      "kind": "content-content-guideline",
+      "title": "JobVision Product Terminology",
+      "summary": "Defines the semantic terminology model, audience-aware label rules, source boundaries, and machine-readable lexicon for JobVision product content.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.content-guidelines",
+        "content.localization"
+      ],
+      "topics": [
+        "ai-content",
+        "application",
+        "content",
+        "content-content-guideline",
+        "job-post",
+        "organization",
+        "persian",
+        "resume",
+        "terminology",
+        "ux-writing"
+      ],
+      "path": "foundations/content/terminology.md"
+    },
+    {
+      "id": "design-language.ai.retrieval",
+      "kind": "design-language-ai-routing",
+      "title": "Design Language Retrieval Contract",
+      "summary": "Defines minimum-context retrieval, identity resolution, conflict handling, and future MCP behavior.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-language.ai.router",
+        "design-system.reference.source-of-truth"
+      ],
+      "topics": [
+        "design-language-ai-routing",
+        "retrieval"
+      ],
+      "path": "ai/retrieval.md"
+    },
+    {
+      "id": "design-language.ai.router",
+      "kind": "design-language-ai-routing",
+      "title": "Design Language AI Router",
+      "summary": "Routes design-language questions to the smallest canonical knowledge area and the appropriate live source.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.design-language",
+        "design-system.reference.source-of-truth"
+      ],
+      "topics": [
+        "design-language-ai-routing",
+        "router"
+      ],
+      "path": "ai/router.md"
+    },
+    {
+      "id": "design-language.integration.karbon",
+      "kind": "design-language-integration",
+      "title": "Karbon Integration",
+      "summary": "Defines how the Design Language repository relates to Karbon code and Storybook without duplicating runtime truth.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.reference.source-of-truth",
+        "design-system.reference.code",
+        "design-system.reference.storybook"
+      ],
+      "topics": [
+        "design-language-integration",
+        "karbon"
+      ],
+      "path": "integrations/karbon.md"
+    },
+    {
+      "id": "design-system.accessibility.color-and-contrast",
+      "kind": "design-system-accessibility",
+      "title": "Color and Contrast",
+      "summary": "Practical contrast, color-use, focus, disabled-state, mode, compositing, and palette-acceptance requirements.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core"
+      ],
+      "topics": [
+        "color-and-contrast",
+        "design-system-accessibility"
+      ],
+      "path": "accessibility/color-and-contrast.md"
+    },
+    {
+      "id": "design-system.accessibility.component-authoring-contract",
+      "kind": "design-system-accessibility",
+      "title": "Component Accessibility Authoring Contract",
+      "summary": "Minimum accessibility information a reusable Design System component must define before its accessibility behavior is considered complete.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.router"
+      ],
+      "topics": [
+        "component-accessibility-authoring-contract",
+        "design-system-accessibility"
+      ],
+      "path": "accessibility/component-accessibility-authoring-contract.md"
+    },
+    {
+      "id": "design-system.accessibility.conformance-and-policy",
+      "kind": "design-system-accessibility",
+      "title": "Accessibility Conformance and Policy",
+      "summary": "Defines the WCAG baseline, internal requirement levels, evidence language, exceptions, ownership, support expectations, and accessibility-debt policy.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.router",
+        "design-system.accessibility.testing"
+      ],
+      "topics": [
+        "conformance-and-policy",
+        "design-system-accessibility"
+      ],
+      "path": "accessibility/conformance-and-policy.md"
+    },
+    {
+      "id": "design-system.accessibility.content",
+      "kind": "design-system-accessibility",
+      "title": "Accessible Content",
+      "summary": "Defines accessible UX content, labels, instructions, link purpose, language, abbreviations, error copy, and accessible-name wording.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.structure-and-navigation"
+      ],
+      "topics": [
+        "content",
+        "design-system-accessibility"
+      ],
+      "path": "accessibility/content.md"
+    },
+    {
+      "id": "design-system.accessibility.core",
+      "kind": "design-system-accessibility",
+      "title": "Accessibility Core",
+      "summary": "Compact accessibility baseline that must be considered for every design and frontend implementation task.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.conformance-and-policy",
+        "design-system.accessibility.router"
+      ],
+      "topics": [
+        "core",
+        "design-system-accessibility"
+      ],
+      "path": "accessibility/core.md"
+    },
+    {
+      "id": "design-system.accessibility.dynamic-content-and-feedback",
+      "kind": "design-system-accessibility",
+      "title": "Dynamic Content and Feedback",
+      "summary": "Defines accessible status messages, alerts, loading, async updates, toasts, progress, and dynamic-content announcement behavior.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.screen-reader-semantics",
+        "design-system.accessibility.forms"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "dynamic-content-and-feedback"
+      ],
+      "path": "accessibility/dynamic-content-and-feedback.md"
+    },
+    {
+      "id": "design-system.accessibility.focus-management",
+      "kind": "design-system-accessibility",
+      "title": "Focus Management",
+      "summary": "Defines practical rules for visible focus, logical focus order, programmatic focus, overlays, dynamic changes, validation, removal, and focus restoration.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-19",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "design-system.accessibility.forms"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "focus-management"
+      ],
+      "path": "accessibility/focus-management.md"
+    },
+    {
+      "id": "design-system.accessibility.forms",
+      "kind": "design-system-accessibility",
+      "title": "Accessible Forms",
+      "summary": "Defines form labeling, instructions, validation, errors, input purpose, authentication, redundant-entry, multi-step, and submission requirements.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "design-system.accessibility.content",
+        "design-system.accessibility.structure-and-navigation"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "forms"
+      ],
+      "path": "accessibility/forms.md"
+    },
+    {
+      "id": "design-system.accessibility.images-icons-and-media",
+      "kind": "design-system-accessibility",
+      "title": "Images, Icons, and Media",
+      "summary": "Defines text alternatives, decorative imagery, icon semantics, complex images, captions, audio description, and media-control accessibility.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.screen-reader-semantics",
+        "design-system.accessibility.content"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "images-icons-and-media"
+      ],
+      "path": "accessibility/images-icons-and-media.md"
+    },
+    {
+      "id": "design-system.accessibility.keyboard-navigation",
+      "kind": "design-system-accessibility",
+      "title": "Keyboard Navigation",
+      "summary": "Defines practical keyboard access, native behavior, composite-widget navigation, shortcuts, disabled-item behavior, and testing requirements.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.screen-reader-semantics",
+        "design-system.accessibility.pointer-touch-and-gestures"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "keyboard-navigation"
+      ],
+      "path": "accessibility/keyboard-navigation.md"
+    },
+    {
+      "id": "design-system.accessibility.motion",
+      "kind": "design-system-accessibility",
+      "title": "Motion and Reduced Motion",
+      "summary": "Defines animation, reduced-motion, flashing, moving/auto-updating content, timing, autoplay, and vestibular-safety guidance.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.pointer-touch-and-gestures"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "motion"
+      ],
+      "path": "accessibility/motion.md"
+    },
+    {
+      "id": "design-system.accessibility.pointer-touch-and-gestures",
+      "kind": "design-system-accessibility",
+      "title": "Pointer, Touch, and Gestures",
+      "summary": "Defines target-size, cancellation, gesture, dragging, concurrent-input, hover, and motion-actuation accessibility requirements.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.motion"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "pointer-touch-and-gestures"
+      ],
+      "path": "accessibility/pointer-touch-and-gestures.md"
+    },
+    {
+      "id": "design-system.accessibility.responsive-and-zoom",
+      "kind": "design-system-accessibility",
+      "title": "Responsive and Zoom",
+      "summary": "Defines text resize, zoom, reflow, overflow, truncation, reading-order, RTL, and responsive accessibility requirements.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.structure-and-navigation"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "responsive-and-zoom"
+      ],
+      "path": "accessibility/responsive-and-zoom.md"
+    },
+    {
+      "id": "design-system.accessibility.router",
+      "kind": "design-system-accessibility",
+      "title": "Accessibility Task Router",
+      "summary": "Routes design and frontend tasks to the smallest sufficient accessibility context.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "router"
+      ],
+      "path": "accessibility/router.md"
+    },
+    {
+      "id": "design-system.accessibility.screen-reader-semantics",
+      "kind": "design-system-accessibility",
+      "title": "Screen Reader Semantics",
+      "summary": "Defines native-first semantics, accessible naming, programmatic state and relationship rules, hidden-content behavior, and assistive-technology expectations.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "design-system.accessibility.structure-and-navigation"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "screen-reader-semantics"
+      ],
+      "path": "accessibility/screen-reader-semantics.md"
+    },
+    {
+      "id": "design-system.accessibility.structure-and-navigation",
+      "kind": "design-system-accessibility",
+      "title": "Structure and Navigation",
+      "summary": "Defines page structure, headings, landmarks, bypass/navigation, page titles, predictable context changes, and Consistent Help ownership.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.content",
+        "design-system.accessibility.forms"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "structure-and-navigation"
+      ],
+      "path": "accessibility/structure-and-navigation.md"
+    },
+    {
+      "id": "design-system.accessibility.tables-and-data-visualization",
+      "kind": "design-system-accessibility",
+      "title": "Tables and Data Visualization",
+      "summary": "Defines Data Table versus Interactive Grid decisions, table semantics, sorting/filtering, custom Grid contracts, virtualization, charts, and accessible data alternatives.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.screen-reader-semantics",
+        "design-system.accessibility.color-and-contrast",
+        "design-system.accessibility.testing"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "tables-and-data-visualization"
+      ],
+      "path": "accessibility/tables-and-data-visualization.md"
+    },
+    {
+      "id": "design-system.accessibility.testing",
+      "kind": "design-system-accessibility",
+      "title": "Accessibility Testing",
+      "summary": "Defines practical accessibility test scope, evidence, manual and automated checks, complete-process evaluation, and specialized validation coverage.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-02",
+      "related": [
+        "design-system.accessibility.core",
+        "design-system.accessibility.conformance-and-policy",
+        "design-system.accessibility.router"
+      ],
+      "topics": [
+        "design-system-accessibility",
+        "testing"
+      ],
+      "path": "accessibility/testing.md"
+    },
+    {
+      "id": "design-system.component.autocomplete",
+      "kind": "design-system-component",
+      "title": "Autocomplete",
+      "summary": "Editable single-value query input with suggestions; explicit free-form and selection-required value policies.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.select",
+        "design-system.component.search",
+        "design-system.component.text-input",
+        "design-system.accessibility.forms"
+      ],
+      "topics": [
+        "autocomplete",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/autocomplete.md"
+    },
+    {
+      "id": "design-system.component.badge",
+      "kind": "design-system-component",
+      "title": "Badge",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "badge",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/badge.md"
+    },
+    {
+      "id": "design-system.component.breadcrumb",
+      "kind": "design-system-component",
+      "title": "Breadcrumb",
+      "summary": "Breadcrumbs show the current page in a hierarchy and provide navigation to ancestor destinations.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-09-19",
+      "related": [
+        "design-system.component.link",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "breadcrumb",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/breadcrumb.md"
+    },
+    {
+      "id": "design-system.component.checkbox",
+      "kind": "design-system-component",
+      "title": "Checkbox",
+      "summary": "Checkbox lets users select zero, one, or many independent options and can represent a single optional boolean choice.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-19",
+      "related": [
+        "design-system.component.radio",
+        "design-system.reference.component-mapping",
+        "design-system.accessibility.keyboard-navigation"
+      ],
+      "topics": [
+        "checkbox",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/checkbox.md"
+    },
+    {
+      "id": "design-system.component.chip",
+      "kind": "design-system-component",
+      "title": "Chip",
+      "summary": "Chip is the interactive compact-control family for direct selection, committed removable values, disclosure controls, and value-level add/start actions.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-20",
+      "related": [
+        "design-system.component.tag",
+        "design-system.component.badge",
+        "design-system.component.switch",
+        "design-system.foundation.radius",
+        "design-system.accessibility.focus-management",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "chip",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/chip.md"
+    },
+    {
+      "id": "design-system.component.choice-group",
+      "kind": "design-system-component",
+      "title": "Choice Group",
+      "summary": "Choice Group composes Chip / Selectable items into a labeled single- or multiple-selection group for compact choices.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-18",
+      "related": [
+        "design-system.component.chip",
+        "design-system.component.radio",
+        "design-system.component.checkbox",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "choice-group",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/choice-group.md"
+    },
+    {
+      "id": "design-system.component.coachmark",
+      "kind": "design-system-component",
+      "title": "Coachmark",
+      "summary": "Coachmark proactively introduces a feature, workflow, or contextual concept at a specific product moment.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.popover",
+        "design-system.pattern.tour",
+        "design-system.experience-rule.contextual-guidance"
+      ],
+      "topics": [
+        "coachmark",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/coachmark.md"
+    },
+    {
+      "id": "design-system.component.combo-button",
+      "kind": "design-system-component",
+      "title": "Combo Button",
+      "summary": "Combo Button keeps one dominant action directly available and exposes closely related alternative actions from a separate menu trigger.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-17",
+      "related": [
+        "button",
+        "design-system.component.icon-button",
+        "design-system.component.menu-button",
+        "design-system.accessibility.core"
+      ],
+      "topics": [
+        "combo-button",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/combo-button.md"
+    },
+    {
+      "id": "design-system.component.content-switcher",
+      "kind": "design-system-component",
+      "title": "Content Switcher",
+      "summary": "Content Switcher switches immediately between closely related views of the same content using one current choice.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-14",
+      "related": [
+        "design-system.component.tabs",
+        "design-system.component.toggle-button",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "components",
+        "content-switcher",
+        "design-system-component"
+      ],
+      "path": "design-system/components/content-switcher.md"
+    },
+    {
+      "id": "design-system.component.dialog",
+      "kind": "design-system-component",
+      "title": "Dialog",
+      "summary": "Canonical design contract for modal, blocking task dialogs, including dismiss/focus, responsive presentation and scroll.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-19",
+      "related": [
+        "design-system.reference.component-mapping",
+        "design-system.foundation.responsive-layout-spec",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.screen-reader-semantics"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "dialog"
+      ],
+      "path": "design-system/components/dialog.md"
+    },
+    {
+      "id": "design-system.component.drawer",
+      "kind": "design-system-component",
+      "title": "Drawer",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "components",
+        "design-system-component",
+        "drawer"
+      ],
+      "path": "design-system/components/drawer.md"
+    },
+    {
+      "id": "design-system.component.dropdown-menu",
+      "kind": "design-system-component",
+      "title": "Dropdown Menu",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "components",
+        "design-system-component",
+        "dropdown-menu"
+      ],
+      "path": "design-system/components/dropdown-menu.md"
+    },
+    {
+      "id": "design-system.component.empty-state",
+      "kind": "design-system-component",
+      "title": "Empty State",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "components",
+        "design-system-component",
+        "empty-state"
+      ],
+      "path": "design-system/components/empty-state.md"
+    },
+    {
+      "id": "design-system.component.file-uploader",
+      "kind": "design-system-component",
+      "title": "File Uploader",
+      "summary": "Canonical Carbon-derived file selection and drag-and-drop design contract, with native File list Slot, file-level feedback and verified Figma sources.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-20",
+      "related": [
+        "design-system.component.progress-bar",
+        "design-system.component.progress-circle",
+        "design-system.pattern.loading-and-progress",
+        "design-system.reference.component-mapping",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "content.pattern.loading-and-progress",
+        "content.pattern.error"
+      ],
+      "topics": [
+        "accessibility",
+        "components",
+        "design-system-component",
+        "dropzone",
+        "file-item",
+        "file-uploader",
+        "rtl",
+        "upload",
+        "validation"
+      ],
+      "path": "design-system/components/file-uploader.md"
+    },
+    {
+      "id": "design-system.component.icon-button",
+      "kind": "design-system-component",
+      "title": "Icon Button",
+      "summary": "Icon Button triggers a compact action using one recognizable icon while preserving an explicit accessible name and visible Tooltip label.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "button",
+        "design-system.component.tooltip",
+        "design-system.accessibility.core",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "icon-button"
+      ],
+      "path": "design-system/components/icon-button.md"
+    },
+    {
+      "id": "design-system.component.link",
+      "kind": "design-system-component",
+      "title": "Link",
+      "summary": "Links navigate users to another destination through a standalone component with three sizes and an inline native-text recipe.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-09-19",
+      "related": [],
+      "topics": [
+        "components",
+        "design-system-component",
+        "link"
+      ],
+      "path": "design-system/components/link.md"
+    },
+    {
+      "id": "design-system.component.menu",
+      "kind": "design-system-component",
+      "title": "Menu",
+      "summary": "Menu is a temporary action/command surface composed from Menu Items, optional grouping, separators, shortcuts, checked state, destructive tone, and submenus.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-09-23",
+      "related": [
+        "design-system.component.menu-button",
+        "design-system.component.combo-button",
+        "design-system.accessibility.core",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "menu"
+      ],
+      "path": "design-system/components/menu.md"
+    },
+    {
+      "id": "design-system.component.menu-button",
+      "kind": "design-system-component",
+      "title": "Menu Button",
+      "summary": "Menu Button opens a replaceable menu of peer actions from one labeled Button trigger without surfacing a separate primary action.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-17",
+      "related": [
+        "button",
+        "design-system.component.menu",
+        "design-system.accessibility.core",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "menu-button"
+      ],
+      "path": "design-system/components/menu-button.md"
+    },
+    {
+      "id": "design-system.component.modal",
+      "kind": "design-system-component",
+      "title": "Modal (legacy name)",
+      "summary": "Backward-compatible redirect to the canonical Dialog component.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-10-17",
+      "related": [
+        "design-system.component.dialog"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "modal"
+      ],
+      "path": "design-system/components/modal.md"
+    },
+    {
+      "id": "design-system.component.notification",
+      "kind": "design-system-component",
+      "title": "Notification",
+      "summary": "Defines the canonical design contracts for Inline Notification and Toast, including severity, anatomy, composition, and current runtime gaps.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-09-19",
+      "related": [
+        "design-system.pattern.notifications",
+        "design-system.component.icon-button",
+        "design-system.component.link"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "notification"
+      ],
+      "path": "design-system/components/notification.md"
+    },
+    {
+      "id": "design-system.component.pagination",
+      "kind": "design-system-component",
+      "title": "Pagination",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "components",
+        "design-system-component",
+        "pagination"
+      ],
+      "path": "design-system/components/pagination.md"
+    },
+    {
+      "id": "design-system.component.password-input",
+      "kind": "design-system-component",
+      "title": "Password Input",
+      "summary": "Password Input captures a secret single-line value through the shared RTL-first Field contract, with native-password-oriented masking and a dedicated reveal/hide action.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.text-input",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "password-input"
+      ],
+      "path": "design-system/components/password-input.md"
+    },
+    {
+      "id": "design-system.component.popover",
+      "kind": "design-system-component",
+      "title": "Popover",
+      "summary": "Popover is a generic floating surface for a small contextual task or interaction.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.toggletip",
+        "design-system.component.coachmark",
+        "design-system.experience-rule.contextual-guidance"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "popover"
+      ],
+      "path": "design-system/components/popover.md"
+    },
+    {
+      "id": "design-system.component.progress-bar",
+      "kind": "design-system-component",
+      "title": "Progress Bar",
+      "summary": "Continuous operation-progress component with measured determinate values, public Figma Indeterminate variants, and explicit success/error feedback.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-20",
+      "related": [
+        "design-system.component.progress-indicator",
+        "design-system.pattern.loading-and-progress",
+        "content.pattern.loading-and-progress",
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "accessibility",
+        "components",
+        "design-system-component",
+        "determinate",
+        "feedback",
+        "indeterminate",
+        "progress",
+        "progress-bar",
+        "rtl"
+      ],
+      "path": "design-system/components/progress-bar.md"
+    },
+    {
+      "id": "design-system.component.progress-circle",
+      "kind": "design-system-component",
+      "title": "Progress Circle",
+      "summary": "Shared circular progress component for measured work and unknown activity; Button and loading patterns consume its indeterminate mode directly.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-19",
+      "related": [
+        "design-system.pattern.loading-and-progress",
+        "design-system.component.progress-bar",
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "content.pattern.loading-and-progress",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "determinate",
+        "feedback",
+        "indeterminate",
+        "progress",
+        "progress-circle"
+      ],
+      "path": "design-system/components/progress-circle.md"
+    },
+    {
+      "id": "design-system.component.progress-indicator",
+      "kind": "design-system-component",
+      "title": "Progress Indicator",
+      "summary": "Carbon-derived RTL progress indicator for known, ordered multi-step workflows, with explicit current/completed/incomplete/error/disabled states and compositional Figma authoring.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-15",
+      "related": [
+        "design-system.component.timeline",
+        "design-system.component.breadcrumb",
+        "design-system.component.tabs",
+        "design-system.accessibility.core",
+        "design-system.accessibility.forms",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "progress-indicator"
+      ],
+      "path": "design-system/components/progress-indicator.md"
+    },
+    {
+      "id": "design-system.component.radio",
+      "kind": "design-system-component",
+      "title": "Radio",
+      "summary": "Radio lets users choose exactly one mutually exclusive option from a group.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-19",
+      "related": [
+        "design-system.component.checkbox",
+        "design-system.reference.component-mapping",
+        "design-system.accessibility.keyboard-navigation"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "radio"
+      ],
+      "path": "design-system/components/radio.md"
+    },
+    {
+      "id": "design-system.component.rich-text-editor",
+      "kind": "design-system-component",
+      "title": "Rich Text Editor",
+      "summary": "Rich Text Editor captures formatted multiline content through the shared Field contract and an internal formatting toolbar.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.textarea",
+        "design-system.component.icon-button",
+        "design-system.component.toggle-button",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "rich-text-editor"
+      ],
+      "path": "design-system/components/rich-text-editor.md"
+    },
+    {
+      "id": "design-system.component.search",
+      "kind": "design-system-component",
+      "title": "Search",
+      "summary": "Search captures a single-line query through an RTL-first search-specific control with a fixed search affordance and a contextual clear action.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.text-input",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "search"
+      ],
+      "path": "design-system/components/search.md"
+    },
+    {
+      "id": "design-system.component.select",
+      "kind": "design-system-component",
+      "title": "Select",
+      "summary": "Single- and multiple-value selection from predefined options, with a shared Selection Panel.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.text-input",
+        "design-system.component.autocomplete",
+        "design-system.accessibility.forms"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "select"
+      ],
+      "path": "design-system/components/select.md"
+    },
+    {
+      "id": "design-system.component.skeleton",
+      "kind": "design-system-component",
+      "title": "Skeleton",
+      "summary": "Composable content placeholders with Text, Block and Circle primitives, one shared Shimmer motion utility, and region-owned loading feedback.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-19",
+      "related": [
+        "design-system.component.progress-bar",
+        "design-system.pattern.loading-and-progress",
+        "design-system.foundation.motion",
+        "design-system.accessibility.motion",
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "accessibility",
+        "components",
+        "composition",
+        "design-system-component",
+        "loading",
+        "reduced-motion",
+        "shimmer",
+        "skeleton"
+      ],
+      "path": "design-system/components/skeleton.md"
+    },
+    {
+      "id": "design-system.component.switch",
+      "kind": "design-system-component",
+      "title": "Toggle",
+      "summary": "Toggle is the canonical binary on/off control for settings that take effect immediately.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-19",
+      "related": [
+        "design-system.component.checkbox",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "switch"
+      ],
+      "path": "design-system/components/switch.md"
+    },
+    {
+      "id": "design-system.component.table",
+      "kind": "design-system-component",
+      "title": "Data Table",
+      "summary": "Composable RTL table for comparing and managing structured data in Job Vision products; HOS-35 working Figma pilot.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-20",
+      "related": [
+        "design-system.accessibility.tables-and-data-visualization",
+        "design-system.pattern.data-views"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "table"
+      ],
+      "path": "design-system/components/table.md"
+    },
+    {
+      "id": "design-system.component.table-runtime-contract",
+      "kind": "design-system-component",
+      "title": "Data Table — Runtime and Accessibility Contract",
+      "summary": "Proposed implementation contract and acceptance tests for the HOS-35 RTL Data Table pilot.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-14",
+      "related": [
+        "design-system.component.table",
+        "design-system.pattern.data-views",
+        "design-system.accessibility.tables-and-data-visualization"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "table-runtime-contract"
+      ],
+      "path": "design-system/components/table-runtime-contract.md"
+    },
+    {
+      "id": "design-system.component.tabs",
+      "kind": "design-system-component",
+      "title": "Tabs",
+      "summary": "Tabs switch between peer content panels within the same context using one current tab.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-14",
+      "related": [
+        "design-system.component.content-switcher",
+        "design-system.reference.component-mapping",
+        "design-system.accessibility.keyboard-navigation"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "tabs"
+      ],
+      "path": "design-system/components/tabs.md"
+    },
+    {
+      "id": "design-system.component.tag",
+      "kind": "design-system-component",
+      "title": "Tag",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "components",
+        "design-system-component",
+        "tag"
+      ],
+      "path": "design-system/components/tag.md"
+    },
+    {
+      "id": "design-system.component.text-input",
+      "kind": "design-system-component",
+      "title": "Text Input",
+      "summary": "Text Input captures a single-line text value through a native-input-oriented, RTL-first field contract with shared label, supporting text, validation, and adornment behavior.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.accessibility.forms",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "text-input"
+      ],
+      "path": "design-system/components/text-input.md"
+    },
+    {
+      "id": "design-system.component.textarea",
+      "kind": "design-system-component",
+      "title": "Textarea",
+      "summary": "Textarea captures multiline free text through the shared RTL-first Field contract, with optional helper/count content, validation, and vertical resizing.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.text-input",
+        "design-system.component.rich-text-editor",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "textarea"
+      ],
+      "path": "design-system/components/textarea.md"
+    },
+    {
+      "id": "design-system.component.timeline",
+      "kind": "design-system-component",
+      "title": "Timeline",
+      "summary": "A compositional vertical RTL sequence of chronological events or scheduled time groups, shared by Job Vision My Applications and employee Onboarding.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-14",
+      "related": [
+        "design-system.component.progress-indicator",
+        "design-system.accessibility.core"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "timeline"
+      ],
+      "path": "design-system/components/timeline.md"
+    },
+    {
+      "id": "design-system.component.toggle-button",
+      "kind": "design-system-component",
+      "title": "Toggle Button",
+      "summary": "Toggle Button represents a Button-like control with persistent selected and unselected states.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.rich-text-editor"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "toggle-button"
+      ],
+      "path": "design-system/components/toggle-button.md"
+    },
+    {
+      "id": "design-system.component.toggletip",
+      "kind": "design-system-component",
+      "title": "Toggletip",
+      "summary": "Toggletip reveals supplemental contextual explanation when the user explicitly asks for more information.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.tooltip",
+        "design-system.component.popover",
+        "design-system.experience-rule.contextual-guidance"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "toggletip"
+      ],
+      "path": "design-system/components/toggletip.md"
+    },
+    {
+      "id": "design-system.component.tooltip",
+      "kind": "design-system-component",
+      "title": "Tooltip",
+      "summary": "Tooltip provides brief, passive, non-interactive supplementary information on hover or keyboard focus.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.icon-button",
+        "design-system.component.toggletip",
+        "design-system.experience-rule.contextual-guidance"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "tooltip"
+      ],
+      "path": "design-system/components/tooltip.md"
+    },
+    {
+      "id": "design-system.design-language",
+      "kind": "design-system-design-language",
+      "title": "JV Design Language",
+      "summary": "Compact design-language entry point for human and AI design work; routes exact specifications to the canonical live sources.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.overview",
+        "design-system.structure",
+        "design-system.reference.source-of-truth"
+      ],
+      "topics": [
+        "design-language",
+        "design-system-design-language"
+      ],
+      "path": "overview/design-language.md"
+    },
+    {
+      "id": "design-system.experience-rule.action-hierarchy",
+      "kind": "design-system-experience-rule",
+      "title": "Action Hierarchy",
+      "summary": "Every action group should have one clear visual leader.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "action-hierarchy",
+        "design-system-experience-rule",
+        "interaction"
+      ],
+      "path": "foundations/interaction/action-hierarchy.md"
+    },
+    {
+      "id": "design-system.experience-rule.contextual-guidance",
+      "kind": "design-system-experience-rule",
+      "title": "Contextual Guidance",
+      "summary": "Choose Tooltip, Toggletip, Popover, Coachmark, or Tour based on user intent, initiator, and interaction complexity.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-19",
+      "related": [
+        "design-system.component.tooltip",
+        "design-system.component.toggletip",
+        "design-system.component.popover",
+        "design-system.component.coachmark",
+        "design-system.pattern.tour"
+      ],
+      "topics": [
+        "contextual-guidance",
+        "design-system-experience-rule",
+        "interaction"
+      ],
+      "path": "foundations/interaction/contextual-guidance.md"
+    },
+    {
+      "id": "design-system.experience-rule.disabled-and-read-only",
+      "kind": "design-system-experience-rule",
+      "title": "Disabled and Read-Only States",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-experience-rule",
+        "disabled-and-read-only",
+        "interaction"
+      ],
+      "path": "foundations/interaction/disabled-and-read-only.md"
+    },
+    {
+      "id": "design-system.experience-rule.error-recovery",
+      "kind": "design-system-experience-rule",
+      "title": "Error Recovery",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-experience-rule",
+        "error-recovery",
+        "interaction"
+      ],
+      "path": "foundations/interaction/error-recovery.md"
+    },
+    {
+      "id": "design-system.experience-rule.feedback",
+      "kind": "design-system-experience-rule",
+      "title": "System Feedback",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-experience-rule",
+        "feedback",
+        "interaction"
+      ],
+      "path": "foundations/interaction/feedback.md"
+    },
+    {
+      "id": "design-system.experience-rule.focus",
+      "kind": "design-system-experience-rule",
+      "title": "Focus",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-experience-rule",
+        "focus",
+        "interaction"
+      ],
+      "path": "foundations/interaction/focus.md"
+    },
+    {
+      "id": "design-system.experience-rule.loading",
+      "kind": "design-system-experience-rule",
+      "title": "Loading",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-experience-rule",
+        "interaction",
+        "loading"
+      ],
+      "path": "foundations/interaction/loading.md"
+    },
+    {
+      "id": "design-system.experience-rule.navigation",
+      "kind": "design-system-experience-rule",
+      "title": "Navigation",
+      "summary": "Semantics are independent from visual appearance.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-experience-rule",
+        "interaction",
+        "navigation"
+      ],
+      "path": "foundations/interaction/navigation.md"
+    },
+    {
+      "id": "design-system.experience-rule.responsive-interaction",
+      "kind": "design-system-experience-rule",
+      "title": "Responsive Interaction",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-experience-rule",
+        "interaction",
+        "responsive-interaction"
+      ],
+      "path": "foundations/interaction/responsive-interaction.md"
+    },
+    {
+      "id": "design-system.experience-rule.selection",
+      "kind": "design-system-experience-rule",
+      "title": "Selection",
+      "summary": "Selection is a component state, not a general color family.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-experience-rule",
+        "interaction",
+        "selection"
+      ],
+      "path": "foundations/interaction/selection.md"
+    },
+    {
+      "id": "design-system.experience-rule.validation",
+      "kind": "design-system-experience-rule",
+      "title": "Validation",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-experience-rule",
+        "interaction",
+        "validation"
+      ],
+      "path": "foundations/interaction/validation.md"
+    },
+    {
+      "id": "design-system.foundation.color",
+      "kind": "design-system-foundation",
+      "title": "Color",
+      "summary": "Operational entry point for JV Color semantics, installable Theme architecture, Appearance behavior, accessibility, and source routing.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-14",
+      "related": [
+        "design-system.token.architecture",
+        "design-system.token.semantic-tokens",
+        "design-system.token.component-tokens",
+        "design-system.token.product-overrides",
+        "design-system.accessibility.color-and-contrast",
+        "design-system.reference.source-of-truth"
+      ],
+      "topics": [
+        "color",
+        "design-system-foundation",
+        "visual"
+      ],
+      "path": "foundations/visual/color.md"
+    },
+    {
+      "id": "design-system.foundation.elevation",
+      "kind": "design-system-foundation",
+      "title": "Elevation",
+      "summary": "Defines the semantic shadow model for floating UI and active drag states, plus the boundaries for component-owned shadows.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-19",
+      "related": [
+        "design-system.reference.tailwind"
+      ],
+      "topics": [
+        "design-system-foundation",
+        "elevation",
+        "visual"
+      ],
+      "path": "foundations/visual/elevation.md"
+    },
+    {
+      "id": "design-system.foundation.iconography",
+      "kind": "design-system-foundation",
+      "title": "Iconography",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-foundation",
+        "iconography",
+        "visual"
+      ],
+      "path": "foundations/visual/iconography.md"
+    },
+    {
+      "id": "design-system.foundation.layout",
+      "kind": "design-system-foundation",
+      "title": "Layout",
+      "summary": "Entry point for shared layout foundations, including responsive layout, grid, containers, page structure, density, and alignment.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.foundation.responsive-layout",
+        "design-system.foundation.responsive-layout-spec",
+        "design-system.pattern.responsive-layout"
+      ],
+      "topics": [
+        "design-system-foundation",
+        "layout",
+        "visual"
+      ],
+      "path": "foundations/visual/layout.md"
+    },
+    {
+      "id": "design-system.foundation.motion",
+      "kind": "design-system-foundation",
+      "title": "Motion",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-foundation",
+        "motion",
+        "visual"
+      ],
+      "path": "foundations/visual/motion.md"
+    },
+    {
+      "id": "design-system.foundation.radius",
+      "kind": "design-system-foundation",
+      "title": "Radius",
+      "summary": "Defines the canonical Small/Medium/Large radius scale shared by controls, surfaces, and fully rounded shapes.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-19",
+      "related": [
+        "design-system.reference.tailwind"
+      ],
+      "topics": [
+        "design-system-foundation",
+        "radius",
+        "visual"
+      ],
+      "path": "foundations/visual/radius.md"
+    },
+    {
+      "id": "design-system.foundation.responsive-behavior",
+      "kind": "design-system-foundation",
+      "title": "Responsive Behavior",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-foundation",
+        "responsive-behavior",
+        "visual"
+      ],
+      "path": "foundations/visual/responsive-behavior.md"
+    },
+    {
+      "id": "design-system.foundation.responsive-layout",
+      "kind": "design-system-foundation",
+      "title": "Responsive Layout",
+      "summary": "Canonical guidance for viewport ranges, breakpoint ruler values, page types, layout regions, content containers, responsive strategies, container queries, and responsive testing.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-12",
+      "related": [
+        "design-system.foundation.layout",
+        "design-system.foundation.responsive-layout-spec",
+        "design-system.pattern.responsive-layout",
+        "design-system.reference.tailwind"
+      ],
+      "topics": [
+        "design-system-foundation",
+        "guideline",
+        "responsive-layout",
+        "visual"
+      ],
+      "path": "foundations/visual/responsive-layout/guideline.md"
+    },
+    {
+      "id": "design-system.foundation.responsive-layout-spec",
+      "kind": "design-system-foundation",
+      "title": "Responsive Layout Specification",
+      "summary": "Atomic rules and decision tables for viewport ranges, breakpoint ruler values, page types, layout regions, containers, responsive strategies, and responsive implementation.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-12",
+      "related": [
+        "design-system.foundation.responsive-layout",
+        "design-system.pattern.responsive-layout",
+        "design-system.reference.tailwind"
+      ],
+      "topics": [
+        "design-system-foundation",
+        "responsive-layout",
+        "spec",
+        "visual"
+      ],
+      "path": "foundations/visual/responsive-layout/spec.md"
+    },
+    {
+      "id": "design-system.foundation.spacing",
+      "kind": "design-system-foundation",
+      "title": "Spacing",
+      "summary": "Defines the canonical shared spacing scale and how Product code consumes it without making Tailwind the source of truth.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-12",
+      "related": [
+        "design-system.reference.tailwind"
+      ],
+      "topics": [
+        "design-system-foundation",
+        "spacing",
+        "visual"
+      ],
+      "path": "foundations/visual/spacing.md"
+    },
+    {
+      "id": "design-system.foundation.typography",
+      "kind": "design-system-foundation",
+      "title": "Typography",
+      "summary": "Defines the shared Label, Body, and Heading recipes, Product-aware font identity, compact and fluid variants, and the boundary with local Tailwind typography.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-19",
+      "related": [
+        "design-system.reference.tailwind"
+      ],
+      "topics": [
+        "design-system-foundation",
+        "typography",
+        "visual"
+      ],
+      "path": "foundations/visual/typography.md"
+    },
+    {
+      "id": "design-system.governance.change-process",
+      "kind": "design-system-governance",
+      "title": "Change Process",
+      "summary": "Defines the branch, review, validation, and maturity rules for canonical Design System knowledge changes.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-03",
+      "related": [
+        "design-system.governance.ownership",
+        "design-system.governance.documentation-maintenance",
+        "design-system.accessibility.testing"
+      ],
+      "topics": [
+        "change-process",
+        "design-system-governance"
+      ],
+      "path": "governance/change-process.md"
+    },
+    {
+      "id": "design-system.governance.contribution",
+      "kind": "design-system-governance",
+      "title": "Contribution",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "contribution",
+        "design-system-governance"
+      ],
+      "path": "governance/contribution.md"
+    },
+    {
+      "id": "design-system.governance.deprecation",
+      "kind": "design-system-governance",
+      "title": "Deprecation",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "deprecation",
+        "design-system-governance"
+      ],
+      "path": "governance/deprecation.md"
+    },
+    {
+      "id": "design-system.governance.documentation-maintenance",
+      "kind": "design-system-governance",
+      "title": "Documentation Maintenance",
+      "summary": "Defines maintenance triggers, review expectations, and validation for canonical Design System documentation.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-03",
+      "related": [
+        "design-system.governance.ownership",
+        "design-system.governance.change-process",
+        "design-system.accessibility.testing"
+      ],
+      "topics": [
+        "design-system-governance",
+        "documentation-maintenance"
+      ],
+      "path": "governance/documentation-maintenance.md"
+    },
+    {
+      "id": "design-system.governance.ownership",
+      "kind": "design-system-governance",
+      "title": "Ownership",
+      "summary": "Defines ownership and review responsibility for shared Design System knowledge, including the accessibility corpus.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-03",
+      "related": [
+        "design-system.governance.documentation-maintenance",
+        "design-system.governance.change-process",
+        "design-system.accessibility.conformance-and-policy"
+      ],
+      "topics": [
+        "design-system-governance",
+        "ownership"
+      ],
+      "path": "governance/ownership.md"
+    },
+    {
+      "id": "design-system.governance.release-and-versioning",
+      "kind": "design-system-governance",
+      "title": "Release and Versioning",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-governance",
+        "release-and-versioning"
+      ],
+      "path": "governance/release-and-versioning.md"
+    },
+    {
+      "id": "design-system.integration.figma-component-presentation",
+      "kind": "design-system-integration",
+      "title": "Figma Component Presentation",
+      "summary": "Defines a consistent, AI-readable presentation layout for JobVision Design System component pages without duplicating canonical component or runtime contracts.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.structure",
+        "design-system.governance.documentation-maintenance",
+        "design-system.reference.source-of-truth"
+      ],
+      "topics": [
+        "design-system-integration",
+        "figma-component-presentation"
+      ],
+      "path": "integrations/figma-component-presentation.md"
+    },
+    {
+      "id": "design-system.overview",
+      "kind": "design-system-overview",
+      "title": "Design Language Scope",
+      "summary": "Defines the purpose, scope, boundaries, and operating model of the shared JobVision and Cando Design Language.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.design-language",
+        "design-system.structure",
+        "design-system.reference.source-of-truth"
+      ],
+      "topics": [
+        "design-system-overview",
+        "scope"
+      ],
+      "path": "overview/scope.md"
+    },
+    {
+      "id": "design-system.pattern.ai-entry-points",
+      "kind": "design-system-pattern",
+      "title": "AI Entry Points",
+      "summary": "AI-assisted and AI-generated experiences may use the shared Magic color semantics.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "ai-entry-points",
+        "design-system-pattern",
+        "patterns"
+      ],
+      "path": "design-system/patterns/ai-entry-points.md"
+    },
+    {
+      "id": "design-system.pattern.bulk-actions",
+      "kind": "design-system-pattern",
+      "title": "Bulk Actions",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "bulk-actions",
+        "design-system-pattern",
+        "patterns"
+      ],
+      "path": "design-system/patterns/bulk-actions.md"
+    },
+    {
+      "id": "design-system.pattern.confirmation",
+      "kind": "design-system-pattern",
+      "title": "Confirmation and Modal Actions",
+      "summary": "Cancel is usually Ghost.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "confirmation",
+        "design-system-pattern",
+        "patterns"
+      ],
+      "path": "design-system/patterns/confirmation.md"
+    },
+    {
+      "id": "design-system.pattern.data-views",
+      "kind": "design-system-pattern",
+      "title": "Data Views",
+      "summary": "Choosing between tables, lists, and interactive grids, and composing common data-view controls.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-10-14",
+      "related": [
+        "design-system.component.table",
+        "design-system.accessibility.tables-and-data-visualization"
+      ],
+      "topics": [
+        "data-views",
+        "design-system-pattern",
+        "patterns"
+      ],
+      "path": "design-system/patterns/data-views.md"
+    },
+    {
+      "id": "design-system.pattern.destructive-actions",
+      "kind": "design-system-pattern",
+      "title": "Destructive Actions",
+      "summary": "Use destructive treatment when an action:",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-pattern",
+        "destructive-actions",
+        "patterns"
+      ],
+      "path": "design-system/patterns/destructive-actions.md"
+    },
+    {
+      "id": "design-system.pattern.empty-states",
+      "kind": "design-system-pattern",
+      "title": "Empty States",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-pattern",
+        "empty-states",
+        "patterns"
+      ],
+      "path": "design-system/patterns/empty-states.md"
+    },
+    {
+      "id": "design-system.pattern.form-submission",
+      "kind": "design-system-pattern",
+      "title": "Form Submission",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-pattern",
+        "form-submission",
+        "patterns"
+      ],
+      "path": "design-system/patterns/form-submission.md"
+    },
+    {
+      "id": "design-system.pattern.loading-and-progress",
+      "kind": "design-system-pattern",
+      "title": "Loading and Progress",
+      "summary": "Loading usage pattern using Progress Circle Indeterminate directly, with measured progress, Skeleton boundaries, stable Button composition and announcement ownership.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-19",
+      "related": [
+        "design-system.component.progress-circle",
+        "design-system.component.progress-bar",
+        "button",
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "content.pattern.loading-and-progress",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "busy",
+        "design-system-pattern",
+        "feedback",
+        "loading",
+        "loading-and-progress",
+        "patterns",
+        "progress",
+        "skeleton",
+        "spinner"
+      ],
+      "path": "design-system/patterns/loading-and-progress.md"
+    },
+    {
+      "id": "design-system.pattern.multi-step-flow",
+      "kind": "design-system-pattern",
+      "title": "Multi-Step Flow",
+      "summary": "Default combination:",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-pattern",
+        "multi-step-flow",
+        "patterns"
+      ],
+      "path": "design-system/patterns/multi-step-flow.md"
+    },
+    {
+      "id": "design-system.pattern.notifications",
+      "kind": "design-system-pattern",
+      "title": "Notifications",
+      "summary": "Defines shared feedback severity and when feedback appears inline or as a transient Toast.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-09-19",
+      "related": [
+        "design-system.accessibility.dynamic-content-and-feedback",
+        "design-system.component.notification"
+      ],
+      "topics": [
+        "design-system-pattern",
+        "notifications",
+        "patterns"
+      ],
+      "path": "design-system/patterns/notifications.md"
+    },
+    {
+      "id": "design-system.pattern.on-media-controls",
+      "kind": "design-system-pattern",
+      "title": "On-Media Controls",
+      "summary": "The current Core token model does not define dedicated Button tokens for image or video backgrounds.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-pattern",
+        "on-media-controls",
+        "patterns"
+      ],
+      "path": "design-system/patterns/on-media-controls.md"
+    },
+    {
+      "id": "design-system.pattern.responsive-layout",
+      "kind": "design-system-pattern",
+      "title": "Responsive Layout Patterns",
+      "summary": "Adaptive behavior guidance for navigation, tables, forms, overlays, master-detail layouts, filters, and toolbars.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.foundation.responsive-layout",
+        "design-system.foundation.responsive-layout-spec"
+      ],
+      "topics": [
+        "design-system-pattern",
+        "patterns",
+        "responsive-layout",
+        "visual"
+      ],
+      "path": "foundations/visual/responsive-layout/patterns.md"
+    },
+    {
+      "id": "design-system.pattern.search-and-filtering",
+      "kind": "design-system-pattern",
+      "title": "Search and Filtering",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-pattern",
+        "patterns",
+        "search-and-filtering"
+      ],
+      "path": "design-system/patterns/search-and-filtering.md"
+    },
+    {
+      "id": "design-system.pattern.tour",
+      "kind": "design-system-pattern",
+      "title": "Tour",
+      "summary": "Tour orchestrates an ordered sequence of Coachmark steps for contextual onboarding or feature guidance.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.coachmark",
+        "design-system.experience-rule.contextual-guidance"
+      ],
+      "topics": [
+        "design-system-pattern",
+        "patterns",
+        "tour"
+      ],
+      "path": "design-system/patterns/tour.md"
+    },
+    {
+      "id": "design-system.product-variation.brand-variants",
+      "kind": "design-system-product-variation",
+      "title": "Brand Variants",
+      "summary": "Brand Button uses the active product brand while preserving one shared usage rule.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "brand-variants",
+        "brands",
+        "design-system-product-variation"
+      ],
+      "path": "product-expression/brands/brand-variants.md"
+    },
+    {
+      "id": "design-system.product-variation.product-overrides",
+      "kind": "design-system-product-variation",
+      "title": "Product Overrides",
+      "summary": "> Status: structure only",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "brands",
+        "design-system-product-variation",
+        "product-overrides"
+      ],
+      "path": "product-expression/brands/product-overrides.md"
+    },
+    {
+      "id": "design-system.product-variation.theme-context",
+      "kind": "design-system-product-variation",
+      "title": "Theme Package Architecture",
+      "summary": "Defines Theme as an installable visual-token implementation selected by an application, with stable shared Design System contracts and runtime Appearance resolution.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-14",
+      "related": [
+        "design-system.token.product-overrides",
+        "design-system.token.architecture",
+        "design-system.reference.code",
+        "design-system.reference.theme-initialization"
+      ],
+      "topics": [
+        "brands",
+        "design-system-product-variation",
+        "theme-context"
+      ],
+      "path": "product-expression/brands/theme-context.md"
+    },
+    {
+      "id": "design-system.reference.code",
+      "kind": "design-system-reference",
+      "title": "Code Reference",
+      "summary": "Operational boundary for Design System runtime code sources; the real repository/package is not yet registered in Design System Knowledge.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-13",
+      "related": [
+        "design-system.reference.source-of-truth",
+        "design-system.reference.component-mapping",
+        "design-system.reference.storybook"
+      ],
+      "topics": [
+        "code",
+        "design-system-reference"
+      ],
+      "path": "integrations/code.md"
+    },
+    {
+      "id": "design-system.reference.component-mapping",
+      "kind": "design-system-reference",
+      "title": "Design-to-Code Component Mapping",
+      "summary": "Registry contract for mapping stable Figma component identities to runtime components and Storybook; records current verified mappings and gaps.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-19",
+      "related": [
+        "design-system.reference.figma",
+        "design-system.reference.code",
+        "design-system.reference.storybook"
+      ],
+      "topics": [
+        "component-mapping",
+        "design-system-reference"
+      ],
+      "path": "integrations/component-mapping.md"
+    },
+    {
+      "id": "design-system.reference.figma",
+      "kind": "design-system-reference",
+      "title": "Figma Reference",
+      "summary": "Operational reference for the current JV Design System Figma file, its variable architecture, stable component identities, and live-source boundaries.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-19",
+      "related": [
+        "design-system.reference.source-of-truth",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "design-system-reference",
+        "figma"
+      ],
+      "path": "integrations/figma.md"
+    },
+    {
+      "id": "design-system.reference.figma-token-compliance",
+      "kind": "design-system-reference",
+      "title": "Figma Component Token Compliance",
+      "summary": "Required binding and semantic QA gate for canonical Figma design system components.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": "2026-10-19",
+      "related": [],
+      "topics": [
+        "design-system-reference",
+        "figma-token-compliance"
+      ],
+      "path": "integrations/figma-token-compliance.md"
+    },
+    {
+      "id": "design-system.reference.source-of-truth",
+      "kind": "design-system-reference",
+      "title": "Sources of Truth",
+      "summary": "Defines which source owns design meaning, visual construction, runtime implementation, product behavior, and temporary change history.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.overview",
+        "design-system.structure",
+        "design-system.reference.figma",
+        "design-system.reference.code",
+        "design-system.reference.storybook",
+        "design-system.reference.component-mapping",
+        "design-language.integration.karbon"
+      ],
+      "topics": [
+        "design-system-reference",
+        "source-of-truth"
+      ],
+      "path": "integrations/source-of-truth.md"
+    },
+    {
+      "id": "design-system.reference.storybook",
+      "kind": "design-system-reference",
+      "title": "Storybook Reference",
+      "summary": "Defines Storybook as the executable component reference when registered and records the current absence of a verified JV Design System Storybook source.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-13",
+      "related": [
+        "design-system.reference.source-of-truth",
+        "design-system.reference.code",
+        "design-system.reference.component-mapping"
+      ],
+      "topics": [
+        "design-system-reference",
+        "storybook"
+      ],
+      "path": "integrations/storybook.md"
+    },
+    {
+      "id": "design-system.reference.tailwind",
+      "kind": "design-system-reference",
+      "title": "Tailwind Integration Contract",
+      "summary": "Defines the Design System boundary for Tailwind consumption across Color, Spacing, Radius, Typography, Elevation, responsive breakpoints, component tokens, and arbitrary values.",
+      "status": "reviewed",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-21",
+      "related": [
+        "design-system.token.architecture",
+        "design-system.token.semantic-tokens",
+        "design-system.token.component-tokens",
+        "design-system.foundation.spacing",
+        "design-system.foundation.radius",
+        "design-system.foundation.typography",
+        "design-system.foundation.elevation",
+        "design-system.foundation.responsive-layout",
+        "design-system.foundation.responsive-layout-spec"
+      ],
+      "topics": [
+        "design-system-reference",
+        "tailwind"
+      ],
+      "path": "integrations/tailwind.md"
+    },
+    {
+      "id": "design-system.reference.theme-initialization",
+      "kind": "design-system-reference",
+      "title": "Theme Initialization Contract",
+      "summary": "Defines installed Theme package readiness, Appearance resolution, first-paint invariants, hydration continuity, and no-flash requirements.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": "2026-09-14",
+      "related": [
+        "design-system.product-variation.theme-context",
+        "design-system.reference.source-of-truth"
+      ],
+      "topics": [
+        "design-system-reference",
+        "theme-initialization"
+      ],
+      "path": "integrations/theme-initialization.md"
+    },
+    {
+      "id": "design-system.structure",
+      "kind": "design-language-overview",
+      "title": "Design Language Knowledge Structure",
+      "summary": "Defines the human- and AI-readable architecture, ownership boundaries, and extension points of the Design Language repository.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.design-language",
+        "design-system.overview",
+        "design-system.reference.source-of-truth"
+      ],
+      "topics": [
+        "architecture",
+        "design-language-overview"
+      ],
+      "path": "overview/architecture.md"
+    },
+    {
+      "id": "design-system.token.architecture",
+      "kind": "design-system-token",
+      "title": "Token Architecture",
+      "summary": "Defines the shared Color contract versus Theme-owned Color implementation, including Theme-local Primitives, stable Semantic roles, and component-token boundaries.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-14",
+      "related": [
+        "design-system.product-variation.theme-context"
+      ],
+      "topics": [
+        "architecture",
+        "design-system-token",
+        "tokens"
+      ],
+      "path": "design-system/tokens/architecture.md"
+    },
+    {
+      "id": "design-system.token.color-token-aliases",
+      "kind": "design-system-token",
+      "title": "Color Token Alias Mappings",
+      "summary": "Validated current Figma Color mappings for the Theme package architecture.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-19",
+      "related": [],
+      "topics": [
+        "color-token-aliases",
+        "design-system-token",
+        "tokens"
+      ],
+      "path": "design-system/tokens/color-token-aliases.md"
+    },
+    {
+      "id": "design-system.token.component-tokens",
+      "kind": "design-system-token",
+      "title": "Component Tokens",
+      "summary": "Defines when component-specific Color tokens are justified and documents the approved Tag exception.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-14",
+      "related": [],
+      "topics": [
+        "component-tokens",
+        "design-system-token",
+        "tokens"
+      ],
+      "path": "design-system/tokens/component-tokens.md"
+    },
+    {
+      "id": "design-system.token.frontend-contract",
+      "kind": "design-system-token",
+      "title": "Frontend Token and Theme Package Contract",
+      "summary": "Design-side contract for installable Theme packages, stable token APIs, consumption audiences, serialization boundaries, and future Foundation extension.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": "2026-09-14",
+      "related": [
+        "design-system.token.architecture",
+        "design-system.product-variation.theme-context"
+      ],
+      "topics": [
+        "design-system-token",
+        "frontend-token-contract",
+        "tokens"
+      ],
+      "path": "design-system/tokens/frontend-token-contract.md"
+    },
+    {
+      "id": "design-system.token.jobvision-color-tokens-v3-surface-model",
+      "kind": "design-system-token",
+      "title": "Jobvision Color Tokens v3 — Surface Model",
+      "summary": "> Status: Working draft > Theme scope: Light + Dark > Implementation target: Tailwind CSS v3 > CSS variables: Open decision > Product variation: Brand override only > Experience variation: Productive / Expressive",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-token",
+        "jobvision-color-tokens-v3-surface-model",
+        "tokens"
+      ],
+      "path": "design-system/tokens/jobvision-color-tokens-v3-surface-model.md"
+    },
+    {
+      "id": "design-system.token.jobvision-color-tokens-v4-surface-model",
+      "kind": "design-system-token",
+      "title": "JobVision Color Tokens v4 — Surface Model",
+      "summary": "Draft canonical v4 Color-token catalog; unresolved alias values are tracked separately.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-token",
+        "jobvision-color-tokens-v4-surface-model",
+        "tokens"
+      ],
+      "path": "design-system/tokens/jobvision-color-tokens-v4-surface-model.md"
+    },
+    {
+      "id": "design-system.token.primitive-tokens",
+      "kind": "design-system-token",
+      "title": "Primitive Tokens",
+      "summary": "> Status: draft",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-token",
+        "primitive-tokens",
+        "tokens"
+      ],
+      "path": "design-system/tokens/primitive-tokens.md"
+    },
+    {
+      "id": "design-system.token.product-overrides",
+      "kind": "design-system-token",
+      "title": "Product and Theme Selection",
+      "summary": "Defines the relationship between Product identity, installable Theme packages, and Appearance without making Product a token dimension.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-14",
+      "related": [
+        "design-system.product-variation.theme-context",
+        "design-system.token.architecture"
+      ],
+      "topics": [
+        "design-system-token",
+        "product-overrides",
+        "tokens"
+      ],
+      "path": "design-system/tokens/product-overrides.md"
+    },
+    {
+      "id": "design-system.token.semantic-tokens",
+      "kind": "design-system-token",
+      "title": "Semantic Tokens",
+      "summary": "Stable shared Color roles and their usage boundaries across compatible Theme and Appearance contexts.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": "2026-09-14",
+      "related": [],
+      "topics": [
+        "design-system-token",
+        "semantic-tokens",
+        "tokens"
+      ],
+      "path": "design-system/tokens/semantic-tokens.md"
+    },
+    {
+      "id": "design-system.token.usage-rules",
+      "kind": "design-system-token",
+      "title": "Token Usage Rules",
+      "summary": "> Status: draft",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [],
+      "topics": [
+        "design-system-token",
+        "tokens",
+        "usage-rules"
+      ],
+      "path": "design-system/tokens/usage-rules.md"
+    }
+  ],
+  "summary": {
+    "documents": 147,
+    "by_kind": {
+      "content-content-component": 4,
+      "content-content-foundation": 1,
+      "content-content-guideline": 3,
+      "content-content-pattern": 7,
+      "design-language-ai-routing": 2,
+      "design-language-integration": 1,
+      "design-language-overview": 1,
+      "design-system-accessibility": 18,
+      "design-system-component": 44,
+      "design-system-design-language": 1,
+      "design-system-experience-rule": 11,
+      "design-system-foundation": 11,
+      "design-system-governance": 6,
+      "design-system-integration": 1,
+      "design-system-overview": 1,
+      "design-system-pattern": 14,
+      "design-system-product-variation": 3,
+      "design-system-reference": 8,
+      "design-system-token": 10
+    },
+    "by_group": {},
+    "by_product": {}
+  },
+  "aliases": {
+    "content-guidelines": "content.content-guidelines",
+    "design-language": "design-system.design-language",
+    "design-system": "design-system.overview",
+    "karbon": "design-language.integration.karbon"
+  }
+}

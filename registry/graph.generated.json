@@ -1,0 +1,2209 @@
+{
+  "schema_version": 1,
+  "nodes": [
+    "accordion",
+    "button",
+    "content.component.button",
+    "content.component.modal",
+    "content.component.notification",
+    "content.component.text-input",
+    "content.content-guidelines",
+    "content.localization",
+    "content.pattern.ai-content-and-disclosure",
+    "content.pattern.confirmation",
+    "content.pattern.empty-states",
+    "content.pattern.error",
+    "content.pattern.instructions-and-helper-text",
+    "content.pattern.loading-and-progress",
+    "content.pattern.notifications",
+    "content.product-voice",
+    "content.terminology",
+    "design-language.ai.retrieval",
+    "design-language.ai.router",
+    "design-language.integration.karbon",
+    "design-system.accessibility.color-and-contrast",
+    "design-system.accessibility.component-authoring-contract",
+    "design-system.accessibility.conformance-and-policy",
+    "design-system.accessibility.content",
+    "design-system.accessibility.core",
+    "design-system.accessibility.dynamic-content-and-feedback",
+    "design-system.accessibility.focus-management",
+    "design-system.accessibility.forms",
+    "design-system.accessibility.images-icons-and-media",
+    "design-system.accessibility.keyboard-navigation",
+    "design-system.accessibility.motion",
+    "design-system.accessibility.pointer-touch-and-gestures",
+    "design-system.accessibility.responsive-and-zoom",
+    "design-system.accessibility.router",
+    "design-system.accessibility.screen-reader-semantics",
+    "design-system.accessibility.structure-and-navigation",
+    "design-system.accessibility.tables-and-data-visualization",
+    "design-system.accessibility.testing",
+    "design-system.component.autocomplete",
+    "design-system.component.badge",
+    "design-system.component.breadcrumb",
+    "design-system.component.checkbox",
+    "design-system.component.chip",
+    "design-system.component.choice-group",
+    "design-system.component.coachmark",
+    "design-system.component.combo-button",
+    "design-system.component.content-switcher",
+    "design-system.component.dialog",
+    "design-system.component.drawer",
+    "design-system.component.dropdown-menu",
+    "design-system.component.empty-state",
+    "design-system.component.file-uploader",
+    "design-system.component.icon-button",
+    "design-system.component.link",
+    "design-system.component.menu",
+    "design-system.component.menu-button",
+    "design-system.component.modal",
+    "design-system.component.notification",
+    "design-system.component.pagination",
+    "design-system.component.password-input",
+    "design-system.component.popover",
+    "design-system.component.progress-bar",
+    "design-system.component.progress-circle",
+    "design-system.component.progress-indicator",
+    "design-system.component.radio",
+    "design-system.component.rich-text-editor",
+    "design-system.component.search",
+    "design-system.component.select",
+    "design-system.component.skeleton",
+    "design-system.component.switch",
+    "design-system.component.table",
+    "design-system.component.table-runtime-contract",
+    "design-system.component.tabs",
+    "design-system.component.tag",
+    "design-system.component.text-input",
+    "design-system.component.textarea",
+    "design-system.component.timeline",
+    "design-system.component.toggle-button",
+    "design-system.component.toggletip",
+    "design-system.component.tooltip",
+    "design-system.design-language",
+    "design-system.experience-rule.action-hierarchy",
+    "design-system.experience-rule.contextual-guidance",
+    "design-system.experience-rule.disabled-and-read-only",
+    "design-system.experience-rule.error-recovery",
+    "design-system.experience-rule.feedback",
+    "design-system.experience-rule.focus",
+    "design-system.experience-rule.loading",
+    "design-system.experience-rule.navigation",
+    "design-system.experience-rule.responsive-interaction",
+    "design-system.experience-rule.selection",
+    "design-system.experience-rule.validation",
+    "design-system.foundation.color",
+    "design-system.foundation.elevation",
+    "design-system.foundation.iconography",
+    "design-system.foundation.layout",
+    "design-system.foundation.motion",
+    "design-system.foundation.radius",
+    "design-system.foundation.responsive-behavior",
+    "design-system.foundation.responsive-layout",
+    "design-system.foundation.responsive-layout-spec",
+    "design-system.foundation.spacing",
+    "design-system.foundation.typography",
+    "design-system.governance.change-process",
+    "design-system.governance.contribution",
+    "design-system.governance.deprecation",
+    "design-system.governance.documentation-maintenance",
+    "design-system.governance.ownership",
+    "design-system.governance.release-and-versioning",
+    "design-system.integration.figma-component-presentation",
+    "design-system.overview",
+    "design-system.pattern.ai-entry-points",
+    "design-system.pattern.bulk-actions",
+    "design-system.pattern.confirmation",
+    "design-system.pattern.data-views",
+    "design-system.pattern.destructive-actions",
+    "design-system.pattern.empty-states",
+    "design-system.pattern.form-submission",
+    "design-system.pattern.loading-and-progress",
+    "design-system.pattern.multi-step-flow",
+    "design-system.pattern.notifications",
+    "design-system.pattern.on-media-controls",
+    "design-system.pattern.responsive-layout",
+    "design-system.pattern.search-and-filtering",
+    "design-system.pattern.tour",
+    "design-system.product-variation.brand-variants",
+    "design-system.product-variation.product-overrides",
+    "design-system.product-variation.theme-context",
+    "design-system.reference.code",
+    "design-system.reference.component-mapping",
+    "design-system.reference.figma",
+    "design-system.reference.figma-token-compliance",
+    "design-system.reference.source-of-truth",
+    "design-system.reference.storybook",
+    "design-system.reference.tailwind",
+    "design-system.reference.theme-initialization",
+    "design-system.structure",
+    "design-system.token.architecture",
+    "design-system.token.color-token-aliases",
+    "design-system.token.component-tokens",
+    "design-system.token.frontend-contract",
+    "design-system.token.jobvision-color-tokens-v3-surface-model",
+    "design-system.token.jobvision-color-tokens-v4-surface-model",
+    "design-system.token.primitive-tokens",
+    "design-system.token.product-overrides",
+    "design-system.token.semantic-tokens",
+    "design-system.token.usage-rules"
+  ],
+  "edges": [
+    {
+      "from": "content.component.button",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "content.component.button",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "content.component.button",
+      "to": "content.pattern.confirmation",
+      "type": "related"
+    },
+    {
+      "from": "content.component.button",
+      "to": "content.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "content.component.button",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.component.button",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.component.button",
+      "to": "design-system.experience-rule.action-hierarchy",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "content.component.button",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "content.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "content.pattern.confirmation",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "content.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "content.component.modal",
+      "to": "design-system.component.modal",
+      "type": "related"
+    },
+    {
+      "from": "content.component.notification",
+      "to": "content.component.button",
+      "type": "related"
+    },
+    {
+      "from": "content.component.notification",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "content.component.notification",
+      "to": "content.pattern.confirmation",
+      "type": "related"
+    },
+    {
+      "from": "content.component.notification",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.component.notification",
+      "to": "content.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "content.component.notification",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.component.notification",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.component.notification",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "content.component.notification",
+      "to": "design-system.component.notification",
+      "type": "related"
+    },
+    {
+      "from": "content.component.text-input",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "content.component.text-input",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.component.text-input",
+      "to": "content.pattern.instructions-and-helper-text",
+      "type": "related"
+    },
+    {
+      "from": "content.component.text-input",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.component.text-input",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.component.text-input",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "content.component.text-input",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.component.button",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.component.modal",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.component.notification",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.pattern.ai-content-and-disclosure",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.pattern.confirmation",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.pattern.empty-states",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.pattern.instructions-and-helper-text",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.localization",
+      "to": "content.content-guidelines",
+      "type": "related"
+    },
+    {
+      "from": "content.localization",
+      "to": "content.pattern.instructions-and-helper-text",
+      "type": "related"
+    },
+    {
+      "from": "content.localization",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.localization",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.localization",
+      "to": "design-system.accessibility.content",
+      "type": "related"
+    },
+    {
+      "from": "content.localization",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "content.localization",
+      "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.ai-content-and-disclosure",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.ai-content-and-disclosure",
+      "to": "content.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.ai-content-and-disclosure",
+      "to": "content.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.ai-content-and-disclosure",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.ai-content-and-disclosure",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.ai-content-and-disclosure",
+      "to": "design-system.accessibility.content",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.ai-content-and-disclosure",
+      "to": "design-system.pattern.ai-entry-points",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.ai-content-and-disclosure",
+      "to": "design-system.token.semantic-tokens",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.confirmation",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.confirmation",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.confirmation",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.confirmation",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.confirmation",
+      "to": "design-system.component.modal",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.confirmation",
+      "to": "design-system.experience-rule.action-hierarchy",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.confirmation",
+      "to": "design-system.pattern.confirmation",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.confirmation",
+      "to": "design-system.pattern.destructive-actions",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.empty-states",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.empty-states",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.empty-states",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.empty-states",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.empty-states",
+      "to": "design-system.component.empty-state",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.empty-states",
+      "to": "design-system.pattern.empty-states",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.empty-states",
+      "to": "design-system.pattern.search-and-filtering",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.error",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.error",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.error",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.error",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.error",
+      "to": "design-system.component.modal",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.error",
+      "to": "design-system.component.notification",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.error",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.error",
+      "to": "design-system.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.instructions-and-helper-text",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.instructions-and-helper-text",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.instructions-and-helper-text",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.instructions-and-helper-text",
+      "to": "design-system.accessibility.content",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.instructions-and-helper-text",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.instructions-and-helper-text",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.instructions-and-helper-text",
+      "to": "design-system.component.textarea",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.instructions-and-helper-text",
+      "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.loading-and-progress",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.loading-and-progress",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.loading-and-progress",
+      "to": "content.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.loading-and-progress",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.loading-and-progress",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.loading-and-progress",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.loading-and-progress",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.loading-and-progress",
+      "to": "design-system.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.notifications",
+      "to": "content.pattern.confirmation",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.notifications",
+      "to": "content.pattern.empty-states",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.notifications",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.notifications",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.notifications",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.notifications",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.notifications",
+      "to": "design-system.component.notification",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.notifications",
+      "to": "design-system.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.content-guidelines",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.pattern.ai-content-and-disclosure",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.pattern.confirmation",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.pattern.empty-states",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.pattern.instructions-and-helper-text",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.product-voice",
+      "to": "design-system.accessibility.content",
+      "type": "related"
+    },
+    {
+      "from": "content.terminology",
+      "to": "content.content-guidelines",
+      "type": "related"
+    },
+    {
+      "from": "content.terminology",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "design-language.ai.retrieval",
+      "to": "design-language.ai.router",
+      "type": "related"
+    },
+    {
+      "from": "design-language.ai.retrieval",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-language.ai.router",
+      "to": "design-system.design-language",
+      "type": "related"
+    },
+    {
+      "from": "design-language.ai.router",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-language.integration.karbon",
+      "to": "design-system.reference.code",
+      "type": "related"
+    },
+    {
+      "from": "design-language.integration.karbon",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-language.integration.karbon",
+      "to": "design-system.reference.storybook",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.color-and-contrast",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.component-authoring-contract",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.component-authoring-contract",
+      "to": "design-system.accessibility.router",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.conformance-and-policy",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.conformance-and-policy",
+      "to": "design-system.accessibility.router",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.conformance-and-policy",
+      "to": "design-system.accessibility.testing",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.content",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.content",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.content",
+      "to": "design-system.accessibility.structure-and-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.core",
+      "to": "design-system.accessibility.conformance-and-policy",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.core",
+      "to": "design-system.accessibility.router",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.dynamic-content-and-feedback",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.dynamic-content-and-feedback",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.dynamic-content-and-feedback",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.dynamic-content-and-feedback",
+      "to": "design-system.accessibility.screen-reader-semantics",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.focus-management",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.focus-management",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.focus-management",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.focus-management",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.forms",
+      "to": "design-system.accessibility.content",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.forms",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.forms",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.forms",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.forms",
+      "to": "design-system.accessibility.structure-and-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.images-icons-and-media",
+      "to": "design-system.accessibility.content",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.images-icons-and-media",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.images-icons-and-media",
+      "to": "design-system.accessibility.screen-reader-semantics",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.keyboard-navigation",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.keyboard-navigation",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.keyboard-navigation",
+      "to": "design-system.accessibility.pointer-touch-and-gestures",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.keyboard-navigation",
+      "to": "design-system.accessibility.screen-reader-semantics",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.motion",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.motion",
+      "to": "design-system.accessibility.pointer-touch-and-gestures",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.pointer-touch-and-gestures",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.pointer-touch-and-gestures",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.pointer-touch-and-gestures",
+      "to": "design-system.accessibility.motion",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.responsive-and-zoom",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.responsive-and-zoom",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.responsive-and-zoom",
+      "to": "design-system.accessibility.structure-and-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.router",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.router",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.screen-reader-semantics",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.screen-reader-semantics",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.screen-reader-semantics",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.screen-reader-semantics",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.screen-reader-semantics",
+      "to": "design-system.accessibility.structure-and-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.structure-and-navigation",
+      "to": "design-system.accessibility.content",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.structure-and-navigation",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.structure-and-navigation",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.structure-and-navigation",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.tables-and-data-visualization",
+      "to": "design-system.accessibility.color-and-contrast",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.tables-and-data-visualization",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.tables-and-data-visualization",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.tables-and-data-visualization",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.tables-and-data-visualization",
+      "to": "design-system.accessibility.screen-reader-semantics",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.tables-and-data-visualization",
+      "to": "design-system.accessibility.testing",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.testing",
+      "to": "design-system.accessibility.conformance-and-policy",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.testing",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.accessibility.testing",
+      "to": "design-system.accessibility.router",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.autocomplete",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.autocomplete",
+      "to": "design-system.component.search",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.autocomplete",
+      "to": "design-system.component.select",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.autocomplete",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.breadcrumb",
+      "to": "design-system.component.link",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.breadcrumb",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.checkbox",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.checkbox",
+      "to": "design-system.component.radio",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.checkbox",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.chip",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.chip",
+      "to": "design-system.component.badge",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.chip",
+      "to": "design-system.component.switch",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.chip",
+      "to": "design-system.component.tag",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.chip",
+      "to": "design-system.foundation.radius",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.chip",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.choice-group",
+      "to": "design-system.component.checkbox",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.choice-group",
+      "to": "design-system.component.chip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.choice-group",
+      "to": "design-system.component.radio",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.choice-group",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.coachmark",
+      "to": "design-system.component.popover",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.coachmark",
+      "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.coachmark",
+      "to": "design-system.pattern.tour",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.combo-button",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.combo-button",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.combo-button",
+      "to": "design-system.component.icon-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.combo-button",
+      "to": "design-system.component.menu-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.content-switcher",
+      "to": "design-system.component.tabs",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.content-switcher",
+      "to": "design-system.component.toggle-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.content-switcher",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.dialog",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.dialog",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.dialog",
+      "to": "design-system.accessibility.screen-reader-semantics",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.dialog",
+      "to": "design-system.foundation.responsive-layout-spec",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.dialog",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.file-uploader",
+      "to": "content.pattern.error",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.file-uploader",
+      "to": "content.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.file-uploader",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.file-uploader",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.file-uploader",
+      "to": "design-system.component.progress-bar",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.file-uploader",
+      "to": "design-system.component.progress-circle",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.file-uploader",
+      "to": "design-system.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.file-uploader",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.icon-button",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.icon-button",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.icon-button",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.icon-button",
+      "to": "design-system.component.tooltip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu",
+      "to": "design-system.component.combo-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu",
+      "to": "design-system.component.menu-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu-button",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu-button",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu-button",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu-button",
+      "to": "design-system.component.menu",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.modal",
+      "to": "design-system.component.dialog",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.notification",
+      "to": "design-system.component.icon-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.notification",
+      "to": "design-system.component.link",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.notification",
+      "to": "design-system.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.password-input",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.password-input",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.password-input",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.popover",
+      "to": "design-system.component.coachmark",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.popover",
+      "to": "design-system.component.toggletip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.popover",
+      "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-bar",
+      "to": "content.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-bar",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-bar",
+      "to": "design-system.component.progress-indicator",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-bar",
+      "to": "design-system.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-bar",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-circle",
+      "to": "content.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-circle",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-circle",
+      "to": "design-system.component.progress-bar",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-circle",
+      "to": "design-system.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-circle",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-indicator",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-indicator",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-indicator",
+      "to": "design-system.component.breadcrumb",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-indicator",
+      "to": "design-system.component.tabs",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-indicator",
+      "to": "design-system.component.timeline",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.progress-indicator",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.radio",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.radio",
+      "to": "design-system.component.checkbox",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.radio",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.rich-text-editor",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.rich-text-editor",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.rich-text-editor",
+      "to": "design-system.component.icon-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.rich-text-editor",
+      "to": "design-system.component.textarea",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.rich-text-editor",
+      "to": "design-system.component.toggle-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.search",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.search",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.search",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.select",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.select",
+      "to": "design-system.component.autocomplete",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.select",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.skeleton",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.skeleton",
+      "to": "design-system.accessibility.motion",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.skeleton",
+      "to": "design-system.component.progress-bar",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.skeleton",
+      "to": "design-system.foundation.motion",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.skeleton",
+      "to": "design-system.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.skeleton",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.switch",
+      "to": "design-system.component.checkbox",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.switch",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.table",
+      "to": "design-system.accessibility.tables-and-data-visualization",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.table",
+      "to": "design-system.pattern.data-views",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.table-runtime-contract",
+      "to": "design-system.accessibility.tables-and-data-visualization",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.table-runtime-contract",
+      "to": "design-system.component.table",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.table-runtime-contract",
+      "to": "design-system.pattern.data-views",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.tabs",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.tabs",
+      "to": "design-system.component.content-switcher",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.tabs",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.text-input",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.text-input",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.textarea",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.textarea",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.textarea",
+      "to": "design-system.component.rich-text-editor",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.textarea",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.timeline",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.timeline",
+      "to": "design-system.component.progress-indicator",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.toggle-button",
+      "to": "design-system.component.rich-text-editor",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.toggletip",
+      "to": "design-system.component.popover",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.toggletip",
+      "to": "design-system.component.tooltip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.toggletip",
+      "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.tooltip",
+      "to": "design-system.component.icon-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.tooltip",
+      "to": "design-system.component.toggletip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.tooltip",
+      "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.design-language",
+      "to": "design-system.overview",
+      "type": "related"
+    },
+    {
+      "from": "design-system.design-language",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.design-language",
+      "to": "design-system.structure",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.contextual-guidance",
+      "to": "design-system.component.coachmark",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.contextual-guidance",
+      "to": "design-system.component.popover",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.contextual-guidance",
+      "to": "design-system.component.toggletip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.contextual-guidance",
+      "to": "design-system.component.tooltip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.contextual-guidance",
+      "to": "design-system.pattern.tour",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.color",
+      "to": "design-system.accessibility.color-and-contrast",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.color",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.color",
+      "to": "design-system.token.architecture",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.color",
+      "to": "design-system.token.component-tokens",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.color",
+      "to": "design-system.token.product-overrides",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.color",
+      "to": "design-system.token.semantic-tokens",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.elevation",
+      "to": "design-system.reference.tailwind",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.layout",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.layout",
+      "to": "design-system.foundation.responsive-layout-spec",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.layout",
+      "to": "design-system.pattern.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.radius",
+      "to": "design-system.reference.tailwind",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout",
+      "to": "design-system.foundation.layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout",
+      "to": "design-system.foundation.responsive-layout-spec",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout",
+      "to": "design-system.pattern.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout",
+      "to": "design-system.reference.tailwind",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.pattern.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.reference.tailwind",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.spacing",
+      "to": "design-system.reference.tailwind",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.typography",
+      "to": "design-system.reference.tailwind",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.change-process",
+      "to": "design-system.accessibility.testing",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.change-process",
+      "to": "design-system.governance.documentation-maintenance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.change-process",
+      "to": "design-system.governance.ownership",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.documentation-maintenance",
+      "to": "design-system.accessibility.testing",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.documentation-maintenance",
+      "to": "design-system.governance.change-process",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.documentation-maintenance",
+      "to": "design-system.governance.ownership",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.ownership",
+      "to": "design-system.accessibility.conformance-and-policy",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.ownership",
+      "to": "design-system.governance.change-process",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.ownership",
+      "to": "design-system.governance.documentation-maintenance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.integration.figma-component-presentation",
+      "to": "design-system.governance.documentation-maintenance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.integration.figma-component-presentation",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.integration.figma-component-presentation",
+      "to": "design-system.structure",
+      "type": "related"
+    },
+    {
+      "from": "design-system.overview",
+      "to": "design-system.design-language",
+      "type": "related"
+    },
+    {
+      "from": "design-system.overview",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.overview",
+      "to": "design-system.structure",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.data-views",
+      "to": "design-system.accessibility.tables-and-data-visualization",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.data-views",
+      "to": "design-system.component.table",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.loading-and-progress",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.loading-and-progress",
+      "to": "content.pattern.loading-and-progress",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.loading-and-progress",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.loading-and-progress",
+      "to": "design-system.component.progress-bar",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.loading-and-progress",
+      "to": "design-system.component.progress-circle",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.loading-and-progress",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.notifications",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.notifications",
+      "to": "design-system.component.notification",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.responsive-layout",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.responsive-layout",
+      "to": "design-system.foundation.responsive-layout-spec",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.tour",
+      "to": "design-system.component.coachmark",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.tour",
+      "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.theme-context",
+      "to": "design-system.reference.code",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.theme-context",
+      "to": "design-system.reference.theme-initialization",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.theme-context",
+      "to": "design-system.token.architecture",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.theme-context",
+      "to": "design-system.token.product-overrides",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.code",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.code",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.code",
+      "to": "design-system.reference.storybook",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.component-mapping",
+      "to": "design-system.reference.code",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.component-mapping",
+      "to": "design-system.reference.figma",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.component-mapping",
+      "to": "design-system.reference.storybook",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.figma",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.figma",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.source-of-truth",
+      "to": "design-language.integration.karbon",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.source-of-truth",
+      "to": "design-system.overview",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.source-of-truth",
+      "to": "design-system.reference.code",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.source-of-truth",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.source-of-truth",
+      "to": "design-system.reference.figma",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.source-of-truth",
+      "to": "design-system.reference.storybook",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.source-of-truth",
+      "to": "design-system.structure",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.storybook",
+      "to": "design-system.reference.code",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.storybook",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.storybook",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.tailwind",
+      "to": "design-system.foundation.elevation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.tailwind",
+      "to": "design-system.foundation.radius",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.tailwind",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.tailwind",
+      "to": "design-system.foundation.responsive-layout-spec",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.tailwind",
+      "to": "design-system.foundation.spacing",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.tailwind",
+      "to": "design-system.foundation.typography",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.tailwind",
+      "to": "design-system.token.architecture",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.tailwind",
+      "to": "design-system.token.component-tokens",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.tailwind",
+      "to": "design-system.token.semantic-tokens",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.theme-initialization",
+      "to": "design-system.product-variation.theme-context",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.theme-initialization",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.structure",
+      "to": "design-system.design-language",
+      "type": "related"
+    },
+    {
+      "from": "design-system.structure",
+      "to": "design-system.overview",
+      "type": "related"
+    },
+    {
+      "from": "design-system.structure",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.architecture",
+      "to": "design-system.product-variation.theme-context",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.frontend-contract",
+      "to": "design-system.product-variation.theme-context",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.frontend-contract",
+      "to": "design-system.token.architecture",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.product-overrides",
+      "to": "design-system.product-variation.theme-context",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.product-overrides",
+      "to": "design-system.token.architecture",
+      "type": "related"
+    }
+  ]
+}

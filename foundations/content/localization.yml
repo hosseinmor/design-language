@@ -1,0 +1,240 @@
+schema_version: "0.1"
+id: content.foundation.localization
+document_id: content.localization
+title: قرارداد بومی‌سازی فارسی محصول
+status: draft
+language: fa-IR
+scope:
+  - product-ui
+  - transactional-content
+  - dynamic-content
+  - ai-generated-product-content
+
+sources:
+  - id: product_voice
+    type: internal_content_foundation
+    reference: content.foundation.product_voice
+  - id: terminology
+    type: internal_content_foundation
+    reference: content.foundation.terminology
+  - id: accessibility_content
+    type: internal_product_standard
+    reference: design-system.accessibility.content
+  - id: contextual_guidance
+    type: internal_design_system_rule
+    reference: design-system.experience-rule.contextual-guidance
+  - id: w3c_language
+    type: external_standard_guidance
+    url: https://www.w3.org/International/questions/qa-html-language-declarations.html
+  - id: w3c_bidi
+    type: external_standard_guidance
+    url: https://www.w3.org/International/articles/inline-bidi-markup/
+  - id: unicode_cldr_persian
+    type: external_locale_data
+    url: https://cldr.unicode.org/translation/language-specific/persian
+  - id: product_content_decisions
+    type: operational_decision
+    state: working_decisions
+
+source_boundary:
+  confirmed:
+    - زبان پایهٔ محتوای محصول فارسی معیار نوشتاری است.
+    - زبان صفحه و تغییر زبان بخش معنادار باید برنامه‌وار مشخص شود.
+    - تجربهٔ فارسی RTL است و layout از Start/End منطقی استفاده می‌کند.
+    - متن runtime دوجهته باید با semantics جهت و isolation نمایش داده شود.
+    - CLDR دادهٔ locale و الگوهای فارسی را فراهم می‌کند.
+  operational_decisions:
+    - شناسهٔ زبان پایهٔ محتوای فارسی fa-IR است.
+    - مقدار پویا پیش از ورود به template بر اساس type format می‌شود.
+    - identifier با تبدیل عمومی رقم یا گروه‌بندی quantity تغییر نمی‌کند.
+    - واحد ترجمه یک پیام کامل است، نه fragment قابل‌چسباندن.
+  unresolved:
+    - زبان‌های پشتیبانی‌شدهٔ هر محصول
+    - numbering system هر surface و data type
+    - calendar هر concept و flow
+    - timezone مرجع و سیاست تبدیل
+    - currency display و rounding
+    - formatter و message library canonical
+    - input normalization و translation fallback runtime
+
+precedence:
+  - product_truth_and_data_integrity
+  - accessibility_and_semantics
+  - locale_and_direction
+  - terminology_and_brand_identity
+  - brevity_and_surface_fit
+
+rules:
+  - id: LOC-001
+    obligation: must
+    dimension: language
+    key: declare_base_language_and_direction
+    statement: زبان و جهت پایهٔ surface فارسی با semantics برنامه‌وار اعلام شود.
+    evidence: [product_voice, accessibility_content, w3c_language, contextual_guidance]
+  - id: LOC-002
+    obligation: must
+    dimension: language
+    key: identify_meaningful_language_change
+    statement: تغییر زبانِ phrase یا passage وقتی برای پردازش معنادار است مشخص شود.
+    evidence: [accessibility_content, w3c_language]
+  - id: LOC-003
+    obligation: must
+    dimension: direction
+    key: use_logical_direction
+    statement: layout و placement از Start/End منطقی استفاده کنند و RTL به text alignment تقلیل نیابد.
+    evidence: [contextual_guidance]
+  - id: LOC-004
+    obligation: must
+    dimension: bidi
+    key: isolate_dynamic_direction
+    statement: متن runtime یا دوجهته در نزدیک‌ترین محدودهٔ معنایی با جهت معلوم یا خودکار isolate شود.
+    evidence: [accessibility_content, w3c_bidi]
+  - id: LOC-005
+    obligation: must_not
+    dimension: bidi
+    key: prefer_semantics_over_invisible_controls
+    statement: وقتی markup semantic در دسترس است، کنترل‌نویسهٔ نامرئی bidi در copy یا داده تزریق نشود.
+    evidence: [accessibility_content, w3c_bidi]
+  - id: LOC-006
+    obligation: must
+    dimension: identifier
+    key: preserve_identifier_contract
+    statement: ایمیل، URL، کد، OTP، شمارهٔ پیگیری و identifier مطابق قرارداد فیلد حفظ شوند و مانند quantity تبدیل نشوند.
+    evidence: [product_content_decisions, w3c_bidi]
+  - id: LOC-007
+    obligation: must
+    dimension: formatting
+    key: use_type_aware_locale_formatter
+    statement: عدد، درصد، واحد، مبلغ، تاریخ و زمان با formatter آگاه از type، locale و policy محصول ساخته شوند.
+    evidence: [unicode_cldr_persian, product_content_decisions]
+  - id: LOC-008
+    obligation: must_not
+    dimension: number
+    key: mix_digit_systems_in_token
+    statement: یک token عددی با ترکیب رقم فارسی و لاتین نمایش داده نشود.
+    evidence: [unicode_cldr_persian, product_content_decisions]
+  - id: LOC-009
+    obligation: must_not
+    dimension: date_time
+    key: manually_concatenate_date_time
+    statement: تاریخ، زمان، درصد یا مبلغ با replace عمومی یا چسباندن fragmentهای قالب ساخته نشود.
+    evidence: [unicode_cldr_persian, product_content_decisions]
+  - id: LOC-010
+    obligation: must
+    dimension: date_time
+    key: require_calendar_and_timezone_truth
+    statement: calendar، timezone، precision و clock از product truth بیایند و از زبان UI استنتاج نشوند.
+    evidence: [unicode_cldr_persian, product_content_decisions]
+  - id: LOC-011
+    obligation: should
+    dimension: date_time
+    key: choose_relative_time_by_task
+    statement: زمان نسبی فقط وقتی استفاده شود که دقت، به‌روزرسانی و تصمیم کاربر را مختل نکند.
+    evidence: [product_content_decisions]
+  - id: LOC-012
+    obligation: must
+    dimension: translation
+    key: translate_complete_message
+    statement: واحد ترجمه پیام یا جملهٔ کامل باشد تا ترتیب، فعل و شمار در زبان مقصد قابل‌تغییر بماند.
+    evidence: [product_content_decisions]
+  - id: LOC-013
+    obligation: must
+    dimension: translation
+    key: provide_translation_context
+    statement: surface، intent، نوع متغیر، محدودیت و نتیجهٔ action برای ترجمه مشخص باشد.
+    evidence: [product_content_decisions]
+  - id: LOC-014
+    obligation: must
+    dimension: terminology
+    key: preserve_canonical_terms_and_names
+    statement: ترجمه، اصطلاح canonical و نام رسمی محصول را حفظ کند و conceptهای متمایز را collapse نکند.
+    evidence: [terminology, product_content_decisions]
+  - id: LOC-015
+    obligation: must
+    dimension: variable
+    key: type_escape_and_isolate_variables
+    statement: متغیر runtime type مشخص، formatter معتبر، escaping و bidi isolation مناسب داشته باشد.
+    evidence: [w3c_bidi, product_content_decisions]
+  - id: LOC-016
+    obligation: must
+    dimension: grammar
+    key: use_plural_and_select_formatting
+    statement: شمار و variation دستوری با سازوکار plural/select در template کامل مدیریت شود.
+    evidence: [product_content_decisions]
+  - id: LOC-017
+    obligation: must_not
+    dimension: fallback
+    key: expose_raw_or_mixed_fallback
+    statement: placeholder خام، null، fragment گمشده یا fallback دوزبانه به کاربر نمایش داده نشود.
+    evidence: [product_content_decisions]
+  - id: LOC-018
+    obligation: must_not
+    dimension: product_truth
+    key: invent_unresolved_locale_policy
+    statement: digit، calendar، timezone، currency یا normalization حل‌نشده به‌عنوان policy قطعی معرفی نشود.
+    evidence: [product_content_decisions]
+
+language_model:
+  base_locale: fa-IR
+  base_direction: rtl
+  writing_register: standard_written_persian
+  address: شما
+  language_change: mark_when_meaningful_for_processing
+
+directionality_model:
+  layout: logical_start_end
+  known_ltr:
+    - email
+    - url
+    - code
+    - hash
+    - version
+  unknown_runtime_text: auto_isolation
+  preferred_mechanisms:
+    - language_metadata
+    - dir_attribute
+    - bdi
+    - dir_auto
+  avoid_when_markup_available:
+    - embedded_bidi_control_characters
+
+formatting_model:
+  quantities:
+    value_storage: numeric
+    display: locale_and_product_policy
+    unit: product_truth
+  identifiers:
+    preserve_field_contract: true
+    apply_quantity_grouping: false
+  date_time:
+    required_inputs: [instant_or_date, calendar, timezone_when_relevant, precision, locale]
+    display: locale_aware_formatter
+    relative_time: task_dependent
+  currency:
+    required_inputs: [amount, currency_or_product_unit, precision, rounding_policy, locale]
+
+translation_model:
+  unit: complete_message
+  required_context: [surface, intent, variable_types, action_result]
+  terminology_source: content.foundation.terminology
+  fallback: whole_message_only
+  forbid_fragment_concatenation: true
+
+variable_contract:
+  required: [name, type, source, formatter, bidi, fallback]
+  semantic_names: true
+  escape_runtime_values: true
+  punctuation_owned_by_template: true
+  grammar_variation: plural_or_select_formatter
+
+unknowns:
+  - language matrix هر محصول و surface
+  - numbering system پیش‌فرض و استثناهای identifier
+  - calendar هر concept و flow
+  - timezone مرجع و conversion policy
+  - ریال، تومان، precision و rounding هر محصول
+  - formatter و message library canonical
+  - normalization ورودی، جست‌وجو و storage
+  - fallback ترجمه و missing-key behavior
+
+evaluation_source: ../../ai/evals/content/localization-cases.yml

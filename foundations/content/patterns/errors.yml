@@ -1,0 +1,129 @@
+schema_version: "0.1"
+id: content.pattern.error
+title: الگوی محتوایی خطا
+status: draft
+language: fa-IR
+scope:
+  - inline-validation
+  - form-submission
+  - system-failure
+  - async-operation
+  - blocking-error
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  accessibility:
+    - design-system.accessibility.forms
+    - design-system.accessibility.dynamic-content-and-feedback
+
+goal: >
+  کاربر بفهمد چه چیزی مانع ادامه شده، کجا رخ داده و وقتی راه بازیابی معلوم است
+  چه کاری می‌تواند انجام دهد؛ بدون سرزنش، ابهام یا ادعای ساختگی.
+
+tone_profile: validation_error
+
+rules:
+  - id: ERR-001
+    obligation: must
+    dimension: content
+    key: identify_problem
+    statement: مشکل یا وضعیت ناموفق را مشخص کنید.
+  - id: ERR-002
+    obligation: must
+    dimension: content
+    key: identify_recovery_when_known
+    statement: وقتی راه بازیابی معلوم و مجاز است، اقدام بعدی را بگویید.
+  - id: ERR-003
+    obligation: must
+    dimension: terminology
+    key: reuse_field_terminology
+    statement: نام فیلد، شیء یا اقدام را با همان اصطلاحی بنویسید که در UI دیده می‌شود.
+  - id: ERR-004
+    obligation: must_not
+    dimension: tone
+    key: blame_user
+    statement: کاربر را سرزنش نکنید و خطا را به شخصیت یا توانایی او نسبت ندهید.
+  - id: ERR-005
+    obligation: must_not
+    dimension: content
+    key: generic_only
+    statement: «نامعتبر است» یا «خطایی رخ داد» نباید کل پیام باشد.
+  - id: ERR-006
+    obligation: must_not
+    dimension: terminology
+    key: expose_internal_code
+    statement: کد خطا، نام سرویس یا اصطلاح داخلی نباید جای توضیح کاربرفهم را بگیرد.
+  - id: ERR-007
+    obligation: must
+    dimension: product_truth
+    key: preserve_product_truth
+    statement: علت، نتیجه یا امکان بازیابی را فقط در حدی بیان کنید که محصول تأیید می‌کند.
+  - id: ERR-008
+    obligation: must_not
+    dimension: tone
+    key: add_brand_personality
+    statement: شوخی، شعار، ایموجی و انگیزش را به پیام خطا اضافه نکنید.
+  - id: ERR-009
+    obligation: must
+    dimension: interaction
+    key: preserve_recoverable_input
+    statement: پس از خطای قابل‌بازیابی، دادهٔ معتبر و نامرتبط کاربر حفظ شود.
+  - id: ERR-010
+    obligation: must
+    dimension: accessibility
+    key: expose_and_locate_error
+    statement: خطا در متن بیان، با محل مرتبط برنامه‌وار متصل و از مسیر منطقی قابل‌دسترسی باشد.
+
+anatomy:
+  required:
+    - problem
+  conditional:
+    - recovery
+    - affected_item
+    - safe_retry_state
+  sequence:
+    - problem
+    - recovery
+  pattern: "[مشکل یا وضعیت ناموفق]. [راه اصلاح یا اقدام بعدی]."
+  compact_pattern: "[نام فیلد] را [شرط قابل‌قبول] وارد کنید."
+
+placement:
+  field:
+    use_when: خطا به یک ورودی مشخص مربوط است.
+    component: design-system.component.text-input
+    rule: پیام را کنار همان فیلد نمایش دهید و ارتباط برنامه‌وار را حفظ کنید.
+  summary:
+    use_when: فرم طولانی یا چند خطا دارد و یافتن خطاها دشوار است.
+    rule: خلاصه را در ابتدای محدوده قرار دهید و دسترسی به هر خطا را ممکن کنید.
+  inline_notification:
+    use_when: خطا به یک بخش یا عملیات مشخص مربوط است و باید باقی بماند.
+    component: design-system.component.notification
+  toast:
+    use_when: شکست عملیات کوتاه است، زمینه همچنان روشن است و پیام گذرا مانع بازیابی نمی‌شود.
+    component: design-system.component.notification
+    avoid_when: کاربر باید برای اصلاح یا تصمیم‌گیری به متن مراجعه کند.
+  modal:
+    use_when: خطا یک context مسدودکنندهٔ واقعی و پاسخ ضروری ایجاد می‌کند.
+    component: design-system.component.modal
+    avoid_when: هدف فقط برجسته‌کردن پیام یا بازخورد منفعل است.
+  page_state:
+    use_when: محتوای اصلی صفحه بارگیری نشده یا کل task در دسترس نیست.
+
+templates:
+  required_field: "{field_label} را وارد کنید."
+  invalid_format: "{field_label} را با قالب {accepted_format} وارد کنید."
+  unmet_constraint: "{field_label} باید {constraint} باشد."
+  retryable_operation: "{operation} انجام نشد. {recovery_action}."
+  unavailable_feature: "{feature} اکنون در دسترس نیست. {alternative_or_retry}."
+  unknown_failure: >
+    {operation} انجام نشد. دوباره تلاش کنید. اگر مشکل ادامه داشت، از مسیر پشتیبانی
+    تأییدشده استفاده کنید.
+
+unknowns:
+  - اگر علت دقیق معلوم نیست، نتیجهٔ مشاهده‌شده را بگویید و علت نسازید.
+  - اگر retry ممکن یا امن بودن آن تأیید نشده، کاربر را به retry هدایت نکنید.
+  - اگر زمان رفع مشکل معلوم نیست، زمان تخمینی نسازید.
+  - اگر داده حفظ نشده است، خلاف آن را وعده ندهید.
+
+evaluation_source: ../../../ai/evals/content/error-cases.yml
