@@ -3,7 +3,7 @@ id: design-system.pattern.ai-entry-points
 collection: design-system
 type: pattern
 title: AI Entry Points
-summary: AI-assisted and AI-generated experiences may use the shared Magic color semantics.
+summary: Compose discoverable AI feature entry points from existing controls while delegating Magic token meanings to Color Semantics.
 knowledge_state: unverified
 document_maturity: draft
 related: []
@@ -29,42 +29,17 @@ Typical uses include:
 
 Do not use Magic merely as a decorative purple treatment.
 
-## Color Semantics
+## Color ownership
 
-```text
-surface/magic-muted
-→ subtle AI card, section, chip, or container
+The [Color Semantics](../tokens/color/semantics.md) and [Color Usage](../tokens/color/usage.md) documents own Magic role names, token inventories and combinations. Do not maintain a second token catalog in this pattern.
 
-surface/magic-emphasis
-surface/magic-emphasis-hover
-surface/magic-emphasis-active
-→ strong interactive AI action or entry point
-
-fg/magic
-→ AI icon, label, sparkle, or inline emphasis
-
-line/magic
-→ AI-specific outline/indicator when required by anatomy
-```
-
-The component's interaction model still determines which states exist. A passive AI container does not gain Hover or Active merely because Magic Emphasis has those state tokens available.
-
-## Semantic Boundary
-
-Magic means AI capability. It does not replace:
-
-- Brand for product identity or approved conversion moments
-- Accent for general chromatic interaction/affordance
-- Selected for a component state
-- Support for Info/Success/Warning/Error feedback
-
-If an AI feature is also selected, disabled, focused, or in error, compose the relevant component/state semantics rather than using Magic to encode every state.
+An AI indicator must not override normal selection, focus, disabled or error behavior. A passive AI container does not become interactive merely by consuming Magic roles.
 
 ## Component Composition
 
-Use shared Semantic Color tokens directly where the component anatomy can express the pattern. Do not create an `ai-card/*` or `ai-button/*` Color-token family solely to rename Magic roles.
+A card/section, chip/label, icon/inline indicator, and action entry are **different compositions**. Reuse the appropriate canonical component and give the AI affordance an understandable visible or accessible label. Use shared Magic roles only where they convey AI meaning; selection and action hierarchy still come from the component's own interaction contract.
 
-Component-specific tokens require a stable AI component contract that cannot be represented by the existing Semantic vocabulary.
+This document does not authorize a new `ai-card/*` or `ai-button/*` token family. If a repeated AI-specific interaction or composition cannot use existing components, propose a separate reviewed component/pattern contract.
 
 ## Accessibility
 
@@ -73,22 +48,12 @@ Component-specific tokens require a stable AI component contract that cannot be 
 - Focus remains independent and uses the shared Focus roles.
 - Disabled suppresses tone according to the component's normal Disabled contract.
 
-## Product Examples
+## Scope and open decisions
 
-Current approved use-case categories include AI cards/sections, AI chips/labels, AI entry actions, and AI icons/indicators across JobVision and Cando experiences.
-
-Exact product-level component mappings remain owned by the corresponding component/product documentation.
-
-## Anti-Patterns
-
-- Using Magic for any visually special CTA that is not AI-related
-- Using Magic instead of Brand for product identity
-- Using Magic instead of Accent for ordinary interaction
-- Using Magic instead of Error/Warning/Info feedback
-- Building a full component-specific Magic matrix when shared Semantic roles already resolve the anatomy
+This is a **draft composition pattern**, not approval of a new standalone AI component. Product-specific eligibility, triggering, consent/disclosure and feature descriptions must come from Product Knowledge and [AI Content Guidance](../../foundations/content/patterns/ai-content-and-disclosure.md). Exact example mappings and new reusable anatomy remain TBD until reviewed.
 
 ## Related Documents
 
-- `../tokens/color/semantics.md`
-- `../tokens/color/usage.md`
-- `../tokens/color/semantics.md`
+- [Color Semantics](../tokens/color/semantics.md)
+- [Color Usage](../tokens/color/usage.md)
+- [Content for AI disclosure](../../foundations/content/patterns/ai-content-and-disclosure.md)

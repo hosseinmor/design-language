@@ -19,10 +19,10 @@ related:
 | Visual design principle | `foundations/visual/` | Figma for live construction |
 | Token names, values or role selection | `design-system/tokens/{color,typography,spacing,radius,elevation,motion}/` | Figma for editable values, Code/Storybook for runtime |
 | Product language | `foundations/content/` | Product Knowledge for product truth |
-| Interaction behavior shared across UI | `foundations/interaction/` | Component/pattern and Karbon |
+| Interaction choice/principle shared across UI | `foundations/interaction/` | Owning component/pattern and Karbon |
 | Accessibility requirement | `accessibility/router.md` | Runtime accessibility tests |
 | Component choice or contract | `design-system/components/` | Figma and Karbon/Storybook |
-| Multi-component behavior | `design-system/patterns/` | Product Knowledge for feature policy |
+| Multi-component composition and behavior (Loading, Confirmation, Notifications, Tour and other patterns) | `design-system/patterns/` | Owning components, Product Knowledge for feature policy, Karbon for runtime |
 | Brand or expressive variation | `product-expression/` | Figma variables and themes |
 | Changing the system | `playbooks/evolve-the-system/` | Owning live sources |
 | Applying the system | `playbooks/apply-the-system/` | Product Knowledge and live sources |

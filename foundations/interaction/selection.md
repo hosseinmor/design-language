@@ -11,147 +11,33 @@ related: []
 
 # Selection
 
-## Principle
+## Scope
 
-Selection is a component state, not a normal action Button state and not a complete global color family.
+This foundation owns **cross-component interaction meaning** for a selected/current/checked/on/applied state. It does not define a separate global Selected Color matrix or override specific component state machines.
 
-A component may call the state:
+## Selection taxonomy
 
-```text
-selected
-current
-checked
-on
-applied
-```
+- `selected`: an item belongs to the current choice set; single- and multi-selection are distinct contracts.
+- `current`: the active destination or position, such as the current Tab or pagination item; it does not necessarily mean a selectable value.
+- `checked`: a selection control has a checked state, including mixed/indeterminate where the owning component supports it.
+- `on`: a Toggle/Switch represents an enabled boolean setting.
+- `applied`: a Filter is currently active; changing it may directly change results rather than merely edit a draft selection.
 
-The state name does not require a same-named global color token.
+These are distinct interaction meanings; a shared hue or token name does not make their behaviors interchangeable. A component or pattern defines whether selection occurs immediately, can be undone, permits multiple values, and remains interactive while selected.
 
-Use a dedicated selection component or pattern such as:
+## Interaction rules
 
-- Toggle Button
-- Segmented Control
-- Filter Button
-- Applied Filter Chip
-- Tab
-- Selectable Card
-- Selectable row/list item
+- Do not invent Hover/Active styles for a current, non-interactive item. Only provide interaction states when the item still has a meaningful operation.
+- A persistent selected item that remains interactive may receive a selected-hover treatment; the exact semantic role and recipe belong to the [Color Token Usage](../../design-system/tokens/color/usage.md) and owning component.
+- Selecting, applying, dismissing or clearing a value are different actions; the component/pattern determines their semantics.
+- For actual state machines, keyboard selection and focus, consult the relevant [Tabs](../../design-system/components/tabs.md), [Checkbox](../../design-system/components/checkbox.md), [Choice Group](../../design-system/components/choice-group.md), [Chip](../../design-system/components/chip.md), and [Table](../../design-system/components/table.md) contracts.
 
-The items above are a selection taxonomy. Their presence in this document does not by itself mean every item already has a complete shared component specification.
+## Color and accessibility ownership
 
-## Semantic Treatment
+The [Color Semantics](../../design-system/tokens/color/semantics.md) document owns Accent, Neutral and selected-container role meanings; [Color Usage](../../design-system/tokens/color/usage.md) owns token recipes and retired Color roles. Do not repeat token inventories or historic v3 migration tables here.
 
-Choose the visual treatment based on component anatomy.
+Accessibility and keyboard/focus requirements belong to the owning component and [Accessibility](../../accessibility/keyboard-navigation.md); state cannot rely on color alone.
 
-### Chromatic cue
+## Open scope
 
-Use Accent semantics when selection needs a colored indicator:
-
-```text
-Selected line Tab
-→ fg/primary + line/accent
-
-Checked Checkbox
-→ surface/accent-emphasis + fg/on-color
-
-Saved Bookmark
-→ fg/accent
-```
-
-Accent itself does not mean Selected. The component state is using Accent as its visual cue.
-
-A selected line Tab does not need a selected Hover state when the selected Tab itself has no meaningful interaction. Hover on unselected Tabs does not imply Hover on the current Tab.
-
-### Persistent selected container
-
-For rows/items/containers that need a neutral selected background:
-
-```text
-surface/selected
-surface/selected-hover
-```
-
-Examples:
-
-- Selected table row
-- Selected dropdown/menu item
-- Selected tree node
-- Selected navigation item
-- Selectable list item
-
-Use `surface/selected-hover` only when the selected container remains interactive while selected. If selected state removes meaningful interaction, use only `surface/selected`.
-
-Use `fg/primary` for ordinary content unless the component specification defines another semantic foreground.
-
-### Strong neutral selection
-
-When a current/exclusive choice is clearly communicated by component anatomy and grouping, a component may use an existing strong Neutral treatment such as `surface/neutral-emphasis` rather than introducing a global selected-emphasis token.
-
-Pill Tabs, Segmented Controls, and current Pagination are examples that should be decided in their component specs. When the selected/current item is not meaningfully interactive, do not generate Hover/Active states merely because the underlying Neutral family has them available.
-
-## Removed v3 Selected Color Matrix
-
-Do not use:
-
-```text
-surface/selected-muted*
-surface/selected-emphasis*
-surface/selected-disabled
-surface/selected-inverse*
-fg/selected
-line/selected
-fg/on-color-disabled
-```
-
-Only the neutral persistent-container roles remain globally approved:
-
-```text
-surface/selected
-surface/selected-hover
-```
-
-`surface/selected-hover` is conditional on continued interaction; it is not a universal selected-state requirement.
-
-## Brand Separation
-
-Do not use Brand semantics to represent selection merely because Brand and Accent happen to share a hue in JobVision.
-
-Brand communicates product identity or an approved key conversion moment. Selection is a component state and should be expressed with Accent, Neutral, or the minimal selected-container surface according to anatomy.
-
-## Applied Filter
-
-Treat `applied` as a valid selection-like component state, but do not force it into one global visual treatment.
-
-A tonal applied-filter treatment is a validated use case for Accent Muted when the filter remains interactive:
-
-```text
-Applied Filter Chip
-→ surface/accent-muted
-→ surface/accent-muted-hover when interactive
-→ surface/accent-muted-active when a pressed/active visual is required
-→ fg/accent or fg/primary according to anatomy
-→ line/accent only if the component has a semantic Accent outline
-```
-
-First try shared Semantic roles. If the Filter Chip needs a stable component-specific applied treatment that cannot be represented semantically, create a reviewed `filter-chip/*` Component token contract. Do not consume Tag tokens as a generic palette unless the UI is actually rendering the Tag component.
-
-## Stress-Test Summary
-
-The current Color architecture resolves common selection anatomies without a full Selected color matrix:
-
-```text
-Line Tab           → Accent indicator
-Checked Checkbox   → Accent Emphasis
-Applied Filter     → Accent Muted
-Selected Row       → Selected surface
-Strong Pill choice → Neutral Emphasis
-```
-
-The treatment communicates selection; the token family name does not need to repeat the component state name.
-
-## Related Documents
-
-- `../../design-system/components/toggle-button.md`
-- `../../design-system/components/button.md`
-- `../../design-system/tokens/color/semantics.md`
-- `../../design-system/tokens/color/component-tokens.md`
+Specific selection behaviors for future components, such as a new selectable-card or pagination contract, remain TBD until those components are reviewed. This draft does not imply their implementation exists.

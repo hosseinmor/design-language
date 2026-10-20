@@ -14,6 +14,7 @@ related:
   - design-system.component.popover
   - design-system.component.coachmark
   - design-system.pattern.tour
+  - design-system.foundation.elevation
 ---
 
 # Contextual Guidance
@@ -231,69 +232,20 @@ For anchored floating components:
 
 Runtime implementations must use logical positioning semantics where possible rather than duplicating physical RTL/LTR variants.
 
-## Visual Family
+## Shared anchor offset
 
-The components intentionally do not share one identical surface treatment.
+All anchored contextual surfaces share the default **2px gap** from their trigger or target. This is the Design Language's common positioning rule, not four independent component-specific design decisions.
 
-### Tooltip
+- **Without an arrow:** measure 2px from the visible Surface edge to the trigger/target edge.
+- **With an arrow:** measure 2px from the arrow tip to the trigger/target edge.
+- The offset is the preferred design/runtime gap **before collision handling**. Repositioning may preserve it where space allows; do not invent a larger gap merely because a Floating shadow extends beyond the surface.
+- This rule applies to Tooltip, Toggletip, Popover and Coachmark. Tour inherits the offset from each Coachmark step.
 
-- inverse surface;
-- no border;
-- no shadow;
-- radius 6.
+## Component-owned visual and placement details
 
-### Toggletip / Popover / Coachmark
+[Tooltip](../../design-system/components/tooltip.md), [Toggletip](../../design-system/components/toggletip.md), [Popover](../../design-system/components/popover.md) and [Coachmark](../../design-system/components/coachmark.md) own their **individual** surface treatments, arrow defaults, Side/Align properties, visual anatomy and acceptance tests. Their component-level 2px examples are applications of the shared offset above, not independent authorities for changing the number.
 
-- `surface/raised`;
-- no border;
-- `Shadow/Floating`;
-- radius 12.
-
-This distinction helps communicate ephemeral passive labeling vs persistent contextual surface behavior.
-
-## Arrow Policy
-
-Arrow usage is intentionally different across the family:
-
-| Pattern | Arrow policy |
-|---|---|
-| Tooltip | No arrow |
-| Toggletip | Required / always shown |
-| Popover | Optional; default `False` |
-| Coachmark | Optional property; default `True` |
-| Tour | Follows each Coachmark step |
-
-Use an arrow when visual pointing materially clarifies the anchor/target relationship. Do not add one merely to make all floating surfaces visually consistent.
-
-Tooltip is intentionally simplified and relies on proximity/placement rather than a caret. Popover is task-oriented and normally does the same. Toggletip and Coachmark retain stronger anchored pointing because their explanation/guidance is tied to a specific trigger or target.
-
-## Anchor Offset
-
-Anchored contextual surfaces use a default **2px gap** from their trigger or target.
-
-Measure the gap from the visually closest part of the floating surface:
-
-- **No arrow** — 2px from the Surface edge to the trigger/target edge.
-- **With arrow** — 2px from the arrow tip to the trigger/target edge.
-
-This applies to Tooltip, Toggletip, Popover, and Coachmark. Tour inherits the rule from each Coachmark step.
-
-The 2px value is the preferred design/runtime offset before collision handling. Runtime may reposition or flip the surface to keep it inside the viewport, but should preserve the 2px anchor gap whenever geometry allows.
-
-Do not add extra arbitrary spacing merely because a component has `Shadow/Floating`; the shadow may visually extend into the gap, but placement geometry is based on the Surface/arrow bounds, not the shadow blur.
-
-## Floating Shadow Rule
-
-`Shadow/Floating` is the shared separation recipe for raised floating surfaces.
-
-It contains:
-
-- a subtle `0 0 0 1px` outline-like first layer;
-- two soft elevation layers.
-
-This first layer is intentional so white floating surfaces remain distinguishable on white page backgrounds. It is part of the Floating effect, not a separate component border.
-
-Toggletip, Popover, and Coachmark therefore use `Shadow/Floating` with **no additional explicit border by default**.
+[Elevation](../../foundations/visual/elevation.md) and its [token catalog](../../design-system/tokens/elevation/catalog.md) own the Shadow/Floating recipe. Components document when they consume it, not a duplicate shadow definition. Tour owns sequencing and target resolution rather than a second caret or shadow recipe.
 
 ## Accessibility Boundary
 

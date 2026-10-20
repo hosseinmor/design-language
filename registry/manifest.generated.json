@@ -1816,7 +1816,8 @@
         "design-system.component.toggletip",
         "design-system.component.popover",
         "design-system.component.coachmark",
-        "design-system.pattern.tour"
+        "design-system.pattern.tour",
+        "design-system.foundation.elevation"
       ],
       "topics": [
         "contextual-guidance",
@@ -1829,11 +1830,14 @@
       "id": "design-system.experience-rule.disabled-and-read-only",
       "kind": "design-system-experience-rule",
       "title": "Disabled and Read-Only States",
-      "summary": "> Status: structure only",
+      "summary": "TBD shared interaction guidance for unavailable versus non-editable controls; does not override component or accessibility rules.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.accessibility.forms",
+        "design-system.component.text-input"
+      ],
       "topics": [
         "design-system-experience-rule",
         "disabled-and-read-only",
@@ -1845,11 +1849,14 @@
       "id": "design-system.experience-rule.error-recovery",
       "kind": "design-system-experience-rule",
       "title": "Error Recovery",
-      "summary": "> Status: structure only",
+      "summary": "TBD cross-component recovery guidance; message content and feature-specific retry policy remain in their owning sources.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "content.pattern.error",
+        "design-system.pattern.notifications"
+      ],
       "topics": [
         "design-system-experience-rule",
         "error-recovery",
@@ -1861,11 +1868,14 @@
       "id": "design-system.experience-rule.feedback",
       "kind": "design-system-experience-rule",
       "title": "System Feedback",
-      "summary": "> Status: structure only",
+      "summary": "TBD cross-pattern feedback coordination; Loading and Notification patterns own approved presentation choices.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.pattern.notifications",
+        "design-system.pattern.loading-and-progress"
+      ],
       "topics": [
         "design-system-experience-rule",
         "feedback",
@@ -1877,11 +1887,13 @@
       "id": "design-system.experience-rule.focus",
       "kind": "design-system-experience-rule",
       "title": "Focus",
-      "summary": "> Status: structure only",
+      "summary": "TBD design-level focus continuity guidance; accessibility/focus-management owns normative focus behavior.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.accessibility.focus-management"
+      ],
       "topics": [
         "design-system-experience-rule",
         "focus",
@@ -1893,11 +1905,13 @@
       "id": "design-system.experience-rule.loading",
       "kind": "design-system-experience-rule",
       "title": "Loading",
-      "summary": "> Status: structure only",
+      "summary": "Routing-only TBD placeholder; the final Loading and Progress pattern owns active composition decisions.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.pattern.loading-and-progress"
+      ],
       "topics": [
         "design-system-experience-rule",
         "interaction",
@@ -1925,11 +1939,14 @@
       "id": "design-system.experience-rule.responsive-interaction",
       "kind": "design-system-experience-rule",
       "title": "Responsive Interaction",
-      "summary": "> Status: structure only",
+      "summary": "TBD adaptive interaction guidance distinct from Responsive Layout and accessibility zoom requirements.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.foundation.responsive-layout",
+        "design-system.accessibility.responsive-and-zoom"
+      ],
       "topics": [
         "design-system-experience-rule",
         "interaction",
@@ -1957,11 +1974,15 @@
       "id": "design-system.experience-rule.validation",
       "kind": "design-system-experience-rule",
       "title": "Validation",
-      "summary": "> Status: structure only",
+      "summary": "TBD reusable validation interaction guidance; forms accessibility, field components and product rules own current requirements.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.accessibility.forms",
+        "design-system.component.text-input",
+        "content.pattern.error"
+      ],
       "topics": [
         "design-system-experience-rule",
         "interaction",
@@ -2318,7 +2339,7 @@
       "id": "design-system.pattern.ai-entry-points",
       "kind": "design-system-pattern",
       "title": "AI Entry Points",
-      "summary": "AI-assisted and AI-generated experiences may use the shared Magic color semantics.",
+      "summary": "Compose discoverable AI feature entry points from existing controls while delegating Magic token meanings to Color Semantics.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
@@ -2334,11 +2355,14 @@
       "id": "design-system.pattern.bulk-actions",
       "kind": "design-system-pattern",
       "title": "Bulk Actions",
-      "summary": "> Status: structure only",
+      "summary": "TBD multi-selection and batch-action composition across Data Views; product action eligibility is out of scope.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.pattern.data-views",
+        "design-system.experience-rule.selection"
+      ],
       "topics": [
         "bulk-actions",
         "design-system-pattern",
@@ -2350,7 +2374,7 @@
       "id": "design-system.pattern.confirmation",
       "kind": "design-system-pattern",
       "title": "Confirmation and Modal Actions",
-      "summary": "Cancel is usually Ghost.",
+      "summary": "Defines confirmation composition and safe exit decisions, delegating action hierarchy, Dialog anatomy and copy to their owners.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
@@ -2385,7 +2409,7 @@
       "id": "design-system.pattern.destructive-actions",
       "kind": "design-system-pattern",
       "title": "Destructive Actions",
-      "summary": "Use destructive treatment when an action:",
+      "summary": "Distinguishes destructive consequences and maps low-emphasis entry points to final confirmation.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
@@ -2401,11 +2425,14 @@
       "id": "design-system.pattern.empty-states",
       "kind": "design-system-pattern",
       "title": "Empty States",
-      "summary": "> Status: structure only",
+      "summary": "TBD Empty State layout and component composition; empty-state messages are owned by Content System.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "content.pattern.empty-states",
+        "design-system.component.empty-state"
+      ],
       "topics": [
         "design-system-pattern",
         "empty-states",
@@ -2417,11 +2444,14 @@
       "id": "design-system.pattern.form-submission",
       "kind": "design-system-pattern",
       "title": "Form Submission",
-      "summary": "> Status: structure only",
+      "summary": "TBD reusable form-action composition and submission lifecycle; product policy and error copy are separate sources.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.pattern.loading-and-progress",
+        "design-system.experience-rule.validation"
+      ],
       "topics": [
         "design-system-pattern",
         "form-submission",
@@ -2533,11 +2563,14 @@
       "id": "design-system.pattern.search-and-filtering",
       "kind": "design-system-pattern",
       "title": "Search and Filtering",
-      "summary": "> Status: structure only",
+      "summary": "TBD cross-component Search and Filter composition; individual inputs and feature eligibility remain separately owned.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.component.search",
+        "design-system.component.chip"
+      ],
       "topics": [
         "design-system-pattern",
         "patterns",
