@@ -2339,7 +2339,7 @@
       "id": "design-system.pattern.ai-entry-points",
       "kind": "design-system-pattern",
       "title": "AI Entry Points",
-      "summary": "AI-assisted and AI-generated experiences may use the shared Magic color semantics.",
+      "summary": "Compose discoverable AI feature entry points from existing controls while delegating Magic token meanings to Color Semantics.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
