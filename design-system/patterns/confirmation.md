@@ -15,7 +15,7 @@ related: []
 
 Use the shared [Action Hierarchy](../../foundations/interaction/action-hierarchy.md) for Button combinations across action groups; do not define a second preset matrix here. For destructive confirmation, follow [Destructive Actions](destructive-actions.md) and the canonical `Danger Primary` Button Style.
 
-The confirmation pattern owns **how a consequential confirmation is composed** and the relationship between the consequence, safe alternative, and Close/Cancel. The feature owner determines whether a confirmation is mandated by product policy; the [Confirmation Content pattern](../../foundations/content/patterns/confirmations.md) owns the wording and decision-oriented copy. The [Dialog component](../components/dialog.md) owns modal anatomy, focus, dismissal and shell behavior. [Confirmation Content](../../foundations/content/patterns/confirmations.md) owns message wording and labels.
+The confirmation pattern owns **how a consequential confirmation is composed** and the relationship between the consequence, safe alternative, and Close/Cancel. The feature owner determines whether confirmation is mandated by product policy. The [Confirmation Content pattern](../../foundations/content/patterns/confirmations.md) owns message wording and labels; the [Dialog component](../components/dialog.md) owns modal anatomy, focus, dismissal and shell behavior.
 
 ## Cancel
 

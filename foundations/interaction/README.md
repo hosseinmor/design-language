@@ -25,4 +25,4 @@ A non-owner document may summarize the integration point and link to the canonic
 | Inline versus Toast feedback | [Notifications pattern](../../design-system/patterns/notifications.md) |
 | Normative focus/keyboard accessibility | [Focus Management](../../accessibility/focus-management.md) |
 
-Unfinished Interaction files are **explicit TBD placeholders**, not approval of missing rules. Use their referenced canonical source for currently reviewed behavior; do not infer rules from empty sections.
+Unfinished Interaction files are **explicit TBD placeholders**, not approval of missing rules. Use their referenced canonical source for currently reviewed behavior. A separate `draft` may still document supported design decisions; [AI retrieval](../../ai/retrieval.md) explains the distinction.

@@ -12,4 +12,4 @@ owns feature-specific policy, permissions, states, and flows.
 - Content System owns text, labels and messages; Accessibility owns normative requirements.
 - Product Knowledge owns product eligibility, persistence/business policy and feature-specific lifecycle.
 
-The documents marked `scaffold` are reserved TBD subjects, not approved implementation or usage contracts. Prefer a reviewed component or pattern before using a scaffold as evidence. Examples: [Loading](loading-and-progress.md), [Notifications](notifications.md), [Tour](tour.md).
+The documents marked `scaffold` are reserved TBD subjects, not approved implementation or usage contracts. Use a current owning source instead: [Loading and Progress](loading-and-progress.md) is reviewed/final; [Notifications](notifications.md) and [Tour](tour.md) remain drafts with established decisions and explicit gaps. Read [maturity-aware AI retrieval](../../ai/retrieval.md) rather than treating all drafts as either approved or invalid.

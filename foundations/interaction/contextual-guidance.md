@@ -232,11 +232,20 @@ For anchored floating components:
 
 Runtime implementations must use logical positioning semantics where possible rather than duplicating physical RTL/LTR variants.
 
-## Visual and placement ownership
+## Shared anchor offset
 
-The component documents own **surface treatments, arrow defaults, 2px anchor offsets, Shadow/Floating, and Side/Align geometry**. Consult [Tooltip](../../design-system/components/tooltip.md), [Toggletip](../../design-system/components/toggletip.md), [Popover](../../design-system/components/popover.md) or [Coachmark](../../design-system/components/coachmark.md) for the exact visual and interaction contracts.
+All anchored contextual surfaces share the default **2px gap** from their trigger or target. This is the Design Language's common positioning rule, not four independent component-specific design decisions.
 
-A Tour follows its Coachmark composition and owns sequencing and target resolution, not a second caret or shadow recipe.
+- **Without an arrow:** measure 2px from the visible Surface edge to the trigger/target edge.
+- **With an arrow:** measure 2px from the arrow tip to the trigger/target edge.
+- The offset is the preferred design/runtime gap **before collision handling**. Repositioning may preserve it where space allows; do not invent a larger gap merely because a Floating shadow extends beyond the surface.
+- This rule applies to Tooltip, Toggletip, Popover and Coachmark. Tour inherits the offset from each Coachmark step.
+
+## Component-owned visual and placement details
+
+[Tooltip](../../design-system/components/tooltip.md), [Toggletip](../../design-system/components/toggletip.md), [Popover](../../design-system/components/popover.md) and [Coachmark](../../design-system/components/coachmark.md) own their **individual** surface treatments, arrow defaults, Side/Align properties, visual anatomy and acceptance tests. Their component-level 2px examples are applications of the shared offset above, not independent authorities for changing the number.
+
+[Elevation](../../foundations/visual/elevation.md) and its [token catalog](../../design-system/tokens/elevation/catalog.md) own the Shadow/Floating recipe. Components document when they consume it, not a duplicate shadow definition. Tour owns sequencing and target resolution rather than a second caret or shadow recipe.
 
 ## Accessibility Boundary
 
