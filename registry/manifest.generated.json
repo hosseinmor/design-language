@@ -1973,7 +1973,7 @@
       "id": "design-system.foundation.color",
       "kind": "design-system-foundation",
       "title": "Color",
-      "summary": "Operational entry point for JV Color semantics, installable Theme architecture, Appearance behavior, accessibility, and source routing.",
+      "summary": "Design principles for using color, visual emphasis, perception, and accessibility; detailed token contracts live in tokens/color.",
       "status": "reviewed",
       "owner": null,
       "last_reviewed": "2026-09-14",
@@ -2806,10 +2806,11 @@
       ],
       "topics": [
         "architecture",
+        "color",
         "design-system-token",
         "tokens"
       ],
-      "path": "design-system/tokens/architecture.md"
+      "path": "design-system/tokens/color/architecture.md"
     },
     {
       "id": "design-system.token.color-token-aliases",
@@ -2821,11 +2822,12 @@
       "last_reviewed": "2026-09-19",
       "related": [],
       "topics": [
-        "color-token-aliases",
+        "aliases",
+        "color",
         "design-system-token",
         "tokens"
       ],
-      "path": "design-system/tokens/color-token-aliases.md"
+      "path": "design-system/tokens/color/aliases.md"
     },
     {
       "id": "design-system.token.component-tokens",
@@ -2837,11 +2839,31 @@
       "last_reviewed": "2026-09-14",
       "related": [],
       "topics": [
+        "color",
         "component-tokens",
         "design-system-token",
         "tokens"
       ],
-      "path": "design-system/tokens/component-tokens.md"
+      "path": "design-system/tokens/color/component-tokens.md"
+    },
+    {
+      "id": "design-system.token.elevation.catalog",
+      "kind": "design-system-token",
+      "title": "Elevation Token Catalog",
+      "summary": "Approved Shadow/Floating and Shadow/Dragged recipes, including current Light values and Dark resolution notes.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.foundation.elevation"
+      ],
+      "topics": [
+        "catalog",
+        "design-system-token",
+        "elevation",
+        "tokens"
+      ],
+      "path": "design-system/tokens/elevation/catalog.md"
     },
     {
       "id": "design-system.token.frontend-contract",
@@ -2857,58 +2879,45 @@
       ],
       "topics": [
         "design-system-token",
-        "frontend-token-contract",
-        "tokens"
+        "frontend-token-contract"
       ],
-      "path": "design-system/tokens/frontend-token-contract.md"
+      "path": "integrations/frontend-token-contract.md"
     },
     {
-      "id": "design-system.token.jobvision-color-tokens-v3-surface-model",
+      "id": "design-system.token.motion.catalog",
       "kind": "design-system-token",
-      "title": "Jobvision Color Tokens v3 — Surface Model",
-      "summary": "> Status: Working draft > Theme scope: Light + Dark > Implementation target: Tailwind CSS v3 > CSS variables: Open decision > Product variation: Brand override only > Experience variation: Productive / Expressive",
+      "title": "Motion Token Catalog (TBD)",
+      "summary": "Placeholder for future approved duration, easing and motion tokens; no values are canonical.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.foundation.motion"
+      ],
       "topics": [
+        "catalog",
         "design-system-token",
-        "jobvision-color-tokens-v3-surface-model",
+        "motion",
         "tokens"
       ],
-      "path": "design-system/tokens/jobvision-color-tokens-v3-surface-model.md"
-    },
-    {
-      "id": "design-system.token.jobvision-color-tokens-v4-surface-model",
-      "kind": "design-system-token",
-      "title": "JobVision Color Tokens v4 — Surface Model",
-      "summary": "Draft canonical v4 Color-token catalog; unresolved alias values are tracked separately.",
-      "status": "draft",
-      "owner": null,
-      "last_reviewed": null,
-      "related": [],
-      "topics": [
-        "design-system-token",
-        "jobvision-color-tokens-v4-surface-model",
-        "tokens"
-      ],
-      "path": "design-system/tokens/jobvision-color-tokens-v4-surface-model.md"
+      "path": "design-system/tokens/motion/catalog.md"
     },
     {
       "id": "design-system.token.primitive-tokens",
       "kind": "design-system-token",
       "title": "Primitive Tokens",
-      "summary": "> Status: draft",
+      "summary": "Documents the provisional Color Primitive inventory; exact palette scales are not yet validated.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
       "related": [],
       "topics": [
+        "color",
         "design-system-token",
-        "primitive-tokens",
+        "primitives",
         "tokens"
       ],
-      "path": "design-system/tokens/primitive-tokens.md"
+      "path": "design-system/tokens/color/primitives.md"
     },
     {
       "id": "design-system.token.product-overrides",
@@ -2930,6 +2939,25 @@
       "path": "design-system/tokens/product-overrides.md"
     },
     {
+      "id": "design-system.token.radius.catalog",
+      "kind": "design-system-token",
+      "title": "Radius Token Catalog",
+      "summary": "Reviewed approved radius tokens, design values, Figma variables, and code names.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.foundation.radius"
+      ],
+      "topics": [
+        "catalog",
+        "design-system-token",
+        "radius",
+        "tokens"
+      ],
+      "path": "design-system/tokens/radius/catalog.md"
+    },
+    {
       "id": "design-system.token.semantic-tokens",
       "kind": "design-system-token",
       "title": "Semantic Tokens",
@@ -2939,11 +2967,50 @@
       "last_reviewed": "2026-09-14",
       "related": [],
       "topics": [
+        "color",
         "design-system-token",
-        "semantic-tokens",
+        "semantics",
         "tokens"
       ],
-      "path": "design-system/tokens/semantic-tokens.md"
+      "path": "design-system/tokens/color/semantics.md"
+    },
+    {
+      "id": "design-system.token.spacing.catalog",
+      "kind": "design-system-token",
+      "title": "Spacing Token Catalog",
+      "summary": "Reviewed shared spacing token keys, values, and Tailwind mapping.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.foundation.spacing"
+      ],
+      "topics": [
+        "catalog",
+        "design-system-token",
+        "spacing",
+        "tokens"
+      ],
+      "path": "design-system/tokens/spacing/catalog.md"
+    },
+    {
+      "id": "design-system.token.typography.catalog",
+      "kind": "design-system-token",
+      "title": "Typography Token Catalog",
+      "summary": "Approved semantic typography recipes, responsive heading styles, weights, and product-aware font mapping.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.foundation.typography"
+      ],
+      "topics": [
+        "catalog",
+        "design-system-token",
+        "tokens",
+        "typography"
+      ],
+      "path": "design-system/tokens/typography/catalog.md"
     },
     {
       "id": "design-system.token.usage-rules",
@@ -2955,15 +3022,16 @@
       "last_reviewed": null,
       "related": [],
       "topics": [
+        "color",
         "design-system-token",
         "tokens",
-        "usage-rules"
+        "usage"
       ],
-      "path": "design-system/tokens/usage-rules.md"
+      "path": "design-system/tokens/color/usage.md"
     }
   ],
   "summary": {
-    "documents": 147,
+    "documents": 150,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -2983,7 +3051,7 @@
       "design-system-pattern": 14,
       "design-system-product-variation": 3,
       "design-system-reference": 8,
-      "design-system-token": 10
+      "design-system-token": 13
     },
     "by_group": {},
     "by_product": {}

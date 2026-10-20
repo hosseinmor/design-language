@@ -141,12 +141,15 @@
     "design-system.token.architecture",
     "design-system.token.color-token-aliases",
     "design-system.token.component-tokens",
+    "design-system.token.elevation.catalog",
     "design-system.token.frontend-contract",
-    "design-system.token.jobvision-color-tokens-v3-surface-model",
-    "design-system.token.jobvision-color-tokens-v4-surface-model",
+    "design-system.token.motion.catalog",
     "design-system.token.primitive-tokens",
     "design-system.token.product-overrides",
+    "design-system.token.radius.catalog",
     "design-system.token.semantic-tokens",
+    "design-system.token.spacing.catalog",
+    "design-system.token.typography.catalog",
     "design-system.token.usage-rules"
   ],
   "edges": [
@@ -2186,6 +2189,11 @@
       "type": "related"
     },
     {
+      "from": "design-system.token.elevation.catalog",
+      "to": "design-system.foundation.elevation",
+      "type": "related"
+    },
+    {
       "from": "design-system.token.frontend-contract",
       "to": "design-system.product-variation.theme-context",
       "type": "related"
@@ -2196,6 +2204,11 @@
       "type": "related"
     },
     {
+      "from": "design-system.token.motion.catalog",
+      "to": "design-system.foundation.motion",
+      "type": "related"
+    },
+    {
       "from": "design-system.token.product-overrides",
       "to": "design-system.product-variation.theme-context",
       "type": "related"
@@ -2203,6 +2216,21 @@
     {
       "from": "design-system.token.product-overrides",
       "to": "design-system.token.architecture",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.radius.catalog",
+      "to": "design-system.foundation.radius",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.spacing.catalog",
+      "to": "design-system.foundation.spacing",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.typography.catalog",
+      "to": "design-system.foundation.typography",
       "type": "related"
     }
   ]
