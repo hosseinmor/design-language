@@ -89,6 +89,6 @@ Exact product-level component mappings remain owned by the corresponding compone
 
 ## Related Documents
 
-- `../tokens/semantic-tokens.md`
-- `../tokens/usage-rules.md`
-- `../tokens/jobvision-color-tokens-v4-surface-model.md`
+- `../tokens/color/semantics.md`
+- `../tokens/color/usage.md`
+- `../tokens/color/semantics.md`

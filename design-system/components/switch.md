@@ -211,5 +211,5 @@ Do not infer runtime prop names or DOM structure from the Figma property model.
 - `checkbox.md`
 - `toggle-button.md`
 - `../../foundations/interaction/selection.md`
-- `../tokens/color-token-aliases.md`
+- `../tokens/color/aliases.md`
 - `../../integrations/component-mapping.md`

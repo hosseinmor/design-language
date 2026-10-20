@@ -425,7 +425,7 @@ External systems are evidence, not runtime sources for JV.
 
 - `content-switcher.md`
 - `../../foundations/interaction/selection.md`
-- `../tokens/semantic-tokens.md`
+- `../tokens/color/semantics.md`
 - `../../accessibility/keyboard-navigation.md`
 - `../../accessibility/focus-management.md`
 - `../../integrations/component-mapping.md`

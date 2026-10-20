@@ -153,5 +153,5 @@ The treatment communicates selection; the token family name does not need to rep
 
 - `../../design-system/components/toggle-button.md`
 - `../../design-system/components/button.md`
-- `../../design-system/tokens/semantic-tokens.md`
-- `../../design-system/tokens/component-tokens.md`
+- `../../design-system/tokens/color/semantics.md`
+- `../../design-system/tokens/color/component-tokens.md`

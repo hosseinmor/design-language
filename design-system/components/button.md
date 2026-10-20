@@ -331,4 +331,4 @@ These are implementation-system decisions; the Button visual and behavioral cont
 - `../patterns/confirmation.md`
 - `../patterns/destructive-actions.md`
 - `../../product-expression/brand-variants.md`
-- `../tokens/jobvision-color-tokens-v4-surface-model.md`
+- `../tokens/color/semantics.md`

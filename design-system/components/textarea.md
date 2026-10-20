@@ -623,6 +623,6 @@ These open items do not block the current Textarea visual and authoring contract
 - `./rich-text-editor.md`
 - `../../accessibility/forms.md`
 - `../../accessibility/component-accessibility-authoring-contract.md`
-- `../tokens/semantic-tokens.md`
-- `../tokens/usage-rules.md`
+- `../tokens/color/semantics.md`
+- `../tokens/color/usage.md`
 - `../../foundations/visual/radius.md`

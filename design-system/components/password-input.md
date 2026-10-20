@@ -513,6 +513,6 @@ These open items do not block the current visual and authoring contract.
 - `./textarea.md`
 - `../../accessibility/forms.md`
 - `../../accessibility/component-accessibility-authoring-contract.md`
-- `../tokens/semantic-tokens.md`
-- `../tokens/usage-rules.md`
+- `../tokens/color/semantics.md`
+- `../tokens/color/usage.md`
 - `../../foundations/visual/radius.md`
