@@ -2034,11 +2034,14 @@
       "id": "design-system.foundation.iconography",
       "kind": "design-system-foundation",
       "title": "Iconography",
-      "summary": "> Status: structure only",
+      "summary": "Documents the verified icon-instance semantic color override guard; icon library, sizing, stroke/fill and accessibility guidelines remain TBD.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.accessibility.images-icons-and-media",
+        "design-system.component.icon-button"
+      ],
       "topics": [
         "design-system-foundation",
         "iconography",
@@ -2050,14 +2053,15 @@
       "id": "design-system.foundation.layout",
       "kind": "design-system-foundation",
       "title": "Layout",
-      "summary": "Entry point for shared layout foundations, including responsive layout, grid, containers, page structure, density, and alignment.",
+      "summary": "Routes layout design principles to the reviewed Responsive Layout guidance and the Layout Token Catalog; remaining global grid, density and alignment rules are TBD.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
       "related": [
         "design-system.foundation.responsive-layout",
         "design-system.foundation.responsive-layout-spec",
-        "design-system.pattern.responsive-layout"
+        "design-system.pattern.responsive-layout",
+        "design-system.token.layout.catalog"
       ],
       "topics": [
         "design-system-foundation",
@@ -2070,11 +2074,14 @@
       "id": "design-system.foundation.motion",
       "kind": "design-system-foundation",
       "title": "Motion",
-      "summary": "> Status: structure only",
+      "summary": "TBD shared motion-design principles and reduced-motion guidance; approved numeric duration/easing tokens are not yet defined.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.token.motion.catalog",
+        "design-system.accessibility.motion"
+      ],
       "topics": [
         "design-system-foundation",
         "motion",
@@ -2104,11 +2111,15 @@
       "id": "design-system.foundation.responsive-behavior",
       "kind": "design-system-foundation",
       "title": "Responsive Behavior",
-      "summary": "> Status: structure only",
+      "summary": "TBD routing for visual responsive adaptation that is not already covered by Responsive Layout, adaptive Patterns, or Interaction rules.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.foundation.responsive-layout",
+        "design-system.pattern.responsive-layout",
+        "design-system.experience-rule.responsive-interaction"
+      ],
       "topics": [
         "design-system-foundation",
         "responsive-behavior",
@@ -2120,7 +2131,7 @@
       "id": "design-system.foundation.responsive-layout",
       "kind": "design-system-foundation",
       "title": "Responsive Layout",
-      "summary": "Canonical guidance for viewport ranges, breakpoint ruler values, page types, layout regions, content containers, responsive strategies, container queries, and responsive testing.",
+      "summary": "Canonical visual guidance for viewport ranges, page types, logical regions, responsive strategies, container choice and responsive testing; exact numeric values live in Layout Tokens.",
       "status": "reviewed",
       "owner": "Design System team",
       "last_reviewed": "2026-09-12",
@@ -2128,7 +2139,8 @@
         "design-system.foundation.layout",
         "design-system.foundation.responsive-layout-spec",
         "design-system.pattern.responsive-layout",
-        "design-system.reference.tailwind"
+        "design-system.reference.tailwind",
+        "design-system.token.layout.catalog"
       ],
       "topics": [
         "design-system-foundation",
@@ -2142,14 +2154,15 @@
       "id": "design-system.foundation.responsive-layout-spec",
       "kind": "design-system-foundation",
       "title": "Responsive Layout Specification",
-      "summary": "Atomic rules and decision tables for viewport ranges, breakpoint ruler values, page types, layout regions, containers, responsive strategies, and responsive implementation.",
+      "summary": "Atomic responsive rules and decision tables for page types, ranges, regions and transformations; shared numeric values live in Layout Tokens.",
       "status": "reviewed",
       "owner": "Design System team",
       "last_reviewed": "2026-09-12",
       "related": [
         "design-system.foundation.responsive-layout",
         "design-system.pattern.responsive-layout",
-        "design-system.reference.tailwind"
+        "design-system.reference.tailwind",
+        "design-system.token.layout.catalog"
       ],
       "topics": [
         "design-system-foundation",
@@ -2181,7 +2194,7 @@
       "id": "design-system.foundation.typography",
       "kind": "design-system-foundation",
       "title": "Typography",
-      "summary": "Defines the shared Label, Body, and Heading recipes, Product-aware font identity, compact and fluid variants, and the boundary with local Tailwind typography.",
+      "summary": "Defines typography design intent, the selection of shared styles versus local utilities, and accessibility; exact typography recipes are in Tokens.",
       "status": "reviewed",
       "owner": "Design System team",
       "last_reviewed": "2026-10-19",
@@ -2915,6 +2928,28 @@
       "path": "integrations/frontend-token-contract.md"
     },
     {
+      "id": "design-system.token.layout.catalog",
+      "kind": "design-system-token",
+      "title": "Layout Token Catalog",
+      "summary": "Reviewed responsive breakpoint, content-container and region-padding token identifiers and values; distinguishes published Figma variables from conceptual layout roles.",
+      "status": "reviewed",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "design-system.foundation.layout",
+        "design-system.foundation.responsive-layout",
+        "design-system.foundation.responsive-layout-spec",
+        "design-system.reference.tailwind"
+      ],
+      "topics": [
+        "catalog",
+        "design-system-token",
+        "layout",
+        "tokens"
+      ],
+      "path": "design-system/tokens/layout/catalog.md"
+    },
+    {
       "id": "design-system.token.motion.catalog",
       "kind": "design-system-token",
       "title": "Motion Token Catalog (TBD)",
@@ -3043,7 +3078,7 @@
     }
   ],
   "summary": {
-    "documents": 149,
+    "documents": 150,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3063,7 +3098,7 @@
       "design-system-pattern": 14,
       "design-system-product-variation": 3,
       "design-system-reference": 8,
-      "design-system-token": 12
+      "design-system-token": 13
     },
     "by_group": {},
     "by_product": {}

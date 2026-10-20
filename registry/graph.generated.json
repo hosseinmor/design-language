@@ -143,6 +143,7 @@
     "design-system.token.component-tokens",
     "design-system.token.elevation.catalog",
     "design-system.token.frontend-contract",
+    "design-system.token.layout.catalog",
     "design-system.token.motion.catalog",
     "design-system.token.primitive-tokens",
     "design-system.token.radius.catalog",
@@ -1858,6 +1859,16 @@
       "type": "related"
     },
     {
+      "from": "design-system.foundation.iconography",
+      "to": "design-system.accessibility.images-icons-and-media",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.iconography",
+      "to": "design-system.component.icon-button",
+      "type": "related"
+    },
+    {
       "from": "design-system.foundation.layout",
       "to": "design-system.foundation.responsive-layout",
       "type": "related"
@@ -1873,8 +1884,38 @@
       "type": "related"
     },
     {
+      "from": "design-system.foundation.layout",
+      "to": "design-system.token.layout.catalog",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.motion",
+      "to": "design-system.accessibility.motion",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.motion",
+      "to": "design-system.token.motion.catalog",
+      "type": "related"
+    },
+    {
       "from": "design-system.foundation.radius",
       "to": "design-system.reference.tailwind",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-behavior",
+      "to": "design-system.experience-rule.responsive-interaction",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-behavior",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-behavior",
+      "to": "design-system.pattern.responsive-layout",
       "type": "related"
     },
     {
@@ -1898,6 +1939,11 @@
       "type": "related"
     },
     {
+      "from": "design-system.foundation.responsive-layout",
+      "to": "design-system.token.layout.catalog",
+      "type": "related"
+    },
+    {
       "from": "design-system.foundation.responsive-layout-spec",
       "to": "design-system.foundation.responsive-layout",
       "type": "related"
@@ -1910,6 +1956,11 @@
     {
       "from": "design-system.foundation.responsive-layout-spec",
       "to": "design-system.reference.tailwind",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.token.layout.catalog",
       "type": "related"
     },
     {
@@ -2300,6 +2351,26 @@
     {
       "from": "design-system.token.frontend-contract",
       "to": "design-system.token.architecture",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.layout.catalog",
+      "to": "design-system.foundation.layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.layout.catalog",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.layout.catalog",
+      "to": "design-system.foundation.responsive-layout-spec",
+      "type": "related"
+    },
+    {
+      "from": "design-system.token.layout.catalog",
+      "to": "design-system.reference.tailwind",
       "type": "related"
     },
     {
