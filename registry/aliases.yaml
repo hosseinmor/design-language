@@ -4,3 +4,4 @@ aliases:
   design-system: design-system.overview
   karbon: design-language.integration.karbon
   content-guidelines: content.content-guidelines
+  design-system.token.product-overrides: design-system.product-variation.theme-context

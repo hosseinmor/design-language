@@ -491,5 +491,5 @@ The current visual/Figma-authoring contract is usable for product testing, but t
 - `./toggle-button.md`
 - `../../accessibility/forms.md`
 - `../../accessibility/component-accessibility-authoring-contract.md`
-- `../tokens/semantic-tokens.md`
-- `../tokens/usage-rules.md`
+- `../tokens/color/semantics.md`
+- `../tokens/color/usage.md`

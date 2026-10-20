@@ -330,7 +330,7 @@ utility/skeleton-element
 utility/skeleton-shimmer
 ```
 
-Overlay stores its resolved RGBA value directly. Skeleton roles use Neutral Primitive aliases. Exact mappings are documented in `color-token-aliases.md`.
+Overlay stores its resolved RGBA value directly. Skeleton roles use Neutral Primitive aliases. Exact mappings are documented in `aliases.md`.
 
 ## Component-owned exception
 
@@ -354,6 +354,6 @@ Categorical hues communicate grouping, not Support meaning. Cyan and Warm Gray a
 ## Source of truth
 
 - Semantic meaning and usage → this document.
-- Exact current visual aliases/values → Figma, with `color-token-aliases.md` as the documented mapping contract.
+- Exact current visual aliases/values → Figma, with `aliases.md` as the documented mapping contract.
 - Component recipes → the corresponding component guideline.
 - Layering and collection responsibilities → `architecture.md`.

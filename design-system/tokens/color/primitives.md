@@ -3,7 +3,7 @@ id: design-system.token.primitive-tokens
 collection: design-system
 type: token
 title: Primitive Tokens
-summary: '> Status: draft'
+summary: Documents the provisional Color Primitive inventory; exact palette scales are not yet validated.
 knowledge_state: unverified
 document_maturity: draft
 related: []
@@ -21,14 +21,14 @@ Primitive color scales are named by hue/value rather than semantic meaning. In t
 Current opaque families:
 
 ```text
-color/neutral/*
-color/blue/*
-color/yellow/*
-color/red/*
-color/purple/*
-color/green/*
-color/emerald/*
-color/orange/*
+palette/neutral/*
+palette/blue/*
+palette/yellow/*
+palette/red/*
+palette/purple/*
+palette/green/*
+palette/emerald/*
+palette/orange/*
 ```
 
 Product-specific public Primitive families remain prohibited. A Theme may define the local Primitive values it needs, but Product code must not depend on Theme-local Primitive identities. Product identity is expressed through shared Semantic roles whose values are supplied by the selected Theme.
@@ -58,10 +58,5 @@ Alpha primitives store direct RGBA values and support transparent interaction, o
 | `color/white-alpha/8` | `rgba(255, 255, 255, 0.08)` |
 | `color/white-alpha/12` | `rgba(255, 255, 255, 0.12)` |
 
-See `color-token-aliases.md` for Appearance-specific alias targets and unresolved mappings.
+See `aliases.md` for Appearance-specific alias targets and unresolved mappings.
 
-## Typography
-## Spacing
-## Radius
-## Elevation
-## Motion

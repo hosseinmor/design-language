@@ -1,59 +1,18 @@
 # Design Tokens
 
-This section contains the detailed Color contracts. Start with `../../foundations/visual/color.md` for the operational model and use the smallest detailed document needed for the question.
+This directory organizes Design Language token contracts by foundation type. Each family has a stable documentation home, even when its catalog is not yet approved.
 
-The current architecture separates a **shared Design System token contract** from **installable Theme packages that provide values**.
+| Family | Token document | Design principles and usage |
+|---|---|---|
+| Color | [Color contracts](color/README.md) | [Color foundation](../../foundations/visual/color.md) |
+| Typography | [Typography catalog](typography/catalog.md) | [Typography foundation](../../foundations/visual/typography.md) |
+| Spacing | [Spacing catalog](spacing/catalog.md) | [Spacing foundation](../../foundations/visual/spacing.md) |
+| Radius | [Radius catalog](radius/catalog.md) | [Radius foundation](../../foundations/visual/radius.md) |
+| Elevation | [Elevation catalog](elevation/catalog.md) | [Elevation foundation](../../foundations/visual/elevation.md) |
+| Motion | [Motion catalog — TBD](motion/catalog.md) | [Motion foundation — TBD](../../foundations/visual/motion.md) |
 
-Non-Color Foundations such as Typography, Spacing, Radius, Elevation, Motion, and Responsive Layout keep their own contracts. Theme packages are Foundation-agnostic in architecture, but v1 Theme packages provide Color only.
+**Boundary:** The token document owns approved names/recipes; the Foundation owns design principles, guidance and accessibility applications. Figma owns live editable values and construction, while code/Storybook owns implemented behavior and generated artifacts. Do not manually mirror live values in multiple documents.
 
-## Current Color documents
+For Theme-package runtime contracts, see [Frontend Token Contract](../../integrations/frontend-token-contract.md). For Product↔Theme selection, see [Theme Context](../../product-expression/brands/theme-context.md).
 
-- `architecture.md` — shared-contract ↔ Theme-implementation model and current Figma representation
-- `primitive-tokens.md` — current Primitive inventory and palette work; runtime ownership is Theme-local
-- `semantic-tokens.md` — stable shared UI Color roles and usage boundaries
-- `color-token-aliases.md` — current validated Figma Theme × Appearance mappings
-- `component-tokens.md` — component-token criteria and the finalized categorical Tag Theme Extension
-- `product-overrides.md` — Product ↔ Theme selection and Brand semantic resolution
-- `usage-rules.md` — Semantic Color consumption and migration rules
-- `frontend-token-contract.md` — Design-side contract for Theme packages, public/internal token boundaries, serialization, and frontend consumption
-
-Historical/working catalogs remain reference material only when they conflict with the reviewed contracts above.
-
-## Color model
-
-```text
-Shared DS contract
-  Semantic names + meanings
-          │
-          ▼
-Installed Theme package
-  Theme-local Primitives
-  Light/Dark Semantic values
-  private Component Tokens
-          │
-          ▼
-Product UI / DS Components
-```
-
-Product UI consumes Semantic Color by default. Theme-local Primitives are implementation detail.
-
-Brand remains Semantic meaning, not a required runtime alias layer.
-
-Categorical Tag is currently the only approved Component Color-token exception. Its `tag/*` contract is shared across Products, varies only by Light/Dark Appearance, and is not Product-facing API.
-
-## Current Figma model
-
-```text
-01 Primitives            → Value
-02 Product               → JobVision | Cando
-03 Semantic              → Value
-03 Semantic Values       → Light | Dark
-  ├── jobvision/*
-  └── cando/*
-04 Component Tokens      → Light | Dark
-```
-
-- `02 Product` is the Figma Product selector and switches both Product-aware typography and Semantic routing.
-- `03 Semantic` is the published stable Color contract.
-- `03 Semantic Values` holds Product-nested Light/Dark implementation values.
-- `04 Component Tokens` remains Product-independent and component-only.
+Human-facing README files are not indexed by the current AI manifest generator. Use [AI Router](../../ai/router.md) for machine retrieval.

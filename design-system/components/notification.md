@@ -357,5 +357,5 @@ Do not infer runtime props from Figma property names.
 - `link.md`
 - `../../accessibility/dynamic-content-and-feedback.md`
 - `../../foundations/visual/elevation.md`
-- `../tokens/semantic-tokens.md`
-- `../tokens/usage-rules.md`
+- `../tokens/color/semantics.md`
+- `../tokens/color/usage.md`

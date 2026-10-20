@@ -18,19 +18,12 @@ related:
 
 Radius uses a deliberately small **size scale**. Component specs decide which approved size applies; the Foundation does not encode component anatomy into token names.
 
-The canonical numeric scale is **3 → 6 → 12**. `None` and `Full` are boundary behaviors, not additional steps in that progression.
+The approved Small/Medium/Large scale is defined in the [Radius Token Catalog](../../design-system/tokens/radius/catalog.md). `None` and `Full` are boundary behaviors, not additional steps in that progression.
 
-## Canonical scale
 
-| Token | Figma variable | Value | Typical use | Tailwind-facing name |
-|---|---|---:|---|---|
-| None | `0px · None` | 0px | Square edges and explicit no-radius cases | `rounded-none` |
-| Small | `3px · Small` | 3px | Compact detail geometry when a component spec explicitly needs less rounding than Medium | `rounded-small` |
-| Medium | `6px · Medium` | 6px | Standard controls and compact surfaces such as Button, Input, Select, Search, Tooltip and Menu Item | `rounded-medium` |
-| Large | `12px · Large` | 12px | Card, Menu shell, Popover, Toggletip, Coachmark, Modal and other independent/floating surfaces | `rounded-large` |
-| Full | `Full` | 9999px / fully rounded behavior | Tag, Chip, Avatar, Toggle track, circular/pill controls | `rounded-full` |
+## Token source
 
-`Full` is a shape behavior, not the next step in the numeric scale.
+See [Radius Token Catalog](../../design-system/tokens/radius/catalog.md) for canonical names and values.
 
 ## Usage rules
 

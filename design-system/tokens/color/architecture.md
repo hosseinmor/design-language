@@ -201,9 +201,9 @@ Runtime/CSS serialization remains a separate frontend contract.
 
 ## References
 
-- `semantic-tokens.md`
+- `semantics.md`
 - `component-tokens.md`
-- `product-overrides.md`
-- `color-token-aliases.md`
-- `primitive-tokens.md`
-- `usage-rules.md`
+- [Theme Context](../../../product-expression/brands/theme-context.md)
+- `aliases.md`
+- `primitives.md`
+- `usage.md`

@@ -16,7 +16,8 @@ related:
 | Question | Start here | Verify exact facts in |
 |---|---|---|
 | Overall design intent | `overview/design-language.md` | Relevant canonical contract |
-| Visual rule | `foundations/visual/` | Figma for live construction |
+| Visual design principle | `foundations/visual/` | Figma for live construction |
+| Token names, values or role selection | `design-system/tokens/{color,typography,spacing,radius,elevation,motion}/` | Figma for editable values, Code/Storybook for runtime |
 | Product language | `foundations/content/` | Product Knowledge for product truth |
 | Interaction behavior shared across UI | `foundations/interaction/` | Component/pattern and Karbon |
 | Accessibility requirement | `accessibility/router.md` | Runtime accessibility tests |

@@ -352,21 +352,6 @@ The proposed `highlight/default` and `highlight/inverse` roles are removed. A fu
 - If a proposed value fails accessibility, choose a contrast-safe approved mapping rather than binding a component to an arbitrary Primitive.
 - If a future product needs a different Accent hue, add the minimum product-aware alias without changing the public Semantic role names.
 
-## Migration rules
+## Migration history
 
-1. Remove the `Experience` collection from the Color resolution path.
-2. Replace root `canvas` usage with the appropriate structural Surface, normally `surface/default` or `surface/inset` according to hierarchy.
-3. Replace `surface/control*` with `surface/neutral-muted*`.
-4. Replace `surface/emphasis*` with `surface/neutral-emphasis*`.
-5. Replace `surface/brand-emphasis*` with `surface/brand*`; remove `surface/brand-muted`, `fg/brand`, and `line/brand`.
-6. Add the approved Accent family and migrate chromatic interaction cues to Accent by meaning.
-7. Replace the expanded Selected matrix with `surface/selected` and `surface/selected-hover`; use existing Accent/Neutral roles for other selection presentations.
-8. Remove `fg/on-color-disabled`; disabled filled controls use the general disabled treatment.
-9. Replace Link `emphasis` with `subtle` using the new direction: Default is chromatic, Subtle is neutral. Remove Visited.
-10. Rename Button Accent preset/tone to Brand and update its Semantic mappings.
-11. Rename Brand collection `accent/* → brand/*` and `content/on-accent → content/on-brand`.
-12. Remove the unvalidated `highlight/default` and `highlight/inverse` proposals.
-13. Replace product-specific Primitive brand palettes with generic hue palettes during the palette migration.
-14. Update Figma and code references together after final alias values and implementation mapping are approved.
-
-See `architecture.md`, `jobvision-color-tokens-v4-surface-model.md`, and `color-token-aliases.md`.
+Historical v3→v4 migrations are recorded in Git history. Follow the active semantic role definitions in [`semantics.md`](semantics.md), the current aliases in [`aliases.md`](aliases.md), and the system architecture in [`architecture.md`](architecture.md). Do not apply obsolete renaming instructions to current components.

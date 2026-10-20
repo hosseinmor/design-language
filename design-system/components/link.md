@@ -407,4 +407,4 @@ Still requiring runtime verification:
 - `../../accessibility/color-and-contrast.md`
 - `../../foundations/interaction/navigation.md`
 - `../../integrations/component-mapping.md`
-- `../tokens/semantic-tokens.md`
+- `../tokens/color/semantics.md`
