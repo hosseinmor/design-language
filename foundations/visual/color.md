@@ -10,7 +10,6 @@ related:
   - design-system.token.architecture
   - design-system.token.semantic-tokens
   - design-system.token.component-tokens
-  - design-system.token.product-overrides
   - design-system.accessibility.color-and-contrast
   - design-system.reference.source-of-truth
 last_reviewed: '2026-09-14'

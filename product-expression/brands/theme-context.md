@@ -7,7 +7,6 @@ summary: Defines Theme as an installable visual-token implementation selected by
 knowledge_state: canonical
 document_maturity: reviewed
 related:
-  - design-system.token.product-overrides
   - design-system.token.architecture
   - design-system.reference.code
   - design-system.reference.theme-initialization
@@ -62,7 +61,7 @@ Shared DS contract
         └── Cando Theme     → values
 ```
 
-Product code consumes the stable Design System contract. It must not depend on which Primitive value a Theme uses to implement that contract.
+Product code consumes the stable Design System contract. It must not depend on which Primitive value a Theme uses to implement that contract. Components and ordinary Product UI must not branch on Product identity solely to select Design System colors, consume Theme-local Primitives, or encode Product names into shared Semantic role names.
 
 ## Theme package scope
 

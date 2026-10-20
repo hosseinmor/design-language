@@ -1981,7 +1981,6 @@
         "design-system.token.architecture",
         "design-system.token.semantic-tokens",
         "design-system.token.component-tokens",
-        "design-system.token.product-overrides",
         "design-system.accessibility.color-and-contrast",
         "design-system.reference.source-of-truth"
       ],
@@ -2606,7 +2605,6 @@
       "owner": null,
       "last_reviewed": "2026-09-14",
       "related": [
-        "design-system.token.product-overrides",
         "design-system.token.architecture",
         "design-system.reference.code",
         "design-system.reference.theme-initialization"
@@ -2920,25 +2918,6 @@
       "path": "design-system/tokens/color/primitives.md"
     },
     {
-      "id": "design-system.token.product-overrides",
-      "kind": "design-system-token",
-      "title": "Product and Theme Selection",
-      "summary": "Defines the relationship between Product identity, installable Theme packages, and Appearance without making Product a token dimension.",
-      "status": "reviewed",
-      "owner": null,
-      "last_reviewed": "2026-09-14",
-      "related": [
-        "design-system.product-variation.theme-context",
-        "design-system.token.architecture"
-      ],
-      "topics": [
-        "design-system-token",
-        "product-overrides",
-        "tokens"
-      ],
-      "path": "design-system/tokens/product-overrides.md"
-    },
-    {
       "id": "design-system.token.radius.catalog",
       "kind": "design-system-token",
       "title": "Radius Token Catalog",
@@ -3031,7 +3010,7 @@
     }
   ],
   "summary": {
-    "documents": 150,
+    "documents": 149,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3051,7 +3030,7 @@
       "design-system-pattern": 14,
       "design-system-product-variation": 3,
       "design-system-reference": 8,
-      "design-system-token": 13
+      "design-system-token": 12
     },
     "by_group": {},
     "by_product": {}
@@ -3060,6 +3039,7 @@
     "content-guidelines": "content.content-guidelines",
     "design-language": "design-system.design-language",
     "design-system": "design-system.overview",
+    "design-system.token.product-overrides": "design-system.product-variation.theme-context",
     "karbon": "design-language.integration.karbon"
   }
 }

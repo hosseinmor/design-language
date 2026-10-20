@@ -145,7 +145,6 @@
     "design-system.token.frontend-contract",
     "design-system.token.motion.catalog",
     "design-system.token.primitive-tokens",
-    "design-system.token.product-overrides",
     "design-system.token.radius.catalog",
     "design-system.token.semantic-tokens",
     "design-system.token.spacing.catalog",
@@ -1780,11 +1779,6 @@
     },
     {
       "from": "design-system.foundation.color",
-      "to": "design-system.token.product-overrides",
-      "type": "related"
-    },
-    {
-      "from": "design-system.foundation.color",
       "to": "design-system.token.semantic-tokens",
       "type": "related"
     },
@@ -2019,11 +2013,6 @@
       "type": "related"
     },
     {
-      "from": "design-system.product-variation.theme-context",
-      "to": "design-system.token.product-overrides",
-      "type": "related"
-    },
-    {
       "from": "design-system.reference.code",
       "to": "design-system.reference.component-mapping",
       "type": "related"
@@ -2206,16 +2195,6 @@
     {
       "from": "design-system.token.motion.catalog",
       "to": "design-system.foundation.motion",
-      "type": "related"
-    },
-    {
-      "from": "design-system.token.product-overrides",
-      "to": "design-system.product-variation.theme-context",
-      "type": "related"
-    },
-    {
-      "from": "design-system.token.product-overrides",
-      "to": "design-system.token.architecture",
       "type": "related"
     },
     {
