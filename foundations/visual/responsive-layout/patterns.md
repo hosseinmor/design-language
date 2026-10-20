@@ -30,9 +30,9 @@ This is a **draft adaptive-composition guide**, not an override of reviewed comp
 
 ### Expanded layouts
 
-- Persistent side navigation may begin at `lg` when the remaining content width is sufficient.
+- Persistent side navigation may begin at `breakpoint/large` when the remaining content width is sufficient.
 - A compact rail may be used before a full sidebar when navigation density requires it.
-- Do not show a persistent sidebar solely because the viewport crossed `lg`; validate the remaining workspace width.
+- Do not show a persistent sidebar solely because the viewport crossed `breakpoint/large`; validate the remaining workspace width.
 
 ## Tables and dense data
 
@@ -59,7 +59,7 @@ Requirements:
 - Introduce multiple columns only for fields with a clear relationship and adequate width.
 - Keep dependent fields close together.
 - Do not reorganize fields in a way that changes the task sequence without documenting the behavioral reason.
-- Constrain long forms to approximately `720–800px` rather than stretching them across the page.
+- Prefer the reviewed `container/medium` role for focused forms rather than stretching them across the page; change the width only when the task and content constraints justify it.
 - Stacked actions are acceptable in compact layouts; expanded layouts may align actions horizontally when priority remains clear.
 
 ## Dialogs, sheets, and full-screen overlays

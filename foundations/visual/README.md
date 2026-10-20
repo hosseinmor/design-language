@@ -4,7 +4,7 @@ Visual foundations define the shared visual building blocks used by tokens,
 components, patterns, assets, and product expression. Shared behavior lives in
 `foundations/interaction/`.
 
-## Active guidance
+## Current guidance and planned foundations
 
 - [Color](color.md) · [Tokens](../../design-system/tokens/color/README.md)
 - [Typography](typography.md) · [Tokens](../../design-system/tokens/typography/catalog.md)
