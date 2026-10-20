@@ -11,11 +11,12 @@ related:
   - design-system.structure
   - design-system.governance.documentation-maintenance
   - design-system.reference.source-of-truth
+  - design-system.reference.figma
 ---
 
 # Figma Component Presentation
 
-> **Status: draft for Design System owner review.** This is a rule for **presenting** existing components in Figma, not a redesign of any component API or a release/production approval.
+> **Status: draft for Design System owner review.** This is the single detailed documentation-page presentation proposal. The older 2528px / three-section draft preserved in earlier `figma.md` revisions must not be treated as a parallel rule. This is a rule for **presenting** existing components in Figma, not a redesign of any component API or a release/production approval.
 
 ## Purpose and authority
 

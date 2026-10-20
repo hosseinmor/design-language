@@ -22,7 +22,7 @@ Code is the owning live source for **implemented runtime API and behavior** when
 
 > Runtime Design System source: **not yet registered in Design System Knowledge**.
 
-The currently connected GitHub sources do not provide an identified JV Design System implementation repository/package that can be verified as the owning runtime source.
+The Karbon deployment URL is recorded as an unverified Storybook candidate in [Storybook Reference](storybook.md), but it does **not** identify or register the owning code repository, package exports, release branch or implementation commits. Those implementation identities still require Frontend confirmation.
 
 Do not substitute the internal Product Knowledge site, Figma component/property names, historical Carbon references, Tailwind guidance prose, or product application code for the missing runtime source.
 
