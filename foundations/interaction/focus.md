@@ -3,20 +3,28 @@ id: design-system.experience-rule.focus
 collection: design-system
 type: experience-rule
 title: Focus
-summary: '> Status: structure only'
+summary: TBD design-level focus continuity guidance; accessibility/focus-management owns normative focus behavior.
 knowledge_state: unverified
 document_maturity: scaffold
-related: []
+related:
+  - design-system.accessibility.focus-management
 ---
 
 # Focus
 
-> Status: structure only
+> **TBD / Unverified — this document is a reserved scope, not an approved guideline.** Do not infer behavior, tokens, timing or implementations from this placeholder.
 
-## Principle
-## Rules
-## Exceptions
-## Component Implications
-## Product Implications
-## Accessibility
-## Examples
+## Intended scope (TBD)
+
+Optional shared design conventions for visible task continuity during navigation or temporary surfaces, distinct from normative focus behavior.
+
+## Questions to resolve
+
+- Which design patterns need a documented return-to-task convention?
+- Are there cross-component design exceptions beyond accessibility requirements?
+
+## Existing owners and references
+
+- [Focus Management](../../accessibility/focus-management.md)
+
+When a reviewed source already owns a rule, update that source instead of duplicating it here. Only promote this scaffold after the owner approves genuinely reusable decisions.
