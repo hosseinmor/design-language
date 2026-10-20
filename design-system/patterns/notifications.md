@@ -101,7 +101,7 @@ This pattern composes:
 - existing Icon Button for dismissal;
 - semantic Support/Danger tokens according to message meaning.
 
-The components own anatomy and implementation mechanics; this pattern owns severity meaning and presentation choice.
+The components own anatomy and implementation mechanics; this pattern owns **presentation choice and cross-component feedback composition**. Semantic Color and Content System own severity meanings and wording.
 
 ## Accessibility
 
