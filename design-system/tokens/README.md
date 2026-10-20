@@ -13,11 +13,11 @@ Non-Color Foundations such as Typography, Spacing, Radius, Elevation, Motion, an
 - `semantic-tokens.md` — stable shared UI Color roles and usage boundaries
 - `color-token-aliases.md` — current validated Figma Theme × Appearance mappings
 - `component-tokens.md` — component-token criteria and the finalized categorical Tag Theme Extension
-- `product-overrides.md` — Product ↔ Theme selection and Brand semantic resolution
+- Product ↔ Theme selection is owned by [`product-expression/brands/theme-context.md`](../../product-expression/brands/theme-context.md).
 - `usage-rules.md` — Semantic Color consumption and migration rules
-- `frontend-token-contract.md` — Design-side contract for Theme packages, public/internal token boundaries, serialization, and frontend consumption
+- Frontend packaging and serialization boundaries are documented in [`integrations/frontend-token-contract.md`](../../integrations/frontend-token-contract.md).
 
-Historical/working catalogs remain reference material only when they conflict with the reviewed contracts above.
+Superseded v3/v4 working catalogs are retained in Git history, not in the active knowledge corpus. The current contracts listed above are authoritative.
 
 ## Color model
 
