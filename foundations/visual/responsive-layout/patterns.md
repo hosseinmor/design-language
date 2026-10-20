@@ -18,6 +18,8 @@ related:
 
 This document describes common adaptations. It does not prescribe one responsive transformation for every use case. Product context, information priority, task continuity, and implementation constraints must be considered.
 
+This is a **draft adaptive-composition guide**, not an override of reviewed component requirements or feature-specific rules. Its examples must be checked against the current [Responsive Layout Guideline](guideline.md), [Atomic Specification](spec.md), and the owning component and accessibility documents before use.
+
 ## Navigation
 
 ### Compact layouts
@@ -153,3 +155,13 @@ A product-specific responsive decision should document:
 - information that is hidden, moved, or disclosed;
 - focus, keyboard, and back-navigation behavior;
 - unresolved implementation or product decisions.
+
+## Ownership and related patterns
+
+- [Layout Tokens](../../../design-system/tokens/layout/catalog.md) own shared breakpoint, container and padding values; this document defines no numeric token families.
+- [Data Views](../../../design-system/patterns/data-views.md) and [Table](../../../design-system/components/table.md) own table composition and table-specific responsive decisions.
+- [Dialog](../../../design-system/components/dialog.md) owns its own breakpoint variants, dimensions, modal behavior and runtime acceptance requirements.
+- [Search and Filtering](../../../design-system/patterns/search-and-filtering.md) is a separate TBD cross-component pattern; do not treat these draft compact/expanded filter examples as approved feature behavior.
+- [Responsive Interaction](../../interaction/responsive-interaction.md) owns future cross-component modality behavior (TBD), while [Responsive Accessibility](../../../accessibility/responsive-and-zoom.md) owns normative reflow/zoom guidance.
+
+The detailed responsive transformation of a real Product feature remains Product Knowledge-owned. Verify task, content priority and actual code before claiming implementation.

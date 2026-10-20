@@ -4,7 +4,7 @@ document_type: design-system
 collection: design-system
 type: foundation
 title: Responsive Layout
-summary: Canonical guidance for viewport ranges, breakpoint ruler values, page types, layout regions, content containers, responsive strategies, container queries, and responsive testing.
+summary: Canonical visual guidance for viewport ranges, page types, logical regions, responsive strategies, container choice and responsive testing; exact numeric values live in Layout Tokens.
 knowledge_state: canonical
 document_maturity: reviewed
 owner: Design System team

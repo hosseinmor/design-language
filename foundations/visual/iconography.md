@@ -3,19 +3,30 @@ id: design-system.foundation.iconography
 collection: design-system
 type: foundation
 title: Iconography
-summary: '> Status: structure only'
-knowledge_state: unverified
-document_maturity: scaffold
-related: []
+summary: Documents the verified icon-instance semantic color override guard; icon library, sizing, stroke/fill and accessibility guidelines remain TBD.
+knowledge_state: verified
+document_maturity: draft
+related:
+  - design-system.accessibility.images-icons-and-media
+  - design-system.component.icon-button
 ---
 
 # Iconography
 
-> Status: structure only
+> **Partially reviewed / Draft.** Only the Consumer Color Override Guard below is verified for current Figma authoring. Icon library choices, naming, sizes, stroke/fill and shared asset governance are **TBD**, not approved by this draft.
 
 ## Icon Library
+
+> TBD — Define the canonical asset library, icon naming and governance only after the shared icon-system source is reviewed.
+
 ## Sizes
+
+> TBD — Component-specific icon sizes remain in their owning component specifications; do not invent a universal icon-size token scale.
+
 ## Stroke and Fill
+
+> TBD — Do not infer stroke widths, fill style or library construction from this incomplete document.
+
 ## Usage Rules
 
 ### Consumer color override guard
@@ -35,3 +46,5 @@ Rules:
 This rule is verified for current component authoring even though the rest of this Iconography foundation document remains a scaffold.
 
 ## Accessibility
+
+The [Images, Icons and Media accessibility contract](../../accessibility/images-icons-and-media.md) owns accessible naming and decorative/informational icon behavior. The [Icon Button](../../design-system/components/icon-button.md) owns its own anatomy and operation labeling. Further icon-system-level guidance remains TBD.

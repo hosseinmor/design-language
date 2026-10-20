@@ -4,7 +4,7 @@ document_type: design-system
 collection: design-system
 type: foundation
 title: Responsive Layout Specification
-summary: Atomic rules and decision tables for viewport ranges, breakpoint ruler values, page types, layout regions, containers, responsive strategies, and responsive implementation.
+summary: Atomic responsive rules and decision tables for page types, ranges, regions and transformations; shared numeric values live in Layout Tokens.
 knowledge_state: canonical
 document_maturity: reviewed
 owner: Design System team
