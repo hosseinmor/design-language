@@ -58,5 +58,5 @@ Alpha primitives store direct RGBA values and support transparent interaction, o
 | `color/white-alpha/8` | `rgba(255, 255, 255, 0.08)` |
 | `color/white-alpha/12` | `rgba(255, 255, 255, 0.12)` |
 
-See `color-token-aliases.md` for Appearance-specific alias targets and unresolved mappings.
+See `aliases.md` for Appearance-specific alias targets and unresolved mappings.
 

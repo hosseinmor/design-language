@@ -25,7 +25,7 @@ foundations/
   interaction/        Cross-component behavior
 accessibility/        Normative accessibility guidance
 design-system/
-  tokens/             Semantic token architecture and usage
+  tokens/             Token contracts by family: color, typography, spacing, radius, elevation, motion
   components/         Reusable component decision contracts
   patterns/           Multi-component composition contracts
   templates/          Reusable UI/page templates when approved

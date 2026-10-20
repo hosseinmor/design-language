@@ -354,4 +354,4 @@ The proposed `highlight/default` and `highlight/inverse` roles are removed. A fu
 
 ## Migration history
 
-Historical v3→v4 migrations are recorded in Git history. Follow the active semantic role definitions in [`semantic-tokens.md`](semantic-tokens.md), the current aliases in [`color-token-aliases.md`](color-token-aliases.md), and the system architecture in [`architecture.md`](architecture.md). Do not apply obsolete renaming instructions to current components.
+Historical v3→v4 migrations are recorded in Git history. Follow the active semantic role definitions in [`semantics.md`](semantics.md), the current aliases in [`aliases.md`](aliases.md), and the system architecture in [`architecture.md`](architecture.md). Do not apply obsolete renaming instructions to current components.

@@ -40,13 +40,7 @@ Typical uses:
 - Toast;
 - floating controls such as the Support FAB.
 
-The approved Light recipe follows the Primer-style floating separation model:
-
-```css
-0 0 0 1px #d1d9e040,
-0 6px 12px -3px #25292e0a,
-0 6px 18px 0 #25292e1f
-```
+See the exact Light/Dark recipe contract in the [Elevation Token Catalog](../../design-system/tokens/elevation/catalog.md).
 
 `Shadow/Floating` is a **composite floating-surface recipe**:
 
@@ -56,10 +50,6 @@ The approved Light recipe follows the Primer-style floating separation model:
 The first layer is part of the shared Floating effect, not an explicit component border. Components using `Shadow/Floating` therefore do not add a separate 1px border by default.
 
 Dark keeps the same three-layer geometry and resolves to appearance-aware boundary/shadow colors.
-
-Figma implements Light/Dark resolution inside one Effect Style by binding the three effect colors to hidden implementation variables in the Semantic Appearance collection.
-
-The internal `shadow/floating/border` color chain is active implementation data for the first Floating layer and remains hidden from publishing as a standalone public token.
 
 ## Shadow / Dragged
 
@@ -71,15 +61,7 @@ Typical uses:
 - reorderable list or table row;
 - dragged chip or other movable item.
 
-Approved Light recipe:
-
-```css
-0 12px 16px 0 rgba(0,0,0,.08),
-0 6px 8px 0 rgba(0,0,0,.04),
-0 0 6px 0 rgba(0,0,0,.16)
-```
-
-Dark keeps the same geometry and increases the corresponding layer opacities to approximately 24%, 12%, and 48%.
+The approved values are documented in the [Elevation Token Catalog](../../design-system/tokens/elevation/catalog.md).
 
 Dragged is an interaction state, not a general `Floating / Strong` level.
 
@@ -128,6 +110,10 @@ shadow-dragged
 ```
 
 Exact generated artifact and utility implementation remain Frontend-owned.
+
+## Token source
+
+The [Elevation Token Catalog](../../design-system/tokens/elevation/catalog.md) owns the exact approved shadow recipe declarations. This foundation owns where and why elevation is applied.
 
 ## Figma migration
 

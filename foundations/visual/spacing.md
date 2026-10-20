@@ -20,29 +20,10 @@ Spacing provides one shared scale for recurring Product layout and component spa
 
 Product teams should use the shared scale for ordinary padding, margin, and gap decisions rather than inventing nearby raw values.
 
-## Canonical scale
 
-| Value | Shared key | Tailwind key |
-|---:|---|---|
-| 0px | `spacing-0` | `0` |
-| 2px | `spacing-0.5` | `0.5` |
-| 4px | `spacing-1` | `1` |
-| 6px | `spacing-1.5` | `1.5` |
-| 8px | `spacing-2` | `2` |
-| 12px | `spacing-3` | `3` |
-| 16px | `spacing-4` | `4` |
-| 20px | `spacing-5` | `5` |
-| 24px | `spacing-6` | `6` |
-| 32px | `spacing-8` | `8` |
-| 40px | `spacing-10` | `10` |
-| 48px | `spacing-12` | `12` |
-| 56px | `spacing-14` | `14` |
-| 64px | `spacing-16` | `16` |
-| 80px | `spacing-20` | `20` |
-| 96px | `spacing-24` | `24` |
-| 160px | `spacing-40` | `40` |
+## Token source
 
-Figma variables are value-first for quick scanning (`0px`, `2px`, `4px`, …) and expose the shared key as WEB code syntax.
+See [Spacing Token Catalog](../../design-system/tokens/spacing/catalog.md) for the definitive shared keys, values, and framework mappings.
 
 ## Usage rules
 
@@ -56,6 +37,6 @@ Figma variables are value-first for quick scanning (`0px`, `2px`, `4px`, …) an
 
 ## Source boundary
 
-The semantic scale and usage rules are owned here. Figma owns the editable design variables. The generated runtime artifact and Tailwind preset/config are Code-owned implementation outputs.
+The catalog owns the approved scale and this foundation owns its design usage rules. Figma owns the editable design variables. The generated runtime artifact and Tailwind preset/config are Code-owned implementation outputs.
 
 The exact generated file/module format remains a Frontend decision; it must not require manually re-authoring the scale in Product configuration.
