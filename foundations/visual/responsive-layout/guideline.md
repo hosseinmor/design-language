@@ -4,7 +4,7 @@ document_type: design-system
 collection: design-system
 type: foundation
 title: Responsive Layout
-summary: Canonical guidance for viewport ranges, breakpoint ruler values, page types, layout regions, content containers, responsive strategies, container queries, and responsive testing.
+summary: Canonical visual guidance for viewport ranges, page types, logical regions, responsive strategies, container choice and responsive testing; exact numeric values live in Layout Tokens.
 knowledge_state: canonical
 document_maturity: reviewed
 owner: Design System team
@@ -14,6 +14,7 @@ related:
   - design-system.foundation.responsive-layout-spec
   - design-system.pattern.responsive-layout
   - design-system.reference.tailwind
+  - design-system.token.layout.catalog
 ---
 
 # Responsive Layout
@@ -31,32 +32,21 @@ The model is intentionally close to Primer's responsive foundation because it su
 
 ## Viewport ranges
 
-Viewport ranges are the primary semantic states for page-level responsive behavior.
+Viewport ranges are semantic page-structure states derived from the [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md), not separate device-specific token families.
 
-| Range | Width | Major layout regions | Intended use |
-|---|---:|---:|---|
-| `narrow` | `< 768px` | 1 | Mobile / compact page structure |
-| `regular` | `>= 768px` | Up to 2 | Desktop-friendly patterns may begin |
-| `wide` | `>= 1400px` | Up to 3 | Optional third region or wide workspace |
+| Range | Threshold relationship | Major layout regions | Intended use |
+|---|---|---:|---|
+| `narrow` | Below `breakpoint/medium` | 1 | Compact page structure |
+| `regular` | From `breakpoint/medium` to below `breakpoint/xxlarge` | Up to 2 | Desktop-friendly structures may begin |
+| `wide` | From `breakpoint/xxlarge` upward | Up to 3 | Optional third region or wide workspace |
 
-Use viewport ranges for navigation affordance, stacking/separating major page regions, persistent panes, and optional third-region behavior.
-
-Entering `regular` does **not** mean every page must immediately become multi-column. A page may keep a compact composition until its own content constraints fit.
+Use viewport ranges for navigation affordances, stacking/separating major page regions, persistent panes, and third-region behavior. Entering `regular` does **not** force every page into multiple columns: the task and actual space still govern the transformation.
 
 ## Breakpoint ruler
 
-Breakpoint tokens are shared numeric ruler values. They are not device categories and do not each define a new page mode.
+The shared numeric breakpoints and intended Tailwind mapping are maintained **only** in the [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md). Use them to fine-tune a component/page where viewport ranges are too coarse.
 
-| Token | Value | Tailwind adapter |
-|---|---:|---|
-| `xsmall` | `320px` | `xs` |
-| `small` | `544px` | `sm` |
-| `medium` | `768px` | `md` |
-| `large` | `1012px` | `lg` |
-| `xlarge` | `1280px` | `xl` |
-| `xxlarge` | `1400px` | `2xl` |
-
-Use these values to fine-tune behavior when the three viewport ranges are too coarse. A global breakpoint must not be added for a one-off component; use a local media query or container query instead.
+Do not add a new global breakpoint for one specific component or label breakpoints as devices. Prefer a local query or container query when that better reflects available space.
 
 ## Breakpoint source contract
 
@@ -68,38 +58,33 @@ Figma's `Typography breakpoint` collection is a separate design-time mechanism f
 
 ## Content and pane padding
 
-Padding belongs to the content or pane region itself. Do not add a second outer page-padding wrapper around a normal constrained content container.
+Padding belongs to the Content or Pane region, not to an additional outer page wrapper.
 
-| Breakpoint | Content padding | Pane padding |
-|---|---:|---:|
-| `xsmall` | `16px` | `16px` |
-| `small` | `16px` | `16px` |
-| `medium` | `16px` | `16px` |
-| `large` | `16px` | `16px` |
-| `xlarge` | `24px` | `16px` |
-| `xxlarge` | `24px` | `16px` |
+- `content-padding/default` applies through `breakpoint/large`.
+- `content-padding/wide` applies from `breakpoint/xlarge` upward.
+- `pane-padding` applies to Start/End panes across ranges.
 
-A container's max-width **includes its own horizontal padding**. Example: an `xlarge` container has a maximum outer width of `1280px`; with `24px` padding on both sides, the maximum visually usable inner width is `1232px`.
+For their exact shared numeric values, use the [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md), not a second table here. A container's maximum width **includes** its own horizontal padding; the available inner width equals the outer max-width minus both side paddings.
 
 ## Content containers
 
-| Role | Maximum width | Typical use |
-|---|---:|---|
-| `interstitial` | `320px` | Sign-in, verification, focused single-task screens |
-| `medium` | `768px` | Focused forms and narrow content |
-| `large` | `1012px` | Settings, larger forms, constrained application pages |
-| `xlarge` | `1280px` | Default centered Full page |
-| `full` | `100%` | Operational workspace and split layouts that need all available space |
+Choose a Content container **by the user task**, not by device or viewport mode. The [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md) owns exact widths and whether a role has a published Figma variable.
 
-The numeric max-width includes the region's padding.
+| Role | Typical use |
+|---|---|
+| `interstitial` | Sign-in, verification, focused single-task screens |
+| `medium` | Focused forms and narrow content |
+| `large` | Settings, larger forms, constrained application pages |
+| `xlarge` | Default centered Full page |
+| `full` | Operational workspace and Split layouts needing all available width |
+
+Numeric max-width includes the region's padding.
 
 ## Page types
 
 ### Full page
 
-Use for ordinary centered pages. Default to `xlarge = 1280px`. Use `medium` or `large` when the task benefits from a narrower form or reading width.
-
-Use `xlarge` as the default for ordinary centered pages unless the task benefits from a narrower container.
+Use for ordinary centered pages. Default to the `xlarge` container from the [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md); choose `medium` or `large` when the task benefits from narrower form or reading width.
 
 ### Split page
 
@@ -128,7 +113,7 @@ Treat list-detail as a Split page. The `regular` range begins at `768px`, but th
 
 ### Interstitial page
 
-Use for sign-in, verification, focused loading/transition tasks, and similar single-purpose experiences. Default maximum width: `320px`.
+Use for sign-in, verification, focused loading/transition tasks, and similar single-purpose experiences. Default to the `interstitial` container role.
 
 ## Layout regions
 
@@ -191,29 +176,11 @@ Also test intermediate fluid widths, RTL, text expansion, 200% zoom/reflow, keyb
 
 ## Figma contract
 
-Published `Responsive layout` variables:
+The published **Responsive layout** variable names and reviewed value snapshot now live in the [Layout Token Catalog](../../../design-system/tokens/layout/catalog.md). Figma is the live editable source; Frontend owns runtime adapters. The Figma `Typography breakpoint` collection is a separate design-time mechanism for Fluid Heading typography.
 
-```text
-breakpoint/xsmall      320
-breakpoint/small       544
-breakpoint/medium      768
-breakpoint/large      1012
-breakpoint/xlarge     1280
-breakpoint/xxlarge    1400
+The experimental `Grid/Base`, `Grid/MD`, `Grid/LG`, and `Grid/XL` styles are not part of the canonical responsive foundation. They remain hidden under `Legacy/Working/*` to preserve bindings during migration.
 
-container/interstitial 320
-container/medium       768
-container/large       1012
-container/xlarge      1280
-
-content-padding/default 16
-content-padding/wide    24
-pane-padding            16
-```
-
-The previous experimental `Grid/Base`, `Grid/MD`, `Grid/LG`, and `Grid/XL` styles are not part of the canonical responsive foundation. They remain hidden under `Legacy/Working/*` only to preserve existing bindings during migration.
-
-The Figma page is named **Responsive layout** and documents viewport ranges, page types, canonical Layout regions, responsive strategies, and generic Full/Split/Interstitial examples.
+The Figma **Responsive layout** page documents viewport ranges, page types, canonical logical regions, responsive strategies, and generic Full/Split/Interstitial examples.
 
 ## Related documents
 

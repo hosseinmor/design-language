@@ -44,7 +44,7 @@ See the exact Light/Dark recipe contract in the [Elevation Token Catalog](../../
 
 `Shadow/Floating` is a **composite floating-surface recipe**:
 
-1. the first `0 0 0 1px` layer provides a subtle outline-like boundary so white raised surfaces remain legible on white backgrounds;
+1. the first outline-like layer provides a subtle boundary so white raised surfaces remain legible on white backgrounds; the [Elevation Token Catalog](../../design-system/tokens/elevation/catalog.md) owns its exact recipe;
 2. the second and third layers provide elevation.
 
 The first layer is part of the shared Floating effect, not an explicit component border. Components using `Shadow/Floating` therefore do not add a separate 1px border by default.

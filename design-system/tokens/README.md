@@ -10,6 +10,7 @@ This directory organizes Design Language token contracts by foundation type. Eac
 | Radius | [Radius catalog](radius/catalog.md) | [Radius foundation](../../foundations/visual/radius.md) |
 | Elevation | [Elevation catalog](elevation/catalog.md) | [Elevation foundation](../../foundations/visual/elevation.md) |
 | Motion | [Motion catalog — TBD](motion/catalog.md) | [Motion foundation — TBD](../../foundations/visual/motion.md) |
+| Layout / Responsive | [Layout catalog](layout/catalog.md) | [Layout foundation](../../foundations/visual/layout.md) and [Responsive guideline](../../foundations/visual/responsive-layout/guideline.md) |
 
 **Boundary:** The token document owns approved names/recipes; the Foundation owns design principles, guidance and accessibility applications. Figma owns live editable values and construction, while code/Storybook owns implemented behavior and generated artifacts. Do not manually mirror live values in multiple documents.
 

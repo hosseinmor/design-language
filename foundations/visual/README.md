@@ -4,7 +4,7 @@ Visual foundations define the shared visual building blocks used by tokens,
 components, patterns, assets, and product expression. Shared behavior lives in
 `foundations/interaction/`.
 
-## Active guidance
+## Current guidance and planned foundations
 
 - [Color](color.md) · [Tokens](../../design-system/tokens/color/README.md)
 - [Typography](typography.md) · [Tokens](../../design-system/tokens/typography/catalog.md)
@@ -12,10 +12,10 @@ components, patterns, assets, and product expression. Shared behavior lives in
 - [Radius](radius.md) · [Tokens](../../design-system/tokens/radius/catalog.md)
 - [Elevation](elevation.md) · [Tokens](../../design-system/tokens/elevation/catalog.md)
 - [Motion — TBD](motion.md) · [Tokens — TBD](../../design-system/tokens/motion/catalog.md)
-
-
-- [Layout](layout.md)
-- [Responsive layout](responsive-layout/guideline.md)
+- [Layout — partly TBD](layout.md) · [Layout Tokens](../../design-system/tokens/layout/catalog.md)
+- [Responsive layout](responsive-layout/guideline.md) · [Atomic spec](responsive-layout/spec.md)
+- [Iconography — partially reviewed](iconography.md) · semantic color override guard verified; remaining library/size/stroke rules TBD
+- [Responsive behavior — TBD](responsive-behavior.md) · reserved topic; current guidance is in responsive layout, patterns and Interaction
 
 ## Responsive layout documents
 

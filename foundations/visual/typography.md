@@ -3,7 +3,7 @@ id: design-system.foundation.typography
 collection: design-system
 type: foundation
 title: Typography
-summary: Defines the shared Label, Body, and Heading recipes, Product-aware font identity, compact and fluid variants, and the boundary with local Tailwind typography.
+summary: Defines typography design intent, the selection of shared styles versus local utilities, and accessibility; exact typography recipes are in Tokens.
 knowledge_state: canonical
 document_maturity: reviewed
 owner: Design System team
@@ -34,10 +34,6 @@ Heading / Fluid
 ```
 
 Paragraph and Display are intentionally not part of the core Product recipe set. Landing pages, marketing surfaces, lead paragraphs, display text, and other one-off expressive compositions may use native Tailwind typography utilities.
-
-
-
-
 
 ## DS recipe versus Tailwind utility
 
