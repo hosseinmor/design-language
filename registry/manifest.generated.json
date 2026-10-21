@@ -1628,7 +1628,7 @@
     },
     {
       "id": "design-system.component.table-runtime-contract",
-      "kind": "design-system-component",
+      "kind": "design-system-component-annex",
       "title": "Data Table — Runtime and Accessibility Contract",
       "summary": "Draft design-side implementation and acceptance annex for Data Table; not a standalone public component or verified runtime API.",
       "status": "draft",
@@ -1641,7 +1641,7 @@
       ],
       "topics": [
         "components",
-        "design-system-component",
+        "design-system-component-annex",
         "table-runtime-contract"
       ],
       "path": "design-system/components/table-runtime-contract.md"
@@ -2445,7 +2445,9 @@
       "last_reviewed": "2026-10-14",
       "related": [
         "design-system.component.table",
-        "design-system.accessibility.tables-and-data-visualization"
+        "design-system.accessibility.tables-and-data-visualization",
+        "design-system.component.tag",
+        "design-system.token.component-tokens"
       ],
       "topics": [
         "data-views",
@@ -3160,7 +3162,8 @@
       "design-language-integration": 1,
       "design-language-overview": 1,
       "design-system-accessibility": 18,
-      "design-system-component": 44,
+      "design-system-component": 43,
+      "design-system-component-annex": 1,
       "design-system-design-language": 1,
       "design-system-experience-rule": 11,
       "design-system-foundation": 11,

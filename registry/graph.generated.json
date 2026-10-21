@@ -2205,6 +2205,16 @@
       "type": "related"
     },
     {
+      "from": "design-system.pattern.data-views",
+      "to": "design-system.component.tag",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.data-views",
+      "to": "design-system.token.component-tokens",
+      "type": "related"
+    },
+    {
       "from": "design-system.pattern.empty-states",
       "to": "content.pattern.empty-states",
       "type": "related"
