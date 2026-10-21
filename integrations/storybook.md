@@ -3,7 +3,7 @@ id: design-system.reference.storybook
 collection: design-system
 type: reference
 title: Storybook Reference
-summary: Defines Storybook as the executable component reference when registered and records the current absence of a verified JV Design System Storybook source.
+summary: Storybook owns executable examples and evidence; a reported internal Karbon URL is known but package, build and story mapping remain unverified.
 knowledge_state: canonical
 document_maturity: reviewed
 owner: Design System team
@@ -20,9 +20,9 @@ Storybook is the preferred live source for **runnable component examples and exe
 
 ## Current registration status
 
-> Verified JV Design System Storybook: **not yet registered in Design System Knowledge**.
+> **Known deployment candidate, not registered executable authority:** [https://karbon.jvoffice.ir/](https://karbon.jvoffice.ir/) (company VPN may be required).
 
-No Storybook URL, deployment, story structure, or current coverage map is currently recorded as an owning source.
+This URL has been supplied as the current Karbon site; it has **not been verified against the owning Code repository, package/build revision, individual Story IDs or test reports in this audit**. A known URL is not a verified live registration. The current story structure and coverage map remain unknown.
 
 This is an integration gap, not permission to infer executable behavior from Figma or Markdown.
 
@@ -58,7 +58,7 @@ Canonical story IDs or stable URLs for mapping
 
 ## AI rule while unregistered
 
-Until Storybook is registered:
+Until the site, repository, build identity and relevant stories are verified:
 
 - do not describe a state as runnable merely because it exists in Figma;
 - do not claim interaction/a11y tests exist without the test source;

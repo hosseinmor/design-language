@@ -11,11 +11,12 @@ related:
   - design-system.structure
   - design-system.governance.documentation-maintenance
   - design-system.reference.source-of-truth
+  - design-system.reference.figma
 ---
 
 # Figma Component Presentation
 
-> **Status: draft for Design System owner review.** This is a rule for **presenting** existing components in Figma, not a redesign of any component API or a release/production approval.
+> **Status: mixed evidence / document draft.** The 2528px three-section baseline below was recorded in a previously **reviewed** Figma reference. The separate 1600px/five-section model is a **proposed migration**, pending Design System owner approval. Neither document status nor sample pilots prove that the proposal has superseded the reviewed baseline or that all live Figma pages follow it. This guide concerns **presentation** only, not component API design or release approval.
 
 ## Purpose and authority
 
@@ -28,9 +29,24 @@ The Figma component page should let a designer locate and inspect the canonical 
 
 Do not replicate full API/state tables, token inventories, keyboard specifications, or runtime tests in this presentation. Link to their owning sources when needed. Refer to `overview/design-language.md` and the relevant component contract before proposing substantive changes.
 
-## Standard page structure
+## Reviewed baseline versus proposed presentation (decision pending)
 
-Use **one visually dominant documentation frame** per component. **The original canonical Main Component / Component Set must live inside the presentation frame**. Older documentation frames may remain temporarily as archives, but must no longer contain the active master sources. Reparent existing masters; preserve node IDs, component keys, published identities, variant children, slots, variables, and connected instances.
+The earlier `integrations/figma.md` had `document_maturity: reviewed` and explicitly recorded these **reviewed design-side authoring rules**:
+
+- One canonical editable public Component Set, not a recreated instance matrix or screenshot.
+- A **2528px-wide** default documentation frame, with a white `surface/default` background and the required `Header → 01 · Component set → 02 · Playground` sequence.
+- A human-readable labelled variant matrix and an `Axes & properties` panel **directly beside** the Component Set.
+- Editable source-linked Playground instances, with legacy material outside the canonical work area, while preserving source identities and existing consumers.
+
+**Current proposal, not yet approved as a replacement:** a **1600px-wide** standard frame with the same mandatory core and optional `03 · Anatomy & composition` and `04 · Usage & handoff` sections. The proposal adds documentation utilities and specific layout defaults below; those newer decisions remain draft until owner review.
+
+**Retrieval and authoring rule:** when a task requires an *approved* page-authoring standard, use the reviewed baseline above. When exploring or applying the proposed redesign, state clearly that 1600px and its related layout choices are draft, and request owner approval before treating them as globally normative. Preserve live source identities in either path. Do not present the old 2528px baseline as a rejected draft or infer the current construction of a Figma page without inspecting the file.
+
+**Open decision:** accept the new proposal (including its default width and conditional sections), revise it, or retain the prior baseline; only the Design System owner can close this. Current-value/live-source reconciliation remains deferred.
+
+## Proposed page structure (draft)
+
+The structure below is the 1600px migration proposal until reviewed. Preserve the reviewed core safeguards above regardless of documentation layout. Use **one visually dominant documentation frame** per component. **The original canonical Main Component / Component Set must live inside the presentation frame**. Older documentation frames may remain temporarily as archives, but must no longer contain the active master sources. Reparent existing masters; preserve node IDs, component keys, published identities, variant children, slots, variables, and connected instances.
 
 | Order | Section name | Required | Content |
 | --- | --- | --- | --- |
@@ -52,7 +68,7 @@ Use **one visually dominant documentation frame** per component. **The original 
 
 The canonical public component must be searchable in Figma and remain attached to its expected file/library identity.
 
-## Layout rules (v1)
+## Proposed layout rules (draft v1)
 
 | Rule | Default |
 | --- | --- |
@@ -79,7 +95,7 @@ The **1600 px frame is a documentation canvas convention**, not a product breakp
 - Use full-width source containers for wide internal Masters. Text-only references are supplementary and cannot replace the actual source inside Section 03.
 - Size/density axes are about the **product component**, not arbitrary documentation card sizes.
 
-## Required section details
+## Proposed section details and retained authoring safeguards
 
 ### 00 · Header
 
@@ -90,8 +106,8 @@ Show the component's official Figma name, a concise purpose and (when known) tas
 - Place the **existing public canonical Component Set** directly in this section; display its real variants and axes. Do not use an instance-generated matrix as the sole source display.
 - Keep the full original variant set intact even when large; use full-width rows or a documented width exception rather than hiding canonical variants.
 - Identify secondary component families separately (e.g., Radio Group under Radio).
-- Put the *Axes & properties* panel beside the matrix when width permits; avoid a long standalone text section.
-- Show true `Variant` axes separately from Text, Boolean, Instance Swap, and Slot authoring properties.
+- **Retained reviewed baseline:** Keep the `Axes & properties` panel directly beside the canonical Component Set. If the proposed 1600px frame cannot accommodate it at natural size, document an explicit wide-layout exception rather than separating the panel from the set or squeezing/altering the masters. Show every Variant axis and permitted value; also document public Text, Boolean, Instance Swap, and Slot properties and any related wrapper/group component.
+- Show true `Variant` axes separately from Text, Boolean, Instance Swap, and Slot authoring properties. **Retained design guideline:** arrange one or two compact axes in columns, remaining major axes in rows; add human-readable row/column labels and spacing between meaningful row groups. For example, Accordion Item was documented with columns `Indicator position × Expanded` and rows `Size × State`. This is a matrix-design example, **not** a claim that those are the current live variant options.
 - Do not generate a variant explosion for layout direction, full content permutations, or purely authoring choices unless the canonical component actually has those axes.
 
 ### 02 · Playground
@@ -135,6 +151,16 @@ A change to one of these utilities may affect every presentation instance; inspe
 
 These are **presentation pilots**, not component maturity or runtime approval signals. Both pilots now contain the **original canonical sources moved in place with unchanged node IDs and variant counts**; master APIs were not redesigned.
 
+## Retained cleanup and exploration safeguards
+
+The previous reviewed Figma reference also included these **non-duplicative safeguards**; they remain in force regardless of the proposed canvas width:
+
+- Keep canonical documentation at the page origin and clearly separated from archival/scratch material.
+- Keep an `Archive — legacy & scratch` area **only** for material with genuine migration or reference value. Delete obsolete copies when safely preserved elsewhere and no outstanding migration dependency exists.
+- If both legacy assets and current `Scratch / exploration` need deliberate preservation, keep them in distinct named groups; do not place either among canonical variant sources or Playground instances.
+- **Never delete user-owned exploration solely to declutter a component page.** Follow the intended preservation/review workflow and protect outstanding work.
+- Treat archived assets as noncanonical. Do not change identifiers, detach source components, or recreate masters as a shortcut to a cleaner page.
+
 ## Migration / cleanup protocol
 
 1. Identify published masters, nested source components, existing component-set IDs, slots, and connected instances.
@@ -143,13 +169,13 @@ These are **presentation pilots**, not component maturity or runtime approval si
 4. **Reparent the original public Main Component / Component Set into Section 01**. Verify its node ID, published key, variants, nested dependencies and instance links are unchanged.
 5. **Reparent the original internal Component Sets and standalone Masters into Section 03** for composite components; preserve natural sizes and stable identities.
 6. Use existing source-linked instances in Section 02 Playground. Reuse `_Docs` utilities for headings and notes; a reusable documentation card is never itself a product master.
-7. Mark superseded documentation frames as archive and position them out of the main presentation. Check any externally documented Figma frame links and update references after moving sources.
+7. Move superseded documentation to a separate archive **only when it retains migration/reference value**; otherwise remove obsolete duplicates after verifying they are safely preserved. Keep user-owned current exploration intact, away from the canonical presentation. Check externally documented Figma links after moving sources.
 8. Perform visual and structural QA (below) before accepting the new presentation.
 9. Update component documentation when live source links move, but do not change component behavior/runtime contracts for a presentation-only migration.
 
 ### QA checklist
 
-- [ ] One recognizable 1600 px documentation frame; no unexplained loose content around it
+- [ ] Approved page-width rule respected; 1600px is **draft** unless the owner approves the migration. No unexplained loose content around the canonical presentation.
 - [ ] Header + Section 01 + Section 02 present; optional sections conditional, numbering stable
 - [ ] Titles and section descriptions readable at practical Figma zoom
 - [ ] Auto Layout governs all documentation groups; text uses shared styles and hugs height
@@ -169,7 +195,7 @@ These are **presentation pilots**, not component maturity or runtime approval si
 
 When asked to standardize a Figma component page:
 
-1. Read this rule **only when editing the Figma presentation**, then read the target component contract and inspect the actual current Figma nodes.
+1. Read this guide for the approved baseline **and the explicitly draft proposal**, then read the target component contract and inspect actual live Figma nodes; do not silently enforce the new width without owner review.
 2. Treat existing canonical Masters, published IDs, variable bindings and nested component contracts as protected; ask for owner review before changing them.
 3. Build the documentation layout using `_Docs` utilities; then **move the existing canonical Master nodes** into Sections 01 and 03. Never create substitute instances in their place.
 4. Never infer undocumented axis/state options from a generic template. Display only the target's real options.
@@ -178,6 +204,6 @@ When asked to standardize a Figma component page:
 
 ## Open review points
 
-- Confirm whether all component pages adopt 1600 px, or whether an explicitly defined **wide exception** is needed for unusual editors/data views.
+- Resolve whether the 1600px proposal supersedes the reviewed 2528px baseline and which wide exceptions are necessary for unusual editors/data views.
 - Confirm publication-exclusion enforcement for internal `_Docs` sources in library settings (the naming convention alone must not be treated as technical enforcement).
 - Plan cleanup of already published legacy documentation frames carefully. Keep master identities stable and mark superseded documentation as archive; never silently substitute published component sources.

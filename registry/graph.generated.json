@@ -131,6 +131,7 @@
     "design-system.product-variation.theme-context",
     "design-system.reference.code",
     "design-system.reference.component-mapping",
+    "design-system.reference.component-mapping-index",
     "design-system.reference.figma",
     "design-system.reference.figma-token-compliance",
     "design-system.reference.source-of-truth",
@@ -2025,6 +2026,11 @@
     },
     {
       "from": "design-system.integration.figma-component-presentation",
+      "to": "design-system.reference.figma",
+      "type": "related"
+    },
+    {
+      "from": "design-system.integration.figma-component-presentation",
       "to": "design-system.reference.source-of-truth",
       "type": "related"
     },
@@ -2204,8 +2210,38 @@
       "type": "related"
     },
     {
+      "from": "design-system.reference.component-mapping-index",
+      "to": "design-system.reference.code",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.component-mapping-index",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.component-mapping-index",
+      "to": "design-system.reference.figma",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.component-mapping-index",
+      "to": "design-system.reference.storybook",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.figma",
+      "to": "design-system.integration.figma-component-presentation",
+      "type": "related"
+    },
+    {
       "from": "design-system.reference.figma",
       "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.figma",
+      "to": "design-system.reference.figma-token-compliance",
       "type": "related"
     },
     {
