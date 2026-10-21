@@ -180,20 +180,22 @@ Figma component keys and names above are verified on the live source. This is **
 | Figma component set | `Button / Default` |
 | Figma component key | `be5d0d9cd5fdd02f9d7afa1e371c2f2a23acb329` |
 | Figma node ID | `1854:1776` |
-| Figma variant properties | `Style / Size / State / Loading` |
+| Figma variant properties (live) | `Style / Size / State`; **no public `Loading` Boolean** in the published Component Set |
 | Figma content properties | `Button text / Start Icon / End Icon / Swap Start Icon / Swap End Icon` |
 | Figma styles | `Brand / Primary / Secondary / Tertiary / Ghost / Danger Primary / Danger Tertiary / Danger Ghost` |
 | Figma sizes | `Extra Small 28 / Small 32 / Medium 40 / Large 48` |
-| Figma states | `Enabled / Hover / Active / Focus / Disabled` |
-| Loading representation | `False / True`, separate from interaction State; directly uses Progress Circle / Indeterminate / Small, 16px, State=Active, line/default track + line/accent arc on surface/disabled (HOS-46); no Loading wrapper |
+| Figma states (live) | `Enabled / Hover / Active / Focus / Disabled / Loading` |
+| Loading representation (live Figma) | `State=Loading`. This currently **disagrees with** the documented design intent in `button.md`, which specifies `Loading=True/False` independent from interaction `State`. The desired Progress Circle rendering remains documented design intent, **not** evidence of a live Boolean property or runtime API. |
 | Code repository/package | **Unregistered** |
 | Runtime component/API | **Unverified** |
 | Property mapping | **Unverified** — do not infer code prop names from Figma property names |
 | Storybook | **Unregistered** |
 | Code Connect | **No registered mapping** |
-| Last Figma verification | 2026-09-19 |
+| Last live Figma property inspection | 2026-10-21 (published Component Set identity and public property options) |
 
-The Button design identity and current Figma property model are verified. Runtime API, Storybook identity, and Figma-to-code prop mapping remain deliberately unverified because the owning runtime Design System repository/package and Storybook source are not yet registered. Track that source gap through the integration contract rather than guessing from Figma.
+**Reconciliation decision open (2026-10-21):** Design System owner must decide whether the Figma authoring API should expose independent Loading or whether the intended authoring contract should change. **Do not convert `State=Loading` into an assumed runtime prop.** Preserve source identity and the intended loading/focus contract while deciding.
+
+The Button design identity and current live Figma property model are verified. Runtime API, Storybook identity, and Figma-to-code prop mapping remain deliberately unverified because the owning runtime Design System repository/package and Storybook source are not yet registered. Track that source gap through the integration contract rather than guessing from Figma.
 
 
 ### Icon Button
@@ -701,28 +703,28 @@ The Tabs design identity, line-only v1 appearance, native Items Slot composition
 | Figma file key | `rROD8ctH9UfPGAMrRrOzHe` |
 | Selectable set | `Chip / Selectable` |
 | Selectable key / node | `5571e8e324b47155d7e9fd384aaea289c2e54d89` / `20783:128158` |
-| Selectable variants | `20 = 2 Size × 2 Selected × 5 State` |
+| Selectable variants | `30 = 3 Size × 2 Selected × 5 State` |
 | Selectable properties | Variant: `Size / Selected / State`; content: `Label` |
 | Removable set | `Chip / Removable` |
 | Removable key / node | `193062043a2194024cc06c6d45f11b96b4a238b3` / `23124:358` |
-| Removable variants | `10 = 2 Size × 5 State` |
+| Removable variants | `15 = 3 Size × 5 State` |
 | Removable properties | Variant: `Size / State`; content: `Label / Detail / Show detail / Show leading visual / Leading visual`; `Show detail` controls the whole `Detail content` container |
 | Removable behavioral capability | Body may be independently actionable; body and trailing Remove are separate runtime interaction/focus targets; Body action is not a Figma variant |
 | Removable surface | `surface/accent-muted + line/accent + fg/accent`; Hover/Active preserve the Accent base and layer `surface/transparent-hover/active`; Disabled uses shared selected-disabled treatment |
 | Disclosure set | `Chip / Disclosure` |
 | Disclosure key / node | `3ba6c8dc36a76632d1569108e024ae47c841a50c` / `20783:534` |
-| Disclosure variants | `20 = 2 Size × 2 Applied × 5 State` |
+| Disclosure variants | `30 = 3 Size × 2 Applied × 5 State` |
 | Disclosure properties | Variant: `Size / Applied / State`; content: `Label / Summary / Show summary`; `Show summary` controls the whole `Summary content` container |
 | Disclosure Open | Runtime-only; removed from Figma variants because reviewed Open treatment duplicated Hover visually |
 | Disclosure Applied surface | `surface/accent-muted + line/accent + fg/accent`; Hover/Active preserve the Accent base and layer `surface/transparent-hover/active`; Focus preserves base + `Focus/Default` |
 | Action set | `Chip / Action` |
 | Action key / node | `876535cdb18030fe2d38c6c6221036d770838586` / `23123:125056` |
-| Action variants | `10 = 2 Size × 5 State` |
+| Action variants | `15 = 3 Size × 5 State` |
 | Action anatomy | Optional add/action icon at logical End — visually left of the label in RTL |
 | Action properties | Variant: `Size / State`; content: `Label / Show trailing icon / Trailing icon` |
 | Shared states | `Default / Hover / Active / Focus / Disabled` |
-| Figma sizes | `Small 32 / Medium 40` |
-| Label text style | `Body/Compact/SM` across all four Chip sets |
+| Figma sizes | `Extra Small 28 / Small 32 / Medium 40` (all four public sets) |
+| Label text style | Current `chip.md` design contract states `Label/XS` (Extra Small) and `Label/SM` (Small/Medium); live Text Style bindings require a separate targeted inspection |
 | Main content gap | `8px` shared spacing variable |
 | Secondary content | Disclosure uses `Summary content`; Removable uses `Detail content`; each contains `Divider (·) + value` with `4px` internal gap |
 | Summary / Detail property value | Value only; separator is structural and must not be embedded in the property string |
@@ -740,7 +742,9 @@ The Tabs design identity, line-only v1 appearance, native Items Slot composition
 | Property mapping | **Unverified** — do not infer runtime props, DOM/ARIA roles, compound-control structure, or popup implementation from Figma |
 | Storybook | **Unregistered** |
 | Code Connect | **No registered mapping** |
-| Last Figma verification | 2026-09-23 |
+| Last live Figma property inspection | 2026-10-21 (four published Component Sets, identity and public variant axes) |
+
+**Live inventory reconciliation (2026-10-21):** All four published Chip sets expose a third `Extra Small` size. Previous two-size/20-10-20-10 mapping rows were stale. The owning `chip.md` already contains the three-size design contract; this change updates *evidence only* and does not introduce a new variant, redesign the source or verify Code/Storybook.
 
 The Chip design identity is verified as four capability-specific public component sets that share one visual recipe without a mega Type matrix. Selectable, Removable, Disclosure, and Action contracts, current Full radius, 8px main content gap, separate Divider + Summary/Detail secondary-content anatomy, Accent treatment for Selectable Selected / Disclosure Applied / Removable, shared structured-surface Hover/Active overlays across all Chip families, leading selected check anatomy, Action icon at logical End, focus-visible behavior, RTL anatomy, software lifecycle, Tag/Button/selection-control boundaries, real Disclosure + Popover composition, and legacy migration are documented in `../design-system/components/chip.md`. Runtime API, exact DOM/ARIA implementation, compound Removable structure, Storybook identity, and Figma-to-code property mapping remain deliberately unverified until the owning runtime Design System source is registered.
 

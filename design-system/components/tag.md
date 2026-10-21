@@ -51,7 +51,7 @@ The [Component Accessibility Authoring Contract](../../accessibility/component-a
 > TBD — No Product-specific variance or approved override is implied.
 ## Figma Reference
 
-> TBD — Do not infer public component identity, variants or Figma publication from this placeholder. Confirm from the live owner during the final reconciliation.
+**Live Figma identity recorded, not an approved design contract:** [Tag Component Set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=23493-586), node `23493:586`, published asset key `d1acda5183dc106f7ee6da0169545a71489439af`. On 2026-10-21 the published set exposes `Size = Extra Small / Small / Medium` and `Color = Neutral / Blue / Teal / Green / Yellow / Orange / Red / Magenta / Purple`. This records existing *Figma authoring options*, not final approved Tag anatomy/behavior, production usage, accessibility or Code parity. Keep this document `unverified/scaffold` until the component owner reviews its semantic usage and contract.
 ## Code Reference
 
 > TBD — No registered runtime package, API, Storybook story or executed test evidence is represented here.

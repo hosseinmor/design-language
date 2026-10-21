@@ -42,29 +42,29 @@ These inclusive line numbers are generated from the current `component-mapping.m
 | Confirmation Dialog — standalone Figma component (review draft) | 124–134 | ### Confirmation Dialog — standalone Figma component (review draft) |
 | Alert Dialog — standalone Figma component (review draft) | 136–146 | ### Alert Dialog — standalone Figma component (review draft) |
 | File Uploader — final Carbon design source (runtime unverified) | 148–172 | ### File Uploader — final Carbon design source (runtime unverified) |
-| Button | 174–196 | ### Button |
-| Icon Button | 199–223 | ### Icon Button |
-| Menu | 227–267 | ### Menu |
-| Menu Button | 269–294 | ### Menu Button |
-| Combo Button | 297–324 | ### Combo Button |
-| Tooltip | 327–349 | ### Tooltip |
-| Accordion | 352–370 | ### Accordion |
-| Accordion Item | 372–396 | ### Accordion Item |
-| Link | 398–427 | ### Link |
-| Breadcrumb | 430–460 | ### Breadcrumb |
-| Inline Notification | 463–484 | ### Inline Notification |
-| Toast | 486–509 | ### Toast |
-| Checkbox | 512–547 | ### Checkbox |
-| Radio | 550–582 | ### Radio |
-| Toggle | 585–611 | ### Toggle |
-| Content Switcher | 614–650 | ### Content Switcher |
-| Tabs | 653–693 | ### Tabs |
-| Chip | 695–745 | ### Chip |
-| Progress Bar (HOS-37) | 748–778 | ### Progress Bar (HOS-37) |
-| Progress Indicator (HOS-31) | 780–812 | ### Progress Indicator (HOS-31) |
-| Choice Group | 815–844 | ### Choice Group |
-| Timeline | 846–875 | ### Timeline |
-| Data Table (HOS-35) | 877–906 | ### Data Table (HOS-35) |
+| Button | 174–198 | ### Button |
+| Icon Button | 201–225 | ### Icon Button |
+| Menu | 229–269 | ### Menu |
+| Menu Button | 271–296 | ### Menu Button |
+| Combo Button | 299–326 | ### Combo Button |
+| Tooltip | 329–351 | ### Tooltip |
+| Accordion | 354–372 | ### Accordion |
+| Accordion Item | 374–398 | ### Accordion Item |
+| Link | 400–429 | ### Link |
+| Breadcrumb | 432–462 | ### Breadcrumb |
+| Inline Notification | 465–486 | ### Inline Notification |
+| Toast | 488–511 | ### Toast |
+| Checkbox | 514–549 | ### Checkbox |
+| Radio | 552–584 | ### Radio |
+| Toggle | 587–613 | ### Toggle |
+| Content Switcher | 616–652 | ### Content Switcher |
+| Tabs | 655–695 | ### Tabs |
+| Chip | 697–749 | ### Chip |
+| Progress Bar (HOS-37) | 752–782 | ### Progress Bar (HOS-37) |
+| Progress Indicator (HOS-31) | 784–816 | ### Progress Indicator (HOS-31) |
+| Choice Group | 819–848 | ### Choice Group |
+| Timeline | 850–879 | ### Timeline |
+| Data Table (HOS-35) | 881–910 | ### Data Table (HOS-35) |
 <!-- END GENERATED COMPONENT MAPPING SECTIONS -->
 
 ## Maintenance
