@@ -32,7 +32,7 @@ When shared reuse is possible, prefer updating the owning shared rule or compone
 
 > **TBD:** No approved override records have been added **to this registry** yet. Do not invent an example or infer implementation approval from the heading.
 
-Each future approved entry must document:
+**Proposed review record fields (TBD until owner-approved):**
 
 | Field | Required evidence |
 |---|---|
@@ -52,7 +52,7 @@ A deviation affecting shared component behavior still requires coordinated revie
 
 ## Deprecation and Review
 
-Review an override when its Product scope, component contract, Theme relationship, accessibility requirements, or governing shared rule changes. Remove the exception when the Product can return to shared behavior, and retain any necessary historical rationale in change history.
+**Proposed lifecycle rule (TBD):** Reassess an approved exception when its Product scope, component contract, Theme relationship, accessibility requirements, or governing shared rule changes. Retire it once shared behavior is suitable again, preserving the reviewed rationale in change history.
 
 ## Related Documents
 
