@@ -2165,8 +2165,58 @@
       "type": "related"
     },
     {
+      "from": "design-system.product-variation.brand-variants",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.brand-variants",
+      "to": "design-system.product-variation.theme-context",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.brand-variants",
+      "to": "design-system.token.semantic-tokens",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.brand-variants",
+      "to": "design-system.token.usage-rules",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.product-overrides",
+      "to": "design-system.product-variation.brand-variants",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.product-overrides",
+      "to": "design-system.product-variation.theme-context",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.product-overrides",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.theme-context",
+      "to": "design-system.product-variation.brand-variants",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.theme-context",
+      "to": "design-system.product-variation.product-overrides",
+      "type": "related"
+    },
+    {
       "from": "design-system.product-variation.theme-context",
       "to": "design-system.reference.code",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.theme-context",
+      "to": "design-system.reference.figma",
       "type": "related"
     },
     {
@@ -2177,6 +2227,16 @@
     {
       "from": "design-system.product-variation.theme-context",
       "to": "design-system.token.architecture",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.theme-context",
+      "to": "design-system.token.frontend-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.product-variation.theme-context",
+      "to": "design-system.token.semantic-tokens",
       "type": "related"
     },
     {

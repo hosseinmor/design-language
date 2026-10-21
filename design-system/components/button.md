@@ -330,5 +330,5 @@ These are implementation-system decisions; the Button visual and behavioral cont
 - `../patterns/multi-step-flow.md`
 - `../patterns/confirmation.md`
 - `../patterns/destructive-actions.md`
-- `../../product-expression/brand-variants.md`
+- [Brand Variants](../../product-expression/brands/brand-variants.md)
 - `../tokens/color/semantics.md`

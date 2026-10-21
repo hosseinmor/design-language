@@ -23,7 +23,8 @@ related:
 | Accessibility requirement | `accessibility/router.md` | Runtime accessibility tests |
 | Component design choice, usage or contract | `design-system/components/` | Figma for current visual source; Karbon/Storybook for verified runtime |
 | Multi-component composition and behavior (Loading, Confirmation, Notifications, Tour and other patterns) | `design-system/patterns/` | Owning components, Product Knowledge for feature policy, Karbon for runtime |
-| Brand or expressive variation | `product-expression/` | Figma variables and themes |
+| Product ↔ Theme relationship, Brand usage, or reviewed Product exception | `product-expression/brands/` | Color contracts, Figma for editable values, owning Product Knowledge for conversions |
+| Expressive experience variation | `product-expression/experiences/` | Approved shared usage and Product source; currently TBD |
 | Design-to-code component identity or implementation parity | `integrations/component-mapping-index.md` | Relevant mapping evidence, registered code package and Storybook build |
 | Source-of-truth dispute or documentation ownership | `integrations/source-of-truth.md` | Owning Design Language, Figma, Karbon or Product source |
 | Changing the system | `playbooks/evolve-the-system/` | Owning live sources |
