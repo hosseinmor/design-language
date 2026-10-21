@@ -81,11 +81,9 @@ Switching Product changes the Product branch used by the public Semantic contrac
 
 ## Component page presentation source
 
-The detailed component-page presentation and migration rules live **only** in [Figma Component Presentation](figma-component-presentation.md). Its current documented layout uses a 1600px presentation frame, required Header / public Component Set / Playground, and conditional Anatomy and Handoff sections; see that document for the actual structure and open owner-review decisions.
+The detailed page-authoring rules, original master-preservation safeguards, and the distinct design proposals live **only** in [Figma Component Presentation](figma-component-presentation.md). This document is a source registration and boundary reference, **not** a competing page-layout specification.
 
-This reference **does not maintain a second layout specification**. The older 2528px / three-section scaffold previously documented here is superseded as a documentation proposal and must not be used by AI as a competing design rule.
-
-**Maturity boundary:** The detailed Presentation document remains a `draft` with known open review items. The link is the current place to retrieve its proposed and evidence-backed decisions, **not** automatic approval or proof that every Figma page follows it. Exact current frame construction still requires inspecting the live Figma source at the final reconciliation phase.
+**Maturity boundary:** The presentation guide distinguishes the previously reviewed 2528px/three-section documentation baseline recorded in this reference from a **draft** 1600px/five-section proposal. This PR does **not** approve a change in frame width or publication/migration practice. For decisions that require a reviewed rule, follow the explicitly identified reviewed baseline; treat new draft-only details as proposals. When owner review supersedes the baseline, update the single specialist guide. We are deferring verification of the actual live Figma construction to the final source-reconciliation audit.
 
 ## Stable component identity example: Button
 
