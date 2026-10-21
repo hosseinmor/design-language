@@ -526,7 +526,7 @@
       "title": "Design Language Retrieval Contract",
       "summary": "Defines minimum-context retrieval, identity resolution, conflict handling, and future MCP behavior.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-language.ai.router",
@@ -544,7 +544,7 @@
       "title": "Design Language AI Router",
       "summary": "Routes design-language questions to the smallest canonical knowledge area and the appropriate live source.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.design-language",
@@ -562,7 +562,7 @@
       "title": "Karbon Integration",
       "summary": "Defines how the Design Language repository relates to Karbon code and Storybook without duplicating runtime truth.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.reference.source-of-truth",
@@ -988,7 +988,7 @@
       "title": "Checkbox",
       "summary": "Checkbox lets users select zero, one, or many independent options and can represent a single optional boolean choice.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.component.radio",
@@ -1309,7 +1309,7 @@
       "title": "Modal (legacy name)",
       "summary": "Backward-compatible redirect to the canonical Dialog component.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-17",
       "related": [
         "design-system.component.dialog"
@@ -1484,7 +1484,7 @@
       "title": "Radio",
       "summary": "Radio lets users choose exactly one mutually exclusive option from a group.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.component.checkbox",
@@ -1594,7 +1594,7 @@
       "title": "Toggle",
       "summary": "Toggle is the canonical binary on/off control for settings that take effect immediately.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.component.checkbox",
@@ -1809,7 +1809,7 @@
       "title": "JV Design Language",
       "summary": "Compact design-language entry point for human and AI design work; routes exact specifications to the canonical live sources.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.overview",
@@ -2031,7 +2031,7 @@
       "title": "Color",
       "summary": "Design principles for using color, visual emphasis, perception, and accessibility; detailed token contracts live in tokens/color.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [
         "design-system.token.architecture",
@@ -2266,11 +2266,15 @@
       "id": "design-system.governance.contribution",
       "kind": "design-system-governance",
       "title": "Contribution",
-      "summary": "> Status: structure only",
+      "summary": "TBD contributor-onboarding and evidence-submission guidance; the reviewed Change Process remains the active repository change contract.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.governance.ownership",
+        "design-system.governance.change-process",
+        "design-system.governance.documentation-maintenance"
+      ],
       "topics": [
         "contribution",
         "design-system-governance"
@@ -2281,11 +2285,16 @@
       "id": "design-system.governance.deprecation",
       "kind": "design-system-governance",
       "title": "Deprecation",
-      "summary": "> Status: structure only",
+      "summary": "TBD shared Design Language deprecation and alias migration policy; do not infer automatic Figma or Karbon compatibility.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.governance.ownership",
+        "design-system.governance.change-process",
+        "design-system.component.modal",
+        "design-system.reference.source-of-truth"
+      ],
       "topics": [
         "deprecation",
         "design-system-governance"
@@ -2334,11 +2343,16 @@
       "id": "design-system.governance.release-and-versioning",
       "kind": "design-system-governance",
       "title": "Release and Versioning",
-      "summary": "> Status: structure only",
+      "summary": "TBD Design Language documentation versioning and handoff policy, separate from runtime packages, Figma publication and product deployment.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.governance.ownership",
+        "design-system.governance.change-process",
+        "design-system.reference.source-of-truth",
+        "design-language.integration.karbon"
+      ],
       "topics": [
         "design-system-governance",
         "release-and-versioning"
@@ -2371,7 +2385,7 @@
       "title": "Design Language Scope",
       "summary": "Defines the purpose, scope, boundaries, and operating model of the shared JobVision and Cando Design Language.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.design-language",
@@ -2695,7 +2709,7 @@
       "title": "Theme Package Architecture",
       "summary": "Canonical Product-to-Theme relationship, package selection responsibility, supported variation scope, and boundaries with Semantic tokens and Appearance.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [
         "design-system.token.architecture",
@@ -2758,7 +2772,7 @@
       "title": "Component Mapping Lookup Index",
       "summary": "Compact AI retrieval index for locating the exact Figma/design evidence section without loading the full mapping registry; does not certify runtime parity.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.reference.component-mapping",
@@ -2813,7 +2827,7 @@
       "title": "Sources of Truth",
       "summary": "Defines which source owns design meaning, visual construction, runtime implementation, product behavior, and temporary change history.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.overview",
@@ -2898,7 +2912,7 @@
       "title": "Design Language Knowledge Structure",
       "summary": "Defines the human- and AI-readable architecture, ownership boundaries, and extension points of the Design Language repository.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.design-language",
@@ -2917,7 +2931,7 @@
       "title": "Token Architecture",
       "summary": "Defines the shared Color contract versus Theme-owned Color implementation, including Theme-local Primitives, stable Semantic roles, and component-token boundaries.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [
         "design-system.product-variation.theme-context"
@@ -2936,7 +2950,7 @@
       "title": "Color Token Alias Mappings",
       "summary": "Validated current Figma Color mappings for the Theme package architecture.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [],
       "topics": [
@@ -2953,7 +2967,7 @@
       "title": "Component Tokens",
       "summary": "Defines when component-specific Color tokens are justified and documents the approved Tag exception.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [],
       "topics": [
@@ -2970,7 +2984,7 @@
       "title": "Elevation Token Catalog",
       "summary": "Approved Shadow/Floating and Shadow/Dragged recipes, including current Light values and Dark resolution notes.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.elevation"
@@ -3007,7 +3021,7 @@
       "title": "Layout Token Catalog",
       "summary": "Reviewed responsive breakpoint, content-container and region-padding token identifiers and values; distinguishes published Figma variables from conceptual layout roles.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.layout",
@@ -3065,7 +3079,7 @@
       "title": "Radius Token Catalog",
       "summary": "Reviewed approved radius tokens, design values, Figma variables, and code names.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.radius"
@@ -3084,7 +3098,7 @@
       "title": "Semantic Tokens",
       "summary": "Stable shared Color roles and their usage boundaries across compatible Theme and Appearance contexts.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [],
       "topics": [
@@ -3101,7 +3115,7 @@
       "title": "Spacing Token Catalog",
       "summary": "Reviewed shared spacing token keys, values, and Tailwind mapping.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.spacing"
@@ -3120,7 +3134,7 @@
       "title": "Typography Token Catalog",
       "summary": "Approved semantic typography recipes, responsive heading styles, weights, and product-aware font mapping.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.typography"
