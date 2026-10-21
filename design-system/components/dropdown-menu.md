@@ -14,7 +14,7 @@ related:
 
 # Dropdown Menu
 
-> **TBD / Unverified — reserved component topic only.** This is not evidence of a released or approved public component. The linked reviewed documents below retain ownership of existing rules; the remaining component decisions need review.
+> **TBD / Unverified — reserved component topic only.** This is not evidence of a released or approved public component. Linked documents have **independent maturity and review status** (some are draft/scaffold). Each source owns only decisions within its stated, evidence-backed scope; follow its metadata and unresolved gaps before treating any rule as approved.
 
 ## Purpose
 
@@ -63,7 +63,7 @@ The [Component Accessibility Authoring Contract](../../accessibility/component-a
 - Do any verified Figma or runtime consumers still use this exact public name?
 - Which alias/legacy migration would preserve stable IDs without inventing two competing APIs?
 
-**Existing owners and evidence:**
+**Related sources and scopes (review maturity varies):**
 
 - [Menu](menu.md) — canonical command/action surface
 - [Menu Button](menu-button.md) — peer-action trigger

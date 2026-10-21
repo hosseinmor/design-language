@@ -1,7 +1,7 @@
 ---
 id: design-system.component.table-runtime-contract
 collection: design-system
-type: component
+type: component-annex
 title: Data Table — Runtime and Accessibility Contract
 summary: Draft design-side implementation and acceptance annex for Data Table; not a standalone public component or verified runtime API.
 knowledge_state: unverified

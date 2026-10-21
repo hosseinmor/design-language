@@ -14,7 +14,7 @@ related:
 
 # Badge
 
-> **TBD / Unverified — reserved component topic only.** This is not evidence of a released or approved public component. The linked reviewed documents below retain ownership of existing rules; the remaining component decisions need review.
+> **TBD / Unverified — reserved component topic only.** This is not evidence of a released or approved public component. Linked documents have **independent maturity and review status** (some are draft/scaffold). Each source owns only decisions within its stated, evidence-backed scope; follow its metadata and unresolved gaps before treating any rule as approved.
 
 ## Purpose
 
@@ -63,7 +63,7 @@ The [Component Accessibility Authoring Contract](../../accessibility/component-a
 - How does it differ from Tag and Chip in purpose and accessibility?
 - What semantics and product scenarios warrant any special state/color treatment?
 
-**Existing owners and evidence:**
+**Related sources and scopes (review maturity varies):**
 
 - [Chip](chip.md) — interactive compact controls
 - [Tag](tag.md) — categorical Tag component, itself still a scaffold

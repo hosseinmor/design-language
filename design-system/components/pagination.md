@@ -14,7 +14,7 @@ related:
 
 # Pagination
 
-> **TBD / Unverified — reserved component topic only.** This is not evidence of a released or approved public component. The linked reviewed documents below retain ownership of existing rules; the remaining component decisions need review.
+> **TBD / Unverified — reserved component topic only.** This is not evidence of a released or approved public component. Linked documents have **independent maturity and review status** (some are draft/scaffold). Each source owns only decisions within its stated, evidence-backed scope; follow its metadata and unresolved gaps before treating any rule as approved.
 
 ## Purpose
 
@@ -63,7 +63,7 @@ The [Component Accessibility Authoring Contract](../../accessibility/component-a
 - Is Pagination a separate public component or a Data Views composition?
 - Who owns page-size selection, total counts and URL/history synchronization?
 
-**Existing owners and evidence:**
+**Related sources and scopes (review maturity varies):**
 
 - [Data Views](../patterns/data-views.md) — choice/placement in page composition
 - [Data Table](table.md) — table-specific data presentation, not paging policy

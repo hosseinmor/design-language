@@ -14,7 +14,7 @@ related:
 
 # Tag
 
-> **TBD / Unverified — reserved component topic only.** This is not evidence of a released or approved public component. The linked reviewed documents below retain ownership of existing rules; the remaining component decisions need review.
+> **TBD / Unverified — reserved component topic only.** This is not evidence of a released or approved public component. Linked documents have **independent maturity and review status** (some are draft/scaffold). Each source owns only decisions within its stated, evidence-backed scope; follow its metadata and unresolved gaps before treating any rule as approved.
 
 ## Purpose
 
@@ -63,7 +63,7 @@ The [Component Accessibility Authoring Contract](../../accessibility/component-a
 - Does it need hover or any click behavior; if so, is that actually Chip?
 - How do visual categories, semantic status and accessible labels remain distinct?
 
-**Existing owners and evidence:**
+**Related sources and scopes (review maturity varies):**
 
 - [Component Color Tokens](../tokens/color/component-tokens.md) — approved Tag-only categorical palette, not full component
 - [Chip](chip.md) — approved interactive compact-control family
