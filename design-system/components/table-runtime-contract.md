@@ -1,9 +1,9 @@
 ---
 id: design-system.component.table-runtime-contract
 collection: design-system
-type: component
+type: component-annex
 title: Data Table — Runtime and Accessibility Contract
-summary: Proposed implementation contract and acceptance tests for the HOS-35 RTL Data Table pilot.
+summary: Draft design-side implementation and acceptance annex for Data Table; not a standalone public component or verified runtime API.
 knowledge_state: unverified
 document_maturity: draft
 design_status: in-progress
@@ -16,6 +16,8 @@ last_reviewed: '2026-10-14'
 ---
 
 # Data Table — Runtime and Accessibility Contract
+
+> **Document classification:** This is a subordinate **development-handoff proposal** for [Data Table](table.md), not a second public Design System component. Its proposed DOM/ARIA/interaction acceptance criteria are design-side requirements subject to implementation review. Actual runtime exports, APIs, test results and shipped behavior belong to registered Karbon Code/Storybook; shared normative accessibility rules belong to [Accessibility](../../accessibility/tables-and-data-visualization.md).
 
 > **Status: development-handoff proposal, NOT a verified runtime implementation.** Figma geometry, instance composition and visual states have been tested. Angular/browser functionality, assistive-technology behavior, live scrolling/zoom, and automated tests have **not** been implemented or run. Preserve the canonical [cross-cutting table accessibility document](../../accessibility/tables-and-data-visualization.md) as authority; this document specifies HOS-35 component-specific behavior only.
 

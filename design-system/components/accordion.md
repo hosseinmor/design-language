@@ -6,7 +6,9 @@ title: Accordion
 summary: Accordion groups related disclosure items so users can reveal supporting content in place while keeping the page scannable.
 knowledge_state: verified
 document_maturity: draft
-related: []
+related:
+  - design-system.accessibility.keyboard-navigation
+  - design-system.reference.component-mapping
 design_status: ready-for-dev
 design_maturity: handoff-ready
 source_figma: https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=22821-129502

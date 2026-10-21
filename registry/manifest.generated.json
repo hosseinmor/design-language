@@ -9,7 +9,10 @@
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.reference.component-mapping"
+      ],
       "topics": [
         "accordion",
         "components",
@@ -25,7 +28,11 @@
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.experience-rule.action-hierarchy",
+        "design-system.token.semantic-tokens",
+        "design-system.product-variation.brand-variants"
+      ],
       "topics": [
         "button",
         "components",
@@ -940,11 +947,15 @@
       "id": "design-system.component.badge",
       "kind": "design-system-component",
       "title": "Badge",
-      "summary": "> Status: structure only",
+      "summary": "TBD Badge component scope and anatomy; distinguish non-interactive Badge from Tag, Chip, counters and status text before approving a public component.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.component.tag",
+        "design-system.component.chip",
+        "design-system.component.tabs"
+      ],
       "topics": [
         "badge",
         "components",
@@ -1122,11 +1133,15 @@
       "id": "design-system.component.drawer",
       "kind": "design-system-component",
       "title": "Drawer",
-      "summary": "> Status: structure only",
+      "summary": "TBD Drawer component scope and design contract; distinguish modal/non-modal side surfaces from Dialog and responsive pane layouts.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.component.dialog",
+        "design-system.foundation.responsive-layout",
+        "design-system.accessibility.focus-management"
+      ],
       "topics": [
         "components",
         "design-system-component",
@@ -1138,11 +1153,15 @@
       "id": "design-system.component.dropdown-menu",
       "kind": "design-system-component",
       "title": "Dropdown Menu",
-      "summary": "> Status: structure only",
+      "summary": "TBD legacy Dropdown Menu naming/scope; Menu currently owns action surfaces and Menu Button/Combo Button own their respective triggers.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.component.menu",
+        "design-system.component.menu-button",
+        "design-system.component.combo-button"
+      ],
       "topics": [
         "components",
         "design-system-component",
@@ -1154,11 +1173,15 @@
       "id": "design-system.component.empty-state",
       "kind": "design-system-component",
       "title": "Empty State",
-      "summary": "> Status: structure only",
+      "summary": "TBD Empty State component anatomy; composition belongs to the Empty States pattern and messaging to the Content System.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.pattern.empty-states",
+        "content.pattern.empty-states",
+        "design-system.pattern.data-views"
+      ],
       "topics": [
         "components",
         "design-system-component",
@@ -1226,7 +1249,11 @@
       "status": "draft",
       "owner": null,
       "last_reviewed": "2026-09-19",
-      "related": [],
+      "related": [
+        "design-system.accessibility.structure-and-navigation",
+        "button",
+        "design-system.reference.component-mapping"
+      ],
       "topics": [
         "components",
         "design-system-component",
@@ -1318,11 +1345,15 @@
       "id": "design-system.component.pagination",
       "kind": "design-system-component",
       "title": "Pagination",
-      "summary": "> Status: structure only",
+      "summary": "TBD Pagination component anatomy and control states; data-view composition and product paging policy are owned elsewhere.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.pattern.data-views",
+        "design-system.component.table",
+        "design-system.accessibility.structure-and-navigation"
+      ],
       "topics": [
         "components",
         "design-system-component",
@@ -1597,9 +1628,9 @@
     },
     {
       "id": "design-system.component.table-runtime-contract",
-      "kind": "design-system-component",
+      "kind": "design-system-component-annex",
       "title": "Data Table — Runtime and Accessibility Contract",
-      "summary": "Proposed implementation contract and acceptance tests for the HOS-35 RTL Data Table pilot.",
+      "summary": "Draft design-side implementation and acceptance annex for Data Table; not a standalone public component or verified runtime API.",
       "status": "draft",
       "owner": null,
       "last_reviewed": "2026-10-14",
@@ -1610,7 +1641,7 @@
       ],
       "topics": [
         "components",
-        "design-system-component",
+        "design-system-component-annex",
         "table-runtime-contract"
       ],
       "path": "design-system/components/table-runtime-contract.md"
@@ -1639,11 +1670,15 @@
       "id": "design-system.component.tag",
       "kind": "design-system-component",
       "title": "Tag",
-      "summary": "> Status: structure only",
+      "summary": "TBD Tag component anatomy and behavior; approved categorical Tag Color tokens exist separately from this unverified component scaffold.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.token.component-tokens",
+        "design-system.component.chip",
+        "design-system.component.badge"
+      ],
       "topics": [
         "components",
         "design-system-component",
@@ -2410,7 +2445,9 @@
       "last_reviewed": "2026-10-14",
       "related": [
         "design-system.component.table",
-        "design-system.accessibility.tables-and-data-visualization"
+        "design-system.accessibility.tables-and-data-visualization",
+        "design-system.component.tag",
+        "design-system.token.component-tokens"
       ],
       "topics": [
         "data-views",
@@ -3125,7 +3162,8 @@
       "design-language-integration": 1,
       "design-language-overview": 1,
       "design-system-accessibility": 18,
-      "design-system-component": 44,
+      "design-system-component": 43,
+      "design-system-component-annex": 1,
       "design-system-design-language": 1,
       "design-system-experience-rule": 11,
       "design-system-foundation": 11,

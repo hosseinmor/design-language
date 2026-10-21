@@ -6,7 +6,10 @@ title: Button
 summary: Buttons trigger actions through a constrained hierarchy of Brand, operational, low-emphasis, and destructive styles.
 knowledge_state: verified
 document_maturity: draft
-related: []
+related:
+  - design-system.experience-rule.action-hierarchy
+  - design-system.token.semantic-tokens
+  - design-system.product-variation.brand-variants
 design_status: ready-for-dev
 design_maturity: handoff-ready
 ---

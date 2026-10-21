@@ -155,6 +155,31 @@
   ],
   "edges": [
     {
+      "from": "accordion",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "accordion",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "button",
+      "to": "design-system.experience-rule.action-hierarchy",
+      "type": "related"
+    },
+    {
+      "from": "button",
+      "to": "design-system.product-variation.brand-variants",
+      "type": "related"
+    },
+    {
+      "from": "button",
+      "to": "design-system.token.semantic-tokens",
+      "type": "related"
+    },
+    {
       "from": "content.component.button",
       "to": "button",
       "type": "related"
@@ -1115,6 +1140,21 @@
       "type": "related"
     },
     {
+      "from": "design-system.component.badge",
+      "to": "design-system.component.chip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.badge",
+      "to": "design-system.component.tabs",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.badge",
+      "to": "design-system.component.tag",
+      "type": "related"
+    },
+    {
       "from": "design-system.component.breadcrumb",
       "to": "design-system.component.link",
       "type": "related"
@@ -1265,6 +1305,51 @@
       "type": "related"
     },
     {
+      "from": "design-system.component.drawer",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.drawer",
+      "to": "design-system.component.dialog",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.drawer",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.dropdown-menu",
+      "to": "design-system.component.combo-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.dropdown-menu",
+      "to": "design-system.component.menu",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.dropdown-menu",
+      "to": "design-system.component.menu-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.empty-state",
+      "to": "content.pattern.empty-states",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.empty-state",
+      "to": "design-system.pattern.data-views",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.empty-state",
+      "to": "design-system.pattern.empty-states",
+      "type": "related"
+    },
+    {
       "from": "design-system.component.file-uploader",
       "to": "content.pattern.error",
       "type": "related"
@@ -1325,6 +1410,21 @@
       "type": "related"
     },
     {
+      "from": "design-system.component.link",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.link",
+      "to": "design-system.accessibility.structure-and-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.link",
+      "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
       "from": "design-system.component.menu",
       "to": "design-system.accessibility.component-authoring-contract",
       "type": "related"
@@ -1382,6 +1482,21 @@
     {
       "from": "design-system.component.notification",
       "to": "design-system.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.pagination",
+      "to": "design-system.accessibility.structure-and-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.pagination",
+      "to": "design-system.component.table",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.pagination",
+      "to": "design-system.pattern.data-views",
       "type": "related"
     },
     {
@@ -1642,6 +1757,21 @@
     {
       "from": "design-system.component.tabs",
       "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.tag",
+      "to": "design-system.component.badge",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.tag",
+      "to": "design-system.component.chip",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.tag",
+      "to": "design-system.token.component-tokens",
       "type": "related"
     },
     {
@@ -2072,6 +2202,16 @@
     {
       "from": "design-system.pattern.data-views",
       "to": "design-system.component.table",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.data-views",
+      "to": "design-system.component.tag",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.data-views",
+      "to": "design-system.token.component-tokens",
       "type": "related"
     },
     {

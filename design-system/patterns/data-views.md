@@ -9,6 +9,8 @@ document_maturity: draft
 related:
   - design-system.component.table
   - design-system.accessibility.tables-and-data-visualization
+  - design-system.component.tag
+  - design-system.token.component-tokens
 last_reviewed: '2026-10-14'
 ---
 
@@ -64,7 +66,7 @@ Preserve column correspondence and semantic relationships. Prioritize predictabl
 
 ## Content guidelines
 
-Prefer concise data labels, predictable number/date formatting and semantic Tag components rather than ad-hoc status colors. Two-line content is a controlled exception, not the default for every column. Default single-line content truncates. For meaningful long text use `Data Table Text Content` with `Overflow=Wrap` (maximum two lines, ellipsis beyond that); for intentional primary/secondary metadata use `Text + Description`. Both belong inside a Cell Content slot and grow only their owning Row through Hug height. The Table Size remains Small/Medium/Large, with minimum heights 32/40/48px and two-line examples 48/56/64px thanks to 4/8/12px Cell vertical padding. Dates, numbers and statuses should normally remain one line. Avoid excessive per-row actions and unnecessary multi-line columns in dense management tables.
+Prefer concise data labels and predictable number/date formatting. For status or category labels, use readable text and an approved semantic treatment; do **not** introduce ad-hoc status colors. The categorical [Tag Color token contract](../tokens/color/component-tokens.md) is reviewed, but the [Tag component](../components/tag.md) is still an unverified scaffold. Do not prescribe the public Tag component until its anatomy, semantics and variants are reviewed. Two-line content is a controlled exception, not the default for every column. Default single-line content truncates. For meaningful long text use `Data Table Text Content` with `Overflow=Wrap` (maximum two lines, ellipsis beyond that); for intentional primary/secondary metadata use `Text + Description`. Both belong inside a Cell Content slot and grow only their owning Row through Hug height. The Table Size remains Small/Medium/Large, with minimum heights 32/40/48px and two-line examples 48/56/64px thanks to 4/8/12px Cell vertical padding. Dates, numbers and statuses should normally remain one line. Avoid excessive per-row actions and unnecessary multi-line columns in dense management tables.
 
 ## Known gaps
 

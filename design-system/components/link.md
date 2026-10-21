@@ -6,7 +6,10 @@ title: Link
 summary: Links navigate users to another destination through a standalone component with three sizes and an inline native-text recipe.
 knowledge_state: verified
 document_maturity: draft
-related: []
+related:
+  - design-system.accessibility.structure-and-navigation
+  - button
+  - design-system.reference.component-mapping
 design_status: ready-for-dev
 design_maturity: handoff-ready
 last_reviewed: '2026-09-19'
