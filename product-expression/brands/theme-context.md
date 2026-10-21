@@ -72,7 +72,7 @@ The choice to **use** a Brand Button follows [Brand Variants](brand-variants.md)
 
 A different Theme **value** for the same Semantic role is normal Theme variation, not a Product Override. A different Product rule or a one-off UI composition is also **not** automatically a new shared override.
 
-When a Product deliberately needs to depart from a reusable Design Language guideline, use the [Product Overrides](product-overrides.md) review route, with explicit affected scope, owner, evidence and accessibility implications. Product permissions, eligibility, lifecycle and feature flow remain with **Product Knowledge / Product Walkthrough**.
+When a Product may need to depart from a reusable Design Language guideline, record the proposed exception for owner review. The [Product Overrides](product-overrides.md) file is **currently an unverified scaffold**, not an approved registry or finalized review process; its review fields and lifecycle rules remain TBD. No Product exception is approved solely by adding a record. Product permissions, eligibility, lifecycle and feature flow remain with **Product Knowledge / Product Walkthrough**.
 
 ## Runtime status and unresolved implementation
 

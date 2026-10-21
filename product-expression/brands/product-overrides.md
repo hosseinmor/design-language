@@ -14,11 +14,11 @@ related:
 
 # Product Overrides
 
-> **TBD / Unverified.** No specific Product Override is established by this placeholder. Absence of a record here does not prove that a live Product has no exception.
+> **TBD / Unverified.** No specific Product Override is established by this placeholder. **The criteria, recording fields and lifecycle process below are proposed for owner review, not approved governance policy.** Absence of a record here does not prove that a live Product has no exception.
 
 ## Override Criteria
 
-A Product Override is a **reviewed, scoped deviation from an otherwise shared Design Language decision**, justified by a stable Product-specific need. Do not classify these as overrides:
+**Proposed definition (TBD):** A Product Override would be a **reviewed, scoped deviation from an otherwise shared Design Language decision**, justified by a stable Product-specific need. The categories below should normally be routed to their existing owners instead of becoming Overrides:
 
 - a Theme choosing different concrete values for the same shared token meaning;
 - ordinary Product eligibility, permissions, user flow or business logic (owned by Product Knowledge);
@@ -26,7 +26,7 @@ A Product Override is a **reviewed, scoped deviation from an otherwise shared De
 - temporary Figma/runtime drift awaiting reconciliation;
 - exploratory UI that has not been reviewed or approved.
 
-When shared reuse is possible, prefer updating the owning shared rule or component/pattern instead of granting an exception.
+**Proposed decision preference (TBD):** Where shared reuse is possible, update the owning shared rule or component/pattern rather than grant an exception. Final exception governance must be approved by the Design System owner.
 
 ## Approved Overrides
 
@@ -44,7 +44,7 @@ When shared reuse is possible, prefer updating the owning shared rule or compone
 | Scope and lifecycle | Effective situations, expiry/review trigger, deprecation route |
 | Live implementation | Figma/source identity and Karbon/Storybook version when confirmed; otherwise explicitly unverified |
 
-A deviation affecting shared component behavior still requires coordinated review with the component's owner and runtime implementation team.
+**Proposed review requirement (TBD):** A deviation affecting shared component behavior should receive coordinated approval from the component's Design System owner and runtime implementation team.
 
 ## Product-Specific Exceptions
 
