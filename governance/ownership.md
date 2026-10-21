@@ -7,7 +7,7 @@ summary: Defines ownership and review responsibility for shared Design System kn
 knowledge_state: canonical
 document_maturity: reviewed
 owner: Design System team
-last_reviewed: '2026-09-03'
+last_reviewed: '2026-10-21'
 related:
 - design-system.governance.documentation-maintenance
 - design-system.governance.change-process
@@ -38,13 +38,12 @@ Designers, engineers, QA, AI agents, and accessibility reviewers may propose cha
 
 ## Process
 
-- Canonical/reviewed Design System documents **MUST** resolve to an effective owner in the generated Manifest, through an explicit `owner` or the reviewed shared-collection default below.
-- The 18 operational documents in `accessibility/` inherit `Design System team` as their collection owner unless a document explicitly names another approved owner, **regardless of their maturity**.
-- Other **reviewed** documents with `collection: design-system` or `collection: design-language` inherit `Design System team` stewardship **only when no explicit `owner` is recorded**. This matches the existing shared-system responsibility above and lets the Manifest expose an effective owner for reviewed contracts.
-- Unreviewed documents outside Accessibility **do not receive an inferred owner** from this rule; a draft's actual reviewer/approver remains to be established. A missing owner there is a tracked maintenance gap, not permission for AI to approve its proposals.
-- The retrieval manifest **MUST** resolve the effective inherited owner. An inherited owner identifies **stewardship**, not evidence that each sentence was newly reviewed, approved for runtime, or assigned to a named individual.
-- Individual documents MAY repeat their inherited owner in frontmatter when useful. Any explicit alternative must be reviewed and recorded; explicit ownership takes precedence over the default.
-- Changing collection stewardship or introducing a document-specific override is a governance change and requires owner review through a branch and pull request.
+- All documents with `collection: design-system` or `collection: design-language` inherit `Design System team` as their **maintaining steward**, regardless of `document_maturity`, `knowledge_state`, Manifest `status`, or design handoff status. An explicit document `owner` takes precedence.
+- The 18 operational documents under `accessibility/` inherit `Design System team` regardless of maturity, unless they explicitly name another approved owner.
+- The generated Manifest **MUST** resolve an effective owner for these shared collections. Other collections (for example, `content` and product-owned knowledge) keep their own stewardship rules or explicit owners, rather than inheriting the Design System default.
+- **Stewardship is not approval.** A Draft or Scaffold retains its maturity, outstanding owner decisions, review gates and unresolved implementation facts. A recorded owner never certifies publication, design signoff, or a runtime release.
+- A normative change may still require Product, engineering or accessibility co-review. The shared steward does not replace domain-specific approval.
+- Explicit alternative owners must be reviewed and recorded. Changing stewardship defaults or overrides requires an owner-reviewed pull request.
 
 ## Review Requirements
 

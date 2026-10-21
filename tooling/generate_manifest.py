@@ -142,10 +142,10 @@ def infer_product(path: str, metadata: dict[str, Any]) -> str | None:
 
 
 def infer_owner(path: str, metadata: dict[str, Any]) -> str | None:
-    """Resolve explicit owner, then reviewed shared-knowledge/Accessibility defaults.
+    """Resolve stewardship independently of review and implementation maturity.
 
-    Do not assign an inferred owner to unreviewed drafts in non-Accessibility
-    collections: a nominated reviewer is not proof of an approved decision.
+    Explicit ownership wins; shared Design Language documents inherit
+    maintaining stewardship even while draft or scaffold, not content approval.
     """
     if nonempty_string(metadata.get("owner")):
         return str(metadata["owner"]).strip()
@@ -154,12 +154,8 @@ def infer_owner(path: str, metadata: dict[str, Any]) -> str | None:
     if parts and parts[0] == "accessibility":
         return DESIGN_SYSTEM_TEAM
 
-    # A reviewed shared Design Language document inherits its established
-    # system-level stewardship. Explicit owners always take precedence.
-    if (
-        metadata.get("collection") in {"design-system", "design-language"}
-        and infer_status(metadata) == "reviewed"
-    ):
+    # Stewardship is not review approval, design maturity or code shipment.
+    if metadata.get("collection") in {"design-system", "design-language"}:
         return DESIGN_SYSTEM_TEAM
 
     return None

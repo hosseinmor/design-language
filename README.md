@@ -42,6 +42,7 @@ python tooling/generate_manifest.py generate
 python tooling/generate_manifest.py check
 python tooling/generate_component_mapping_index.py check
 python tooling/validators/check_ai_governance.py
+python -m unittest discover -s tests -p 'test_ai_governance.py'
 python tooling/validate_links.py
 python tooling/validators/check_accessibility_knowledge.py
 python tooling/validators/check_content_terminology.py
