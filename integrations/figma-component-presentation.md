@@ -29,6 +29,22 @@ The Figma component page should let a designer locate and inspect the canonical 
 
 Do not replicate full API/state tables, token inventories, keyboard specifications, or runtime tests in this presentation. Link to their owning sources when needed. Refer to `overview/design-language.md` and the relevant component contract before proposing substantive changes.
 
+## Observed live presentations — 2026-10-21, not a policy decision
+
+A targeted read of the actual Figma document gives the following **current examples**, not a representative compliance score or approval of the proposed default:
+
+| Live Figma documentation source | Frame width | Observed structure |
+|---|---:|---|
+| Button, node `22880:132625` | 2528px | Header, original Component Set, Playground (reviewed baseline layout) |
+| Dialog, node `24058:9` | 1600px | 00 Header through 04 Usage & handoff |
+| Chip, node `23900:128061` | 1600px | 00 Header through 04 Usage & handoff |
+| File Uploader, node `24020:785` | 1600px | 00 Header through 04 Usage & handoff |
+| Select, node `23864:904` | 3572px | 00 Header through 04 Usage & handoff; explicit wide-master layout |
+
+These observations confirm that live component pages currently mix the reviewed 2528px baseline, 1600px proposed presentation and wide exceptions. **They do not authorize a global migration, promote this document out of Draft, or replace a previously approved authoring standard.** The Design System owner still needs to decide the default and the rules for wide exceptions.
+
+The published Figma component inventory also includes helper sets such as `__Chip Remove Action` and `__Chip Chevron / Neutral`; a name prefix alone does **not** hide a source from library consumers. Confirm intended publication/exclusion status with the library owner before changing these helper identities. Do **not** unpublish or detach existing source components solely on the basis of this inventory.
+
 ## Reviewed baseline versus proposed presentation (decision pending)
 
 The earlier `integrations/figma.md` had `document_maturity: reviewed` and explicitly recorded these **reviewed design-side authoring rules**:
