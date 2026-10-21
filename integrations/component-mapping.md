@@ -185,7 +185,7 @@ Figma component keys and names above are verified on the live source. This is **
 | Figma styles | `Brand / Primary / Secondary / Tertiary / Ghost / Danger Primary / Danger Tertiary / Danger Ghost` |
 | Figma sizes | `Extra Small 28 / Small 32 / Medium 40 / Large 48` |
 | Figma states (live) | `Enabled / Hover / Active / Focus / Disabled / Loading` |
-| Loading representation (live Figma) | `State=Loading`. This currently **disagrees with** the reviewed design intent in `button.md`, which specifies `Loading=True/False` independent from interaction `State`. The desired Progress Circle rendering remains documented design intent, **not** evidence of a live Boolean property or runtime API. |
+| Loading representation (live Figma) | `State=Loading`. This currently **disagrees with** the documented design intent in `button.md`, which specifies `Loading=True/False` independent from interaction `State`. The desired Progress Circle rendering remains documented design intent, **not** evidence of a live Boolean property or runtime API. |
 | Code repository/package | **Unregistered** |
 | Runtime component/API | **Unverified** |
 | Property mapping | **Unverified** — do not infer code prop names from Figma property names |
