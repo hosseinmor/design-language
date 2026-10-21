@@ -7,7 +7,7 @@ summary: Defines maintenance triggers, review expectations, and validation for c
 knowledge_state: canonical
 document_maturity: reviewed
 owner: Design System team
-last_reviewed: '2026-09-03'
+last_reviewed: '2026-10-21'
 related:
 - design-system.governance.ownership
 - design-system.governance.change-process
@@ -44,9 +44,10 @@ Do not rewrite unrelated Design System documents merely because one document is 
 2. Preserve unresolved behavior as an explicit gap instead of guessing.
 3. Apply approved changes on a dedicated branch and pull request.
 4. Update `last_reviewed` when normative or operational content receives owner review.
-5. Regenerate `manifest.generated.json` whenever indexed documents change.
-6. Run `python tooling/generate_manifest.py check` before merge.
+5. Regenerate the Manifest **and Graph** with `python tooling/generate_manifest.py generate` when indexed documents, metadata, aliases, or relationships change. Regenerate the component-mapping index with `python tooling/generate_component_mapping_index.py generate` when the mapping evidence layout changes.
+6. Run `python tooling/generate_manifest.py check`, `python tooling/generate_component_mapping_index.py check`, `python tooling/validate_links.py`, `python tooling/validators/check_ai_governance.py` and its negative-case unit tests before merge.
 7. When the change affects the accessibility corpus, accessibility routing, or an accessibility-relevant component/pattern contract, run `python tooling/validators/check_accessibility_knowledge.py` and the applicable manual regression gate in `accessibility/testing.md`.
+8. Do not mark semantic eval fixtures as passing unless a real evaluator ran; do not conflate GitHub checks with Figma, Storybook, assistive-technology or production verification.
 
 ## Accessibility Corpus Maintenance
 
@@ -68,6 +69,6 @@ A documentation change is maintenance-ready when:
 - the smallest owning documents were changed;
 - ownership and maturity metadata are accurate;
 - related IDs resolve;
-- generated manifest state is current;
+- generated Manifest/Graph and relevant secondary indexes are current;
 - required deterministic and manual regression gates pass;
 - known gaps and untested behavior remain explicit.

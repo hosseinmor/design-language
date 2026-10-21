@@ -142,12 +142,20 @@ def infer_product(path: str, metadata: dict[str, Any]) -> str | None:
 
 
 def infer_owner(path: str, metadata: dict[str, Any]) -> str | None:
-    """Resolve explicit ownership plus intentionally narrow collection defaults."""
+    """Resolve stewardship independently of review and implementation maturity.
+
+    Explicit ownership wins; shared Design Language documents inherit
+    maintaining stewardship even while draft or scaffold, not content approval.
+    """
     if nonempty_string(metadata.get("owner")):
         return str(metadata["owner"]).strip()
 
     parts = Path(path).parts
     if parts and parts[0] == "accessibility":
+        return DESIGN_SYSTEM_TEAM
+
+    # Stewardship is not review approval, design maturity or code shipment.
+    if metadata.get("collection") in {"design-system", "design-language"}:
         return DESIGN_SYSTEM_TEAM
 
     return None

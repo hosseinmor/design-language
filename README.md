@@ -40,6 +40,9 @@ tests/                Repository-level quality checks
 ```bash
 python tooling/generate_manifest.py generate
 python tooling/generate_manifest.py check
+python tooling/generate_component_mapping_index.py check
+python tooling/validators/check_ai_governance.py
+python -m unittest discover -s tests -p 'test_ai_governance.py'
 python tooling/validate_links.py
 python tooling/validators/check_accessibility_knowledge.py
 python tooling/validators/check_content_terminology.py
@@ -48,5 +51,4 @@ python tooling/validators/check_content_components.py
 python tooling/validators/check_content_patterns.py
 ```
 
-The generated files in `registry/` are derived artifacts. Do not edit them by
-hand.
+When component-mapping sections change, run `python tooling/generate_component_mapping_index.py generate` and commit its updated index. The generated files in `registry/` are derived artifacts. Do not edit them by hand.

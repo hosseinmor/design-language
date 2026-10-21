@@ -34,7 +34,9 @@ outside the indexed corpus.
 - Do not hand-edit `registry/manifest.generated.json` or
   `registry/graph.generated.json`; regenerate them with
   `python tooling/generate_manifest.py generate`.
-- Run repository validators after moving or changing indexed guidance.
+- Regenerate the component-mapping lookup index with `python tooling/generate_component_mapping_index.py generate` when its source headings or line ranges change.
+- Run `python tooling/validators/check_ai_governance.py` plus repository validators after changing AI routes, ownership defaults or indexed guidance.
+- Keep unverified draft proposals and semantic eval fixtures distinct from approved policies, CI results and verified live-source facts.
 - Treat `assets/` as canonical only when the asset has an owner and a documented
   source. Do not store screenshots or temporary exports there.
 - An MCP server, if introduced, is an adapter over the registry and live

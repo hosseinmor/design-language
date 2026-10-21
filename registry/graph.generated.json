@@ -2120,6 +2120,41 @@
       "type": "related"
     },
     {
+      "from": "design-system.governance.contribution",
+      "to": "design-system.governance.change-process",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.contribution",
+      "to": "design-system.governance.documentation-maintenance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.contribution",
+      "to": "design-system.governance.ownership",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.deprecation",
+      "to": "design-system.component.modal",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.deprecation",
+      "to": "design-system.governance.change-process",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.deprecation",
+      "to": "design-system.governance.ownership",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.deprecation",
+      "to": "design-system.reference.source-of-truth",
+      "type": "related"
+    },
+    {
       "from": "design-system.governance.documentation-maintenance",
       "to": "design-system.accessibility.testing",
       "type": "related"
@@ -2147,6 +2182,26 @@
     {
       "from": "design-system.governance.ownership",
       "to": "design-system.governance.documentation-maintenance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.release-and-versioning",
+      "to": "design-language.integration.karbon",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.release-and-versioning",
+      "to": "design-system.governance.change-process",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.release-and-versioning",
+      "to": "design-system.governance.ownership",
+      "type": "related"
+    },
+    {
+      "from": "design-system.governance.release-and-versioning",
+      "to": "design-system.reference.source-of-truth",
       "type": "related"
     },
     {

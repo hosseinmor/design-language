@@ -7,7 +7,7 @@
       "title": "Accordion",
       "summary": "Accordion groups related disclosure items so users can reveal supporting content in place while keeping the page scannable.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.accessibility.keyboard-navigation",
@@ -26,7 +26,7 @@
       "title": "Button",
       "summary": "Buttons trigger actions through a constrained hierarchy of Brand, operational, low-emphasis, and destructive styles.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.experience-rule.action-hierarchy",
@@ -526,7 +526,7 @@
       "title": "Design Language Retrieval Contract",
       "summary": "Defines minimum-context retrieval, identity resolution, conflict handling, and future MCP behavior.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-language.ai.router",
@@ -544,7 +544,7 @@
       "title": "Design Language AI Router",
       "summary": "Routes design-language questions to the smallest canonical knowledge area and the appropriate live source.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.design-language",
@@ -562,7 +562,7 @@
       "title": "Karbon Integration",
       "summary": "Defines how the Design Language repository relates to Karbon code and Storybook without duplicating runtime truth.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.reference.source-of-truth",
@@ -928,7 +928,7 @@
       "title": "Autocomplete",
       "summary": "Editable single-value query input with suggestions; explicit free-form and selection-required value policies.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.select",
@@ -949,7 +949,7 @@
       "title": "Badge",
       "summary": "TBD Badge component scope and anatomy; distinguish non-interactive Badge from Tag, Chip, counters and status text before approving a public component.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.tag",
@@ -969,7 +969,7 @@
       "title": "Breadcrumb",
       "summary": "Breadcrumbs show the current page in a hierarchy and provide navigation to ancestor destinations.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.component.link",
@@ -988,7 +988,7 @@
       "title": "Checkbox",
       "summary": "Checkbox lets users select zero, one, or many independent options and can represent a single optional boolean choice.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.component.radio",
@@ -1008,7 +1008,7 @@
       "title": "Chip",
       "summary": "Chip is the interactive compact-control family for direct selection, committed removable values, disclosure controls, and value-level add/start actions.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-20",
       "related": [
         "design-system.component.tag",
@@ -1031,7 +1031,7 @@
       "title": "Choice Group",
       "summary": "Choice Group composes Chip / Selectable items into a labeled single- or multiple-selection group for compact choices.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-18",
       "related": [
         "design-system.component.chip",
@@ -1052,7 +1052,7 @@
       "title": "Coachmark",
       "summary": "Coachmark proactively introduces a feature, workflow, or contextual concept at a specific product moment.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.popover",
@@ -1072,7 +1072,7 @@
       "title": "Combo Button",
       "summary": "Combo Button keeps one dominant action directly available and exposes closely related alternative actions from a separate menu trigger.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-17",
       "related": [
         "button",
@@ -1093,7 +1093,7 @@
       "title": "Content Switcher",
       "summary": "Content Switcher switches immediately between closely related views of the same content using one current choice.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-14",
       "related": [
         "design-system.component.tabs",
@@ -1135,7 +1135,7 @@
       "title": "Drawer",
       "summary": "TBD Drawer component scope and design contract; distinguish modal/non-modal side surfaces from Dialog and responsive pane layouts.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.dialog",
@@ -1155,7 +1155,7 @@
       "title": "Dropdown Menu",
       "summary": "TBD legacy Dropdown Menu naming/scope; Menu currently owns action surfaces and Menu Button/Combo Button own their respective triggers.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.menu",
@@ -1175,7 +1175,7 @@
       "title": "Empty State",
       "summary": "TBD Empty State component anatomy; composition belongs to the Empty States pattern and messaging to the Content System.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.pattern.empty-states",
@@ -1226,7 +1226,7 @@
       "title": "Icon Button",
       "summary": "Icon Button triggers a compact action using one recognizable icon while preserving an explicit accessible name and visible Tooltip label.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "button",
@@ -1247,7 +1247,7 @@
       "title": "Link",
       "summary": "Links navigate users to another destination through a standalone component with three sizes and an inline native-text recipe.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.accessibility.structure-and-navigation",
@@ -1267,7 +1267,7 @@
       "title": "Menu",
       "summary": "Menu is a temporary action/command surface composed from Menu Items, optional grouping, separators, shortcuts, checked state, destructive tone, and submenus.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-23",
       "related": [
         "design-system.component.menu-button",
@@ -1288,7 +1288,7 @@
       "title": "Menu Button",
       "summary": "Menu Button opens a replaceable menu of peer actions from one labeled Button trigger without surfacing a separate primary action.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-17",
       "related": [
         "button",
@@ -1309,7 +1309,7 @@
       "title": "Modal (legacy name)",
       "summary": "Backward-compatible redirect to the canonical Dialog component.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-17",
       "related": [
         "design-system.component.dialog"
@@ -1327,7 +1327,7 @@
       "title": "Notification",
       "summary": "Defines the canonical design contracts for Inline Notification and Toast, including severity, anatomy, composition, and current runtime gaps.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.pattern.notifications",
@@ -1347,7 +1347,7 @@
       "title": "Pagination",
       "summary": "TBD Pagination component anatomy and control states; data-view composition and product paging policy are owned elsewhere.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.pattern.data-views",
@@ -1367,7 +1367,7 @@
       "title": "Password Input",
       "summary": "Password Input captures a secret single-line value through the shared RTL-first Field contract, with native-password-oriented masking and a dedicated reveal/hide action.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.text-input",
@@ -1387,7 +1387,7 @@
       "title": "Popover",
       "summary": "Popover is a generic floating surface for a small contextual task or interaction.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.toggletip",
@@ -1461,7 +1461,7 @@
       "title": "Progress Indicator",
       "summary": "Carbon-derived RTL progress indicator for known, ordered multi-step workflows, with explicit current/completed/incomplete/error/disabled states and compositional Figma authoring.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-15",
       "related": [
         "design-system.component.timeline",
@@ -1484,7 +1484,7 @@
       "title": "Radio",
       "summary": "Radio lets users choose exactly one mutually exclusive option from a group.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.component.checkbox",
@@ -1504,7 +1504,7 @@
       "title": "Rich Text Editor",
       "summary": "Rich Text Editor captures formatted multiline content through the shared Field contract and an internal formatting toolbar.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.textarea",
@@ -1526,7 +1526,7 @@
       "title": "Search",
       "summary": "Search captures a single-line query through an RTL-first search-specific control with a fixed search affordance and a contextual clear action.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.text-input",
@@ -1546,7 +1546,7 @@
       "title": "Select",
       "summary": "Single- and multiple-value selection from predefined options, with a shared Selection Panel.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.text-input",
@@ -1594,7 +1594,7 @@
       "title": "Toggle",
       "summary": "Toggle is the canonical binary on/off control for settings that take effect immediately.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.component.checkbox",
@@ -1613,7 +1613,7 @@
       "title": "Data Table",
       "summary": "Composable RTL table for comparing and managing structured data in Job Vision products; HOS-35 working Figma pilot.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-20",
       "related": [
         "design-system.accessibility.tables-and-data-visualization",
@@ -1632,7 +1632,7 @@
       "title": "Data Table — Runtime and Accessibility Contract",
       "summary": "Draft design-side implementation and acceptance annex for Data Table; not a standalone public component or verified runtime API.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-14",
       "related": [
         "design-system.component.table",
@@ -1652,7 +1652,7 @@
       "title": "Tabs",
       "summary": "Tabs switch between peer content panels within the same context using one current tab.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-14",
       "related": [
         "design-system.component.content-switcher",
@@ -1672,7 +1672,7 @@
       "title": "Tag",
       "summary": "TBD Tag component anatomy and behavior; approved categorical Tag Color tokens exist separately from this unverified component scaffold.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.token.component-tokens",
@@ -1692,7 +1692,7 @@
       "title": "Text Input",
       "summary": "Text Input captures a single-line text value through a native-input-oriented, RTL-first field contract with shared label, supporting text, validation, and adornment behavior.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.accessibility.forms",
@@ -1711,7 +1711,7 @@
       "title": "Textarea",
       "summary": "Textarea captures multiline free text through the shared RTL-first Field contract, with optional helper/count content, validation, and vertical resizing.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.text-input",
@@ -1732,7 +1732,7 @@
       "title": "Timeline",
       "summary": "A compositional vertical RTL sequence of chronological events or scheduled time groups, shared by Job Vision My Applications and employee Onboarding.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-14",
       "related": [
         "design-system.component.progress-indicator",
@@ -1751,7 +1751,7 @@
       "title": "Toggle Button",
       "summary": "Toggle Button represents a Button-like control with persistent selected and unselected states.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.rich-text-editor"
@@ -1769,7 +1769,7 @@
       "title": "Toggletip",
       "summary": "Toggletip reveals supplemental contextual explanation when the user explicitly asks for more information.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.tooltip",
@@ -1789,7 +1789,7 @@
       "title": "Tooltip",
       "summary": "Tooltip provides brief, passive, non-interactive supplementary information on hover or keyboard focus.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.icon-button",
@@ -1809,7 +1809,7 @@
       "title": "JV Design Language",
       "summary": "Compact design-language entry point for human and AI design work; routes exact specifications to the canonical live sources.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.overview",
@@ -1828,7 +1828,7 @@
       "title": "Action Hierarchy",
       "summary": "Every action group should have one clear visual leader.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
@@ -1867,7 +1867,7 @@
       "title": "Disabled and Read-Only States",
       "summary": "TBD shared interaction guidance for unavailable versus non-editable controls; does not override component or accessibility rules.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.accessibility.forms",
@@ -1886,7 +1886,7 @@
       "title": "Error Recovery",
       "summary": "TBD cross-component recovery guidance; message content and feature-specific retry policy remain in their owning sources.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "content.pattern.error",
@@ -1905,7 +1905,7 @@
       "title": "System Feedback",
       "summary": "TBD cross-pattern feedback coordination; Loading and Notification patterns own approved presentation choices.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.pattern.notifications",
@@ -1924,7 +1924,7 @@
       "title": "Focus",
       "summary": "TBD design-level focus continuity guidance; accessibility/focus-management owns normative focus behavior.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.accessibility.focus-management"
@@ -1942,7 +1942,7 @@
       "title": "Loading",
       "summary": "Routing-only TBD placeholder; the final Loading and Progress pattern owns active composition decisions.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.pattern.loading-and-progress"
@@ -1960,7 +1960,7 @@
       "title": "Navigation",
       "summary": "Semantics are independent from visual appearance.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
@@ -1976,7 +1976,7 @@
       "title": "Responsive Interaction",
       "summary": "TBD adaptive interaction guidance distinct from Responsive Layout and accessibility zoom requirements.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.responsive-layout",
@@ -1995,7 +1995,7 @@
       "title": "Selection",
       "summary": "Selection is a component state, not a general color family.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
@@ -2011,7 +2011,7 @@
       "title": "Validation",
       "summary": "TBD reusable validation interaction guidance; forms accessibility, field components and product rules own current requirements.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.accessibility.forms",
@@ -2031,7 +2031,7 @@
       "title": "Color",
       "summary": "Design principles for using color, visual emphasis, perception, and accessibility; detailed token contracts live in tokens/color.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [
         "design-system.token.architecture",
@@ -2071,7 +2071,7 @@
       "title": "Iconography",
       "summary": "Documents the verified icon-instance semantic color override guard; icon library, sizing, stroke/fill and accessibility guidelines remain TBD.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.accessibility.images-icons-and-media",
@@ -2090,7 +2090,7 @@
       "title": "Layout",
       "summary": "Routes layout design principles to the reviewed Responsive Layout guidance and the Layout Token Catalog; remaining global grid, density and alignment rules are TBD.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.responsive-layout",
@@ -2111,7 +2111,7 @@
       "title": "Motion",
       "summary": "TBD shared motion-design principles and reduced-motion guidance; approved numeric duration/easing tokens are not yet defined.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.token.motion.catalog",
@@ -2148,7 +2148,7 @@
       "title": "Responsive Behavior",
       "summary": "TBD routing for visual responsive adaptation that is not already covered by Responsive Layout, adaptive Patterns, or Interaction rules.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.responsive-layout",
@@ -2250,7 +2250,7 @@
       "summary": "Defines the branch, review, validation, and maturity rules for canonical Design System knowledge changes.",
       "status": "reviewed",
       "owner": "Design System team",
-      "last_reviewed": "2026-09-03",
+      "last_reviewed": "2026-10-21",
       "related": [
         "design-system.governance.ownership",
         "design-system.governance.documentation-maintenance",
@@ -2266,11 +2266,15 @@
       "id": "design-system.governance.contribution",
       "kind": "design-system-governance",
       "title": "Contribution",
-      "summary": "> Status: structure only",
+      "summary": "TBD contributor-onboarding and evidence-submission guidance; the reviewed Change Process remains the active repository change contract.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.governance.ownership",
+        "design-system.governance.change-process",
+        "design-system.governance.documentation-maintenance"
+      ],
       "topics": [
         "contribution",
         "design-system-governance"
@@ -2281,11 +2285,16 @@
       "id": "design-system.governance.deprecation",
       "kind": "design-system-governance",
       "title": "Deprecation",
-      "summary": "> Status: structure only",
+      "summary": "TBD shared Design Language deprecation and alias migration policy; do not infer automatic Figma or Karbon compatibility.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.governance.ownership",
+        "design-system.governance.change-process",
+        "design-system.component.modal",
+        "design-system.reference.source-of-truth"
+      ],
       "topics": [
         "deprecation",
         "design-system-governance"
@@ -2299,7 +2308,7 @@
       "summary": "Defines maintenance triggers, review expectations, and validation for canonical Design System documentation.",
       "status": "reviewed",
       "owner": "Design System team",
-      "last_reviewed": "2026-09-03",
+      "last_reviewed": "2026-10-21",
       "related": [
         "design-system.governance.ownership",
         "design-system.governance.change-process",
@@ -2318,7 +2327,7 @@
       "summary": "Defines ownership and review responsibility for shared Design System knowledge, including the accessibility corpus.",
       "status": "reviewed",
       "owner": "Design System team",
-      "last_reviewed": "2026-09-03",
+      "last_reviewed": "2026-10-21",
       "related": [
         "design-system.governance.documentation-maintenance",
         "design-system.governance.change-process",
@@ -2334,11 +2343,16 @@
       "id": "design-system.governance.release-and-versioning",
       "kind": "design-system-governance",
       "title": "Release and Versioning",
-      "summary": "> Status: structure only",
+      "summary": "TBD Design Language documentation versioning and handoff policy, separate from runtime packages, Figma publication and product deployment.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.governance.ownership",
+        "design-system.governance.change-process",
+        "design-system.reference.source-of-truth",
+        "design-language.integration.karbon"
+      ],
       "topics": [
         "design-system-governance",
         "release-and-versioning"
@@ -2371,7 +2385,7 @@
       "title": "Design Language Scope",
       "summary": "Defines the purpose, scope, boundaries, and operating model of the shared JobVision and Cando Design Language.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.design-language",
@@ -2390,7 +2404,7 @@
       "title": "AI Entry Points",
       "summary": "Compose discoverable AI feature entry points from existing controls while delegating Magic token meanings to Color Semantics.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
@@ -2406,7 +2420,7 @@
       "title": "Bulk Actions",
       "summary": "TBD multi-selection and batch-action composition across Data Views; product action eligibility is out of scope.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.pattern.data-views",
@@ -2425,7 +2439,7 @@
       "title": "Confirmation and Modal Actions",
       "summary": "Defines confirmation composition and safe exit decisions, delegating action hierarchy, Dialog anatomy and copy to their owners.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
@@ -2441,7 +2455,7 @@
       "title": "Data Views",
       "summary": "Choosing between tables, lists, and interactive grids, and composing common data-view controls.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-10-14",
       "related": [
         "design-system.component.table",
@@ -2462,7 +2476,7 @@
       "title": "Destructive Actions",
       "summary": "Distinguishes destructive consequences and maps low-emphasis entry points to final confirmation.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
@@ -2478,7 +2492,7 @@
       "title": "Empty States",
       "summary": "TBD Empty State layout and component composition; empty-state messages are owned by Content System.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "content.pattern.empty-states",
@@ -2497,7 +2511,7 @@
       "title": "Form Submission",
       "summary": "TBD reusable form-action composition and submission lifecycle; product policy and error copy are separate sources.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.pattern.loading-and-progress",
@@ -2545,7 +2559,7 @@
       "title": "Multi-Step Flow",
       "summary": "Default combination:",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
@@ -2561,7 +2575,7 @@
       "title": "Notifications",
       "summary": "Defines shared feedback severity and when feedback appears inline or as a transient Toast.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.accessibility.dynamic-content-and-feedback",
@@ -2580,7 +2594,7 @@
       "title": "On-Media Controls",
       "summary": "The current Core token model does not define dedicated Button tokens for image or video backgrounds.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
@@ -2596,7 +2610,7 @@
       "title": "Responsive Layout Patterns",
       "summary": "Adaptive behavior guidance for navigation, tables, forms, overlays, master-detail layouts, filters, and toolbars.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.responsive-layout",
@@ -2616,7 +2630,7 @@
       "title": "Search and Filtering",
       "summary": "TBD cross-component Search and Filter composition; individual inputs and feature eligibility remain separately owned.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.search",
@@ -2635,7 +2649,7 @@
       "title": "Tour",
       "summary": "Tour orchestrates an ordered sequence of Coachmark steps for contextual onboarding or feature guidance.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.component.coachmark",
@@ -2654,7 +2668,7 @@
       "title": "Brand Variants",
       "summary": "Draft cross-product Brand action usage guidance, separation from Accent, and the need for explicit Product approval of conversion entry points.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.product-variation.theme-context",
@@ -2675,7 +2689,7 @@
       "title": "Product Overrides",
       "summary": "Unverified scaffold for recording reviewed deviations from shared Design Language rules by Product, without conflating Theme values or business policy.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.product-variation.theme-context",
@@ -2695,7 +2709,7 @@
       "title": "Theme Package Architecture",
       "summary": "Canonical Product-to-Theme relationship, package selection responsibility, supported variation scope, and boundaries with Semantic tokens and Appearance.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [
         "design-system.token.architecture",
@@ -2758,7 +2772,7 @@
       "title": "Component Mapping Lookup Index",
       "summary": "Compact AI retrieval index for locating the exact Figma/design evidence section without loading the full mapping registry; does not certify runtime parity.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.reference.component-mapping",
@@ -2813,7 +2827,7 @@
       "title": "Sources of Truth",
       "summary": "Defines which source owns design meaning, visual construction, runtime implementation, product behavior, and temporary change history.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.overview",
@@ -2898,7 +2912,7 @@
       "title": "Design Language Knowledge Structure",
       "summary": "Defines the human- and AI-readable architecture, ownership boundaries, and extension points of the Design Language repository.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.design-language",
@@ -2917,7 +2931,7 @@
       "title": "Token Architecture",
       "summary": "Defines the shared Color contract versus Theme-owned Color implementation, including Theme-local Primitives, stable Semantic roles, and component-token boundaries.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [
         "design-system.product-variation.theme-context"
@@ -2936,7 +2950,7 @@
       "title": "Color Token Alias Mappings",
       "summary": "Validated current Figma Color mappings for the Theme package architecture.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-19",
       "related": [],
       "topics": [
@@ -2953,7 +2967,7 @@
       "title": "Component Tokens",
       "summary": "Defines when component-specific Color tokens are justified and documents the approved Tag exception.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [],
       "topics": [
@@ -2970,7 +2984,7 @@
       "title": "Elevation Token Catalog",
       "summary": "Approved Shadow/Floating and Shadow/Dragged recipes, including current Light values and Dark resolution notes.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.elevation"
@@ -2989,7 +3003,7 @@
       "title": "Frontend Token and Theme Package Contract",
       "summary": "Design-side contract for installable Theme packages, stable token APIs, consumption audiences, serialization boundaries, and future Foundation extension.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [
         "design-system.token.architecture",
@@ -3007,7 +3021,7 @@
       "title": "Layout Token Catalog",
       "summary": "Reviewed responsive breakpoint, content-container and region-padding token identifiers and values; distinguishes published Figma variables from conceptual layout roles.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.layout",
@@ -3029,7 +3043,7 @@
       "title": "Motion Token Catalog (TBD)",
       "summary": "Placeholder for future approved duration, easing and motion tokens; no values are canonical.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.motion"
@@ -3048,7 +3062,7 @@
       "title": "Primitive Tokens",
       "summary": "Documents the provisional Color Primitive inventory; exact palette scales are not yet validated.",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
@@ -3065,7 +3079,7 @@
       "title": "Radius Token Catalog",
       "summary": "Reviewed approved radius tokens, design values, Figma variables, and code names.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.radius"
@@ -3084,7 +3098,7 @@
       "title": "Semantic Tokens",
       "summary": "Stable shared Color roles and their usage boundaries across compatible Theme and Appearance contexts.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": "2026-09-14",
       "related": [],
       "topics": [
@@ -3101,7 +3115,7 @@
       "title": "Spacing Token Catalog",
       "summary": "Reviewed shared spacing token keys, values, and Tailwind mapping.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.spacing"
@@ -3120,7 +3134,7 @@
       "title": "Typography Token Catalog",
       "summary": "Approved semantic typography recipes, responsive heading styles, weights, and product-aware font mapping.",
       "status": "reviewed",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [
         "design-system.foundation.typography"
@@ -3139,7 +3153,7 @@
       "title": "Token Usage Rules",
       "summary": "> Status: draft",
       "status": "draft",
-      "owner": null,
+      "owner": "Design System team",
       "last_reviewed": null,
       "related": [],
       "topics": [
