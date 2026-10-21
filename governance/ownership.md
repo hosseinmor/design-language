@@ -38,12 +38,13 @@ Designers, engineers, QA, AI agents, and accessibility reviewers may propose cha
 
 ## Process
 
-- Canonical/reviewed Design System documents **SHOULD** resolve to an owner.
-- The 18 operational documents in `accessibility/` inherit `Design System team` as their collection owner unless a document explicitly names another approved owner.
-- The retrieval manifest **MUST** resolve that inherited owner so accessibility documents do not appear ownerless to AI or maintenance tooling.
-- Individual accessibility documents MAY repeat the inherited owner in frontmatter when useful; omission does not mean ownership is unknown.
-- Changing the collection owner or adding a document-specific override is a governance change and requires owner review through a branch and pull request.
-- An unresolved owner outside a defined collection default does not make a document invalid for retrieval, but it is a maintenance gap that must be resolved before the document is treated as operationally complete.
+- Canonical/reviewed Design System documents **MUST** resolve to an effective owner in the generated Manifest, through an explicit `owner` or the reviewed shared-collection default below.
+- The 18 operational documents in `accessibility/` inherit `Design System team` as their collection owner unless a document explicitly names another approved owner, **regardless of their maturity**.
+- Other **reviewed** documents with `collection: design-system` or `collection: design-language` inherit `Design System team` stewardship **only when no explicit `owner` is recorded**. This matches the existing shared-system responsibility above and lets the Manifest expose an effective owner for reviewed contracts.
+- Unreviewed documents outside Accessibility **do not receive an inferred owner** from this rule; a draft's actual reviewer/approver remains to be established. A missing owner there is a tracked maintenance gap, not permission for AI to approve its proposals.
+- The retrieval manifest **MUST** resolve the effective inherited owner. An inherited owner identifies **stewardship**, not evidence that each sentence was newly reviewed, approved for runtime, or assigned to a named individual.
+- Individual documents MAY repeat their inherited owner in frontmatter when useful. Any explicit alternative must be reviewed and recorded; explicit ownership takes precedence over the default.
+- Changing collection stewardship or introducing a document-specific override is a governance change and requires owner review through a branch and pull request.
 
 ## Review Requirements
 

@@ -39,10 +39,11 @@ Apply Design System knowledge changes through a small, reviewable path while pre
 3. Keep unresolved behavior explicit instead of silently filling gaps.
 4. Create a dedicated branch; never write directly to `main`.
 5. Change only the smallest affected document set.
-6. Regenerate `manifest.generated.json` when indexed documents change.
-7. Run `python tooling/generate_manifest.py check`.
-8. Run any domain-specific deterministic and manual regression gates triggered by the change.
-9. Open a pull request and obtain the required owner review before merge.
+6. Regenerate **both** `registry/manifest.generated.json` **and** `registry/graph.generated.json` with `python tooling/generate_manifest.py generate` whenever indexed documents, relationships, ownership or aliases change; do not hand-edit generated files.
+7. When component-mapping evidence headings or line ranges change, run `python tooling/generate_component_mapping_index.py generate` as well.
+8. Run `python tooling/generate_manifest.py check`, `python tooling/generate_component_mapping_index.py check`, `python tooling/validate_links.py` and the AI routing validation gate.
+9. Run any additional deterministic domain gates triggered by the change, and record which **manual** checks have and have not been executed. Passing CI does not certify runtime/Figma parity or end-to-end AI semantic evals.
+10. Open a pull request and obtain the required owner review before merge. Do not promote a Draft, claim parity or merge without the required approval.
 
 ## Accessibility Change Gate
 
@@ -81,7 +82,7 @@ Owner review is required for normative behavior, maturity/routing, standards int
 A change is ready for merge when:
 - scope is limited to owning documents;
 - metadata and ownership are accurate;
-- generated manifest state is current;
+- generated Manifest, Graph and relevant mapping indexes are current;
 - repository checks pass;
 - triggered accessibility/domain gates pass;
 - known gaps remain visible;

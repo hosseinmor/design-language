@@ -21,7 +21,7 @@ related:
    sources own.
 5. Preserve unknowns and conflicts; do not synthesize a false merged truth.
 
-Default retrieval order:
+Default retrieval order **for a broad new design question**:
 
 ```text
 overview/design-language.md
@@ -29,6 +29,17 @@ overview/design-language.md
 → unresolved foundation/accessibility rule
 → exact live-source fact
 ```
+
+For a **specific, named component, governance document, token or pattern**, retrieve its exact document ID/path **directly**, without preloading the overview or the full Registry. The Manifest is an index, not a mandatory document payload: select candidates by ID/path/topic and read only the selected entries or fields. Follow only edges needed to answer the unresolved question (normally direct `related` links); avoid recursive graph traversal and avoid reading every neighboring document. When a large evidence registry has a narrow lookup index, use the index and ranged reads, not the entire evidence file.
+
+### Resolution and evidence rules
+
+- Resolve a **known ID** first; apply `aliases.yaml` only when the input is an alias. Never construct a fake path, component API, or Storybook ID from a label.
+- Distinguish a valid link from **verified identity parity**. A Design Language ID, Figma node and Code export belong to different evidence sources and do not join automatically.
+- An absent runtime/Figma source is a **registration/verification gap**, not authority for a guess based on a generated summary.
+- Cite the owning document and, for live facts, its source identity/revision or explicit verification date. A historical `last_reviewed` is not proof that a live source was rechecked today.
+- The indexed `owner` can be an inherited stewardship default; owner presence does not certify any individual rule or operational shipment.
+- Reuse a prior retrieved section in the same workflow if unchanged; keep token/context cost proportional to the actual decision.
 
 Future MCP tooling should expose registry lookup and live-source joins. It must
 return provenance, verification state, and source timestamps, and must never
@@ -44,7 +55,7 @@ The generated Manifest's `status` is a **coarse document-level index signal**, n
 - A file can be `knowledge_state: verified` but `document_maturity: draft`: evidence for some decisions exists, while other work is unfinished. Do not upgrade the whole file to final or downgrade every statement to conjecture.
 - Preserve each answer's provenance and scope. If a draft statement conflicts with the owning current contract or verified live source, flag the conflict; do not silently pick by status alone.
 
-The currently indexed Manifest does not carry each of these frontmatter fields. Read the source document metadata when maturity affects a decision; do not infer `scaffold` solely from Manifest `status: draft`.
+The currently indexed Manifest does not carry each of these frontmatter fields or rule-level verification provenance. Read the source document metadata when maturity affects a decision; do not infer `scaffold` solely from Manifest `status: draft`.
 
 ## Ownership boundaries
 
