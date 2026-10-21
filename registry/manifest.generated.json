@@ -2615,11 +2615,16 @@
       "id": "design-system.product-variation.brand-variants",
       "kind": "design-system-product-variation",
       "title": "Brand Variants",
-      "summary": "Brand Button uses the active product brand while preserving one shared usage rule.",
+      "summary": "Draft cross-product Brand action usage guidance, separation from Accent, and the need for explicit Product approval of conversion entry points.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.product-variation.theme-context",
+        "design-system.token.semantic-tokens",
+        "design-system.token.usage-rules",
+        "button"
+      ],
       "topics": [
         "brand-variants",
         "brands",
@@ -2631,11 +2636,15 @@
       "id": "design-system.product-variation.product-overrides",
       "kind": "design-system-product-variation",
       "title": "Product Overrides",
-      "summary": "> Status: structure only",
+      "summary": "Unverified scaffold for recording reviewed deviations from shared Design Language rules by Product, without conflating Theme values or business policy.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
-      "related": [],
+      "related": [
+        "design-system.product-variation.theme-context",
+        "design-system.product-variation.brand-variants",
+        "design-system.reference.source-of-truth"
+      ],
       "topics": [
         "brands",
         "design-system-product-variation",
@@ -2647,14 +2656,19 @@
       "id": "design-system.product-variation.theme-context",
       "kind": "design-system-product-variation",
       "title": "Theme Package Architecture",
-      "summary": "Defines Theme as an installable visual-token implementation selected by an application, with stable shared Design System contracts and runtime Appearance resolution.",
+      "summary": "Canonical Product-to-Theme relationship, package selection responsibility, supported variation scope, and boundaries with Semantic tokens and Appearance.",
       "status": "reviewed",
       "owner": null,
       "last_reviewed": "2026-09-14",
       "related": [
         "design-system.token.architecture",
+        "design-system.token.semantic-tokens",
+        "design-system.product-variation.brand-variants",
+        "design-system.product-variation.product-overrides",
+        "design-system.reference.figma",
         "design-system.reference.code",
-        "design-system.reference.theme-initialization"
+        "design-system.reference.theme-initialization",
+        "design-system.token.frontend-contract"
       ],
       "topics": [
         "brands",
