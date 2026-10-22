@@ -65,6 +65,8 @@ COMPONENT_SPECS = (
         "eval_path": EVAL_DIR / "modal-content-cases.yml",
         "component_id": "content.component.modal",
         "eval_id": "content.eval.modal_content_cases",
+        "required_design_system_reference": "design-system.component.dialog",
+        "forbidden_design_system_references": ("design-system.component.modal",),
         "rule_prefix": "MOD",
         "tone_profiles": {
             "focused_task": "form_helper",
@@ -221,6 +223,7 @@ def validate_component(
         errors.append(f"{label}: `sources` must be a non-empty list")
         sources = []
     source_ids: list[str] = []
+    source_references: set[str] = set()
     for index, source in enumerate(sources):
         location = f"{label}.sources[{index}]"
         if not isinstance(source, dict):
@@ -231,10 +234,28 @@ def validate_component(
             errors.append(f"{location}.id must be a non-empty string")
         else:
             source_ids.append(source_id)
+        reference = source.get("reference")
+        if nonempty_string(reference):
+            source_references.add(reference)
     duplicate_sources = duplicate_values(source_ids)
     if duplicate_sources:
         errors.append(f"{label}: duplicate source ids: {', '.join(duplicate_sources)}")
     known_sources = set(source_ids)
+
+    required_reference = spec.get("required_design_system_reference")
+    if required_reference and required_reference not in source_references:
+        errors.append(
+            f"{label}: sources must reference `{required_reference}`"
+        )
+    forbidden_references = set(
+        spec.get("forbidden_design_system_references", ())
+    )
+    present_forbidden = sorted(forbidden_references & source_references)
+    if present_forbidden:
+        errors.append(
+            f"{label}: sources use legacy design-system references: "
+            + ", ".join(present_forbidden)
+        )
 
     rules = data.get("rules")
     if not isinstance(rules, list) or not rules:
@@ -294,6 +315,26 @@ def validate_component(
     for field in spec["required_models"]:
         if not isinstance(data.get(field), dict) or not data[field]:
             errors.append(f"{label}: `{field}` must be a non-empty mapping")
+    if required_reference:
+        depends_on = data.get("depends_on")
+        design_system_dependencies = (
+            depends_on.get("design_system", [])
+            if isinstance(depends_on, dict)
+            else []
+        )
+        if required_reference not in design_system_dependencies:
+            errors.append(
+                f"{label}: depends_on.design_system must include "
+                f"`{required_reference}`"
+            )
+        forbidden_dependencies = sorted(
+            forbidden_references & set(design_system_dependencies)
+        )
+        if forbidden_dependencies:
+            errors.append(
+                f"{label}: depends_on.design_system uses legacy references: "
+                + ", ".join(forbidden_dependencies)
+            )
     if not isinstance(data.get("unknowns"), list) or not data["unknowns"]:
         errors.append(f"{label}: `unknowns` must be a non-empty list")
     return errors, obligations
