@@ -1342,6 +1342,33 @@
       "path": "design-system/components/notification.md"
     },
     {
+      "id": "design-system.component.number-input",
+      "kind": "design-system-component",
+      "title": "Number Input",
+      "summary": "RTL-first numeric input with an optional persistent non-editable unit, field-family validation, and shared Secondary Icon Button steppers.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.text-input",
+        "design-system.component.icon-button",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "accessibility",
+        "components",
+        "currency",
+        "design-system-component",
+        "number-input",
+        "prefix",
+        "rtl",
+        "stepper",
+        "unit"
+      ],
+      "path": "design-system/components/number-input.md"
+    },
+    {
       "id": "design-system.component.pagination",
       "kind": "design-system-component",
       "title": "Pagination",
@@ -3167,7 +3194,7 @@
     }
   ],
   "summary": {
-    "documents": 151,
+    "documents": 152,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3177,7 +3204,7 @@
       "design-language-integration": 1,
       "design-language-overview": 1,
       "design-system-accessibility": 18,
-      "design-system-component": 43,
+      "design-system-component": 44,
       "design-system-component-annex": 1,
       "design-system-design-language": 1,
       "design-system-experience-rule": 11,
