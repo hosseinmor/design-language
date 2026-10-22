@@ -78,6 +78,31 @@ Each Container Reference also selects the current Figma `layout/page-gutter` var
 
 Changing Shell viewport variants must retain the user's Content slot overrides. Changing nested Container mode must also retain them. The same contract applies if a Boolean hides a region. These changes require a visual QA pass for every intended combination, rather than merely a check that properties exist.
 
+## Height, scrolling and App Footer — design-side default
+
+App Shell is **minimum-viewport-height, content-driven**, not a fixed-height scroller. For short page content it should occupy at least the intended viewport height; as Content grows, Body/Main/Container/Content all grow to accommodate it. A short page with `App Footer=on` places the app-level Footer at the bottom of the minimum viewport. A long page places it **after the content**, regardless of whether persistent panes are present. Turning Header, Start Pane or End Pane off must not cause content to overlap Footer.
+
+**Default scroll ownership:** scroll the **whole page/document**. Do not make Body, Main Region, Container or the Content slot separate scrollports. Header is **not sticky by default**. App Footer is **not fixed/sticky by default**. Independent pane scrolling, sticky Header/Footer and viewport-contained operational workspaces are **intentional exceptions**, subject to product, responsive and accessibility requirements; they are not additional App Shell variants in this candidate.
+
+The app-level Footer is shared chrome and should not be conflated with a page-local form action bar or sticky action footer. This candidate's Footer is only a structural placeholder (48px in the current Figma test), **not a finalized Footer component or published dimension**.
+
+### Figma height implementation and limitations
+
+- The `Viewport` design references have initial minimum heights `xs=844`, `md=820`, and `lg=900` px; these are **canvas test/reference heights**, not design-system height tokens, CSS breakpoint heights, or runtime constants. For other viewport heights, the designer must adjust the Figma instance's minimum-height behavior as necessary. Runtime's actual viewport units are implementation-owned.
+- The Shell root uses a vertically Hugging Auto Layout with a reference `minHeight`; Body and Main Region Hug their content vertically, and the nested Page Container plus its **single** native Content slot are vertically Hugging. This avoids masking long page content with fixed nested frame heights.
+- A **locked, empty** `Viewport Balance / Figma only` layer absorbs spare space caused by optional Header/Footer visibility in the minimum-height Figma component. It is a **design-tool representation workaround, not a sixth semantic region or an additional runtime DOM requirement**. Its minimum rendered size may produce a ~1px Figma rounding difference at Footer boundaries; the expected runtime contract remains exact document flow. On footer-disabled pages, any under-filled reference-height area takes the same surface background as Main Region; do not infer a separate content panel.
+- Figma prototype scrolling is demonstrated in a separate **fixed viewport Frame** with `overflowDirection=VERTICAL` and clipping. Because Figma can constrain a Hugging nested instance inside that fixed scroll viewport, the prototype instance uses an explicit minimum height matching its current long content for presentation. This workaround does **not** change the reusable App Shell master nor imply that Figma fully simulates CSS `min-height:100vh` / native browser scroll.
+- There is no `Scroll`, `Sticky` or `Footer position` variant in the component; adding one requires a distinct reviewed use case.
+
+### Figma height QA (2026-10-22)
+
+- `lg`, short content, Footer off: Shell remains 900px tall, with no internal Body/Main scrolling.
+- `lg`, short content, Footer on: Shell remains 900px; Footer sits at its viewport-bottom position (allowing Figma's ~1px spacer artifact).
+- `lg`, 1470px content, Footer on: Shell expands to 1582px and Footer follows the content instead of overlapping it.
+- `xs`, short content, Footer on: Shell remains 844px; `md`, 1470px content, Footer on: Shell expands to 1574px.
+- `lg` with no Header or with both panes plus long content was checked; no separate Body/Main scrollers were introduced.
+- A fixed 1440×900px viewport was configured to scroll vertically around a long App Shell instance; this is **Figma prototype configuration only**, not a browser accessibility or runtime scroll test.
+
 ## Accessibility and semantics
 
 The final runtime composition must preserve meaningful Header/Main/Footer and navigation landmarks, logical keyboard and screen-reader reading order in both RTL and LTR, visible focus, and responsive reflow. Hidden panes must not expose focusable off-screen controls. Any overlay pane requires focus entry/return, keyboard dismissal and a reachable mobile navigation trigger. These behaviors **are not verified by this Figma pilot**.
@@ -89,6 +114,7 @@ The final runtime composition must preserve meaningful Header/Main/Footer and na
 - Decide Start Pane defaults/presets; test both-pane combinations and compact overlay behavior.
 - Resolve old responsive breakpoint and container numeric contracts in `foundations/visual/responsive-layout/` and `design-system/tokens/layout/catalog.md` in a reviewed foundation change; do not silently overwrite them.
 - The Tailwind v3 width steps, centered Contained/Fluid modes, and reference-based 16/24px gutters were reproduced and tested in the isolated Figma candidate. The remaining design-tool usability gap is that Container `Reference` must be selected manually when a design crosses steps inside the broader App Shell `lg` range; this should be assessed in designer testing.
+- Review any designs that specifically require a sticky Header, sticky footer or independently scrolling pane; those are exception patterns, not verified here. Test long-form focus navigation, scroll restoration and zoom/reflow in runtime before a production claim.
 - Run keyboard/RTL/zoom and complete design/runtime acceptance. No claimed Storybook parity.
 
 ### Figma validation completed (2026-10-22)
@@ -103,4 +129,6 @@ A former instance-level max-width override prevented Fluid/2xl from working even
 - [App Shell / Playground](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24552-177)
 - [Page Container / Tailwind candidate](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24549-41)
 - [Container / Verified width QA](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24606-40546)
+- [App Shell / Height and Footer QA](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24619-1618)
+- [App Shell / Vertical page scroll viewport](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24622-2030)
 - Karbon Storybook and code: runtime verification not yet performed; cross-source parity deferred.
