@@ -1,6 +1,5 @@
 """Regression tests for terminology source authority boundaries."""
 
-import copy
 import unittest
 
 from tooling.validators.check_content_terminology import validate
