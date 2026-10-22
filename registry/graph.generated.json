@@ -70,7 +70,6 @@
     "design-system.component.rich-text-editor",
     "design-system.component.search",
     "design-system.component.select",
-    "design-system.component.side-navigation",
     "design-system.component.skeleton",
     "design-system.component.switch",
     "design-system.component.table",
@@ -128,6 +127,7 @@
     "design-system.pattern.responsive-layout",
     "design-system.pattern.search-and-filtering",
     "design-system.pattern.tour",
+    "design-system.pattern.value-summary",
     "design-system.product-variation.brand-variants",
     "design-system.product-variation.product-overrides",
     "design-system.product-variation.theme-context",
@@ -1702,46 +1702,6 @@
       "type": "related"
     },
     {
-      "from": "design-system.component.side-navigation",
-      "to": "design-system.accessibility.focus-management",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.side-navigation",
-      "to": "design-system.accessibility.keyboard-navigation",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.side-navigation",
-      "to": "design-system.accessibility.screen-reader-semantics",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.side-navigation",
-      "to": "design-system.accessibility.structure-and-navigation",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.side-navigation",
-      "to": "design-system.component.drawer",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.side-navigation",
-      "to": "design-system.component.menu",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.side-navigation",
-      "to": "design-system.foundation.responsive-layout",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.side-navigation",
-      "to": "design-system.token.spacing.catalog",
-      "type": "related"
-    },
-    {
       "from": "design-system.component.skeleton",
       "to": "design-system.accessibility.dynamic-content-and-feedback",
       "type": "related"
@@ -2424,6 +2384,26 @@
     {
       "from": "design-system.pattern.tour",
       "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.value-summary",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.value-summary",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.value-summary",
+      "to": "design-system.component.number-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.value-summary",
+      "to": "design-system.component.text-input",
       "type": "related"
     },
     {
