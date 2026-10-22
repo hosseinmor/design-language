@@ -2691,6 +2691,33 @@
       "path": "design-system/patterns/tour.md"
     },
     {
+      "id": "design-system.pattern.value-summary",
+      "kind": "design-system-pattern",
+      "title": "Value Summary",
+      "summary": "Compose converted numeric values and shared multi-field numeric range summaries without adding new Number Input properties or duplicating field support.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.number-input",
+        "design-system.component.text-input",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.dynamic-content-and-feedback"
+      ],
+      "topics": [
+        "conversion",
+        "design-system-pattern",
+        "form-group",
+        "helper",
+        "numeric-range",
+        "patterns",
+        "salary",
+        "summary",
+        "value-summary"
+      ],
+      "path": "design-system/patterns/value-summary.md"
+    },
+    {
       "id": "design-system.product-variation.brand-variants",
       "kind": "design-system-product-variation",
       "title": "Brand Variants",
@@ -3194,7 +3221,7 @@
     }
   ],
   "summary": {
-    "documents": 152,
+    "documents": 153,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3212,7 +3239,7 @@
       "design-system-governance": 6,
       "design-system-integration": 1,
       "design-system-overview": 1,
-      "design-system-pattern": 14,
+      "design-system-pattern": 15,
       "design-system-product-variation": 3,
       "design-system-reference": 9,
       "design-system-token": 13
