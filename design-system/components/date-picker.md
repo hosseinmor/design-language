@@ -70,7 +70,9 @@ Date Picker
 ├── Canonical Field label (Label / Required? / Info?)
 ├── Date control
 │   ├── Segmented Date Input content (Year / Month / Day)
-│   └── Trailing Calendar action (real button)
+│   └── Trailing affordances, in logical End position
+│       ├── Calendar action (real button; absent in Read only)
+│       └── Error icon (Error states only, outermost at End)
 ├── One supporting region (Helper OR format hint; Error replaces both)
 └── Calendar selection surface (when opened)
     ├── Month and year header + navigation
@@ -84,7 +86,7 @@ Date Picker
 | Medium (default) | 40px | 16px |
 | Large | 48px | 16px |
 
-**Field Family:** `6px · Medium` radius, 8px content-to-action gap, semantic label/content/helper typography and the [Text Input](text-input.md) State contract. Calendar action: **16px icon inside the illustrated 32px action zone**, positioned at **logical End** (the **left** in RTL). The calendar icon is non-directional and must not rotate upon opening. The action is not a fake affordance embedded in an inaccessible text input. The implementation must provide an actual keyboard-operable action with an accessible name and sufficient pointer target.
+**Field Family:** `6px · Medium` radius, 8px content-to-action gap, semantic label/content/helper typography and the [Text Input](text-input.md) State contract. Calendar action: **16px icon centered in a 24×24px embedded action wrapper**, positioned at logical **End** (the **left** in RTL). The wrapper is a distinct action target; do not stretch it to the full Small field height. In Error and Error focus, the **16px Error status icon is outermost at End** (leftmost in RTL), with the Calendar action immediately to its right and an **8px** Auto Layout gap between adornments. The date content shifts automatically to avoid both icons. In Read only / Read only focus, hide the Calendar trigger entirely, rather than keeping an empty reserved slot. The calendar icon is non-directional and must not rotate upon opening. The action is not a fake affordance embedded in an inaccessible text input. The implementation must provide an actual keyboard-operable action with an accessible name and sufficient pointer target.
 
 **Desktop Calendar:** the live source demonstrates an approximately **288px-wide** anchored calendar with `surface/raised`, `12px · Large` radius, governed floating shadow, and **4px** vertical anchor gap. Fit to available viewport space, flip/shift when needed, preserve usable zoom/reflow, and avoid double wrapping in an independent Popover shell. An anchored selection panel is not automatically a modal Dialog.
 
@@ -99,6 +101,8 @@ Date Picker
 - Disabled uses `surface/disabled`, `line/disabled`, `fg/disabled`; neither date segments nor Calendar action should be operable.
 - Read only uses `line/muted`, retains readable content and its focus treatment where appropriate, but must not offer a misleading editable/open action.
 - The active date segment highlight is an editing context **inside** the content, not the outer control's focus ring.
+
+**Segment authoring:** Day, Month, and Year live in one physical RTL-aware **Auto Layout** group rather than absolute-positioned text layers. Use the canonical **2px Spacing token** between the five segment/separator items; each date-part text is centered in its editable segment wrapper, with the active-segment backdrop painted **behind** the glyphs. Placeholder/filled state is owned by the public Date Picker, not duplicated inside the internal Field Base.
 
 **No** `surface/brand` for selected calendar days. The selected Cell uses `surface/accent-emphasis` (`surface/accent-emphasis-hover` when hovered) and `fg/on-color`. Ordinary day text uses `fg/primary`, adjacent-month text `fg/tertiary`, and disabled day text `fg/disabled`. Focus remains the distinct `focus/default` semantic role. Interactive hover uses `surface/transparent-hover`.
 
