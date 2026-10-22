@@ -28,7 +28,11 @@ topics:
   - persian
 ---
 
-# محتوای Modal
+# محتوای Dialog
+
+> برای سازگاری با ارجاع‌های موجود، شناسهٔ `content.component.modal` و نام فایل
+> فعلاً حفظ شده‌اند. نام canonical کامپوننت **Dialog** است؛ **Modal** فقط alias
+> قدیمی و توصیف رفتار blocking است. برای کار جدید از Dialog استفاده کنید.
 
 این سند قرارداد محتوای یک context موقت و blocking است. قواعد machine-readable
 در [`modal.yml`](modal.yml) و نمونه‌های regression در
@@ -37,26 +41,29 @@ topics:
 
 ## وضعیت منبع و مرز تصمیم
 
-کامپوننت Modal در Design System هنوز `unverified/draft` است و تصمیم‌هایی مانند
-size model، رفتار `Escape` و backdrop، initial-focus API، action layout و nested
-Modal policy باز مانده‌اند. این سند آن‌ها را قطعی نمی‌کند.
+سند canonical کامپوننت Dialog در Design System اکنون `canonical/reviewed` است و
+هدف، anatomy، size و responsive behavior، رفتار `Escape` و backdrop، focus،
+scroll و مرز Confirmation/Alert را تعریف می‌کند. سند legacy Modal فقط redirect
+سازگاری است. وضعیت runtime، Storybook mapping و آزمون‌های اجراشده همچنان
+`unregistered/unverified` است؛ این سند از روی تأیید طراحی، shipped بودن را نتیجه
+نمی‌گیرد.
 
 قواعد تأییدشدهٔ موجود می‌گویند:
 
-- Modal یک interaction context موقت و blocking برای task یا تصمیم متمرکز است.
+- Dialog یک interaction context موقت و blocking برای task یا تصمیم متمرکز است.
 - عنوان روشن لازم است و معمولاً accessible name از همان عنوان دیده‌شده می‌آید.
-- محتوای اصلی باید بدون مراجعه به صفحهٔ پوشیدهٔ پشت Modal قابل‌فهم باشد.
-- feedback منفعل، disclosure ساده، task طولانی یا navigation-heavy معمولاً Modal
+- محتوای اصلی باید بدون مراجعه به صفحهٔ پوشیدهٔ پشت Dialog قابل‌فهم باشد.
+- feedback منفعل، disclosure ساده، task طولانی یا navigation-heavy معمولاً Dialog
   نیست.
-- actionها از Button hierarchy و Confirmation pattern پیروی می‌کنند؛ Modal
+- actionها از Button hierarchy و Confirmation pattern پیروی می‌کنند؛ Dialog
   Button style تازه نمی‌سازد.
-- هنگام submit نباید Modal بدون product policy معتبر خوش‌بینانه بسته شود و
+- هنگام submit نباید Dialog بدون product policy معتبر خوش‌بینانه بسته شود و
   recovery را از دسترس خارج کند.
 
 الگوهای فارسی Title، Body، acknowledgement، dismissal wording و transitionهای
 content تصمیم Product Content System هستند.
 
-## ابتدا نوع Modal را مشخص کنید
+## ابتدا نوع Dialog را مشخص کنید
 
 | نوع | هدف محتوا | اجزای معمول |
 |---|---|---|
@@ -83,7 +90,7 @@ Dismiss control  only when flow is dismissible
 consequence یا requirement لازم را می‌دهد؛ actionها نتیجهٔ activation را نام
 می‌برند.
 
-لحن با نوع Modal تغییر می‌کند: form کوتاه از لحن راهنمای form، confirmation
+لحن با نوع Dialog تغییر می‌کند: form کوتاه از لحن راهنمای form، confirmation
 خنثی یا مخرب از پروفایل همان confirmation و information response-required از
 لحن informational پیروی می‌کند. هیچ‌کدام مجوز فشار احساسی یا بیان تبلیغاتی
 نیستند.
@@ -124,7 +131,7 @@ Body فقط اطلاعاتی را اضافه می‌کند که برای تصم�
 Title را با جمله‌ای طولانی‌تر تکرار نکنید. اگر Title، controls و actionها task را
 کامل روشن می‌کنند، Body می‌تواند حذف شود.
 
-محتوا نباید به صفحهٔ unavailable پشت Modal ارجاع مبهم بدهد:
+محتوا نباید به صفحهٔ unavailable پشت Dialog ارجاع مبهم بدهد:
 
 ```text
 بد: مورد انتخاب‌شده را طبق اطلاعات زیر حذف کنید.
@@ -164,14 +171,14 @@ Exit: انصراف
 ```
 
 - instruction مشترک را یک بار در جای مناسب بیاورید، نه زیر همهٔ fieldها.
-- requiredness، helper و error را به Modal-specific copy تبدیل نکنید.
-- task طولانی یا چندمرحله‌ای را فقط با کوتاه‌کردن متن در Modal جا ندهید.
+- requiredness، helper و error را به Dialog-specific copy تبدیل نکنید.
+- task طولانی یا چندمرحله‌ای را فقط با کوتاه‌کردن متن در Dialog جا ندهید.
 - اگر بستن باعث ازدست‌رفتن داده می‌شود، آن consequence باید مطابق Product truth
   مدیریت و در صورت نیاز confirmation شود.
 
 ## Information requiring a response
 
-Modal فقط وقتی برای information مناسب است که کاربر باید پیش از بازگشت پاسخ
+Dialog فقط وقتی برای information مناسب است که کاربر باید پیش از بازگشت پاسخ
 صریحی بدهد. Title موضوع را نام می‌برد و Body اطلاعات ضروری را توضیح می‌دهد.
 
 برای acknowledgement ساده، labelی مانند «متوجه شدم» می‌تواند معتبر باشد چون
@@ -189,22 +196,22 @@ Modal فقط وقتی برای information مناسب است که کاربر ب�
   باشد؛ ظاهر مشابه یا label یکسان کافی نیست.
 - Brand، Primary و Danger از hierarchy و consequence می‌آیند، نه از شدت copy.
 
-این سند تعیین نمی‌کند Close icon، `Escape` یا backdrop در همهٔ Modalها چه رفتاری
-دارند. تا ثبت contract نهایی، copy نباید وعده‌ای مانند «برای خروج بیرون کادر
-کلیک کنید» بدهد.
+رفتار Close، `Escape` و backdrop را سند canonical Dialog تعیین می‌کند. این سند
+آن رفتارها را بازتعریف نمی‌کند و copy نباید با آن‌ها تعارض داشته باشد یا از روی
+طراحی، API و وضعیت پیاده‌سازی runtime را حدس بزند.
 
 ## Loading، success و error
 
 هنگام submit:
 
 - Button هویت action را در Loading حفظ می‌کند؛
-- Modal context تا زمانی که flow نتیجهٔ دیگری را تأیید نکرده حفظ می‌شود؛
+- Dialog context تا زمانی که flow نتیجهٔ دیگری را تأیید نکرده حفظ می‌شود؛
 - completion یا success پیش از پاسخ واقعی اعلام نمی‌شود؛
-- Modal فقط وقتی خودکار بسته می‌شود که behavior محصول این transition را تعریف
+- Dialog فقط وقتی خودکار بسته می‌شود که behavior محصول این transition را تعریف
   کرده باشد.
 
 Failure قابل‌بازیابی باید در همان context قابل‌فهم باشد، data معتبر را حفظ کند
-و recovery معلوم را نشان دهد. Toast تنها نباید recovery لازم داخل Modal را از
+و recovery معلوم را نشان دهد. Toast تنها نباید recovery لازم داخل Dialog را از
 دسترس خارج کند.
 
 ```text
@@ -220,7 +227,7 @@ Failure قابل‌بازیابی باید در همان context قابل‌فه
 - نام، identifier، email و متن دوجهته را isolate کنید.
 - Title، Body و Button labels باید در zoom و عرض واقعی بدون حذف اطلاعات ضروری
   قابل‌فهم بمانند.
-- Modal نباید نام internal object یا placeholder خام نشان دهد.
+- Dialog نباید نام internal object یا placeholder خام نشان دهد.
 
 ## دسترس‌پذیری محتوایی
 
@@ -239,7 +246,7 @@ flow هستند. متن نباید یک target همیشگی مانند «همی�
 
 ### باید
 
-- نوع Modal و ضرورت blocking context را پیش از نوشتن مشخص کنید.
+- نوع Dialog و ضرورت blocking context را پیش از نوشتن مشخص کنید.
 - Title task، decision یا موضوع response را روشن نام ببرد.
 - محتوا را مستقل از background قابل‌فهم نگه دارید.
 - Body فقط context، consequence یا requirement لازم و تأییدشده را اضافه کند.
@@ -249,21 +256,19 @@ flow هستند. متن نباید یک target همیشگی مانند «همی�
 
 ### نباید
 
-- feedback منفعل یا disclosure ساده را فقط برای تأکید داخل Modal ببرید.
+- feedback منفعل یا disclosure ساده را فقط برای تأکید داخل Dialog ببرید.
 - از Titleهای generic مانند «توجه»، «هشدار» یا «مطمئن هستید؟» استفاده کنید.
 - Title، Body و actions را با wording تکراری پر کنید.
 - consequence، recoverability، dismissal یا focus behavior را حدس بزنید.
-- Modal را پیش از outcome واقعی موفق اعلام یا خوش‌بینانه ببندید.
-- task طولانی و چندمرحله‌ای را به Modal عمومی تحمیل کنید.
+- Dialog را پیش از outcome واقعی موفق اعلام یا خوش‌بینانه ببندید.
+- task طولانی و چندمرحله‌ای را به Dialog عمومی تحمیل کنید.
 
 ## مسائل باز
 
-- exact dismissibility contract برای Close، Escape و backdrop.
-- initial-focus configuration و action-layout defaults.
-- size، scrolling و sticky header/footer behavior.
-- nested/stacked Modal policy.
-- زمان و شرایط auto-close پس از success.
+- ثبت runtime package، Storybook mapping و آزمون‌های اجراشدهٔ Dialog.
+- زمان و شرایط product-specific برای auto-close پس از success.
 - مرز دقیق focused form با Drawer یا dedicated page در هر محصول.
+- برنامهٔ مهاجرت مصرف‌کنندگان و ارجاع‌های legacy Modal.
 
 ## ارزیابی
 
