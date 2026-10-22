@@ -102,6 +102,7 @@ The app-level Footer is shared chrome and should not be conflated with a page-lo
 - `xs`, short content, Footer on: Shell remains 844px; `md`, 1470px content, Footer on: Shell expands to 1574px.
 - `lg` with no Header or with both panes plus long content was checked; no separate Body/Main scrollers were introduced.
 - A fixed 1440×900px viewport was configured to scroll vertically around a long App Shell instance; this is **Figma prototype configuration only**, not a browser accessibility or runtime scroll test.
+- Further regression: 1470px Content survived Footer/Header Boolean toggles and `lg → xs → md → lg` variant changes. **Content preservation passed; Shell height propagation after the variant switch failed in `xs/md`**. A fresh `md` long-page instance did expand as expected, so this issue is specific to the switch/override path.
 
 ## Accessibility and semantics
 
@@ -115,6 +116,7 @@ The final runtime composition must preserve meaningful Header/Main/Footer and na
 - Resolve old responsive breakpoint and container numeric contracts in `foundations/visual/responsive-layout/` and `design-system/tokens/layout/catalog.md` in a reviewed foundation change; do not silently overwrite them.
 - The Tailwind v3 width steps, centered Contained/Fluid modes, and reference-based 16/24px gutters were reproduced and tested in the isolated Figma candidate. The remaining design-tool usability gap is that Container `Reference` must be selected manually when a design crosses steps inside the broader App Shell `lg` range; this should be assessed in designer testing.
 - Review any designs that specifically require a sticky Header, sticky footer or independently scrolling pane; those are exception patterns, not verified here. Test long-form focus navigation, scroll restoration and zoom/reflow in runtime before a production claim.
+- **Figma height recomputation gap:** a freshly created instance with long Content correctly Hugs its height, but switching an *existing* 1470px-long page from `lg` to `xs` or `md` preserved its Slot content while leaving the instance root at the variant's reference minimum height (844/820px), with Footer lower than the reported Shell bounds. This persisted after a new canvas read, so it is **not yet a verified automatic responsive override workflow**. The tested instance was restored to `lg`. Until solved, choose the intended `Viewport` before authoring page content, or manually verify/adjust the instance height after switching. Do not promote this component to final before this usability issue is reviewed.
 - Run keyboard/RTL/zoom and complete design/runtime acceptance. No claimed Storybook parity.
 
 ### Figma validation completed (2026-10-22)
