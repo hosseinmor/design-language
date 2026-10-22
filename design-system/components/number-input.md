@@ -45,7 +45,7 @@ Number Input captures a numeric value when the user may type directly or change 
 
 The editable region contains the **number only**. The **Unit** is a non-editable inline text element immediately beside it, not a second input, a Select, a button, or a generic trailing Suffix. This Figma anatomy implements the chosen Spectrum-inspired **formatted-value appearance** while preserving a practical native input caret.
 
-A separate, optional **Prefix** (for example W for width) identifies the meaning of the value; it is not the unit. Prefix can coexist with Unit. The overall RTL control reads **Prefix → editable number → Unit → flexible space → decrement → increment**, with **+** at the far-left edge.
+A separate, optional **Prefix** (for example W for width) identifies the meaning of the value; it is not the unit. Prefix can coexist with Unit. The overall RTL control reads **Prefix → editable number → Unit → flexible space → decrement → increment**, with **+** at the far-left edge. **RTL visual order is mandatory: the editable number is on the right and Unit appears immediately to its left.** Within Figma's horizontal Auto Layout group, the physical left-to-right child order must therefore be **Unit, then Content**; do not accidentally render Unit to the right of the number. Preserve this rule for empty, filled, focused, disabled and read-only states, including mixed Persian numerals and Latin units.
 
 ### Empty, editing and filled
 
