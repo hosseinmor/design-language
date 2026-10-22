@@ -60,11 +60,12 @@ These inclusive line numbers are generated from the current `component-mapping.m
 | Content Switcher | 614–650 | ### Content Switcher |
 | Tabs | 653–693 | ### Tabs |
 | Chip | 695–745 | ### Chip |
-| Progress Bar (HOS-37) | 748–778 | ### Progress Bar (HOS-37) |
-| Progress Indicator (HOS-31) | 780–812 | ### Progress Indicator (HOS-31) |
-| Choice Group | 815–844 | ### Choice Group |
-| Timeline | 846–875 | ### Timeline |
-| Data Table (HOS-35) | 877–906 | ### Data Table (HOS-35) |
+| Tag — HOS-33 (Figma verified; runtime unregistered) | 748–773 | ### Tag — HOS-33 (Figma verified; runtime unregistered) |
+| Progress Bar (HOS-37) | 775–805 | ### Progress Bar (HOS-37) |
+| Progress Indicator (HOS-31) | 807–839 | ### Progress Indicator (HOS-31) |
+| Choice Group | 842–871 | ### Choice Group |
+| Timeline | 873–902 | ### Timeline |
+| Data Table (HOS-35) | 904–933 | ### Data Table (HOS-35) |
 <!-- END GENERATED COMPONENT MAPPING SECTIONS -->
 
 ## Maintenance
