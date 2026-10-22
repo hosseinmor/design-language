@@ -14,7 +14,7 @@ related:
 
 # Drawer
 
-> **HOS-53 · Figma design baseline approved for this scope; component handoff is not yet complete.** The live editable source defines the visual component, whereas this document records the selected design decisions and their unresolved boundaries. Public runtime API, actual responsive sizing, interaction tests, motion values and Storybook parity have **not** been verified. The existing `knowledge_state: unverified` / `document_maturity: scaffold` metadata remains unchanged until the remaining gates are complete and the owner approves promotion.
+> **HOS-53 · Design specification ready for development review, not evidence of a deployed implementation.** Size maxima, responsive sizing, modal dismissal/focus, scroll Fade and local motion recipe are defined below. Figma is the editable visual source; Code/Storybook must independently establish implementation, actual APIs and test status. Existing `unverified / scaffold` metadata is retained until owner-reviewed PR merge and maturity gates.
 
 ## Purpose and boundary
 
@@ -40,56 +40,70 @@ Navigation from the Start edge belongs to **Side Navigation / App Shell**, not g
 4. **Header extension** — optional native Figma Slot for a secondary toolbar row, Search, Tabs, or other composition. It is not an additional Drawer Type.
 5. **Content** — required native Slot; the **only vertically scrolling section** when content exceeds available height.
 6. **Footer** — optional native Slot; stays outside Content scrolling and accepts canonical Button actions, status/help, or other appropriate content. Example regular buttons are Small (32px); narrow example buttons are Medium (40px). Preserve the Dialog action hierarchy: Primary to the physical left of adjacent Secondary in RTL.
+7. **Overflow fade** — a Figma-only 48px alpha fade Boolean (default `false`) inherited from the Dialog visual, derived automatically from Body overflow in runtime.
 
 **Close versus other actions:** The dedicated Close Button is not a replaceable generic icon action; it always means safe dismissal. Refresh/Reset/Edit/More use standard Icon Buttons and their own accessible names. The v1 master has one optional sample header action (`Show header action`); a future arbitrary multi-action header should be composed through an explicitly designed actions slot rather than a proliferation of Boolean variants. Existing **Header extension Slot** supports a toolbar below the title row.
 
 **Section spacing in current Figma sample:** regular inline padding is 24px for Header, Content and Footer; narrow preview uses 16px. A physical-left Header reservation prevents the Close hit target overlapping the Title. For current design examples, Close is 12px from both top and physical left in RTL. These are editable design facts, not a claim about a tested responsive runtime.
 
-## Sizing and responsive status — intentionally TBD
+## Sizing and responsive design contract
 
-**Figma now has an explicit `Size` variant axis** for consistent designer authoring. The current **Default = 400px** and **Large = 640px** values are **provisional design presets**, approved as a two-choice *authoring model*, **not** as final runtime pixel/max-width values. The original 400px main component is preserved as `Size=Default` inside the public `Drawer` Component Set; `Size=Large` is a new 640px variant. Designers should select the Size property rather than manually inventing arbitrary desktop widths.
+The approved v1 Figma and intended runtime Size model is **`Default | Large`**. Width values are now **design maxima**, rather than provisional examples:
 
-| Figma Size | Current source width (provisional) | Intended content capacity |
+| Size | Maximum width | Use |
 | --- | ---: | --- |
-| `Default` | 400px | Short contextual edits, filters, a single column of controls |
-| `Large` | 640px | Larger forms, structured content and richer header composition |
+| `Default` (default) | **400px** | Filters, compact contextual edits, simple details |
+| `Large` | **640px** | Structured content, richer forms, two-column content where it fits |
 
-**Do not freeze either number as the runtime API contract yet.** Public default/max width, fluid clamping to viewport, and breakpoint-specific behavior need a separate owner decision. The current authoring axis may inform, but does not automatically establish, production sizing.
+**Fluid width:** `inline-size: min(100dvw, selectedMaxWidth)` or equivalent viewport/safe-area constrained behavior. The Size selection is an upper bound, **not a minimum width**. Do not allow viewport-horizontal scrolling or expose an arbitrary width override or resizable edge in v1. A Large Drawer at 360px is 360px wide, not converted to a third Size or Bottom Sheet.
 
-A **360px narrow** example is a resized instance of **`Size=Default`**, illustrating adaptation to the available viewport, with 16px section inline padding and 40px footer buttons. **Narrow is not a third Size variant, nor a freely selectable runtime density property.** Exact fluid behavior, maximum/minimum width, thresholds, extreme narrow viewport rules and any public sizing API remain **TBD**. Do not create an independent breakpoint system. Do not automatically convert the Drawer to Bottom Sheet.
+**Narrow:** use the existing **768px** shared breakpoint to switch section inline padding from **24px Regular** to **16px Narrow**. Narrow is **not** a Figma Size or a separately selectable density. The 320px/360px Figma examples are resized `Size=Default` instances; run QA also at 390, 767, 768 and wider sizes. Footer examples use Button/Medium 40px in Narrow; do not infer touch capability from width. Close remains physical 12px from top/left RTL and mirrors for LTR.
 
-Drawer is an edge-attached viewport-height surface in the design examples. Respect actual visual viewport and safe-area constraints in runtime; the header and footer must remain usable when zoom/reflow reduce available height. A Figma viewport sample is not proof of these runtime constraints.
+**Height:** Drawer fills the **dynamic visual viewport** (`100dvh` or equivalent). Account for safe-area insets and the software keyboard; Header, optional Header Extension and Footer remain visible outside the flexing Content. The page behind the modal is scroll-locked. Collapse any inner multi-column form at insufficient container width. If 200% zoom or short landscape height makes essential actions unusable, replace the dense task with a dedicated page rather than clipping content.
 
 ## Overflow, scroll and separators
 
-- Header and Footer remain outside the scrolling Content. The background page must not scroll while a modal Drawer is active.
-- `Content / Slot` in Figma has vertical overflow enabled; long-form playground content exercises the slot.
-- A contextual **Divider or 48px edge fade** should be shown only when useful to communicate more available content, never as an unconditional decoration. The final Drawer-specific separator/fade treatment and whether to reuse Dialog's fade presentation remain **TBD**. Do not expose an arbitrary `overflowFade` public prop in anticipation of that decision.
-- Avoid uncontrolled nested scroll containers and prevent content or focus targets being hidden underneath Footer actions.
+**Final v1 visual treatment: reuse Dialog's 48px semantic alpha Fade**, not a permanent Divider. The Fade uses an alpha mask over `surface/default`, preserving Light/Dark behavior, at the **bottom of the Content viewport**, immediately above Footer if present. Its visual layer must not intercept clicks or focus (`pointer-events: none`).
 
-## Dismissal and task safety — intended design, runtime unverified
+- Show Fade **iff** Content vertically overflows **and content remains below** the current scroll position. Hide when content fits and at the scroll end; recompute on scrolling, layout, content changes and resize. Use a ~1px tolerance against rounding flicker.
+- The Figma `Overflow fade` **Boolean defaults to false and is preview-only**. It is enabled on the long-content Large example. Runtime must **derive** overflow from actual scroll state; **no public `overflowFade` prop**.
+- Only Content scrolls; Header, Header Extension and Footer remain outside its scroll container. Do not scroll the inert page, permit an accidental horizontal scrollbar, or obscure focused fields beneath Footer actions. Avoid uncontrolled nested scrolling.
 
-- Visible Close requests **safe dismissal**. `Show close=false` only removes the visible affordance; a legitimate Cancel/Back/exit path must remain for an interruptible task.
-- **Escape** should route to the same safe exit and never submit or destroy data.
-- **Backdrop click does not dismiss by default**; background controls must not receive the click.
-- Unsaved edits require a **single guard** across Close, Escape, Cancel and navigation; users explicitly choose whether to discard. Avoid accidental data loss from overlay dismissal.
-- Swipe-to-dismiss is not part of the v1 design.
-- The opening/closing transition moves from/to logical End. Duration, easing and final motion tokens remain **TBD**, while reduced-motion preference must be respected.
+## Dismissal, modality and task safety — intended design contract
 
-These are **intended design behaviors**, not assertions about a deployed Drawer.
+**Modal-only v1.** The obscured page becomes visually dimmed using `semantic/utility/overlay` and **actually inert** for mouse, keyboard and assistive technology; do not apply `aria-modal=true` without real inertness. Non-modal, nested Drawer, Start placement and swipe-to-dismiss are out of scope.
 
-## Accessibility acceptance criteria
+**Unified safe-exit:** Close Button, Escape, Cancel/Back and relevant route changes use one dismiss request. They never submit, clear fields or silently discard unsaved edits. The hosting product owns dirty-state detection and a coordinated confirmation; choosing Keep editing retains fields and focus in Drawer, choosing Discard permits dismissal. If `Show close=false`, a visible safe exit/recovery path is still required. Backdrop click/tap **never dismisses** by default and never passes interaction through.
 
-For the proposed **modal** version, implementation and tests must establish:
+Open/closed state, portal/stacking and event naming belong to the owning runtime, not to a Figma visual variant. Allow safe cancellation/retry of pending operations; do not lose context on submission error.
 
-- Accessible dialog semantics appropriate to the temporary task (`role="dialog"`; `aria-modal="true"` only when background is truly inert), with visible Title supplying `aria-labelledby` and concise Description optionally supplying `aria-describedby`.
-- Focus placed logically inside when opened; Tab/Shift+Tab contained within the active interaction scope; visual focus indicator present; portalled controls treated as belonging to the active Drawer.
-- Focus returned to the invoking element if still available, otherwise to a logical surviving target.
-- Keyboard access to Close, header actions and Footer controls; an accessible Close name **«بستن»**.
-- Safe Escape and unsaved-change dismissal behavior; correct screen-reader content announcements.
-- Scroll/reflow usability with long Persian content, 200% zoom, narrow viewports and reduced-motion enabled.
+### Drawer-local motion recipe
 
-The shared [Focus Management](../../accessibility/focus-management.md) foundation remains normative. **None of the above tests is marked executed by the Figma design review.**
+The shared Motion Foundation and Motion Token Catalog remain unapproved. These are therefore **scoped Drawer v1 implementation values**, *not new global motion tokens*:
+
+| Phase | Duration | Easing |
+| --- | ---: | --- |
+| Entrance from logical End | **240ms** | `cubic-bezier(0,0,0.38,0.9)` |
+| Exit toward logical End | **200ms** | `cubic-bezier(0.2,0,0.38,0.9)` |
+| Backdrop opacity in/out | **180ms** | `linear` |
+
+RTL End animates from **left**: `translateX(-100%) → 0`; LTR End from **right**: `translateX(100%) → 0`. Reverse for exit; do not animate width or layout. Make background inert immediately upon opening and restore focus only after safe exit completes; handle interrupted/repeated open/close transitions gracefully.
+
+With `prefers-reduced-motion: reduce`, **all transition durations are 0ms**, preserving focus, inertness and semantic state changes. Revisit the numbers if Karbon later approves shared Motion tokens; these local values do not authorize foundation changes.
+
+## Accessibility and development acceptance
+
+These are **required intended behaviors and developer acceptance tests**, not claims of executed runtime QA:
+
+1. Use `role="dialog"`, a visible heading referenced by `aria-labelledby`, optional concise `aria-describedby`; set `aria-modal="true"` **only with a genuinely inert background**. Hidden/closed Drawer must not remain in the tab order or accessibility tree.
+2. On open save the invoking control and move focus inside. For a short form focus the first relevant enabled input; for a long structured form focus its title using `tabindex="-1"` rather than the entire dialog wrapper. Keep the beginning of content visible.
+3. Trap Tab/Shift+Tab among operable controls inside the active interaction scope, including portalled dropdowns; Close, Header actions and Footer actions remain accessible, with visible `focus/default` styling.
+4. On safe close restore focus to the invoking control if still mounted or a logical surviving target; avoid restoring into an inert backdrop. Escape routes through the same dirty-state guard as Close/Cancel.
+5. Check Content-only scrolling and Fade's actual overflow detection. Keep focused fields/validation errors unobscured, with fixed Footer visible under dynamic viewport/software keyboard changes.
+6. Test both sizes at **320, 360, 390, 767, 768, 1024, 1280 and 1920px**, 200% zoom, Persian long strings, RTL/LTR, Light/Dark, short/long content, with/without Footer, pointer and keyboard.
+7. Test rapid open/close, backdrop non-dismissal, failed submission, unsaved-change confirmation, screen-reader title/description announcement, focus restoration and reduced motion (0ms).
+
+The reviewed [Focus Management](../../accessibility/focus-management.md) contract remains normative. The frontend team owns tests in Code/Storybook; Figma cannot certify their results.
 
 ## Figma source and examples
 
@@ -99,10 +113,13 @@ The shared [Focus Management](../../accessibility/focus-management.md) foundatio
 - [Drawer / Documentation · HOS-53](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24636-458) — one current presentation with the actual master and linked examples.
 - [Close Button / Default](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24046-476) — shared with Dialog; its source was not modified for Drawer.
 
-Verified design sample coverage: RTL End for contextual editing and filters, **one `Size=Large`** toolbar/long-content form, **three regular `Size=Default`** examples and a **360px resized `Size=Default`** narrow presentation. All five preview Drawer instances remain linked to the correct **two-variant Component Set**; the 640px form's custom Header toolbar, Footer status and 10 content-field rows survived switching from Default to Large. Both variants contain the same three actual Figma native Slots: **Header extension**, **Content**, **Footer**. Existing `Show close`, `Show description`, `Show header action`, `Show header extension` and `Show footer` Boolean properties are exposed. Visual QA does not imply runtime functionality.
+Verified Figma samples cover RTL End contextual editing and filters, a 640px `Size=Large` toolbar/long form with the **48px Fade** preview, 320px and 360px resized `Size=Default` Narrow examples, and a Footer-off case. All **six** preview Drawer instances remain linked to the **two-variant Component Set**; the Large form retains its toolbar, Footer status and ten field rows. Both variants use three native Slots (Header extension, Content, Footer) and a **Figma-only `Overflow fade` Boolean**. `Show close` and other existing Booleans remain. This is visual QA, not executed runtime QA.
 
-## Known gaps and handoff state
+## Handoff status and evidence
 
-**Still unresolved:** final numeric widths, runtime max-width/fluid Size API and responsive boundaries (despite the approved *Figma Size axis*), exact overflow edge indication, detailed animation tokens, actual dismissal and focus behavior, light/dark and extreme-reflow runtime validation, Storybook/code mapping and tests.
+**Design contract is ready for frontend implementation review; runtime verification is still required.** Developer teams may build from the approved Figma Size/placement/visual choices and the intended requirements above. Do not describe the component as already implemented, tested, or Storybook-mapped.
 
-**HOS-53 remains in progress** until these acceptance gates are resolved or explicitly scoped into separately tracked work with owner approval. The current **two-variant Figma visual/component authoring model** is accepted for this bounded baseline; the numeric sizing values and runtime contract are not yet approved. No Code/Storybook implementation or parity claim is made.
+Figma visual QA covers six linked examples: three regular Default, a Large long form with 48px Fade, plus 360px and 320px Narrow default examples. Both source variants retain the three native Slots, the Dialog Close Button and existing section tokens. The Figma Set also exposes a **preview-only `Overflow fade` Boolean**; do not mirror it as runtime API.
+
+**Remaining work is engineering verification**: choose exact runtime component signature consistent with code conventions, implement and execute responsive/motion/focus/scroll/dirty-state tests, and confirm Code/Storybook parity. A future shared Motion-token foundation may replace the component-local values. This document retains `unverified / scaffold` metadata until PR owner review, release evidence and repository governance allow maturity promotion.
+
