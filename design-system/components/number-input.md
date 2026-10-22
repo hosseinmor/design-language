@@ -56,6 +56,23 @@ A separate, optional **Prefix** (for example W for width) identifies the meaning
 - **Show unit = False** means a plain numeric field with no unit, not a different visual Field style.
 - Group spacing is **4 px** by default for short units such as تومان, سال and px; percentage may be shown without additional inter-token gap. Format/localization rules may override typographic spacing, but do not introduce a second user-facing visual-style variant.
 
+### Initial value, empty state and Placeholder
+
+Number Input **does not supply a numeric default value by itself**. The consuming product owns any initial value. Do not substitute zero, a dash, or an example number merely because a field is empty.
+
+| Scenario | Numeric model | Editable display | Unit when configured |
+|---|---|---|---|
+| Product supplies no initial value | `null` / empty | **Blank** numeric area | Still visible, `fg/secondary` |
+| Product explicitly supplies zero | `0` | `۰` | Visible, `fg/primary` |
+| Product supplies a meaningful default (e.g. 100000) | `100000` | `۱۰۰٬۰۰۰` | Visible, `fg/primary` |
+| User deletes every digit | `null` / empty | **Blank** numeric area | Still visible, `fg/secondary` |
+
+- **Default Placeholder is empty (`""`).** There is no default em dash (`—`), hyphen (`-`), or zero in the editable field. A dash often means unavailable data in read-only display contexts; it is not the empty-state instruction of an editable input.
+- Preserve the optional `Placeholder` authoring property for a *specific justified example*, but prefer Label or Helper for instructions, unit meaning, expected range and constraints. Placeholder must never be the accessible label.
+- **Value and Placeholder are different concepts.** `Filled=False` in Figma is a design-only authoring switch that displays the optional Placeholder; it does not assign or clear a runtime numeric value. `Value="۱۲"` currently exists as a **Figma authoring example default only**, not as a product or code default.
+- Numeric `0` must use the **Filled** representation in Figma; it must not be inferred from an empty field. Apply this distinction to validation, saving, accessibility and stepping behavior. An empty amount and a zero amount can have different product meanings.
+- **Clearing** all digits returns to the same empty representation as an initially blank field. Configured Unit remains visible; pressing Backspace does not insert a dash or automatically restore zero. The first subsequent typed digit produces a numeric value.
+
 ## Click / focus / text-editing behavior
 
 The entire editable side of the Control is a **focusable click region**, excluding the independent Stepper action hit targets:
