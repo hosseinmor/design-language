@@ -127,6 +127,7 @@
     "design-system.pattern.responsive-layout",
     "design-system.pattern.search-and-filtering",
     "design-system.pattern.tour",
+    "design-system.pattern.value-summary",
     "design-system.product-variation.brand-variants",
     "design-system.product-variation.product-overrides",
     "design-system.product-variation.theme-context",
@@ -2383,6 +2384,26 @@
     {
       "from": "design-system.pattern.tour",
       "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.value-summary",
+      "to": "design-system.accessibility.dynamic-content-and-feedback",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.value-summary",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.value-summary",
+      "to": "design-system.component.number-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.value-summary",
+      "to": "design-system.component.text-input",
       "type": "related"
     },
     {

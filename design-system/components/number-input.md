@@ -123,6 +123,10 @@ Control corner radius is 6 px. Both + and − are actual **Icon Button / Seconda
 
 Stepper accepts an intended numeric Step; its exact runtime API is not specified here. Buttons can alter a numeric value but must not silently turn an empty value into a prefilled one without an agreed starting-value rule. Min/Max enforcement, whether out-of-range typed values are clamped on commit, decimal precision, press-and-hold, mouse-wheel behavior and localized formatting are implementation acceptance points and require live validation. **Mouse-wheel changes should be off by default** to avoid accidental modifications during scrolling.
 
+## Derived-value readout and multi-field summaries
+
+A converted numeric equivalent is **supporting content**, not another editable Number Input property: use this component's existing **Helper** for an isolated value (e.g. `۲۰ میلیون تومان` → `معادل ۲۰٬۰۰۰٬۰۰۰ تومان`). When two or more related Number Inputs need **one** sentence (e.g. a min/max salary range), place a shared read-only output **under the whole Field Group** through the [Value Summary pattern](../patterns/value-summary.md). The Pattern owns the composition, partial-bound handling and error precedence; consuming Products own conversion math and business validation. Do not add new `Show converted value` or `Range summary` Figma properties to the Number Input master.
+
 ## Semantics and accessibility
 
 - Give the numeric input a meaningful accessible name, normally from a visible Label. Include the unit in the Label or programmatically associated description when it materially affects interpretation. Visible Unit text alone is not sufficient accessible naming.
