@@ -1108,6 +1108,67 @@
       "path": "design-system/components/content-switcher.md"
     },
     {
+      "id": "design-system.component.date-input",
+      "kind": "design-system-component",
+      "title": "Date Input",
+      "summary": "Segmented manual date entry using shared Field Family anatomy, localized date parsing, one committed date value, and mutually exclusive supporting or error feedback.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.text-input",
+        "design-system.component.date-picker",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "accessibility",
+        "components",
+        "date-field",
+        "date-input",
+        "design-system-component",
+        "form-field",
+        "localization",
+        "rtl",
+        "segmented-date"
+      ],
+      "path": "design-system/components/date-input.md"
+    },
+    {
+      "id": "design-system.component.date-picker",
+      "kind": "design-system-component",
+      "title": "Date Picker",
+      "summary": "Single-date selection through a segmented editable field and a separate trailing calendar action, with shared field feedback, accessible calendar navigation, and responsive composition.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.date-input",
+        "design-system.component.text-input",
+        "design-system.component.dialog",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "accessibility",
+        "calendar",
+        "components",
+        "date-field",
+        "date-picker",
+        "date-selection",
+        "design-system-component",
+        "focus",
+        "localization",
+        "responsive",
+        "rtl"
+      ],
+      "path": "design-system/components/date-picker.md"
+    },
+    {
       "id": "design-system.component.dialog",
       "kind": "design-system-component",
       "title": "Dialog",
@@ -3246,7 +3307,7 @@
     }
   ],
   "summary": {
-    "documents": 154,
+    "documents": 156,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3256,7 +3317,7 @@
       "design-language-integration": 1,
       "design-language-overview": 1,
       "design-system-accessibility": 18,
-      "design-system-component": 45,
+      "design-system-component": 47,
       "design-system-component-annex": 1,
       "design-system-design-language": 1,
       "design-system-experience-rule": 11,
