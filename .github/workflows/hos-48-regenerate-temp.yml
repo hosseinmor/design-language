@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   regenerate:
-    if: github.event.head_commit.message != 'chore(registry): regenerate for HOS-48'
+    if: ${{ !contains(github.event.head_commit.message, 'chore(registry)') }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out exact PR branch
