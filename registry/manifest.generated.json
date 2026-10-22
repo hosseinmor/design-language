@@ -1670,14 +1670,15 @@
       "id": "design-system.component.tag",
       "kind": "design-system-component",
       "title": "Tag",
-      "summary": "TBD Tag component anatomy and behavior; approved categorical Tag Color tokens exist separately from this unverified component scaffold.",
+      "summary": "Tag is a passive, non-interactive categorical label with three sizes, nine categorical colors, optional leading icon, and accessible RTL content rules.",
       "status": "draft",
       "owner": "Design System team",
-      "last_reviewed": null,
+      "last_reviewed": "2026-10-22",
       "related": [
         "design-system.token.component-tokens",
         "design-system.component.chip",
-        "design-system.component.badge"
+        "design-system.component.badge",
+        "design-system.reference.component-mapping"
       ],
       "topics": [
         "components",

@@ -3,18 +3,22 @@ id: design-system.component.tag
 collection: design-system
 type: component
 title: Tag
-summary: TBD Tag component anatomy and behavior; approved categorical Tag Color tokens exist separately from this unverified component scaffold.
-knowledge_state: unverified
-document_maturity: scaffold
+summary: Tag is a passive, non-interactive categorical label with three sizes, nine categorical colors, optional leading icon, and accessible RTL content rules.
+knowledge_state: verified
+document_maturity: reviewed
+design_status: ready-for-dev
+design_maturity: handoff-ready
+last_reviewed: '2026-10-22'
 related:
   - design-system.token.component-tokens
   - design-system.component.chip
   - design-system.component.badge
+  - design-system.reference.component-mapping
 ---
 
 # Tag
 
-> **Design contract proposed for HOS-33 owner review.** The Figma construction below was inspected live on 2026-10-22, including a targeted component-property repair and an independent color-contrast check. This document remains `unverified / scaffold` until the Design System owner approves the proposed contract, required validations are complete, and the generated knowledge registry is updated. A component existing in Figma does not establish library publication or runtime availability.
+> **Reviewed design contract — HOS-33.** The Design System owner accepted the existing Tag design direction and requested review, merge, and completion on 2026-10-22. The Figma master and all 27 variants were audited on the same date. This approval covers the design specification and handoff, **not** Figma Library distribution, shipped code, Storybook, or runtime accessibility testing.
 
 ## Purpose
 
@@ -35,7 +39,7 @@ Tag is a **passive, short, descriptive/categorical label** attached to content. 
 
 ## Anatomy
 
-Proposed visual anatomy:
+Reviewed visual anatomy:
 
 1. A borderless, fully rounded categorical surface.
 2. A **required, visible, single-line Label**.
@@ -111,9 +115,11 @@ The current design's 4.5:1 color target is supported by the Light/Dark variable 
 
 No owning runtime package, Code Connect mapping, Storybook story or implementation tests are registered for this component. Do not infer an exact DOM structure, public API, shipped CSS, or Figma-to-code parity. A separate runtime handoff is required if implementation is needed.
 
-## Owner Review / Known Gaps
+## Handoff and Known Gaps
 
-1. **Review sign-off:** use the existing Figma master as the design baseline; confirm the observed three-size model, optional leading icon, shared Label/XS typography, 180 px maximum and passive-only contract. No redesign or new Figma component is proposed.
-2. **Library distribution is separate from this design contract:** the existing Tag master is the canonical source; no additional or replacement component is needed. Before teams consume it from the shared Library, confirm the current key is published and validate insertion in an independent consumer file. The available library search still resolves a legacy Tag key, so this publication check remains open but does **not** by itself block completion of design documentation.
-3. Upon approval, update this document's summary/maturity and related component routing, regenerate the manifest/graph and the [Component Mapping Lookup Index](../../integrations/component-mapping-index.md) from canonical tooling, and record the reviewed identity in the mapping registry.
-4. Perform manual accessibility/composition QA as appropriate. Keep runtime/Storybook APIs **unverified** until registered from actual owning sources.
+The **design contract is reviewed and ready for development**. The existing Figma master is canonical; no replacement component or new Tag variation is necessary. The approved 20/24/28 px sizes, optional leading icon, Label/XS typography, 180 px default width cap, passive-only behavior, categorical color semantics, and RTL/overflow rules are described above.
+
+- **Figma Library distribution:** the canonical master has been verified in the source design file, but publication/discoverability of its current key in an independent consumer Library remains unverified. Confirm publication and insertion during rollout; this is **not** a reason to redesign the component or block design handoff.
+- **Code, Storybook and Code Connect:** owning runtime sources, exact public API, implementation and tests are unregistered. This design review does not assert code parity or shipment.
+- **Runtime accessibility:** the Figma variable-based text-contrast audit passed, and passive content semantics are specified. Screen-reader, mixed-direction overflow and composed-page tests must be performed when a running implementation or consumer context exists; do not infer product conformance from this design review.
+- **Identity mapping:** the verified Figma source and explicit runtime gaps are recorded in [Component Mapping](../../integrations/component-mapping.md).
