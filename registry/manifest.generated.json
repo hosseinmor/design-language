@@ -1591,7 +1591,7 @@
       "id": "design-system.component.side-navigation",
       "kind": "design-system-component",
       "title": "Side Navigation",
-      "summary": "Draft design contract for persistent destination navigation with expanded and compact rail presentation, two-level disclosure and a non-modal compact Flyout.",
+      "summary": "Draft design contract for persistent destination navigation with expanded and compact rail presentation, two-level disclosure and temporary hover-expansion from the compact rail.",
       "status": "draft",
       "owner": "Design System team",
       "last_reviewed": null,
