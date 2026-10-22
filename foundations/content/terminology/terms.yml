@@ -1,4 +1,4 @@
-schema_version: "0.3"
+schema_version: "0.4"
 id: content.foundation.terminology
 title: واژه‌نامهٔ محتوای محصول جاب‌ویژن
 status: draft
@@ -38,19 +38,58 @@ sources:
     state: observed
     role: runtime_product_evidence
     reviewed_on: 2026-09-23
+  - id: pk_jobvision_glossary_employer_actor
+    title: تمایز سازمان و نقش انسانی کارفرما
+    url: https://docs-jv.jvoffice.ir/contents/00-glossary/#سازمان-company
+    state: draft
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-22
+  - id: pk_jobvision_jobpost_overview
+    title: نمای حوزهٔ آگهی
+    url: https://docs-jv.jvoffice.ir/contents/jobpost/0_overview/
+    state: verified
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-22
+  - id: pk_jobvision_cv_language_variants
+    title: قابلیت رزومهٔ فارسی و انگلیسی
+    url: https://docs-jv.jvoffice.ir/contents/cv/capability-fa-en-cv/
+    state: verified
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-22
+  - id: pk_jobvision_ai_overview
+    title: نمای حوزهٔ هوش مصنوعی
+    url: https://docs-jv.jvoffice.ir/contents/ai/0_overview/
+    state: draft
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-22
+  - id: pk_jobvision_resume_ai_assistant
+    title: قابلیت دستیار هوش مصنوعی رزومه
+    url: https://docs-jv.jvoffice.ir/contents/cv/capability-cv-suggestions/
+    state: verified
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-22
 
 authority_model:
-  meaning_owner: product_knowledge
+  meaning_owners:
+    - product_knowledge
+    - design_language
   language_owner: design_language
+  design_language_owned_concept_kinds:
+    - communication_concept
+    - feature_family
+    - persona
   linked_product_source_role: product_knowledge_reference
   unresolved_product_source: unresolved
+  not_applicable_product_source: not_applicable
   migration_states:
     - source_linked
     - needs_product_knowledge_reference
+    - not_applicable
   interpretation:
     - status میزان بلوغ تصمیم زبانی را نشان می‌دهد، نه اعتبار product truth.
     - definition.source و code_bindings فقط snapshot ارجاعی برای retrieval و migration هستند.
-    - مدخل بدون product source معتبر نباید برای ادعای رفتار محصول استفاده شود.
+    - مدخل محصولی بدون product source معتبر نباید برای ادعای رفتار محصول استفاده شود.
+    - مفهوم ارتباطی یا taxonomy زبانی می‌تواند meaning_owner برابر design_language داشته باشد.
 
 policy:
   concept_and_label:
@@ -123,15 +162,17 @@ terms:
       represented_by: job_post
       distinct_from: [job_post, job_opportunity]
     status: stable
-    evidence: [product_content_decisions]
+    notes:
+      - نمای حوزهٔ آگهی JobPost را «خود موقعیت شغلی» می‌نامد؛ این با تفکیک فعلی entityها تعارض دارد و نیازمند تصمیم مالک محصول است.
+    evidence: [pk_jobvision_jobpost_overview, product_content_decisions]
 
   - id: job_opportunity
     concept_kind: communication_concept
     authority:
-      meaning_owner: product_knowledge
+      meaning_owner: design_language
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: not_applicable
+      migration_state: not_applicable
     canonical_internal: فرصت شغلی
     definition:
       product_content: امکان پیدا کردن یا شروع یک شغل؛ نه یک موجودیت دقیق محصول.
@@ -230,8 +271,8 @@ terms:
     authority:
       meaning_owner: product_knowledge
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: pk_jobvision_glossary_employer_actor
+      migration_state: source_linked
     canonical_internal: کارفرما
     definition:
       product_content: فرد یا نقش انسانی‌ای که از طرف یک سازمان در فرایند جذب نیرو عمل می‌کند.
@@ -244,7 +285,7 @@ terms:
       acts_for: employer_organization
       distinct_from: [employer_organization, operator]
     status: stable
-    evidence: [product_content_decisions]
+    evidence: [pk_jobvision_glossary_employer_actor, product_content_decisions]
 
   - id: operator
     concept_kind: role
@@ -514,8 +555,8 @@ terms:
     authority:
       meaning_owner: product_knowledge
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: pk_jobvision_cv_language_variants
+      migration_state: source_linked
     canonical_internal: نسخهٔ زبانی رزومه
     definition:
       product_content: >
@@ -534,7 +575,7 @@ terms:
     status: stable
     notes:
       - این مدل محتوایی دربارهٔ تعداد رکوردها یا ساختار ذخیره‌سازی ادعا نمی‌کند.
-    evidence: [product_content_decisions]
+    evidence: [pk_jobvision_cv_language_variants, product_content_decisions]
 
   - id: resume_completion_percentage
     concept_kind: metric
@@ -1545,8 +1586,8 @@ terms:
     authority:
       meaning_owner: product_knowledge
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: pk_jobvision_ai_overview
+      migration_state: source_linked
     canonical_internal: هوش مصنوعی
     definition:
       product_content: فناوری یا سامانه‌ای که از مدل‌های هوش مصنوعی استفاده می‌کند.
@@ -1557,15 +1598,15 @@ terms:
     relations:
       distinct_from: [ai_feature_family, ai_assistant]
     status: stable
-    evidence: [product_content_decisions]
+    evidence: [pk_jobvision_ai_overview, product_content_decisions]
 
   - id: ai_feature_family
     concept_kind: feature_family
     authority:
-      meaning_owner: product_knowledge
+      meaning_owner: design_language
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: not_applicable
+      migration_state: not_applicable
     canonical_internal: قابلیت‌های هوشمند
     definition:
       product_content: مجموعه‌ای از قابلیت‌های محصول که با هوش مصنوعی تقویت می‌شوند.
@@ -1582,10 +1623,10 @@ terms:
   - id: ai_assistant
     concept_kind: persona
     authority:
-      meaning_owner: product_knowledge
+      meaning_owner: design_language
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: not_applicable
+      migration_state: not_applicable
     canonical_internal: دستیار هوشمند
     definition:
       product_content: >
@@ -1610,8 +1651,8 @@ terms:
     authority:
       meaning_owner: product_knowledge
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: pk_jobvision_resume_ai_assistant
+      migration_state: source_linked
     canonical_internal: دستیار هوشمند رزومه
     definition:
       source: >
@@ -1629,7 +1670,7 @@ terms:
       uses: ai_technology
       distinct_from: [employer_assistant, external_ai_screener]
     status: stable
-    evidence: [candidate_runtime_review, product_content_decisions]
+    evidence: [pk_jobvision_resume_ai_assistant, candidate_runtime_review, product_content_decisions]
 
   - id: external_ai_screener
     concept_kind: external_automation
@@ -1786,6 +1827,17 @@ decision_queue:
       - فهرست مزایا و entitlementها
       - lifecycle و مدل قیمت‌گذاری
       - نسبت با Premium Insights سمت کارجو
+
+  - id: DEC-007
+    term_ids: [job_post, job_position]
+    question: آیا آگهی و موقعیت شغلی دو مفهوم محصولی مستقل‌اند یا دو نام برای JobPost؟
+    recommendation: تا تصمیم مالک محصول، تفکیک زبانی فعلی حفظ شود اما جدایی دو entity به‌عنوان product truth ادعا نشود.
+    impact: high
+    evidence_needed:
+      - تصمیم مالک حوزهٔ آگهی
+      - مدل دامنه یا PRD تعریف موقعیت شغلی
+      - نسبت یک آگهی با یک یا چند موقعیت شغلی
+      - رفع تعارض با نمای حوزهٔ آگهی
 
 evals:
   blocking:
