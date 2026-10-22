@@ -31,15 +31,16 @@ machine-readable واژگان در [`terminology/terms.yml`](terminology/terms.y
 از هم جدا می‌کند:
 
 ```text
-Concept
-→ Meaning and product truth
-→ Preferred label by audience or surface
+Concept reference
+→ Meaning and behavior owned by Product Knowledge
+→ Preferred label by audience or surface owned by Design Language
 → Allowed, avoid, and forbidden language
 ```
 
-`canonical_internal` نام مرجع مفهوم در دانش محصول است. `preferred` برچسبی است
-که باید در یک تجربه یا برای یک مخاطب استفاده شود. این دو لازم نیست همیشه یکسان
-باشند.
+`canonical_internal` نام مرجع ثبت‌شده برای retrieval و تطبیق مفهوم است؛ وجود
+آن در این فایل، این ریپو را مالک تعریف یا رفتار محصول نمی‌کند. `preferred`
+برچسبی است که باید در یک تجربه یا برای یک مخاطب استفاده شود. این دو لازم نیست
+همیشه یکسان باشند.
 
 مثال:
 
@@ -53,14 +54,33 @@ employer_organization
 
 ## مرجع‌ها و اختیار تصمیم
 
-- واژه‌نامهٔ داخلی استخراج‌شده از محصول، منبع product truth، تمایز entityها و
-  نگاشت به کد است.
-- تصمیم‌های Product Content System، label مناسب مخاطب و سطح را تعیین می‌کنند.
+- Product Knowledge منبع حقیقت معنی، رفتار، lifecycle و نگاشت فنی مفهوم محصول
+  است. واژه‌نامهٔ داخلی فقط یک reference به آن منبع است.
+- تصمیم‌های Design Language، label مناسب مخاطب و سطح و رابطهٔ زبانی اصطلاحات را
+  تعیین می‌کنند.
 - نام کلاس، دیتابیس، enum یا سرویس به‌تنهایی مجوز ورود یک اصطلاح به UI نیست.
 - تعارض حل‌نشده باید با `status: needs_decision` و یک مورد در `decision_queue`
   باقی بماند؛ AI نباید خودش آن را قطعی کند.
 - تصمیم بسته‌شده باید از صف خارج و با تاریخ، نتیجه و دلیل در `decision_log`
   ثبت شود تا تغییر label بدون سابقه و منطق تصمیم باقی نماند.
+
+
+## مدل اختیار و وضعیت مهاجرت
+
+هر مدخل یک `authority` دارد:
+
+- `meaning_owner: product_knowledge`: معنی و رفتار محصول خارج از این ریپو مالک دارد.
+- `language_owner: design_language`: label، منع synonym و قواعد استفاده اینجا
+  نگهداری می‌شوند.
+- `product_source`: منبع Product Knowledge یا `unresolved`.
+- `migration_state: source_linked`: منبع محصولی معتبر به مدخل وصل است.
+- `migration_state: needs_product_knowledge_reference`: مدخل برای تصمیم زبانی
+  قابل استفاده است، اما نباید مبنای ادعای تازه دربارهٔ رفتار محصول باشد.
+
+`definition.source` و `code_bindings` فعلی snapshot ارجاعی برای retrieval و
+مهاجرت‌اند؛ canonical product truth نیستند. تا وقتی صفحه یا شناسهٔ دقیق منبع
+محصولی ثبت نشده، این داده‌ها نباید برای ساختن lifecycle، permission، validation
+یا رفتار جدید استفاده شوند.
 
 ## شدت واژه‌ها
 
@@ -167,9 +187,10 @@ employer_organization
 
 ## وضعیت‌ها
 
-- `stable`: تصمیم Product Content تثبیت شده است.
-- `draft`: مدخل منبع‌دار است اما هنوز مرور محتوایی کامل نشده است.
-- `needs_decision`: یک تصمیم انسانی یا product truth لازم است.
+- `stable`: تصمیم زبانی و label در Design Language تثبیت شده است؛ این وضعیت
+  اعتبار مستقل product truth را نشان نمی‌دهد.
+- `draft`: تصمیم زبانی هنوز مرور محتوایی کامل نشده است.
+- `needs_decision`: یک تصمیم انسانی دربارهٔ زبان یا یک product source لازم است.
 
 فهرست تصمیم‌های باز در `decision_queue` فایل machine-readable نگهداری می‌شود.
 
@@ -178,11 +199,13 @@ employer_organization
 برای تولید یا بررسی محتوا:
 
 1. concept موردنظر را پیدا کن؛ از تطبیق صرف رشته استفاده نکن.
-2. `visibility` و دامنهٔ surface را بررسی کن.
-3. label همان مخاطب را از `preferred` انتخاب کن.
-4. `relations.distinct_from` و ممنوعیت‌های synonym را بررسی کن.
-5. در وضعیت `needs_decision` ادعای قطعی نساز.
-6. بعد از terminology، قواعد pattern و component مرتبط را اعمال کن.
+2. `authority.migration_state` را بررسی کن؛ اگر source حل نشده است از definition
+   برای ادعای رفتار محصول استفاده نکن.
+3. `visibility` و دامنهٔ surface را بررسی کن.
+4. label همان مخاطب را از `preferred` انتخاب کن.
+5. `relations.distinct_from` و ممنوعیت‌های synonym را بررسی کن.
+6. در وضعیت `needs_decision` ادعای قطعی نساز.
+7. بعد از terminology، قواعد pattern و component مرتبط را اعمال کن.
 
 ## اعتبارسنجی
 
@@ -190,5 +213,6 @@ employer_organization
 python tooling/validators/check_content_terminology.py
 ```
 
-این بررسی ساختار فایل، یکتایی شناسه‌ها، statusها، ارجاع‌های evidence و
-`decision_queue` را کنترل می‌کند.
+این بررسی ساختار فایل، یکتایی شناسه‌ها، statusها، ارجاع‌های evidence،
+`decision_queue` و سازگاری `authority` هر مدخل با نقش منبع Product Knowledge را
+کنترل می‌کند.
