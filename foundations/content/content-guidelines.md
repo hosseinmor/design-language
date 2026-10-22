@@ -47,16 +47,19 @@ Pattern
   and AI content
 
 Component contract
-→ Button, input, modal, notification, and other component-specific copy
+→ Button, input, Dialog, notification, and other component-specific copy
 
 Eval
 → Executable examples and regression cases
 ```
 
-Do not copy Product Knowledge into this directory. JobVision concepts and
-behavior remain canonical at <https://docs-jv.jvoffice.ir/>; Cando concepts and
-behavior remain canonical at <https://docs-cd.jvoffice.ir/>. Content owns
-naming and communication rules, not product behavior.
+Do not copy Product Knowledge into this directory. Product Knowledge owns
+product concepts and business rules; Product Walkthrough owns observed
+end-to-end flows. Resolve their current locations through the active project
+source registry instead of hard-coding product URLs here. If the owning source
+is unavailable, record the claim as unknown rather than reconstructing it from
+old repository files or conversation history. Content owns naming and
+communication rules, not product behavior.
 
 ## Voice and Tone
 
@@ -89,6 +92,9 @@ Load audience-, product-, and feature-specific terminology from the owning
 Product Knowledge source after applying these shared rules. Do not copy those
 contracts into Design Language. Product context may select among shared terms
 and tones, but it owns lifecycle, permission, eligibility, validation, and flow.
+A shared content entry may point to a Product Knowledge concept; it must not
+duplicate that concept's definition, state model, permission logic, or code
+binding.
 
 ## Labels
 
@@ -159,15 +165,15 @@ are in [`patterns/confirmations.yml`](patterns/confirmations.yml) and
 Do not infer destructive intent from a negative verb. Use Danger only when the
 actual consequence is destructive or difficult to reverse.
 
-### Modal composition
+### Dialog composition
 
 Use [`components/modal.md`](components/modal.md) when a confirmation, short
-form, or response-required message appears in a blocking Modal. Its
+form, or response-required message appears in a blocking Dialog. Its
 machine-readable contract and evals are in
 [`components/modal.yml`](components/modal.yml) and
 [`../../ai/evals/content/modal-content-cases.yml`](../../ai/evals/content/modal-content-cases.yml).
 
-Give the Modal a task- or decision-specific Title, keep it understandable
+Give the Dialog a task- or decision-specific Title, keep it understandable
 without the obscured background, and preserve context through Loading and
 recoverable Error states. Do not invent Escape, backdrop, auto-close, initial
 focus, or non-dismissible behavior while writing its content.
