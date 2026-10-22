@@ -70,6 +70,7 @@
     "design-system.component.rich-text-editor",
     "design-system.component.search",
     "design-system.component.select",
+    "design-system.component.side-navigation",
     "design-system.component.skeleton",
     "design-system.component.switch",
     "design-system.component.table",
@@ -1698,6 +1699,46 @@
     {
       "from": "design-system.component.select",
       "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.side-navigation",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.side-navigation",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.side-navigation",
+      "to": "design-system.accessibility.screen-reader-semantics",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.side-navigation",
+      "to": "design-system.accessibility.structure-and-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.side-navigation",
+      "to": "design-system.component.drawer",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.side-navigation",
+      "to": "design-system.component.menu",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.side-navigation",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.side-navigation",
+      "to": "design-system.token.spacing.catalog",
       "type": "related"
     },
     {
