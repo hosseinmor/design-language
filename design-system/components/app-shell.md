@@ -26,7 +26,7 @@ Use it for application screens with shared Header, edge panes or app-level Foote
 ## Anatomy and ownership
 
 ```text
-App Shell / Viewport = xs | md | lg
+App Shell / Viewport = xs | md | lg ; Navigation = Compact | Expanded
 ├── Header                    [existing nested instance; optional]
 ├── Body                      [auto layout]
 │   ├── End Pane              [logical end; optional]
@@ -46,6 +46,7 @@ App Shell owns chrome, region presence and their relative layout. Main Region fi
 | Property | Kind | Values | Notes |
 |---|---|---|---|
 | `Viewport` | Figma variant | `xs`, `md`, `lg` | Designer selects manually for the intended viewport |
+| `Navigation` | Figma variant | `Compact`, `Expanded` | Parent-level navigation presentation; **six variants total** (3×2) control Side Navigation width and Main Region reflow |
 | `Header` | Boolean | On / Off | Controls shared Header visibility |
 | `Side Navigation` | Boolean | On / Off | Shows/hides the direct Side Navigation instance in the logical Start region; replaces old `Start Pane` Boolean label (same component-property identity) |
 | `End Pane` | Boolean | On / Off | Controls logical end region |
@@ -53,7 +54,7 @@ App Shell owns chrome, region presence and their relative layout. Main Region fi
 | Container `Mode` | Exposed nested variant | `Contained` / `Fluid` | Default `Contained`; `Fluid` removes its max-width constraint |
 | Container `Reference` | Exposed nested variant | `sm` / `md` / `lg` / `xl` / `2xl` | Determines the design-time Tailwind v3 max-width and gutter step; designer changes manually when needed |
 | Container `Content` | Native slot | Arbitrary page content | The **only main page-content slot**, nested in Page Container |
-| Side Navigation `Compact` | Exposed nested variant | `False` / `True` | Expanded 256px / rail 64px; nested-width override changes still need Figma QA |
+| Side Navigation `Compact` | Nested design property | `False` / `True` | **Do not change manually on an App Shell instance**. Use the parent App Shell `Navigation` variant; its state maps to the nested Side Navigation component (Expanded = False / Compact = True). Direct nested override keeps stale width in Figma. |
 | Side Navigation `Size` | Exposed nested variant | `Small` / `Medium` / `Large` | Default `Medium`; controls navigation item density |
 | Side Navigation `Items` | Nested native slot | Navigation destinations/groups | Navigation-specific slot, **not** a second page-content slot |
 
@@ -65,11 +66,11 @@ The App Shell's three design-time viewport ranges are:
 
 These labels are **Figma App Shell variants**, **not** the Tailwind `xs:`/`sm:` utility system. Tailwind v3 base screen values (640, 768, 1024, 1280, 1536 px) are the target for the separate responsive-foundation reconciliation. The current `main` Layout Token Catalog still contains a legacy conflicting numeric contract; do not claim the two sources already agree.
 
-A shared Figma Boolean property has one default across the Component Set, rather than different defaults by `Viewport`. The candidate Boolean `Side Navigation` defaults to `false`; the `md` and `lg` playground instances explicitly enable it. Per viewport, the default Side Navigation composition is `xs: hidden` (rail instance present only as an unfinished design reference, **not** an approved mobile Drawer), `md: Compact=True` (64px), `lg: Compact=False` (256px), with `Size=Medium`. These are design-time defaults, not verified breakpoint-triggered runtime behavior.
+A shared Figma Boolean property has one default across the Component Set, rather than different defaults by `Viewport`. The candidate Boolean `Side Navigation` defaults to `false`; the `md` and `lg` playground instances explicitly enable it. **Parent-level `Navigation=Compact/Expanded` is a second Figma variant axis**, yielding six combinations: `xs Compact/Expanded`, `md Compact/Expanded`, `lg Compact/Expanded`. The nested Side Navigation is a direct Body child with width 64px (Compact) or 256px (Expanded) and item `Size=Medium`. The intended initial design compositions remain `xs: hidden`, `md: Compact`, `lg: Expanded`, but the same designer-selected viewport can now show either presentation when navigation is enabled. The `xs` examples are for layout examination only: a mobile Drawer and accessible overlay interactions have **not** been designed by this change. Figma does not automatically choose either axis from the viewport size.
 
 ## Responsive behavior
 
-The viewport variant chooses the matching Header presentation and the page-region geometry. The available Main Region and nested Container resize with Figma Auto Layout. Side Navigation consumes width directly as a Body child when visible (no extra Start Pane wrapper). The App Shell owns its placement, width allocation, RTL divider, and whether it is shown. The Side Navigation component owns its expanded/rail styling, item sizes and `Items` slot. On narrower layouts, handing navigation off to a separate Drawer/overlay is a **future responsive pattern**; toggling the hidden Side Navigation in `xs` currently exposes only a test rail, not a production-ready mobile Drawer.
+The `Viewport` variant chooses the matching Header presentation and page-region geometry. The second parent-level `Navigation` variant controls the Side Navigation presentation and allocated width, rather than relying on a nested-component `Compact` override. The available Main Region and nested Container resize with Figma Auto Layout. Side Navigation consumes width directly as a Body child when visible (no extra Start Pane wrapper). In `md/lg`, selecting `Navigation=Compact` allocates 64px and `Navigation=Expanded` allocates 256px. The Auto Layout Main Region takes the remaining width. In `xs`, the Side Navigation is positioned as an experimental overlay and does not subtract width from Main Region; this is **not** a finalized mobile Drawer. The App Shell owns its placement, width allocation, RTL divider, and whether it is shown. The Side Navigation component owns its expanded/rail styling, item sizes and `Items` slot. On narrower layouts, handing navigation off to a separate Drawer/overlay is a **future responsive pattern**; toggling the hidden Side Navigation in `xs` currently exposes only a test rail, not a production-ready mobile Drawer.
 
 Container is optional as a *layout mode choice* (`Contained` / `Fluid`) but is always present as the nested Figma instance, avoiding manual insertion. Fluid is an exceptional wide-workspace composition, not an assumption that every ultrawide page should stretch indefinitely.
 
@@ -80,6 +81,21 @@ Each Container Reference also selects the current Figma `layout/page-gutter` var
 **Important Figma limitation:** changing a frame's width does **not** automatically switch a variant or its breakpoint Reference. App Shell defaults `xs → sm`, `md → md` and `lg → xl` (for a 1440px primary design reference). For 1024–1279px, a designer must change the exposed nested Container `Reference` to `lg`; from 1536px upward, change it to `2xl`. A narrower reference may also be intentionally selected for task-specific constraints. This manual design-tool setting is not an additional runtime API or a new Tailwind breakpoint. A future improvement could reduce this secondary choice, but no automatic breakpoint selection is claimed.
 
 Changing Shell viewport variants must retain the user's Content slot overrides. Changing nested Container mode must also retain them. The same contract applies if a Boolean hides a region. These changes require a visual QA pass for every intended combination, rather than merely a check that properties exist.
+
+### Six-variant navigation matrix — Figma QA (2026-10-22)
+
+| Viewport | Navigation | Navigation width when shown | Main Region relationship |
+|---|---|---:|---|
+| xs | Compact | 64px | experimental overlay; Main Region retains viewport width |
+| xs | Expanded | 256px | experimental overlay; Main Region retains viewport width |
+| md | Compact | 64px | Main Region = available Body width − 64px |
+| md | Expanded | 256px | Main Region = available Body width − 256px |
+| lg | Compact | 64px | Main Region = available Body width − 64px |
+| lg | Expanded | 256px | Main Region = available Body width − 256px |
+
+All six are members of the **existing App Shell Component Set**; three earlier source variant IDs remain and three additional variants were created. Boolean Header/Side Navigation/End Pane/App Footer property references were checked across all variants. Each retains one native Page Container Content slot; Side Navigation retains its separate navigation-specific Items slot.
+
+A live Figma test toggled `Navigation` on `xs/md/lg` consumer examples and checked effective width and Content retention. In md/lg, Main Region reflow was correct; in xs, navigation stays overlaid for exploration. The outer parent-variant solution **passes this design-tool use case** but does not verify Runtime, accessible responsive Drawer or preservation of every product-specific override.
 
 ## Height, scrolling and App Footer — design-side default
 
@@ -115,8 +131,8 @@ The final runtime composition must preserve meaningful Header/Main/Footer and na
 
 - The **Side Navigation** component is now the live designed Figma component (source ID `24631:180`) directly used in App Shell; the old legacy Right Panel instance and the extra Start Pane Frame were removed from all three App Shell variants. This is a design-source integration, not an approved runtime implementation. Header remains legacy, and responsive Drawer/flyout behavior remains independently unverified.
 - End Pane and App Footer currently have **design placeholders**, not final canonical implementation.
-- Review default Side Navigation visibility across viewport variants, `md` rail choice, and responsive Drawer/flyout patterns. Figma currently uses one global Boolean default (`false`).
-- **Nested Compact resizing gap:** switching `Compact=True/False` on the exposed Side Navigation within an **App Shell consumer instance** can retain its prior width even though the Side Navigation variant and its Items switch. In `md` QA, the navigation stayed at 64px when manually switched to `Compact=False`, causing the expanded Items to compress. A new App Shell `lg` instance uses the 256px expanded variant correctly. This is not ready for unconstrained custom compact toggling in a consumer instance and needs resolution/review before final publication.
+- Review default Side Navigation visibility across viewport variants, `md` rail choice, and responsive Drawer/flyout patterns. Figma currently uses one global Boolean default (`false`). Six parent variants are now implemented for both navigation presentations across all three viewports.
+- **Nested Compact resizing gap, mitigated:** changing the nested Side Navigation `Compact` value directly on an App Shell consumer instance may retain the old 64px width and squeeze expanded Items. The **supported Figma design-time workflow is now to change the outer `App Shell → Navigation=Compact/Expanded` Variant**. In verified `md` QA at width 900, Main Region changed correctly from 836px to 644px and back; `lg` at width 1440 changed from 1376px to 1184px and back. The page Content Slot was preserved. Figma still exposes the nested `Compact` setting; designers must avoid toggling that nested setting directly until a more reliable API/property exposure solution is found.
 - Resolve old responsive breakpoint and container numeric contracts in `foundations/visual/responsive-layout/` and `design-system/tokens/layout/catalog.md` in a reviewed foundation change; do not silently overwrite them.
 - The Tailwind v3 width steps, centered Contained/Fluid modes, and reference-based 16/24px gutters were reproduced and tested in the isolated Figma candidate. The remaining design-tool usability gap is that Container `Reference` must be selected manually when a design crosses steps inside the broader App Shell `lg` range; this should be assessed in designer testing.
 - Review any designs that specifically require a sticky Header, sticky footer or independently scrolling pane; those are exception patterns, not verified here. Test long-form focus navigation, scroll restoration and zoom/reflow in runtime before a production claim.
@@ -134,6 +150,7 @@ A former instance-level max-width override prevented Fluid/2xl from working even
 - [Side Navigation / designed Figma component](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24631-180)
 - [App Shell / Figma candidate component set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24550-497)
 - [App Shell / Playground](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24552-177)
+- [App Shell / All six Navigation variants visual comparison](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24814-44967)
 - [Page Container / Tailwind candidate](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24549-41)
 - [Container / Verified width QA](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24606-40546)
 - [App Shell / Height and Footer QA](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24619-1618)
