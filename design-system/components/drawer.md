@@ -47,9 +47,16 @@ Navigation from the Start edge belongs to **Side Navigation / App Shell**, not g
 
 ## Sizing and responsive status — intentionally TBD
 
-**No final width model is approved.** The live Figma source is a single resizable Main Component and has **no Size variant axis**. The **400px and 640px** widths are only representative design samples. Do not implement them as fixed `Default / Large` presets or impose a maximum without another explicit sizing decision.
+**Figma now has an explicit `Size` variant axis** for consistent designer authoring. The current **Default = 400px** and **Large = 640px** values are **provisional design presets**, approved as a two-choice *authoring model*, **not** as final runtime pixel/max-width values. The original 400px main component is preserved as `Size=Default` inside the public `Drawer` Component Set; `Size=Large` is a new 640px variant. Designers should select the Size property rather than manually inventing arbitrary desktop widths.
 
-A **360px narrow** example illustrates adapting the Drawer to the available viewport, with 16px section inline padding and 40px footer buttons. Exact fluid behavior, maximum/minimum width, thresholds, extreme narrow viewport rules and any public sizing API remain **TBD**. Do not create an independent breakpoint system. Do not automatically convert the Drawer to Bottom Sheet.
+| Figma Size | Current source width (provisional) | Intended content capacity |
+| --- | ---: | --- |
+| `Default` | 400px | Short contextual edits, filters, a single column of controls |
+| `Large` | 640px | Larger forms, structured content and richer header composition |
+
+**Do not freeze either number as the runtime API contract yet.** Public default/max width, fluid clamping to viewport, and breakpoint-specific behavior need a separate owner decision. The current authoring axis may inform, but does not automatically establish, production sizing.
+
+A **360px narrow** example is a resized instance of **`Size=Default`**, illustrating adaptation to the available viewport, with 16px section inline padding and 40px footer buttons. **Narrow is not a third Size variant, nor a freely selectable runtime density property.** Exact fluid behavior, maximum/minimum width, thresholds, extreme narrow viewport rules and any public sizing API remain **TBD**. Do not create an independent breakpoint system. Do not automatically convert the Drawer to Bottom Sheet.
 
 Drawer is an edge-attached viewport-height surface in the design examples. Respect actual visual viewport and safe-area constraints in runtime; the header and footer must remain usable when zoom/reflow reduce available height. A Figma viewport sample is not proof of these runtime constraints.
 
@@ -86,14 +93,16 @@ The shared [Focus Management](../../accessibility/focus-management.md) foundatio
 
 ## Figma source and examples
 
-- [Drawer / Default · original Main Component](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24608-37) — existing source identity preserved, not a rebuilt detached copy.
+- [Drawer · Size Component Set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24677-486) — editable source with **`Size=Default | Large`**.
+- [Drawer `Size=Default` (400px)](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24608-37) — original Main Component ID preserved as this Variant.
+- [Drawer `Size=Large` (640px)](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24677-467) — additional Variant in the same Component Set.
 - [Drawer / Documentation · HOS-53](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24636-458) — one current presentation with the actual master and linked examples.
 - [Close Button / Default](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24046-476) — shared with Dialog; its source was not modified for Drawer.
 
-Verified design sample coverage: RTL End for contextual editing and filters, a 640px toolbar/long-content form, a 360px narrow presentation, and a no-Footer composition. All five preview Drawer instances remain connected to the same Main Component. Three actual Figma native Slots are present: **Header extension**, **Content**, **Footer**. Existing `Show close`, `Show description`, `Show header action`, `Show header extension` and `Show footer` Boolean properties are exposed. Visual QA does not imply runtime functionality.
+Verified design sample coverage: RTL End for contextual editing and filters, **one `Size=Large`** toolbar/long-content form, **three regular `Size=Default`** examples and a **360px resized `Size=Default`** narrow presentation. All five preview Drawer instances remain linked to the correct **two-variant Component Set**; the 640px form's custom Header toolbar, Footer status and 10 content-field rows survived switching from Default to Large. Both variants contain the same three actual Figma native Slots: **Header extension**, **Content**, **Footer**. Existing `Show close`, `Show description`, `Show header action`, `Show header extension` and `Show footer` Boolean properties are exposed. Visual QA does not imply runtime functionality.
 
 ## Known gaps and handoff state
 
-**Still unresolved:** final width/size API and responsive boundaries, exact overflow edge indication, detailed animation tokens, actual dismissal and focus behavior, light/dark and extreme-reflow runtime validation, Storybook/code mapping and tests.
+**Still unresolved:** final numeric widths, runtime max-width/fluid Size API and responsive boundaries (despite the approved *Figma Size axis*), exact overflow edge indication, detailed animation tokens, actual dismissal and focus behavior, light/dark and extreme-reflow runtime validation, Storybook/code mapping and tests.
 
-**HOS-53 remains in progress** until these acceptance gates are resolved or explicitly scoped into separately tracked work with owner approval. The current Figma **visual/component authoring design** is accepted for this bounded baseline. No Code/Storybook implementation or parity claim is made.
+**HOS-53 remains in progress** until these acceptance gates are resolved or explicitly scoped into separately tracked work with owner approval. The current **two-variant Figma visual/component authoring model** is accepted for this bounded baseline; the numeric sizing values and runtime contract are not yet approved. No Code/Storybook implementation or parity claim is made.
