@@ -42,7 +42,7 @@ Side Pane is a **layout region**, not a separate published Side Pane component.
 | Side Navigation Component Set | [24631:180](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24631-180) |
 | Side Navigation Item Component Set | [24643:1407](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24643-1407) |
 | Presentation and integration examples | [24664:42762](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24664-42762) |
-| Interaction and accessibility examples (Hover-expanded overlay) | [24782:697](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24782-697) |
+| Hover-expanded and edge-case Playground (Section 02) | [24854:44261](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24854-44261) |
 
 These node IDs describe **editable design evidence**, not a verified runtime package/Storybook component.
 
@@ -172,11 +172,11 @@ Follow [Keyboard Navigation](../../accessibility/keyboard-navigation.md), [Focus
 
 ## Content guidance
 
-Labels should identify destinations in concise, stable language. Truncate only when necessary and preserve the full accessible name; a Tooltip can supplement a truncated label. Use non-interactive End content for a concise count or status without competing with the Submenu Chevron. Avoid ambiguous “click to navigate or expand” hybrid targets until a separate interaction model is approved.
+Labels should identify destinations in concise, stable language. In the fixed-height Side Navigation Item, text labels are visually **single-line with ending ellipsis** when too long; preserve the complete accessible name for assistive technology. A Tooltip may supplement a truncated label but does not replace its accessible name. Use non-interactive End content for a concise count or status without competing with the Submenu Chevron. Avoid ambiguous “click to navigate or expand” hybrid targets until a separate interaction model is approved.
 
 ## Verification checklist and open gaps
 
-**Figma observed:** Source variant axes and RTL item alignment; the candidate Surface/Spacing/Radius/Foreground tokens; independent Selected and Focus visuals; inline two-level example and icon-only rail; temporary full-width hover-expanded Navigation over unchanged Main Content with a current Level 2 destination. This is an **illustrative layout**, not a tested interactive prototype.
+**Figma observed:** Original masters remain in the 2528px reviewed presentation, organized into Sections 00–04. Source-linked Playground coverage includes Expanded/Compact App Shell samples, uniform Small/Medium/Large density, Submenu + current Level 2, non-interactive Tag, Selected + Focus, Disabled, long-label ellipsis, and temporary full-width hover-expanded Navigation over unchanged Main Content. These are **illustrative designs**, not tested interactive prototypes.
 
 **Must be tested in Code/Storybook before Ready for Dev or release:**
 
