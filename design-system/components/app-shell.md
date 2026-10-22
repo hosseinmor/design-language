@@ -50,7 +50,8 @@ App Shell owns chrome, region presence and their relative layout. Main Region fi
 | `Start Pane` | Boolean | On / Off | Controls logical start region |
 | `End Pane` | Boolean | On / Off | Controls logical end region |
 | `App Footer` | Boolean | On / Off | Controls app-level Footer |
-| Container `Mode` | Exposed nested variant | `Contained` / `Fluid` | Default `Contained`; exact Tailwind max-width steps require further design reconciliation |
+| Container `Mode` | Exposed nested variant | `Contained` / `Fluid` | Default `Contained`; `Fluid` removes its max-width constraint |
+| Container `Reference` | Exposed nested variant | `sm` / `md` / `lg` / `xl` / `2xl` | Determines the design-time Tailwind v3 max-width and gutter step; designer changes manually when needed |
 | Container `Content` | Native slot | Arbitrary page content | Exactly one content slot, nested in Page Container |
 
 The App Shell's three design-time viewport ranges are:
@@ -69,7 +70,11 @@ The viewport variant chooses the matching Header presentation and the page-regio
 
 Container is optional as a *layout mode choice* (`Contained` / `Fluid`) but is always present as the nested Figma instance, avoiding manual insertion. Fluid is an exceptional wide-workspace composition, not an assumption that every ultrawide page should stretch indefinitely.
 
-In the current experiment, the Contained slot uses a 1536 px cap. This implements a ceiling, **not all Tailwind v3 intermediate `container` max-width steps**. The live Figma `layout/page-gutter` variable uses Base (16 px) and XL+ (24 px) modes; Figma does not switch them based on frame width automatically. The finished Container contract needs explicit design-time handling of widths and mode selection, without duplicate padding in the parent shell.
+The experimental Page Container's **outer component** (not its inner slot) now supports exact Tailwind v3 max-width references when manually selected: `sm=640`, `md=768`, `lg=1024`, `xl=1280`, and `2xl=1536` px. Mode `Fluid` has no cap. The single inner Content slot fills the padded width of that outer Container. The Container is centered **within the remaining Main Region**, after any persistent panes, and the shell itself adds no duplicate page gutter.
+
+Each Container Reference also selects the current Figma `layout/page-gutter` variable mode: `sm/md/lg → Base (16 px)`, `xl/2xl → XL+ (24 px)`. This binding lives in the Container's design-time reference variants rather than being overridden at the App Shell level, so Mode/Reference switches update width and gutter together.
+
+**Important Figma limitation:** changing a frame's width does **not** automatically switch a variant or its breakpoint Reference. App Shell defaults `xs → sm`, `md → md` and `lg → xl` (for a 1440px primary design reference). For 1024–1279px, a designer must change the exposed nested Container `Reference` to `lg`; from 1536px upward, change it to `2xl`. A narrower reference may also be intentionally selected for task-specific constraints. This manual design-tool setting is not an additional runtime API or a new Tailwind breakpoint. A future improvement could reduce this secondary choice, but no automatic breakpoint selection is claimed.
 
 Changing Shell viewport variants must retain the user's Content slot overrides. Changing nested Container mode must also retain them. The same contract applies if a Boolean hides a region. These changes require a visual QA pass for every intended combination, rather than merely a check that properties exist.
 
@@ -83,16 +88,19 @@ The final runtime composition must preserve meaningful Header/Main/Footer and na
 - End Pane and App Footer currently have **design placeholders**, not final canonical implementation.
 - Decide Start Pane defaults/presets; test both-pane combinations and compact overlay behavior.
 - Resolve old responsive breakpoint and container numeric contracts in `foundations/visual/responsive-layout/` and `design-system/tokens/layout/catalog.md` in a reviewed foundation change; do not silently overwrite them.
-- Reconcile Tailwind `container` step widths, Page Container modes and gutter modes at the 1280 px threshold; test 1024, 1280, 1440, 1536 and 1920 with panes on/off.
+- The Tailwind v3 width steps, centered Contained/Fluid modes, and reference-based 16/24px gutters were reproduced and tested in the isolated Figma candidate. The remaining design-tool usability gap is that Container `Reference` must be selected manually when a design crosses steps inside the broader App Shell `lg` range; this should be assessed in designer testing.
 - Run keyboard/RTL/zoom and complete design/runtime acceptance. No claimed Storybook parity.
 
 ### Figma validation completed (2026-10-22)
 
-On the experimental Figma component, content remained in the *one nested native Slot* after changing `lg → xs → md → lg` and switching Container `Contained → Fluid → Contained`. The Header/Pane/Footer Boolean controls and exposed nested Container `Mode` were inspected. This demonstrates design-tool override retention only, not production readiness.
+The single nested native Content slot retained page content through `lg → xs → md → lg`, `Contained → Fluid → Contained`, and `Reference=lg → 2xl → xl`. In width QA, Contained outer caps and centering were verified at 700px (640px), 900px (768px), 1100px (1024px), 1440px (1280px), and 1920px (1536px). At 1920px, Fluid used the full 1920px, while two visible panes left 1384px of Main Region width and the Container respected that smaller available width. Gutter resolved to 16px for `sm/md/lg` and 24px for `xl/2xl` from the existing Figma responsive layout variable collection. These are **Figma visual/structural checks**, not executable CSS or runtime parity proof.
+
+A former instance-level max-width override prevented Fluid/2xl from working even though their variant labels changed; that stale override was cleared, and max-width ownership is now on the Container source variant. The noncanonical QA samples document the verified state.
 
 ## Live references
 
 - [App Shell / Figma candidate component set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24550-497)
 - [App Shell / Playground](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24552-177)
 - [Page Container / Tailwind candidate](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24549-41)
+- [Container / Verified width QA](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24606-40546)
 - Karbon Storybook and code: runtime verification not yet performed; cross-source parity deferred.
