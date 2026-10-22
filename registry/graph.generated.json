@@ -59,6 +59,7 @@
     "design-system.component.menu-button",
     "design-system.component.modal",
     "design-system.component.notification",
+    "design-system.component.number-input",
     "design-system.component.pagination",
     "design-system.component.password-input",
     "design-system.component.popover",
@@ -1482,6 +1483,26 @@
     {
       "from": "design-system.component.notification",
       "to": "design-system.pattern.notifications",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.number-input",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.number-input",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.number-input",
+      "to": "design-system.component.icon-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.number-input",
+      "to": "design-system.component.text-input",
       "type": "related"
     },
     {
