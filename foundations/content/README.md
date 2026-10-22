@@ -28,6 +28,15 @@ Karbon / Storybook
 → Exact runtime behavior and rendered implementation
 ```
 
+## Registered Product Knowledge sources
+
+- JobVision: https://docs-jv.jvoffice.ir/
+- Cando / HrCando: https://docs-cd.jvoffice.ir/
+
+These are separate product sources. Retrieve the source for the product in scope;
+do not transfer a concept, lifecycle rule, permission, or preferred product term
+from one product to the other without explicit shared-source evidence.
+
 ## Product-knowledge boundary
 
 Content owns reusable naming, writing, localization, component-copy, and
