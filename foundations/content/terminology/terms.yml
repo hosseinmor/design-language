@@ -1,4 +1,4 @@
-schema_version: "0.4"
+schema_version: "0.5"
 id: content.foundation.terminology
 title: واژه‌نامهٔ محتوای محصول جاب‌ویژن
 status: draft
@@ -93,9 +93,10 @@ authority_model:
 
 policy:
   concept_and_label:
-    - هر id یک مفهوم مستقل را نشان می‌دهد، نه صرفاً یک رشتهٔ متنی را.
+    - هر id یک مفهوم محصولی یا یک قرارداد نام‌گذاری مستقل را نشان می‌دهد، نه صرفاً یک رشتهٔ متنی را.
+    - مدخلی که relations.same_entity_as دارد، برچسب زمینه‌ای همان entity است و موجودیت جداگانه‌ای ایجاد نمی‌کند.
     - canonical_internal نام مرجع ثبت‌شده برای retrieval و تطبیق مفهوم است؛ نه مالک تعریف محصول.
-    - preferred برچسب مناسب هر مخاطب یا سطح را تعیین می‌کند.
+    - preferred و contextual_labels برچسب مناسب هر مخاطب، سطح یا مرحلهٔ lifecycle را تعیین می‌کنند.
   term_severity:
     allowed: واژهٔ مجاز ولی نه لزوماً انتخاب اول
     avoid: ترجیحاً استفاده نشود؛ خطای non-blocking
@@ -113,57 +114,71 @@ terms:
     authority:
       meaning_owner: product_knowledge
       language_owner: design_language
-      product_source: source_glossary
+      product_source: pk_jobvision_jobpost_overview
       migration_state: source_linked
-    canonical_internal: آگهی
+    canonical_internal: JobPost
     definition:
-      source: اعلان یک موقعیت شغلی توسط سازمان.
+      source: آگهی (JobPost) همان موقعیت شغلی در مدل محصول است.
       product_content: >
-        موجودیت منتشرشده در جاب‌ویژن که اطلاعات یک موقعیت شغلی را
-        به کارجو نمایش می‌دهد.
+        موجودیت واحدی که سازمان برای یک موقعیت شغلی ثبت می‌کند و در طول
+        ساخت، انتشار، نمایش به کارجو، دریافت درخواست و پایان انتشار باقی می‌ماند.
+        «آگهی شغلی» و «موقعیت شغلی» دو برچسب زمینه‌ای برای همین موجودیت‌اند.
     preferred:
       default: آگهی شغلی
-      jobseeker: آگهی شغلی
-      employer: آگهی
-      admin: آگهی
+      jobseeker_listing: آگهی شغلی
+      employer_management: آگهی
+      admin_management: آگهی
+      role_context: موقعیت شغلی
+    contextual_labels:
+      - label: آگهی شغلی
+        use_when:
+          - ثبت، ساخت، ویرایش، انتشار، توقف یا انقضای موجودیت
+          - اشاره به وضعیت، شناسه، تاریخ انتشار، سهمیه یا metadata
+          - اشاره به کارت یا صفحهٔ منتشرشده به‌عنوان listing
+      - label: موقعیت شغلی
+        use_when:
+          - ارائهٔ همان موجودیت به‌عنوان نقش یا جایگاه قابل بررسی
+          - شرح مسئولیت‌ها، شرایط، تناسب و اقدام کارجو برای درخواست
+          - تصمیم‌ها و گفتگوهای جذب دربارهٔ نقش
     forbidden_as_synonym:
-      - موقعیت شغلی
       - فرصت شغلی
       - آگهی استخدام
       - وکنسی
     domains: [jobseeker, employer, ats, admin]
     visibility: [public, internal]
     relations:
-      represents: job_position
-      distinct_from: [job_position, job_opportunity]
+      same_entity_label: job_position
+      distinct_from: [job_opportunity]
     code_bindings: [JobPost]
     status: stable
-    evidence: [source_glossary, product_content_decisions]
+    evidence: [pk_jobvision_jobpost_overview, source_glossary, product_content_decisions]
 
   - id: job_position
-    concept_kind: entity
+    concept_kind: communication_concept
     authority:
-      meaning_owner: product_knowledge
+      meaning_owner: design_language
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: not_applicable
+      migration_state: not_applicable
     canonical_internal: موقعیت شغلی
     definition:
-      product_content: نقش یا جایگاه واقعی‌ای که یک سازمان برای آن نیرو می‌خواهد.
+      product_content: >
+        برچسب زمینه‌ای JobPost وقتی همان موجودیت به‌عنوان نقش یا جایگاهی
+        ارائه می‌شود که سازمان برای آن نیرو می‌خواهد؛ نه یک entity جداگانه.
     preferred:
       default: موقعیت شغلی
     use_when:
-      - اشاره به خود نقش یا جایگاه
-      - اقدام یا تصمیم جذب برای یک نقش
-    forbidden_as_synonym_of: [job_post, job_opportunity]
+      - اشاره به نقش، مسئولیت‌ها، شرایط یا تناسب شغلی
+      - اقدام کارجو برای ارسال درخواست یا تصمیم جذب دربارهٔ نقش
+    avoid_when:
+      - ثبت، ویرایش، انتشار، وضعیت، انقضا، سهمیه یا metadata آگهی
+    forbidden_as_synonym_of: [job_opportunity]
     domains: [jobseeker, employer, ats]
     visibility: [public, internal]
     relations:
-      represented_by: job_post
-      distinct_from: [job_post, job_opportunity]
+      same_entity_as: job_post
+      distinct_from: [job_opportunity]
     status: stable
-    notes:
-      - نمای حوزهٔ آگهی JobPost را «خود موقعیت شغلی» می‌نامد؛ این با تفکیک فعلی entityها تعارض دارد و نیازمند تصمیم مالک محصول است.
     evidence: [pk_jobvision_jobpost_overview, product_content_decisions]
 
   - id: job_opportunity
@@ -1815,6 +1830,20 @@ decision_log:
       وضعیت نامشخص یا غیرفعال ثبت کرده است. یکسان گرفتن آن‌ها مرز قابلیت، persona
       و integration را از بین می‌برد.
 
+  - id: DEC-007
+    term_ids: [job_post, job_position, job_opportunity]
+    decided_on: 2026-10-22
+    outcome: >
+      «آگهی شغلی» و «موقعیت شغلی» دو برچسب زمینه‌ای برای یک entity محصولی
+      یعنی JobPost هستند. «آگهی شغلی» هنگام ساخت، مدیریت، انتشار، وضعیت و
+      metadata ترجیح دارد؛ «موقعیت شغلی» هنگام ارائهٔ نقش، شرایط، تناسب،
+      درخواست کارجو و تصمیم جذب ترجیح دارد. «فرصت شغلی» عبارت عمومی برای
+      discovery، recommendation و marketing است و نام دقیق این entity نیست.
+    rationale: >
+      سازمان برای یک موقعیت شغلی آگهی ثبت می‌کند، اما در مدل محصول آگهی و
+      موقعیت دو entity مستقل نیستند. تفاوت واژه‌ها زاویهٔ ارائه و مرحلهٔ
+      lifecycle را روشن می‌کند، بدون اینکه مدل دامنهٔ کاذب بسازد.
+
 decision_queue:
 
   - id: DEC-004
@@ -1827,17 +1856,6 @@ decision_queue:
       - فهرست مزایا و entitlementها
       - lifecycle و مدل قیمت‌گذاری
       - نسبت با Premium Insights سمت کارجو
-
-  - id: DEC-007
-    term_ids: [job_post, job_position]
-    question: آیا آگهی و موقعیت شغلی دو مفهوم محصولی مستقل‌اند یا دو نام برای JobPost؟
-    recommendation: تا تصمیم مالک محصول، تفکیک زبانی فعلی حفظ شود اما جدایی دو entity به‌عنوان product truth ادعا نشود.
-    impact: high
-    evidence_needed:
-      - تصمیم مالک حوزهٔ آگهی
-      - مدل دامنه یا PRD تعریف موقعیت شغلی
-      - نسبت یک آگهی با یک یا چند موقعیت شغلی
-      - رفع تعارض با نمای حوزهٔ آگهی
 
 evals:
   blocking:
@@ -1852,6 +1870,8 @@ evals:
     - id: AI_CAPABILITY_MISLABELED_AS_ASSISTANT
       rule: یک محاسبه، پیشنهاد یا automation بدون تجربهٔ دستیارگونه «دستیار هوشمند» نامیده شده است.
   non_blocking:
+    - id: JOB_POST_LABEL_CONTEXT_MISMATCH
+      rule: برای entity واحد JobPost برچسبی انتخاب شده که با مرحلهٔ lifecycle یا زاویهٔ ارائه سازگار نیست.
     - id: TERM_NOT_PREFERRED_FOR_SURFACE
       rule: واژه مجاز است اما preferred همان سطح نیست.
     - id: TERM_AMBIGUOUS_WITHOUT_CONTEXT
