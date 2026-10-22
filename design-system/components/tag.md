@@ -113,7 +113,7 @@ No owning runtime package, Code Connect mapping, Storybook story or implementati
 
 ## Owner Review / Known Gaps
 
-1. **Approve or revise** the observed three-size model, optional leading icon, shared Label/XS typography, 180 px default maximum and passive-only contract. These are current Figma facts, not yet owner-approved Design Language decisions.
-2. Publish the new canonical Tag as the intended library component and check that consumers select the **new key** rather than a legacy Tag; execute a smoke test in an independent consumer file.
+1. **Review sign-off:** use the existing Figma master as the design baseline; confirm the observed three-size model, optional leading icon, shared Label/XS typography, 180 px maximum and passive-only contract. No redesign or new Figma component is proposed.
+2. **Library distribution is separate from this design contract:** the existing Tag master is the canonical source; no additional or replacement component is needed. Before teams consume it from the shared Library, confirm the current key is published and validate insertion in an independent consumer file. The available library search still resolves a legacy Tag key, so this publication check remains open but does **not** by itself block completion of design documentation.
 3. Upon approval, update this document's summary/maturity and related component routing, regenerate the manifest/graph and the [Component Mapping Lookup Index](../../integrations/component-mapping-index.md) from canonical tooling, and record the reviewed identity in the mapping registry.
 4. Perform manual accessibility/composition QA as appropriate. Keep runtime/Storybook APIs **unverified** until registered from actual owning sources.
