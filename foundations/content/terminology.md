@@ -69,18 +69,34 @@ employer_organization
 
 هر مدخل یک `authority` دارد:
 
-- `meaning_owner: product_knowledge`: معنی و رفتار محصول خارج از این ریپو مالک دارد.
+- `meaning_owner: product_knowledge`: معنی و رفتار یک مفهوم محصولی خارج از این
+  ریپو مالک دارد.
+- `meaning_owner: design_language`: خود مفهوم یک taxonomy یا قرارداد ارتباطی
+  است، نه entity یا رفتار محصول.
 - `language_owner: design_language`: label، منع synonym و قواعد استفاده اینجا
   نگهداری می‌شوند.
-- `product_source`: منبع Product Knowledge یا `unresolved`.
+- `product_source`: منبع Product Knowledge، یا `unresolved` / `not_applicable`.
 - `migration_state: source_linked`: منبع محصولی معتبر به مدخل وصل است.
-- `migration_state: needs_product_knowledge_reference`: مدخل برای تصمیم زبانی
-  قابل استفاده است، اما نباید مبنای ادعای تازه دربارهٔ رفتار محصول باشد.
+- `migration_state: needs_product_knowledge_reference`: مفهوم محصولی هنوز منبع
+  دقیق ندارد و نباید مبنای ادعای تازه دربارهٔ رفتار محصول باشد.
+- `migration_state: not_applicable`: مفهوم زبانی است و به Product Knowledge
+  نیاز ندارد.
 
 `definition.source` و `code_bindings` فعلی snapshot ارجاعی برای retrieval و
 مهاجرت‌اند؛ canonical product truth نیستند. تا وقتی صفحه یا شناسهٔ دقیق منبع
 محصولی ثبت نشده، این داده‌ها نباید برای ساختن lifecycle، permission، validation
 یا رفتار جدید استفاده شوند.
+
+در بازبینی 2026-10-22، ۶۷ مدخل به منبع محصولی وصل شدند، ۳ مفهوم ارتباطی زیر
+مالک Design Language تشخیص داده شدند و ۵ مفهوم محصولی unresolved ماندند:
+
+- Design Language: `job_opportunity`، `ai_feature_family` و `ai_assistant`؛
+- unresolved: `job_position`، `recruitment`، `hiring`، `ats_candidate` و
+  `hiring_request`.
+
+Product Knowledge فعلی، JobPost را «خود موقعیت شغلی» توصیف می‌کند؛ این عبارت
+با تفکیک فعلی `job_post` و `job_position` تعارض دارد. این تعارض در `DEC-007`
+ثبت شده و تا تصمیم مالک محصول نباید با تفسیر خودکار بسته شود.
 
 ## شدت واژه‌ها
 
@@ -199,8 +215,8 @@ employer_organization
 برای تولید یا بررسی محتوا:
 
 1. concept موردنظر را پیدا کن؛ از تطبیق صرف رشته استفاده نکن.
-2. `authority.migration_state` را بررسی کن؛ اگر source حل نشده است از definition
-   برای ادعای رفتار محصول استفاده نکن.
+2. `authority.meaning_owner` و `migration_state` را بررسی کن؛ اگر مفهوم محصولی
+   source حل‌شده ندارد از definition برای ادعای رفتار محصول استفاده نکن.
 3. `visibility` و دامنهٔ surface را بررسی کن.
 4. label همان مخاطب را از `preferred` انتخاب کن.
 5. `relations.distinct_from` و ممنوعیت‌های synonym را بررسی کن.
