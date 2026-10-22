@@ -55,7 +55,7 @@ The public Figma set has **24 variants**: `Size = Small | Medium | Large` × `St
 | `Supporting text` (Text) | Either helper copy **or** a locale-derived format hint |
 | `Error text` (Text) | Validation feedback in Error / Error focus |
 
-The nested canonical **Field label** owns `Label`, `Required`, and `Show info`. They are not duplicated as unrelated top-level date properties. `Date Field Base` has a `Show calendar action` Boolean that is **False** for Date Input; Date Input has **no `Open` property** and no calendar overlay.
+The nested canonical **Field label** owns `Label`, `Required`, and `Show info`. They are not duplicated as unrelated top-level date properties. `Date Field Base` has a `Show calendar action` Boolean that is **False** for Date Input; Date Input has **no `Open` property** and no calendar overlay. The shared Field Base also owns an internal `Show validation icon` Boolean; it is enabled only for Error and Error focus. That **16px validation icon is at logical End** (left edge in RTL), inside the same inline Auto Layout as the editable content; it must not be placed as an absolutely positioned icon on the opposite side.
 
 `Filled`, `Active segment`, and `State` snapshots support Figma authoring; a runtime implementation derives empty/filled, focus, error, and actual editing state from behavior. Do **not** require consumers to pass three independent Year/Month/Day values to a public runtime component.
 
@@ -91,6 +91,8 @@ The Focus border is **`line/emphasis` 1px**, while its separate visible Focus tr
 - Hover changes semantic border role without changing geometry. Focus does **not** change height or padding.
 
 The visible segment highlight is an **inner editing-caret context**, not a replacement for the field's outer keyboard Focus ring.
+
+**Figma anatomy rule:** compose Day / separator / Month / separator / Year in one RTL-aware horizontal **Auto Layout**, using a bound **2px spacing token** between items. Each part has its own text-bound segment wrapper, and the `Active segment` authoring highlight stays **behind** the text. Do not maintain duplicate Date Field Base placeholder layers or manually absolute-position individual date numerals.
 
 ## Date model, parsing, and editing behavior
 
