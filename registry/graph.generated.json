@@ -48,6 +48,8 @@
     "design-system.component.coachmark",
     "design-system.component.combo-button",
     "design-system.component.content-switcher",
+    "design-system.component.date-input",
+    "design-system.component.date-picker",
     "design-system.component.dialog",
     "design-system.component.drawer",
     "design-system.component.dropdown-menu",
@@ -1280,6 +1282,71 @@
     {
       "from": "design-system.component.content-switcher",
       "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-input",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-input",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-input",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-input",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-input",
+      "to": "design-system.component.date-picker",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-input",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-picker",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-picker",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-picker",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-picker",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-picker",
+      "to": "design-system.component.date-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-picker",
+      "to": "design-system.component.dialog",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.date-picker",
+      "to": "design-system.component.text-input",
       "type": "related"
     },
     {
