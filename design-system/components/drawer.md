@@ -3,7 +3,7 @@ id: design-system.component.drawer
 collection: design-system
 type: component
 title: Drawer
-summary: Proposed unified Drawer display contract for Inline, Overlay, Floating, Bottom Sheet and optional minimize across shared anatomy.
+summary: TBD Drawer component scope and design contract; distinguish modal/non-modal side surfaces from Dialog and responsive pane layouts.
 knowledge_state: unverified
 document_maturity: scaffold
 related:
