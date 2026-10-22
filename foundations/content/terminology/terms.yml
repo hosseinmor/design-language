@@ -55,7 +55,7 @@ authority_model:
 policy:
   concept_and_label:
     - هر id یک مفهوم مستقل را نشان می‌دهد، نه صرفاً یک رشتهٔ متنی را.
-    - canonical_internal نام مرجع مفهوم در دانش محصول است.
+    - canonical_internal نام مرجع ثبت‌شده برای retrieval و تطبیق مفهوم است؛ نه مالک تعریف محصول.
     - preferred برچسب مناسب هر مخاطب یا سطح را تعیین می‌کند.
   term_severity:
     allowed: واژهٔ مجاز ولی نه لزوماً انتخاب اول
