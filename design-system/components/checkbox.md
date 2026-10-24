@@ -6,7 +6,7 @@ title: Checkbox
 summary: Checkbox lets users select zero, one, or many independent options and can represent a single optional boolean choice.
 knowledge_state: canonical
 document_maturity: reviewed
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-09-19'
 related:
   - design-system.component.radio
   - design-system.reference.component-mapping
