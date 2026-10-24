@@ -62,7 +62,7 @@ Date Picker follows the same single-public-component decision with optional Cale
 | Instance Swap | Active segment | Hour / Minute / Second active highlight preview; Figma-only |
 | Boolean | Filled | Value vs placeholder presentation; Figma-only |
 | Boolean | Open | Preview popup content only while Selection panel is On and field interactive; Figma-only |
-| Field content | Show label, Label, Required, Placeholder, Show supporting, Supporting text, Error text | Shared Field Family authoring conventions |
+| Field content | Show label, Label, Required, Placeholder, Show helper, Helper, Error text | Shared Field Family authoring conventions |
 
 No `Open`, `Filled`, or seconds-combination Variant axis is needed. The runtime must derive focus/filled/opened from interaction and value.
 
