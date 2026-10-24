@@ -217,7 +217,7 @@ The outer instance owns the resize interaction:
 - the Field and Control absorb added vertical height;
 - Label height stays stable;
 - Supporting row height stays stable;
-- Border and Value overlay stretch with the Control; the shared `Focus/Default` Effect Style follows the Control bounds;
+- Border and Value overlay stretch with the Control; the Control is the perceived Focus target and follows the shared [Focus Management](../../accessibility/focus-management.md) treatment;
 - the resize handle remains anchored to the bottom-left in RTL;
 - minimum Control height remains `120px`.
 
@@ -274,7 +274,7 @@ Hover is a CSS/platform interaction state, not normally a runtime component prop
 
 ```text
 Control border → line/emphasis, 1px
-Focus indicator → focus/default, 2px ring + 1px offset
+Focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 ```
 
 Focus does not change Control dimensions or padding.
@@ -295,7 +295,7 @@ The 2px border is an overlay and does not shift content.
 
 ```text
 Error border → line/error, 2px
-Focus indicator → focus/default, 2px ring + 1px offset
+Focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 Error message → fg/error
 ```
 
@@ -327,7 +327,7 @@ Read only remains visually and semantically distinct from Disabled.
 
 A native readonly textarea remains focusable.
 
-Read only focus preserves the Read only treatment and adds the shared `focus/default` 2px ring with a 1px offset.
+Read only focus preserves the Read only treatment while visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract.
 
 ## Placeholder and Value
 
@@ -416,7 +416,7 @@ Textarea consumes the same shared Semantic roles as Text Input.
 | Disabled line | `line/disabled` |
 | Disabled content | `fg/disabled` |
 | Read-only line | `line/muted` |
-| Focus indicator | `focus/default` |
+| Focus indicator | shared [Focus Management](../../accessibility/focus-management.md) contract |
 
 Do not create a Textarea-specific Color-token family merely to restate these shared roles.
 
@@ -541,7 +541,7 @@ Supporting      → composition of helper/error/count presence
 - optional supporting row → `20px`
 - default/hover/focus/read-only line → `1px`
 - error line → `2px` overlay
-- focus indicator → `2px` ring + `1px` offset
+- focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 - resize affordance → bottom-left in RTL in Figma, `8px` inset
 
 The exact CSS/Tailwind implementation and whether the runtime uses native browser resize rendering or an approved custom affordance remain Frontend decisions until the code source is registered.
