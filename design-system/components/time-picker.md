@@ -42,11 +42,12 @@ Date Picker follows the same single-public-component decision with optional Cale
 
 ## Figma sources
 
-- [Time Picker documentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24862-46617).
+- [Time Picker documentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25067-1359).
 - [Public Time Picker Component Set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24862-46616), stable node `24862:46616`, with 24 variants (`Size=Small|Medium|Large` × eight Field Family States). Original component set identity is preserved.
 - [Active Time Segment / Internal](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25025-455): Hour / Minute / Second; content-hugging selection backdrop with semantic colors.
 - [Time Option Content / Internal](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25021-449) is composed of instances of [Select Option](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=20613-21).
 - [Selection Panel](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=20619-306) is a **shared Select source**, reused as an instance with time options in its `Options` Slot.
+- [Mobile selection composition](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25073-45891) uses the shared Dialog mobile variant with `Time Option Content / Internal` in its native Body Slot; it is design evidence, not verified runtime modality.
 - [Legacy Time Input](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24861-46139) preserves its earlier master ID and key for migration.
 
 ## Figma authoring
