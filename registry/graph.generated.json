@@ -95,6 +95,7 @@
     "design-system.experience-rule.loading",
     "design-system.experience-rule.navigation",
     "design-system.experience-rule.responsive-interaction",
+    "design-system.experience-rule.segmented-field-editing",
     "design-system.experience-rule.selection",
     "design-system.experience-rule.validation",
     "design-system.foundation.color",
@@ -1320,6 +1321,11 @@
       "type": "related"
     },
     {
+      "from": "design-system.component.date-picker",
+      "to": "design-system.experience-rule.segmented-field-editing",
+      "type": "related"
+    },
+    {
       "from": "design-system.component.dialog",
       "to": "design-system.accessibility.focus-management",
       "type": "related"
@@ -2047,6 +2053,26 @@
     {
       "from": "design-system.experience-rule.responsive-interaction",
       "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.segmented-field-editing",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.segmented-field-editing",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.segmented-field-editing",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.segmented-field-editing",
+      "to": "design-system.component.date-picker",
       "type": "related"
     },
     {
