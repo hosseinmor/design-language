@@ -61,23 +61,24 @@ There are **24** public variants: `Size = Small | Medium | Large` × `State = De
 | `Year`, `Month`, `Day` (Text) | Independently editable Figma visuals for **one** date |
 | `Active segment` (Instance Swap) | Year / Month / Day highlight in Figma; **Figma-only** |
 | `Show label` (Boolean) | Hides the visible label only when another accessible-name mechanism exists |
-| `Show supporting` (Boolean) | Shows the ordinary supporting region |
-| `Supporting text` (Text) | Contextual helper **or** format hint |
-| `Error text` (Text) | Text feedback for Error / Error focus |
+| `Show helper` (Boolean) | Shows the canonical Field Helper instance in non-error states; hidden by default. |
 
-Nested canonical **Field label** owns `Label`, `Required`, `Show info`. The painted date control is now **inline in the Date Picker master**, as in Select; an unnecessary nested Date Field Base is no longer an active dependency. The `Calendar` Boolean is bound to the direct 16px Calendar icon and the outer Calendar slot; the separate `Open` Boolean is bound to the nested popup content. Therefore **Calendar Off always hides the popup even if Open=True**. Runtime derives open state from interaction and must not treat `Year`, `Month`, and `Day` as unrelated committed values.
+The shared **Field Label** instance exposes contextual `Label` (Text), `Required` (Boolean), and `Show info` (Boolean). The shared **Field Helper** instance exposes `Text` for either a contextual helper or a localized format hint. In Error/Error focus states, the shared **Field Error** instance exposes its own `Text`; Error replaces Helper. These are **nested exposed component properties**, consistent with [Text Input](text-input.md); do not create duplicate top-level `Supporting text` or `Error text` fields.
+
+Use the canonical exposed **Field Label / Field Helper / Field Error** instances; `Required` and `Show info` do not create additional Date Picker variants. A hidden visible label still requires another programmatically accessible name. The painted date control is now **inline in the Date Picker master**, as in Select; an unnecessary nested Date Field Base is no longer an active dependency. The `Calendar` Boolean is bound to the direct 16px Calendar icon and the outer Calendar slot; the separate `Open` Boolean is bound to the nested popup content. Therefore **Calendar Off always hides the popup even if Open=True**. Runtime derives open state from interaction and must not treat `Year`, `Month`, and `Day` as unrelated committed values.
 
 ## Anatomy, placement and visual rules
 
 ```text
 Date Picker
-├── Canonical Field label (Label / Required? / Info?)
+├── Field Label instance (Label / Required / Show info)
 ├── Date control
 │   ├── Segmented Date Input content (Year / Month / Day)
 │   └── Trailing affordances, in logical End position
 │       ├── Calendar icon (only if Calendar On and interactive; absent when Off/Read only)
 │       └── Error icon (Error states; outermost when Calendar Off)
-├── One supporting region (Helper OR format hint; Error replaces both)
+├── Field Helper instance (Text = helper OR localized format hint; non-error states)
+├── Field Error instance (Text = actionable validation feedback; Error states)
 └── Calendar selection surface (only if Calendar On and opened)
     ├── Month and year header + navigation
     ├── Weekday headings
@@ -94,9 +95,9 @@ Date Picker
 
 **Calendar header composition:** Previous/Next month controls are **instances of the existing [Icon Button](icon-button.md) component**, using `Style=Ghost`, `Size=Medium` (40×40px), and canonical `Icon/chevron_right` / `Icon/chevron_left` swaps appropriate to RTL. Do **not** create a separate Month Navigation Component Set or use a label-hiding Button workaround. The Month/Year label and two buttons are a frame **within Calendar Surface**, not a second independent Month-Year master. Preserve keyboard-operable labels for Previous/Next month in implementation; Figma instance names alone are not accessible labels.
 
-**Figma source structure:** the canonical Date Picker now owns the painted Field Control **directly in each of its 24 variants**, matching Select's Field anatomy. This enables one `Calendar` Boolean to control the icon and popup while allowing the segmented content region to **expand automatically** when the icon is absent. The former three-size Date Field Base and 24-variant Date Input remain archived in Legacy for existing instances; they are **not active public sources**. The reusable internal Date Segment Focus master remains because it shares three focus-highlight positions without multiplying the public variant axes.
+**Figma source structure:** the canonical Date Picker owns a direct Field Label instance, a painted Field Control, and a contextual Field Helper or Field Error instance **in each of its 24 variants**, reusing the [Text Input](text-input.md) Field Family. Root Auto Layout uses the governed 4px field spacing token. The Calendar popup is in the Control assembly that paints **above** the subsequent Helper/Error sibling (reversed Auto Layout stacking); it must not be covered by Helper/Error text, even when the calendar is opened. The field remains resizable and RTL-right aligned. The canonical Date Picker owns the painted Field Control **directly in each of its 24 variants**, matching Select's Field anatomy. This enables one `Calendar` Boolean to control the icon and popup while allowing the segmented content region to **expand automatically** when the icon is absent. The former three-size Date Field Base and 24-variant Date Input remain archived in Legacy for existing instances; they are **not active public sources**. The reusable internal Date Segment Focus master remains because it shares three focus-highlight positions without multiplying the public variant axes.
 
-**Fluid field and fixed calendar width (RTL):** The Date Picker **field has no fixed Max Width**. Its Figma master is authored at a 288px **sample width**, not a maximum. When placed inside a resizing Auto Layout container, the entire field (Label, Control, Supporting/Error) stretches to the available inline width; `Calendar=false` also reclaims the trigger width. The date Placeholder is text-aligned **right** and the segmented value group is anchored to the **right side of its expanding content region**; Label and Supporting/Error text are also right-aligned in RTL. Individual segment numerals remain centered within their own edit targets. No element should retain a hard-coded 288px **field** constraint.
+**Fluid field and fixed calendar width (RTL):** The Date Picker **field has no fixed Max Width**. Its Figma master is authored at a 288px **sample width**, not a maximum. When placed inside a resizing Auto Layout container, the entire field (Label, Control, Supporting/Error) stretches to the available inline width; `Calendar=false` also reclaims the trigger width. The date Placeholder is text-aligned **right** and the segmented value group is anchored to the **right side of its expanding content region**; Label and Helper/Error text are also right-aligned in RTL. Individual segment numerals remain centered within their own edit targets. No element should retain a hard-coded 288px **field** constraint.
 
 **Desktop Calendar:** the calendar **selection panel itself retains a fixed 288px width**, independent of field width, and its **right edge aligns to the field's right edge in RTL** (the logical inline-start alignment for this pattern). The popup remains outside the field's Auto Layout flow and does not affect field sizing. A field narrower than 288px may visually overhang on the left; runtime positioning must shift/flip as needed to stay within the **viewport**, rather than force the field to become 288px wide. The surface uses `surface/raised`, `12px · Large` radius, governed floating shadow, and **4px** vertical anchor gap. Fit to available viewport space, flip/shift when needed, preserve usable zoom/reflow, and avoid double wrapping in an independent Popover shell. An anchored selection panel is not automatically a modal Dialog.
 
@@ -168,7 +169,7 @@ Implement these as a tested accessible calendar pattern rather than guessing rol
 
 ### Supporting content and validation
 
-Under the control, **Error > explicit helper > generated locale Format Hint > nothing**. The Figma component has exactly one `Show supporting`/`Supporting text` authoring slot; do not stack Helper and Format Hint. While invalid, show actionable `Error text` with correct programmatic association. Validation is ordinarily triggered on blur or submit/commit per Product/Form policy, not every partial keystroke.
+Under the control, **Error > explicit helper > generated locale Format Hint > nothing**. The Figma component has exactly one `Show helper` toggle in non-error states and an exposed Field Helper `Text` property; do not stack Helper and Format Hint. Error/Error focus use the exposed Field Error `Text` property instead and do not show a Helper simultaneously. For RTL, both messages are right-aligned and stretch with the Field. **The opened Calendar panel paints above these messages**, rather than the text floating above or obscuring the calendar. In runtime, use an appropriate floating layer/stacking context without changing the logical accessibility association of errors and helpers. While invalid, show actionable Error text with correct programmatic association. Validation is ordinarily triggered on blur or submit/commit per Product/Form policy, not every partial keystroke.
 
 ## Accessibility acceptance and evidence
 
