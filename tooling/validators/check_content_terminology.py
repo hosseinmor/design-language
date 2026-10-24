@@ -28,6 +28,7 @@ VALID_AUTHORITY_MIGRATION_STATES = {
     "needs_product_knowledge_reference",
     "not_applicable",
 }
+VALID_PRODUCTS = {"jobvision", "cando"}
 VALID_VISIBILITY = {
     "public",
     "internal",
@@ -166,6 +167,21 @@ def validate(data: dict[str, Any]) -> list[str]:
             + ", ".join(sorted(VALID_AUTHORITY_MIGRATION_STATES))
         )
 
+    product_variant_model = data.get("product_variant_model")
+    if not isinstance(product_variant_model, dict):
+        errors.append("top-level `product_variant_model` must be a mapping")
+        product_variant_model = {}
+    products = product_variant_model.get("products")
+    if not isinstance(products, list) or set(products) != VALID_PRODUCTS:
+        errors.append(
+            "product_variant_model.products must contain exactly "
+            + ", ".join(sorted(VALID_PRODUCTS))
+        )
+    if product_variant_model.get("unresolved_source") != "unresolved":
+        errors.append(
+            "product_variant_model.unresolved_source must be `unresolved`"
+        )
+
     terms = data.get("terms")
     if not isinstance(terms, list) or not terms:
         errors.append("top-level `terms` must be a non-empty list")
@@ -289,6 +305,53 @@ def validate(data: dict[str, Any]) -> list[str]:
                 errors.append(
                     f"{location}: linked product_source must also appear in evidence"
                 )
+
+        product_variants = term.get("product_variants")
+        if product_variants is not None:
+            if not isinstance(product_variants, dict) or not product_variants:
+                errors.append(
+                    f"{location}: product_variants must be a non-empty mapping"
+                )
+            else:
+                invalid_products = sorted(set(product_variants) - VALID_PRODUCTS)
+                if invalid_products:
+                    errors.append(
+                        f"{location}: unknown product variants: "
+                        + ", ".join(invalid_products)
+                    )
+                for product, variant in product_variants.items():
+                    variant_location = f"{location}.product_variants.{product}"
+                    if not isinstance(variant, dict):
+                        errors.append(f"{variant_location} must be a mapping")
+                        continue
+                    preferred_variant = variant.get("preferred")
+                    if not isinstance(preferred_variant, dict) or not any(
+                        nonempty_string(value)
+                        for value in preferred_variant.values()
+                    ):
+                        errors.append(
+                            f"{variant_location}.preferred must contain a label"
+                        )
+                    variant_source = variant.get("product_source")
+                    if variant_source == "unresolved":
+                        continue
+                    if variant_source not in known_sources:
+                        errors.append(
+                            f"{variant_location}.product_source must reference "
+                            "a known source or `unresolved`"
+                        )
+                    elif source_roles.get(variant_source) != (
+                        "product_knowledge_reference"
+                    ):
+                        errors.append(
+                            f"{variant_location}.product_source must use "
+                            "`product_knowledge_reference` role"
+                        )
+                    elif variant_source not in evidence:
+                        errors.append(
+                            f"{variant_location}.product_source must also "
+                            "appear in evidence"
+                        )
 
         if status == "stable":
             preferred = term.get("preferred")
