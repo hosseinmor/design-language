@@ -205,7 +205,7 @@ Accordion remains low-decoration:
 | Focus | shared Focus treatment on Trigger only | normal semantic foreground | `line/muted` |
 | Disabled | transparent | `fg/disabled` | `line/muted` |
 
-Focus uses the shared `Focus/Default` Effect Style bound to `focus/default`. It represents a 2px ring with a 1px gap and must not resize the Trigger or wrap the Panel.
+Visible Focus on the Trigger follows the shared [Focus Management](../../accessibility/focus-management.md) contract. The Trigger remains the perceived focus target; Focus must not resize the Trigger or wrap the Panel.
 
 Active is a transient runtime pseudo-state and is intentionally not a Figma variant.
 
@@ -339,7 +339,7 @@ Accordion introduces no component-specific Color tokens.
 | Divider | `line/muted` |
 | Hover | `surface/transparent-hover` |
 | Active | `surface/transparent-active` |
-| Focus | `focus/default` |
+| Focus | shared [Focus Management](../../accessibility/focus-management.md) contract |
 
 Content inserted into the native Slot owns its own semantic/component token contract.
 
