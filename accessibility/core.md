@@ -10,7 +10,7 @@ owner: Design System team
 related:
 - design-system.accessibility.conformance-and-policy
 - design-system.accessibility.router
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-09-02'
 ---
 
 # Accessibility Core
