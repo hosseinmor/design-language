@@ -71,8 +71,8 @@ Date Picker
 ├── Date control
 │   ├── Segmented Date Input content (Year / Month / Day)
 │   └── Trailing affordances, in logical End position
-│       ├── Calendar action (real button; absent in Read only)
-│       └── Error icon (Error states only, outermost at End)
+│       ├── Calendar icon (outermost at End; real action; absent in Read only)
+│       └── Error icon (Error states only, immediately inside/right of Calendar in RTL)
 ├── One supporting region (Helper OR format hint; Error replaces both)
 └── Calendar selection surface (when opened)
     ├── Month and year header + navigation
@@ -86,7 +86,7 @@ Date Picker
 | Medium (default) | 40px | 16px |
 | Large | 48px | 16px |
 
-**Field Family:** `6px · Medium` radius, 8px content-to-action gap, semantic label/content/helper typography and the [Text Input](text-input.md) State contract. Calendar action: **16px icon centered in a 24×24px embedded action wrapper**, positioned at logical **End** (the **left** in RTL). The wrapper is a distinct action target; do not stretch it to the full Small field height. In Error and Error focus, the **16px Error status icon is outermost at End** (leftmost in RTL), with the Calendar action immediately to its right and an **8px** Auto Layout gap between adornments. The date content shifts automatically to avoid both icons. In Read only / Read only focus, hide the Calendar trigger entirely, rather than keeping an empty reserved slot. The calendar icon is non-directional and must not rotate upon opening. The action is not a fake affordance embedded in an inaccessible text input. The implementation must provide an actual keyboard-operable action with an accessible name and sufficient pointer target.
+**Field Family:** `6px · Medium` radius and the canonical [Select](select.md) trailing-Chevron spacing pattern. Calendar is a **direct 16×16px icon instance within the field's Auto Layout**, with **no extra 24px or 32px wrapper or padding**. Its physical left inset in RTL is **12px in Small**, **16px in Medium/Large**. Field content gap matches Select: **4px in Small** and **8px in Medium/Large**, each bound to the shared Spacing variable. In Error and Error focus, the **16px Calendar icon remains leftmost**, and the **16px Error status icon sits immediately to its right** (toward the editable date). Both icons use the same Auto Layout gap; the content region shrinks automatically and must not overlap either icon. In Read only / Read only focus, hide the Calendar icon and reclaim the reserved space. The visual icon does not alone define the button's accessible pointer target: the runtime must provide an independently keyboard-operable trigger with a sufficient hit area **without adding visual inset or changing the spacing**. The calendar icon is non-directional and must not rotate upon opening. The action is not a fake affordance embedded in an inaccessible text input. The implementation must provide an actual keyboard-operable action with an accessible name and sufficient pointer target.
 
 **Desktop Calendar:** the live source demonstrates an approximately **288px-wide** anchored calendar with `surface/raised`, `12px · Large` radius, governed floating shadow, and **4px** vertical anchor gap. Fit to available viewport space, flip/shift when needed, preserve usable zoom/reflow, and avoid double wrapping in an independent Popover shell. An anchored selection panel is not automatically a modal Dialog.
 
