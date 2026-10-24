@@ -8,7 +8,7 @@ knowledge_state: verified
 document_maturity: reviewed
 design_status: ready-for-dev
 design_maturity: handoff-ready
-last_reviewed: '2026-10-20'
+last_reviewed: '2026-10-24'
 related:
   - design-system.component.tag
   - design-system.component.badge
@@ -77,8 +77,7 @@ All public Chip sets share the same control recipe:
 | Main content gap | `8px` |
 | Secondary content internal gap | `4px` |
 | Direction | RTL-first; use logical start/end |
-| Focus | Shared `Focus/Default` outside ring |
-| Focus geometry | 2px ring + 1px gap/offset |
+| Focus | Shared [Focus Management](../../accessibility/focus-management.md) treatment |
 | Color | Semantic roles only |
 | Interaction State | `Default / Hover / Active / Focus / Disabled` |
 
@@ -114,7 +113,7 @@ The component itself does not know whether it is Choice or Filter; the owning gr
 
 #### Selected treatment
 
-`Selected=true` uses a leading check at logical Start plus `surface/accent-muted`, `line/accent`, and `fg/accent`. Hover and Active use the corresponding direct semantic Accent surfaces: `surface/accent-muted-hover` and `surface/accent-muted-active`. Focus preserves the base selected surface and adds `Focus/Default`. Disabled continues to use the shared disabled treatment.
+`Selected=true` uses a leading check at logical Start plus `surface/accent-muted`, `line/accent`, and `fg/accent`. Hover and Active use the corresponding direct semantic Accent surfaces: `surface/accent-muted-hover` and `surface/accent-muted-active`. Focus preserves the base selected surface and adds the shared visible-Focus treatment. Disabled continues to use the shared disabled treatment.
 
 Rules:
 
@@ -403,17 +402,17 @@ Do not:
 
 ## Focus
 
-All public Chip sets use the shared `Focus/Default` treatment.
+All public Chip sets use the shared [Focus Management](../../accessibility/focus-management.md) treatment.
 
 Rules:
 
-- visible focus follows keyboard `:focus-visible` behavior;
+- visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) behavior;
 - use the outside ring/effect, not border thickening;
 - preserve the underlying Selected/Applied treatment;
 - parent containers must not clip the ring;
 - pointer activation alone need not force keyboard-style focus when the platform's focus-visible algorithm does not require it.
 
-For compound Removable Chips, Body and Remove have separate focus targets. The Figma Body now receives its own Focus/Default effect and Remove retains independent Focus/Default; neither is a permanent indicator of popup visibility.
+For compound Removable Chips, Body and Remove have separate focus targets. The Figma Body and Remove action retain independent shared Focus treatments; neither is a permanent indicator of popup visibility.
 
 ## Content, Long Labels, and Layout
 
