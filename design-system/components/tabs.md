@@ -6,7 +6,7 @@ title: Tabs
 summary: Tabs switch between peer content panels within the same context using one current tab.
 knowledge_state: verified
 document_maturity: reviewed
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-14'
 related:
   - design-system.component.content-switcher
   - design-system.reference.component-mapping
