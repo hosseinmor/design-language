@@ -5,7 +5,8 @@ type: experience-rule
 title: Segmented Field Editing
 summary: Shared editing, active-segment presentation, and keyboard model for date and time fields.
 knowledge_state: verified
-document_maturity: draft
+document_maturity: reviewed
+last_reviewed: '2026-10-24'
 owner: Design System team
 related:
   - design-system.component.date-picker
@@ -23,7 +24,7 @@ topics:
 
 # Segmented Field Editing
 
-> **Design decision for HOS-49, pending owner review and runtime acceptance.** The Time Picker HTML was interactively prototyped; Figma demonstrates visual authoring, not tested Karbon behavior. Date Picker has its own date-specific validation and localization contract. This foundation does not assert that the two runtime implementations already share code.
+> **Reviewed shared design rule — HOS-49.** The Design System owner accepted this segmented-editing model for Date Picker and Time Picker and requested development handoff on 2026-10-24. The Time Picker HTML was interactively prototyped and Figma demonstrates the reviewed visual authoring; neither is evidence of tested Karbon behavior. Date Picker retains its date-specific validation and localization contract. This foundation does not assert that the two runtime implementations already share code.
 
 ## Scope and ownership
 
