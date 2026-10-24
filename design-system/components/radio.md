@@ -6,7 +6,7 @@ title: Radio
 summary: Radio lets users choose exactly one mutually exclusive option from a group.
 knowledge_state: canonical
 document_maturity: reviewed
-last_reviewed: '2026-09-19'
+last_reviewed: '2026-10-24'
 related:
   - design-system.component.checkbox
   - design-system.reference.component-mapping
@@ -115,9 +115,8 @@ Focus is independent from selection.
 
 Use the shared focus treatment:
 
-- 2px `focus/default` outer ring;
-- 1px visual gap between component boundary and focus ring;
-- no layout/dimension change.
+- visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract around the Radio control;
+- Focus does not change layout or the selection geometry.
 
 Both selected and unselected Radio options retain their selection geometry while focused.
 
