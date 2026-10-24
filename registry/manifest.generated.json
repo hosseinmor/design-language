@@ -1675,11 +1675,11 @@
         "design-system.token.spacing.catalog",
         "design-system.component.menu",
         "design-system.component.drawer",
+        "design-system.component.app-shell",
         "design-system.accessibility.keyboard-navigation",
         "design-system.accessibility.focus-management",
         "design-system.accessibility.screen-reader-semantics",
-        "design-system.accessibility.structure-and-navigation",
-        "design-system.component.app-shell"
+        "design-system.accessibility.structure-and-navigation"
       ],
       "topics": [
         "components",
