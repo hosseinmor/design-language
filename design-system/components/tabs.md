@@ -6,7 +6,7 @@ title: Tabs
 summary: Tabs switch between peer content panels within the same context using one current tab.
 knowledge_state: verified
 document_maturity: reviewed
-last_reviewed: '2026-10-14'
+last_reviewed: '2026-10-24'
 related:
   - design-system.component.content-switcher
   - design-system.reference.component-mapping
@@ -162,9 +162,8 @@ Tabs owns a 1px bottom line using `line/default`.
 
 - base content uses `fg/primary`;
 - shared focus-visible treatment:
-  - 2px visible `focus/default` outer ring;
-  - 1px visual gap using the normal surface;
-  - no geometry change.
+  - visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract;
+  - Focus does not change Tab geometry or replace the selected indicator.
 
 ### Selected
 
