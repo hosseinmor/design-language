@@ -20,6 +20,7 @@ related:
 | Token names, values or role selection | `design-system/tokens/{color,typography,spacing,radius,elevation,motion,layout}/` | Figma for editable values, Code/Storybook for runtime |
 | Product language | `foundations/content/` | Product Knowledge for product truth |
 | Interaction choice/principle shared across UI | `foundations/interaction/` | Owning component/pattern and Karbon |
+| Directionality / RTL–LTR layout inheritance, logical placement and mirroring | `foundations/interaction/directionality.md` (draft; owner review pending) | Localization, Accessibility, live Figma and owning components |
 | Accessibility requirement | `accessibility/router.md` | Runtime accessibility tests |
 | Component design choice, usage or contract | `design-system/components/` | Figma for current visual source; Karbon/Storybook for verified runtime |
 | Multi-component composition and behavior (Loading, Confirmation, Notifications, Tour and other patterns) | `design-system/patterns/` | Owning components, Product Knowledge for feature policy, Karbon for runtime |
