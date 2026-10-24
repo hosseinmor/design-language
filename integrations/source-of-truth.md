@@ -24,9 +24,9 @@ Use ownership by question:
 
 | Question | Primary source |
 |---|---|
-| Why does this component/pattern exist? | Design System Knowledge |
-| When should it be used or avoided? | Design System Knowledge |
-| What does a semantic token/state mean? | Design System Knowledge |
+| Why does this component/pattern exist? | Design Language |
+| When should it be used or avoided? | Design Language |
+| What does a semantic token/state mean? | Design Language |
 | What is the approved design intent, semantic meaning, or a component state model? | Design Language (reviewed decisions and marked draft gaps) |
 | What are the current editable visual properties/layouts? | Figma |
 | Which component properties, code APIs, events and defaults are **implemented**? | Versioned Karbon code and its implementation docs |
@@ -42,7 +42,7 @@ When sources disagree, do not silently merge them.
 
 ```text
 Meaning / usage conflict
-→ Design System Knowledge owner reviews
+→ Design Language owner reviews
 
 Visual construction conflict
 → Figma implementation is inspected and reconciled
@@ -68,7 +68,7 @@ Examples that normally belong outside general prose documentation:
 - test implementation details;
 - historical token/component migration mappings after migration is complete.
 
-Design System Knowledge should retain durable semantic decisions, decision rules, important constraints, and known gaps.
+Design Language should retain durable semantic decisions, decision rules, important constraints, and known gaps.
 
 ## Live-source availability rule
 
@@ -79,7 +79,7 @@ source registered and accessible
 → query it for exact facts
 
 source role known but source unregistered/unavailable
-→ use Knowledge only for the semantic contract
+→ use Design Language only for the semantic contract
 → explicitly mark exact live fact as unverified
 → do not infer it from another source
 ```
