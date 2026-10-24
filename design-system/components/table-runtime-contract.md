@@ -12,7 +12,7 @@ related:
   - design-system.component.table
   - design-system.pattern.data-views
   - design-system.accessibility.tables-and-data-visualization
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-14'
 ---
 
 # Data Table — Runtime and Accessibility Contract
