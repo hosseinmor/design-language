@@ -39,6 +39,7 @@
     "design-system.accessibility.structure-and-navigation",
     "design-system.accessibility.tables-and-data-visualization",
     "design-system.accessibility.testing",
+    "design-system.component.app-shell",
     "design-system.component.autocomplete",
     "design-system.component.badge",
     "design-system.component.breadcrumb",
@@ -1127,6 +1128,31 @@
       "type": "related"
     },
     {
+      "from": "design-system.component.app-shell",
+      "to": "design-system.component.drawer",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.app-shell",
+      "to": "design-system.component.side-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.app-shell",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.app-shell",
+      "to": "design-system.foundation.responsive-layout-spec",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.app-shell",
+      "to": "design-system.token.layout.catalog",
+      "type": "related"
+    },
+    {
       "from": "design-system.component.autocomplete",
       "to": "design-system.accessibility.forms",
       "type": "related"
@@ -1759,6 +1785,11 @@
     {
       "from": "design-system.component.side-navigation",
       "to": "design-system.accessibility.structure-and-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.side-navigation",
+      "to": "design-system.component.app-shell",
       "type": "related"
     },
     {

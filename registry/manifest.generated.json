@@ -923,6 +923,28 @@
       "path": "accessibility/testing.md"
     },
     {
+      "id": "design-system.component.app-shell",
+      "kind": "design-system-component",
+      "title": "App Shell",
+      "summary": "Draft Karbon App Shell composition contract for responsive chrome, logical Start and End regions, and a Page Container-owned native content slot.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.side-navigation",
+        "design-system.component.drawer",
+        "design-system.foundation.responsive-layout",
+        "design-system.foundation.responsive-layout-spec",
+        "design-system.token.layout.catalog"
+      ],
+      "topics": [
+        "app-shell",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/app-shell.md"
+    },
+    {
       "id": "design-system.component.autocomplete",
       "kind": "design-system-component",
       "title": "Autocomplete",
@@ -1653,6 +1675,7 @@
         "design-system.token.spacing.catalog",
         "design-system.component.menu",
         "design-system.component.drawer",
+        "design-system.component.app-shell",
         "design-system.accessibility.keyboard-navigation",
         "design-system.accessibility.focus-management",
         "design-system.accessibility.screen-reader-semantics",
@@ -3354,7 +3377,7 @@
     }
   ],
   "summary": {
-    "documents": 158,
+    "documents": 159,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3364,7 +3387,7 @@
       "design-language-integration": 1,
       "design-language-overview": 1,
       "design-system-accessibility": 18,
-      "design-system-component": 48,
+      "design-system-component": 49,
       "design-system-component-annex": 1,
       "design-system-design-language": 1,
       "design-system-experience-rule": 12,
