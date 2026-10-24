@@ -101,6 +101,7 @@
     "design-system.experience-rule.selection",
     "design-system.experience-rule.validation",
     "design-system.foundation.color",
+    "design-system.foundation.directionality",
     "design-system.foundation.elevation",
     "design-system.foundation.iconography",
     "design-system.foundation.layout",
@@ -2170,6 +2171,66 @@
     {
       "from": "design-system.foundation.color",
       "to": "design-system.token.semantic-tokens",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.accessibility.responsive-and-zoom",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.accessibility.structure-and-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.component.app-shell",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.component.drawer",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.component.menu",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.experience-rule.segmented-field-editing",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.foundation.iconography",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.foundation.layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.directionality",
+      "to": "design-system.foundation.responsive-layout",
       "type": "related"
     },
     {
