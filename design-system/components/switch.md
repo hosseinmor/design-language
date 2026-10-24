@@ -6,7 +6,7 @@ title: Toggle
 summary: Toggle is the canonical binary on/off control for settings that take effect immediately.
 knowledge_state: canonical
 document_maturity: reviewed
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-09-19'
 related:
   - design-system.component.checkbox
   - design-system.reference.component-mapping
