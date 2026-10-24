@@ -183,10 +183,10 @@ The linked Figma Page Container is still a candidate and is not aligned with the
 
 | Source | Reference values |
 |---|---|
-| Live Figma Page Container | 640, 768, 1024, 1280, 1536px |
-| Current main Responsive/Layout contract | 544, 768, 1012, 1280, 1400px, with 320px as xsmall |
+| Live Figma Page Container candidate | 640, 768, 1024, 1280, 1536px |
+| Canonical main container roles | Interstitial 320px, Medium 768px, Large 1012px, XLarge 1280px, Full |
 
-App Shell correctly delegates gutter and max-width ownership to Page Container, but it must not claim numeric alignment. Reconcile these values in a Foundation-owned change that also decides whether the candidate Page Container replaces or coexists with the older Container family. Do not silently change Page Container from the App Shell PR.
+The 544px Small and 1400px XXLarge values are breakpoint thresholds, not container max-width roles. App Shell correctly delegates gutter and max-width ownership to Page Container, but it must not claim numeric alignment. Reconcile these values in a Foundation-owned change that also decides whether the candidate Page Container replaces or coexists with the older Container family. Do not silently change Page Container from the App Shell PR.
 
 ## Runtime interaction and accessibility contract
 
