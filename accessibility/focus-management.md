@@ -3,7 +3,7 @@ id: design-system.accessibility.focus-management
 collection: design-system
 type: accessibility
 title: Focus Management
-summary: Defines practical rules for visible focus, logical focus order, programmatic focus, overlays, dynamic changes, validation, removal, and focus restoration.
+summary: Defines the shared Focus Visibility contract plus logical focus order, programmatic focus, overlays, dynamic changes, validation, removal, and focus restoration.
 knowledge_state: canonical
 document_maturity: reviewed
 related:
@@ -11,7 +11,7 @@ related:
 - design-system.accessibility.keyboard-navigation
 - design-system.accessibility.dynamic-content-and-feedback
 - design-system.accessibility.forms
-last_reviewed: '2026-09-19'
+last_reviewed: '2026-10-24'
 ---
 
 # Focus Management
@@ -30,80 +30,46 @@ Never leave the user with focus lost, hidden, or trapped unintentionally.
 
 ---
 
-# 1. Visible focus
+# 1. Shared Focus Visibility Contract
 
-## WCAG baseline
+This section is the canonical owner for the **shared visible-focus treatment** used by reusable JobVision/Cando UI.
 
-**MUST**
+Component and Pattern guidelines MUST NOT redefine the default Focus ring geometry, token selection, or web trigger. They only document:
+- whether and where the component can receive focus;
+- which perceived control/sub-control owns the visible indicator when placement is not obvious;
+- focus movement, containment, restoration, and composite-widget behavior;
+- state composition that is specific to that component;
+- a justified, reviewed exception to this shared contract.
 
-Keyboard-operable UI has a mode in which keyboard focus is visibly identifiable.
+If no exception is documented, this contract applies.
 
-Do not remove the browser focus indicator without providing an accessible replacement.
+## Terminology
 
-```css
-outline: none;
+Treat these concepts as related but distinct:
+
+```text
+DOM focus / :focus
+→ the element currently owns focus
+→ may result from pointer, touch, keyboard, or programmatic focus
+
+Visible focus / :focus-visible
+→ the user agent determines that an explicit focus indicator is appropriate
+→ show the shared JV Focus ring
+
+Focus-within / :focus-within
+→ the element itself or one of its descendants owns focus
+→ useful for container state, but not a substitute for the visible indicator
 ```
 
-is not acceptable by itself.
+A component being focused does **not** automatically mean that the shared Focus ring must be drawn.
+
+## Visibility trigger
 
 **MUST — web implementations**
 
-Treat DOM focus and the visible Focus ring as related but distinct concepts:
+Use `:focus-visible` as the default trigger for the shared Focus ring.
 
-```text
-:focus
-→ the control currently owns DOM focus
-→ may result from pointer, touch, keyboard, or programmatic focus
-
-:focus-visible
-→ the user agent determines that a visible focus indicator is appropriate
-→ show the JV Focus ring
-```
-
-Use `:focus-visible` for the standard explicit Focus ring. Do not use `:focus` alone to force the ring on every focused control.
-
-Pointer users do not need an identical Focus ring merely because a click also caused DOM focus. At the same time, `:focus-visible` is **not defined as “keyboard-only”**. Browsers apply their own input-modality and control-type heuristics; for example, a text-editing control may still match `:focus-visible` after pointer interaction. JV accepts the user-agent heuristic rather than implementing custom keyboard-vs-pointer modality tracking.
-
-Do not add global JavaScript or `data-input-modality` logic solely to suppress a standards-based `:focus-visible` match. A component may define a documented exception only when native `:focus-visible` behavior cannot meet its interaction/accessibility contract.
-
-## JV focus tokens
-
-Use:
-
-```text
-focus/default
-→ supported normal/local surfaces
-
-focus/inverse
-→ supported inverse surfaces
-```
-
-Focus is a dedicated Semantic role. The current `focus/default` mapping intentionally shares the approved Accent primitives:
-
-```text
-Light → palette/blue/600
-Dark  → palette/blue/500
-```
-
-Components must still consume `focus/default`, not an Accent token directly. Sharing a Primitive does not merge the semantic meanings or allow Accent styling to replace Focus.
-
-Focus remains a distinct interaction state from Brand, Danger, Error, and Selected/current state. Error + Focus and Selected + Focus must preserve both meanings.
-
-## JV visual treatment and web implementation
-
-**MUST**
-
-The standard focus treatment is:
-
-```text
-component edge
-→ 1px gap
-→ 2px focus ring
-```
-
-The focus ring is external to the component boundary. It must not replace, recolor, thicken, or resize the component's own border. Focus + Error and similar combined states therefore retain the component border while adding the Focus ring outside it.
-
-For web implementations, use `:focus-visible` and CSS `outline` as the default mechanism:
+Do not use `:focus` alone to force the ring on every focused control.
 
 ```css
 :focus-visible {
@@ -112,33 +78,170 @@ For web implementations, use `:focus-visible` and CSS `outline` as the default m
 }
 ```
 
-`outline` is preferred because it does not participate in layout and supports the required offset directly. Do not implement the standard Focus treatment by increasing or recoloring `border`.
+JV accepts the browser/user-agent `:focus-visible` heuristic. Do not add global JavaScript, CSS classes, or `data-input-modality` logic solely to distinguish keyboard from pointer input.
 
-Use a `box-shadow`-based ring only when a documented component/platform constraint prevents `outline` from producing the required visible geometry; it must preserve the same 2px ring, 1px gap, Semantic Focus token, and no-layout-shift behavior.
+`:focus-visible` is not defined as “keyboard-only”. A text-editing control may still match it after pointer interaction. Do not suppress that standards-based behavior merely to force a pointer-specific visual result.
 
-In Figma, the shared outer Focus Effect Style represents this geometry. Its spacer must resolve to the adjacent supported surface; use the default-surface or inverse-surface treatment appropriate to the context. Figma's shadow construction is a design representation, not the required web implementation.
+This policy aligns with WCAG 2.4.7, which allows a mode of operation where the keyboard focus indicator is visible and explicitly recognizes user-agent behavior that may optimize when the indicator is shown.
+
+## Visual geometry
+
+**MUST**
+
+The shared authored Focus treatment is:
+
+```text
+component edge
+→ 1px visual gap
+→ 2px Focus ring
+```
+
+The ring is external to the perceived interactive boundary.
+
+It must not:
+- replace the component border;
+- recolor the component border as a Focus substitute;
+- thicken the component border;
+- resize the component;
+- create layout shift.
+
+The 2px + 1px geometry is a **JV Design System contract** even though WCAG 2.4.13 Focus Appearance is Level AAA. WCAG conformance level and the internal visual standard are separate decisions.
+
+## Focus tokens
+
+Use only the shared semantic Focus roles:
+
+```text
+focus/default
+→ normal/local supported surfaces
+
+focus/inverse
+→ approved inverse-surface contexts
+```
+
+Do not consume Accent, Brand, Line, Error, or raw Primitive colors as substitutes for Focus.
+
+Do not infer `focus/inverse` from global Dark mode. Inverse is a **local semantic surface context**.
+
+Exact Light/Dark/Product mappings are owned by the Color token contract under `design-system/tokens/color/`; this document owns **when the Focus roles are used**, not their Primitive values.
+
+## Focus target
+
+**MUST**
+
+Draw the visible indicator around the perceived interactive control or sub-control that currently owns visible focus.
+
+Examples:
+
+```text
+Button
+→ Button boundary
+
+Text field
+→ field/control shell perceived as the editable control
+
+Menu item
+→ focused menu-item row
+
+Slider
+→ focused thumb, when the thumb is the keyboard focus target
+
+Composite widget with roving focus
+→ active focused sub-control, not automatically the entire composite
+```
+
+Do not place the Focus ring around labels, helper text, decorative wrappers, or an entire composite merely because they contain the focused element.
+
+A wrapper may visually carry the ring when it is the correct perceived control boundary and its state is driven by a descendant's `:focus-visible`; document non-obvious placement in the component contract.
+
+## State composition
+
+Focus is independent from:
+- Hover;
+- Active/Pressed;
+- Selected/Current;
+- Checked;
+- Expanded;
+- Error/Danger;
+- loading or other component-specific states.
+
+**MUST**
+
+When Focus composes with another meaningful state, preserve both meanings.
+
+```text
+Error + Focus
+→ keep Error border/state
+→ add external Focus ring
+
+Selected + Focus
+→ keep Selected treatment
+→ add external Focus ring
+```
+
+Do not use Selected, Error, Active, or Accent styling as the only Focus indicator.
+
+## Implementation mechanism
+
+**MUST**
+
+Prefer CSS `outline` + `outline-offset` for the standard web treatment because it:
+- does not participate in layout;
+- directly expresses the required external offset;
+- keeps Focus separate from the component border.
+
+A `box-shadow`-based ring MAY be used only when a documented component/platform constraint prevents `outline` from producing the required result. The fallback must preserve:
+- the same 2px visible ring;
+- the same 1px gap;
+- the correct semantic Focus token;
+- no layout shift.
+
+`:focus-within` MAY style a composite/container when the container needs a focused internal state, but it MUST NOT remove or replace the visible indicator required for the actual focus target.
+
+## Figma authoring contract
+
+Figma represents the shared web Focus treatment with:
+
+```text
+Focus/Default
+Focus/Inverse
+```
+
+These shared Effect Styles model the external 1px gap + 2px ring. Their shadow construction is a **design representation**, not the required runtime mechanism.
+
+For Figma component variants:
+
+- a visual `State=Focus` represents the **visible-focus treatment** corresponding to the shared `:focus-visible` contract; it does not mean “every possible DOM `:focus` event”;
+- use the shared Focus Effect Style; do not recreate Focus with manual strokes, ad hoc shadows, or component-specific colors;
+- apply the effect to the layer that matches the perceived interactive boundary;
+- keep the Focus effect outside the component's own border/state styling;
+- ensure the effect and its owning wrapper are not clipped by `Clip content` / overflow;
+- use `Focus/Inverse` only for an approved inverse-surface context.
+
+A component that needs a visually distinct pointer-focused/editing state MAY model that separately, but it must not redefine the shared visible-focus ring.
 
 ## Contrast
 
-Author-created focus indicators are subject to applicable non-text contrast requirements.
+**MUST**
 
-See `color-and-contrast.md`.
+Keyboard focus remains visibly identifiable and the author-created Focus indicator satisfies the applicable non-text contrast requirements in every supported context.
 
-### Stronger JV target
+See `color-and-contrast.md` for contrast ownership and validation.
 
 **SHOULD**
 
-Aim for the WCAG 2.4.13 Focus Appearance model:
+Aim for the WCAG 2.4.13 Focus Appearance model for indicator area and focused-vs-unfocused change. This remains a Level AAA external criterion; the shared JV geometry above is still the Design System's required authored treatment.
 
-```text
-visible indicator area
-→ at least equivalent to a 2 CSS px perimeter
+## Exceptions
 
-focused vs unfocused change
-→ ≥3:1
-```
+An exception to the shared Focus Visibility contract requires:
+- a concrete component/platform constraint;
+- the same or stronger focus identifiability;
+- preserved keyboard accessibility;
+- explicit documentation in the owning Component/Pattern guideline;
+- owner review.
 
-This remains a **JV SHOULD**, because WCAG 2.4.13 is Level AAA, not AA.
+Do not create an exception only to make one component look visually different.
 
 ---
 
