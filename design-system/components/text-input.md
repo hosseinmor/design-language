@@ -200,7 +200,7 @@ Focus composes two independent visual layers:
 
 ```text
 Control border → line/emphasis, 1px
-Focus indicator → focus/default, 2px ring + 1px offset
+Focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 ```
 
 The focus indicator must not change input height, content padding, or layout.
@@ -225,7 +225,7 @@ Error and Focus remain independently visible:
 
 ```text
 Error border → line/error, 2px
-Focus indicator → focus/default, 2px ring + 1px offset
+Focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 Error message → fg/error
 ```
 
@@ -262,7 +262,7 @@ A native readonly input remains focusable, so Figma also provides `Read only foc
 
 ### Read only focus
 
-Read only focus preserves the Read only treatment and adds the shared `focus/default` 2px ring with a 1px offset.
+Read only focus preserves the Read only treatment while visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract.
 
 ## Label, Required, and Info
 
@@ -363,7 +363,7 @@ Text Input consumes shared Semantic roles and does not require an `input/*` Colo
 | Disabled line | `line/disabled` |
 | Disabled content | `fg/disabled` |
 | Read-only line | `line/muted` |
-| Focus indicator | `focus/default` |
+| Focus indicator | shared [Focus Management](../../accessibility/focus-management.md) contract |
 
 Do not create `fg/helper`, `read-only/*`, input-specific focus tokens, or Text-Input-owned Color tokens solely to restate these roles.
 
@@ -411,7 +411,7 @@ line/error
 
 not color alone.
 
-Focus uses the shared `focus/default` contract and remains visible in Error and Read only states.
+Visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract and remains distinct from Error and Read only styling.
 
 ### RTL, zoom, and content
 
@@ -501,7 +501,7 @@ Read only focus → composition of readonly + focus
 - adornment/content gap → 8 px
 - default/hover/focus/read-only line → 1 px
 - error line → 2 px overlay with no layout shift
-- focus indicator → 2px ring + 1px offset with no layout shift
+- focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract with no layout shift
 
 The exact CSS/Tailwind class architecture remains a Frontend implementation decision.
 
