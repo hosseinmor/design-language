@@ -23,6 +23,7 @@ A non-owner document may summarize the integration point and link to the canonic
 | Link versus Button semantics | [Navigation](navigation.md) |
 | Busy/loading composition | [Loading and Progress pattern](../../design-system/patterns/loading-and-progress.md) |
 | Inline versus Toast feedback | [Notifications pattern](../../design-system/patterns/notifications.md) |
+| Shared Date/Time segment editing behavior (draft) | [Segmented Field Editing](segmented-field-editing.md) — **draft, pending owner review** |
 | Normative focus/keyboard accessibility | [Focus Management](../../accessibility/focus-management.md) |
 
 Unfinished Interaction files are **explicit TBD placeholders**, not approval of missing rules. Use their referenced canonical source for currently reviewed behavior. A separate `draft` may still document supported design decisions; [AI retrieval](../../ai/retrieval.md) explains the distinction.
