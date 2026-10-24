@@ -8,6 +8,7 @@ knowledge_state: verified
 document_maturity: draft
 owner: Design System team
 related:
+  - design-system.experience-rule.segmented-field-editing
   - design-system.component.text-input
   - design-system.component.dialog
   - design-system.accessibility.forms
@@ -57,9 +58,9 @@ There are **24** public variants: `Size = Small | Medium | Large` × `State = De
 | `Calendar` (Boolean, default **True**) | **Controls both the Calendar icon and Calendar popup availability**; `False` = manual date entry, no trigger or popup. Figma authoring of a design capability; runtime option naming must be confirmed. |
 | `Open` (Boolean) | Controls **only the inner popup content**; it has no visible effect if `Calendar=False`, `Disabled` or `Read only`; **not a required runtime prop** |
 | `Filled` (Boolean) | Previews a populated date; **Figma-only** |
-| `Placeholder` (Text) | Empty-state localized format/placeholder sample |
+| `Placeholder` (Text) | Retained Figma compatibility field for old localized format samples; the current segmented empty-state visual shows separate dash placeholders. Final authoring API cleanup awaits review. |
 | `Year`, `Month`, `Day` (Text) | Independently editable Figma visuals for **one** date |
-| `Active segment` (Instance Swap) | Year / Month / Day highlight in Figma; **Figma-only** |
+| `Active segment` (Instance Swap) | Retained legacy authoring property and source IDs for compatibility. Its old fixed-width paint is neutralized; **the new responsive visual preview** is driven by three Figma-only Boolean toggles `Highlight year`, `Highlight month`, `Highlight day` (exactly one enabled when the field is editable and focused). This is a review-stage authoring compromise, **not** a runtime API or a finalized single-select Figma control. |
 | `Show label` (Boolean) | Hides the visible label only when another accessible-name mechanism exists |
 | `Show helper` (Boolean) | Shows the canonical Field Helper instance in non-error states; hidden by default. |
 
@@ -113,7 +114,9 @@ Date Picker
 - Read only uses `line/muted`, retains readable content and its focus treatment where appropriate, but must not offer a misleading editable/open action.
 - The active date segment highlight is an editing context **inside** the content, not the outer control's focus ring.
 
-**Segment authoring:** Day, Month, and Year live in one physical RTL-aware **Auto Layout** group rather than absolute-positioned text layers. Use the canonical **2px Spacing token** between the five segment/separator items; each date-part text is centered in its editable segment wrapper, with the active-segment backdrop painted **behind** the glyphs. Placeholder/filled content lives **inside the inline Field Control's Auto Layout content region**; it is not an unrelated absolute overlay of the former internal Field Base. Switching Calendar Off must reclaim Calendar icon space without shifting the field border or Focus effect.
+**Segment authoring (draft for review):** Follow the new [Segmented Field Editing](../../foundations/interaction/segmented-field-editing.md) shared proposal. Day, Month, and Year live in one RTL-aware **Auto Layout** row with bound **2px Spacing** between segment and literal separator items. Each text segment and its selected-surface overlay use **hug-content width**; when the segment text changes from 1 to 2 or 4 characters, its Highlight changes by the same rendered character width. The selected segment uses bound **`surface/accent-emphasis`** with **`fg/on-color`**, and an approved Radius variable; selected text is independently bound to the same existing `Year`, `Month` or `Day` authoring Text property. Other segments retain regular Field foreground. Empty units display dash placeholders (`----` for year and `--` for month/day in the current visual locale example), while separators remain visible as literals. The outer `focus/default` **Effect** remains an independent 2px Focus ring with a 1px gap. Preserve existing RTL visual order and locale-specific date formatting; sample date values are not a new calendar-system policy. The date content remains in the inline Field Control and expands when Calendar is Off; the Calendar panel remains independent.
+
+**Figma preview limitation:** The retained `Active segment` swap is a compatibility artifact, **not** the new visual selection driver. Figma-only `Highlight year/month/day` Booleans control which character-hugging overlay is shown in the six Focus/Error focus master states. Review examples set exactly one Boolean true. This workaround avoids adding 72 public variants or changing the committed Date Picker/Calendar architecture; the preferred single authoring control should be decided at design review. An application must derive a **single** active segment from actual interaction, not accept three independent runtime Booleans.
 
 **No** `surface/brand` for selected calendar days. The selected Cell uses `surface/accent-emphasis` (`surface/accent-emphasis-hover` when hovered) and `fg/on-color`. Ordinary day text uses `fg/primary`, adjacent-month text `fg/tertiary`, and disabled day text `fg/disabled`. Focus remains the distinct `focus/default` semantic role. Interactive hover uses `surface/transparent-hover`.
 
@@ -138,7 +141,7 @@ Keep one selected date, with at most one calendar day marked selected at a time.
 **Both Calendar modes use one date-only committed value and a recoverable segmented editing draft.** Empty, incomplete and temporarily invalid year/month/day segments are editing drafts, not new committed dates. A valid complete date is committed once; manual editing and calendar selection must never maintain conflicting date values.
 
 - Year, Month and Day segments always remain manually editable in either Calendar mode. When `Calendar=False`, **there is no calendar action, no popup and no opening behavior**. When On, focusing the text control alone **does not** automatically open the popup.
-- Typing and full-date paste use the same localized parser and validation; supported Persian/Arabic/Latin numerals normalize internally. An incomplete draft does not commit an invalid calendar date.
+- Typing and full-date paste use the same localized parser and validation; supported Persian/Arabic/Latin numerals normalize internally. Typing in a segment retains a partial draft; its full digit capacity advances focus to the next editable unit. Backspace removes a **single character** per press, then can navigate to the previous unit when empty. Left/Right navigate adjacent units in the current locale's visual order; Up/Down update the active unit within allowed values. A full-date paste is parsed atomically, and **no incomplete or invalid date commits**. Exact Tab/ARIA focus-model acceptance is in the [shared Segmented Field Editing draft](../../foundations/interaction/segmented-field-editing.md) and [Keyboard Navigation](../../accessibility/keyboard-navigation.md).
 - A valid calendar day selection commits **one date value**, updates the segmented display, and closes the Calendar when the single-date selection action completes. An invalid/unavailable day does not commit.
 - Product/Form supplies requiredness, initial date, min/max, unavailable-date predicates and validation timing/copy. Avoid variants for arbitrary dates, limits or error categories.
 - Date-only values must not shift day because of time-zone or UTC-midnight conversion. Calendar system, display format, digit set and weekday order are **locale/product configuration**, not a fixed product-wide Gregorian or Jalali default in this component.
