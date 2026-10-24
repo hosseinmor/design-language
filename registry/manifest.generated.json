@@ -923,6 +923,28 @@
       "path": "accessibility/testing.md"
     },
     {
+      "id": "design-system.component.app-shell",
+      "kind": "design-system-component",
+      "title": "App Shell",
+      "summary": "Draft Karbon App Shell composition contract for responsive chrome, logical Start and End regions, and a Page Container-owned native content slot.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.side-navigation",
+        "design-system.component.drawer",
+        "design-system.foundation.responsive-layout",
+        "design-system.foundation.responsive-layout-spec",
+        "design-system.token.layout.catalog"
+      ],
+      "topics": [
+        "app-shell",
+        "components",
+        "design-system-component"
+      ],
+      "path": "design-system/components/app-shell.md"
+    },
+    {
       "id": "design-system.component.autocomplete",
       "kind": "design-system-component",
       "title": "Autocomplete",
@@ -1106,6 +1128,59 @@
         "design-system-component"
       ],
       "path": "design-system/components/content-switcher.md"
+    },
+    {
+      "id": "design-system.component.date-input",
+      "kind": "design-system-component",
+      "title": "Date Input (legacy name)",
+      "summary": "Backward-compatible redirect to the canonical Date Picker component in Calendar Off mode.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.date-picker"
+      ],
+      "topics": [
+        "components",
+        "date-field",
+        "date-input",
+        "design-system-component",
+        "legacy",
+        "segmented-date"
+      ],
+      "path": "design-system/components/date-input.md"
+    },
+    {
+      "id": "design-system.component.date-picker",
+      "kind": "design-system-component",
+      "title": "Date Picker",
+      "summary": "Unified segmented date field with optional Calendar; Calendar Off supports manual date entry, Calendar On adds an accessible calendar selection surface.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.text-input",
+        "design-system.component.dialog",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "accessibility",
+        "calendar",
+        "components",
+        "date-field",
+        "date-input",
+        "date-picker",
+        "date-selection",
+        "design-system-component",
+        "focus",
+        "localization",
+        "responsive",
+        "rtl"
+      ],
+      "path": "design-system/components/date-picker.md"
     },
     {
       "id": "design-system.component.dialog",
@@ -1342,6 +1417,33 @@
       "path": "design-system/components/notification.md"
     },
     {
+      "id": "design-system.component.number-input",
+      "kind": "design-system-component",
+      "title": "Number Input",
+      "summary": "RTL-first numeric input with an optional persistent non-editable unit, field-family validation, and shared Secondary Icon Button steppers.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.text-input",
+        "design-system.component.icon-button",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.component-authoring-contract"
+      ],
+      "topics": [
+        "accessibility",
+        "components",
+        "currency",
+        "design-system-component",
+        "number-input",
+        "prefix",
+        "rtl",
+        "stepper",
+        "unit"
+      ],
+      "path": "design-system/components/number-input.md"
+    },
+    {
       "id": "design-system.component.pagination",
       "kind": "design-system-component",
       "title": "Pagination",
@@ -1561,6 +1663,32 @@
       "path": "design-system/components/select.md"
     },
     {
+      "id": "design-system.component.side-navigation",
+      "kind": "design-system-component",
+      "title": "Side Navigation",
+      "summary": "Draft design contract for persistent destination navigation with expanded and compact rail presentation, two-level disclosure and temporary hover-expansion from the compact rail.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.foundation.responsive-layout",
+        "design-system.token.spacing.catalog",
+        "design-system.component.menu",
+        "design-system.component.drawer",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.screen-reader-semantics",
+        "design-system.accessibility.structure-and-navigation",
+        "design-system.component.app-shell"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "side-navigation"
+      ],
+      "path": "design-system/components/side-navigation.md"
+    },
+    {
       "id": "design-system.component.skeleton",
       "kind": "design-system-component",
       "title": "Skeleton",
@@ -1670,14 +1798,15 @@
       "id": "design-system.component.tag",
       "kind": "design-system-component",
       "title": "Tag",
-      "summary": "TBD Tag component anatomy and behavior; approved categorical Tag Color tokens exist separately from this unverified component scaffold.",
+      "summary": "Tag is a passive, non-interactive categorical label with three sizes, nine categorical colors, optional leading icon, and accessible RTL content rules.",
       "status": "draft",
       "owner": "Design System team",
-      "last_reviewed": null,
+      "last_reviewed": "2026-10-22",
       "related": [
         "design-system.token.component-tokens",
         "design-system.component.chip",
-        "design-system.component.badge"
+        "design-system.component.badge",
+        "design-system.reference.component-mapping"
       ],
       "topics": [
         "components",
@@ -2663,6 +2792,33 @@
       "path": "design-system/patterns/tour.md"
     },
     {
+      "id": "design-system.pattern.value-summary",
+      "kind": "design-system-pattern",
+      "title": "Value Summary",
+      "summary": "Compose converted numeric values and shared multi-field numeric range summaries without adding new Number Input properties or duplicating field support.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.number-input",
+        "design-system.component.text-input",
+        "design-system.accessibility.forms",
+        "design-system.accessibility.dynamic-content-and-feedback"
+      ],
+      "topics": [
+        "conversion",
+        "design-system-pattern",
+        "form-group",
+        "helper",
+        "numeric-range",
+        "patterns",
+        "salary",
+        "summary",
+        "value-summary"
+      ],
+      "path": "design-system/patterns/value-summary.md"
+    },
+    {
       "id": "design-system.product-variation.brand-variants",
       "kind": "design-system-product-variation",
       "title": "Brand Variants",
@@ -3166,7 +3322,7 @@
     }
   ],
   "summary": {
-    "documents": 151,
+    "documents": 157,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3176,7 +3332,7 @@
       "design-language-integration": 1,
       "design-language-overview": 1,
       "design-system-accessibility": 18,
-      "design-system-component": 43,
+      "design-system-component": 48,
       "design-system-component-annex": 1,
       "design-system-design-language": 1,
       "design-system-experience-rule": 11,
@@ -3184,7 +3340,7 @@
       "design-system-governance": 6,
       "design-system-integration": 1,
       "design-system-overview": 1,
-      "design-system-pattern": 14,
+      "design-system-pattern": 15,
       "design-system-product-variation": 3,
       "design-system-reference": 9,
       "design-system-token": 13

@@ -3,11 +3,13 @@ id: design-system.component.app-shell
 collection: design-system
 type: component
 title: App Shell
-summary: Draft Karbon App Shell composition contract for viewport-based Figma variants, optional logical regions, and a nested Page Container with one native content slot.
+summary: Draft Karbon App Shell composition contract for responsive chrome, logical Start and End regions, and a Page Container-owned native content slot.
 knowledge_state: unverified
 document_maturity: draft
 owner: Design System team
 related:
+  - design-system.component.side-navigation
+  - design-system.component.drawer
   - design-system.foundation.responsive-layout
   - design-system.foundation.responsive-layout-spec
   - design-system.token.layout.catalog
@@ -15,172 +17,240 @@ related:
 
 # App Shell
 
-> **Status — design candidate, pending owner review.** This document records the approved discussion scope and the current experimental Figma composition. It is **not** a verified Karbon runtime API, a shipped component, or a resolution of legacy Responsive Layout documentation conflicts.
+> **Status — audited Figma design candidate, pending owner and runtime review.** This document describes the live Figma source after the 2026-10-24 audit. It is not a shipped runtime API and does not claim Storybook parity. The Page Container reference values still require a Foundation-owned reconciliation before the composition can be considered fully design-ready.
 
 ## Purpose
 
-App Shell composes stable, cross-page application chrome around a designer-owned main content area. It gives a designer a reusable page starting point without detaching Header/Navigation or adding a Page Container manually.
+App Shell composes stable application chrome around designer-owned page content. Use it for application screens that share a Header, logical navigation, optional supplementary Drawer, and optional app-level Footer. A single-purpose interstitial or marketing page may use a simpler page pattern.
 
-Use it for application screens with shared Header, edge panes or app-level Footer. A single-purpose interstitial may use a simpler page pattern instead. This is a composite **design-time Figma component**; its exact runtime abstraction and framework API remain implementation-owned.
+App Shell owns region placement and visibility. It does not own product content, navigation items, Drawer content, responsive breakpoint tokens, or runtime interaction implementation.
 
 ## Anatomy and ownership
 
 ```text
-App Shell / Viewport = xs | md | lg ; Navigation = Compact | Expanded
-├── Header                    [existing nested instance; optional]
-├── Body                      [auto layout]
-│   ├── End Drawer / Inline [md/lg, optional]
-│   ├── Main Region           [fills remaining width; no page gutter]
-│   │   └── Page Container    [nested instance]
-│   │       └── Content       [ONE native slot; designer-owned]
-│   └── Side Navigation      [direct linked instance in logical Start region; optional]
-└── App Footer                [app-level, optional]
+App Shell
+├── Header                              [linked instance; optional]
+├── Body                                [horizontal composition on md/lg]
+│   ├── End Region
+│   │   └── Drawer                      [linked instance; optional]
+│   ├── Main Region                     [fills remaining width; no page gutter]
+│   │   └── Page Container              [linked Figma layout helper]
+│   │       └── Content                 [one native page-content slot]
+│   └── Start Region
+│       └── Side Navigation             [linked instance; optional]
+└── App Footer                          [optional placeholder region]
 ```
 
-In RTL, logical Start is on the right and End is on the left; in LTR they mirror. Start Pane and End Pane are layout regions, not independent components. In md/lg the real linked Side Navigation and Drawer / Inline are direct children of Body. In xs the regions become App Shell-owned overlay compositions: expanded Side Navigation under the persistent Header, or modal Drawer / Overlay over the entire viewport. Page Container continues to own the main Content slot and horizontal gutter.
+Start Region and End Region are conceptual layout regions, not components. Do not introduce `Start Pane` or `End Pane` wrappers. In RTL, logical Start is right and logical End is left; in LTR they mirror.
 
-App Shell owns chrome, region presence and their relative layout. Main Region fills the available area. **Page Container owns centering, width constraint and horizontal gutter**. The candidate **Figma-only Page Container Master** is located in **Foundations → Layout & responsive** ([source presentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25010-48), [unchanged master ID](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24549-41)), rather than nested as a canonical source inside the App Shell documentation page. All six App Shell variants continue to reference the same Container source. The existing older `Layout / Container` family (`23437:83`) remains separate pending reconciliation; do not treat these as interchangeable or imply a runtime Container API. The Content slot has no independent second page-gutter layer. Product page content, including its own local Flex/Grid, is owned by the consuming design. App Footer is shared app chrome, not a page-local form action bar.
+| Owner | Responsibility |
+|---|---|
+| App Shell | Region order, region visibility, mobile temporary-surface composition, remaining Main width |
+| Side Navigation | Navigation destinations, item density, Compact/Expanded presentation |
+| Drawer | Drawer header, actions, content, footer, Display and modal behavior contract |
+| Page Container | Main-content centering, max width and page gutter |
+| Consuming product | Page content, local grids, route semantics and product-specific minimum usable width |
 
-## Designer-facing choices
+Main Region adds no horizontal page padding. Page Container is the only owner of page gutter and the only owner of the main native Content slot. Drawer and Side Navigation keep their independent native slots; those are not extra page-content slots.
 
-| Property | Kind | Values | Notes |
-|---|---|---|---|
-| `Viewport` | Figma variant | `xs`, `md`, `lg` | Designer selects manually for the intended viewport |
-| `Navigation` | Figma variant | `Compact`, `Expanded` | md/lg choose 64/256px persistent Navigation. xs currently has two redundant source variants that both show the same expanded temporary overlay; preserve both IDs pending owner-reviewed reduction to five useful combinations. |
-| `Header` | Boolean | On / Off | Controls shared Header visibility |
-| `Side Navigation` | Boolean | On / Off | md/lg toggles persistent navigation; xs toggles a 256px expanded temporary navigation below Header, scrim below Header, and linked Header-menu Open=True close icon |
-| `End Pane` | Boolean | On / Off | md/lg toggles Drawer / Inline; xs toggles Drawer / Overlay modal with full-viewport backdrop including Header |
-| Drawer `Display` | Nested variant | `Inline` md/lg; `Overlay` xs | Determined by App Shell viewport; Floating is not a fallback |
-| Drawer `Size` | Nested variant | `Default` | Inline current source 400px; xs Overlay sample width 358px inside 390px viewport is a Figma-only experimental size, not a token |
-| Drawer `Content / Slot` | Nested native slot | Arbitrary supplementary/task content | Drawer-specific content, distinct from Main Page Content; Drawer also owns its own Header-actions/Footer slots |
-| `App Footer` | Boolean | On / Off | Controls app-level Footer |
-| Container `Mode` | Exposed nested variant | `Contained` / `Fluid` | Default `Contained`; `Fluid` removes its max-width constraint |
-| Container `Reference` | Exposed nested variant | `sm` / `md` / `lg` / `xl` / `2xl` | Determines the design-time Tailwind v3 max-width and gutter step; designer changes manually when needed |
-| Container `Content` | Native slot | Arbitrary page content | The **only main page-content slot**, nested in Page Container |
-| Side Navigation `Compact` | Nested design property | `False` / `True` | md/lg: controlled by parent Navigation variant. xs temporary Navigation always uses `Compact=False`/256px, independent of redundant xs Compact/Expanded labels. Avoid direct override on consumer instances. |
-| Side Navigation `Size` | Exposed nested variant | `Small` / `Medium` / `Large` | Default `Medium`; controls navigation item density |
-| Side Navigation `Items` | Nested native slot | Navigation destinations/groups | Navigation-specific slot, **not** a second page-content slot |
+## Live Figma source
 
-The App Shell's three design-time viewport ranges are:
+- [App Shell component set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24550-497)
+- [App Shell presentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24829-43466)
+- [Mobile responsive Playground](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24988-3726)
+- [Side Navigation source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24631-180)
+- [Drawer source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24677-486)
+- [Page Container source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24549-41)
 
-- `xs`: widths below 768 px.
-- `md`: widths from 768 px through 1023 px.
-- `lg`: widths of 1024 px and above.
+The App Shell presentation follows [Figma component presentation guidance](../../integrations/figma-component-presentation.md): 00 Header, 01 canonical Component Set, 02 Playground, 03 Anatomy and composition, and 04 Usage and handoff. The canonical Component Set remains in section 01; Playground examples are instances.
 
-These labels are **Figma App Shell variants**, **not** the Tailwind `xs:`/`sm:` utility system. Tailwind v3 base screen values (640, 768, 1024, 1280, 1536 px) are the target for the separate responsive-foundation reconciliation. The current `main` Layout Token Catalog still contains a legacy conflicting numeric contract; do not claim the two sources already agree.
+## Component API
 
-A shared Figma Boolean property has one default across the Component Set. The Booleans Side Navigation and End Pane default false. md/lg source variants use Compact 64px or Expanded 256px inline Navigation, with Drawer / Inline at End when requested. Both xs variants now use the same 256px expanded temporary Navigation below Header and a separate modal End Drawer Overlay. These xs variants are visually redundant for Navigation; both IDs are intentionally retained pending later simplification. Figma does not automatically select a viewport variant or guarantee only one Boolean is true.
+### Variant axes
 
-## Responsive behavior
+| Property | Values | Contract |
+|---|---|---|
+| `Viewport` | `xs`, `md`, `lg` | Manual Figma authoring preset; it does not switch automatically from frame width |
+| `Navigation` | `Compact`, `Expanded` | Controls 64px/256px persistent navigation on md/lg; ignored visually on xs |
 
-The Viewport variant chooses Header presentation and layout. In md/lg, the parent Navigation variant sets persistent Side Navigation width (64px/256px) and Main Region receives remaining width; End Drawer / Inline consumes 400px when enabled. In xs, the Side Navigation Boolean shows an App Shell-owned expanded 256px temporary panel anchored right in RTL, starting immediately below the 56px Header. Its utility/overlay backdrop begins below the Header, and the existing Header menu Open=True source icon covers the hamburger position. This keeps the Header visibly outside the backdrop. The xs End Pane Boolean instead shows the linked Drawer / Overlay as an intended modal from the logical End (left in RTL), with a full-viewport backdrop covering Header. Neither overlay subtracts from Main width; neither adds a mobile variant to Side Navigation. Runtime focus, dismissal and scroll behavior is not proved by these Figma examples.
+The set intentionally retains all six `Viewport × Navigation` combinations. Both xs variants render the same 256px temporary navigation. `xs / Expanded` is a compatibility alias, not a distinct mobile visual state.
 
-Container is optional as a *layout mode choice* (`Contained` / `Fluid`) but is always present as the nested Figma instance, avoiding manual insertion. Fluid is an exceptional wide-workspace composition, not an assumption that every ultrawide page should stretch indefinitely.
+The audit found one `xs / Expanded` instance and it exists only in the archived QA area. Deleting that source would nevertheless leave a partial two-axis matrix and make variant switching less predictable. A true five-state model would require either a breaking combined `Layout` axis or separate mobile and desktop components. Both alternatives add migration cost and reduce the current simple API. Keep six variants until an owner explicitly approves a migration plan; do not delete a single xs source as an isolated cleanup.
 
-The experimental Page Container's **outer component** (not its inner slot) now supports exact Tailwind v3 max-width references when manually selected: `sm=640`, `md=768`, `lg=1024`, `xl=1280`, and `2xl=1536` px. Mode `Fluid` has no cap. The single inner Content slot fills the padded width of that outer Container. The Container is centered **within the remaining Main Region**, after any persistent panes, and the shell itself adds no duplicate page gutter.
+### Boolean properties
 
-Each Container Reference also selects the current Figma `layout/page-gutter` variable mode: `sm/md/lg → Base (16 px)`, `xl/2xl → XL+ (24 px)`. This binding lives in the Container's design-time reference variants rather than being overridden at the App Shell level, so Mode/Reference switches update width and gutter together.
+| Property | Default | Contract |
+|---|---:|---|
+| `Header` | `true` | Shows shared Header |
+| `Side Navigation` | `false` | Shows persistent md/lg navigation or temporary xs navigation |
+| `End Drawer` | `false` | Shows linked Drawer as Inline on md/lg or Overlay on xs |
+| `App Footer` | `true` | Shows app-level Footer placeholder |
 
-**Important Figma limitation:** changing a frame's width does **not** automatically switch a variant or its breakpoint Reference. App Shell defaults `xs → sm`, `md → md` and `lg → xl` (for a 1440px primary design reference). For 1024–1279px, a designer must change the exposed nested Container `Reference` to `lg`; from 1536px upward, change it to `2xl`. A narrower reference may also be intentionally selected for task-specific constraints. This manual design-tool setting is not an additional runtime API or a new Tailwind breakpoint. A future improvement could reduce this secondary choice, but no automatic breakpoint selection is claimed.
+`End Pane` was renamed to `End Drawer` in Figma. The component-property identity suffix (`#24550:13`) was preserved, and audited instance values survived the rename.
 
-Changing Shell viewport variants must retain the user's Content slot overrides. Changing nested Container mode must also retain them. The same contract applies if a Boolean hides a region. These changes require a visual QA pass for every intended combination, rather than merely a check that properties exist.
+### Exposed nested authoring
 
-### End region — Drawer Inline integration (Figma evidence, 2026-10-24)
+Page Container, Drawer and Side Navigation remain linked instances and remain exposed so designers can reach their native slots. This also exposes nested layout properties that App Shell already owns:
 
-The md/lg App Shell variants use the live Drawer / Inline, Size=Default from the linked Figma Drawer set. Both xs variants now use the same Drawer source with Display=Overlay inside an App Shell modal overlay layer, not a standalone End Pane component. The existing End Pane visibility Boolean remains the same property across all variants.
+- Change Compact/Expanded with the outer App Shell `Navigation` axis, not nested Side Navigation `Compact`.
+- Do not change nested Drawer `Display`; App Shell sets Inline on md/lg and Overlay on xs.
+- Page Container `Mode` and `Reference` remain designer choices until its responsive model is reconciled.
 
-The current Figma Inline Drawer width is **400px**. When both regions are visible at 1440px, the Main Region width is 784px with a 256px Expanded Navigation and 976px with the 64px Compact Navigation. When the Drawer is hidden, the Main region recovers its 400px. In a 900px `md` / Compact example, Main Region is 436px with the Drawer shown. The Page Container remains the sole native **page-content** slot; Drawer owns separate native slots for Drawer Header actions, Content, Footer (and optional Header extension). This is expected composition, not redundant nested Page Container insertion.
+Figma cannot conditionally hide those nested controls while keeping their slots discoverable. Treat the parent-owned values above as authoring rules, not additional consumer choices.
 
-**Mobile responsive decision — design candidate (2026-10-24):** The 400px Inline Drawer is unsuitable for 390px xs. The xs End Pane Boolean now displays a linked Drawer / Overlay over a full-viewport utility/overlay backdrop including Header. The 358px panel at 390px is a test width, not a public size. Modal semantics, focus trapping/restoration, Escape/backdrop dismissal and page scroll lock remain runtime QA obligations.
+## Responsive model
 
-**Figma regression QA:** On the live App Shell composition, toggling `End Pane` off/on retained **both** the Page Content Slot override and the Drawer Content Slot override. Switching parent `Navigation=Expanded → Compact → Expanded` while keeping Drawer visible retained both content regions and recalculated Main Region (784 → 976 → 784px at 1440px). These results verify editable Figma composition only. The [design-language Drawer document on main](drawer.md) is still a **scaffold**; this Figma source must not be represented as approved code/runtime behavior or a reviewed shared Drawer contract.
+Use the canonical semantic ranges from [Responsive Layout](../../foundations/visual/responsive-layout/guideline.md): narrow below 768px, regular from 768px to below 1400px, and wide from 1400px. App Shell `xs`, `md`, and `lg` are manual authoring presets intended to represent those ranges; they are not token names and do not select themselves automatically.
 
-### xs Header-preserving navigation and modal End Drawer — Figma candidate (2026-10-24)
+### xs / narrow
 
-**Navigation:** Existing Side Navigation source `Compact=False, Size=Medium`, shown as a right-side 256px temporary panel (RTL). Backdrop uses `utility/overlay` and begins *below* the 56px Header; Header remains visually accessible. The existing Header-menu source offers `Open=False/True`; Figma represents open state with the linked `Open=True` icon over the normal hamburger position and an opaque 48×56px surface to avoid double rendering. This design-time layering is **not** an instruction to render two actual buttons in code. Navigation is not automatically an `aria-modal=true` dialog simply because a backdrop is present.
+#### Temporary Navigation
 
-**End Drawer:** Same linked Drawer component with `Display=Overlay`; the Modal backdrop covers Header and document. Current visual reference is 390×844px with Drawer 358px wide, leaving 32px of Backdrop; that width is experimental. Drawer retains its Content and other native slots.
+- Uses the existing Side Navigation instance, always Expanded at 256px.
+- Anchors to logical Start: right in RTL, left in LTR.
+- Starts immediately below the 56px Header.
+- Backdrop starts below Header; Header and its toggle remain outside the backdrop.
+- The linked Header-menu `Open=true` variant occupies the same 48×56 position as the hamburger. The Figma overlay is a design-time technique and must not produce two runtime buttons.
+- Main width does not change.
+- This surface is navigation, not a modal dialog. A backdrop alone does not imply `aria-modal=true`.
 
-**Design choice:** Both existing xs parent Navigation variants use the same composition because Compact does not apply to the temporary mobile panel. A future owner-reviewed cleanup may reduce App Shell to five useful variants; the six existing Figma variant IDs are **not removed** in this change.
+`Header=false` with `Side Navigation=true` is an invalid xs authoring combination because the close trigger disappears while the backdrop still begins at 56px. Keep Header on whenever temporary Navigation can open.
 
-**Interaction contract pending runtime testing:** Keep the real Header toggle keyboard reachable with appropriate expanded/controlled semantics; handle Escape/outside dismiss and focus restoration. While an End Drawer modal is open, use its proper focus management and scroll lock. App Shell should prevent both temporary surfaces opening simultaneously; separate Figma Booleans do not enforce that. The application must also define overlay behavior at narrower widths and zoom/reflow.
+#### Modal End Drawer
 
-[Two current xs linked-instance Playground examples](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24988-3726).
+- Uses the existing Drawer with `Display=Overlay`.
+- Anchors to logical End: left in RTL, right in LTR.
+- Backdrop covers the full viewport, including Header.
+- Width follows the tested Figma rule `min(viewport − 32px, 400px)`: 288px at 320, 358px at 390, and 400px from 432px upward.
+- Main width does not change.
+- Drawer native Header-actions, Content and Footer slots remain available.
 
-### Six-variant navigation matrix — Figma QA (2026-10-22)
+Only one temporary surface may be open. If End Drawer is requested while Navigation is open, runtime closes Navigation before opening the modal Drawer. Figma Booleans cannot enforce this mutual exclusion; when both are true, End Drawer currently paints above Navigation and the state must be treated as invalid.
 
-| Viewport | Navigation | Navigation width when shown | Main Region relationship |
-|---|---|---:|---|
-| xs | Compact | 256px (same as Expanded) | Temporary panel below Header, Main width unchanged; redundant xs variant label retained for compatibility |
-| xs | Expanded | 256px | Temporary panel below Header, Main width unchanged |
-| md | Compact | 64px | Main Region = available Body width − 64px |
-| md | Expanded | 256px | Main Region = available Body width − 256px |
-| lg | Compact | 64px | Main Region = available Body width − 64px |
-| lg | Expanded | 256px | Main Region = available Body width − 256px |
+### md and lg / persistent composition
 
-All six are members of the **existing App Shell Component Set**; three earlier source variant IDs remain and three additional variants were created. Boolean Header/Side Navigation/End Pane/App Footer property references were checked across all variants. Each retains one native Page Container Content slot; Side Navigation retains its separate navigation-specific Items slot.
+Side Navigation is inline at 64px Compact or 256px Expanded. End Drawer is a linked 400px Inline Drawer. Both subtract from Main Region.
 
-A live Figma test toggled `Navigation` on `xs/md/lg` consumer examples and checked effective width and Content retention. In md/lg, Main Region reflow was correct; in xs, navigation stays overlaid for exploration. The outer parent-variant solution **passes this design-tool use case** but does not verify Runtime, accessible responsive Drawer or preservation of every product-specific override.
+Use 640px as the current App Shell handoff guardrail for a generally usable Main Region, not as a new global token:
 
-## Height, scrolling and App Footer — design-side default
+- Compact Navigation + Drawer requires at least `64 + 400 + 640 = 1104px` host width.
+- Expanded Navigation + Drawer requires at least `256 + 400 + 640 = 1296px` host width.
 
-App Shell is **minimum-viewport-height, content-driven**, not a fixed-height scroller. For short page content it should occupy at least the intended viewport height; as Content grows, Body/Main/Container/Content all grow to accommodate it. A short page with `App Footer=on` places the app-level Footer at the bottom of the minimum viewport. A long page places it **after the content**, regardless of whether persistent panes are present. Turning Header, Side Navigation or End Pane off must not cause content to overlap Footer.
+Below those thresholds, close or collapse one panel, or use a product-reviewed overlay policy. Do not allow the auto-layout result to reduce Main to an unusable sliver merely because the composition is technically possible.
 
-**Default scroll ownership:** scroll the **whole page/document**. Do not make Body, Main Region, Container or the Content slot separate scrollports. Header is **not sticky by default**. App Footer is **not fixed/sticky by default**. Independent pane scrolling, sticky Header/Footer and viewport-contained operational workspaces are **intentional exceptions**, subject to product, responsive and accessibility requirements; they are not additional App Shell variants in this candidate.
+## Verified responsive geometry
 
-The app-level Footer is shared chrome and should not be conflated with a page-local form action bar or sticky action footer. This candidate's Footer is only a structural placeholder (48px in the current Figma test), **not a finalized Footer component or published dimension**.
+The following measurements come from temporary live instances created for this audit and removed after inspection.
 
-### Figma height implementation and limitations
+| Preset / width | Compact Main | Compact + Drawer | Expanded Main | Expanded + Drawer |
+|---|---:|---:|---:|---:|
+| md / 768 | 704 | 304 | 512 | 112 |
+| md / 900 | 836 | 436 | 644 | 244 |
+| md / 1024 | 960 | 560 | 768 | 368 |
+| lg / 1280 | 1216 | 816 | 1024 | 624 |
+| lg / 1400 | 1336 | 936 | 1144 | 744 |
+| lg / 1440 | 1376 | 976 | 1184 | 784 |
 
-- The `Viewport` design references have initial minimum heights `xs=844`, `md=820`, and `lg=900` px; these are **canvas test/reference heights**, not design-system height tokens, CSS breakpoint heights, or runtime constants. For other viewport heights, the designer must adjust the Figma instance's minimum-height behavior as necessary. Runtime's actual viewport units are implementation-owned.
-- The Shell root uses a vertically Hugging Auto Layout with a reference `minHeight`; Body and Main Region Hug their content vertically, and the nested Page Container plus its **single** native Content slot are vertically Hugging. This avoids masking long page content with fixed nested frame heights.
-- A **locked, empty** `Viewport Balance / Figma only` layer absorbs spare space caused by optional Header/Footer visibility in the minimum-height Figma component. It is a **design-tool representation workaround, not a sixth semantic region or an additional runtime DOM requirement**. Its minimum rendered size may produce a ~1px Figma rounding difference at Footer boundaries; the expected runtime contract remains exact document flow. On footer-disabled pages, any under-filled reference-height area takes the same surface background as Main Region; do not infer a separate content panel.
-- Figma prototype scrolling is demonstrated in a separate **fixed viewport Frame** with `overflowDirection=VERTICAL` and clipping. Because Figma can constrain a Hugging nested instance inside that fixed scroll viewport, the prototype instance uses an explicit minimum height matching its current long content for presentation. This workaround does **not** change the reusable App Shell master nor imply that Figma fully simulates CSS `min-height:100vh` / native browser scroll.
-- There is no `Scroll`, `Sticky` or `Footer position` variant in the component; adding one requires a distinct reviewed use case.
+The 1280 test intentionally stress-tested the lg source even though 1280 belongs to the current regular semantic range. This reinforces that Figma presets are manual references, not automatic breakpoint logic.
 
-### Figma height QA (2026-10-22)
+Mobile width tests at 320, 390, 600 and 767px confirmed that Navigation stays 256px at Start, Drawer follows its 32px-backdrop/max-400 rule, both backdrops stretch horizontally, and Main width remains unchanged.
 
-- `lg`, short content, Footer off: Shell remains 900px tall, with no internal Body/Main scrolling.
-- `lg`, short content, Footer on: Shell remains 900px; Footer sits at its viewport-bottom position (allowing Figma's ~1px spacer artifact).
-- `lg`, 1470px content, Footer on: Shell expands to 1582px and Footer follows the content instead of overlapping it.
-- `xs`, short content, Footer on: Shell remains 844px; `md`, 1470px content, Footer on: Shell expands to 1574px.
-- `lg` with no Header or with both panes plus long content was checked prior to Side Navigation replacement; no separate Body/Main scrollers were introduced. Height was rechecked with directly nested Side Navigation after replacement.
-- A fixed 1440×900px viewport was configured to scroll vertically around a long App Shell instance; this is **Figma prototype configuration only**, not a browser accessibility or runtime scroll test.
-- Further regression: 1470px Content survived Footer/Header Boolean toggles and `lg → xs → md → lg` variant changes. **Content preservation passed; Shell height propagation after the variant switch failed in `xs/md`**. A fresh `md` long-page instance did expand as expected, so this issue is specific to the switch/override path.
+## Height, scrolling and Footer
 
-## Accessibility and semantics
+Runtime intent is a minimum-viewport-height, content-driven document:
 
-The final runtime composition must preserve meaningful Header/Main/Footer and navigation landmarks, logical keyboard and screen-reader reading order in both RTL and LTR, visible focus, and responsive reflow. Hidden panes must not expose focusable off-screen controls. Any overlay pane requires focus entry/return, keyboard dismissal and a reachable mobile navigation trigger. These behaviors **are not verified by this Figma pilot**.
+- Short content fills at least the viewport.
+- Long content grows the document; Footer follows content.
+- Header and Footer are not sticky by default.
+- Body, Main, Page Container and Content do not become independent scrollports by default.
+- Modal End Drawer owns its internal overflow behavior and locks background scroll according to the [Drawer contract](drawer.md).
 
-## Known gaps and acceptance
+The Figma representation does not fully model that contract:
 
-- The **Side Navigation** component is now the live designed Figma component (source ID `24631:180`) directly used in App Shell; the old legacy Right Panel instance and the extra Start Pane Frame were removed from all three App Shell variants. This is a design-source integration, not an approved runtime implementation. Header remains legacy, and responsive Drawer/flyout behavior remains independently unverified.
-- End Pane uses a linked Drawer: Inline in md/lg, modal Overlay in xs. App Footer remains a placeholder, and runtime/Storybook parity is not claimed.
-- Review default Side Navigation visibility across viewport variants, `md` rail choice, and responsive Drawer/flyout patterns. Figma currently uses one global Boolean default (`false`). Six parent variants are now implemented for both navigation presentations across all three viewports.
-- xs mobile overlays are now represented in Figma: Navigation preserves Header, while End Drawer covers the whole viewport. Both Boolean controls should not be true together; mutual exclusion remains an unverified runtime behavior. Modal End Drawer and temporary Navigation require separate focus/keyboard and scroll tests.
-- **Nested Compact resizing gap, mitigated:** changing the nested Side Navigation `Compact` value directly on an App Shell consumer instance may retain the old 64px width and squeeze expanded Items. The **supported Figma design-time workflow is now to change the outer `App Shell → Navigation=Compact/Expanded` Variant**. In verified `md` QA at width 900, Main Region changed correctly from 836px to 644px and back; `lg` at width 1440 changed from 1376px to 1184px and back. The page Content Slot was preserved. Figma still exposes the nested `Compact` setting; designers must avoid toggling that nested setting directly until a more reliable API/property exposure solution is found.
-- Resolve old responsive breakpoint and container numeric contracts in `foundations/visual/responsive-layout/` and `design-system/tokens/layout/catalog.md` in a reviewed foundation change; do not silently overwrite them.
-- The Tailwind v3 width steps, centered Contained/Fluid modes, and reference-based 16/24px gutters were reproduced and tested in the isolated Figma candidate. The remaining design-tool usability gap is that Container `Reference` must be selected manually when a design crosses steps inside the broader App Shell `lg` range; this should be assessed in designer testing.
-- Review any designs that specifically require a sticky Header, sticky footer or independently scrolling pane; those are exception patterns, not verified here. Test long-form focus navigation, scroll restoration and zoom/reflow in runtime before a production claim.
-- **Figma height recomputation gap:** a freshly created instance with long Content correctly Hugs its height, but switching an *existing* 1470px-long page from `lg` to `xs` or `md` preserved its Slot content while leaving the instance root at the variant's reference minimum height (844/820px), with Footer lower than the reported Shell bounds. This persisted after a new canvas read, so it is **not yet a verified automatic responsive override workflow**. The tested instance was restored to `lg`. Until solved, choose the intended `Viewport` before authoring page content, or manually verify/adjust the instance height after switching. Do not promote this component to final before this usability issue is reviewed.
-- Run keyboard/RTL/zoom and complete design/runtime acceptance. No claimed Storybook parity.
+- Source reference heights are xs 844px, md 820px and lg 900px. They are canvas references, not tokens or runtime constants.
+- xs cannot shrink to the required 700px test height; a request for 700px remains clamped to 844px.
+- At 900px, mobile backdrops and panels stretch to 900px correctly.
+- Long native-slot content is preserved across `lg → xs` variant switching, but the App Shell instance root remains at its reference height while Body, Main and Footer extend outside the reported root bounds.
+- Fresh long-content instances show the same root-bound limitation. Header/Footer toggles do not repair it.
 
-### Figma validation completed (2026-10-22)
+No clean master-only correction was found. Lowering or removing the reference minimum fixes one short screenshot but loses the useful short-page viewport floor; fixing the root height makes long content fixed or clipped. Do not add a Height variant for this design-tool limitation.
 
-The single nested native Content slot retained page content through `lg → xs → md → lg`, `Contained → Fluid → Contained`, and `Reference=lg → 2xl → xl`. In width QA, Contained outer caps and centering were verified at 700px (640px), 900px (768px), 1100px (1024px), 1440px (1280px), and 1920px (1536px). At 1920px, Fluid used the full 1920px, while two visible panes left 1384px of Main Region width and the Container respected that smaller available width. Gutter resolved to 16px for `sm/md/lg` and 24px for `xl/2xl` from the existing Figma responsive layout variable collection. These are **Figma visual/structural checks**, not executable CSS or runtime parity proof.
+For Figma authoring, choose the intended Viewport before adding long content, verify the instance bounds manually after content or variant changes, and use a separate fixed viewport frame for prototype scrolling. Runtime must size against the actual viewport and content flow; the Figma root height is not implementation evidence.
 
-A former instance-level max-width override prevented Fluid/2xl from working even though their variant labels changed; that stale override was cleared, and max-width ownership is now on the Container source variant. The noncanonical QA samples document the verified state.
+## Page Container mismatch
 
-## Live references
+The linked Figma Page Container is still a candidate and is not aligned with the current responsive Foundation:
 
-- [Side Navigation / designed Figma component](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24631-180)
-- [Drawer / live Figma component set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24677-486)
-- [App Shell / Inline Drawer authoring Playground](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24961-46031)
-- [App Shell / Figma candidate component set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24550-497)
-- [App Shell / Playground](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24552-177)
-- [App Shell / All six Navigation variants visual comparison](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24814-44967)
-- [Page Container / Tailwind candidate](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24549-41)
-- [Container / Verified width QA](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24606-40546)
-- [App Shell / Height and Footer QA](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24619-1618)
-- [App Shell / Vertical page scroll viewport](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24622-2030)
-- Karbon Storybook and code: runtime verification not yet performed; cross-source parity deferred.
+| Source | Reference values |
+|---|---|
+| Live Figma Page Container | 640, 768, 1024, 1280, 1536px |
+| Current main Responsive/Layout contract | 544, 768, 1012, 1280, 1400px, with 320px as xsmall |
+
+App Shell correctly delegates gutter and max-width ownership to Page Container, but it must not claim numeric alignment. Reconcile these values in a Foundation-owned change that also decides whether the candidate Page Container replaces or coexists with the older Container family. Do not silently change Page Container from the App Shell PR.
+
+## Runtime interaction and accessibility contract
+
+These requirements are implementation acceptance criteria. They are not verified by Figma.
+
+### Temporary Navigation
+
+- Use one real Header toggle with an accessible name that changes between open and close.
+- Expose `aria-expanded` and `aria-controls` on that toggle.
+- Do not use dialog semantics or `aria-modal=true` merely because a backdrop exists.
+- When open, prevent pointer and keyboard interaction with covered Main/Footer content while leaving Header toggle and Navigation operable. The implementation may use scoped inertness, but must not trap focus in hidden or unrelated controls.
+- Escape closes Navigation and restores focus to the Header toggle if focus moved into Navigation.
+- Selecting a destination closes Navigation before route focus management runs.
+- Backdrop click may close Navigation if product policy requires it; keyboard dismissal must never depend on pointer behavior.
+
+### Modal End Drawer
+
+- Follow [Drawer](drawer.md) for role, accessible naming, close control and backdrop-dismiss policy.
+- Enter focus deliberately, contain focus while modal, mark outside application regions inert, lock background scroll, and return focus to the invoker on close.
+- Escape closes unless a documented blocking workflow owns a stricter rule.
+- Opening End Drawer closes temporary Navigation first.
+
+### Shared checks
+
+- Preserve landmark and DOM order for Header, Navigation, Main and Footer in RTL and LTR.
+- Hidden regions must not expose focusable controls or stale screen-reader content.
+- Test Tab, Shift+Tab, Enter, Space and Escape; visible focus must not be obscured by the Header, panels or viewport edge.
+- Test 200% zoom, reflow, screen-reader name/role/state and both text directions.
+
+See [Focus management](../../accessibility/focus-management.md), [Keyboard navigation](../../accessibility/keyboard-navigation.md), [Screen-reader semantics](../../accessibility/screen-reader-semantics.md), [Structure and navigation](../../accessibility/structure-and-navigation.md), and [Responsive and zoom](../../accessibility/responsive-and-zoom.md).
+
+## Presentation decisions
+
+The audited presentation keeps the canonical source in section 01 and uses linked instances in the Playground. It includes:
+
+- all six variants, with `xs / Expanded` labeled as an alias;
+- desktop Expanded and Compact examples;
+- xs closed, Navigation-open and End-Drawer-open states;
+- anatomy and ownership notes;
+- responsive Main-width thresholds;
+- the Page Container mismatch;
+- Figma height limitations; and
+- explicit Runtime QA requirements.
+
+Archived QA frames remain outside the canonical presentation. They are not consumer guidance. No production source, variant or linked dependency was deleted during this audit.
+
+## Acceptance status
+
+### Design evidence completed
+
+- Six variants and all linked source identities preserved.
+- `End Drawer` property rename verified on real instances with values intact.
+- Page Content survives viewport variant switching.
+- Side Navigation and Drawer remain linked; native slots remain available.
+- Mobile overlay geometry verified at 320, 390, 600 and 767px; heights checked at 700, 844 and 900px.
+- Desktop Main geometry verified at 768, 900, 1024, 1280, 1400 and 1440px with Compact/Expanded Navigation and Drawer off/on.
+- Header off, Footer off, both xs temporary surfaces, and long-content cases exercised.
+
+### Blocking decisions and Runtime QA
+
+- Reconcile Page Container numeric references with the current responsive Foundation.
+- Decide whether to keep the six-state compatibility matrix long-term or approve a breaking five-state migration.
+- Resolve or explicitly accept the Figma instance root-height limitation for long content and sub-844px xs viewports.
+- Validate runtime focus, inertness, Escape/backdrop behavior, scroll lock, route-close behavior, RTL/LTR, zoom and screen-reader semantics.
+- Verify implementation and Storybook parity; none is claimed here.
+
+The Figma composition is suitable for engineering discussion and implementation planning. It is not yet ready for an unconditional design handoff or merge as a verified contract while the Foundation mismatch and runtime acceptance remain open.

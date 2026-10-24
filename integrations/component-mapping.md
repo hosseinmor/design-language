@@ -745,6 +745,33 @@ The Tabs design identity, line-only v1 appearance, native Items Slot composition
 The Chip design identity is verified as four capability-specific public component sets that share one visual recipe without a mega Type matrix. Selectable, Removable, Disclosure, and Action contracts, current Full radius, 8px main content gap, separate Divider + Summary/Detail secondary-content anatomy, Accent treatment for Selectable Selected / Disclosure Applied / Removable, shared structured-surface Hover/Active overlays across all Chip families, leading selected check anatomy, Action icon at logical End, focus-visible behavior, RTL anatomy, software lifecycle, Tag/Button/selection-control boundaries, real Disclosure + Popover composition, and legacy migration are documented in `../design-system/components/chip.md`. Runtime API, exact DOM/ARIA implementation, compound Removable structure, Storybook identity, and Figma-to-code property mapping remain deliberately unverified until the owning runtime Design System source is registered.
 
 
+### Tag — HOS-33 (Figma verified; runtime unregistered)
+
+| Field | Verified Figma source / status |
+|---|---|
+| DS component | Tag — passive, descriptive, categorical |
+| Knowledge document | `../design-system/components/tag.md` — **reviewed design contract; ready for development** |
+| Figma file key | `rROD8ctH9UfPGAMrRrOzHe` |
+| Figma master set | `Tag`, node `23493:586` |
+| Published asset identity / key | `d1acda5183dc106f7ee6da0169545a71489439af` — **Figma component identity only; Library publication unverified** |
+| Variant count | **27 = 3 Size × 9 categorical Color** |
+| Size | `Extra Small` = 20px; `Small` = 24px; `Medium` = 28px |
+| Color | `Neutral / Blue / Teal / Green / Yellow / Orange / Red / Magenta / Purple`; component-owned `tag/{color}/surface` and `tag/{color}/fg` |
+| Figma properties | `Size / Color` variants; content `Label / Show icon / Icon` instance swap (default `Icon/work`) |
+| Typography and geometry | `Label/XS` 12/16; `Radius/Full`; tokenized spacing; 4px icon gap; default max-inline-size 180px, single-line RTL-aware ellipsis |
+| Interaction | Non-interactive — no Hover, Focus, Selected, Disabled, remove or click states |
+| Visual / accessibility QA | 27 variant property and icon-color bindings checked; Light/Dark foreground-on-surface contrast min 5.30:1 / 7.45:1; content/RTL examples inspected |
+| Documentation frame | `Tag / Documentation`, node `23493:587` |
+| Legacy boundary | Existing legacy Tag artifacts are not the new master; Chip owns interactive values; Badge/Status remain independent |
+| Library consumption | **Unverified** — independent-library discoverability and consumer insertion need rollout confirmation; no new Figma master required |
+| Code repository/package | **Unregistered** |
+| Runtime component/API and Figma prop mapping | **Unverified** — do not infer code props, markup, ARIA implementation or behavior |
+| Storybook | **Unregistered** |
+| Code Connect | **No registered mapping** |
+| Last live Figma verification | **2026-10-22** |
+
+The design identity and passive categorical contract are reviewed for design handoff, not runtime parity. Publishing this *same* source master into a shared Figma Library and verifying consumer insertion are separate rollout checks; no redesign or new component is required. Exact runtime API, build, tests, implementation semantics and Storybook mapping remain unverified until explicitly registered.
+
 ### Progress Bar (HOS-37)
 
 | Field | Verified Figma source / status |
