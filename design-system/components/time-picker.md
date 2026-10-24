@@ -5,7 +5,10 @@ type: component
 title: Time Picker
 summary: One public segmented time field with optional shared Selection Panel and optional seconds.
 knowledge_state: verified
-document_maturity: draft
+document_maturity: reviewed
+design_status: ready-for-dev
+design_maturity: handoff-ready
+last_reviewed: '2026-10-24'
 owner: Design System team
 related:
   - design-system.experience-rule.segmented-field-editing
@@ -25,7 +28,7 @@ topics:
 
 # Time Picker
 
-> **HOS-49 — proposed design contract for owner review.** Figma's unified Time Picker source and connected Selection Panel have been inspected after visual changes on 2026-10-24. The HTML prototype validates intended keyboard interactions but is **not** proof of a production runtime API, accessible screen-reader implementation or Storybook parity. Design maturity remains draft until review.
+> **Reviewed design contract — HOS-49.** The Design System owner accepted the unified Time Picker direction and requested merge and development handoff on 2026-10-24. The Figma source, Field Family alignment, shared Selection Panel composition, mobile Dialog composition, and representative Playground states were inspected on the same date. This approval covers the design specification and handoff; the HTML prototype is **not** proof of a production runtime API, accessible screen-reader implementation, shipped code, or Storybook parity.
 
 ## Purpose and boundary
 
@@ -85,4 +88,4 @@ The 24-hour locale default is appropriate for the Persian experience. Twelve-hou
 
 ## Handoff and acceptance
 
-The Figma sources and HTML prototype are ready for **design review**, not confirmed production implementation. Before development sign-off, validate resizing and `Selection panel=False/Open=True` suppression, `Seconds` toggles for empty and filled values, content-hugging highlight for 1- and 2-digit drafts, keyboard navigation and Backspace, zero/overflow cases, RTL, accessibility, mobile viewport/zoom, selection-list scrolling, and screen reader behavior. Confirm runtime naming and any migration from Time Input against the Storybook/code source; no runtime parity or successful CI is claimed here.
+The design contract is **reviewed and ready for development**. Implementation acceptance must validate resizing and `Selection panel=False/Open=True` suppression, `Seconds` toggles for empty and filled values, content-hugging highlight for 1- and 2-digit drafts, keyboard navigation and Backspace, zero/overflow cases, RTL, accessibility, mobile viewport/zoom, selection-list scrolling, and screen-reader behavior. Confirm runtime naming and migration from Time Input against the owning Storybook/code source. Design approval does not claim runtime parity, shipment, or production accessibility certification.
