@@ -32,8 +32,8 @@ jobs:
       - name: Check component mapping index freshness
         run: python tooling/generate_component_mapping_index.py check
 
-      - name: Test AI/Governance validator failures
-        run: python -m unittest discover -s tests -p 'test_ai_governance.py'
+      - name: Test validator failure modes
+        run: python -m unittest discover -s tests -p 'test_*.py'
 
       - name: Check AI/Governance retrieval integrity
         run: python tooling/validators/check_ai_governance.py

@@ -17,6 +17,17 @@ TERMS_PATH = ROOT / "foundations" / "content" / "terminology" / "terms.yml"
 ID_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 DECISION_ID_RE = re.compile(r"^DEC-[0-9]{3}$")
 VALID_STATUSES = {"stable", "draft", "needs_decision"}
+VALID_MEANING_OWNERS = {"product_knowledge", "design_language"}
+DESIGN_LANGUAGE_OWNED_CONCEPT_KINDS = {
+    "communication_concept",
+    "feature_family",
+    "persona",
+}
+VALID_AUTHORITY_MIGRATION_STATES = {
+    "source_linked",
+    "needs_product_knowledge_reference",
+    "not_applicable",
+}
 VALID_VISIBILITY = {
     "public",
     "internal",
@@ -88,6 +99,7 @@ def validate(data: dict[str, Any]) -> list[str]:
         errors.append("top-level `sources` must be a non-empty list")
         sources = []
     source_ids: list[str] = []
+    source_roles: dict[str, str] = {}
     for index, source in enumerate(sources):
         location = f"sources[{index}]"
         if not isinstance(source, dict):
@@ -98,6 +110,11 @@ def validate(data: dict[str, Any]) -> list[str]:
             errors.append(f"{location}.id must use snake_case")
         else:
             source_ids.append(source_id)
+            role = source.get("role")
+            if not nonempty_string(role):
+                errors.append(f"{location}.role must be a non-empty string")
+            else:
+                source_roles[source_id] = role
     duplicate_sources = sorted(
         source_id
         for source_id, count in Counter(source_ids).items()
@@ -106,6 +123,48 @@ def validate(data: dict[str, Any]) -> list[str]:
     if duplicate_sources:
         errors.append(f"duplicate source ids: {', '.join(duplicate_sources)}")
     known_sources = set(source_ids)
+
+    authority_model = data.get("authority_model")
+    if not isinstance(authority_model, dict):
+        errors.append("top-level `authority_model` must be a mapping")
+        authority_model = {}
+    expected_authority_values = {
+        "language_owner": "design_language",
+        "linked_product_source_role": "product_knowledge_reference",
+        "unresolved_product_source": "unresolved",
+        "not_applicable_product_source": "not_applicable",
+    }
+    for field, expected in expected_authority_values.items():
+        if authority_model.get(field) != expected:
+            errors.append(
+                f"authority_model.{field} must be `{expected}`"
+            )
+    meaning_owners = authority_model.get("meaning_owners")
+    if not isinstance(meaning_owners, list) or set(meaning_owners) != (
+        VALID_MEANING_OWNERS
+    ):
+        errors.append(
+            "authority_model.meaning_owners must contain exactly "
+            + ", ".join(sorted(VALID_MEANING_OWNERS))
+        )
+    design_language_kinds = authority_model.get(
+        "design_language_owned_concept_kinds"
+    )
+    if not isinstance(design_language_kinds, list) or set(
+        design_language_kinds
+    ) != DESIGN_LANGUAGE_OWNED_CONCEPT_KINDS:
+        errors.append(
+            "authority_model.design_language_owned_concept_kinds must contain exactly "
+            + ", ".join(sorted(DESIGN_LANGUAGE_OWNED_CONCEPT_KINDS))
+        )
+    migration_states = authority_model.get("migration_states")
+    if not isinstance(migration_states, list) or set(migration_states) != (
+        VALID_AUTHORITY_MIGRATION_STATES
+    ):
+        errors.append(
+            "authority_model.migration_states must contain exactly "
+            + ", ".join(sorted(VALID_AUTHORITY_MIGRATION_STATES))
+        )
 
     terms = data.get("terms")
     if not isinstance(terms, list) or not terms:
@@ -126,8 +185,71 @@ def validate(data: dict[str, Any]) -> list[str]:
             term_ids.append(term_id)
             location = term_id
 
-        if not nonempty_string(term.get("concept_kind")):
+        concept_kind = term.get("concept_kind")
+        if not nonempty_string(concept_kind):
             errors.append(f"{location}: missing non-empty `concept_kind`")
+
+        authority = term.get("authority")
+        if not isinstance(authority, dict):
+            errors.append(f"{location}: authority must be a mapping")
+            authority = {}
+        meaning_owner = authority.get("meaning_owner")
+        if meaning_owner not in VALID_MEANING_OWNERS:
+            errors.append(
+                f"{location}: authority.meaning_owner must be one of "
+                f"{sorted(VALID_MEANING_OWNERS)}"
+            )
+        if (
+            meaning_owner == "design_language"
+            and concept_kind not in DESIGN_LANGUAGE_OWNED_CONCEPT_KINDS
+        ):
+            errors.append(
+                f"{location}: concept_kind `{concept_kind}` cannot use "
+                "`design_language` as meaning owner"
+            )
+        if authority.get("language_owner") != "design_language":
+            errors.append(
+                f"{location}: authority.language_owner must be `design_language`"
+            )
+        migration_state = authority.get("migration_state")
+        if migration_state not in VALID_AUTHORITY_MIGRATION_STATES:
+            errors.append(
+                f"{location}: authority.migration_state must be one of "
+                f"{sorted(VALID_AUTHORITY_MIGRATION_STATES)}"
+            )
+        product_source = authority.get("product_source")
+        if meaning_owner == "product_knowledge":
+            if migration_state == "source_linked":
+                if product_source not in known_sources:
+                    errors.append(
+                        f"{location}: linked product_source must reference a known source"
+                    )
+                elif source_roles.get(product_source) != (
+                    "product_knowledge_reference"
+                ):
+                    errors.append(
+                        f"{location}: linked product_source `{product_source}` must use "
+                        "`product_knowledge_reference` role"
+                    )
+            elif migration_state == "needs_product_knowledge_reference":
+                if product_source != "unresolved":
+                    errors.append(
+                        f"{location}: unresolved product_source must be `unresolved`"
+                    )
+            else:
+                errors.append(
+                    f"{location}: product-owned meaning cannot use "
+                    "`not_applicable` migration state"
+                )
+        elif meaning_owner == "design_language":
+            if (
+                migration_state != "not_applicable"
+                or product_source != "not_applicable"
+            ):
+                errors.append(
+                    f"{location}: Design Language-owned meaning must use "
+                    "`not_applicable` product source and migration state"
+                )
 
         status = term.get("status")
         if status not in VALID_STATUSES:
@@ -159,6 +281,13 @@ def validate(data: dict[str, Any]) -> list[str]:
             if unknown:
                 errors.append(
                     f"{location}: unknown evidence source ids: {', '.join(unknown)}"
+                )
+            if (
+                migration_state == "source_linked"
+                and product_source not in evidence
+            ):
+                errors.append(
+                    f"{location}: linked product_source must also appear in evidence"
                 )
 
         if status == "stable":
@@ -280,11 +409,18 @@ def main() -> int:
 
     terms = data["terms"]
     statuses = Counter(term["status"] for term in terms)
+    authority_states = Counter(
+        term["authority"]["migration_state"] for term in terms
+    )
     print(
         "Content terminology is valid: "
         f"{len(terms)} terms, {len(data['decision_queue'])} open decisions, "
         f"{len(data['decision_log'])} resolved decisions, "
         + ", ".join(f"{key}={value}" for key, value in sorted(statuses.items()))
+        + "; authority: "
+        + ", ".join(
+            f"{key}={value}" for key, value in sorted(authority_states.items())
+        )
     )
     return 0
 

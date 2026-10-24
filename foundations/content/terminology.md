@@ -27,19 +27,21 @@ machine-readable واژگان در [`terminology/terms.yml`](terminology/terms.y
 
 ## مدل
 
-واژه‌نامه یک فهرست synonym نیست. هر مدخل یک مفهوم مستقل است و چهار لایه را
-از هم جدا می‌کند:
+واژه‌نامه یک فهرست synonym نیست. هر مدخل یا یک مفهوم محصولی است یا یک قرارداد
+نام‌گذاری زمینه‌ای که صریحاً به همان مفهوم متصل می‌شود. مدل چهار لایه را از هم
+جدا می‌کند:
 
 ```text
-Concept
-→ Meaning and product truth
-→ Preferred label by audience or surface
+Product entity or concept reference
+→ Meaning, behavior, and lifecycle owned by Product Knowledge
+→ Contextual label by audience, surface, or lifecycle owned by Design Language
 → Allowed, avoid, and forbidden language
 ```
 
-`canonical_internal` نام مرجع مفهوم در دانش محصول است. `preferred` برچسبی است
-که باید در یک تجربه یا برای یک مخاطب استفاده شود. این دو لازم نیست همیشه یکسان
-باشند.
+`canonical_internal` نام مرجع ثبت‌شده برای retrieval و تطبیق مفهوم است؛ وجود
+آن در این فایل، این ریپو را مالک تعریف یا رفتار محصول نمی‌کند. `preferred`
+برچسبی است که باید در یک تجربه یا برای یک مخاطب استفاده شود. این دو لازم نیست
+همیشه یکسان باشند.
 
 مثال:
 
@@ -53,14 +55,50 @@ employer_organization
 
 ## مرجع‌ها و اختیار تصمیم
 
-- واژه‌نامهٔ داخلی استخراج‌شده از محصول، منبع product truth، تمایز entityها و
-  نگاشت به کد است.
-- تصمیم‌های Product Content System، label مناسب مخاطب و سطح را تعیین می‌کنند.
+- Product Knowledge منبع حقیقت معنی، رفتار، lifecycle و نگاشت فنی مفهوم محصول
+  است. واژه‌نامهٔ داخلی فقط یک reference به آن منبع است.
+- تصمیم‌های Design Language، label مناسب مخاطب و سطح و رابطهٔ زبانی اصطلاحات را
+  تعیین می‌کنند.
 - نام کلاس، دیتابیس، enum یا سرویس به‌تنهایی مجوز ورود یک اصطلاح به UI نیست.
 - تعارض حل‌نشده باید با `status: needs_decision` و یک مورد در `decision_queue`
   باقی بماند؛ AI نباید خودش آن را قطعی کند.
 - تصمیم بسته‌شده باید از صف خارج و با تاریخ، نتیجه و دلیل در `decision_log`
   ثبت شود تا تغییر label بدون سابقه و منطق تصمیم باقی نماند.
+
+
+## مدل اختیار و وضعیت مهاجرت
+
+هر مدخل یک `authority` دارد:
+
+- `meaning_owner: product_knowledge`: معنی و رفتار یک مفهوم محصولی خارج از این
+  ریپو مالک دارد.
+- `meaning_owner: design_language`: خود مفهوم یک taxonomy یا قرارداد ارتباطی
+  است، نه entity یا رفتار محصول.
+- `language_owner: design_language`: label، منع synonym و قواعد استفاده اینجا
+  نگهداری می‌شوند.
+- `product_source`: منبع Product Knowledge، یا `unresolved` / `not_applicable`.
+- `migration_state: source_linked`: منبع محصولی معتبر به مدخل وصل است.
+- `migration_state: needs_product_knowledge_reference`: مفهوم محصولی هنوز منبع
+  دقیق ندارد و نباید مبنای ادعای تازه دربارهٔ رفتار محصول باشد.
+- `migration_state: not_applicable`: مفهوم زبانی است و به Product Knowledge
+  نیاز ندارد.
+
+`definition.source` و `code_bindings` فعلی snapshot ارجاعی برای retrieval و
+مهاجرت‌اند؛ canonical product truth نیستند. تا وقتی صفحه یا شناسهٔ دقیق منبع
+محصولی ثبت نشده، این داده‌ها نباید برای ساختن lifecycle، permission، validation
+یا رفتار جدید استفاده شوند.
+
+در بازبینی 2026-10-22، ۶۷ مدخل به منبع محصولی وصل شدند، ۴ قرارداد ارتباطی
+مالک Design Language تشخیص داده شدند و ۴ مفهوم محصولی unresolved ماندند:
+
+- Design Language: `job_position`، `job_opportunity`، `ai_feature_family` و
+  `ai_assistant`؛
+- unresolved: `recruitment`، `hiring`، `ats_candidate` و
+  `hiring_request`.
+
+با تصمیم مالک محصول، `job_post` و `job_position` دو entity مستقل نیستند.
+`job_position` قرارداد برچسب‌گذاری زمینه‌ای همان JobPost است. نتیجه و منطق
+انتخاب برچسب‌ها در `DEC-007` ثبت شده است.
 
 ## شدت واژه‌ها
 
@@ -72,19 +110,27 @@ employer_organization
 | `forbidden` | در scope مشخص استفاده نشود | blocking |
 
 `forbidden_as_synonym` ممنوعیت مطلق یک عبارت نیست. فقط می‌گوید آن عبارت نباید
-به‌جای concept دیگری استفاده شود. برای مثال «موقعیت شغلی» واژه‌ای معتبر است،
-اما نام جایگزین `job_post` نیست.
+به‌جای concept دیگری استفاده شود. برای مثال «فرصت شغلی» واژه‌ای معتبر است، اما در اشاره به وضعیت انتشار یا
+metadata یک JobPost جایگزین دقیق «آگهی شغلی» نیست.
 
 ## تصمیم‌های تثبیت‌شدهٔ اصلی
 
 ### آگهی، موقعیت و فرصت
 
-- **آگهی شغلی / آگهی**: موجودیت منتشرشده و دارای وضعیت و metadata.
-- **موقعیت شغلی**: نقش یا جایگاه واقعی‌ای که سازمان برای آن نیرو می‌خواهد.
-- **فرصت شغلی**: عبارت عمومی discovery و recommendation؛ نه entity دقیق.
+«آگهی شغلی» و «موقعیت شغلی» دو entity نیستند؛ دو برچسب برای یک JobPost هستند.
+انتخاب واژه از زاویهٔ ارائه و مرحلهٔ lifecycle می‌آید:
 
-در تجربهٔ کارجو «آگهی شغلی» و در پنل کارفرما یا ادمین «آگهی» ترجیح دارد تا
-صورت کامل در سطح عمومی روشن بماند و در سطوح تخصصی از تکرار غیرضروری جلوگیری شود.
+- **آگهی شغلی / آگهی**: هنگام ثبت، ساخت، ویرایش، انتشار، توقف، انقضا، وضعیت،
+  شناسه، تاریخ انتشار، سهمیه و metadata؛ «آگهی» صورت کوتاه در پنل کارفرما و
+  ادمین است.
+- **موقعیت شغلی**: وقتی همان موجودیت به‌عنوان نقش قابل بررسی ارائه می‌شود؛
+  شرح مسئولیت‌ها و شرایط، تناسب، ارسال درخواست و تصمیم‌های جذب دربارهٔ نقش.
+- **فرصت شغلی**: عبارت عمومی discovery، recommendation و marketing؛ نه نام
+  دقیق entity برای وضعیت یا metadata.
+
+پس «شرکت برای یک موقعیت شغلی آگهی ثبت می‌کند» درست است، اما این جمله دو
+موجودیت محصولی مستقل نمی‌سازد. در UI باید نزدیک‌ترین برچسب به کار فعلی کاربر
+انتخاب شود.
 
 ### جذب و استخدام
 
@@ -167,9 +213,10 @@ employer_organization
 
 ## وضعیت‌ها
 
-- `stable`: تصمیم Product Content تثبیت شده است.
-- `draft`: مدخل منبع‌دار است اما هنوز مرور محتوایی کامل نشده است.
-- `needs_decision`: یک تصمیم انسانی یا product truth لازم است.
+- `stable`: تصمیم زبانی و label در Design Language تثبیت شده است؛ این وضعیت
+  اعتبار مستقل product truth را نشان نمی‌دهد.
+- `draft`: تصمیم زبانی هنوز مرور محتوایی کامل نشده است.
+- `needs_decision`: یک تصمیم انسانی دربارهٔ زبان یا یک product source لازم است.
 
 فهرست تصمیم‌های باز در `decision_queue` فایل machine-readable نگهداری می‌شود.
 
@@ -178,11 +225,15 @@ employer_organization
 برای تولید یا بررسی محتوا:
 
 1. concept موردنظر را پیدا کن؛ از تطبیق صرف رشته استفاده نکن.
-2. `visibility` و دامنهٔ surface را بررسی کن.
-3. label همان مخاطب را از `preferred` انتخاب کن.
-4. `relations.distinct_from` و ممنوعیت‌های synonym را بررسی کن.
-5. در وضعیت `needs_decision` ادعای قطعی نساز.
-6. بعد از terminology، قواعد pattern و component مرتبط را اعمال کن.
+2. `authority.meaning_owner` و `migration_state` را بررسی کن؛ اگر مفهوم محصولی
+   source حل‌شده ندارد از definition برای ادعای رفتار محصول استفاده نکن.
+3. `visibility` و دامنهٔ surface را بررسی کن.
+4. اگر `contextual_labels` یا `relations.same_entity_as` وجود دارد، مرحلهٔ
+   lifecycle و زاویهٔ ارائه را تعیین کن؛ سپس label را انتخاب کن.
+5. در نبود قاعدهٔ زمینه‌ای، label همان مخاطب را از `preferred` انتخاب کن.
+6. `relations.distinct_from` و ممنوعیت‌های synonym را بررسی کن.
+7. در وضعیت `needs_decision` ادعای قطعی نساز.
+8. بعد از terminology، قواعد pattern و component مرتبط را اعمال کن.
 
 ## اعتبارسنجی
 
@@ -190,5 +241,6 @@ employer_organization
 python tooling/validators/check_content_terminology.py
 ```
 
-این بررسی ساختار فایل، یکتایی شناسه‌ها، statusها، ارجاع‌های evidence و
-`decision_queue` را کنترل می‌کند.
+این بررسی ساختار فایل، یکتایی شناسه‌ها، statusها، ارجاع‌های evidence،
+`decision_queue` و سازگاری `authority` هر مدخل با نقش منبع Product Knowledge را
+کنترل می‌کند.
