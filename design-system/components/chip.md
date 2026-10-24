@@ -8,7 +8,7 @@ knowledge_state: verified
 document_maturity: reviewed
 design_status: ready-for-dev
 design_maturity: handoff-ready
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-20'
 related:
   - design-system.component.tag
   - design-system.component.badge
