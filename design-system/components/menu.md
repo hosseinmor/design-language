@@ -270,7 +270,7 @@ Runtime grouping must preserve semantic grouping. Visible group labels provide t
 | Label / actionable icon | `fg/primary` — explicit override on icon instances |
 | Secondary shortcut metadata | `fg/secondary` |
 | Disabled content | `fg/disabled` |
-| Focus | shared `Focus/Default` non-layout-affecting ring |
+| Focus | shared [Focus Management](../../accessibility/focus-management.md) treatment |
 | Divider | `line/muted` |
 
 ### Danger Menu Item
@@ -286,9 +286,9 @@ Do not use a solid danger-filled row for normal Menu Hover/Active feedback.
 
 ## Focus
 
-Focus uses the shared `Focus/Default` effect and must not change item dimensions. Do not use a layout-affecting border.
+Visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract and must not change item dimensions. Do not use a layout-affecting border as a Focus substitute.
 
-Runtime should show the focus treatment for keyboard navigation under the shared `:focus-visible` contract.
+Runtime Focus visibility follows the shared [Focus Management](../../accessibility/focus-management.md) contract; Menu does not introduce its own input-modality rule.
 
 ## Interaction
 

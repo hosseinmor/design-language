@@ -131,8 +131,7 @@ Focus is independent from selection.
 
 Use the shared focus treatment:
 
-- 2px `focus/default` outer ring;
-- 1px visual gap between the icon-instance boundary and focus ring using the normal surface;
+- visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract around the Checkbox control;
 - no layout/dimension change.
 
 Unchecked, Checked, and Indeterminate retain their selection geometry while focused.

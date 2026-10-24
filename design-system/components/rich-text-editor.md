@@ -93,7 +93,7 @@ Rich Text Editor
     └── Error / Count
 ```
 
-Focus and validation styling belong to the complete Editor shell, not only the editable area. In Figma, Focus is applied to the Editor shell with the shared `Focus/Default` Effect Style rather than a separate Focus-ring layer.
+Focus and validation styling belong to the complete Editor shell, not only the editable area. In Figma, the Editor shell is the perceived Focus target and uses the shared [Focus Management](../../accessibility/focus-management.md) treatment rather than a separate component-specific ring layer.
 
 ## Geometry
 
@@ -173,7 +173,7 @@ Real-instance QA has been run at `480px` width and increased vertical height.
 
 ```text
 Editor line → line/emphasis, 1px
-Focus indicator → focus/default, 2px ring + 1px offset
+Focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 ```
 
 ### Error
@@ -192,7 +192,7 @@ Error meaning and keyboard focus remain independently visible:
 
 ```text
 Editor line → line/error, 2px
-Focus indicator → focus/default, 2px ring + 1px offset
+Focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 Error message → fg/error
 ```
 

@@ -96,7 +96,7 @@ Use stable, semantic row IDs; **never** use page array indexes for selection/exp
 
 - Every direct action is a native Button with `type="button"`, a distinct accessible name including row context, and a visually discoverable interaction state. Use canonical Icon Button and Tooltip/Popover where appropriate.
 - Up to three direct action buttons share the 96px Figma column. Additional actions belong in a canonical Overflow Menu with its own keyboard contract. The Header actions spacer always matches this column.
-- Keyboard focus ring follows JV focus tokens: visible for `:focus-visible`, not a blanket outline on every pointer click. Ensure ring is not clipped by Row/Cell/Scroll container. Maintain required contrast.
+- Visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract. Ensure the indicator is not clipped by Row/Cell/Scroll containers and maintains required contrast.
 - Tab proceeds through selection, disclosure, cell actions, then subsequent table controls in DOM order. Repeated row actions need context to remain understandable out of context.
 - Loading, updating, disabling or removing data must not strand keyboard focus on a disappearing element. On destructive actions choose a predictable successor or a concise status announcement.
 

@@ -35,7 +35,7 @@ Select commits option IDs from a **known option set**. `Select / Single` commits
 - Option `20613:21`; Option Group Header `20614:46`; Select All `20614:126920`
 - [Field Family QA board](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=23915-841)
 
-**Figma axes (both sets):** Size = Small / Medium / Large; State = Default / Hover / Focus / Disabled / Error / **Error focus** / Warning / Read only / Read only focus; Filled = False / True. **54 variants each** (3 × 9 × 2). Error focus was added with 2px red error border + retained text error + visible keyboard focus ring, without replacing earlier component IDs.
+**Figma axes (both sets):** Size = Small / Medium / Large; State = Default / Hover / Focus / Disabled / Error / **Error focus** / Warning / Read only / Read only focus; Filled = False / True. **54 variants each** (3 × 9 × 2). Error focus was added with a 2px red error border + retained text error + the shared visible-Focus treatment, without replacing earlier component IDs.
 
 **Figma-only compatibility notes:** `Filled` remains a Variant axis describing placeholder versus populated visual. It is not a runtime state/API; derive from actual committed value(s). The historical `Mandatory` Figma Boolean corresponds to runtime **required**, not a separate property. The set's Figma default Size is **Large** to preserve existing instances; **Medium (40px) is the default size for NEW runtime usages** and should be set explicitly in Figma. Warning remains a legacy Figma visual and is *not* mandatory in the Sandbox v1 public API. Do not block a Sandbox implementation on deleting/reorganizing these authored variants.
 
@@ -54,7 +54,7 @@ Helper OR Error/Warning supporting region
 | Medium (new default) | 40px | 6px |
 | Large | 48px | 6px |
 
-Field: neutral border 1px; error border 2px; existing shared 2px focus effect with 1px offset; no component-specific color tokens. Floating panel: radius 12px, 2px anchor offset, floating shadow, correct RTL alignment; it is **not** wrapped in an additional Popover shell. Label/helper/error use canonical semantic typography and field tokens. No layout jump between Focus/Error/Error focus. Error text must remain readable/associated even if a floating panel visually overlaps.
+Field: neutral border 1px; error border 2px; visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract; no component-specific Focus tokens. Floating panel: radius 12px, 2px anchor offset, floating shadow, correct RTL alignment; it is **not** wrapped in an additional Popover shell. Label/helper/error use canonical semantic typography and field tokens. No layout jump between Focus/Error/Error focus. Error text must remain readable/associated even if a floating panel visually overlaps.
 
 
 ### Selection Panel and Option typography (Figma source QA, 2026-10-20)

@@ -293,20 +293,31 @@ If a component guideline adopts a specific interaction model, implementation MUS
 
 # 8. Focus behavior
 
-Define focus behavior only when the component can receive, move, contain, restore, or lose focus.
+Use [Focus Management](focus-management.md) as the canonical owner for the shared visible-focus treatment.
+
+Component guidelines MUST NOT restate the default Focus ring geometry, token mappings, or `:focus-visible` trigger. For the default case, a concise statement such as:
+
+```text
+Visible focus → uses the shared Focus Management contract.
+```
+
+is sufficient.
+
+Define additional focus behavior only when the component can receive, move, contain, restore, or lose focus, or when visible-focus placement is not obvious.
 
 ## MUST define, when applicable
 
 - whether the component is focusable;
-- visible focus treatment;
+- which perceived control/sub-control owns visible Focus when placement is not obvious;
 - focus order within composite components;
 - initial focus on open;
 - focus containment;
 - focus destination on close;
 - behavior after focused content is removed;
-- interaction between Focus and Error / Selected / Expanded states.
+- interaction between Focus and Error / Selected / Expanded states;
+- any reviewed exception to the shared Focus Management contract.
 
-Simple controls can use a concise contract.
+Simple controls can use the shared Focus contract plus a concise component-specific statement.
 
 Level 3 components require a deeper focus contract.
 

@@ -113,7 +113,7 @@ This alignment is achieved with the leading icon + gap for Level 1 and in-item p
 | Selected Hover | `surface/selected-hover` | `fg/primary` | `fg/primary` |
 | Disabled | transparent | `fg/disabled` | `fg/disabled` |
 
-`focus/default` is a distinct, visible focus treatment and may coexist with Selected. Follow the reviewed Focus Management foundation for the external 2px ring and 1px gap rather than inventing a component-specific Accent border.
+Visible Focus is distinct from Selected and may coexist with it. Follow the shared [Focus Management](../../accessibility/focus-management.md) contract rather than inventing a component-specific Accent border or Focus treatment.
 
 **Unresolved design option:** Selected destinations might use a filled rather than an outlined icon in the future. This is **TBD**, not a variant or automatic substitution in the current source.
 

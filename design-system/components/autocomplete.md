@@ -49,11 +49,11 @@ The canonical source audit verified the original **24 Autocomplete / Single** va
 - **48/48** owned positive Radius properties use `6px · Medium`.
 - **120/120** owned visible solid fills/strokes consume public `03 Semantic` color variables.
 - All **24/24** nested Selection Panel instances inherit `12px · Large` from the upstream Selection Panel source, without local raw Radius overrides.
-- Focus, Error focus and Read only focus have the existing shared `Focus/Default` effect; Error focus keeps its 2px `line/error` Border and visible Error helper. Controls remain 32/40/48px by Size.
+- Focus, Error focus and Read only focus follow the shared [Focus Management](../../accessibility/focus-management.md) contract; Error focus keeps its 2px `line/error` Border and visible Error helper. Controls remain 32/40/48px by Size.
 
 The page's three existing open linked Playground samples (job title, city, job group) are source-linked and display correctly in RTL. `Open` is intentionally false for the default 24 master variants; it is true in the consumer examples. Treat it as a Figma authoring property, not a default always-visible Popup.
 
-**Remaining acceptance:** published override integrity following the upstream Selection Panel migration, live keyboard focus ring visibility (the screenshot renderer may not show the existing shadow), Product × Appearance editor/runtime visual testing and editable-combobox interaction/AT tests. This mechanical source audit does not upgrade the component's **Ready for Sandbox** status to production-ready. Image Uploader remains out of scope.
+**Remaining acceptance:** published override integrity following the upstream Selection Panel migration, live visible-Focus ring behavior (the screenshot renderer may not show the existing shadow), Product × Appearance editor/runtime visual testing and editable-combobox interaction/AT tests. This mechanical source audit does not upgrade the component's **Ready for Sandbox** status to production-ready. Image Uploader remains out of scope.
 
 ## State and event model — normative
 

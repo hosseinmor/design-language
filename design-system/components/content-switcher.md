@@ -164,7 +164,7 @@ Selected is intentionally lightweight and does not introduce a separate Selected
 
 The Figma Focus state represents keyboard `focus-visible`, not every programmatic or pointer focus event.
 
-Use the shared focus ring: `focus/default`, 2px outside ring, with a 1px visual gap from the control edge.
+Visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract. It remains distinct from the selected segment treatment and must not change segment dimensions.
 
 ## Responsive Behavior
 

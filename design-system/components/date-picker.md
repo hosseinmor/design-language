@@ -110,7 +110,7 @@ Date Picker
 
 - Default `surface/default` + `line/default` 1px.
 - Hover / Focus border `line/emphasis` 1px.
-- **Focus is not an extra border:** the canonical Text Input **two-layer semantic Effect** renders `focus/default` 2px with a 1px offset. It must not change control dimensions.
+- **Focus is not an extra border:** the Date field follows the shared [Focus Management](../../accessibility/focus-management.md) contract and must not change control dimensions.
 - Error uses `line/error` 2px and `fg/error` text. Error focus preserves both error border/message and the independent focus effect.
 - Disabled uses `surface/disabled`, `line/disabled`, `fg/disabled`; neither date segments nor Calendar action should be operable.
 - Read only uses `line/muted`, retains readable content and its focus treatment where appropriate, but must not offer a misleading editable/open action.
@@ -118,7 +118,7 @@ Date Picker
 
 **Segment authoring:** Day, Month, and Year live in one physical RTL-aware **Auto Layout** group rather than absolute-positioned text layers. Use the canonical **2px Spacing token** between the five segment/separator items; each date-part text is centered in its editable segment wrapper, with the active-segment backdrop painted **behind** the glyphs. Placeholder/filled content lives **inside the inline Field Control's Auto Layout content region**; it is not an unrelated absolute overlay of the former internal Field Base. Switching Calendar Off must reclaim Calendar icon space without shifting the field border or Focus effect.
 
-**No** `surface/brand` for selected calendar days. The selected Cell uses `surface/accent-emphasis` (`surface/accent-emphasis-hover` when hovered) and `fg/on-color`. Ordinary day text uses `fg/primary`, adjacent-month text `fg/tertiary`, and disabled day text `fg/disabled`. Focus remains the distinct `focus/default` semantic role. Interactive hover uses `surface/transparent-hover`.
+**No** `surface/brand` for selected calendar days. The selected Cell uses `surface/accent-emphasis` (`surface/accent-emphasis-hover` when hovered) and `fg/on-color`. Ordinary day text uses `fg/primary`, adjacent-month text `fg/tertiary`, and disabled day text `fg/disabled`. Focus remains a distinct shared interaction treatment and does not merge with selected-day Accent styling. Interactive hover uses `surface/transparent-hover`.
 
 ## Calendar Day Cell and single-date selection
 
@@ -184,7 +184,7 @@ Reference [Accessible Forms](../../accessibility/forms.md), [Focus Management](.
 
 **Before claiming accessibility or runtime readiness**, verify:
 - overall field and individual segment labels; calendar trigger name/role/state and focus order;
-- visible `:focus-visible` with error/selected/today contexts; no border-only Focus or layout shift;
+- visible Focus according to the shared [Focus Management](../../accessibility/focus-management.md) contract in error/selected/today contexts; no border-only Focus or layout shift;
 - correct supporting/error associations, invalid/required feedback and announcements;
 - keyboard-only type/paste/open/navigate/select/dismiss; focus restoration, grid boundaries, disabled dates, month changes and mobile Dialog;
 - screen-reader date/day/month announcements, selected/current/disabled semantics, RTL/LTR, mixed-script input and correct localized digit output;

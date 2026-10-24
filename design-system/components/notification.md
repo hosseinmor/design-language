@@ -275,6 +275,13 @@ For Persian UI, the expected action label / Tooltip text is `بستن`.
 
 High Toast currently applies the required inverse foreground to the nested canonical Icon Button while the shared Icon Button component itself lacks an explicit inverse-surface treatment.
 
+For visible Focus on High Toast:
+- Link / Inverse follows the shared Focus Management inverse-context treatment;
+- the Dismiss Icon Button must also use the inverse-context Focus treatment when it becomes visibly focused;
+- do not silently fall back to the default Focus treatment on surface/inverse.
+
+The Dismiss case remains part of the existing shared inverse-surface Icon Button gap; this Notification contract does not introduce a local Icon Button variant or local Focus token.
+
 ## Behavior and Accessibility
 
 Severity and announcement urgency are separate decisions.
