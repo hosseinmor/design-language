@@ -2232,6 +2232,42 @@
       "path": "foundations/visual/color.md"
     },
     {
+      "id": "design-system.foundation.directionality",
+      "kind": "design-system-foundation",
+      "title": "Directionality (Bidirectional RTL/LTR)",
+      "summary": "Shared inheritable UI direction model, logical layout, directional icon decisions, bidi-content boundaries and RTL/LTR authoring expectations without duplicating component contracts.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "content.localization",
+        "design-system.foundation.responsive-layout",
+        "design-system.foundation.layout",
+        "design-system.foundation.iconography",
+        "design-system.experience-rule.segmented-field-editing",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.responsive-and-zoom",
+        "design-system.accessibility.structure-and-navigation",
+        "design-system.accessibility.focus-management",
+        "design-system.component.app-shell",
+        "design-system.component.drawer",
+        "design-system.component.menu"
+      ],
+      "topics": [
+        "bidirectional",
+        "design-system-foundation",
+        "directionality",
+        "figma",
+        "interaction",
+        "localization",
+        "logical-properties",
+        "ltr",
+        "mirroring",
+        "rtl"
+      ],
+      "path": "foundations/interaction/directionality.md"
+    },
+    {
       "id": "design-system.foundation.elevation",
       "kind": "design-system-foundation",
       "title": "Elevation",
@@ -3377,7 +3413,7 @@
     }
   ],
   "summary": {
-    "documents": 159,
+    "documents": 160,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3391,7 +3427,7 @@
       "design-system-component-annex": 1,
       "design-system-design-language": 1,
       "design-system-experience-rule": 12,
-      "design-system-foundation": 11,
+      "design-system-foundation": 12,
       "design-system-governance": 6,
       "design-system-integration": 1,
       "design-system-overview": 1,
