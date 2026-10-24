@@ -160,7 +160,7 @@ Shared geometry:
 - Visibility action area: `24×24px`.
 - The action area sits at the trailing/left edge in RTL.
 - Error border is a 2px overlay and must not alter padding or height.
-- Focus indicator is a separate 2px ring with a 1px offset outside the control.
+- The Focus indicator is separate from the control border and follows the shared [Focus Management](../../accessibility/focus-management.md) contract.
 - Width is flexible and resizing must preserve padding, action position, and RTL order.
 - In Figma, Placeholder, masked content, and revealed Value fill the available Content width, remain single-line, and use ending ellipsis for overflow. Runtime password editing may use native horizontal scrolling instead of reproducing ellipsis while the value is actively edited.
 
@@ -209,7 +209,7 @@ Password Input uses the same visual state model as Text Input.
 
 ```text
 Control border → line/emphasis, 1px
-Focus indicator → focus/default, 2px ring + 1px offset
+Focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 ```
 
 ### Error
@@ -226,7 +226,7 @@ Error message is required; a red border alone is insufficient.
 
 ```text
 Error border → line/error, 2px
-Focus indicator → focus/default, 2px ring + 1px offset
+Focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 Error message → fg/error
 ```
 
@@ -253,7 +253,7 @@ Read only is distinct from Disabled.
 
 ### Read only focus
 
-Readonly native inputs remain focusable, so the Figma contract includes `Read only focus` with the shared 2px `focus/default` ring and 1px offset.
+Readonly native inputs remain focusable, so the Figma contract includes `Read only focus`; it preserves Read only styling while visible Focus follows the shared [Focus Management](../../accessibility/focus-management.md) contract.
 
 Whether a readonly password may still be revealed is a product/runtime behavior decision; do not infer implementation behavior solely from the Figma authoring switch.
 
@@ -332,7 +332,7 @@ Password Input consumes shared Semantic roles.
 | Disabled line | `line/disabled` |
 | Disabled content/action | `fg/disabled` |
 | Read-only line | `line/muted` |
-| Focus indicator | `focus/default` |
+| Focus indicator | shared [Focus Management](../../accessibility/focus-management.md) contract |
 
 Do not create Password-Input-specific Color tokens merely to restate these roles.
 
