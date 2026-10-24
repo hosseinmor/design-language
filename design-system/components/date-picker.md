@@ -3,12 +3,11 @@ id: design-system.component.date-picker
 collection: design-system
 type: component
 title: Date Picker
-summary: Single-date selection through a segmented editable field and a separate trailing calendar action, with shared field feedback, accessible calendar navigation, and responsive composition.
+summary: Unified segmented date field with optional Calendar; Calendar Off supports manual date entry, Calendar On adds an accessible calendar selection surface.
 knowledge_state: verified
 document_maturity: draft
 owner: Design System team
 related:
-  - design-system.component.date-input
   - design-system.component.text-input
   - design-system.component.dialog
   - design-system.accessibility.forms
@@ -17,6 +16,7 @@ related:
   - design-system.accessibility.component-authoring-contract
 topics:
   - date-picker
+  - date-input
   - calendar
   - date-field
   - date-selection
@@ -29,13 +29,16 @@ topics:
 
 # Date Picker
 
-> **HOS-49 — design contract for review.** Figma's canonical Date Picker and Calendar Day Cell sources were verified on 2026-10-22. Their visual design, component placement, semantic tokens, and representative desktop/mobile compositions are complete. Real parser, browser keyboard and screen-reader behavior, responsive collisions, and Karbon/Storybook parity have **not** been executed or certified. Document maturity remains **draft** until owner review; Figma authoring properties are not confirmed runtime APIs.
+> **HOS-49 — design contract for review.** Figma's unified Date Picker and Calendar Day Cell sources were rechecked on 2026-10-24. Their visual design, component placement, semantic tokens, and representative desktop/mobile compositions are complete. Real parser, browser keyboard and screen-reader behavior, responsive collisions, and Karbon/Storybook parity have **not** been executed or certified. Document maturity remains **draft** until owner review; Figma authoring properties are not confirmed runtime APIs.
 
 ## Purpose and component boundary
 
-Date Picker selects **one date** by either editing date segments manually or choosing a day from a calendar. It extends the same date-entry mechanism as [Date Input](date-input.md) with an independently focusable **trailing Calendar action** and one dedicated calendar selection surface.
+**Date Picker is the only public single-date field component.** It always supports manually editing year/month/day segments. Its **Calendar Boolean** switches between two supported uses:
 
-Use Date Picker when browsing adjacent dates, seeing weekday context, or selecting a date visually adds value **and** typing an exact date should remain possible. Prefer Date Input when only manual entry is needed. Do not use a generic Text Input with a decorative calendar glyph as a substitute for a real picker.
+- **Calendar Off (manual entry):** segmented date editing without Calendar trigger or popup. Use when users know and type an exact date (including historical/document dates).
+- **Calendar On (default):** the same segmented field plus an independently focusable trailing Calendar trigger and a selectable Calendar surface. Use when visual date browsing is helpful.
+
+Do **not** maintain an independent public Date Input master. The previous [Date Input](date-input.md) document and Figma source are **legacy compatibility references** for existing consumers only. The former Date Input functionality is now `Date Picker / Calendar=false`. Do not replace this date field with a generic Text Input and a decorative Calendar icon.
 
 Date Picker is **not** Date Range, Time Picker, Date-Time Picker, timezone chooser, Menu, or a general-purpose Popover. The calendar is a specialized selection widget; the floating-surface rules are composed without turning this component into generic Popover content.
 
@@ -47,11 +50,12 @@ Date Picker is **not** Date Range, Time Picker, Date-Time Picker, timezone choos
 - [Calendar Surface](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24748-2810), `24748:2810`.
 - [Mobile composition with shared Dialog](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24838-990).
 
-There are **24** public variants: `Size = Small | Medium | Large` × `State = Default | Hover | Focus | Error | Error focus | Disabled | Read only | Read only focus`, with **Medium / Default** as the Figma default. There is no `State=Focus+Open`, `Filled` variant axis, or public Range axis.
+There are **24** public variants: `Size = Small | Medium | Large` × `State = Default | Hover | Focus | Error | Error focus | Disabled | Read only | Read only focus`, with **Medium / Default** as the Figma default. **Calendar is a Boolean authoring property, not a Variant axis**, so switching manual-only and calendar-enabled entry must not double the 24-variant set. There is no `State=Focus+Open`, `Filled` variant axis, or public Range axis.
 
 | Figma authoring property | Purpose |
 |---|---|
-| `Open` (Boolean) | Shows an authored calendar preview; **not a required runtime prop** |
+| `Calendar` (Boolean, default **True**) | **Controls both the Calendar icon and Calendar popup availability**; `False` = manual date entry, no trigger or popup. Figma authoring of a design capability; runtime option naming must be confirmed. |
+| `Open` (Boolean) | Controls **only the inner popup content**; it has no visible effect if `Calendar=False`, `Disabled` or `Read only`; **not a required runtime prop** |
 | `Filled` (Boolean) | Previews a populated date; **Figma-only** |
 | `Placeholder` (Text) | Empty-state localized format/placeholder sample |
 | `Year`, `Month`, `Day` (Text) | Independently editable Figma visuals for **one** date |
@@ -61,7 +65,7 @@ There are **24** public variants: `Size = Small | Medium | Large` × `State = De
 | `Supporting text` (Text) | Contextual helper **or** format hint |
 | `Error text` (Text) | Text feedback for Error / Error focus |
 
-Nested canonical **Field label** owns `Label`, `Required`, `Show info`. Internal `Date Field Base` owns `Show calendar action`; it is True in Date Picker and False in Date Input. The runtime opens from actual user interaction, not the Figma `Open` authoring Boolean. Runtime must not treat `Year`, `Month`, and `Day` as unrelated committed values.
+Nested canonical **Field label** owns `Label`, `Required`, `Show info`. The painted date control is now **inline in the Date Picker master**, as in Select; an unnecessary nested Date Field Base is no longer an active dependency. The `Calendar` Boolean is bound to the direct 16px Calendar icon and the outer Calendar slot; the separate `Open` Boolean is bound to the nested popup content. Therefore **Calendar Off always hides the popup even if Open=True**. Runtime derives open state from interaction and must not treat `Year`, `Month`, and `Day` as unrelated committed values.
 
 ## Anatomy, placement and visual rules
 
@@ -71,10 +75,10 @@ Date Picker
 ├── Date control
 │   ├── Segmented Date Input content (Year / Month / Day)
 │   └── Trailing affordances, in logical End position
-│       ├── Calendar icon (outermost at End; real action; absent in Read only)
-│       └── Error icon (Error states only, immediately inside/right of Calendar in RTL)
+│       ├── Calendar icon (only if Calendar On and interactive; absent when Off/Read only)
+│       └── Error icon (Error states; outermost when Calendar Off)
 ├── One supporting region (Helper OR format hint; Error replaces both)
-└── Calendar selection surface (when opened)
+└── Calendar selection surface (only if Calendar On and opened)
     ├── Month and year header + navigation
     ├── Weekday headings
     └── Calendar Day Cell grid
@@ -90,7 +94,7 @@ Date Picker
 
 **Calendar header composition:** Previous/Next month controls are **instances of the existing [Icon Button](icon-button.md) component**, using `Style=Ghost`, `Size=Medium` (40×40px), and canonical `Icon/chevron_right` / `Icon/chevron_left` swaps appropriate to RTL. Do **not** create a separate Month Navigation Component Set or use a label-hiding Button workaround. The Month/Year label and two buttons are a frame **within Calendar Surface**, not a second independent Month-Year master. Preserve keyboard-operable labels for Previous/Next month in implementation; Figma instance names alone are not accessible labels.
 
-**Figma source structure:** `Date Field Base / Internal` remains an **internal, shared design-authoring source** for Date Input and Date Picker, not a third public Date component or a confirmed runtime API. It prevents duplicating field styling and action/validation slots across their 48 public variants; do not delete it merely to reduce the visible count of masters. Retire it only as part of a verified composition refactor that genuinely reuses the existing Date Input source without introducing more duplicate controls.
+**Figma source structure:** the canonical Date Picker now owns the painted Field Control **directly in each of its 24 variants**, matching Select's Field anatomy. This enables one `Calendar` Boolean to control the icon and popup while allowing the segmented content region to **expand automatically** when the icon is absent. The former three-size Date Field Base and 24-variant Date Input remain archived in Legacy for existing instances; they are **not active public sources**. The reusable internal Date Segment Focus master remains because it shares three focus-highlight positions without multiplying the public variant axes.
 
 **Desktop Calendar:** the live source demonstrates an approximately **288px-wide** anchored calendar with `surface/raised`, `12px · Large` radius, governed floating shadow, and **4px** vertical anchor gap. Fit to available viewport space, flip/shift when needed, preserve usable zoom/reflow, and avoid double wrapping in an independent Popover shell. An anchored selection panel is not automatically a modal Dialog.
 
@@ -106,7 +110,7 @@ Date Picker
 - Read only uses `line/muted`, retains readable content and its focus treatment where appropriate, but must not offer a misleading editable/open action.
 - The active date segment highlight is an editing context **inside** the content, not the outer control's focus ring.
 
-**Segment authoring:** Day, Month, and Year live in one physical RTL-aware **Auto Layout** group rather than absolute-positioned text layers. Use the canonical **2px Spacing token** between the five segment/separator items; each date-part text is centered in its editable segment wrapper, with the active-segment backdrop painted **behind** the glyphs. Placeholder/filled state is owned by the public Date Picker, not duplicated inside the internal Field Base.
+**Segment authoring:** Day, Month, and Year live in one physical RTL-aware **Auto Layout** group rather than absolute-positioned text layers. Use the canonical **2px Spacing token** between the five segment/separator items; each date-part text is centered in its editable segment wrapper, with the active-segment backdrop painted **behind** the glyphs. Placeholder/filled content lives **inside the inline Field Control's Auto Layout content region**; it is not an unrelated absolute overlay of the former internal Field Base. Switching Calendar Off must reclaim Calendar icon space without shifting the field border or Focus effect.
 
 **No** `surface/brand` for selected calendar days. The selected Cell uses `surface/accent-emphasis` (`surface/accent-emphasis-hover` when hovered) and `fg/on-color`. Ordinary day text uses `fg/primary`, adjacent-month text `fg/tertiary`, and disabled day text `fg/disabled`. Focus remains the distinct `focus/default` semantic role. Interactive hover uses `surface/transparent-hover`.
 
@@ -128,9 +132,9 @@ Keep one selected date, with at most one calendar day marked selected at a time.
 
 ## Date value and input behavior
 
-Use the same **single date-only committed value and recoverable editing draft** contract as [Date Input](date-input.md). Date Picker must not maintain a second, conflicting value for the calendar grid.
+**Both Calendar modes use one date-only committed value and a recoverable segmented editing draft.** Empty, incomplete and temporarily invalid year/month/day segments are editing drafts, not new committed dates. A valid complete date is committed once; manual editing and calendar selection must never maintain conflicting date values.
 
-- The user may edit Year, Month, Day segments without opening Calendar. Focus on the text control alone **does not** automatically open the popup.
+- Year, Month and Day segments always remain manually editable in either Calendar mode. When `Calendar=False`, **there is no calendar action, no popup and no opening behavior**. When On, focusing the text control alone **does not** automatically open the popup.
 - Typing and full-date paste use the same localized parser and validation; supported Persian/Arabic/Latin numerals normalize internally. An incomplete draft does not commit an invalid calendar date.
 - A valid calendar day selection commits **one date value**, updates the segmented display, and closes the Calendar when the single-date selection action completes. An invalid/unavailable day does not commit.
 - Product/Form supplies requiredness, initial date, min/max, unavailable-date predicates and validation timing/copy. Avoid variants for arbitrary dates, limits or error categories.
@@ -142,9 +146,9 @@ Use the same **single date-only committed value and recoverable editing draft** 
 
 This is a **composite date-field + calendar** widget, requiring stronger behavior than a generic Text Input.
 
-### Separate focusable trigger
+### Separate focusable trigger (Calendar On only)
 
-- The trailing Calendar control is a real button or an equivalent semantic action; it has a meaningful accessible name (e.g. `انتخاب تاریخ`), appropriate expanded/controlled relationships, and a target that meets the pointer contract.
+- **Do not render or expose the Calendar trigger when Calendar is Off.** The trailing Calendar control, when enabled, is a real button or an equivalent semantic action; it has a meaningful accessible name (e.g. `انتخاب تاریخ`), appropriate expanded/controlled relationships, and a target that meets the pointer contract.
 - Click, Enter or Space on this action opens the Calendar; clicking/editing the date segments does **not** open it. Opening the panel does not overwrite an incomplete editing draft.
 - When opened, focus moves predictably to the selected date if usable, or to an appropriate initial date (often today, if enabled). The exact fallback when today is disabled/out of bounds is a runtime acceptance case.
 
@@ -188,7 +192,7 @@ Figma screenshots and component-property counts do **not** prove completed brows
 
 ## Live source and handoff state
 
-**Figma:** `24703:8942` and `24747:2862` on the official **Date Picker** page; verified 2026-10-22. Original legacy published source identities remain retained separately under internal compatibility sources.
+**Figma:** single public Date Picker set `24703:8942` (24 variants) and Calendar Day Cell `24747:2862` on the official **Date Picker** page; checked 2026-10-24. Legacy Date Input master `24779:839` and Date Field Base `24662:227` are retained under internal compatibility sources for migration; no separate public Date Input page remains.
 
 **Karbon / Storybook:** [karbon.jvoffice.ir](https://karbon.jvoffice.ir/) is the runtime reference site, but **no matching implementation export or executed parity, keyboard, screen-reader or responsive tests have been verified** for this component.
 
