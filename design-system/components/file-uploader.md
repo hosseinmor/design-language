@@ -10,7 +10,7 @@ design_status: ready-for-dev
 design_maturity: handoff-ready
 status: reviewed
 owner: Design System team
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-20'
 related:
   - design-system.component.progress-bar
   - design-system.component.progress-circle
