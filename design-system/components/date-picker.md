@@ -44,11 +44,11 @@ Date Picker is **not** Date Range, Time Picker, Date-Time Picker, timezone choos
 
 ## Canonical Figma and authoring contract
 
-- [Date Picker — live component and documentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24764-3047), page **Date Picker**.
+- [Date Picker — live component and documentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25066-2922), page **Date Picker**.
 - [Date Picker — public component set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24703-8942), `24703:8942`.
 - [Calendar Day Cell](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24747-2862), `24747:2862`.
 - [Calendar Surface](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24748-2810), `24748:2810`.
-- [Mobile composition with shared Dialog](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24838-990).
+- [Mobile composition with shared Dialog](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25073-45658).
 
 There are **24** public variants: `Size = Small | Medium | Large` × `State = Default | Hover | Focus | Error | Error focus | Disabled | Read only | Read only focus`, with **Medium / Default** as the Figma default. **Calendar is a Boolean authoring property, not a Variant axis**, so switching manual-only and calendar-enabled entry must not double the 24-variant set. There is no `State=Focus+Open`, `Filled` variant axis, or public Range axis.
 
