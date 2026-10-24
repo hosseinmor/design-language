@@ -58,7 +58,7 @@ WCAG 2.2 AA is the web baseline defined by the Accessibility corpus. Product Des
 
 Do not duplicate live specifications in this file.
 
-- **Design Knowledge** → why, when, semantic meaning, decision rules, composition constraints, known gaps.
+- **Design Language** → why, when, semantic meaning, decision rules, composition constraints, known gaps.
 - **Figma** → editable visual construction, component properties, variables, layout specifications.
 - **Code / Storybook when available** → runtime API, defaults, rendered states, implementation behavior, executable examples and tests.
 - **Product Knowledge** → product-specific business rules, permissions, states, and workflows.

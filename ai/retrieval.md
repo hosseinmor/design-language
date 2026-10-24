@@ -32,6 +32,40 @@ overview/design-language.md
 
 For a **specific, named component, governance document, token or pattern**, retrieve its exact document ID/path **directly**, without preloading the overview or the full Registry. The Manifest is an index, not a mandatory document payload: select candidates by ID/path/topic and read only the selected entries or fields. Follow only edges needed to answer the unresolved question (normally direct `related` links); avoid recursive graph traversal and avoid reading every neighboring document. When a large evidence registry has a narrow lookup index, use the index and ranged reads, not the entire evidence file.
 
+## Existing-decision preservation
+
+Retrieval is a **decision gate**, not only a context-loading optimization.
+
+For Design System design, review, or documentation work, retrieve and reconcile the current internal contract **before** ideation or external benchmarking:
+
+```text
+owning Design Language decision on main
+→ relevant live Figma construction
+→ existing decisions + explicit TBDs + cross-source discrepancies
+→ benchmark only unresolved questions or explicit change proposals
+→ owner decision
+→ Design Language / Figma reconciliation
+```
+
+The default assumption is that a mature system already contains decisions. Do not approach an existing component or pattern as a greenfield design problem unless the owning sources explicitly show that it is unowned or unresolved.
+
+Before proposing or applying a change, classify it as exactly one of:
+
+- **preserve** — keep an existing approved decision unchanged;
+- **resolve** — answer an explicit TBD/open gap without contradicting approved decisions;
+- **reconcile** — bring Figma and Design Language back into agreement without inventing a third contract;
+- **change** — intentionally replace an existing decision through the governed change process.
+
+Reviewed/final decisions are constraints during ordinary design work. A benchmark, common industry convention, product analogy, or model preference does not override them. Use external systems to inform unresolved questions or to provide evidence inside an explicit change proposal.
+
+If a proposed direction conflicts with a current reviewed decision, stop treating it as routine design iteration: name the conflict and route it through `governance/change-process.md`.
+
+Before modifying a live source, record the preservation set: which current decisions remain unchanged, which explicit gaps/conflicts are being addressed, and which source owns each affected fact.
+
+If the required owning Design Language document or live Figma source cannot be accessed, do not substitute memory, conversation history, benchmark behavior, or generic best practice for a new system-level decision. Surface the missing evidence and keep the decision unresolved.
+
+Chat history, Linear issues, audit documents, benchmark notes, screenshots, and migration artifacts may explain context or history, but they are not canonical decision sources. When they contain a durable approved decision, reconcile that decision into the owning Design Language document and live Figma source as applicable.
+
 ### Resolution and evidence rules
 
 - Resolve a **known ID** first; apply `aliases.yaml` only when the input is an alias. Never construct a fake path, component API, or Storybook ID from a label.
