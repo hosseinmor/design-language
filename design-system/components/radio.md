@@ -6,7 +6,7 @@ title: Radio
 summary: Radio lets users choose exactly one mutually exclusive option from a group.
 knowledge_state: canonical
 document_maturity: reviewed
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-09-19'
 related:
   - design-system.component.checkbox
   - design-system.reference.component-mapping
