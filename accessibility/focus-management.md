@@ -3,7 +3,7 @@ id: design-system.accessibility.focus-management
 collection: design-system
 type: accessibility
 title: Focus Management
-summary: Defines the shared Focus Visibility contract plus logical focus order, programmatic focus, overlays, dynamic changes, validation, removal, and focus restoration.
+summary: Defines practical rules for visible focus, logical focus order, programmatic focus, overlays, dynamic changes, validation, removal, and focus restoration.
 knowledge_state: canonical
 document_maturity: reviewed
 related:
@@ -11,7 +11,7 @@ related:
 - design-system.accessibility.keyboard-navigation
 - design-system.accessibility.dynamic-content-and-feedback
 - design-system.accessibility.forms
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-09-19'
 ---
 
 # Focus Management
