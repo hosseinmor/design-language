@@ -145,6 +145,10 @@ Keep one selected date, with at most one calendar day marked selected at a time.
 - A product-owned optional **Clear** action may be added when clearing is meaningful and permitted. It must not displace/confuse the Calendar action or silently clear a required date. The current public Figma design does **not** include Clear as a confirmed default.
 - Today shortcut, presets, multi-month calendars, Date Range and Timezone are **not** included in Single Date v1 by default.
 
+## Shared segmented editing rule
+
+The active-segment visual and cross-field editing model are owned by [Segmented Field Editing](../../foundations/interaction/segmented-field-editing.md). Date Picker retains its date/calendar-specific digit limits, locale ordering and validation below. The shared rule does **not** imply runtime conformance or change the canonical Date Picker master in this PR.
+
 ## Opening, keyboard and focus management
 
 This is a **composite date-field + calendar** widget, requiring stronger behavior than a generic Text Input.
