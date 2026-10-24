@@ -1139,12 +1139,12 @@
     },
     {
       "from": "design-system.component.app-shell",
-      "to": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.foundation.responsive-layout",
       "type": "related"
     },
     {
       "from": "design-system.component.app-shell",
-      "to": "design-system.foundation.responsive-layout",
+      "to": "design-system.foundation.responsive-layout-spec",
       "type": "related"
     },
     {
@@ -1394,12 +1394,12 @@
     },
     {
       "from": "design-system.component.dropdown-menu",
-      "to": "design-system.component.menu-button",
+      "to": "design-system.component.menu",
       "type": "related"
     },
     {
       "from": "design-system.component.dropdown-menu",
-      "to": "design-system.component.menu",
+      "to": "design-system.component.menu-button",
       "type": "related"
     },
     {
@@ -1493,26 +1493,6 @@
       "type": "related"
     },
     {
-      "from": "design-system.component.menu-button",
-      "to": "button",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.menu-button",
-      "to": "design-system.accessibility.component-authoring-contract",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.menu-button",
-      "to": "design-system.accessibility.core",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.menu-button",
-      "to": "design-system.component.menu",
-      "type": "related"
-    },
-    {
       "from": "design-system.component.menu",
       "to": "design-system.accessibility.component-authoring-contract",
       "type": "related"
@@ -1530,6 +1510,26 @@
     {
       "from": "design-system.component.menu",
       "to": "design-system.component.menu-button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu-button",
+      "to": "button",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu-button",
+      "to": "design-system.accessibility.component-authoring-contract",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu-button",
+      "to": "design-system.accessibility.core",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.menu-button",
+      "to": "design-system.component.menu",
       "type": "related"
     },
     {
@@ -1853,6 +1853,16 @@
       "type": "related"
     },
     {
+      "from": "design-system.component.table",
+      "to": "design-system.accessibility.tables-and-data-visualization",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.table",
+      "to": "design-system.pattern.data-views",
+      "type": "related"
+    },
+    {
       "from": "design-system.component.table-runtime-contract",
       "to": "design-system.accessibility.tables-and-data-visualization",
       "type": "related"
@@ -1864,16 +1874,6 @@
     },
     {
       "from": "design-system.component.table-runtime-contract",
-      "to": "design-system.pattern.data-views",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.table",
-      "to": "design-system.accessibility.tables-and-data-visualization",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.table",
       "to": "design-system.pattern.data-views",
       "type": "related"
     },
@@ -2189,12 +2189,12 @@
     },
     {
       "from": "design-system.foundation.layout",
-      "to": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.foundation.responsive-layout",
       "type": "related"
     },
     {
       "from": "design-system.foundation.layout",
-      "to": "design-system.foundation.responsive-layout",
+      "to": "design-system.foundation.responsive-layout-spec",
       "type": "related"
     },
     {
@@ -2238,26 +2238,6 @@
       "type": "related"
     },
     {
-      "from": "design-system.foundation.responsive-layout-spec",
-      "to": "design-system.foundation.responsive-layout",
-      "type": "related"
-    },
-    {
-      "from": "design-system.foundation.responsive-layout-spec",
-      "to": "design-system.pattern.responsive-layout",
-      "type": "related"
-    },
-    {
-      "from": "design-system.foundation.responsive-layout-spec",
-      "to": "design-system.reference.tailwind",
-      "type": "related"
-    },
-    {
-      "from": "design-system.foundation.responsive-layout-spec",
-      "to": "design-system.token.layout.catalog",
-      "type": "related"
-    },
-    {
       "from": "design-system.foundation.responsive-layout",
       "to": "design-system.foundation.layout",
       "type": "related"
@@ -2279,6 +2259,26 @@
     },
     {
       "from": "design-system.foundation.responsive-layout",
+      "to": "design-system.token.layout.catalog",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.pattern.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.reference.tailwind",
+      "type": "related"
+    },
+    {
+      "from": "design-system.foundation.responsive-layout-spec",
       "to": "design-system.token.layout.catalog",
       "type": "related"
     },
@@ -2519,12 +2519,12 @@
     },
     {
       "from": "design-system.pattern.responsive-layout",
-      "to": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.foundation.responsive-layout",
       "type": "related"
     },
     {
       "from": "design-system.pattern.responsive-layout",
-      "to": "design-system.foundation.responsive-layout",
+      "to": "design-system.foundation.responsive-layout-spec",
       "type": "related"
     },
     {
@@ -2658,6 +2658,21 @@
       "type": "related"
     },
     {
+      "from": "design-system.reference.component-mapping",
+      "to": "design-system.reference.code",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.component-mapping",
+      "to": "design-system.reference.figma",
+      "type": "related"
+    },
+    {
+      "from": "design-system.reference.component-mapping",
+      "to": "design-system.reference.storybook",
+      "type": "related"
+    },
+    {
       "from": "design-system.reference.component-mapping-index",
       "to": "design-system.reference.code",
       "type": "related"
@@ -2674,21 +2689,6 @@
     },
     {
       "from": "design-system.reference.component-mapping-index",
-      "to": "design-system.reference.storybook",
-      "type": "related"
-    },
-    {
-      "from": "design-system.reference.component-mapping",
-      "to": "design-system.reference.code",
-      "type": "related"
-    },
-    {
-      "from": "design-system.reference.component-mapping",
-      "to": "design-system.reference.figma",
-      "type": "related"
-    },
-    {
-      "from": "design-system.reference.component-mapping",
       "to": "design-system.reference.storybook",
       "type": "related"
     },
@@ -2774,12 +2774,12 @@
     },
     {
       "from": "design-system.reference.tailwind",
-      "to": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.foundation.responsive-layout",
       "type": "related"
     },
     {
       "from": "design-system.reference.tailwind",
-      "to": "design-system.foundation.responsive-layout",
+      "to": "design-system.foundation.responsive-layout-spec",
       "type": "related"
     },
     {
@@ -2859,12 +2859,12 @@
     },
     {
       "from": "design-system.token.layout.catalog",
-      "to": "design-system.foundation.responsive-layout-spec",
+      "to": "design-system.foundation.responsive-layout",
       "type": "related"
     },
     {
       "from": "design-system.token.layout.catalog",
-      "to": "design-system.foundation.responsive-layout",
+      "to": "design-system.foundation.responsive-layout-spec",
       "type": "related"
     },
     {
