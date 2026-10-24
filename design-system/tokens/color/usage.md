@@ -111,7 +111,7 @@ Disabled     → line/disabled
 
 Operation-progress lines share one contract: neutral unfilled path → `line/default`; active arc/segment (including 100%) → `line/accent`; complete settled Success/Error → `line/success` / `line/error`. This applies to Progress Circle and Progress Bar without changing their existing token scopes. It does not turn status text or icons into line roles. `line/inverse` remains restricted to an inverse surface.
 
-Focus remains a separate semantic layer; `line/emphasis` does not replace `focus/default`. The standard Focus geometry is a 2px ring with a 1px gap outside the component boundary, implemented on the web with `outline` + `outline-offset` rather than by changing the border.
+Focus remains a separate semantic layer; `line/emphasis` does not replace `focus/default`. This Color document owns token-role selection only. Shared Focus visibility, geometry, state composition, and runtime/Figma treatment are owned by `accessibility/focus-management.md`.
 
 ## Brand versus Accent
 
