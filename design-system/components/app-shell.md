@@ -29,7 +29,7 @@ Use it for application screens with shared Header, edge panes or app-level Foote
 App Shell / Viewport = xs | md | lg ; Navigation = Compact | Expanded
 ├── Header                    [existing nested instance; optional]
 ├── Body                      [auto layout]
-│   ├── End Pane              [logical end; optional]
+│   ├── Drawer / Inline       [direct linked instance in logical End region; optional]
 │   ├── Main Region           [fills remaining width; no page gutter]
 │   │   └── Page Container    [nested instance]
 │   │       └── Content       [ONE native slot; designer-owned]
@@ -37,7 +37,7 @@ App Shell / Viewport = xs | md | lg ; Navigation = Compact | Expanded
 └── App Footer                [app-level, optional]
 ```
 
-In RTL, the logical **Start region** appears on the **right** and End Pane on the **left**. This relationship reverses in LTR. **Start Pane is a layout-region concept, not a separate Figma component.** In this candidate, the Side Navigation instance sits **directly inside Body**, without an intermediate Start Pane component or frame. A general-purpose pane is not implied for pages that use navigation. Navigation UI and item contents remain owned by the Side Navigation component.
+In RTL, the logical **Start region** appears on the **right** and the **End region** on the **left**. This relationship reverses in LTR. **Start Pane and End Pane are layout-region concepts, not standalone Figma components.** In this candidate, the Side Navigation instance sits **directly inside Body**, without an intermediate Start Pane component or frame. The **End region is composed with a linked `Drawer` instance in `Display=Inline, Size=Default`**, not a separate End Pane frame/component. The Drawer owns its Header actions, Content and Footer slots; the App Shell owns whether it is present and how much width it consumes. Navigation UI and item contents remain owned by the Side Navigation component.
 
 App Shell owns chrome, region presence and their relative layout. Main Region fills the available area. **Page Container owns centering, width constraint and horizontal gutter**. The Content slot has no independent second page-gutter layer. Product page content, including its own local Flex/Grid, is owned by the consuming design. App Footer is shared app chrome, not a page-local form action bar.
 
@@ -49,7 +49,10 @@ App Shell owns chrome, region presence and their relative layout. Main Region fi
 | `Navigation` | Figma variant | `Compact`, `Expanded` | Parent-level navigation presentation; **six variants total** (3×2) control Side Navigation width and Main Region reflow |
 | `Header` | Boolean | On / Off | Controls shared Header visibility |
 | `Side Navigation` | Boolean | On / Off | Shows/hides the direct Side Navigation instance in the logical Start region; replaces old `Start Pane` Boolean label (same component-property identity) |
-| `End Pane` | Boolean | On / Off | Controls logical end region |
+| `End Pane` | Boolean | On / Off | Shows or hides the linked `Drawer / Inline` instance in logical End region; **keeps its existing Boolean identity** |
+| Drawer `Display` | Nested variant | `Inline` | Fixed by App Shell composition; other Drawer modes `Overlay`/`Floating` are not automatically part of the End region |
+| Drawer `Size` | Nested variant | `Default` | Current Inline design candidate width 400px, not a verified runtime width |
+| Drawer `Content / Slot` | Nested native slot | Arbitrary supplementary/task content | Drawer-specific content, distinct from Main Page Content; Drawer also owns its own Header-actions/Footer slots |
 | `App Footer` | Boolean | On / Off | Controls app-level Footer |
 | Container `Mode` | Exposed nested variant | `Contained` / `Fluid` | Default `Contained`; `Fluid` removes its max-width constraint |
 | Container `Reference` | Exposed nested variant | `sm` / `md` / `lg` / `xl` / `2xl` | Determines the design-time Tailwind v3 max-width and gutter step; designer changes manually when needed |
@@ -81,6 +84,16 @@ Each Container Reference also selects the current Figma `layout/page-gutter` var
 **Important Figma limitation:** changing a frame's width does **not** automatically switch a variant or its breakpoint Reference. App Shell defaults `xs → sm`, `md → md` and `lg → xl` (for a 1440px primary design reference). For 1024–1279px, a designer must change the exposed nested Container `Reference` to `lg`; from 1536px upward, change it to `2xl`. A narrower reference may also be intentionally selected for task-specific constraints. This manual design-tool setting is not an additional runtime API or a new Tailwind breakpoint. A future improvement could reduce this secondary choice, but no automatic breakpoint selection is claimed.
 
 Changing Shell viewport variants must retain the user's Content slot overrides. Changing nested Container mode must also retain them. The same contract applies if a Boolean hides a region. These changes require a visual QA pass for every intended combination, rather than merely a check that properties exist.
+
+### End region — Drawer Inline integration (Figma evidence, 2026-10-24)
+
+The six existing App Shell source variants now use the **live Figma Drawer** `Display=Inline, Size=Default` (source component set [24677:486](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24677-486)). The old placeholder End Pane Frames were removed. The linked Drawer Instance is a **direct Body child** at the logical End, opposite Side Navigation in RTL. `End Pane` is retained as the familiar visibility Boolean rather than adding a new property or a seventh Shell variant.
+
+The current Figma Inline Drawer width is **400px**. When both regions are visible at 1440px, the Main Region width is 784px with a 256px Expanded Navigation and 976px with the 64px Compact Navigation. When the Drawer is hidden, the Main region recovers its 400px. In a 900px `md` / Compact example, Main Region is 436px with the Drawer shown. The Page Container remains the sole native **page-content** slot; Drawer owns separate native slots for Drawer Header actions, Content, Footer (and optional Header extension). This is expected composition, not redundant nested Page Container insertion.
+
+**Mobile feasibility boundary:** The current Inline Drawer is wider than the 390px `xs` reference; enabling `End Pane` there collapses Main Region to approximately 1px in Figma. **Inline in xs is therefore unsupported and remains off by default.** Do not silently convert the End region to Floating or Overlay or claim a responsive fallback. A mobile Overlay/Drawer handoff requires an explicit reviewed behavior decision and accessibility testing.
+
+**Figma regression QA:** On the live App Shell composition, toggling `End Pane` off/on retained **both** the Page Content Slot override and the Drawer Content Slot override. Switching parent `Navigation=Expanded → Compact → Expanded` while keeping Drawer visible retained both content regions and recalculated Main Region (784 → 976 → 784px at 1440px). These results verify editable Figma composition only. The [design-language Drawer document on main](drawer.md) is still a **scaffold**; this Figma source must not be represented as approved code/runtime behavior or a reviewed shared Drawer contract.
 
 ### Six-variant navigation matrix — Figma QA (2026-10-22)
 
@@ -130,8 +143,9 @@ The final runtime composition must preserve meaningful Header/Main/Footer and na
 ## Known gaps and acceptance
 
 - The **Side Navigation** component is now the live designed Figma component (source ID `24631:180`) directly used in App Shell; the old legacy Right Panel instance and the extra Start Pane Frame were removed from all three App Shell variants. This is a design-source integration, not an approved runtime implementation. Header remains legacy, and responsive Drawer/flyout behavior remains independently unverified.
-- End Pane and App Footer currently have **design placeholders**, not final canonical implementation.
+- **End Pane now uses a linked live Figma Drawer / Inline** in all six App Shell variants; the previous placeholder has been removed. App Footer remains a visual placeholder. Drawer source has Figma variant/slot evidence, but its design-language document is still scaffold and its runtime interactions remain unverified.
 - Review default Side Navigation visibility across viewport variants, `md` rail choice, and responsive Drawer/flyout patterns. Figma currently uses one global Boolean default (`false`). Six parent variants are now implemented for both navigation presentations across all three viewports.
+- **Mobile Inline Drawer not supported:** at xs width the current 400px Inline Drawer exhausts Main width. Decide whether mobile End Pane requests should hand off to Overlay; until reviewed, keep `End Pane=false` on xs.
 - **Nested Compact resizing gap, mitigated:** changing the nested Side Navigation `Compact` value directly on an App Shell consumer instance may retain the old 64px width and squeeze expanded Items. The **supported Figma design-time workflow is now to change the outer `App Shell → Navigation=Compact/Expanded` Variant**. In verified `md` QA at width 900, Main Region changed correctly from 836px to 644px and back; `lg` at width 1440 changed from 1376px to 1184px and back. The page Content Slot was preserved. Figma still exposes the nested `Compact` setting; designers must avoid toggling that nested setting directly until a more reliable API/property exposure solution is found.
 - Resolve old responsive breakpoint and container numeric contracts in `foundations/visual/responsive-layout/` and `design-system/tokens/layout/catalog.md` in a reviewed foundation change; do not silently overwrite them.
 - The Tailwind v3 width steps, centered Contained/Fluid modes, and reference-based 16/24px gutters were reproduced and tested in the isolated Figma candidate. The remaining design-tool usability gap is that Container `Reference` must be selected manually when a design crosses steps inside the broader App Shell `lg` range; this should be assessed in designer testing.
@@ -148,6 +162,8 @@ A former instance-level max-width override prevented Fluid/2xl from working even
 ## Live references
 
 - [Side Navigation / designed Figma component](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24631-180)
+- [Drawer / live Figma component set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24677-486)
+- [App Shell / Inline Drawer authoring Playground](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24961-46031)
 - [App Shell / Figma candidate component set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24550-497)
 - [App Shell / Playground](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24552-177)
 - [App Shell / All six Navigation variants visual comparison](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24814-44967)
