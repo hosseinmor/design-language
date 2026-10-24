@@ -155,7 +155,7 @@ Rules:
 
 ```text
 Control line → line/emphasis, 1 px
-Focus indicator → focus/default, 2px ring + 1px offset
+Focus indicator → shared [Focus Management](../../accessibility/focus-management.md) contract
 ```
 
 The focus indicator does not alter layout.
@@ -235,7 +235,7 @@ Do not multiply the base Search variant matrix for this behavior.
 | Hover / Focus line | `line/emphasis` |
 | Disabled surface | `surface/disabled` |
 | Disabled line/content/actions | `fg/disabled` / disabled semantic roles |
-| Focus indicator | `focus/default` |
+| Focus indicator | shared [Focus Management](../../accessibility/focus-management.md) contract |
 
 Search does not require a Search-specific Color-token family.
 
@@ -336,7 +336,7 @@ Verify:
 - Clear appears only when Filled=true;
 - Filled preserves Placeholder and Query independently;
 - Small/Large property bindings work after cloning;
-- Focus uses line/emphasis + the shared 2px `focus/default` ring with a 1px offset;
+- Focus preserves the component's own line treatment and adds visible Focus through the shared [Focus Management](../../accessibility/focus-management.md) contract;
 - Disabled uses disabled semantic roles;
 - Placeholder and Query fill Content and use single-line ending ellipsis in Figma;
 - horizontal resize preserves padding, order, border, and clipping;
