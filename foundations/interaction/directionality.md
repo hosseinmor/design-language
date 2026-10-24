@@ -180,6 +180,7 @@ The detailed content contract, HTML examples and unresolved numeral/calendar/tim
 
 ## Live references
 
+- [Figma · Directionality HOS-56 review playground (editable QA examples, not a master)](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25157-37)
 - [Figma · App Shell](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24549-36)
 - [Figma · Side Navigation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24604-40457)
 - [Figma · Drawer](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24608-36)
