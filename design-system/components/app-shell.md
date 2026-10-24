@@ -17,7 +17,7 @@ related:
 
 # App Shell
 
-> **Status — audited Figma design candidate, pending owner and runtime review.** This document describes the live Figma source after the 2026-10-24 audit. It is not a shipped runtime API and does not claim Storybook parity. The Page Container reference values still require a Foundation-owned reconciliation before the composition can be considered fully design-ready.
+> **Status — audited Figma design candidate, pending runtime review.** This document describes the live Figma source after the 2026-10-24 audit. It is not a shipped runtime API and does not claim Storybook parity. The Page Container and optional Layout Content responsibilities are now reconciled in Figma.
 
 ## Purpose
 
@@ -34,8 +34,9 @@ App Shell
 │   ├── End Region
 │   │   └── Drawer                      [linked instance; optional]
 │   ├── Main Region                     [fills remaining width; no page gutter]
-│   │   └── Page Container              [linked Figma layout helper]
+│   │   └── Page Container              [linked responsive layout primitive]
 │   │       └── Content                 [one native page-content slot]
+│   │           └── Layout / Content    [optional inner max-width helper]
 │   └── Start Region
 │       └── Side Navigation             [linked instance; optional]
 └── App Footer                          [optional placeholder region]
@@ -48,10 +49,11 @@ Start Region and End Region are conceptual layout regions, not components. Do no
 | App Shell | Region order, region visibility, mobile temporary-surface composition, remaining Main width |
 | Side Navigation | Navigation destinations, item density, Compact/Expanded presentation |
 | Drawer | Drawer header, actions, content, footer, Display and modal behavior contract |
-| Page Container | Main-content centering, max width and page gutter |
+| Page Container | Responsive width, centering, page gutter, and the primary Content slot |
+| Layout / Content | Optional narrower inner max-width; no gutter or visual styling |
 | Consuming product | Page content, local grids, route semantics and product-specific minimum usable width |
 
-Main Region adds no horizontal page padding. Page Container is the only owner of page gutter and the only owner of the main native Content slot. Drawer and Side Navigation keep their independent native slots; those are not extra page-content slots.
+Main Region adds no horizontal page padding. Page Container is the only owner of page gutter and the primary native Content slot. Designers place content directly in that slot by default. Add Layout / Content only when the design needs a narrower reading or working width. Drawer and Side Navigation keep their independent native slots; those are not extra page-content slots.
 
 ## Live Figma source
 
@@ -61,6 +63,7 @@ Main Region adds no horizontal page padding. Page Container is the only owner of
 - [Side Navigation source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24631-180)
 - [Drawer source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24677-486)
 - [Page Container source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24549-41)
+- [Layout Content source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=23437-83)
 
 The App Shell presentation follows [Figma component presentation guidance](../../integrations/figma-component-presentation.md): 00 Header, 01 canonical Component Set, 02 Playground, 03 Anatomy and composition, and 04 Usage and handoff. The canonical Component Set remains in section 01; Playground examples are instances.
 
@@ -94,9 +97,10 @@ Page Container, Drawer and Side Navigation remain linked instances and remain ex
 
 - Change Compact/Expanded with the outer App Shell `Navigation` axis, not nested Side Navigation `Compact`.
 - Do not change nested Drawer `Display`; App Shell sets Inline on md/lg and Overlay on xs.
-- Page Container `Mode` and `Reference` remain designer choices until its responsive model is reconciled.
+- Do not change nested Page Container `Reference` independently of the selected App Shell viewport preset.
+- Layout / Content is not part of the App Shell master. Designers may add it inside Page Container Content only when a narrower max-width is intentional.
 
-Figma cannot conditionally hide those nested controls while keeping their slots discoverable. Treat the parent-owned values above as authoring rules, not additional consumer choices.
+Figma cannot conditionally hide parent-owned nested controls while keeping their slots discoverable. Treat those values as authoring rules, not additional consumer choices.
 
 ## Responsive model
 
@@ -177,16 +181,27 @@ No clean master-only correction was found. Lowering or removing the reference mi
 
 For Figma authoring, choose the intended Viewport before adding long content, verify the instance bounds manually after content or variant changes, and use a separate fixed viewport frame for prototype scrolling. Runtime must size against the actual viewport and content flow; the Figma root height is not implementation evidence.
 
-## Page Container mismatch
+## Page Container and Layout Content
 
-The linked Figma Page Container is still a candidate and is not aligned with the current responsive Foundation:
+The Figma architecture now separates responsive page layout from optional inner content constraint.
 
-| Source | Reference values |
-|---|---|
-| Live Figma Page Container candidate | 640, 768, 1024, 1280, 1536px |
-| Canonical main container roles | Interstitial 320px, Medium 768px, Large 1012px, XLarge 1280px, Full |
+### Page Container
 
-The 544px Small and 1400px XXLarge values are breakpoint thresholds, not container max-width roles. App Shell correctly delegates gutter and max-width ownership to Page Container, but it must not claim numeric alignment. Reconcile these values in a Foundation-owned change that also decides whether the candidate Page Container replaces or coexists with the older Container family. Do not silently change Page Container from the App Shell PR.
+- Uses one `Reference` axis: `sm`, `md`, `lg`, `xl`, `2xl`, and `Fluid`.
+- Represents the standard Tailwind v3 container progression used by the product layout.
+- Owns responsive width, centering, and the token-bound 16/24px page gutter.
+- Owns the primary native `Content` slot used by App Shell.
+- Runtime should use the existing Tailwind container behavior rather than introduce another public Container abstraction.
+
+### Layout / Content
+
+- Is optional and lives inside the Page Container Content slot.
+- Uses one `Max width` axis: `Compact` 400px, `Narrow` 768px, `Standard` 1200px, `Wide` 1320px, and `Fluid`.
+- Owns only the selected max-width and centering.
+- Does not own page gutter, fill, border, radius, shadow, or internal padding.
+- Runtime implements it as an inner max-width constraint; a dedicated public component is not required unless implementation reuse later justifies one.
+
+Place content directly in Page Container by default. Add Layout / Content only when a narrower measure is a deliberate design decision.
 
 ## Runtime interaction and accessibility contract
 
@@ -227,7 +242,7 @@ The audited presentation keeps the canonical source in section 01 and uses linke
 - xs closed, Navigation-open and End-Drawer-open states;
 - anatomy and ownership notes;
 - responsive Main-width thresholds;
-- the Page Container mismatch;
+- the Page Container plus optional Layout Content ownership model;
 - Figma height limitations; and
 - explicit Runtime QA requirements.
 
@@ -247,10 +262,9 @@ Archived QA frames remain outside the canonical presentation. They are not consu
 
 ### Blocking decisions and Runtime QA
 
-- Reconcile Page Container numeric references with the current responsive Foundation.
 - Decide whether to keep the six-state compatibility matrix long-term or approve a breaking five-state migration.
 - Resolve or explicitly accept the Figma instance root-height limitation for long content and sub-844px xs viewports.
 - Validate runtime focus, inertness, Escape/backdrop behavior, scroll lock, route-close behavior, RTL/LTR, zoom and screen-reader semantics.
 - Verify implementation and Storybook parity; none is claimed here.
 
-The Figma composition is suitable for engineering discussion and implementation planning. It is not yet ready for an unconditional design handoff or merge as a verified contract while the Foundation mismatch and runtime acceptance remain open.
+The Figma composition is suitable for engineering discussion and implementation planning. It is not yet ready for an unconditional design handoff or merge as a verified contract while runtime acceptance remains open.
