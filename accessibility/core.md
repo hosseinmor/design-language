@@ -10,7 +10,7 @@ owner: Design System team
 related:
 - design-system.accessibility.conformance-and-policy
 - design-system.accessibility.router
-last_reviewed: '2026-09-02'
+last_reviewed: '2026-10-24'
 ---
 
 # Accessibility Core
@@ -122,14 +122,14 @@ Use the established native/APG keyboard model for custom composite widgets rathe
 Keyboard focus is visibly identifiable.
 
 **MUST**
+Reusable authored UI follows the shared [Focus Management](focus-management.md) contract for visible Focus unless the owning Component/Pattern documents a reviewed exception.
+
+The default JV authored treatment is an external **2px Focus ring with a 1px gap**, shown through the shared visible-focus contract rather than by replacing the component border.
+
+**MUST**
 Author-created sticky/fixed content must not completely obscure the focused component.
 
-**SHOULD**
-Use a strong, consistent focus treatment that approaches the WCAG Focus Appearance model:
-- visible area roughly equivalent to a 2 CSS px perimeter;
-- approximately 3:1 focused/unfocused contrast change.
-
-The exact Focus Appearance geometry is a recommended internal target, not currently a hard JV requirement.
+WCAG 2.4.13 Focus Appearance remains Level AAA, but JV's 2px + 1px geometry is an internal Design System requirement. Contrast and standards interpretation remain owned by [Color and Contrast](color-and-contrast.md) and [Focus Management](focus-management.md).
 
 ### 5. Color and visual meaning
 
