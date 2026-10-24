@@ -1286,35 +1286,10 @@
     },
     {
       "from": "design-system.component.date-input",
-      "to": "design-system.accessibility.component-authoring-contract",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.date-input",
-      "to": "design-system.accessibility.focus-management",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.date-input",
-      "to": "design-system.accessibility.forms",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.date-input",
-      "to": "design-system.accessibility.keyboard-navigation",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.date-input",
       "to": "design-system.component.date-picker",
       "type": "related"
     },
     {
-      "from": "design-system.component.date-input",
-      "to": "design-system.component.text-input",
-      "type": "related"
-    },
-    {
       "from": "design-system.component.date-picker",
       "to": "design-system.accessibility.component-authoring-contract",
       "type": "related"
@@ -1332,11 +1307,6 @@
     {
       "from": "design-system.component.date-picker",
       "to": "design-system.accessibility.keyboard-navigation",
-      "type": "related"
-    },
-    {
-      "from": "design-system.component.date-picker",
-      "to": "design-system.component.date-input",
       "type": "related"
     },
     {
