@@ -5,7 +5,10 @@ type: component
 title: Date Picker
 summary: Unified segmented date field with optional Calendar; Calendar Off supports manual date entry, Calendar On adds an accessible calendar selection surface.
 knowledge_state: verified
-document_maturity: draft
+document_maturity: reviewed
+design_status: ready-for-dev
+design_maturity: handoff-ready
+last_reviewed: '2026-10-24'
 owner: Design System team
 related:
   - design-system.component.text-input
@@ -29,7 +32,7 @@ topics:
 
 # Date Picker
 
-> **HOS-49 — design contract for review.** Figma's unified Date Picker and Calendar Day Cell sources were rechecked on 2026-10-24. Their visual design, component placement, semantic tokens, and representative desktop/mobile compositions are complete. Real parser, browser keyboard and screen-reader behavior, responsive collisions, and Karbon/Storybook parity have **not** been executed or certified. Document maturity remains **draft** until owner review; Figma authoring properties are not confirmed runtime APIs.
+> **Reviewed design contract — HOS-49.** The Design System owner accepted the unified Date Picker direction and requested merge and development handoff on 2026-10-24. Figma's Date Picker and Calendar Day Cell sources were rechecked on the same date; their visual design, component placement, semantic tokens, and representative desktop/mobile compositions are complete. This approval covers the design specification and handoff, **not** shipped code, parser/browser behavior, screen-reader conformance, responsive collision handling, or Karbon/Storybook parity. Figma authoring properties are not confirmed runtime APIs.
 
 ## Purpose and component boundary
 
@@ -203,4 +206,4 @@ Figma screenshots and component-property counts do **not** prove completed brows
 
 **Karbon / Storybook:** [karbon.jvoffice.ir](https://karbon.jvoffice.ir/) is the runtime reference site, but **no matching implementation export or executed parity, keyboard, screen-reader or responsive tests have been verified** for this component.
 
-**Review gate:** Design System owner review, registry and link validations, and the triggered accessibility knowledge gate are required before merging or changing document maturity.
+**Design handoff:** The design contract is reviewed and ready for development. Registry, link, governance, terminology, localization, component-contract, and accessibility knowledge checks must pass before merge. Runtime parser, browser keyboard, screen-reader, responsive-collision, and Storybook tests remain implementation acceptance work; they do not block design handoff and must not be inferred as already passing.
