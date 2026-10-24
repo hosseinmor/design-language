@@ -8,7 +8,7 @@ knowledge_state: verified
 document_maturity: draft
 design_status: ready-for-dev
 design_maturity: handoff-ready
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-14'
 related:
   - design-system.component.tabs
   - design-system.component.toggle-button
