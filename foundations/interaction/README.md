@@ -20,6 +20,7 @@ A non-owner document may summarize the integration point and link to the canonic
 | Action-group hierarchy | [Action Hierarchy](action-hierarchy.md) |
 | Choosing Tooltip/Toggletip/Popover/Coachmark/Tour | [Contextual Guidance](contextual-guidance.md) |
 | Meaning of selected/current/checked/on/applied states | [Selection](selection.md) |
+| Editing compound dates/times through numeric segments | [Segmented Field Editing](segmented-field-editing.md) |
 | Link versus Button semantics | [Navigation](navigation.md) |
 | Busy/loading composition | [Loading and Progress pattern](../../design-system/patterns/loading-and-progress.md) |
 | Inline versus Toast feedback | [Notifications pattern](../../design-system/patterns/notifications.md) |

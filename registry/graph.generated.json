@@ -81,6 +81,7 @@
     "design-system.component.tag",
     "design-system.component.text-input",
     "design-system.component.textarea",
+    "design-system.component.time-picker",
     "design-system.component.timeline",
     "design-system.component.toggle-button",
     "design-system.component.toggletip",
@@ -95,6 +96,7 @@
     "design-system.experience-rule.loading",
     "design-system.experience-rule.navigation",
     "design-system.experience-rule.responsive-interaction",
+    "design-system.experience-rule.segmented-field-editing",
     "design-system.experience-rule.selection",
     "design-system.experience-rule.validation",
     "design-system.foundation.color",
@@ -1910,6 +1912,36 @@
       "type": "related"
     },
     {
+      "from": "design-system.component.time-picker",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.time-picker",
+      "to": "design-system.accessibility.forms",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.time-picker",
+      "to": "design-system.component.date-picker",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.time-picker",
+      "to": "design-system.component.select",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.time-picker",
+      "to": "design-system.component.text-input",
+      "type": "related"
+    },
+    {
+      "from": "design-system.component.time-picker",
+      "to": "design-system.experience-rule.segmented-field-editing",
+      "type": "related"
+    },
+    {
       "from": "design-system.component.timeline",
       "to": "design-system.accessibility.core",
       "type": "related"
@@ -2047,6 +2079,26 @@
     {
       "from": "design-system.experience-rule.responsive-interaction",
       "to": "design-system.foundation.responsive-layout",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.segmented-field-editing",
+      "to": "design-system.accessibility.focus-management",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.segmented-field-editing",
+      "to": "design-system.accessibility.keyboard-navigation",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.segmented-field-editing",
+      "to": "design-system.component.date-picker",
+      "type": "related"
+    },
+    {
+      "from": "design-system.experience-rule.segmented-field-editing",
+      "to": "design-system.component.time-picker",
       "type": "related"
     },
     {

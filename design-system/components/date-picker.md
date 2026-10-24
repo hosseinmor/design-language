@@ -5,7 +5,10 @@ type: component
 title: Date Picker
 summary: Unified segmented date field with optional Calendar; Calendar Off supports manual date entry, Calendar On adds an accessible calendar selection surface.
 knowledge_state: verified
-document_maturity: draft
+document_maturity: reviewed
+design_status: ready-for-dev
+design_maturity: handoff-ready
+last_reviewed: '2026-10-24'
 owner: Design System team
 related:
   - design-system.component.text-input
@@ -29,7 +32,7 @@ topics:
 
 # Date Picker
 
-> **HOS-49 — design contract for review.** Figma's unified Date Picker and Calendar Day Cell sources were rechecked on 2026-10-24. Their visual design, component placement, semantic tokens, and representative desktop/mobile compositions are complete. Real parser, browser keyboard and screen-reader behavior, responsive collisions, and Karbon/Storybook parity have **not** been executed or certified. Document maturity remains **draft** until owner review; Figma authoring properties are not confirmed runtime APIs.
+> **Reviewed design contract — HOS-49.** The Design System owner accepted the unified Date Picker direction and requested merge and development handoff on 2026-10-24. Figma's Date Picker and Calendar Day Cell sources were rechecked on the same date; their visual design, component placement, semantic tokens, and representative desktop/mobile compositions are complete. This approval covers the design specification and handoff, **not** shipped code, parser/browser behavior, screen-reader conformance, responsive collision handling, or Karbon/Storybook parity. Figma authoring properties are not confirmed runtime APIs.
 
 ## Purpose and component boundary
 
@@ -44,11 +47,11 @@ Date Picker is **not** Date Range, Time Picker, Date-Time Picker, timezone choos
 
 ## Canonical Figma and authoring contract
 
-- [Date Picker — live component and documentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24764-3047), page **Date Picker**.
+- [Date Picker — live component and documentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25066-2922), page **Date Picker**.
 - [Date Picker — public component set](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24703-8942), `24703:8942`.
 - [Calendar Day Cell](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24747-2862), `24747:2862`.
 - [Calendar Surface](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24748-2810), `24748:2810`.
-- [Mobile composition with shared Dialog](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24838-990).
+- [Mobile composition with shared Dialog](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25073-45658).
 
 There are **24** public variants: `Size = Small | Medium | Large` × `State = Default | Hover | Focus | Error | Error focus | Disabled | Read only | Read only focus`, with **Medium / Default** as the Figma default. **Calendar is a Boolean authoring property, not a Variant axis**, so switching manual-only and calendar-enabled entry must not double the 24-variant set. There is no `State=Focus+Open`, `Filled` variant axis, or public Range axis.
 
@@ -145,6 +148,10 @@ Keep one selected date, with at most one calendar day marked selected at a time.
 - A product-owned optional **Clear** action may be added when clearing is meaningful and permitted. It must not displace/confuse the Calendar action or silently clear a required date. The current public Figma design does **not** include Clear as a confirmed default.
 - Today shortcut, presets, multi-month calendars, Date Range and Timezone are **not** included in Single Date v1 by default.
 
+## Shared segmented editing rule
+
+The active-segment visual and cross-field editing model are owned by [Segmented Field Editing](../../foundations/interaction/segmented-field-editing.md). Date Picker retains its date/calendar-specific digit limits, locale ordering and validation below. The shared rule does **not** imply runtime conformance or change the canonical Date Picker master in this PR.
+
 ## Opening, keyboard and focus management
 
 This is a **composite date-field + calendar** widget, requiring stronger behavior than a generic Text Input.
@@ -199,4 +206,4 @@ Figma screenshots and component-property counts do **not** prove completed brows
 
 **Karbon / Storybook:** [karbon.jvoffice.ir](https://karbon.jvoffice.ir/) is the runtime reference site, but **no matching implementation export or executed parity, keyboard, screen-reader or responsive tests have been verified** for this component.
 
-**Review gate:** Design System owner review, registry and link validations, and the triggered accessibility knowledge gate are required before merging or changing document maturity.
+**Design handoff:** The design contract is reviewed and ready for development. Registry, link, governance, terminology, localization, component-contract, and accessibility knowledge checks must pass before merge. Runtime parser, browser keyboard, screen-reader, responsive-collision, and Storybook tests remain implementation acceptance work; they do not block design handoff and must not be inferred as already passing.
