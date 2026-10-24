@@ -14,6 +14,7 @@ related:
   - design-system.token.spacing.catalog
   - design-system.component.menu
   - design-system.component.drawer
+  - design-system.component.app-shell
   - design-system.accessibility.keyboard-navigation
   - design-system.accessibility.focus-management
   - design-system.accessibility.screen-reader-semantics
@@ -26,11 +27,11 @@ related:
 
 ## Purpose and ownership
 
-Side Navigation presents persistent product destinations and nested destinations, normally within the logical **Start Pane** of the App Shell (the right-hand edge in RTL).
+Side Navigation presents persistent product destinations and nested destinations, normally within the logical **Start Region** of the App Shell (the right-hand edge in RTL).
 
-- **App Shell / Start Pane** owns placement, space allocation, logical boundaries, the collapse affordance's placement, the compact/expanded layout state, and responsive composition.
+- **App Shell / Start Region** owns placement, space allocation, logical boundaries, the collapse affordance's placement, the compact/expanded layout state, and responsive composition.
 - **Side Navigation** owns the contents, navigation item presentation, active destination, and inline disclosure and the compact-rail hover-expanded overlay composition.
-- **Drawer** is a separate temporary/overlay component. Reusing the same navigation content in Drawer on a narrow viewport does not turn Side Navigation into a Drawer variant.
+- **Drawer** is a separate supplementary surface. On a narrow viewport, App Shell may present the existing Side Navigation itself as a temporary expanded panel; do not wrap it in Drawer or create a mobile Side Navigation variant.
 - **Menu** remains the action/command surface; persistent destination navigation is not an ARIA menu or application menubar.
 
 Side Pane is a **layout region**, not a separate published Side Pane component.
@@ -156,7 +157,7 @@ This temporary expanded presentation uses the existing `Compact=False` design an
 - Keep a meaningful accessible name on every icon-only control; Tooltip is supplemental, not a substitute.
 - Avoid clipping beneath the Main region, other scroll containers and the viewport. Check overlay stacking, pointer travel, zoom and RTL/LTR mirroring during runtime QA.
 
-The App Shell owns the persistent Compact preference, collapse button location, usable Start width and any narrow-viewport Drawer handoff. No new Side Navigation variant or modal semantics are introduced by the hover preview.
+The App Shell owns the persistent Compact preference, collapse button location, usable Start width and any narrow-viewport temporary-navigation composition. No new Side Navigation variant or modal semantics are introduced by the hover preview.
 
 ### Keyboard and semantics
 
@@ -184,7 +185,7 @@ Labels should identify destinations in concise, stable language. In the fixed-he
 - [ ] screen reader navigation landmark, accessible name, current page, expanded state and list hierarchy;
 - [ ] pointer hover-expansion of the entire rail, pointer-to-panel persistence, click/touch/keyboard alternatives, outside dismissal and Escape suppression of immediate reopening;
 - [ ] RTL/LTR, zoom, narrow viewports, overlay clipping/stacking and collision handling for hover-expanded Navigation;
-- [ ] App Shell toggle placement, compact state persistence and responsive Drawer handoff;
+- [ ] App Shell toggle placement, compact state persistence and responsive temporary-navigation handoff;
 - [ ] effective target sizes and focus ring contrast across Product/Appearance themes;
 - [ ] existing runtime component mappings, package API and Storybook stories (none verified here).
 
@@ -194,5 +195,5 @@ Labels should identify destinations in concise, stable language. In the fixed-he
 
 - [Responsive Layout](../../foundations/visual/responsive-layout/guideline.md) — layout regions and responsive strategy.
 - [Menu](menu.md) — action/command menu, not persistent destination navigation.
-- [Drawer](drawer.md) — independent temporary side surface; currently unverified.
+- [Drawer](drawer.md) — independent supplementary surface; currently unverified.
 - [W3C APG disclosure navigation example](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/) — reference for native links and buttons without menu semantics.
