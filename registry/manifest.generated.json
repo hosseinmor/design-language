@@ -1137,6 +1137,7 @@
       "owner": "Design System team",
       "last_reviewed": null,
       "related": [
+        "design-system.experience-rule.segmented-field-editing",
         "design-system.component.text-input",
         "design-system.component.dialog",
         "design-system.accessibility.forms",
@@ -2094,6 +2095,34 @@
         "responsive-interaction"
       ],
       "path": "foundations/interaction/responsive-interaction.md"
+    },
+    {
+      "id": "design-system.experience-rule.segmented-field-editing",
+      "kind": "design-system-experience-rule",
+      "title": "Segmented Field Editing",
+      "summary": "Draft shared editing behavior for segmented date/time values, including active-segment visuals, character-level deletion, directional navigation, incomplete drafts and accessible focus.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.date-picker",
+        "design-system.accessibility.keyboard-navigation",
+        "design-system.accessibility.focus-management",
+        "design-system.accessibility.forms"
+      ],
+      "topics": [
+        "date-input",
+        "design-system-experience-rule",
+        "interaction",
+        "keyboard",
+        "localization",
+        "rtl",
+        "segmented-editing",
+        "segmented-field",
+        "segmented-field-editing",
+        "time-input"
+      ],
+      "path": "foundations/interaction/segmented-field-editing.md"
     },
     {
       "id": "design-system.experience-rule.selection",
@@ -3299,7 +3328,7 @@
     }
   ],
   "summary": {
-    "documents": 156,
+    "documents": 157,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3312,7 +3341,7 @@
       "design-system-component": 47,
       "design-system-component-annex": 1,
       "design-system-design-language": 1,
-      "design-system-experience-rule": 11,
+      "design-system-experience-rule": 12,
       "design-system-foundation": 11,
       "design-system-governance": 6,
       "design-system-integration": 1,
