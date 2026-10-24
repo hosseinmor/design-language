@@ -6,7 +6,7 @@ title: Toggle
 summary: Toggle is the canonical binary on/off control for settings that take effect immediately.
 knowledge_state: canonical
 document_maturity: reviewed
-last_reviewed: '2026-09-19'
+last_reviewed: '2026-10-24'
 related:
   - design-system.component.checkbox
   - design-system.reference.component-mapping
@@ -84,7 +84,7 @@ The Small visual track remains 32 × 16 while the authored row preserves a 24px 
 | Default | `surface/neutral-muted` | `palette/bw/white` |
 | Hover | `surface/neutral-muted-hover` | `palette/bw/white` |
 | Active | `surface/neutral-muted-active` | `palette/bw/white` |
-| Focus | Default Off track + `focus/default` 2px outside ring | `palette/bw/white` |
+| Focus | Default Off track + shared [Focus Management](../../accessibility/focus-management.md) treatment | `palette/bw/white` |
 | Disabled | `surface/disabled` | `palette/bw/white` |
 
 Default, Hover, Active, and Disabled do not use a persistent border.
@@ -98,7 +98,7 @@ The fixed white Thumb is an intentional visual exception and binds directly to t
 | Default | `surface/accent-emphasis` | `palette/bw/white` |
 | Hover | `surface/accent-emphasis-hover` | `palette/bw/white` |
 | Active | `surface/accent-emphasis-active` | `palette/bw/white` |
-| Focus | Default On track + `focus/default` 2px outside ring | `palette/bw/white` |
+| Focus | Default On track + shared [Focus Management](../../accessibility/focus-management.md) treatment | `palette/bw/white` |
 | Disabled | `surface/disabled` | `palette/bw/white` |
 
 Brand and Success semantics are not used to communicate the On state.
