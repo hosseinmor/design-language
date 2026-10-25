@@ -1189,7 +1189,7 @@
       "summary": "Canonical design contract for modal, blocking task dialogs, including dismiss/focus, responsive presentation and scroll.",
       "status": "reviewed",
       "owner": "Design System team",
-      "last_reviewed": "2026-10-19",
+      "last_reviewed": "2026-10-25",
       "related": [
         "design-system.reference.component-mapping",
         "design-system.foundation.responsive-layout-spec",
