@@ -35,6 +35,9 @@ jobs:
       - name: Test validator failure modes
         run: python -m unittest discover -s tests -p 'test_*.py'
 
+      - name: Validate semantic content fixtures
+        run: python tooling/evals/run_content_semantic_eval.py validate
+
       - name: Check AI/Governance retrieval integrity
         run: python tooling/validators/check_ai_governance.py
 
