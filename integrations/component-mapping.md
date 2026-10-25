@@ -73,7 +73,7 @@ Known mismatch/gap
 | Legacy Inline outcomes | Unused legacy set `24149:1204` removed after verifying zero consumers; no outcome family remains under Loading |
 | Contracts | [Loading pattern](../design-system/patterns/loading-and-progress.md) · [Progress Circle](../design-system/components/progress-circle.md) |
 | Runtime / Storybook / Code Connect | Unregistered / unverified; no production animation, reduced-motion or assistive-technology test claim |
-| Figma last verified | 2026-10-19 |
+| Figma last verified | 2026-10-25 |
 
 ### Skeleton — HOS-47 design handoff (Figma verified; runtime unregistered)
 
@@ -104,7 +104,7 @@ Known mismatch/gap
 | Figma file key | `rROD8ctH9UfPGAMrRrOzHe` |
 | Figma presentation | [Dialog / Documentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24058-9) · node `24058:9` |
 | Figma component set | `Dialog / Default` · node `24036:267` · key `b8bd11b06f27bac00225857315e0cb4f4c0887f7` |
-| Size / Viewport axes | Five authored combinations: `Size=Small/Medium/Large/XL` with `Viewport=Regular` (400/560 default/800/960px max widths) plus `Size=Small, Viewport=Mobile` (328px design example). Under 768px layout adapts responsively at runtime; `Mobile` is not a hardware mode or public density prop. |
+| Size / Viewport / Presentation axes | Seven authored combinations: five `Presentation=Contained` combinations (four Regular widths 400/560/800/960, one Mobile 328px), plus `Presentation=Full screen` in Regular (master node `25233:314`, 1280×800 authoring) and Mobile (master node `25233:331`, 360×780 authoring). In Full screen, Size value is a Figma placeholder, **not** a width constraint. Mobile means responsive layout, not device detection. |
 | Shared authoring properties | `Title`, `Description`, `Description visible`, `Dismissible`, `Body / Slot`, `Footer / Slot`, and **`Overflow fade` Boolean (Figma preview only; default `false`)**. Size and Viewport are authoring axes, not runtime user-selectable appearance APIs. |
 | Anatomy | Title and supporting description; native Body/Footer Slots; canonical shared Buttons; independent Close Button |
 | Close Button set | `Close Button / Default` · node `24046:476` · key `c19c7786bdbb03e1ad13695db575d5d7478e0d34`; 40px operable area, 5 states, Radius Medium 6px; physical top/left in RTL: **12px Regular / 8px Mobile** |
