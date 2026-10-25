@@ -7,7 +7,7 @@ summary: Canonical design contract for modal, blocking task dialogs, including d
 knowledge_state: canonical
 document_maturity: reviewed
 owner: Design System team
-last_reviewed: 2026-10-19
+last_reviewed: 2026-10-25
 related:
   - design-system.reference.component-mapping
   - design-system.foundation.responsive-layout-spec
@@ -58,6 +58,20 @@ The modal overlay consists of an inert underlying page, a semantic **backdrop** 
 - Alert Dialog: **Icon is an actual child of the Title Row**, not an absolute sibling of Header. The RTL row is `[Title (flex), Alert icon (24px)]` with an **8px gap**; Title is right-aligned and shares Heading/LG. Description is its own line underneath, aligned with the Header's right edge. Icons and their colors reuse canonical icon components and existing public `fg/warning` / `fg/danger` variables.
 - At viewport height limits, keep Header/Footer outside the scroll container and scroll only Body. When Body is hidden, the Footer's top padding still supplies exactly one content-to-actions gap: **16px generic Mobile, 24px generic Regular or specialized narrow, and 32px specialized Regular**. This is intended runtime behavior; visual Figma checks do not constitute executed scroll/a11y tests.
 
+### Full-screen presentation
+
+**Approved design extension (2026-10-25).** `Full screen` is a **Presentation mode**, not a fifth content Size. It is supported **only by the general Dialog**, not by Confirmation Dialog or Alert Dialog. The existing contained sizing and behaviors are preserved.
+
+**Figma authoring:** Main Dialog Component Set adds the `Presentation` axis. Existing five combinations use `Presentation=Contained`; two additional supported source variants are `Presentation=Full screen, Viewport=Regular` (1280×800 authoring canvas, paired with Size=Medium solely because Figma requires a Size value) and `Presentation=Full screen, Viewport=Mobile` (360×780 authoring canvas, paired with Size=Small). **Size has no width-limiting meaning when Presentation=Full screen**; do not interpret or implement an eight-way Cartesian product of Size, Viewport and Presentation. The two Full-screen master examples share the same Title, Description, Dismissible, Overflow fade and native Body/Footer Slots as contained Dialog. Figma authoring dimensions are illustrative, not new breakpoints.
+
+**Shared behavior:** A Full-screen Dialog remains a *temporary modal task*, not a navigable application destination. Preserve the existing safe Close/Escape/unsaved-changes guard, modal semantics, background inertness, focus containment and return. Use no visible backdrop in front of a fully occupied viewport; ownership of backdrop/inertness remains at the modal infrastructure layer. The shell has zero margin, **radius 0**, no shadow, and fills the available *application viewport* width and height, accounting for actual system safe areas and on-screen keyboards. Keep Header and Footer visible; **Body grows to fill the rest and is the only scrollable region**. The 48px conditional Body fade remains applicable where overflow actually occurs. Section padding continues to use existing Regular/Mobile spacing; do not introduce a Full-screen-only spacing scale or tokens.
+
+**Mobile:** appropriate for bounded edit/compose tasks where keyboard, safe areas or a substantial form make contained Dialog cramped. Use a 40px Close target at existing 8px top/physical-left offset, Mobile section spacing and touch-appropriate Button sizes. Respect visual viewport changes, safe-area insets and focus visibility.
+
+**Regular/Desktop:** reserve for temporary content editing/review demanding a large working canvas and an obvious Save/Cancel completion model. The shell spans the application viewport, but forms or prose inside Body may independently limit their readable **content max-width**; two-pane workspaces may use available width. Close remains top/physical-left 12px. Do **not** use a Full-screen Dialog as a substitute for a destination with primary navigation, meaningful direct URL/deep-link, multi-page workflow or long-lived context: route such cases to a Page.
+
+**Implementation verification (not yet runtime-tested):** check regular and mobile viewport resize, 200% zoom, safe areas, software keyboard, RTL, body overflow/fade visibility, focus trap and restoration, cancellation with dirty form, and persisted underlying-page context. Figma source and screenshots are editable visual evidence only.
+
 ### Size and responsive choices
 
 | Authoring Size | Preferred maximum shell width | Intended use |
@@ -97,7 +111,7 @@ Dialog uses **content-height (Hug)** until constrained by available visual viewp
 
 ## Implementation acceptance checklist
 
-- [ ] Four widths 400/560/800/960 with fluid shrinking and 16px minimum gutters; check 320, 390, 767, 768, 1024, 1280 and 1920; long Persian strings / RTL.
+- [ ] Contained: four widths 400/560/800/960 with fluid shrinking and 16px minimum gutters. Full screen: Regular/Mobile application viewport fill with radius 0, fixed Header/Footer and only Body scrolling. Check 320, 390, 767, 768, 1024, 1280 and 1920; long Persian strings / RTL.
 - [ ] Shell padding=0 for all three families; verify section-level spacings in the matrix below (and special no-Footer Body bottom space). No public arbitrary `Narrow` density prop. All retain accessible action targets.
 - [ ] Short information with X and no Footer; confirmation with no X and explicit safe Cancel; destructive confirmation with correct Danger emphasis; focused form with validation and loading/error.
 - [ ] Escape routes to safe exit; Backdrop click does nothing; changes remain intact unless explicitly discarded; Cancel/Close/Escape share the same guard.
@@ -111,6 +125,7 @@ Dialog uses **content-height (Hug)** until constrained by available visual viewp
 ## Live sources and ownership
 
 - [Dialog page and presentation](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24058-9)
+- [Full-screen Regular source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25233-314) and [Full-screen Mobile source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=25233-331), within the existing Dialog Component Set.
 - Main Figma Dialog Component Set: node `24036:267`, key `b8bd11b06f27bac00225857315e0cb4f4c0887f7`.
 - [Close Button source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24046-476), key `c19c7786bdbb03e1ad13695db575d5d7478e0d34`.
 - [Narrow preset source](https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=24087-129096); generic Dialog Figma authoring only.
