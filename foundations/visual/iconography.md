@@ -45,6 +45,10 @@ Rules:
 
 This rule is verified for current component authoring even though the rest of this Iconography foundation document remains a scaffold.
 
+## Directional icon usage
+
+The proposed [Directionality foundation](../interaction/directionality.md) classifies directional navigation, physical assets, data-semantic visuals, and non-mirroring marks. The **consuming component** remains responsible for selecting the appropriate physical icon asset for its semantic action and effective RTL/LTR context. Do not globally mirror the icon library. Detailed icon classification and tooling are still pending owner review; this pointer does not promote the wider Iconography document out of Draft.
+
 ## Accessibility
 
 The [Images, Icons and Media accessibility contract](../../accessibility/images-icons-and-media.md) owns accessible naming and decorative/informational icon behavior. The [Icon Button](../../design-system/components/icon-button.md) owns its own anatomy and operation labeling. Further icon-system-level guidance remains TBD.
