@@ -73,7 +73,7 @@ The v1 canonical Menu is action/command-oriented. Do not use it as the default p
 ### Menu
 
 - Figma file: `rROD8ctH9UfPGAMrRrOzHe`
-- Component set: `Menu / Default`
+- Component set: `Menu`
 - Node ID: `17332:167748`
 - Component key: `5b8278235b0cefb99927a2507739afb15ace8f3b`
 - Matrix: `4 Size × 2 Layout = 8 variants`
@@ -87,7 +87,7 @@ The v1 canonical Menu is action/command-oriented. Do not use it as the default p
 
 ### Menu Item
 
-- Component set: `Menu Item / Default`
+- Component set: `Menu Item`
 - Node ID: `17332:167436`
 - Component key: `77d84f9c0d0377652a87f13ef915c65412655073`
 - Matrix: `4 Size × 5 State × 2 Tone = 40 variants`
@@ -101,8 +101,8 @@ The v1 canonical Menu is action/command-oriented. Do not use it as the default p
 | `Label` | Text | Single-line item label |
 | `Leading` | Boolean | 16px logical Start slot; Menu `Layout` controls this automatically in default composition |
 | `Checked` | Boolean | Shows the checked indicator |
-| `Show start icon` | Boolean | Shows an optional leading/action icon |
-| `Start icon` | Instance swap | Shared icon-library source; consumer must explicitly override icon color |
+| `Show leading icon` | Boolean | Shows an optional leading/action icon |
+| `Leading icon` | Instance swap | Shared icon-library source; consumer must explicitly override icon color |
 | `Show shortcut` | Boolean | Shows shortcut metadata |
 | `Shortcut` | Text | Shortcut text |
 | `Submenu` | Boolean | Marks a Root Menu Item as a submenu trigger and shows the logical-End indicator; child submenus do not expose another submenu trigger in JV v1 |
@@ -111,8 +111,8 @@ The v1 canonical Menu is action/command-oriented. Do not use it as the default p
 
 | Component | Node ID | Component key | Role |
 |---|---|---|---|
-| `Menu Group Label / Default` | `23038:129820` | `ae3dbe7236e339083cccd60ad047306201c0f6c6` | Optional non-interactive group heading |
-| `Menu Divider / Default` | `23038:129822` | `8cb217e111f87fa16785890815d769083ac7e5ec` | Optional non-interactive group separator |
+| `Menu Group Label` | `23038:129820` | `ae3dbe7236e339083cccd60ad047306201c0f6c6` | Optional non-interactive group heading |
+| `Menu Divider` | `23038:129822` | `8cb217e111f87fa16785890815d769083ac7e5ec` | Optional non-interactive group separator |
 
 Grouping is Menu composition. Divider/group properties do not belong on every Menu Item.
 
@@ -226,7 +226,7 @@ If a command hierarchy needs another level, prefer one of these restructures ins
 
 #### Child surface composition
 
-The child surface is another instance of the same canonical `Menu / Default`; do not create a separate Submenu component.
+The child surface is another instance of the same canonical `Menu`; do not create a separate Submenu component.
 
 - child `Size` matches its parent Menu Size;
 - child `Layout` may be Simple or Complex according to its own items;
@@ -246,7 +246,7 @@ Opening a child submenu must not resize either Menu surface.
 
 ## Grouping and separators
 
-Use `Menu Group Label / Default` when a visible group name improves comprehension. Use `Menu Divider / Default` between meaningful groups, not between every item.
+Use `Menu Group Label` when a visible group name improves comprehension. Use `Menu Divider` between meaningful groups, not between every item.
 
 Runtime grouping must preserve semantic grouping. Visible group labels provide the group accessible name; separators are non-focusable and non-interactive.
 
@@ -441,3 +441,12 @@ Verify:
 - `../../accessibility/component-accessibility-authoring-contract.md`
 - `../../accessibility/focus-management.md`
 - `../../integrations/component-mapping.md`
+
+## Figma authoring label compatibility
+
+The following Figma authoring labels were renamed in place for library consistency. Property types, identifier suffixes, defaults and component identities are preserved. These are design-tool labels, not new runtime APIs.
+
+| Previous label | Current label |
+| --- | --- |
+| `Show start icon` | `Show leading icon` |
+| `Start icon` | `Leading icon` |

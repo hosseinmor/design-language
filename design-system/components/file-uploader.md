@@ -54,14 +54,14 @@ Selection constraints, upload network timing, virus/security validation, remote 
 
 | Actual Figma master | ID | Verified structure |
 | --- | --- | --- |
-| Public `File uploader` | `5465:294860` | **15 variants**: Type × Size × supported State |
+| Public `File Uploader` | `5465:294860` | **15 variants**: Type × Size × supported State |
 | Internal `_File uploader file item` | `3199:35182` | **18 variants**: Size × 6 presentational States |
 | Internal `_File uploader - Drag and drop box states` | `3183:29103` | **4 states**, original Carbon |
 | Internal `_File uploader file list item` | `4188:102462` | **1 native `File list` Slot**, ID `24003:831` |
 | Figma presentation | `24020:785` | Actual masters in §01/§03, six connected Playground examples |
 | Superseded HOS-39 pilot | `23907:394` | Archived experiment; **not** an API/source for Carbon |
 
-Public properties: `Type` = Default / Drag and drop; `Size` = Large / Medium / Small; `State` = Enabled / Disabled (plus Skeleton only where provided for Drag and drop); `Label text` and `Desc. text` are Text; `Files` is Boolean for list visibility. Do **not** invent separate runtime `Mode`, `UploadStatus`, `FileCount` or `DragReject` props from these names.
+Public properties: `Type` = Default / Drag and drop; `Size` = Large / Medium / Small; `State` = Enabled / Disabled (plus Skeleton only where provided for Drag and drop); `Label` and `Description` are Text; `Show files` is Boolean for list visibility. Do **not** invent separate runtime `Mode`, `UploadStatus`, `FileCount` or `DragReject` props from these names.
 
 Internal File Item: `Size` (L/M/S), `State` (Uploaded, Loading, Success, Focus, Error short, Error long), and `File name`, `Short desc.`, `Long desc.` Text properties. Internal Dropzone: Enabled, Drag + Hover, Focus and Disabled, with editable `Helper text`. These are original presentational variants, not evidence of network behavior.
 
@@ -171,3 +171,13 @@ The new normal text combinations exceed 4.5:1; the error icon exceeds the 3:1 no
 **Open maintenance and runtime debt:** File Item 7/11/15px optical padding; Dropzone 10/50px local construction; old Transparent/Transparent Paint Styles; actual focus-ring editor/browser rendering; mixed-content, screen-reader and native file input testing; published instance override regression; product appearance visual matrix. The neighboring nine-variant **image uploader** is a separate component with its own migration debt, not part of this scope.
 
 Detailed evidence: File Uploader Token Migration Audit. Foundation/semantic fixes are **applied in Figma**, while runtime, focus and published-consumer QA remain open.
+
+## Figma authoring label compatibility
+
+The following Figma authoring labels were renamed in place for library consistency. Property types, identifier suffixes, defaults and component identities are preserved. These are design-tool labels, not new runtime APIs.
+
+| Previous label | Current label |
+| --- | --- |
+| `Label text` | `Label` |
+| `Desc. text` | `Description` |
+| `Files` | `Show files` |

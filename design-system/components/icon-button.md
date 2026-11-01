@@ -54,7 +54,7 @@ Do not use Icon Button when:
 
 ## Canonical Figma API
 
-Component set: `Icon Button / Default`
+Component set: `Icon Button`
 
 Figma file key: `rROD8ctH9UfPGAMrRrOzHe`
 
@@ -442,7 +442,7 @@ Do not introduce product-specific Icon Button variants solely to change color.
 ## Live References
 
 - Figma file: `rROD8ctH9UfPGAMrRrOzHe`
-- Component set: `Icon Button / Default`
+- Component set: `Icon Button`
 - Node: `22685:1410`
 - Component key: `f9b7af4bd9afaf768ae955c51ccddd29833c5ca7`
 - Current matrix: 7 Styles × 4 Sizes × 5 States = 140 variants

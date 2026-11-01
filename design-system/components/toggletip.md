@@ -48,7 +48,7 @@ If the content grows into a mini application surface, it is no longer a Toggleti
 
 ## Canonical Figma API
 
-Component set: `Toggletip / Default`
+Component set: `Toggletip`
 
 Figma file key: `rROD8ctH9UfPGAMrRrOzHe`
 
@@ -60,11 +60,11 @@ Component key: `54bf6a92136594a94c18def1a16c5378786884cf`
 
 | Property | Values / behavior |
 |---|---|
-| `Title` | Boolean; default `False` |
-| `Action` | Boolean; default `False` |
-| `Title text` | Text |
-| `Body text` | Text |
-| `Action text` | Text |
+| `Show title` | Boolean; default `False` |
+| `Show action` | Boolean; default `False` |
+| `Title` | Text |
+| `Body` | Text |
+| `Action label` | Text |
 | `Side` | `Top`, `Bottom`, `Left`, `Right` |
 | `Align` | `Start`, `Center`, `End` |
 
@@ -262,7 +262,7 @@ Verify:
 ## Live References
 
 - Figma file: `rROD8ctH9UfPGAMrRrOzHe`
-- Component set: `Toggletip / Default`
+- Component set: `Toggletip`
 - Node: `22778:127362`
 - Component key: `54bf6a92136594a94c18def1a16c5378786884cf`
 - Matrix: 4 Sides × 3 Alignments = 12 variants
@@ -277,3 +277,15 @@ Verify:
 - `../../foundations/interaction/contextual-guidance.md`
 - `../../accessibility/core.md`
 - `../../accessibility/focus-management.md`
+
+## Figma authoring label compatibility
+
+The following Figma authoring labels were renamed in place for library consistency. Property types, identifier suffixes, defaults and component identities are preserved. These are design-tool labels, not new runtime APIs.
+
+| Previous label | Current label |
+| --- | --- |
+| `Title` | `Show title` |
+| `Action` | `Show action` |
+| `Title text` | `Title` |
+| `Body text` | `Body` |
+| `Action text` | `Action label` |

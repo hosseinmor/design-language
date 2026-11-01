@@ -85,7 +85,7 @@ The `Label` property remains required in every mode. In Icon-only mode it is not
 
 ## Figma Property Model
 
-### Tabs / Default
+### Tabs
 
 Tabs is a standalone public component rather than a Component Set with appearance, size, count, or alignment axes.
 
@@ -319,7 +319,7 @@ File key: `rROD8ctH9UfPGAMrRrOzHe`
 
 ### Tabs
 
-- Component: `Tabs / Default`
+- Component: `Tabs`
 - Figma node ID: `23486:300`
 - Component key: `d79023ff7c2575d09ea714814c8d7e75fbac1662`
 - Content property: `Items` native Slot

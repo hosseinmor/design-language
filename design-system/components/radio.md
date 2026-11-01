@@ -234,7 +234,7 @@ File key: `rROD8ctH9UfPGAMrRrOzHe`
 
 ### Radio
 
-- Component Set: `Radio / Default`
+- Component Set: `Radio`
 - Node: `2930:23442`
 - Component key: `a1e6b8ca998c57f78abd75b97b190aacbd662f44`
 - Variant properties: `Selected / State`
@@ -242,7 +242,7 @@ File key: `rROD8ctH9UfPGAMrRrOzHe`
 
 ### Radio Group
 
-- Component Set: `Radio Group / Default`
+- Component Set: `Radio Group`
 - Node: `2927:28166`
 - Component key: `8a24b1caa72671235a5c9d26706efcc845f45eee`
 - Variant properties: `Direction`

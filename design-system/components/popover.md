@@ -46,7 +46,7 @@ Do not use Popover merely because content visually fits inside a floating rectan
 
 ## Canonical Figma API
 
-Component set: `Popover / Default`
+Component set: `Popover`
 
 Figma file key: `rROD8ctH9UfPGAMrRrOzHe`
 
@@ -85,15 +85,15 @@ Properties:
 
 | Property | Values / behavior |
 |---|---|
-| `Title` | Boolean |
-| `Body` | Boolean |
-| `Title text` | Text |
-| `Body text` | Text |
+| `Show title` | Boolean |
+| `Show body` | Boolean |
+| `Title` | Text |
+| `Body` | Text |
 | `Actions` | `None`, `One`, `Two` |
 
 Component default: Title + Body + `Actions=None`.
 
-Inside `Popover / Default`, the recommended embedded `Popover content` preset is intentionally configured with `Actions=Two`. This shell preset does not change the standalone `Popover content` component default.
+Inside `Popover`, the recommended embedded `Popover content` preset is intentionally configured with `Actions=Two`. This shell preset does not change the standalone `Popover content` component default.
 
 The action buttons are real instances of the canonical Button component and are exposed nested instances for further configuration.
 
@@ -193,7 +193,7 @@ Popover is non-modal by default and must not trap focus merely because it is flo
 
 The standalone `Popover content` component defaults to Title + Body with `Actions=None`.
 
-The canonical `Popover / Default` shell is prepopulated with that component configured as `Actions=Two` so the common two-action anatomy is immediately available in the shell preset.
+The canonical `Popover` shell is prepopulated with that component configured as `Actions=Two` so the common two-action anatomy is immediately available in the shell preset.
 
 Consumers may choose `None`, `One`, or `Two` according to the task. Keep action groups to two Buttons whenever possible.
 
@@ -290,7 +290,7 @@ Verify:
 - default `Popover content` is present and editable;
 - default shell is `Side=Top`, `Align=Start`, `Arrow=False`;
 - standalone `Popover content` defaults to Title + Body with `Actions=None`;
-- the embedded `Popover / Default` shell preset uses `Actions=Two`;
+- the embedded `Popover` shell preset uses `Actions=Two`;
 - Title, Body, and Actions properties work;
 - one- and two-action layouts do not overflow;
 - custom Slot compositions resize the shell correctly;
@@ -300,7 +300,7 @@ Verify:
 ## Live References
 
 - Figma file: `rROD8ctH9UfPGAMrRrOzHe`
-- Popover component set: `Popover / Default`
+- Popover component set: `Popover`
 - Popover node: `22790:127700`
 - Popover component key: `4e88b783a0b479a8bb90e8771604a04fd39785ba`
 - Default content component set: `Popover content`
@@ -316,3 +316,14 @@ Verify:
 - `button.md`
 - `../../foundations/interaction/contextual-guidance.md`
 - `../../foundations/interaction/action-hierarchy.md`
+
+## Figma authoring label compatibility
+
+The following Figma authoring labels were renamed in place for library consistency. Property types, identifier suffixes, defaults and component identities are preserved. These are design-tool labels, not new runtime APIs.
+
+| Previous label | Current label |
+| --- | --- |
+| `Title` | `Show title` |
+| `Body` | `Show body` |
+| `Title text` | `Title` |
+| `Body text` | `Body` |

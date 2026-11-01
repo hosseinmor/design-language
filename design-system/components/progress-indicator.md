@@ -52,10 +52,10 @@ Progress Indicator answers **"where am I in this workflow?"**. Timeline answers 
 
 - Figma file: `[DS] Job Vision NEXT`
 - File key: `rROD8ctH9UfPGAMrRrOzHe`
-- Page: `Progress indicator`, node `521:16785`
+- Page: `Progress Indicator`, node `521:16785`
 - Canonical documentation frame: `Progress indicator / Documentation`, node `23730:499`
 - Item component set: `_Progress indicator item`, node `23704:348`, component key `ebd4a7beb03d58ea243faaed501712880ffa2669`
-- Parent component set: `Progress indicator`, node `23704:699`, component key `335d54d47ea28e6329f88a8bb34dc3b2d02e5c77`
+- Parent component set: `Progress Indicator`, node `23704:699`, component key `335d54d47ea28e6329f88a8bb34dc3b2d02e5c77`
 
 Figma review link:
 https://www.figma.com/design/rROD8ctH9UfPGAMrRrOzHe/-DS--Job-Vision-NEXT?node-id=23730-499
@@ -278,7 +278,7 @@ If a product needs navigation to previous steps, define that behavior deliberate
 
 ## Figma designer workflow
 
-1. Insert `Progress indicator`.
+1. Insert `Progress Indicator`.
 2. Select `Direction`.
 3. The native `Items` slot starts with three default Progress Indicator Items.
 4. Select nested Items and set `State`, `Label`, and optional `Helper`.
@@ -453,7 +453,7 @@ The previous Carbon-derived assets and Expressive exploration were retained only
 Canonical v1 now uses:
 
 - `_Progress indicator item` — node `23704:348`;
-- `Progress indicator` — node `23704:699`;
+- `Progress Indicator` — node `23704:699`;
 - documentation frame `23730:499`.
 
 Removed from the canonical contract:

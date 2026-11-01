@@ -54,12 +54,12 @@ Combo Button is not a generic Button Group. The two controls have fixed roles: o
 ## Canonical Figma source
 
 - Figma file: `rROD8ctH9UfPGAMrRrOzHe`
-- Component set: `Combo Button / Default`
+- Component set: `Combo Button`
 - Node ID: `22932:134187`
 - Component key: `c6f34b8a4294241844d10349881d8264b1c072eb`
 - Matrix: `3 Style × 4 Size × 2 Open = 24 variants`
-- Primary Action foundation: canonical `Button / Default`
-- Menu Trigger foundation: canonical `Icon Button / Default`
+- Primary Action foundation: canonical `Button`
+- Menu Trigger foundation: canonical `Icon Button`
 - Menu composition: native `Menu content` SLOT
 
 ### Figma presentation — verified 2026-10-17
@@ -86,7 +86,7 @@ Interaction states are intentionally not multiplied into the outer variant matri
 RTL-authored Figma source:
 
 ```text
-Combo Button / Default (Style × Size × Open)
+Combo Button (Style × Size × Open)
 ├─ Unified shell / Wrapper (horizontal Auto Layout, 0px gap, radius 6)
 │  ├─ Menu Trigger / Icon Button (canonical instance; logical End)
 │  ├─ Divider / semantic {Style} (non-interactive 1px Rectangle)

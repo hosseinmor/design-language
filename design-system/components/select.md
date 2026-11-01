@@ -19,7 +19,7 @@ related:
 
 ## Purpose, boundaries
 
-Select commits option IDs from a **known option set**. `Select / Single` commits one ID (or null), `Select / Multiple` commits an ordered unique list of IDs.
+Select commits option IDs from a **known option set**. `Select / Single Select` commits one ID (or null), `Select / Multiple Select` commits an ordered unique list of IDs.
 
 - For unbounded typed text → Text Input.
 - For typed query with suggestions and value-policy → Autocomplete.
@@ -41,9 +41,9 @@ Select commits option IDs from a **known option set**. `Select / Single` commits
 
 ### Internal content sources and library insertion
 
-The content-only masters `_Select / Content / Placeholder`, `_Select / Single / Content / Value`, `_Select / Multiple / Content / Summary`, and `_Autocomplete / Content / Query` are internal composition sources, not standalone field entry points. Their underscore-prefixed names distinguish them from the directly insertable `Select / Single` and `Select / Multiple`. These masters retain their original node IDs, keys, and linked instances. Shared Selection Panel and Option families remain composition assets; do not hide them merely because they are nested in a field.
+The content-only masters `_Select / Content / Placeholder`, `_Select / Single / Content / Value`, `_Select / Multiple / Content / Summary`, and `_Autocomplete / Content / Query` are internal composition sources, not standalone field entry points. Their underscore-prefixed names distinguish them from the directly insertable `Select / Single Select` and `Select / Multiple Select`. These masters retain their original node IDs, keys, and linked instances. Shared Selection Panel and Option families remain composition assets; do not hide them merely because they are nested in a field.
 
-The rename does not by itself certify the currently published library contents. After publishing, verify the Assets search and library publication settings, including removal of previously published internal entries where necessary.
+The naming changes do not by themselves certify the currently published library contents. After publishing, verify the Assets search and library publication settings, including removal of previously published internal entries where necessary.
 
 ## Common visual anatomy
 

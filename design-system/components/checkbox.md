@@ -253,7 +253,7 @@ File key: `rROD8ctH9UfPGAMrRrOzHe`
 
 ### Checkbox
 
-- Component Set: `Checkbox / Default`
+- Component Set: `Checkbox`
 - Node: `3193:29303`
 - Component key: `af1fdbe97bf103d8ae5e4540d36f4ffb284cc35b`
 - Variant properties: `Selection / State`
@@ -261,7 +261,7 @@ File key: `rROD8ctH9UfPGAMrRrOzHe`
 
 ### Checkbox Group
 
-- Component Set: `Checkbox Group / Default`
+- Component Set: `Checkbox Group`
 - Node: `23020:127117`
 - Component key: `9c6f915d8bc3399d2f02fd0aad20218757b0749f`
 - Variant properties: `Direction`

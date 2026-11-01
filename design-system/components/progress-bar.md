@@ -82,7 +82,7 @@ Use Indeterminate when an operation is active but its completed proportion, rema
 **Figma status (2026-10-15):**
 
 - The nested `_Progress bar track item` retains `Progress=Indeterminate` in **Small 4px** and **Big 8px**; no internal Track master was duplicated.
-- The public `Progress bar` now exposes **five** `State=Active, Progress=Indeterminate` variants: `Default/Small`, `Default/Big`, `Inline/Small`, `Inline/Big`, and `Indent/Big`. These match currently supported Active size/alignment combinations; `Indent/Small` was not invented.
+- The public `Progress Bar` now exposes **five** `State=Active, Progress=Indeterminate` variants: `Default/Small`, `Default/Big`, `Inline/Small`, `Inline/Big`, and `Indent/Big`. These match currently supported Active size/alignment combinations; `Indent/Small` was not invented.
 - Each Indeterminate master nests its corresponding Track and preserves linked Label/Helper text authoring where present. Indeterminate is a **Progress axis value**, not a separate Mode axis.
 - **Verified in Figma:** component links, both sizes, available alignment treatments, RTL/Persian Playground, neutral Track stroke, accent **static segment**, and absence of numeric progress copy. The segment must move appropriately at runtime, not act as a static 25% claim.
 - **Runtime QA needed:** actual animation, reduced-motion handling, accessible progress naming/value/announcements, and long/mixed-script responsive behavior.
@@ -102,8 +102,8 @@ Figma: [Progress bar / Documentation](https://www.figma.com/design/rROD8ctH9UfPG
 | Source | Verified identifier |
 | --- | --- |
 | File | `[DS] Job Vision NEXT` — `rROD8ctH9UfPGAMrRrOzHe` |
-| Page | `Progress bar` — `8930:400384` |
-| **Public component set** | `Progress bar` — node `12603:272925`; component key `1d9983588bb228a44ca2b3af89195bd1e2b51c9d` |
+| Page | `Progress Bar` — `8930:400384` |
+| **Public component set** | `Progress Bar` — node `12603:272925`; component key `1d9983588bb228a44ca2b3af89195bd1e2b51c9d` |
 | **Nested track set** | `_Progress bar track item` — node `12603:273022`; component key `b765a10f45d8d3ad69489a266bc6e623ba94d5b1` |
 | Presentation | `Progress bar / Documentation` — node `23867:126381`, 1600px shared presentation system |
 
@@ -167,7 +167,7 @@ The operation Label is the primary identifier of the running task; Helper and te
 
 ### Figma token-compliance refinement — 2026-10-20
 
-A source-only audit of the **original** `Progress bar` (30 public variants) and `_Progress bar track item` (16 internal variants) verified the current semantic Stroke, Typography and geometry contract. **46** existing shared-scale spacing properties lacked a Figma Spacing variable binding. They were rebound **in place** without modifying numeric values, component IDs/keys, layout dimensions, or the set's existing Figma API:
+A source-only audit of the **original** `Progress Bar` (30 public variants) and `_Progress bar track item` (16 internal variants) verified the current semantic Stroke, Typography and geometry contract. **46** existing shared-scale spacing properties lacked a Figma Spacing variable binding. They were rebound **in place** without modifying numeric values, component IDs/keys, layout dimensions, or the set's existing Figma API:
 
 - **30** public parent `itemSpacing` bindings: **22 × 8px** in Default/Indent and **8 × 16px** in Inline.
 - **4 × 16px** `Label + Icon` gap bindings in Success/Error parent variants.
