@@ -102,7 +102,7 @@ Figma: [Progress bar / Documentation](https://www.figma.com/design/rROD8ctH9UfPG
 | Source | Verified identifier |
 | --- | --- |
 | File | `[DS] Job Vision NEXT` — `rROD8ctH9UfPGAMrRrOzHe` |
-| Page | `Progress Bar` — `8930:400384` |
+| Page | `Progress bar` — `8930:400384` |
 | **Public component set** | `Progress Bar` — node `12603:272925`; component key `1d9983588bb228a44ca2b3af89195bd1e2b51c9d` |
 | **Nested track set** | `_Progress bar track item` — node `12603:273022`; component key `b765a10f45d8d3ad69489a266bc6e623ba94d5b1` |
 | Presentation | `Progress bar / Documentation` — node `23867:126381`, 1600px shared presentation system |

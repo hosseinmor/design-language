@@ -52,7 +52,7 @@ Progress Indicator answers **"where am I in this workflow?"**. Timeline answers 
 
 - Figma file: `[DS] Job Vision NEXT`
 - File key: `rROD8ctH9UfPGAMrRrOzHe`
-- Page: `Progress Indicator`, node `521:16785`
+- Page: `Progress indicator`, node `521:16785`
 - Canonical documentation frame: `Progress indicator / Documentation`, node `23730:499`
 - Item component set: `_Progress indicator item`, node `23704:348`, component key `ebd4a7beb03d58ea243faaed501712880ffa2669`
 - Parent component set: `Progress Indicator`, node `23704:699`, component key `335d54d47ea28e6329f88a8bb34dc3b2d02e5c77`

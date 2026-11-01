@@ -288,7 +288,7 @@ The canonical Button component set (node `1854:1776`) still has the existing 320
 - All four sizes retain documented 28/32/40/48px heights and 8/12/16/20px horizontal padding.
 - The 320 Variant source text styles and Radius bindings were unchanged; all were already governed.
 
-Each variant additionally contains one `Show leading icon` and one `Show trailing icon` frame, each with only one direct child. Those **640** raw `itemSpacing=8px` values are **inactive** because no sibling spacing can be produced within a single-child frame. They are not a layout-token failure, were left unchanged, and are exempted by the scoped source audit. If the icon wrapper anatomy gains multiple children, review its gap.
+Each variant additionally contains one `Start Icon` and one `End Icon` frame, each with only one direct child. Those **640** raw `itemSpacing=8px` values are **inactive** because no sibling spacing can be produced within a single-child frame. They are not a layout-token failure, were left unchanged, and are exempted by the scoped source audit. If the icon wrapper anatomy gains multiple children, review its gap.
 
 **Remaining:** Legacy `Transparent/Transparent` Paint Style remains in some Button Focus visuals; it uses blending behavior and was not indiscriminately replaced. Product × Appearance visual regression, published instance overrides, keyboard focus and Angular/Storybook QA still require separate verification.
 
@@ -347,3 +347,7 @@ The following Figma authoring labels were renamed in place for library consisten
 | `End Icon` | `Show trailing icon` |
 | `Swap Start Icon` | `Leading icon` |
 | `Swap End Icon` | `Trailing icon` |
+
+## Open live-source reconciliation gap
+
+The naming audit found 192 live variants at the unchanged `1854:1776` source, with Loading represented in `State` and no independent Loading Boolean. This differs from the independent-Loading contract and the historical 320-variant audit recorded above. The naming cleanup preserved that live construction and did not resolve or approve this discrepancy. Reconcile the owning loading/state decision before treating either representation as verified parity.
