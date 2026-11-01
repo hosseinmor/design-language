@@ -62,7 +62,7 @@ Date Picker follows the same single-public-component decision with optional Cale
 | Boolean | Selection panel | On by default; controls capability and clock icon; Off means no popup even when Open=True |
 | Boolean | Seconds | Off by default; makes the third unit and `:--` placeholder suffix visible |
 | Text | Hour / Minute / Second | Sampled segment display strings, not three independently committed values |
-| Instance Swap | Active segment | Hour / Minute / Second active highlight preview; Figma-only |
+| Instance Swap | Active segment | Hour / Minute / Second active highlight preview; these three internal sources are offered as preferred swap values; Figma-only |
 | Boolean | Filled | Value vs placeholder presentation; Figma-only |
 | Boolean | Open | Preview popup content only while Selection panel is On and field interactive; Figma-only |
 | Field content | Show label, Label, Required, Placeholder, Show helper, Helper, Error text | Shared Field Family authoring conventions |
@@ -77,6 +77,7 @@ No `Open`, `Filled`, or seconds-combination Variant axis is needed. The runtime 
 - The shared Selection Panel is the single floating shell (12px radius, floating elevation and governed spacing). Use **Single / Results / Filterable=False** with instances of shared Option rows. No duplicate Time Option style system. The time picker controls allowed values, step, filtering against min/max, validation and whether a selection commits.
 - Figma's source panel and sample option content demonstrate composition, not a fixed menu width, minute interval or maximum option count. Runtime handles viewport collision and scrolling. On narrow viewports, compose the option content in the shared mobile Dialog/Drawer pattern as appropriate, without nesting the floating shell.
 - Disabled has no usable popup or typing; Read only stays legible and must not suggest a usable clock action.
+- The Figma placeholder and populated-value planes track the current **editable-content width** when the field is resized. Use horizontal stretch constraints within that region, preserving logical alignment and the segment group's content-hugging geometry. Read-only variants reclaim the trailing-action space for both planes. A smaller field must not keep a fixed-width value plane outside the clipped editing region; numeric content must remain visible at supported widths.
 
 ## Editing and keyboard behavior
 

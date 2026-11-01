@@ -62,7 +62,7 @@ There are **24** public variants: `Size = Small | Medium | Large` × `State = De
 | `Filled` (Boolean) | Previews a populated date; **Figma-only** |
 | `Placeholder` (Text) | Empty-state localized format/placeholder sample |
 | `Year`, `Month`, `Day` (Text) | Independently editable Figma visuals for **one** date |
-| `Active segment` (Instance Swap) | Year / Month / Day highlight in Figma; **Figma-only** |
+| `Active segment` (Instance Swap) | Year / Month / Day highlight in Figma, with those three internal sources offered as preferred swap values; **Figma-only** |
 | `Show label` (Boolean) | Hides the visible label only when another accessible-name mechanism exists |
 | `Show helper` (Boolean) | Shows the canonical Field Helper instance in non-error states; hidden by default. |
 
