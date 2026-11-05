@@ -115,7 +115,7 @@ def load_cases(fixtures_dir: Path = DEFAULT_FIXTURES_DIR) -> list[EvalCase]:
                 EvalCase(
                     case_id=case_id,
                     suite_id=suite_id,
-                    fixture_path=str(path.relative_to(ROOT)),
+                    fixture_path=(str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else path.name),
                     policy_refs=refs,
                     payload=payload,
                     expected_valid=expected_valid,
