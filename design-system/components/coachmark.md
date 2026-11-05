@@ -47,7 +47,7 @@ Coachmark is not a substitute for product clarity.
 
 ## Canonical Figma API
 
-Component set: `Coachmark / Default`
+Component set: `Coachmark`
 
 Figma file key: `rROD8ctH9UfPGAMrRrOzHe`
 
@@ -65,7 +65,7 @@ Component key: `da0cc1d606dfad2870fa6f93cbaac7b616aee278`
 | `Dismiss` | Boolean; default `True` |
 | `Progress` | Boolean; default `False` |
 | `Arrow` | Boolean; default `True` |
-| `Title text` | Text |
+| `Title` | Text |
 | `Description` | Text |
 | `Progress text` | Text |
 
@@ -357,11 +357,11 @@ Verify:
 ## Live References
 
 - Figma file: `rROD8ctH9UfPGAMrRrOzHe`
-- Component set: `Coachmark / Default`
+- Component set: `Coachmark`
 - Node: `22796:647`
 - Component key: `da0cc1d606dfad2870fa6f93cbaac7b616aee278`
 - Matrix: 4 Sides × 3 Alignments × 2 Action counts = 24 variants
-- Dismiss dependency: `Icon Button / Default`, Ghost / Medium
+- Dismiss dependency: `Icon Button`, Ghost / Medium
 - Action dependency: canonical Button, Small
 - Runtime / Storybook / Code Connect: unregistered / unverified
 
@@ -375,3 +375,11 @@ Verify:
 - `../patterns/tour.md`
 - `../../foundations/interaction/contextual-guidance.md`
 - `../../accessibility/focus-management.md`
+
+## Figma authoring label compatibility
+
+The following Figma authoring labels were renamed in place for library consistency. Property types, identifier suffixes, defaults and component identities are preserved. These are design-tool labels, not new runtime APIs.
+
+| Previous label | Current label |
+| --- | --- |
+| `Title text` | `Title` |

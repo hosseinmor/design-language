@@ -91,7 +91,7 @@ Canonical file: `[DS] Job Vision NEXT`
 
 ### Chip / Selectable
 
-- Component set: `Chip / Selectable`
+- Component set: `Chip / Selectable Chip`
 - Figma node ID: `20783:128158`
 - Figma component key: `5571e8e324b47155d7e9fd384aaea289c2e54d89`
 - Variant properties:
@@ -124,7 +124,7 @@ Rules:
 
 ### Chip / Removable
 
-- Component set: `Chip / Removable`
+- Component set: `Chip / Removable Chip`
 - Figma node ID: `23124:358`
 - Figma component key: `193062043a2194024cc06c6d45f11b96b4a238b3`
 - Variant properties:
@@ -181,7 +181,7 @@ Runtime requirements:
 
 ### Chip / Disclosure
 
-- Component set: `Chip / Disclosure`
+- Component set: `Chip / Disclosure Chip`
 - Figma node ID: `20783:534`
 - Figma component key: `3ba6c8dc36a76632d1569108e024ae47c841a50c`
 - Variant properties:
@@ -234,7 +234,7 @@ The trailing chevron remains the disclosure affordance after a value is applied.
 
 ### Chip / Action
 
-- Component set: `Chip / Action`
+- Component set: `Chip / Action Chip`
 - Figma node ID: `23123:125056`
 - Figma component key: `876535cdb18030fe2d38c6c6221036d770838586`
 - Variant properties:
@@ -296,7 +296,7 @@ Collection behavior belongs to composition/pattern-level contracts.
 
 ### Choice Group
 
-Uses `Chip / Selectable` for short, compact choices.
+Uses `Chip / Selectable Chip` for short, compact choices.
 
 Potential group behavior:
 
@@ -312,8 +312,8 @@ Potential group behavior:
 
 May combine:
 
-- `Chip / Selectable` for direct filters;
-- `Chip / Disclosure` for faceted filters.
+- `Chip / Selectable Chip` for direct filters;
+- `Chip / Disclosure Chip` for faceted filters.
 
 Example:
 
@@ -323,7 +323,7 @@ They share one visual language but retain distinct interaction contracts.
 
 ### Tokenized Input / Selected Values
 
-Uses `Chip / Removable`.
+Uses `Chip / Removable Chip`.
 
 Examples:
 
@@ -356,7 +356,7 @@ Then:
 
 Whether the committed item stays in the same location or moves from Available to Selected is a **product-level collection decision**, not part of the Chip component contract.
 
-The Figma Chip documentation includes a real `Chip / Disclosure` + existing Popover composition example for the Industry filter to make the component/surface boundary explicit.
+The Figma Chip documentation includes a real `Chip / Disclosure Chip` + existing Popover composition example for the Industry filter to make the component/surface boundary explicit.
 
 ### Figma token-compliance audit — 2026-10-20
 
@@ -554,10 +554,10 @@ Published identities were preserved where safe.
 
 Identity-preserving migration:
 
-- old Toggle identity/key → `Chip / Selectable`;
-- old Trigger identity/key → `Chip / Disclosure`;
+- old Toggle identity/key → `Chip / Selectable Chip`;
+- old Trigger identity/key → `Chip / Disclosure Chip`;
 - On 2026-10-17, the initial Open background treatment was rejected after benchmark review. The canonical Disclosure retains the original 30 closed-variant component IDs, with nested Chevron direction instead; Removable retains the original 15 component IDs and two independent target areas. The 45 old Open=True source components were retained in a separate __Legacy frame for compatibility rather than deleted;
-- `Chip / Removable` and `Chip / Action` are new canonical capability sets.
+- `Chip / Removable Chip` and `Chip / Action Chip` are new canonical capability sets.
 
 Older Carbon-derived Chip artifacts and old Chip Group components remain reference-only where deleting them could break existing consumers.
 

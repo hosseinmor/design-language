@@ -89,13 +89,23 @@ The detailed page-authoring rules, original master-preservation safeguards, and 
 
 Verified design identity:
 
-- Component set: `Button / Default`
+- Component set: `Button`
 - Node ID: `1854:1776`
 - Component key: `be5d0d9cd5fdd02f9d7afa1e371c2f2a23acb329`
 
 Use the live Figma component for current variants, properties, anatomy, and visual construction. Do not copy its full property matrix into this reference because that information changes during component pilots.
 
 These are **design identifiers**. Do not infer runtime component names, props, or shipped support until the Code mapping is registered.
+
+## Library insertion and authoring labels
+
+Public component names must remain meaningful when Figma displays only the last slash-separated segment. Use the component name itself instead of a generic `Default` leaf. Family names can remain grouped, for example `Select / Single Select`, `Select / Multiple Select`, and `Chip / Selectable Chip`. Renaming an asset must preserve its node ID, key, variants and existing instance connections.
+
+Internal construction, documentation, experiment and retained compatibility sources use an underscore at the beginning of the **full component or component-set name**. A word such as `Internal`, `Legacy` or `Archive` later in the name is not the internal naming convention. Keep useful public composition assets discoverable; a nested component is not automatically private. Inspect publication settings and the publish dialog as well: names alone do not prove that previously published entries have disappeared from consumers.
+
+Use `Required` for the visual required indicator; `Label` for an action/destination label; `Title` and `Description` for their respective content roles. Visibility controls use `Show …`, distinct from the editable text or instance-swap property. Optional logical icon positions use `Show leading icon` / `Leading icon` and `Show trailing icon` / `Trailing icon`. Use one canonical label per equivalent role without flattening meaningful distinctions such as Selected, Applied, Expanded, Open, or semantic content versus visibility.
+
+Do not delete and recreate properties to standardize their names or order: use in-place renames and preserve property identity and defaults. Exact property order is an editable Figma fact; no cross-component ordering contract has been adopted here. The current Plugin API does not expose a property-reordering operation. Ordering reconciliation remains open for an editor-based pass.
 
 ## Token authoring compliance
 

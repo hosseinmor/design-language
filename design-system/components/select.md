@@ -22,7 +22,7 @@ related:
 
 ## Purpose, boundaries
 
-Select commits option IDs from a **known option set**. `Select / Single` commits one ID (or null), `Select / Multiple` commits an ordered unique list of IDs.
+Select commits option IDs from a **known option set**. `Select / Single Select` commits one ID (or null), `Select / Multiple Select` commits an ordered unique list of IDs.
 
 - For unbounded typed text → Text Input.
 - For typed query with suggestions and value-policy → Autocomplete.
@@ -41,7 +41,13 @@ Select commits option IDs from a **known option set**. `Select / Single` commits
 
 **Figma axes (both sets):** Size = Small / Medium / Large; State = Default / Hover / Focus / Disabled / Error / **Error focus** / Warning / Read only / Read only focus; Filled = False / True. **54 variants each** (3 × 9 × 2). Error focus was added with a 2px red error border + retained text error + the shared visible-Focus treatment, without replacing earlier component IDs.
 
-**Figma-only compatibility notes:** `Filled` remains a Variant axis describing placeholder versus populated visual. It is not a runtime state/API; derive from actual committed value(s). The historical `Mandatory` Figma Boolean corresponds to runtime **required**, not a separate property. The set's Figma default Size is **Large** to preserve existing instances; **Medium (40px) is the default size for NEW runtime usages** and should be set explicitly in Figma. Warning remains a legacy Figma visual and is *not* mandatory in the Sandbox v1 public API. Do not block a Sandbox implementation on deleting/reorganizing these authored variants.
+**Figma-only compatibility notes:** `Filled` remains a Variant axis describing placeholder versus populated visual. It is not a runtime state/API; derive from actual committed value(s). The Figma Boolean is named `Required`; it was renamed in place from the historical `Mandatory` property, preserving its property identity and defaults. It controls the visual required indicator and corresponds to semantic **required**, not a separate runtime property. The set's Figma default Size is **Large** to preserve existing instances; **Medium (40px) is the default size for NEW runtime usages** and should be set explicitly in Figma. Warning remains a legacy Figma visual and is *not* mandatory in the Sandbox v1 public API. Do not block a Sandbox implementation on deleting/reorganizing these authored variants.
+
+### Internal content sources and library insertion
+
+The content-only masters `_Select / Content / Placeholder`, `_Select / Single / Content / Value`, `_Select / Multiple / Content / Summary`, and `_Autocomplete / Content / Query` are internal composition sources, not standalone field entry points. Their underscore-prefixed names distinguish them from the directly insertable `Select / Single Select` and `Select / Multiple Select`. These masters retain their original node IDs, keys, and linked instances. Shared Selection Panel and Option families remain composition assets; do not hide them merely because they are nested in a field.
+
+The naming changes do not by themselves certify the currently published library contents. After publishing, verify the Assets search and library publication settings, including removal of previously published internal entries where necessary.
 
 ## Common visual anatomy
 
