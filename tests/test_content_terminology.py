@@ -25,6 +25,13 @@ def authority_model():
     }
 
 
+def product_variant_model():
+    return {
+        "products": ["jobvision", "cando"],
+        "unresolved_source": "unresolved",
+    }
+
+
 def linked_term():
     return {
         "id": "job_post",
@@ -49,6 +56,7 @@ def valid_data():
         "id": "content.foundation.terminology",
         "language": "fa-IR",
         "authority_model": authority_model(),
+        "product_variant_model": product_variant_model(),
         "sources": [
             {
                 "id": "product_source",
@@ -114,6 +122,43 @@ class TerminologyAuthorityValidationTest(unittest.TestCase):
         )
         term["evidence"] = []
         self.assertEqual(validate(data), [])
+
+    def test_product_variant_with_linked_and_unresolved_sources_is_valid(self):
+        data = valid_data()
+        data["terms"][0]["product_variants"] = {
+            "jobvision": {
+                "preferred": {"default": "آگهی شغلی"},
+                "product_source": "unresolved",
+            },
+            "cando": {
+                "preferred": {"default": "موقعیت شغلی"},
+                "product_source": "product_source",
+            },
+        }
+        self.assertEqual(validate(data), [])
+
+    def test_unknown_product_variant_fails(self):
+        data = valid_data()
+        data["terms"][0]["product_variants"] = {
+            "unknown": {
+                "preferred": {"default": "term"},
+                "product_source": "product_source",
+            }
+        }
+        errors = " ".join(validate(data))
+        self.assertIn("unknown product variants", errors)
+
+    def test_product_variant_source_must_be_evidence(self):
+        data = valid_data()
+        data["terms"][0]["product_variants"] = {
+            "cando": {
+                "preferred": {"default": "موقعیت شغلی"},
+                "product_source": "product_source",
+            }
+        }
+        data["terms"][0]["evidence"] = []
+        errors = " ".join(validate(data))
+        self.assertIn("must also appear in evidence", errors)
 
     def test_unresolved_state_cannot_name_a_source(self):
         data = valid_data()

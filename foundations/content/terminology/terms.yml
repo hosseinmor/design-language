@@ -1,4 +1,4 @@
-schema_version: "0.5"
+schema_version: "0.6"
 id: content.foundation.terminology
 title: واژه‌نامهٔ محتوای محصول جاب‌ویژن
 status: draft
@@ -68,6 +68,36 @@ sources:
     state: verified
     role: product_knowledge_reference
     reviewed_on: 2026-10-22
+  - id: pk_cando_glossary
+    title: واژه‌نامهٔ کندو
+    url: https://docs-cd.jvoffice.ir/contents/00-glossary/
+    state: draft
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-24
+  - id: pk_cando_hiring_request_overview
+    title: نمای حوزهٔ درخواست استخدام کندو
+    url: https://docs-cd.jvoffice.ir/contents/ats/hiring-request/0_overview/
+    state: draft
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-24
+  - id: pk_cando_candidate_overview
+    title: نمای حوزهٔ کارجو و رزومهٔ کندو
+    url: https://docs-cd.jvoffice.ir/contents/ats/candidate/0_overview/
+    state: draft
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-24
+  - id: pk_cando_application_overview
+    title: نمای حوزهٔ درخواست شغلی و مراحل استخدام کندو
+    url: https://docs-cd.jvoffice.ir/contents/ats/application/0_overview/
+    state: draft
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-24
+  - id: pk_cando_hire_steps
+    title: قواعد مراحل استخدام کندو
+    url: https://docs-cd.jvoffice.ir/contents/ats/job/rule-hire-steps/
+    state: draft
+    role: product_knowledge_reference
+    reviewed_on: 2026-10-24
 
 authority_model:
   meaning_owners:
@@ -90,6 +120,15 @@ authority_model:
     - definition.source و code_bindings فقط snapshot ارجاعی برای retrieval و migration هستند.
     - مدخل محصولی بدون product source معتبر نباید برای ادعای رفتار محصول استفاده شود.
     - مفهوم ارتباطی یا taxonomy زبانی می‌تواند meaning_owner برابر design_language داشته باشد.
+
+product_variant_model:
+  products: [jobvision, cando]
+  unresolved_source: unresolved
+  interpretation:
+    - preferred عمومی فقط وقتی استفاده می‌شود که product context معلوم نباشد.
+    - product_variants برچسب و ممنوعیت همان concept را برای هر محصول مشخص می‌کند.
+    - تفاوت label بین محصولات به معنی یکسان بودن رفتار، lifecycle یا permission آن‌ها نیست.
+    - منبع یک محصول نباید برای ادعای رفتار محصول دیگر استفاده شود.
 
 policy:
   concept_and_label:
@@ -208,47 +247,83 @@ terms:
     authority:
       meaning_owner: product_knowledge
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: pk_cando_application_overview
+      migration_state: source_linked
     canonical_internal: جذب
     definition:
+      source: >
+        در ATS کندو، درخواست شغلی از مرحلهٔ ورودی میان «مراحل استخدام»
+        جابه‌جا می‌شود و در پایان به استخدام یا رد می‌رسد.
       product_content: >
         فرایند پیدا کردن، بررسی، ارزیابی و پیش بردن افراد تا رسیدن
         به تصمیم استخدام.
     preferred:
       default: جذب
-    examples: [فرایند جذب, درخواست جذب, تیم جذب, در حال جذب]
-    forbidden_as_synonym_of: [hiring]
+    product_variants:
+      jobvision:
+        preferred:
+          default: جذب
+          process: فرایند جذب
+        product_source: unresolved
+      cando:
+        preferred:
+          default: فرایند استخدام
+          stages: مراحل استخدام
+        product_source: pk_cando_application_overview
+    examples: [فرایند جذب, تیم جذب, در حال جذب]
+    forbidden_as_synonym_of:
+      - term: hiring
+        scope: default_except_cando_product_labels
     relations:
       leads_to: hiring
       distinct_from: [hiring]
     domains: [employer, ats]
     visibility: [public, internal]
     status: stable
-    evidence: [product_content_decisions]
+    notes:
+      - در کندو «استخدام» هم در نام فرایند/مراحل و هم برای مرحلهٔ نهایی دیده می‌شود؛ concept را از context تشخیص دهید.
+      - منبع کندو رفتار یا نام‌گذاری جاب‌ویژن را تأیید نمی‌کند.
+    evidence: [pk_cando_glossary, pk_cando_application_overview, pk_cando_hire_steps, product_content_decisions]
 
   - id: hiring
     concept_kind: outcome
     authority:
       meaning_owner: product_knowledge
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
+      product_source: pk_cando_application_overview
+      migration_state: source_linked
     canonical_internal: استخدام
     definition:
+      source: >
+        در ATS کندو، رسیدن درخواست شغلی به مرحله‌ای از گروه «استخدام»
+        زمان استخدام را ثبت می‌کند؛ استخدام وضعیت درخواست نیست.
       product_content: >
         تصمیم یا نتیجه‌ای که فرد در آن برای یک موقعیت وارد رابطهٔ استخدامی می‌شود.
     preferred:
       default: استخدام
+    product_variants:
+      jobvision:
+        preferred:
+          default: استخدام
+        product_source: unresolved
+      cando:
+        preferred:
+          default: استخدام
+          final_stage: مرحلهٔ استخدام
+        product_source: pk_cando_application_overview
     examples: [استخدام شد, تاریخ استخدام, تصمیم استخدام]
-    forbidden_as_synonym_of: [recruitment]
+    forbidden_as_synonym_of:
+      - term: recruitment
+        scope: default_except_cando_product_labels
     relations:
       result_of: recruitment
       distinct_from: [recruitment]
     domains: [employer, ats, jobseeker]
     visibility: [public, internal]
     status: stable
-    evidence: [product_content_decisions]
+    notes:
+      - در کندو «استخدام» هم بخشی از عبارت «مراحل استخدام» و هم نام گروه/مرحلهٔ نهایی است.
+    evidence: [pk_cando_glossary, pk_cando_application_overview, pk_cando_hire_steps, product_content_decisions]
 
   # People and organizations
   - id: employer_organization
@@ -372,23 +447,37 @@ terms:
     authority:
       meaning_owner: product_knowledge
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
-    canonical_internal: کاندیدا
+      product_source: pk_cando_candidate_overview
+      migration_state: source_linked
+    canonical_internal: Candidate
     definition:
+      source: >
+        در ATS کندو، کارجو (Candidate) پروندهٔ یک شخص در ATS یک سازمان است
+        و مستقل از تعداد موقعیت‌هایی است که برای آن‌ها آمده است.
       product_content: >
         فردی که در ATS برای یک یا چند موقعیت شغلی در حال بررسی است؛
-        چه خودش درخواست شغلی فرستاده باشد و چه recruiter او را اضافه کرده باشد.
+        چه خودش درخواست شغلی فرستاده باشد و چه رابط او را اضافه کرده باشد.
     preferred:
-      ats: کاندیدا
-    allowed: [کاندیدای جذب]
-    avoid: [متقاضی, کارجو, داوطلب]
+      jobvision_ats: کاندیدا
+      cando_ats: کارجو
+    product_variants:
+      jobvision:
+        preferred:
+          ats: کاندیدا
+        product_source: unresolved
+      cando:
+        preferred:
+          ats: کارجو
+        forbidden: [کاندید, کاندیدا, متقاضی, داوطلب]
+        product_source: pk_cando_candidate_overview
     domains: [ats]
     visibility: [public, internal]
     relations:
       distinct_from: [jobseeker]
     status: stable
-    evidence: [product_content_decisions]
+    notes:
+      - «کارجو» در کندو label موجودیت Candidate است؛ این کاربرد نباید به‌صورت خودکار به جاب‌ویژن منتقل شود.
+    evidence: [pk_cando_glossary, pk_cando_candidate_overview, product_content_decisions]
 
   - id: industry
     concept_kind: taxonomy
@@ -689,21 +778,38 @@ terms:
     authority:
       meaning_owner: product_knowledge
       language_owner: design_language
-      product_source: unresolved
-      migration_state: needs_product_knowledge_reference
-    canonical_internal: درخواست جذب
+      product_source: pk_cando_hiring_request_overview
+      migration_state: source_linked
+    canonical_internal: HiringRequest
     definition:
-      product_content: درخواست داخلی سازمان برای آغاز یا پیش‌برد جذب نیرو.
+      source: >
+        در کندو، درخواست استخدام پیش از ساخت موقعیت شغلی ثبت می‌شود،
+        از گردش تأیید می‌گذرد و پس از تأیید نهایی به موقعیت متصل می‌شود.
+      product_content: درخواست داخلی سازمان برای اعلام و تأیید نیاز نیرو.
     preferred:
-      default: درخواست جذب
+      jobvision: درخواست جذب
+      cando: درخواست استخدام
+    product_variants:
+      jobvision:
+        preferred:
+          default: درخواست جذب
+        product_source: unresolved
+      cando:
+        preferred:
+          default: درخواست استخدام
+        forbidden: [درخواست جذب, درخواست نیرو, Job Request]
+        product_source: pk_cando_hiring_request_overview
     forbidden_as_synonym_of: [job_application, generic_request]
     domains: [employer, ats]
     visibility: [internal]
     relations:
       distinct_from: [job_application]
+      precedes: job_post
       part_of: recruitment
     status: stable
-    evidence: [product_content_decisions]
+    notes:
+      - «درخواست جذب» در واژه‌نامهٔ کندو ممنوع است؛ آن را فقط در context جاب‌ویژن به کار ببرید.
+    evidence: [pk_cando_glossary, pk_cando_hiring_request_overview, product_content_decisions]
 
   - id: resume_snapshot
     concept_kind: internal_artifact
@@ -1843,6 +1949,19 @@ decision_log:
       سازمان برای یک موقعیت شغلی آگهی ثبت می‌کند، اما در مدل محصول آگهی و
       موقعیت دو entity مستقل نیستند. تفاوت واژه‌ها زاویهٔ ارائه و مرحلهٔ
       lifecycle را روشن می‌کند، بدون اینکه مدل دامنهٔ کاذب بسازد.
+
+  - id: DEC-008
+    term_ids: [recruitment, hiring, ats_candidate, hiring_request]
+    decided_on: 2026-10-24
+    outcome: >
+      برچسب‌های محصولی جاب‌ویژن و کندو نباید در یک preferred عمومی ادغام شوند.
+      در کندو «فرایند/مراحل استخدام»، «کارجو» برای Candidate و «درخواست استخدام»
+      اصطلاحات مرجع‌اند؛ در جاب‌ویژن تصمیم‌های فعلی «جذب»، «کاندیدا» در ATS و
+      «درخواست جذب» حفظ می‌شوند تا منبع محصولی دقیق‌تری آن‌ها را تغییر دهد.
+    rationale: >
+      Product Knowledge کندو صریحاً این برچسب‌ها و ممنوعیت‌ها را ثبت کرده است،
+      اما منبع یک محصول مالک زبان یا رفتار محصول دیگر نیست. product_variants
+      تفاوت را machine-readable نگه می‌دارد و از انتقال خودکار واژه جلوگیری می‌کند.
 
 decision_queue:
 
