@@ -68,7 +68,7 @@ Default variant: `Top / Start`.
 
 There is intentionally no `Visible`, `Open`, `State`, `Shadow`, or runtime collision property in the Figma API.
 
-Runtime visibility, delay, collision, flip, portal behavior, and dismissal implementation remain code-owned.
+Runtime state plumbing, collision, flip, portal behavior, and timer implementation remain code-owned. The user-visible timing and dismissal behavior below are canonical Design Language requirements.
 
 ## Anatomy
 
@@ -132,19 +132,48 @@ Tooltip uses a 2px anchor offset. Because Tooltip has no arrow, measure this fro
 Tooltip is revealed by:
 
 - pointer hover;
-- keyboard focus.
+- keyboard-origin focus, using `focus-visible` or an equivalent input-modality signal.
 
 Tooltip is not click-triggered.
 
-### Dismissal
+Pointer activation that merely causes the trigger to receive focus must not independently open or reopen Tooltip through the focus path. The focus trigger is for keyboard-origin focus, not pointer-induced focus.
+
+### Timing
+
+Canonical timing:
+
+| Event | Behavior |
+|---|---|
+| Pointer enters trigger | Show after **300ms** |
+| Keyboard-origin focus reaches trigger | Show after **300ms** |
+| Pointer leaves both trigger and Tooltip | Close after **100ms** |
+| Keyboard focus leaves trigger | Close immediately |
+| `Escape` while shown | Close immediately |
+| Trigger activation | Close immediately |
+
+The 100ms pointer close delay is a grace interval for ordinary pointer movement. It does not permit Tooltip to linger after keyboard focus has moved or after explicit dismissal/activation.
+
+Do not add a separate Figma delay/state axis. Runtime owns timer mechanics while preserving these values.
+
+### Dismissal and reopen suppression
 
 Tooltip dismisses when:
 
-- pointer hover leaves the relevant trigger/content region;
-- keyboard focus moves away;
-- the user presses `Escape` while the Tooltip is shown.
+- pointer leaves the combined trigger + Tooltip hover region for 100ms;
+- keyboard focus moves away from the trigger;
+- the user presses `Escape` while Tooltip is shown;
+- the trigger is activated.
 
-Exact open and close delays are not yet locked in the design-system runtime contract.
+After explicit dismissal by `Escape`, do not automatically reopen Tooltip while the same hover/focus condition remains active.
+
+Reopening requires the relevant condition to reset:
+
+- pointer: leave, then re-enter the trigger;
+- keyboard: move focus away, then return with keyboard-origin focus.
+
+After trigger activation, do not reopen Tooltip merely because the trigger retains pointer-induced focus.
+
+When another Tooltip in the same interaction context opens, the previously visible Tooltip should close so competing Tooltip labels are not shown simultaneously.
 
 ### Hoverability and persistence
 
@@ -152,7 +181,7 @@ Hover/focus-triggered supplemental content must satisfy the shared accessibility
 
 The rendered Tooltip surface must participate in pointer hit-testing when that is necessary to preserve hover. Do **not** use `pointer-events: none` on the Tooltip surface if doing so causes the Tooltip to close while the pointer moves from the trigger onto the Tooltip.
 
-Runtime may satisfy the transition between trigger and Tooltip through direct hover retention, a hover bridge / safe-polygon strategy, or a short close grace interval. The implementation technique and exact timing remain code-owned; the behavioral requirement is that a user can move the pointer onto the Tooltip without it disappearing prematurely.
+Runtime may satisfy the transition between trigger and Tooltip through direct hover retention, a hover bridge / safe-polygon strategy, or equivalent hit-area handling. The implementation technique is code-owned; the behavioral requirement is that a user can move the pointer onto the Tooltip without it disappearing prematurely, and the canonical close grace is 100ms after leaving both regions.
 
 This hoverability requirement does not make Tooltip content interactive or keyboard-focusable.
 
@@ -195,19 +224,31 @@ Multiline text is allowed when a concise label cannot reasonably fit on one line
 
 ### Icon Button dependency
 
+Every operable Icon Button must provide a visible Tooltip label.
+
 Tooltip improves visible discoverability for Icon Button but does not provide Button semantics or accessible naming.
 
-A disabled control must not become focusable solely so Tooltip can explain why it is disabled.
+Disabled Icon Buttons are not required to expose Tooltip. A disabled control must not become focusable solely so Tooltip can appear.
 
 If the reason for disabled state matters to task completion, expose that reason through persistent UI or another appropriate feedback pattern.
 
+### Assistive-technology relationship
+
+When Tooltip text simply repeats the trigger's accessible name, implementation must avoid creating a redundant duplicate announcement.
+
+If Tooltip carries a short supplementary description rather than the visible action label, runtime may expose an appropriate programmatic description relationship when verified.
+
+The exact ARIA wiring remains runtime-owned until Karbon behavior is registered and tested. Do not make Tooltip the source of the trigger's accessible name.
+
 ## Touch / Mobile
 
-Tooltip is not a primary touch disclosure pattern.
+Tooltip has no canonical touch activation.
 
-Do not require long-press or hidden tap behavior merely to preserve desktop Tooltip content.
+Do not use tap or long-press merely to reproduce desktop Tooltip behavior.
 
 When the user must be able to intentionally request the information on touch, use Toggletip instead.
+
+Touch users must not lose essential instructions, state, or task-critical information because Tooltip is unavailable.
 
 ## Motion
 
@@ -238,13 +279,21 @@ Do not model hover/focus visibility, collision results, or automatic flip as app
 Runtime must handle:
 
 - use the canonical 2px Surface-to-trigger anchor offset;
-- hover + focus triggers;
-- Escape dismissal;
+- 300ms show delay for pointer hover;
+- 300ms show delay for keyboard-origin focus;
+- 100ms pointer close grace after leaving both trigger and Tooltip;
+- immediate close on keyboard blur;
+- immediate close on `Escape`;
+- immediate close on trigger activation;
+- suppression of automatic reopen until the relevant hover/focus condition resets after `Escape`;
+- no focus-triggered reopen caused only by pointer-induced focus after activation;
+- hover persistence across trigger ↔ Tooltip movement;
+- only one visible Tooltip within the same interaction context;
 - collision/flip;
 - portal/layering;
-- accessibility relationship;
+- accessibility relationship without duplicate naming;
 - RTL logical Start/End;
-- touch fallback boundary.
+- no Tooltip-specific tap/long-press contract.
 
 ## QA Checklist
 
@@ -260,12 +309,18 @@ Verify:
 - max width and wrapping do not exceed the contract;
 - anchored examples preserve the 2px Surface-to-trigger offset;
 - Tooltip has no border or shadow;
-- hover and keyboard focus both reveal Tooltip;
+- pointer hover reveals Tooltip after 300ms;
+- keyboard-origin focus reveals Tooltip after 300ms;
+- pointer-induced focus from click does not independently open/reopen Tooltip;
 - moving the pointer from the trigger onto the Tooltip does not cause premature dismissal;
+- leaving both trigger and Tooltip closes after 100ms;
+- keyboard blur closes immediately;
 - Tooltip does not create a tab stop;
-- Escape dismisses it;
+- `Escape` dismisses immediately and Tooltip stays suppressed until hover/focus resets;
+- trigger activation closes Tooltip immediately;
+- opening another Tooltip closes the previous Tooltip in the same interaction context;
 - essential information is not Tooltip-only;
-- touch flows do not depend on Tooltip discovery.
+- touch flows do not depend on Tooltip discovery or Tooltip-specific tap/long-press behavior.
 
 ## Live References
 

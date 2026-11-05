@@ -209,16 +209,26 @@ The Tooltip exists because Icon Button intentionally removes the persistent text
 
 ### Required behavior
 
-- Tooltip appears on pointer hover.
-- Tooltip appears when the Icon Button receives keyboard focus.
-- Tooltip is non-interactive and does not receive focus.
-- Tooltip can be dismissed with `Escape` when shown.
-- Moving focus away dismisses it.
-- Tooltip must not be the only source of the accessible name.
-- Tooltip must not be the only source of essential instructions or state.
-- Touch interaction must not depend on Tooltip discovery.
+Icon Button owns the requirement that every operable icon-only action provides a visible Tooltip label.
 
-Exact delay, placement, collision handling, visual styling, animation, and touch behavior belong to the Tooltip component contract and HOS-17.
+The Tooltip component contract owns the shared display and interaction behavior, including:
+
+- hover and keyboard-origin focus triggering;
+- canonical show/hide timing;
+- hover persistence;
+- `Escape` and activation dismissal;
+- reopen suppression;
+- placement/collision behavior;
+- touch boundary;
+- Tooltip focusability and accessibility relationship.
+
+Do not redefine those values in Icon Button.
+
+Icon Button-specific requirements remain:
+
+- Tooltip must not be the only source of the accessible name;
+- Tooltip must not be the only source of essential instructions or state;
+- disabled Icon Buttons must not become focusable solely to expose Tooltip.
 
 ### Tooltip text
 
