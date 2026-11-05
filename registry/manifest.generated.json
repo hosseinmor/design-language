@@ -1653,7 +1653,8 @@
       "related": [
         "design-system.component.text-input",
         "design-system.component.autocomplete",
-        "design-system.accessibility.forms"
+        "design-system.accessibility.forms",
+        "design-system.pattern.hierarchical-selection"
       ],
       "topics": [
         "components",
@@ -1959,6 +1960,25 @@
         "tooltip"
       ],
       "path": "design-system/components/tooltip.md"
+    },
+    {
+      "id": "design-system.component.tree-view",
+      "kind": "design-system-component",
+      "title": "Tree View",
+      "summary": "TBD Tree View scope for viewing and managing hierarchical structures; not a form-field replacement for choosing a value from a hierarchy.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.select",
+        "design-system.pattern.hierarchical-selection"
+      ],
+      "topics": [
+        "components",
+        "design-system-component",
+        "tree-view"
+      ],
+      "path": "design-system/components/tree-view.md"
     },
     {
       "id": "design-system.design-language",
@@ -2709,6 +2729,27 @@
       "path": "design-system/patterns/form-submission.md"
     },
     {
+      "id": "design-system.pattern.hierarchical-selection",
+      "kind": "design-system-pattern",
+      "title": "Hierarchical Selection",
+      "summary": "Choosing values from a tree-shaped option set where any node is selectable; control choice, exact vs inclusive scope, and composition edge cases. Rendering and interaction are owned by Select › Hierarchical options.",
+      "status": "draft",
+      "owner": "Design System team",
+      "last_reviewed": null,
+      "related": [
+        "design-system.component.select",
+        "design-system.component.tree-view",
+        "design-system.pattern.search-and-filtering",
+        "design-system.accessibility.forms"
+      ],
+      "topics": [
+        "design-system-pattern",
+        "hierarchical-selection",
+        "patterns"
+      ],
+      "path": "design-system/patterns/hierarchical-selection.md"
+    },
+    {
       "id": "design-system.pattern.loading-and-progress",
       "kind": "design-system-pattern",
       "title": "Loading and Progress",
@@ -3377,7 +3418,7 @@
     }
   ],
   "summary": {
-    "documents": 159,
+    "documents": 161,
     "by_kind": {
       "content-content-component": 4,
       "content-content-foundation": 1,
@@ -3387,7 +3428,7 @@
       "design-language-integration": 1,
       "design-language-overview": 1,
       "design-system-accessibility": 18,
-      "design-system-component": 49,
+      "design-system-component": 50,
       "design-system-component-annex": 1,
       "design-system-design-language": 1,
       "design-system-experience-rule": 12,
@@ -3395,7 +3436,7 @@
       "design-system-governance": 6,
       "design-system-integration": 1,
       "design-system-overview": 1,
-      "design-system-pattern": 15,
+      "design-system-pattern": 16,
       "design-system-product-variation": 3,
       "design-system-reference": 9,
       "design-system-token": 13
