@@ -100,7 +100,11 @@ class ContentSemanticEvalTest(unittest.TestCase):
         self.assertEqual(report["metrics"]["rule_precision"], 1.0)
         self.assertEqual(report["metrics"]["rule_recall"], 0.5)
         self.assertFalse(report["coverage"]["missing_cases"])
-        self.assertIn("BTN-004", report["cases"][1]["rule_false_negatives"])
+        invalid_case = next(
+            case for case in report["cases"]
+            if case["case_id"] == "content.eval.sample::invalid_case"
+        )
+        self.assertIn("BTN-004", invalid_case["rule_false_negatives"])
         self.assertIn("Mode: report-only", render_markdown(report))
 
     def test_invalid_response_requires_corrected_example(self):
