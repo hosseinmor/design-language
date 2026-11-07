@@ -91,7 +91,7 @@ rules:
     obligation: must
     dimension: terminology
     key: labels_from_terminology
-    statement: برچسب هر concept متناسب با audience و surface از منبع برچسب آن بیاید (برچسب هدف واژه‌نامه، وگرنه برچسب PK؛ برای مفهوم تازه قواعد نام‌گذاری DL با ثبت در draft_dependencies) و برچسب forbidden یا legacy در copy تازه نیاید.
+    statement: برچسب هر concept متناسب با audience و surface از منبع برچسب آن بیاید (برچسب هدف واژه‌نامه، وگرنه برچسب PK؛ برای مفهوم تازه قواعد NAM با ثبت در draft_dependencies) و برچسب forbidden یا legacy در copy تازه نیاید.
   - id: BRF-005
     obligation: must_not
     dimension: product_truth

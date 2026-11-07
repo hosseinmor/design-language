@@ -194,7 +194,8 @@
         "content.pattern.loading-and-progress",
         "content.pattern.ai-content-and-disclosure",
         "content.pattern.instructions-and-helper-text",
-        "content.copy-brief"
+        "content.copy-brief",
+        "content.naming"
       ],
       "topics": [
         "content",
@@ -258,6 +259,30 @@
         "variables"
       ],
       "path": "foundations/content/localization.md"
+    },
+    {
+      "id": "content.naming",
+      "kind": "content-content-foundation",
+      "title": "Naming New Concepts",
+      "summary": "Defines how a user-facing label is chosen for a concept that exists neither in Product Knowledge nor in the Design Language terminology, before it is published and extracted into Product Knowledge.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.terminology",
+        "content.copy-brief",
+        "content.product-voice",
+        "content.localization"
+      ],
+      "topics": [
+        "content",
+        "content-content-foundation",
+        "naming",
+        "persian",
+        "terminology",
+        "ux-writing"
+      ],
+      "path": "foundations/content/naming.md"
     },
     {
       "id": "content.pattern.ai-content-and-disclosure",
@@ -531,7 +556,8 @@
       "last_reviewed": null,
       "related": [
         "content.content-guidelines",
-        "content.localization"
+        "content.localization",
+        "content.naming"
       ],
       "topics": [
         "ai-content",
@@ -3447,10 +3473,10 @@
     }
   ],
   "summary": {
-    "documents": 162,
+    "documents": 163,
     "by_kind": {
       "content-content-component": 4,
-      "content-content-foundation": 2,
+      "content-content-foundation": 3,
       "content-content-guideline": 3,
       "content-content-pattern": 7,
       "design-language-ai-routing": 2,

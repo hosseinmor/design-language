@@ -14,6 +14,8 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 TERMS_PATH = ROOT / "foundations" / "content" / "terminology" / "terms.yml"
+NAMING_PATH = ROOT / "foundations" / "content" / "naming.yml"
+NAMING_CASES_PATH = ROOT / "ai" / "evals" / "content" / "naming-cases.yml"
 ID_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 DECISION_ID_RE = re.compile(r"^DEC-[0-9]{3}$")
 VALID_STATUSES = {"stable", "draft", "needs_decision"}
@@ -549,10 +551,31 @@ def validate(data: dict[str, Any], overrides: list[str] | None = None) -> list[s
     return errors
 
 
+def naming_coverage_errors(
+    contract_path: Path = NAMING_PATH, cases_path: Path = NAMING_CASES_PATH
+) -> list[str]:
+    """Every blocking naming rule must be checked by at least one naming case."""
+    contract = yaml.safe_load(contract_path.read_text(encoding="utf-8")) or {}
+    blocking = {
+        rule["id"]
+        for rule in contract.get("rules") or []
+        if isinstance(rule, dict) and rule.get("obligation") in {"must", "must_not"}
+    }
+    cases = (yaml.safe_load(cases_path.read_text(encoding="utf-8")) or {}).get("cases") or []
+    covered = {
+        rule_id
+        for case in cases
+        if isinstance(case, dict)
+        for rule_id in (case.get("expected") or {}).get("checked_rules") or []
+    }
+    missing = sorted(blocking - covered)
+    return [f"naming cases do not cover blocking rules: {', '.join(missing)}"] if missing else []
+
+
 def main() -> int:
     data = load_terms()
     overrides: list[str] = []
-    errors = validate(data, overrides)
+    errors = validate(data, overrides) + naming_coverage_errors()
     if errors:
         for error in errors:
             print(f"ERROR {error}")

@@ -22,6 +22,7 @@ related:
   - content.pattern.ai-content-and-disclosure
   - content.pattern.instructions-and-helper-text
   - content.copy-brief
+  - content.naming
 ---
 
 # Content Guidelines
@@ -109,6 +110,8 @@ binding.
 
 Use the preferred label for the concept and surface from the terminology source.
 Do not use implementation names as labels merely because they exist in code.
+Name a concept that exists in neither Product Knowledge nor terminology with the
+[naming rules](naming.md).
 
 ## Button Labels
 

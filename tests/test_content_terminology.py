@@ -2,7 +2,10 @@
 
 import unittest
 
-from tooling.validators.check_content_terminology import validate
+import tempfile
+from pathlib import Path
+
+from tooling.validators.check_content_terminology import naming_coverage_errors, validate
 
 
 def authority_model():
@@ -185,6 +188,24 @@ class TerminologyLanguageSchemaTest(unittest.TestCase):
             }
         ]
         self.assertEqual(validate(data), [])
+
+
+
+class NamingCoverageTests(unittest.TestCase):
+    def test_repository_naming_cases_cover_blocking_rules(self):
+        self.assertEqual(naming_coverage_errors(), [])
+
+    def test_uncovered_blocking_rule_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            contract = Path(tmp) / "naming.yml"
+            cases = Path(tmp) / "cases.yml"
+            contract.write_text(
+                "rules:\n  - {id: NAM-001, obligation: must}\n  - {id: NAM-002, obligation: should}\n",
+                encoding="utf-8",
+            )
+            cases.write_text("cases: []\n", encoding="utf-8")
+            errors = naming_coverage_errors(contract, cases)
+        self.assertEqual(errors, ["naming cases do not cover blocking rules: NAM-001"])
 
 
 if __name__ == "__main__":

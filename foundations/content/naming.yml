@@ -1,0 +1,56 @@
+schema_version: "0.1"
+id: content.foundation.naming
+title: قرارداد نام‌گذاری مفهوم تازه
+status: draft
+language: fa-IR
+scope:
+  - product-ui
+  - ai-generated-product-content
+
+description: >
+  قواعد انتخاب برچسب کاربرپسند برای مفهومی که نه در Product Knowledge هست و نه در
+  واژه‌نامهٔ Design Language. معنی و رفتار مفهوم از PRD می‌آید؛ wording نهایی با
+  Designer است. بعد از publish، استخراج Product Knowledge همین نام را برمی‌دارد.
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  localization: content.foundation.localization
+
+goal: >
+  نام تازه با مفهوم‌های موجود تداخل نکند، با خانوادهٔ خود سازگار باشد، آنچه
+  کاربر می‌بیند را بگوید و چیزی بیش از رفتار تعریف‌شده در PRD وعده ندهد.
+
+rules:
+  - id: NAM-001
+    obligation: must
+    dimension: classification
+    key: reuse_existing_concept
+    statement: پیش از نام‌گذاری بررسی شود که مفهومی با همین معنی در Product Knowledge یا واژه‌نامه هست یا نه؛ اگر هست، برچسب همان مفهوم به کار رود و نام تازه ساخته نشود.
+  - id: NAM-002
+    obligation: must_not
+    dimension: terminology
+    key: collide_with_other_concept
+    statement: نام تازه با برچسب فعلی، قدیمی یا ممنوع یک مفهوم دیگر یکی نباشد.
+  - id: NAM-003
+    obligation: must
+    dimension: terminology
+    key: follow_concept_family
+    statement: مفهوم وابسته با هستهٔ نام خانوادهٔ خود نام‌گذاری شود و یک نام برای دو سطح یک خانواده به کار نرود.
+  - id: NAM-004
+    obligation: should
+    dimension: terminology
+    key: persian_before_loanword
+    statement: فارسی رایج بر وام‌واژه ترجیح دارد؛ وام‌واژه فقط وقتی به کار رود که اصطلاح جاافتادهٔ همان مخاطب باشد و معادل روشنی نداشته باشد.
+  - id: NAM-005
+    obligation: must
+    dimension: clarity
+    key: name_user_facing_meaning
+    statement: نام آنچه کاربر می‌بیند یا به دست می‌آورد را بگوید، نه سازوکار پیاده‌سازی را.
+  - id: NAM-006
+    obligation: must_not
+    dimension: product_truth
+    key: imply_undefined_capability
+    statement: نام قابلیت یا رفتاری مانند «خودکار»، «هوشمند» یا «فوری» را القا نکند که PRD تعریف نکرده است.
+
+evaluation_source: ../../ai/evals/content/naming-cases.yml

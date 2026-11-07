@@ -1,0 +1,142 @@
+schema_version: "0.1"
+id: content.eval.naming_cases
+foundation_id: content.foundation.naming
+language: fa-IR
+
+# هر case یک مفهوم تازه یا موجود، context آن و نام پیشنهادی است.
+# ویژگی‌های PRD در این فایل آزمایشی‌اند و product truth نیستند.
+
+cases:
+  - id: existing_concept_label_is_reused
+    context:
+      product: jobvision
+      concept: پوشه‌های رزومهٔ ذخیره‌شدهٔ سازمان
+      existing_label_for_same_meaning: تلنت پول
+    proposed_name: تلنت پول
+    expected:
+      valid: true
+      checked_rules: [NAM-001]
+      violations: []
+
+  - id: new_name_for_existing_concept
+    context:
+      product: jobvision
+      concept: پوشه‌های رزومهٔ ذخیره‌شدهٔ سازمان
+      existing_label_for_same_meaning: تلنت پول
+    proposed_name: مخزن رزومه
+    expected:
+      valid: false
+      checked_rules: [NAM-001]
+      violations: [NAM-001]
+
+  - id: name_collides_with_other_concept
+    context:
+      product: jobvision
+      concept: درخواست کارجو برای تغییر زمان مصاحبه
+      existing_labels_of_other_concepts:
+        job_application: [درخواست شغلی, درخواست]
+    proposed_name: درخواست
+    expected:
+      valid: false
+      checked_rules: [NAM-002]
+      violations: [NAM-002]
+
+  - id: distinct_name_without_collision
+    context:
+      product: jobvision
+      concept: درخواست کارجو برای تغییر زمان مصاحبه
+      existing_labels_of_other_concepts:
+        job_application: [درخواست شغلی, درخواست]
+    proposed_name: درخواست تغییر زمان مصاحبه
+    expected:
+      valid: true
+      checked_rules: [NAM-002]
+      violations: []
+
+  - id: child_concept_follows_family
+    context:
+      product: jobvision
+      concept: نوعی آگهی برای جذب کارآموز
+      family_label: آگهی
+    proposed_name: آگهی کارآموزی
+    expected:
+      valid: true
+      checked_rules: [NAM-002, NAM-003]
+      violations: []
+
+  - id: child_concept_breaks_family
+    context:
+      product: jobvision
+      concept: نوعی آگهی برای جذب کارآموز
+      family_label: آگهی
+    proposed_name: فرصت کارآموزی
+    expected:
+      valid: false
+      checked_rules: [NAM-003]
+      violations: [NAM-003]
+
+  - id: persian_name_preferred
+    context:
+      product: jobvision
+      audience: employer_actor
+      concept: فهرست کوتاه کارجوهایی که کارفرما برای مرحلهٔ بعد جدا می‌کند
+    proposed_name: فهرست منتخب
+    expected:
+      valid: true
+      checked_rules: [NAM-004]
+      violations: []
+
+  - id: unestablished_loanword
+    context:
+      product: jobvision
+      audience: employer_actor
+      concept: فهرست کوتاه کارجوهایی که کارفرما برای مرحلهٔ بعد جدا می‌کند
+    proposed_name: شورت‌لیست
+    expected:
+      valid: false
+      checked_rules: [NAM-004]
+      violations: [NAM-004]
+
+  - id: name_describes_user_value
+    context:
+      product: jobvision
+      audience: employer_actor
+      concept: کارجوهایی که سیستم بر اساس تطبیق رزومه به کارفرما پیشنهاد می‌دهد
+    proposed_name: کارجوهای پیشنهادی
+    expected:
+      valid: true
+      checked_rules: [NAM-005]
+      violations: []
+
+  - id: name_describes_mechanism
+    context:
+      product: jobvision
+      audience: employer_actor
+      concept: کارجوهایی که سیستم بر اساس تطبیق رزومه به کارفرما پیشنهاد می‌دهد
+    proposed_name: پایپ‌لاین غربالگری
+    expected:
+      valid: false
+      checked_rules: [NAM-005, VOICE-010]
+      violations: [NAM-005]
+
+  - id: automatic_backed_by_prd
+    context:
+      product: jobvision
+      concept: یادآوری‌ای که سیستم یک روز پیش از مصاحبه برای کارجو می‌فرستد
+      prd_behavior: سیستم بدون اقدام کارفرما یادآوری را ارسال می‌کند.
+    proposed_name: یادآوری خودکار مصاحبه
+    expected:
+      valid: true
+      checked_rules: [NAM-006]
+      violations: []
+
+  - id: automatic_not_backed_by_prd
+    context:
+      product: jobvision
+      concept: دعوت به مصاحبه
+      prd_behavior: کارفرما دعوت را برای هر کارجو دستی ارسال می‌کند.
+    proposed_name: ارسال خودکار دعوت
+    expected:
+      valid: false
+      checked_rules: [NAM-006]
+      violations: [NAM-006]

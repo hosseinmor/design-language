@@ -65,7 +65,7 @@ brief قالب میانی کار AI است، نه سندی که انسان بن�
 
 - `BRF-001` copy فقط از brief، قراردادهای Design Language و factهای ارجاع‌شده ساخته شود؛ هیچ ادعای محصولی دیگری اضافه نشود.
 - `BRF-003` هر slot که به fact با status برابر draft تکیه دارد در draft_dependencies ثبت شود.
-- `BRF-004` برچسب هر concept متناسب با audience و surface از منبع برچسب آن بیاید (برچسب هدف واژه‌نامه، وگرنه برچسب PK؛ برای مفهوم تازه قواعد نام‌گذاری DL با ثبت در draft_dependencies) و برچسب forbidden یا legacy در copy تازه نیاید.
+- `BRF-004` برچسب هر concept متناسب با audience و surface از منبع برچسب آن بیاید (برچسب هدف واژه‌نامه، وگرنه برچسب PK؛ برای مفهوم تازه قواعد NAM با ثبت در draft_dependencies) و برچسب forbidden یا legacy در copy تازه نیاید.
 
 ### نباید
 
@@ -136,7 +136,7 @@ fact یک محصول از Product Knowledge محصول دیگر گرفته نم�
 |---|---|---|
 | مدخل [واژه‌نامهٔ DL](terminology/terms.yml) دارد | برچسب هدف همان مدخل | — |
 | مدخل ندارد ولی در PK هست | `label` ثبت‌شده در PK | — |
-| تازه است (`new_concept`) | نام‌گذاری با قواعد DL؛ wording مال Designer است | slot وابسته در `draft_dependencies` با `concept` ثبت می‌شود |
+| تازه است (`new_concept`) | نام‌گذاری با [قواعد NAM](naming.md)؛ wording مال Designer است | slot وابسته در `draft_dependencies` با `concept` ثبت می‌شود |
 
 در دورهٔ گذار، واژه‌نامهٔ DL فقط برای مفهوم‌هایی برچسب هدف نگه می‌دارد که
 پروداکشن هنوز با گایدلاین هم‌راستا نیست. مفهوم تازه در واژه‌نامه ثبت نمی‌شود:

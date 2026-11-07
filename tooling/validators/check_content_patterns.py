@@ -74,6 +74,7 @@ NON_PATTERN_EVAL_PATHS = (
     ROOT / "ai" / "evals" / "content" / "text-input-content-cases.yml",
     ROOT / "ai" / "evals" / "content" / "modal-content-cases.yml",
     ROOT / "ai" / "evals" / "content" / "notification-content-cases.yml",
+    ROOT / "ai" / "evals" / "content" / "naming-cases.yml",
 )
 RULE_ID_RE = re.compile(r"^(VOICE|ERR|CNF|EST|NTF|LDP|AIC|INS)-[0-9]{3}$")
 CASE_ID_RE = re.compile(r"^[a-z][a-z0-9_]*$")
