@@ -11,6 +11,7 @@
     "content.copy-audit",
     "content.copy-brief",
     "content.localization",
+    "content.naming",
     "content.pattern.ai-content-and-disclosure",
     "content.pattern.confirmation",
     "content.pattern.empty-states",
@@ -393,6 +394,11 @@
     },
     {
       "from": "content.content-guidelines",
+      "to": "content.naming",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
       "to": "content.pattern.ai-content-and-disclosure",
       "type": "related"
     },
@@ -509,6 +515,26 @@
     {
       "from": "content.localization",
       "to": "design-system.experience-rule.contextual-guidance",
+      "type": "related"
+    },
+    {
+      "from": "content.naming",
+      "to": "content.copy-brief",
+      "type": "related"
+    },
+    {
+      "from": "content.naming",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "content.naming",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.naming",
+      "to": "content.terminology",
       "type": "related"
     },
     {
@@ -854,6 +880,11 @@
     {
       "from": "content.terminology",
       "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "content.terminology",
+      "to": "content.naming",
       "type": "related"
     },
     {

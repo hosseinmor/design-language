@@ -9,6 +9,7 @@ document_maturity: draft
 related:
   - content.content-guidelines
   - content.localization
+  - content.naming
 topics:
   - terminology
   - ux-writing
@@ -139,6 +140,13 @@ AI در محتوای تازه از آن‌ها استفاده نمی‌کند و
 هر هدف در `relations` باید یا مدخل داشته باشد یا در `unregistered_concepts`
 ثبت شود. این فهرست مفهوم‌هایی را نشان می‌دهد که هنوز باید بررسی و در صورت نیاز
 اضافه شوند.
+
+### مفهوم تازه
+
+مفهومی که نه در Product Knowledge هست و نه در این واژه‌نامه، این‌جا مدخل
+نمی‌گیرد. نامش طبق [قواعد نام‌گذاری](naming.md) انتخاب و در PRD یا Design
+Artifact ثبت می‌شود و بعد از publish از طریق استخراج Product Knowledge وارد آن
+می‌شود.
 
 ### کلیدهای مجاز
 

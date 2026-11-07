@@ -32,7 +32,7 @@ RETIRED_HEADING = "### بازنشسته (مالک فعلی)"
 
 def contract_paths() -> list[Path]:
     return sorted(
-        [CONTENT / "product-voice.yml", CONTENT / "copy-brief.yml", CONTENT / "copy-audit.yml"]
+        [CONTENT / "product-voice.yml", CONTENT / "copy-brief.yml", CONTENT / "copy-audit.yml", CONTENT / "naming.yml"]
         + list((CONTENT / "patterns").glob("*.yml"))
         + list((CONTENT / "components").glob("*.yml"))
     )

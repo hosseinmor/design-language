@@ -202,7 +202,7 @@ rules:
   - id: VOICE-007
     obligation: must
     dimension: terminology
-    statement: اصطلاح canonical همان مخاطب و سطح از واژه‌نامه انتخاب شود.
+    statement: اصطلاح هر مفهوم برای همان مخاطب و سطح از منبع برچسب آن بیاید؛ برچسب هدف واژه‌نامه، وگرنه برچسب ثبت‌شده در Product Knowledge، و نام مفهوم تازه طبق قواعد NAM.
     evidence: [product_content_decisions]
   - id: VOICE-008
     obligation: must
