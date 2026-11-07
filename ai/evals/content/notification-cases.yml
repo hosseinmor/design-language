@@ -111,6 +111,32 @@ cases:
       checked_rules: [NTF-001, NTF-005]
       violations: [NTF-001, NTF-005]
 
+  - id: confirmed_upload_failure
+    context:
+      event: upload_resume_file
+      failure_confirmed: true
+      retry_available: true
+    content:
+      severity: error
+      message: فایل رزومه بارگذاری نشد. دوباره تلاش کنید.
+    expected:
+      valid: true
+      checked_rules: [NTF-003, NTF-015]
+      violations: []
+
+  - id: error_before_outcome_is_known
+    context:
+      event: submit_job_application
+      request_timed_out: true
+      server_outcome_unknown: true
+    content:
+      severity: error
+      message: درخواست شغلی ارسال نشد.
+    expected:
+      valid: false
+      checked_rules: [NTF-015]
+      violations: [NTF-015]
+
   - id: celebratory_routine_success
     context:
       event: save_profile

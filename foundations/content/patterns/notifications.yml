@@ -62,7 +62,7 @@ rules:
     obligation: must
     dimension: product_truth
     key: confirm_before_success
-    statement: Success فقط پس از تأیید کامل‌شدن action و Error فقط پس از failure واقعی اعلام شود.
+    statement: Success فقط پس از تأیید کامل‌شدن action اعلام شود.
   - id: NTF-006
     obligation: must
     dimension: clarity
@@ -83,6 +83,11 @@ rules:
     dimension: product_truth
     key: invent_runtime_behavior
     statement: زمان نمایش، محل، stacking یا dismissibility تعریف‌نشده اختراع نشود.
+  - id: NTF-015
+    obligation: must
+    dimension: product_truth
+    key: confirm_before_error
+    statement: Error فقط پس از failure تأییدشده اعلام شود؛ وقتی نتیجه هنوز نامعلوم است، شکست قطعی گزارش نشود.
 
 anatomy:
   required:

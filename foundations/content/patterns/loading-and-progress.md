@@ -186,7 +186,7 @@ Skeleton یک treatment دیداری برای ساختار در انتظار ا�
 - `LDP-013` فوکوس فقط برای قابل‌کشف‌کردن spinner یا progress indicator جابه‌جا نشود.
 - `LDP-015` هر تغییر جزئی progress به‌صورت مزاحم announce نشود.
 - `LDP-016` cancellation، ادامهٔ پس‌زمینه‌ای یا خروج امن بدون رفتار تأییدشده وعده داده نشود.
-- `LDP-017` متن threshold نمایش، timing یا رفتار Skeleton را که Design System تعریف نکرده است وعده ندهد یا توصیف نکند.
+- `LDP-017` متن threshold نمایش، timing یا رفتار Skeleton را فقط وقتی بیان کند که در منبع تأییدشده یا copy brief آمده باشد.
 
 ### بازنشسته (مالک فعلی)
 

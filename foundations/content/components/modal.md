@@ -143,7 +143,7 @@ Title را با جمله‌ای طولانی‌تر تکرار نکنید. اگ�
 
 قواعد confirmation—action، object، consequence، دامنه، بازگشت‌پذیری، برچسب action
 اصلی و خروج امن—مالکشان [الگوی confirmation](../patterns/confirmations.md) است
-(`CNF-002` تا `CNF-007`، `CNF-010`). این بخش فقط جای‌گذاری آن‌ها در anatomy
+(`CNF-002` تا `CNF-006`، `CNF-010`) و قاعدهٔ برچسب عمومی مال Button است (`BTN-004`). این بخش فقط جای‌گذاری آن‌ها در anatomy
 Dialog را نشان می‌دهد:
 
 ```text
@@ -278,7 +278,7 @@ flow هستند. متن نباید یک target همیشگی مانند «همی�
 
 - `MOD-008` → `CNF-002`، `CNF-003`، `CNF-004`، `CNF-010`: تکرار قواعد الگوی confirmation برای action، consequence، بازگشت‌پذیری و دامنه.
 - `MOD-009` → `CNF-005`، `CNF-006`: تکرار قواعد الگوی confirmation برای برچسب action اصلی و خروج امن.
-- `MOD-010` → `CNF-007`: عین قاعدهٔ الگوی confirmation دربارهٔ «بله»، «خیر»، «تأیید» و «ادامه».
+- `MOD-010` → `BTN-004`: عین قاعدهٔ Button دربارهٔ برچسب عمومی «بله»، «خیر»، «تأیید» و «ادامه».
 
 <!-- /generated:content-rules -->
 

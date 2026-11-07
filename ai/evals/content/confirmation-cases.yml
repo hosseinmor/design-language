@@ -18,7 +18,7 @@ cases:
       safe_exit: انصراف
     expected:
       valid: true
-      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-007, CNF-011, CNF-012]
+      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, BTN-004, CNF-011, CNF-012]
       violations: []
 
   - id: discard_unsaved_changes
@@ -34,7 +34,7 @@ cases:
       safe_exit: ادامهٔ ویرایش
     expected:
       valid: true
-      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-005, CNF-006, CNF-007, CNF-008, CNF-012]
+      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-005, CNF-006, BTN-004, CNF-008, CNF-012]
       violations: []
 
   - id: remove_organization_access
@@ -98,8 +98,8 @@ cases:
       safe_exit: خیر
     expected:
       valid: false
-      checked_rules: [CNF-002, CNF-003, CNF-005, CNF-006, CNF-007]
-      violations: [CNF-002, CNF-005, CNF-006, CNF-007]
+      checked_rules: [CNF-002, CNF-003, CNF-005, CNF-006, BTN-004]
+      violations: [CNF-002, CNF-005, CNF-006, BTN-004]
 
   - id: generic_confirm_action
     context:
@@ -112,8 +112,8 @@ cases:
       safe_exit: انصراف
     expected:
       valid: false
-      checked_rules: [CNF-004, CNF-005, CNF-006, CNF-007]
-      violations: [CNF-004, CNF-005, CNF-007]
+      checked_rules: [CNF-004, CNF-005, CNF-006, BTN-004]
+      violations: [CNF-004, CNF-005, BTN-004]
 
   - id: emotional_pressure_to_keep_subscription
     context:
