@@ -8,6 +8,7 @@
     "content.component.notification",
     "content.component.text-input",
     "content.content-guidelines",
+    "content.copy-brief",
     "content.localization",
     "content.pattern.ai-content-and-disclosure",
     "content.pattern.confirmation",
@@ -376,6 +377,11 @@
     },
     {
       "from": "content.content-guidelines",
+      "to": "content.copy-brief",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
       "to": "content.localization",
       "type": "related"
     },
@@ -421,6 +427,26 @@
     },
     {
       "from": "content.content-guidelines",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.copy-brief",
+      "to": "content.content-guidelines",
+      "type": "related"
+    },
+    {
+      "from": "content.copy-brief",
+      "to": "content.localization",
+      "type": "related"
+    },
+    {
+      "from": "content.copy-brief",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.copy-brief",
       "to": "content.terminology",
       "type": "related"
     },

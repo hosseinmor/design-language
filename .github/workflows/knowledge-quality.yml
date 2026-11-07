@@ -64,3 +64,9 @@ jobs:
 
       - name: Check content patterns
         run: python tooling/validators/check_content_patterns.py
+
+      - name: Check copy briefs
+        run: python tooling/validators/check_copy_briefs.py
+
+      - name: Validate copy generation fixtures
+        run: python tooling/evals/run_content_generation_eval.py validate
