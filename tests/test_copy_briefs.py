@@ -71,6 +71,29 @@ class BriefTests(unittest.TestCase):
         self.assertTrue(self.errors(brief(product_facts=[fact])))
         self.assertEqual(self.errors(brief(product_facts=[fact]), fixture=True), [])
 
+    def test_product_knowledge_page_source(self):
+        page = {"kind": "product_knowledge", "product": "jobvision", "page": "jobpost-overview", "state": "draft"}
+        verified = {"id": "f", "statement": "x", "status": "verified", "source": page}
+        self.assertTrue(any("exceeds source maturity" in e for e in self.errors(brief(product_facts=[verified]))))
+        draft = {**verified, "status": "draft"}
+        self.assertEqual(self.errors(brief(product_facts=[draft])), [])
+
+    def test_product_knowledge_of_other_product_is_rejected(self):
+        page = {"kind": "product_knowledge", "product": "cando", "page": "p", "state": "verified"}
+        fact = {"id": "f", "statement": "x", "status": "verified", "source": page}
+        self.assertTrue(any("cannot support" in e for e in self.errors(brief(product_facts=[fact]))))
+
+    def test_prd_source_needs_accepted_decision_for_verified(self):
+        prd = {"kind": "prd", "ref": "JV-1405081200", "decision": "proposed"}
+        fact = {"id": "f", "statement": "x", "status": "verified", "source": prd}
+        self.assertTrue(any("exceeds source maturity" in e for e in self.errors(brief(product_facts=[fact]))))
+        accepted = {**fact, "source": {**prd, "decision": "accepted"}}
+        self.assertEqual(self.errors(brief(product_facts=[accepted])), [])
+
+    def test_unknown_source_kind_is_rejected(self):
+        fact = {"id": "f", "statement": "x", "status": "draft", "source": {"kind": "slack"}}
+        self.assertTrue(any("unknown source kind" in e for e in self.errors(brief(product_facts=[fact]))))
+
     def test_anatomy_roles_flatten_nested_lists(self):
         roles, required = anatomy_roles({"required": ["a"], "output": {"conditional": ["b"]}})
         self.assertEqual((roles, required), ({"a", "b"}, {"a"}))

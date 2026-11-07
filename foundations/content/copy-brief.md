@@ -38,15 +38,19 @@ brief قالب میانی کار AI است، نه سندی که انسان بن�
 - **سازنده:** ابزار هماهنگی کار (Product Development Harness) brief را از منابع
   همان کار می‌سازد. جزئیات این جریان مال هارنس است، نه این مخزن.
 - **خوراک:** طرح Figma برای `contract`، `states`، `slots` و `surface`؛ سند
-  Product Knowledge همان feature برای `product_facts` با منبع؛ تیکت یا PRD برای
+  Product Knowledge برای رفتار فعلی و PRD جاری برای رفتار تازه، هر دو برای
+  `product_facts` با منبع؛ تیکت یا PRD برای
   `audience` و `context`؛ واژه‌نامه برای `concepts`. حداقل خوراک طرح و سند PK
-  است. هر چیزی که منبع ندارد `unknown` می‌شود و سؤال برمی‌گرداند.
+  است؛ وقتی کار رفتار تازه می‌سازد، PRD هم لازم است. هر چیزی که منبع ندارد `unknown` می‌شود و سؤال برمی‌گرداند.
 - **سهم انسان:** فقط پاسخ به `open_questions`.
 - **ذخیره:** brief جایی نگهداری نمی‌شود. هر بار از منابع از نو ساخته می‌شود، از
   جمله پس از تغییر دیزاین، و فقط copyهای متأثر دوباره نوشته می‌شوند.
-- **پاسخ سؤال‌ها:** پاسخ هر سؤال fact محصول است و در سند Product Knowledge همان
-  feature ثبت می‌شود. تا آن زمان در تیکت همان کار می‌ماند. پاسخی که جایی ثبت
-  نشود در ساخت بعدی دوباره پرسیده می‌شود.
+- **پاسخ سؤال‌ها:** پاسخ هر سؤال fact محصول است و به مالک همان fact می‌رود:
+  - رفتار **فعلی** محصول → سند Product Knowledge همان محصول؛
+  - رفتار **تازه‌ای** که همین کار می‌سازد → PRD جاری، با تصمیم PM.
+
+  تا ثبت در مالک، پاسخ در تیکت همان کار می‌ماند. پاسخی که جایی ثبت نشود در
+  ساخت بعدی دوباره پرسیده می‌شود.
 
 تنها briefهای این مخزن caseهای eval هستند.
 
@@ -97,20 +101,32 @@ product_facts:
   - id: deleted_job_post_is_permanent
     statement: آگهی حذف‌شده قابل بازگردانی نیست.
     status: verified
-    source: <registered source id>
+    source:
+      kind: product_knowledge
+      product: jobvision
+      page: <source-native page name>
+      state: verified
 ```
 
 ### وضعیت fact
 
 | status | منبع | اثر روی copy |
 |---|---|---|
-| `verified` | منبع ثبت‌شده با state برابر verified | می‌تواند در copy بیاید |
-| `draft` | منبع ثبت‌شده | می‌تواند بیاید، ولی slot وابسته در `draft_dependencies` ثبت می‌شود |
+| `verified` | منبعی که خودش verified است | می‌تواند در copy بیاید |
+| `draft` | هر منبع مجاز | می‌تواند بیاید، ولی slot وابسته در `draft_dependencies` ثبت می‌شود |
 | `unknown` | ندارد؛ `question` لازم است | ادعا یا القا نمی‌شود؛ در `open_questions` برمی‌گردد |
 
-status یک fact نمی‌تواند از state منبع آن بالاتر باشد. منبع‌ها همان
-`sources` ثبت‌شده در واژه‌نامه‌اند. `eval_fixture` فقط در fixtureهای eval مجاز
-است، تا caseهای آزمایشی ادعایی را به منبع واقعی نسبت ندهند.
+status یک fact نمی‌تواند از بلوغ منبع آن بالاتر باشد. سه شکل منبع مجاز است:
+
+| شکل | معنی | بالاترین status |
+|---|---|---|
+| ID یکی از `sources` واژه‌نامه | منبع ثبت‌شده | همان `state` منبع |
+| `{kind: product_knowledge, product, page, state}` | صفحهٔ Product Knowledge با نام source-native آن؛ `product` باید همان محصول brief باشد | همان `state` صفحه هنگام خواندن |
+| `{kind: prd, ref, decision}` | PRD جاری همین کار؛ `decision` برابر `accepted` یا `proposed` | `verified` فقط با `accepted`؛ در غیر این صورت `draft` |
+
+fact یک محصول از Product Knowledge محصول دیگر گرفته نمی‌شود. `eval_fixture`
+فقط در fixtureهای eval مجاز است، تا caseهای آزمایشی ادعایی را به منبع واقعی
+نسبت ندهند.
 
 ### لایهٔ محصول
 
