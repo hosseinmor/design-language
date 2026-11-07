@@ -147,25 +147,25 @@ component_selection:
 rules:
   - id: MOD-001
     obligation: must
-    dimension: selection
+    dimension: classification
     key: require_blocking_context
     statement: Dialog فقط برای task، decision یا response متمرکزی استفاده شود که واقعاً context blocking می‌خواهد.
     evidence: [design_system_dialog, product_content_decisions]
   - id: MOD-002
     obligation: must
-    dimension: title
+    dimension: clarity
     key: title_names_task_or_decision
     statement: Title باید task، decision یا موضوع response را روشن نام ببرد.
     evidence: [design_system_dialog, confirmation_pattern, product_content_decisions]
   - id: MOD-003
     obligation: must_not
-    dimension: title
+    dimension: clarity
     key: generic_title
     statement: «توجه»، «هشدار»، «پیام»، «تأیید» یا «مطمئن هستید؟» به‌تنهایی Title نباشند.
     evidence: [confirmation_pattern, product_content_decisions]
   - id: MOD-004
     obligation: must
-    dimension: context
+    dimension: clarity
     key: self_contained_without_background
     statement: Title و content اصلی بدون مراجعه به background پوشیده‌شده قابل‌فهم باشند.
     evidence: [design_system_dialog, accessibility_focus]
@@ -177,19 +177,19 @@ rules:
     evidence: [design_system_dialog]
   - id: MOD-006
     obligation: must
-    dimension: body
+    dimension: clarity
     key: body_adds_necessary_context
     statement: Body فقط context، consequence یا requirement لازم و تأییدشده‌ای فراتر از Title اضافه کند.
     evidence: [design_system_dialog, product_content_decisions]
   - id: MOD-007
     obligation: must_not
-    dimension: duplication
+    dimension: structure
     key: duplicate_title_body_actions
     statement: Title، Body و actionها با wording تکراری پر نشوند.
     evidence: [product_content_decisions]
   - id: MOD-008
     obligation: must
-    dimension: confirmation
+    dimension: action
     key: confirmation_names_consequence
     statement: Confirmation باید action، object، consequence، scope و recoverability معلوم را روشن کند.
     evidence: [confirmation_pattern]
@@ -207,7 +207,7 @@ rules:
     evidence: [confirmation_pattern, button_contract]
   - id: MOD-011
     obligation: must
-    dimension: dismissal
+    dimension: accessibility
     key: name_available_dismiss_action
     statement: dismiss control موجود accessible name معنادار داشته باشد و با safe exit متفاوت اشتباه نشود.
     evidence: [design_system_dialog, product_content_decisions]
@@ -219,25 +219,25 @@ rules:
     evidence: [design_system_dialog, accessibility_focus]
   - id: MOD-013
     obligation: must
-    dimension: data_loss
+    dimension: product_truth
     key: disclose_dismissal_data_loss
     statement: اگر خروج باعث data loss می‌شود، consequence و مسیر تصمیم مطابق product truth روشن شوند.
     evidence: [design_system_dialog, confirmation_pattern]
   - id: MOD-014
     obligation: must
-    dimension: loading
+    dimension: action
     key: preserve_context_during_loading
     statement: در Loading هویت action و Dialog context تا outcome یا transition تأییدشده حفظ شوند.
     evidence: [design_system_dialog, loading_pattern, button_contract]
   - id: MOD-015
     obligation: must_not
-    dimension: state
+    dimension: product_truth
     key: announce_or_close_before_outcome
     statement: success اعلام نشود و Dialog پیش از outcome واقعی و policy تأییدشده بسته نشود.
     evidence: [design_system_dialog, loading_pattern]
   - id: MOD-016
     obligation: must
-    dimension: error
+    dimension: structure
     key: preserve_recovery_in_context
     statement: Failure قابل‌بازیابی با دادهٔ معتبر و recovery معلوم در همان context قابل‌فهم بماند.
     evidence: [design_system_dialog, error_pattern]
@@ -255,7 +255,7 @@ rules:
     evidence: [localization]
   - id: MOD-019
     obligation: must_not
-    dimension: scope
+    dimension: classification
     key: force_complex_task_into_modal
     statement: task طولانی، چندمرحله‌ای یا navigation-heavy به Dialog عمومی تحمیل نشود.
     evidence: [design_system_dialog]

@@ -62,12 +62,12 @@ rules:
     statement: رویداد، severity معنایی و نیاز به ماندگاری پیش از نوشتن مشخص شود.
   - id: NTF-002
     obligation: must
-    dimension: placement
+    dimension: presentation
     key: choose_presentation_by_context
     statement: شکل نمایش از زمینه، ماندگاری و نیاز به اقدام انتخاب شود، نه فقط از severity.
   - id: NTF-003
     obligation: must
-    dimension: content
+    dimension: clarity
     key: name_actual_result
     statement: نتیجه یا وضعیت واقعی با action و object قابل‌فهم نام برده شود.
   - id: NTF-004
@@ -82,7 +82,7 @@ rules:
     statement: Success فقط پس از تأیید کامل‌شدن action اعلام شود.
   - id: NTF-006
     obligation: must
-    dimension: content
+    dimension: clarity
     key: include_relevant_consequence
     statement: اگر نتیجه روی ادامهٔ task اثر دارد، پیامد یا گام بعدی معلوم بیان شود.
   - id: NTF-007
@@ -92,7 +92,7 @@ rules:
     statement: حداکثر یک action معنادار و واقعاً در دسترس ارائه شود.
   - id: NTF-008
     obligation: must_not
-    dimension: content
+    dimension: clarity
     key: generic_outcome_only
     statement: عبارت کلی مانند «عملیات با موفقیت انجام شد» بدون نام نتیجه کل پیام نباشد.
   - id: NTF-009
@@ -102,7 +102,7 @@ rules:
     statement: موفقیت معمولی با تحسین، هیجان، شعار یا ایموجی بزرگ‌نمایی نشود.
   - id: NTF-010
     obligation: must_not
-    dimension: severity
+    dimension: presentation
     key: confuse_danger_warning_error
     statement: Danger به‌عنوان severity اعلان یا Error برای هشدار نیت مخرب پیش از action استفاده نشود.
   - id: NTF-011

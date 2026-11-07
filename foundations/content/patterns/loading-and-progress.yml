@@ -63,7 +63,7 @@ rules:
     statement: scope محلی یا ناحیه‌ای و نوع progress معین یا نامعین پیش از نوشتن مشخص شود.
   - id: LDP-002
     obligation: must
-    dimension: content
+    dimension: clarity
     key: name_running_action
     statement: وقتی متن وضعیت لازم است، action و object واقعی و قابل‌فهم نام برده شوند.
   - id: LDP-003
@@ -83,7 +83,7 @@ rules:
     statement: برای progress نامعین درصد، تعداد، مرحله یا ETA ساخته نشود.
   - id: LDP-006
     obligation: must_not
-    dimension: content
+    dimension: clarity
     key: generic_wait_only
     statement: عبارت کلی مانند «لطفاً منتظر بمانید» یا «در حال پردازش» بدون زمینه کل پیام نباشد.
   - id: LDP-007
@@ -98,12 +98,12 @@ rules:
     statement: نام action و object با اصطلاح همان مخاطب و سطح UI هماهنگ بماند.
   - id: LDP-009
     obligation: must_not
-    dimension: state
+    dimension: product_truth
     key: collapse_loading_states
     statement: Loading با Disabled، Empty، Error یا Success یکی گرفته نشود.
   - id: LDP-010
     obligation: must
-    dimension: transition
+    dimension: product_truth
     key: transition_from_actual_result
     statement: انتقال به Success، Error یا Cancelled فقط پس از دریافت state واقعی انجام شود.
   - id: LDP-011
@@ -138,7 +138,7 @@ rules:
     statement: cancellation، ادامهٔ پس‌زمینه‌ای یا خروج امن بدون رفتار تأییدشده وعده داده نشود.
   - id: LDP-017
     obligation: must_not
-    dimension: design_system_boundary
+    dimension: presentation
     key: invent_timing_or_skeleton_behavior
     statement: threshold نمایش، timing یا رفتار دقیق Skeleton از scaffoldهای تأییدنشده استنتاج نشود.
 

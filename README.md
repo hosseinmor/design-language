@@ -45,10 +45,12 @@ python tooling/validators/check_ai_governance.py
 python -m unittest discover -s tests -p 'test_ai_governance.py'
 python tooling/validate_links.py
 python tooling/validators/check_accessibility_knowledge.py
+python tooling/generate_content_rule_sections.py check
+python tooling/validators/check_content_contracts.py
 python tooling/validators/check_content_terminology.py
 python tooling/validators/check_content_localization.py
 python tooling/validators/check_content_components.py
 python tooling/validators/check_content_patterns.py
 ```
 
-When component-mapping sections change, run `python tooling/generate_component_mapping_index.py generate` and commit its updated index. The generated files in `registry/` are derived artifacts. Do not edit them by hand.
+When a content rule changes in YAML, run `python tooling/generate_content_rule_sections.py generate` and commit the updated Markdown rule sections. When component-mapping sections change, run `python tooling/generate_component_mapping_index.py generate` and commit its updated index. The generated files in `registry/` are derived artifacts. Do not edit them by hand.

@@ -239,26 +239,37 @@ Placeholder یا copy نباید component اشتباه را قابل‌قبول
 
 ## قرارداد قطعی
 
+<!-- generated:content-rules source=text-input.yml -->
+<!-- این بخش از فایل YAML تولید می‌شود؛ دستی ویرایش نکنید. پس از تغییر قواعد اجرا کنید: python tooling/generate_content_rule_sections.py generate -->
+
 ### باید
 
-- role هر رشته را پیش از نوشتن مشخص کنید.
-- Label purpose field را مستقل از Placeholder نام ببرد.
-- Helper فقط context تازه و تأییدشده بدهد.
-- Required، Invalid، Read only و Disabled را مطابق state واقعی و semantics
-  متناظر نگه دارید.
-- Error مشکل و اصلاح معلوم را با terminology همان Label بیان کند.
-- Label، Helper و Error را برنامه‌وار به input مرتبط کنید.
-- Value و محتوای پویا را با type و bidi contract درست حفظ کنید.
+- `TXT-001` نقش Label، Placeholder، Helper، Value و Error پیش از نوشتن مشخص شود.
+- `TXT-002` Label purpose field را با اصطلاح همان surface مستقل از Placeholder و Value نام ببرد.
+- `TXT-004` Placeholder فقط در صورت افزودن example یا format hint کوتاه و غیرضروری استفاده شود.
+- `TXT-005` exampleی که ممکن است Value واقعی برداشت شود با contextی مانند «مثال:» مشخص شود.
+- `TXT-006` Helper کوتاه، field-specific، غیرتکراری و شامل context تأییدشده‌ای فراتر از Label باشد.
+- `TXT-008` limit، format، reason، privacy، storage، consequence و validation فقط از product truth نوشته شوند.
+- `TXT-009` requiredness واقعی با convention دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
+- `TXT-011` Error شرط نقض‌شده و اصلاح معلوم را متنی و بدون اتکا به رنگ بیان کند.
+- `TXT-012` وقتی Error جای Helper treatment را می‌گیرد، requirement ضروری در Error یا Instruction ماندگار حفظ شود.
+- `TXT-013` accessible name، Helper و Error با input مربوط برنامه‌وار مرتبط شوند.
+- `TXT-014` Error نام field و object را با همان terminology Label و surface حفظ کند.
+- `TXT-015` Value واقعی کاربر یا سیستم مطابق type field حفظ شود و برای لحن برند بازنویسی نشود.
+- `TXT-016` Disabled و Read only مطابق state واقعی و semantics متمایز استفاده شوند.
+- `TXT-017` Trailing تعاملی action و accessible name معنادار داشته باشد و از icon تزئینی متمایز شود.
+- `TXT-018` email، URL، identifier، quantity و free text بر اساس type و قرارداد localization و bidi نمایش داده شوند.
 
 ### نباید
 
-- Placeholder را تنها Label یا carrier requirement ضروری قرار دهید.
-- یک wording را در چند role تکرار کنید.
-- limit، privacy، storage، validation یا reason state را حدس بزنید.
-- Error را فقط با رنگ یا عبارت کلی مانند «نامعتبر است» نشان دهید.
-- requirement ضروری را هنگام Error ناپدید کنید.
-- Info/Tooltip را تنها محل instruction لازم قرار دهید.
-- text چندخطی، انتخاب option یا action تخصصی را به Text Input تحمیل کنید.
+- `TXT-003` Placeholder تنها Label، accessible name یا محل requirement ضروری نباشد.
+- `TXT-007` instruction، requirement، Error یا consequence ضروری فقط پشت Info یا Tooltip پنهان نشود.
+- `TXT-010` Label، Placeholder و Helper با wording تکراری پر نشوند.
+- `TXT-019` متن چندخطی، optionهای ثابت یا رفتار تخصصی به Text Input عمومی تحمیل نشود.
+- `TXT-020` paste، autofill یا password manager بدون محدودیت مشخص و تأییدشده ممنوع نشود.
+- `TXT-021` Warning، normalization، input purpose یا state حل‌نشده به‌عنوان policy قطعی ساخته نشود.
+
+<!-- /generated:content-rules -->
 
 ## مسائل باز
 

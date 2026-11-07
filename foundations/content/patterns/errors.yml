@@ -26,12 +26,12 @@ tone_profile: validation_error
 rules:
   - id: ERR-001
     obligation: must
-    dimension: content
+    dimension: clarity
     key: identify_problem
     statement: مشکل یا وضعیت ناموفق را مشخص کنید.
   - id: ERR-002
     obligation: must
-    dimension: content
+    dimension: clarity
     key: identify_recovery_when_known
     statement: وقتی راه بازیابی معلوم و مجاز است، اقدام بعدی را بگویید.
   - id: ERR-003
@@ -46,7 +46,7 @@ rules:
     statement: کاربر را سرزنش نکنید و خطا را به شخصیت یا توانایی او نسبت ندهید.
   - id: ERR-005
     obligation: must_not
-    dimension: content
+    dimension: clarity
     key: generic_only
     statement: «نامعتبر است» یا «خطایی رخ داد» نباید کل پیام باشد.
   - id: ERR-006

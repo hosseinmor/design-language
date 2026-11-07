@@ -234,25 +234,38 @@ visual severity و announcement urgency دو تصمیم مستقل‌اند:
 
 ## قرارداد قطعی
 
+<!-- generated:content-rules source=notification.yml -->
+<!-- این بخش از فایل YAML تولید می‌شود؛ دستی ویرایش نکنید. پس از تغییر قواعد اجرا کنید: python tooling/generate_content_rule_sections.py generate -->
+
 ### باید
 
-- Inline Notification و Toast را بر اساس persistence و context انتخاب کنید.
-- severity را از معنی outcome یا state تعیین کنید.
-- Message نتیجه یا وضعیت واقعی را مستقل و روشن نام ببرد.
-- Description یا Title فقط اطلاعات تازه اضافه کند.
-- action واحد، معنادار و واقعاً قابل‌استفاده باشد.
-- Dismiss موجود نام «بستن» و accessible relationship درست داشته باشد.
-- announcement را مستقل از severity و با کم‌مزاحمت‌ترین روش کافی تعیین کنید.
+- `NTC-001` Inline Notification یا Toast از context، persistence و نیاز به action انتخاب شود، نه فقط severity.
+- `NTC-003` severity فقط یکی از Info، Success، Warning یا Error و مطابق معنی state باشد.
+- `NTC-005` Message required باشد و نتیجه یا وضعیت واقعی را مستقل و روشن نام ببرد.
+- `NTC-006` Inline Description فقط context، consequence یا recovery تکمیلی و غیرتکراری اضافه کند.
+- `NTC-007` Toast Title فقط در صورت افزودن دسته‌بندی یا object تازه استفاده شود و Message را تکرار نکند.
+- `NTC-009` Notification حداکثر یک action معنادار و واقعاً قابل‌استفاده داشته باشد.
+- `NTC-010` navigation از Link و operation از Button با label نتیجه‌محور استفاده کند.
+- `NTC-011` Undo یا action ضروری فقط با behavior تأییدشده و فرصت دسترسی کافی ارائه شود.
+- `NTC-012` Dismiss موجود accessible name و Tooltip فارسی «بستن» داشته باشد.
+- `NTC-014` Timeout indicator فقط عمر auto-dismiss Toast را نشان دهد و task progress نامیده نشود.
+- `NTC-015` announcement urgency مستقل از visual severity و با کم‌مزاحمت‌ترین سازوکار کافی تعیین شود.
+- `NTC-018` Success فقط پس از outcome تأییدشده و Error فقط پس از failure واقعی اعلام شود.
+- `NTC-019` recovery یا action لازم در presentation ماندگار و قابل‌دسترسی باقی بماند.
+- `NTC-020` action و object با terminology همان audience و surface نامیده شوند.
+- `NTC-021` count، amount، date، identifier، نام و متن دوجهته با formatter و bidi contract معتبر نمایش داده شوند.
 
 ### نباید
 
-- Inline Notification و Toast را یک `Type` مشترک فرض کنید.
-- Danger یا High contrast را severity پنجم در نظر بگیرید.
-- Title/Description را برای تکرار Message استفاده کنید.
-- متن بلند، confirmation یا recovery حیاتی را در Toast گذرا قرار دهید.
-- focus را برای ظاهرشدن Toast جابه‌جا کنید.
-- timeout، stacking، placement یا dismissibility تعریف‌نشده بسازید.
-- success را پیش از outcome واقعی یا با hype اعلام کنید.
+- `NTC-002` Inline Notification و Toast یک component با Type axis مشترک فرض نشوند.
+- `NTC-004` Danger یا High contrast به‌عنوان severity پنجم استفاده نشود.
+- `NTC-008` متن بلند، confirmation، instruction حیاتی یا recovery ماندگار در Toast گذرا قرار نگیرد.
+- `NTC-013` timing، stacking، queue، placement یا dismissibility تعریف‌نشده ساخته نشود.
+- `NTC-016` focus فقط به‌دلیل ظاهرشدن Toast جابه‌جا نشود و action autofocus نگیرد.
+- `NTC-017` یک event بی‌دلیل با Toast، focus move و live announcement تکرار نشود.
+- `NTC-022` پیام کلی، تبلیغاتی، هیجانی، ایموجی‌محور یا success زودهنگام نوشته نشود.
+
+<!-- /generated:content-rules -->
 
 ## مسائل باز
 

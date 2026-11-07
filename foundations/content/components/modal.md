@@ -244,24 +244,36 @@ flow هستند. متن نباید یک target همیشگی مانند «همی�
 
 ## قرارداد قطعی
 
+<!-- generated:content-rules source=modal.yml -->
+<!-- این بخش از فایل YAML تولید می‌شود؛ دستی ویرایش نکنید. پس از تغییر قواعد اجرا کنید: python tooling/generate_content_rule_sections.py generate -->
+
 ### باید
 
-- نوع Dialog و ضرورت blocking context را پیش از نوشتن مشخص کنید.
-- Title task، decision یا موضوع response را روشن نام ببرد.
-- محتوا را مستقل از background قابل‌فهم نگه دارید.
-- Body فقط context، consequence یا requirement لازم و تأییدشده را اضافه کند.
-- action اصلی، خروج امن و dismissal action موجود را دقیق نام‌گذاری کنید.
-- Loading، success و error را فقط از state واقعی flow بنویسید.
-- terminology، variable formatting و accessible relationships را حفظ کنید.
+- `MOD-001` Dialog فقط برای task، decision یا response متمرکزی استفاده شود که واقعاً context blocking می‌خواهد.
+- `MOD-002` Title باید task، decision یا موضوع response را روشن نام ببرد.
+- `MOD-004` Title و content اصلی بدون مراجعه به background پوشیده‌شده قابل‌فهم باشند.
+- `MOD-005` visible Title و accessible name Dialog از نظر معنی همسو و برنامه‌وار مرتبط باشند.
+- `MOD-006` Body فقط context، consequence یا requirement لازم و تأییدشده‌ای فراتر از Title اضافه کند.
+- `MOD-008` Confirmation باید action، object، consequence، scope و recoverability معلوم را روشن کند.
+- `MOD-009` action اصلی نتیجهٔ activation و action ثانویه خروج امن یا بازگشت را صریح نام ببرند.
+- `MOD-011` dismiss control موجود accessible name معنادار داشته باشد و با safe exit متفاوت اشتباه نشود.
+- `MOD-013` اگر خروج باعث data loss می‌شود، consequence و مسیر تصمیم مطابق product truth روشن شوند.
+- `MOD-014` در Loading هویت action و Dialog context تا outcome یا transition تأییدشده حفظ شوند.
+- `MOD-016` Failure قابل‌بازیابی با دادهٔ معتبر و recovery معلوم در همان context قابل‌فهم بماند.
+- `MOD-017` object، field و action با terminology همان surface و audience نامیده شوند.
+- `MOD-018` نام، count، amount، identifier و متن دوجهته با formatter و bidi contract معتبر نمایش داده شوند.
 
 ### نباید
 
-- feedback منفعل یا disclosure ساده را فقط برای تأکید داخل Dialog ببرید.
-- از Titleهای generic مانند «توجه»، «هشدار» یا «مطمئن هستید؟» استفاده کنید.
-- Title، Body و actions را با wording تکراری پر کنید.
-- consequence، recoverability، dismissal یا focus behavior را حدس بزنید.
-- Dialog را پیش از outcome واقعی موفق اعلام یا خوش‌بینانه ببندید.
-- task طولانی و چندمرحله‌ای را به Dialog عمومی تحمیل کنید.
+- `MOD-003` «توجه»، «هشدار»، «پیام»، «تأیید» یا «مطمئن هستید؟» به‌تنهایی Title نباشند.
+- `MOD-007` Title، Body و actionها با wording تکراری پر نشوند.
+- `MOD-010` برای تصمیم پیامددار از «بله»، «خیر»، «تأیید» یا «ادامه» به‌تنهایی استفاده نشود.
+- `MOD-012` Escape، backdrop، auto-close، initial focus یا non-dismissible behavior بدون contract معتبر وعده داده نشود.
+- `MOD-015` success اعلام نشود و Dialog پیش از outcome واقعی و policy تأییدشده بسته نشود.
+- `MOD-019` task طولانی، چندمرحله‌ای یا navigation-heavy به Dialog عمومی تحمیل نشود.
+- `MOD-020` Title، Body یا actionها با ترس، فوریت ساختگی، فشار احساسی یا success زودهنگام تصمیم را جهت ندهند.
+
+<!-- /generated:content-rules -->
 
 ## مسائل باز
 

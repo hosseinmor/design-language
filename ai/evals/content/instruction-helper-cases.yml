@@ -323,3 +323,29 @@ cases:
       valid: false
       checked_rules: [INS-006, INS-015, INS-020]
       violations: [INS-006, INS-015, INS-020]
+
+  - id: ambiguous_link_without_context
+    context:
+      field: national_id
+      link_destination: document_requirements_page
+    content:
+      label: کد ملی
+      helper: کد ملی ۱۰ رقمی خود را وارد کنید.
+      link: بیشتر
+    expected:
+      valid: false
+      checked_rules: [INS-021]
+      violations: [INS-021]
+
+  - id: descriptive_link_names_destination
+    context:
+      field: national_id
+      link_destination: document_requirements_page
+    content:
+      label: کد ملی
+      helper: کد ملی ۱۰ رقمی خود را وارد کنید.
+      link: مدارک لازم برای احراز هویت
+    expected:
+      valid: true
+      checked_rules: [INS-021]
+      violations: []

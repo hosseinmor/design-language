@@ -116,12 +116,12 @@ rules:
     statement: disclosure نزدیک action یا output مرتبط و پیش از commitment پیامددار قرار گیرد.
   - id: AIC-005
     obligation: must
-    dimension: content
+    dimension: disclosure
     key: name_ai_contribution_accurately
     statement: مشارکت AI با نام دقیق action یا نوع خروجی بیان شود.
   - id: AIC-006
     obligation: must
-    dimension: output_status
+    dimension: disclosure
     key: distinguish_suggestion_from_final
     statement: خروجی پیشنهادی یا draft از محتوای نهایی، منتشرشده یا تصمیم انسانی متمایز بماند.
   - id: AIC-007
@@ -141,17 +141,17 @@ rules:
     statement: confidence، score یا درصد دقت بدون تعریف، منبع و interpretation معتبر نمایش داده نشود.
   - id: AIC-010
     obligation: must
-    dimension: limitations
+    dimension: disclosure
     key: make_known_limit_actionable
     statement: محدودیت معلوم یا نیاز به بازبینی در نزدیک‌ترین context مرتبط و به‌شکل قابل‌اقدام بیان شود.
   - id: AIC-011
     obligation: must_not
-    dimension: provenance
+    dimension: disclosure
     key: imply_human_authorship
     statement: خروجی AI به‌عنوان متن کارشناس، تصمیم انسانی یا حقیقت قطعی معرفی نشود.
   - id: AIC-012
     obligation: must_not
-    dimension: data_policy
+    dimension: product_truth
     key: invent_data_claims
     statement: privacy، retention، model training، sharing، consent، opt-out یا ownership بدون policy معتبر ادعا نشود.
   - id: AIC-013
@@ -161,12 +161,12 @@ rules:
     statement: بازبینی با سرزنش، تهدید یا انتقال کامل مسئولیت به کاربر بیان نشود.
   - id: AIC-014
     obligation: must_not
-    dimension: automation
+    dimension: disclosure
     key: collapse_recommendation_into_decision
     statement: پیشنهاد، score یا تحلیل AI به‌عنوان تصمیم خودکار یا نتیجهٔ قطعی معرفی نشود مگر همان automation در product truth تأیید شده باشد.
   - id: AIC-015
     obligation: must
-    dimension: state
+    dimension: product_truth
     key: use_shared_async_patterns
     statement: Loading، Success و Error قابلیت AI از pattern مشترک و state واقعی پیروی کنند.
   - id: AIC-016

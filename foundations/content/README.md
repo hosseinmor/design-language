@@ -77,9 +77,49 @@ Promote a content document only after:
 3. relevant semantic fixtures have been executed by a reviewed evaluator;
 4. unresolved product or runtime claims remain explicit; and
 5. the rule has been piloted on representative product copy.
+
+## Rule contract schema
+
+The YAML contract is the canonical source of every content rule; its paired
+Markdown document explains the rules for people. The rule list inside each
+Markdown contract section (`## قرارداد قطعی`, or `## قواعد همیشگی` in product
+voice) is generated from YAML with rule IDs. Do not edit it by hand: change the
+YAML contract, then run `python tooling/generate_content_rule_sections.py
+generate`.
+
+Every rule in `product-voice.yml`, `patterns/*.yml` and `components/*.yml` has:
+
+| Field | Meaning |
+|---|---|
+| `id` | Stable ID with one prefix per contract, such as `ERR-001`. |
+| `obligation` | `must`, `must_not` or `should`. |
+| `dimension` | One value from the closed vocabulary below. |
+| `key` | Stable snake_case name; not required for product-voice rules. |
+| `statement` | The Persian rule text. |
+
+`dimension` classifies what kind of failure a violation is, so evaluations and
+copy audits can be aggregated across contracts:
+
+| Dimension | Covers |
+|---|---|
+| `classification` | Identifying the situation, text role or component before writing. |
+| `product_truth` | Claims that match verified product behavior and real system state. |
+| `clarity` | Naming what happened, to what, and what it means. |
+| `structure` | Distributing content across anatomy roles without repetition. |
+| `action` | Action labels, available actions, safe exit and recovery. |
+| `terminology` | Canonical labels for the audience and surface. |
+| `tone` | Voice, register and brand expression. |
+| `localization` | Numbers, dates, variables, units and bidirectional text. |
+| `accessibility` | Programmatic meaning, names, relationships and announcements. |
+| `disclosure` | AI involvement, provenance, limits and status of generated output. |
+| `presentation` | Visual severity, hierarchy or display choice. A content rule with this dimension marks a Design System boundary to review. |
+| `interaction` | Interactive behavior such as data preservation and input handling. |
+
 ## Validation
 
 ```bash
+python tooling/generate_content_rule_sections.py check
+python tooling/validators/check_content_contracts.py
 python tooling/validators/check_content_terminology.py
 python tooling/validators/check_content_localization.py
 python tooling/validators/check_content_components.py
