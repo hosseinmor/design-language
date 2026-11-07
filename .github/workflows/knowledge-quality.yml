@@ -47,6 +47,12 @@ jobs:
       - name: Check accessibility knowledge
         run: python tooling/validators/check_accessibility_knowledge.py
 
+      - name: Check generated content rule sections
+        run: python tooling/generate_content_rule_sections.py check
+
+      - name: Check shared content contract schema
+        run: python tooling/validators/check_content_contracts.py
+
       - name: Check content terminology
         run: python tooling/validators/check_content_terminology.py
 

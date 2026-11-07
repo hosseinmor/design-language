@@ -28,6 +28,28 @@ VALID_AUTHORITY_MIGRATION_STATES = {
     "needs_product_knowledge_reference",
     "not_applicable",
 }
+TERM_KEYS = {
+    "id", "concept_kind", "authority", "canonical_internal", "definition",
+    "domains", "visibility", "status", "evidence", "code_bindings",
+    "preferred", "contextual_labels", "allowed", "action_labels", "avoid",
+    "forbidden", "legacy_labels", "use_when", "avoid_when", "examples",
+    "rules", "eval_rules", "grammar", "relations", "open_questions", "notes",
+}
+PREFERRED_KEYS = {
+    "default", "full", "contextual", "internal", "technical",
+    "user_facing_explanation", "jobseeker", "employer", "ats", "admin",
+    "jobseeker_listing", "employer_management", "admin_management",
+    "role_context", "billing", "persian", "english", "store",
+}
+RELATION_TYPES = {
+    "distinct_from", "same_entity_as", "same_entity_label", "uses", "acts_for",
+    "part_of", "contains", "contained_by", "determines", "leads_to",
+    "result_of", "has_variant", "variant_of", "computed_for", "snapshot_of",
+    "subtype_of", "has_instance", "instance_of", "reconciles_source_entries",
+}
+FORBIDDEN_SCOPES = {"concept", "entity_label", "feature_name"}
+FORBIDDEN_SOURCES = {"design_language", "product_knowledge_snapshot"}
+PRODUCT_VOICE_ID = "content.foundation.product_voice"
 VALID_VISIBILITY = {
     "public",
     "internal",
@@ -85,7 +107,86 @@ def load_terms() -> dict[str, Any]:
     return loaded
 
 
-def validate(data: dict[str, Any]) -> list[str]:
+def as_list(value: Any) -> list[Any]:
+    return value if isinstance(value, list) else [value]
+
+
+def own_labels(term: dict[str, Any]) -> tuple[set[str], set[str]]:
+    """Return (entity labels, action labels) chosen by Design Language."""
+    entity: set[str] = set()
+    preferred = term.get("preferred")
+    if isinstance(preferred, dict):
+        entity |= {v for v in preferred.values() if isinstance(v, str)}
+    for item in term.get("contextual_labels") or []:
+        if isinstance(item, dict) and isinstance(item.get("label"), str):
+            entity.add(item["label"])
+    entity |= {v for v in term.get("allowed") or [] if isinstance(v, str)}
+    actions = term.get("action_labels")
+    action = set()
+    if isinstance(actions, dict):
+        action = {v for v in actions.get("allowed") or [] if isinstance(v, str)}
+    return entity, action
+
+
+def validate_language(term: dict[str, Any], location: str) -> tuple[list[str], list[str]]:
+    """Validate label fields; return (errors, product-knowledge snapshot overrides)."""
+    errors: list[str] = []
+    overrides: list[str] = []
+    unknown_keys = sorted(set(term) - TERM_KEYS)
+    if unknown_keys:
+        errors.append(f"{location}: unknown term keys: {', '.join(unknown_keys)}")
+
+    preferred = term.get("preferred")
+    if preferred is not None:
+        if not isinstance(preferred, dict):
+            errors.append(f"{location}: preferred must be a mapping")
+        elif invalid := sorted(set(preferred) - PREFERRED_KEYS):
+            errors.append(f"{location}: unknown preferred contexts: {', '.join(invalid)}")
+
+    entity, action = own_labels(term)
+    forbidden = term.get("forbidden", [])
+    if not isinstance(forbidden, list):
+        errors.append(f"{location}: forbidden must be a list")
+        forbidden = []
+    for index, item in enumerate(forbidden):
+        where = f"{location}.forbidden[{index}]"
+        if not isinstance(item, dict) or not nonempty_string(item.get("label")):
+            errors.append(f"{where}: requires a non-empty `label`")
+            continue
+        if item.get("scope") not in FORBIDDEN_SCOPES:
+            errors.append(f"{where}: scope must be one of {sorted(FORBIDDEN_SCOPES)}")
+        if item.get("source") not in FORBIDDEN_SOURCES:
+            errors.append(f"{where}: source must be one of {sorted(FORBIDDEN_SOURCES)}")
+        chosen = entity | action if item.get("scope") == "concept" else entity
+        if item["label"] in chosen:
+            if item.get("source") == "design_language":
+                errors.append(
+                    f"{where}: `{item['label']}` is both forbidden and a chosen label"
+                )
+            else:
+                overrides.append(f"{location}: «{item['label']}» ({item.get('scope')})")
+
+    legacy = term.get("legacy_labels", [])
+    if not isinstance(legacy, list):
+        errors.append(f"{location}: legacy_labels must be a list")
+        legacy = []
+    for index, item in enumerate(legacy):
+        where = f"{location}.legacy_labels[{index}]"
+        if not isinstance(item, dict) or not nonempty_string(item.get("label")):
+            errors.append(f"{where}: requires a non-empty `label`")
+        elif item["label"] in entity | action:
+            errors.append(f"{where}: `{item['label']}` is still a chosen label")
+
+    relations = term.get("relations")
+    if relations is not None:
+        if not isinstance(relations, dict):
+            errors.append(f"{location}: relations must be a mapping")
+        elif invalid := sorted(set(relations) - RELATION_TYPES):
+            errors.append(f"{location}: unknown relation types: {', '.join(invalid)}")
+    return errors, overrides
+
+
+def validate(data: dict[str, Any], overrides: list[str] | None = None) -> list[str]:
     errors: list[str] = []
 
     for field in ("schema_version", "id", "language"):
@@ -188,6 +289,11 @@ def validate(data: dict[str, Any]) -> list[str]:
         concept_kind = term.get("concept_kind")
         if not nonempty_string(concept_kind):
             errors.append(f"{location}: missing non-empty `concept_kind`")
+
+        language_errors, language_overrides = validate_language(term, location)
+        errors.extend(language_errors)
+        if overrides is not None:
+            overrides.extend(language_overrides)
 
         authority = term.get("authority")
         if not isinstance(authority, dict):
@@ -306,6 +412,34 @@ def validate(data: dict[str, Any]) -> list[str]:
         errors.append(f"duplicate term ids: {', '.join(duplicate_terms)}")
     known_terms = set(term_ids)
 
+    unregistered = data.get("unregistered_concepts", [])
+    if not isinstance(unregistered, list) or not all(
+        nonempty_string(v) and ID_RE.fullmatch(v) for v in unregistered
+    ):
+        errors.append("top-level `unregistered_concepts` must be a list of snake_case ids")
+        unregistered = []
+    if defined := sorted(set(unregistered) & known_terms):
+        errors.append(
+            "unregistered_concepts must not list defined terms: " + ", ".join(defined)
+        )
+    referenced: set[str] = set()
+    for term in terms:
+        if not isinstance(term, dict) or not isinstance(term.get("relations"), dict):
+            continue
+        for relation, targets in term["relations"].items():
+            for target in as_list(targets):
+                referenced.add(target)
+                if target not in known_terms and target not in unregistered:
+                    errors.append(
+                        f"{term.get('id')}: relations.{relation} target `{target}` "
+                        "is neither a term nor listed in unregistered_concepts"
+                    )
+    if stale := sorted(set(unregistered) - referenced):
+        errors.append("unregistered_concepts lists unreferenced ids: " + ", ".join(stale))
+
+    if "precedence_source" in data and data["precedence_source"] != PRODUCT_VOICE_ID:
+        errors.append(f"precedence_source must be `{PRODUCT_VOICE_ID}`")
+
     decisions = data.get("decision_queue")
     if not isinstance(decisions, list):
         errors.append("top-level `decision_queue` must be a list")
@@ -338,6 +472,22 @@ def validate(data: dict[str, Any]) -> list[str]:
         for field in ("question", "recommendation", "impact"):
             if not nonempty_string(decision.get(field)):
                 errors.append(f"{location}: missing non-empty `{field}`")
+
+    queued_terms = {
+        term_id
+        for decision in decisions
+        if isinstance(decision, dict)
+        for term_id in decision.get("term_ids") or []
+    }
+    for term in terms:
+        if (
+            isinstance(term, dict)
+            and term.get("status") == "needs_decision"
+            and term.get("id") not in queued_terms
+        ):
+            errors.append(
+                f"{term.get('id')}: needs_decision term must be referenced by decision_queue"
+            )
 
     duplicate_decisions = sorted(
         decision_id
@@ -401,11 +551,20 @@ def validate(data: dict[str, Any]) -> list[str]:
 
 def main() -> int:
     data = load_terms()
-    errors = validate(data)
+    overrides: list[str] = []
+    errors = validate(data, overrides)
     if errors:
         for error in errors:
             print(f"ERROR {error}")
         return 1
+
+    if overrides:
+        print(
+            "Product Knowledge snapshot labels overridden by Design Language "
+            "(candidates for Product Knowledge feedback):"
+        )
+        for item in overrides:
+            print(f"  - {item}")
 
     terms = data["terms"]
     statuses = Counter(term["status"] for term in terms)

@@ -125,5 +125,67 @@ class TerminologyAuthorityValidationTest(unittest.TestCase):
         self.assertIn("must be `unresolved`", errors)
 
 
+class TerminologyLanguageSchemaTest(unittest.TestCase):
+    def test_design_language_forbidden_label_cannot_be_chosen(self):
+        data = valid_data()
+        data["terms"][0]["forbidden"] = [
+            {"label": "آگهی شغلی", "scope": "concept", "source": "design_language"}
+        ]
+        errors = " ".join(validate(data))
+        self.assertIn("both forbidden and a chosen label", errors)
+
+    def test_snapshot_override_is_reported_not_failed(self):
+        data = valid_data()
+        data["terms"][0]["forbidden"] = [
+            {
+                "label": "آگهی شغلی",
+                "scope": "entity_label",
+                "source": "product_knowledge_snapshot",
+            }
+        ]
+        overrides = []
+        self.assertEqual(validate(data, overrides), [])
+        self.assertEqual(len(overrides), 1)
+
+    def test_forbidden_requires_known_scope(self):
+        data = valid_data()
+        data["terms"][0]["forbidden"] = [
+            {"label": "وکنسی", "scope": "synonym", "source": "design_language"}
+        ]
+        self.assertIn("scope must be one of", " ".join(validate(data)))
+
+    def test_unknown_term_key_fails(self):
+        data = valid_data()
+        data["terms"][0]["forbidden_as_synonym"] = ["وکنسی"]
+        self.assertIn("unknown term keys", " ".join(validate(data)))
+
+    def test_legacy_label_cannot_be_a_chosen_label(self):
+        data = valid_data()
+        data["terms"][0]["legacy_labels"] = [{"label": "آگهی شغلی"}]
+        self.assertIn("still a chosen label", " ".join(validate(data)))
+
+    def test_relation_target_must_be_known_or_registered(self):
+        data = valid_data()
+        data["terms"][0]["relations"] = {"distinct_from": ["job_category"]}
+        self.assertIn("neither a term", " ".join(validate(data)))
+        data["unregistered_concepts"] = ["job_category"]
+        self.assertEqual(validate(data), [])
+
+    def test_needs_decision_term_must_be_queued(self):
+        data = valid_data()
+        data["terms"][0]["status"] = "needs_decision"
+        self.assertIn("must be referenced by decision_queue", " ".join(validate(data)))
+        data["decision_queue"] = [
+            {
+                "id": "DEC-001",
+                "term_ids": ["job_post"],
+                "question": "q",
+                "recommendation": "r",
+                "impact": "low",
+            }
+        ]
+        self.assertEqual(validate(data), [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,4 +1,4 @@
-schema_version: "0.5"
+schema_version: "0.6"
 id: content.foundation.terminology
 title: واژه‌نامهٔ محتوای محصول جاب‌ویژن
 status: draft
@@ -14,13 +14,7 @@ description: >
   مرجع می‌ماند. تعریف‌ها و code bindingهای این فایل snapshot ارجاعی‌اند،
   نه منبع حقیقت مستقل.
 
-precedence:
-  - product_truth_and_safety
-  - accessibility_and_usability
-  - domain_and_surface_rules
-  - persian_language_rules
-  - brand_expression
-
+precedence_source: content.foundation.product_voice
 sources:
   - id: source_glossary
     title: واژه‌نامهٔ جاب‌ویژن
@@ -107,6 +101,10 @@ policy:
     - نام‌های code_only نباید مستقیماً وارد UI کارجو یا کارفرما شوند.
   unresolved_marker: needs_decision
 
+# مفهوم‌هایی که در relations ارجاع داده شده‌اند ولی هنوز مدخل ندارند.
+# هر شناسهٔ تازه در relations باید یا مدخل داشته باشد یا اینجا ثبت شود.
+unregistered_concepts: [application_rejection, business_rule, candidate_profile, company_activation, company_profile, formal_info, generic_request, interview_invitation, job_category, price, proforma_invoice, reactivation, resume_view, seniority_level, services]
+
 terms:
   # Core employment concepts
   - id: job_post
@@ -140,10 +138,10 @@ terms:
           - ارائهٔ همان موجودیت به‌عنوان نقش یا جایگاه قابل بررسی
           - شرح مسئولیت‌ها، شرایط، تناسب و اقدام کارجو برای درخواست
           - تصمیم‌ها و گفتگوهای جذب دربارهٔ نقش
-    forbidden_as_synonym:
-      - فرصت شغلی
-      - آگهی استخدام
-      - وکنسی
+    forbidden:
+      - {label: فرصت شغلی, scope: concept, source: design_language}
+      - {label: آگهی استخدام, scope: concept, source: design_language}
+      - {label: وکنسی, scope: concept, source: design_language}
     domains: [jobseeker, employer, ats, admin]
     visibility: [public, internal]
     relations:
@@ -172,7 +170,6 @@ terms:
       - اقدام کارجو برای ارسال درخواست یا تصمیم جذب دربارهٔ نقش
     avoid_when:
       - ثبت، ویرایش، انتشار، وضعیت، انقضا، سهمیه یا metadata آگهی
-    forbidden_as_synonym_of: [job_opportunity]
     domains: [jobseeker, employer, ats]
     visibility: [public, internal]
     relations:
@@ -195,7 +192,6 @@ terms:
       default: فرصت شغلی
     use_when: [discovery, recommendation, general_product_copy]
     avoid_when: [specific_product_entity, status_or_metadata]
-    forbidden_as_synonym_of: [job_post, job_position]
     domains: [jobseeker, marketing]
     visibility: [public]
     relations:
@@ -218,7 +214,6 @@ terms:
     preferred:
       default: جذب
     examples: [فرایند جذب, درخواست جذب, تیم جذب, در حال جذب]
-    forbidden_as_synonym_of: [hiring]
     relations:
       leads_to: hiring
       distinct_from: [hiring]
@@ -241,7 +236,6 @@ terms:
     preferred:
       default: استخدام
     examples: [استخدام شد, تاریخ استخدام, تصمیم استخدام]
-    forbidden_as_synonym_of: [recruitment]
     relations:
       result_of: recruitment
       distinct_from: [recruitment]
@@ -270,9 +264,8 @@ terms:
       admin: سازمان
     allowed: [سازمان, شرکت]
     avoid: [مجموعه, بنگاه]
-    forbidden_as_synonym:
-      - term: کارفرما
-        scope: entity_label
+    forbidden:
+      - {label: کارفرما, scope: entity_label, source: design_language}
     domains: [jobseeker, employer, ats, admin]
     visibility: [public, internal]
     relations:
@@ -293,7 +286,6 @@ terms:
       product_content: فرد یا نقش انسانی‌ای که از طرف یک سازمان در فرایند جذب نیرو عمل می‌کند.
     preferred:
       default: کارفرما
-    forbidden_as_synonym_of: [employer_organization]
     domains: [jobseeker, employer, ats]
     visibility: [public, internal]
     relations:
@@ -314,7 +306,10 @@ terms:
       source: کاربری که از طرف یک سازمان در پنل کارفرما کار می‌کند.
     preferred:
       default: رابط
-    source_forbidden: [اپراتور, کاربر سازمان, نمایندهٔ کارفرما]
+    forbidden:
+      - {label: اپراتور, scope: concept, source: product_knowledge_snapshot}
+      - {label: کاربر سازمان, scope: concept, source: product_knowledge_snapshot}
+      - {label: نمایندهٔ کارفرما, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, admin]
     visibility: [internal, admin]
     relations:
@@ -358,7 +353,10 @@ terms:
     preferred:
       default: کارجو
     avoid: [متقاضی, داوطلب]
-    forbidden_as_synonym: [کاندید, کاندیدا, جویای کار]
+    forbidden:
+      - {label: کاندید, scope: concept, source: design_language}
+      - {label: کاندیدا, scope: concept, source: design_language}
+      - {label: جویای کار, scope: concept, source: design_language}
     domains: [jobseeker, employer]
     visibility: [public, internal]
     relations:
@@ -402,7 +400,10 @@ terms:
       source: حوزهٔ فعالیت کسب‌وکار سازمان که از بیس‌دیتا انتخاب می‌شود.
     preferred:
       default: صنعت
-    source_forbidden: [حوزهٔ فعالیت, زمینهٔ کاری, رستهٔ شغلی]
+    forbidden:
+      - {label: حوزهٔ فعالیت, scope: concept, source: product_knowledge_snapshot}
+      - {label: زمینهٔ کاری, scope: concept, source: product_knowledge_snapshot}
+      - {label: رستهٔ شغلی, scope: concept, source: product_knowledge_snapshot}
     relations:
       distinct_from: [job_category]
     code_bindings: [CompanyIndustry]
@@ -425,7 +426,10 @@ terms:
         کد پیامکی، شاهکار و تطبیق با فهرست اشخاص سازمان.
     preferred:
       default: احراز هویت سازمان
-    source_forbidden: [تأیید سازمان, وریفای سازمان, احراز شاهکار]
+    forbidden:
+      - {label: تأیید سازمان, scope: concept, source: product_knowledge_snapshot}
+      - {label: وریفای سازمان, scope: concept, source: product_knowledge_snapshot}
+      - {label: احراز شاهکار, scope: concept, source: product_knowledge_snapshot}
     relations:
       distinct_from: [company_activation]
     code_bindings: [CompanyAuthentication]
@@ -448,7 +452,9 @@ terms:
         وب‌سایت یا تلفنش دقیقاً با سازمان دیگری برابر است.
     preferred:
       admin: سازمان مشابه
-    source_forbidden: [سازمان تکراری, سازمان دوتایی]
+    forbidden:
+      - {label: سازمان تکراری, scope: concept, source: product_knowledge_snapshot}
+      - {label: سازمان دوتایی, scope: concept, source: product_knowledge_snapshot}
     domains: [admin]
     visibility: [admin, internal]
     code_bindings: [SimilarCompanyId, SimilarReasonId]
@@ -467,7 +473,9 @@ terms:
       source: انتقال داده و موجودی یک سازمان به سازمان دیگر و حذف سازمان مبدأ.
     preferred:
       admin: ادغام سازمان
-    source_forbidden: [مرج, یکی‌سازی سازمان]
+    forbidden:
+      - {label: مرج, scope: concept, source: product_knowledge_snapshot}
+      - {label: یکی‌سازی سازمان, scope: concept, source: product_knowledge_snapshot}
     domains: [admin]
     visibility: [admin, internal]
     code_bindings: [MergeCompany]
@@ -488,7 +496,10 @@ terms:
       employer: اطلاعات رسمی سازمان
       billing: اطلاعات رسمی
       admin: اطلاعات رسمی سازمان
-    source_forbidden: [اطلاعات حقوقی, اطلاعات فاکتور, اطلاعات مالیاتی]
+    forbidden:
+      - {label: اطلاعات حقوقی, scope: concept, source: product_knowledge_snapshot}
+      - {label: اطلاعات فاکتور, scope: concept, source: product_knowledge_snapshot}
+      - {label: اطلاعات مالیاتی, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, billing, admin]
     visibility: [public, internal]
     relations:
@@ -510,7 +521,9 @@ terms:
       source: کارمند جاب‌ویژن که مسئول مجموعه‌ای از سازمان‌هاست؛ تخصیص بر اساس صنعت.
     preferred:
       internal: اکانت‌منیجر
-    source_forbidden: [مدیر حساب, مسئول فروش]
+    forbidden:
+      - {label: مدیر حساب, scope: concept, source: product_knowledge_snapshot}
+      - {label: مسئول فروش, scope: concept, source: product_knowledge_snapshot}
     domains: [sales, admin]
     visibility: [internal, admin]
     code_bindings: [AccountManager]
@@ -530,7 +543,10 @@ terms:
       source: آگهی‌ای که همهٔ دسته‌های شغلی‌اش سطح شغلی پیش‌فرض ۲ دارند.
     preferred:
       default: آگهی یقه آبی
-    source_forbidden: [آگهی کارگری, آگهی سطح پایین, مشاغل ساده]
+    forbidden:
+      - {label: آگهی کارگری, scope: concept, source: product_knowledge_snapshot}
+      - {label: آگهی سطح پایین, scope: concept, source: product_knowledge_snapshot}
+      - {label: مشاغل ساده, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, employer, admin]
     visibility: [public, internal]
     code_bindings: [IsBlueCollarJob, isLowLevel]
@@ -555,7 +571,9 @@ terms:
     preferred:
       default: رزومه
     avoid: [CV, سی‌وی]
-    forbidden_as_synonym: [پروفایل کاری, پروفایل کارجو]
+    forbidden:
+      - {label: پروفایل کاری, scope: concept, source: design_language}
+      - {label: پروفایل کارجو, scope: concept, source: design_language}
     domains: [jobseeker, employer, ats]
     visibility: [public, internal]
     relations:
@@ -604,7 +622,9 @@ terms:
       source: عدد صفر تا صد برای میزان پرشدن رزومه؛ برای فارسی و انگلیسی جداست.
     preferred:
       default: درصد تکمیل رزومه
-    source_forbidden: [درصد رزومه, کامل بودن رزومه]
+    forbidden:
+      - {label: درصد رزومه, scope: concept, source: product_knowledge_snapshot}
+      - {label: کامل بودن رزومه, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker]
     visibility: [public, internal]
     relations:
@@ -627,7 +647,9 @@ terms:
       source: فایلی که کارجو خودش بارگذاری می‌کند، در برابر رزومهٔ ساختاریافتهٔ جاب‌ویژن.
     preferred:
       default: رزومهٔ شخصی
-    source_forbidden: [رزومهٔ آپلودی, فایل رزومه]
+    forbidden:
+      - {label: رزومهٔ آپلودی, scope: concept, source: product_knowledge_snapshot}
+      - {label: فایل رزومه, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, employer]
     visibility: [public, internal]
     relations:
@@ -647,7 +669,9 @@ terms:
       source: متنی که هم‌کار سابق دربارهٔ کارجو می‌نویسد.
     preferred:
       default: توصیه‌نامه
-    source_forbidden: [رفرنس, معرفی‌نامه]
+    forbidden:
+      - {label: رفرنس, scope: concept, source: product_knowledge_snapshot}
+      - {label: معرفی‌نامه, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, employer]
     visibility: [public, internal]
     code_bindings: [CvFormerColleague.RecommendationText]
@@ -669,7 +693,11 @@ terms:
       contextual: درخواست
     action_labels:
       allowed: [ارسال رزومه]
-    source_forbidden_as_entity_label: [اپلای, ارسال رزومه, تقاضا, درخواست]
+    forbidden:
+      - {label: اپلای, scope: entity_label, source: product_knowledge_snapshot}
+      - {label: ارسال رزومه, scope: entity_label, source: product_knowledge_snapshot}
+      - {label: تقاضا, scope: entity_label, source: product_knowledge_snapshot}
+      - {label: درخواست, scope: entity_label, source: product_knowledge_snapshot}
     rules:
       - در متن مستقل، notification و متن چنددامنه‌ای همیشه «درخواست شغلی» نوشته شود.
       - «درخواست» فقط در سطحی مجاز است که موضوع از عنوان یا ساختار صفحه روشن باشد.
@@ -696,11 +724,10 @@ terms:
       product_content: درخواست داخلی سازمان برای آغاز یا پیش‌برد جذب نیرو.
     preferred:
       default: درخواست جذب
-    forbidden_as_synonym_of: [job_application, generic_request]
     domains: [employer, ats]
     visibility: [internal]
     relations:
-      distinct_from: [job_application]
+      distinct_from: [job_application, generic_request]
       part_of: recruitment
     status: stable
     evidence: [product_content_decisions]
@@ -718,7 +745,11 @@ terms:
     preferred:
       internal: اسنپشات رزومه
       user_facing_explanation: نسخهٔ رزومه در زمان ارسال درخواست شغلی
-    source_forbidden: [عکس فوری, اسنپ‌شات, نسخهٔ رزومه, رزومهٔ ذخیره‌شده]
+    forbidden:
+      - {label: عکس فوری, scope: concept, source: product_knowledge_snapshot}
+      - {label: اسنپ‌شات, scope: concept, source: product_knowledge_snapshot}
+      - {label: نسخهٔ رزومه, scope: concept, source: product_knowledge_snapshot}
+      - {label: رزومهٔ ذخیره‌شده, scope: concept, source: product_knowledge_snapshot}
     domains: [application, employer, admin]
     visibility: [internal, admin]
     relations:
@@ -741,7 +772,9 @@ terms:
         خودکار رد می‌کند و دو روز پیش از آن به رابط‌ها یادآوری می‌دهد.
     preferred:
       default: دستیار کارفرما
-    source_forbidden_as_feature_name: [رد خودکار, اسیستنت]
+    forbidden:
+      - {label: رد خودکار, scope: feature_name, source: product_knowledge_snapshot}
+      - {label: اسیستنت, scope: feature_name, source: product_knowledge_snapshot}
     domains: [employer, application]
     visibility: [public, internal]
     relations:
@@ -762,7 +795,9 @@ terms:
       source: پس گرفتن درخواست شغلی توسط کارجو، با یکی از چهار دلیل مشخص.
     preferred:
       default: انصراف
-    source_forbidden: [کنسل, لغو درخواست شغلی]
+    forbidden:
+      - {label: کنسل, scope: concept, source: product_knowledge_snapshot}
+      - {label: لغو درخواست شغلی, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, application]
     visibility: [public, internal]
     relations:
@@ -785,7 +820,9 @@ terms:
         تا سازمان آن‌ها را مرور کند.
     preferred:
       internal: صف رد
-    source_forbidden: [صف حذف, لیست رد]
+    forbidden:
+      - {label: صف حذف, scope: concept, source: product_knowledge_snapshot}
+      - {label: لیست رد, scope: concept, source: product_knowledge_snapshot}
     domains: [application, employer]
     visibility: [internal, admin]
     code_bindings: [ApplicationStatusEnum.RejectionQueue]
@@ -806,7 +843,9 @@ terms:
       source: روایت کارجو از فرایند مصاحبهٔ یک سازمان.
     preferred:
       default: تجربهٔ مصاحبه
-    source_forbidden: [نظر مصاحبه, بازخورد مصاحبه]
+    forbidden:
+      - {label: نظر مصاحبه, scope: concept, source: product_knowledge_snapshot}
+      - {label: بازخورد مصاحبه, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, company]
     visibility: [public, internal]
     relations:
@@ -828,7 +867,9 @@ terms:
     preferred:
       default: نظر سازمان
       jobseeker: نظر دربارهٔ شرکت
-    source_forbidden: [ریویو, نقد سازمان]
+    forbidden:
+      - {label: ریویو, scope: concept, source: product_knowledge_snapshot}
+      - {label: نقد سازمان, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, company]
     visibility: [public, internal]
     code_bindings: [CompanyReview]
@@ -848,7 +889,9 @@ terms:
     preferred:
       jobseeker: دنبال کردن شرکت
       internal: دنبال کردن سازمان
-    source_forbidden: [فالو کردن, عضویت در سازمان]
+    forbidden:
+      - {label: فالو کردن, scope: concept, source: product_knowledge_snapshot}
+      - {label: عضویت در سازمان, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, company]
     visibility: [public, internal]
     code_bindings: [CandidateFollowedCompany]
@@ -867,7 +910,9 @@ terms:
       source: محتوای معرفی مشاغل، مسیر شغلی و آمار حقوق.
     preferred:
       default: مجله شغلی
-    source_forbidden: [راهنمای شغلی, بلاگ شغلی]
+    forbidden:
+      - {label: راهنمای شغلی, scope: concept, source: product_knowledge_snapshot}
+      - {label: بلاگ شغلی, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, content]
     visibility: [public, internal]
     code_bindings: [CareerGuide]
@@ -889,7 +934,10 @@ terms:
         و مانده در اختیار دارد.
     preferred:
       default: بسته
-    source_forbidden: [پلن, اشتراک, طرح]
+    forbidden:
+      - {label: پلن, scope: concept, source: product_knowledge_snapshot}
+      - {label: اشتراک, scope: concept, source: product_knowledge_snapshot}
+      - {label: طرح, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, billing]
     visibility: [public, internal]
     relations:
@@ -912,7 +960,10 @@ terms:
     preferred:
       internal: نوع بسته
       store: بسته
-    source_forbidden: [بستهٔ فروش, محصول, آیتم فروشگاه]
+    forbidden:
+      - {label: بستهٔ فروش, scope: concept, source: product_knowledge_snapshot}
+      - {label: محصول, scope: concept, source: product_knowledge_snapshot}
+      - {label: آیتم فروشگاه, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, store, admin]
     visibility: [public, internal, admin]
     relations:
@@ -933,7 +984,11 @@ terms:
       source: رشته‌ای که هنگام تسویه وارد می‌شود و از مبلغ سفارش کم می‌کند.
     preferred:
       default: کد تخفیف
-    source_forbidden: [کوپن, کد نخفیف, ووچر, کد هدیه]
+    forbidden:
+      - {label: کوپن, scope: concept, source: product_knowledge_snapshot}
+      - {label: کد نخفیف, scope: concept, source: product_knowledge_snapshot}
+      - {label: ووچر, scope: concept, source: product_knowledge_snapshot}
+      - {label: کد هدیه, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, store]
     visibility: [public, internal]
     relations:
@@ -954,7 +1009,9 @@ terms:
       source: کمپین فروش زمان‌دار با صفحه و فهرست نوع‌بسته‌های اختصاصی.
     preferred:
       default: جشنواره
-    source_forbidden: [فستیوال, کمپین تخفیف]
+    forbidden:
+      - {label: فستیوال, scope: concept, source: product_knowledge_snapshot}
+      - {label: کمپین تخفیف, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, store, marketing]
     visibility: [public, internal]
     relations:
@@ -975,7 +1032,9 @@ terms:
       source: سرآیند یک خرید؛ چه چیزی، با چه قیمت و از چه منابعی تسویه شده است.
     preferred:
       default: سفارش
-    source_forbidden: [اردر, خرید]
+    forbidden:
+      - {label: اردر, scope: concept, source: product_knowledge_snapshot}
+      - {label: خرید, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, store]
     visibility: [public, internal]
     relations:
@@ -996,7 +1055,9 @@ terms:
       source: سند حسابداری سفارش؛ رسمی یا غیررسمی.
     preferred:
       default: فاکتور
-    source_forbidden: [صورت‌حساب, انویس]
+    forbidden:
+      - {label: صورت‌حساب, scope: concept, source: product_knowledge_snapshot}
+      - {label: انویس, scope: concept, source: product_knowledge_snapshot}
     domains: [billing]
     visibility: [public, internal]
     relations:
@@ -1017,7 +1078,10 @@ terms:
       source: اعتبار ریالی سازمان نزد جاب‌ویژن.
     preferred:
       default: کیف پول
-    source_forbidden: [والت, اعتبار, موجودی]
+    forbidden:
+      - {label: والت, scope: concept, source: product_knowledge_snapshot}
+      - {label: اعتبار, scope: concept, source: product_knowledge_snapshot}
+      - {label: موجودی, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, employer]
     visibility: [public, internal]
     code_bindings: [PaymentServiceAdapter]
@@ -1036,7 +1100,9 @@ terms:
       source: سامانه‌ای که فاکتورهای رسمی به آن ارسال می‌شوند تا شمارهٔ مالیاتی بگیرند.
     preferred:
       default: سامانه مؤدیان
-    source_forbidden: [سامانه مالیاتی, مودیان]
+    forbidden:
+      - {label: سامانه مالیاتی, scope: concept, source: product_knowledge_snapshot}
+      - {label: مودیان, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, admin]
     visibility: [public, internal]
     code_bindings: [MoadiyanServiceAdapter]
@@ -1055,7 +1121,9 @@ terms:
       source: کوچک‌ترین حقی که می‌توان خرید و مصرف کرد.
     preferred:
       internal: سرویس
-    source_forbidden: [خدمت پولی, آیتم بسته]
+    forbidden:
+      - {label: خدمت پولی, scope: concept, source: product_knowledge_snapshot}
+      - {label: آیتم بسته, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, employer]
     visibility: [internal, admin]
     relations:
@@ -1079,7 +1147,10 @@ terms:
         شهر و گروه سازمان تشخیص می‌دهد و سازمان آن را نمی‌بیند.
     preferred:
       internal: سطح
-    source_forbidden: [تیر, ردهٔ قیمت, سطح سرویس]
+    forbidden:
+      - {label: تیر, scope: concept, source: product_knowledge_snapshot}
+      - {label: ردهٔ قیمت, scope: concept, source: product_knowledge_snapshot}
+      - {label: سطح سرویس, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, jobpost]
     visibility: [internal, admin]
     relations:
@@ -1101,7 +1172,9 @@ terms:
       source: سطح خدماتی که سازمان برای آگهی می‌خرد.
     preferred:
       default: پلن
-    source_forbidden: [طرح, بسته]
+    forbidden:
+      - {label: طرح, scope: concept, source: product_knowledge_snapshot}
+      - {label: بسته, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, employer, jobpost]
     visibility: [public, internal]
     relations:
@@ -1150,7 +1223,9 @@ terms:
       source: بازهٔ پیوسته‌ای که آگهی در آن روی سایت بوده است.
     preferred:
       internal: راند فعال‌سازی
-    source_forbidden: [دور فعال‌سازی, دورهٔ انتشار]
+    forbidden:
+      - {label: دور فعال‌سازی, scope: concept, source: product_knowledge_snapshot}
+      - {label: دورهٔ انتشار, scope: concept, source: product_knowledge_snapshot}
     domains: [jobpost, analytics]
     visibility: [internal, admin]
     relations:
@@ -1171,7 +1246,10 @@ terms:
       source: بازگرداندن آگهی به بالای فهرست‌ها بدون تغییر وضعیت.
     preferred:
       default: تازه‌سازی
-    source_forbidden: [ریشات, تمدید, بامپ]
+    forbidden:
+      - {label: ریشات, scope: concept, source: product_knowledge_snapshot}
+      - {label: تمدید, scope: concept, source: product_knowledge_snapshot}
+      - {label: بامپ, scope: concept, source: product_knowledge_snapshot}
     domains: [jobpost, employer, admin]
     visibility: [public, internal]
     relations:
@@ -1192,7 +1270,9 @@ terms:
       source: تأیید و فعال‌سازی آگهی توسط سرویس هوش مصنوعی، بدون دخالت پنل ادمین.
     preferred:
       internal: انتشار خودکار
-    source_forbidden: [اتوپابلیش, تأیید هوشمند]
+    forbidden:
+      - {label: اتوپابلیش, scope: concept, source: product_knowledge_snapshot}
+      - {label: تأیید هوشمند, scope: concept, source: product_knowledge_snapshot}
     domains: [jobpost, admin, ai]
     visibility: [internal, admin]
     relations:
@@ -1214,7 +1294,9 @@ terms:
       source: عدد حاصل از محبوبیت، تجربهٔ مصاحبه و تغییر وضعیت درخواست شغلی.
     preferred:
       default: امتیاز سازمان
-    source_forbidden: [رتبهٔ سازمان, نمرهٔ کارفرما]
+    forbidden:
+      - {label: رتبهٔ سازمان, scope: concept, source: product_knowledge_snapshot}
+      - {label: نمرهٔ کارفرما, scope: concept, source: product_knowledge_snapshot}
     domains: [company, scoring]
     visibility: [public, internal]
     relations:
@@ -1235,7 +1317,9 @@ terms:
       source: میانگین بازخورد کلی کارکنان فعلی و سابق سازمان.
     preferred:
       default: امتیاز محبوبیت
-    source_forbidden: [پاپیولاریتی, امتیاز بازدید]
+    forbidden:
+      - {label: پاپیولاریتی, scope: concept, source: product_knowledge_snapshot}
+      - {label: امتیاز بازدید, scope: concept, source: product_knowledge_snapshot}
     domains: [company, scoring]
     visibility: [public, internal]
     relations:
@@ -1276,7 +1360,9 @@ terms:
       source: جایگاه سازمان در فهرست کل سازمان‌ها بر اساس امتیاز.
     preferred:
       default: رتبهٔ سازمان
-    source_forbidden: [رنک, جایگاه سازمان]
+    forbidden:
+      - {label: رنک, scope: concept, source: product_knowledge_snapshot}
+      - {label: جایگاه سازمان, scope: concept, source: product_knowledge_snapshot}
     domains: [company, scoring]
     visibility: [public, internal]
     relations:
@@ -1297,7 +1383,9 @@ terms:
       source: جایگاه سازمان درون هر صنعتی که به آن تعلق دارد.
     preferred:
       default: رتبه در صنعت
-    source_forbidden: [رتبهٔ صنعتی, رنک صنعت]
+    forbidden:
+      - {label: رتبهٔ صنعتی, scope: concept, source: product_knowledge_snapshot}
+      - {label: رنک صنعت, scope: concept, source: product_knowledge_snapshot}
     domains: [company, scoring]
     visibility: [public, internal]
     relations:
@@ -1318,7 +1406,9 @@ terms:
       source: سهم درخواست‌های شغلی تعیین‌وضعیت‌شده.
     preferred:
       default: پاسخ‌گویی به درخواست‌های شغلی
-    source_forbidden: [نرخ پاسخ, ریسپانسیونس]
+    forbidden:
+      - {label: نرخ پاسخ, scope: concept, source: product_knowledge_snapshot}
+      - {label: ریسپانسیونس, scope: concept, source: product_knowledge_snapshot}
     domains: [application, scoring]
     visibility: [public, internal]
     code_bindings: [ApplicationChangeStatus_Score]
@@ -1337,7 +1427,10 @@ terms:
       source: میزان تناسب یک رزومه با یک آگهی.
     preferred:
       default: امتیاز تطبیق
-    source_forbidden: [نمرهٔ تطابق, امتیاز همخوانی, انطباق]
+    forbidden:
+      - {label: نمرهٔ تطابق, scope: concept, source: product_knowledge_snapshot}
+      - {label: امتیاز همخوانی, scope: concept, source: product_knowledge_snapshot}
+      - {label: انطباق, scope: concept, source: product_knowledge_snapshot}
     domains: [resume, jobpost, matching]
     visibility: [public, internal]
     code_bindings: [MatchingScore]
@@ -1357,7 +1450,9 @@ terms:
       source: جست‌وجوی فعال کارفرما در میان رزومه‌ها.
     preferred:
       default: بانک رزومه
-    source_forbidden: [سرچ رزومه, جست‌وجوی استعداد]
+    forbidden:
+      - {label: سرچ رزومه, scope: concept, source: product_knowledge_snapshot}
+      - {label: جست‌وجوی استعداد, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, resume]
     visibility: [public, internal]
     relations:
@@ -1380,7 +1475,10 @@ terms:
       source: مجموعهٔ پوشه‌ها و رزومه‌های ذخیره‌شدهٔ سازمان.
     preferred:
       default: تلنت پول
-    source_forbidden: [مخزن استعداد, استخر استعداد, آرشیو رزومه]
+    forbidden:
+      - {label: مخزن استعداد, scope: concept, source: product_knowledge_snapshot}
+      - {label: استخر استعداد, scope: concept, source: product_knowledge_snapshot}
+      - {label: آرشیو رزومه, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, resume]
     visibility: [public, internal]
     relations:
@@ -1402,7 +1500,9 @@ terms:
     preferred:
       employer: دسترسی به رزومه
       user_facing_explanation: امکان مشاهدهٔ اطلاعات تماس
-    source_forbidden: [مالکیت رزومه, رزومهٔ خریده‌شده]
+    forbidden:
+      - {label: مالکیت رزومه, scope: concept, source: product_knowledge_snapshot}
+      - {label: رزومهٔ خریده‌شده, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, resume, billing]
     visibility: [public, internal]
     relations:
@@ -1423,7 +1523,9 @@ terms:
       source: پوشهٔ سیستمی رزومه‌های پسندیده‌شده اما هنوز خریداری‌نشده.
     preferred:
       employer: نشان‌شده‌ها
-    source_forbidden: [علاقه‌مندی‌ها, بوکمارک]
+    forbidden:
+      - {label: علاقه‌مندی‌ها, scope: concept, source: product_knowledge_snapshot}
+      - {label: بوکمارک, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, talent_pool]
     visibility: [public, internal]
     code_bindings: [FolderTypeEnum.Systemic_Bookmarked]
@@ -1442,7 +1544,10 @@ terms:
       source: نقطه‌ای در مسیر اجرا که یک قاعده را می‌سنجد و در صورت رد، عمل را متوقف می‌کند.
     preferred:
       technical: gateway
-    source_forbidden: [دروازه, گیت, شرط ورود]
+    forbidden:
+      - {label: دروازه, scope: concept, source: product_knowledge_snapshot}
+      - {label: گیت, scope: concept, source: product_knowledge_snapshot}
+      - {label: شرط ورود, scope: concept, source: product_knowledge_snapshot}
     grammar:
       plural: gatewayها
     domains: [engineering, product_knowledge]
@@ -1464,7 +1569,9 @@ terms:
       source: زنجیرهٔ مرحله‌به‌مرحله‌ای که یک محاسبه در آن انجام می‌شود.
     preferred:
       technical: پایپ‌لاین
-    source_forbidden: [خط لوله, زنجیره پردازش]
+    forbidden:
+      - {label: خط لوله, scope: concept, source: product_knowledge_snapshot}
+      - {label: زنجیره پردازش, scope: concept, source: product_knowledge_snapshot}
     domains: [engineering, product_knowledge]
     visibility: [code_only, internal]
     status: draft
@@ -1482,7 +1589,9 @@ terms:
       source: رزومه‌هایی که سیستم به سازمان پیشنهاد می‌دهد.
     preferred:
       default: رزومهٔ پیشنهادی
-    source_forbidden: [رزومه پیشنهاد شده, سرچ خودکار]
+    forbidden:
+      - {label: رزومه پیشنهاد شده, scope: concept, source: product_knowledge_snapshot}
+      - {label: سرچ خودکار, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, resume, matching]
     visibility: [public, internal]
     relations:
@@ -1505,7 +1614,9 @@ terms:
         مراحل استخدام، ارزش‌ها و گزارش‌های نیروی انسانی.
     preferred:
       default: برندینگ کارفرمایی
-    source_forbidden: [امپلویر برندینگ, صفحهٔ اختصاصی سازمان]
+    forbidden:
+      - {label: امپلویر برندینگ, scope: concept, source: product_knowledge_snapshot}
+      - {label: صفحهٔ اختصاصی سازمان, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, jobseeker, company]
     visibility: [public, internal]
     code_bindings: [CompanyBranding]
@@ -1524,7 +1635,10 @@ terms:
       source: رویداد زمان‌دار حضوری یا آنلاین که چند سازمان در آن آگهی ارائه می‌کنند.
     preferred:
       default: نمایشگاه کار
-    source_forbidden: [جاب فیر, رویداد استخدام, اکسپو]
+    forbidden:
+      - {label: جاب فیر, scope: concept, source: product_knowledge_snapshot}
+      - {label: رویداد استخدام, scope: concept, source: product_knowledge_snapshot}
+      - {label: اکسپو, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, employer, events]
     visibility: [public, internal]
     relations:
@@ -1545,7 +1659,9 @@ terms:
       source: آگهی وابسته به نمایشگاه که رایگان است و در جست‌وجوی عادی دیده نمی‌شود.
     preferred:
       default: آگهی نمایشگاهی
-    source_forbidden: [آگهی رویداد, آگهی غرفه]
+    forbidden:
+      - {label: آگهی رویداد, scope: concept, source: product_knowledge_snapshot}
+      - {label: آگهی غرفه, scope: concept, source: product_knowledge_snapshot}
     domains: [events, jobpost]
     visibility: [public, internal]
     relations:
@@ -1567,7 +1683,9 @@ terms:
       source: نقشی که در نمایشگاه حضوری از طرف کارجو درخواست ثبت می‌کند.
     preferred:
       internal: اپراتور غرفه
-    source_forbidden: [اپراتور نمایشگاه, مسئول غرفه]
+    forbidden:
+      - {label: اپراتور نمایشگاه, scope: concept, source: product_knowledge_snapshot}
+      - {label: مسئول غرفه, scope: concept, source: product_knowledge_snapshot}
     domains: [events, admin]
     visibility: [internal, admin]
     relations:
@@ -1588,7 +1706,10 @@ terms:
       source: ابزار ارزیابی کارجو.
     preferred:
       default: آزمون
-    source_forbidden: [اسسمنت, تست, ارزیابی]
+    forbidden:
+      - {label: اسسمنت, scope: concept, source: product_knowledge_snapshot}
+      - {label: تست, scope: concept, source: product_knowledge_snapshot}
+      - {label: ارزیابی, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, employer, ats]
     visibility: [public, internal]
     code_bindings: [Assessment]
@@ -1723,7 +1844,9 @@ terms:
       source: وب‌سایت jobvision.ir.
     preferred:
       default: پنل کارجو
-    source_forbidden: [سایت اصلی, فرانت]
+    forbidden:
+      - {label: سایت اصلی, scope: concept, source: product_knowledge_snapshot}
+      - {label: فرانت, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker]
     visibility: [internal, documentation]
     status: draft
@@ -1741,7 +1864,8 @@ terms:
       source: وب‌سایت employer.jobvision.ir.
     preferred:
       default: پنل کارفرما
-    source_forbidden: [پنل سازمان‌ها]
+    forbidden:
+      - {label: پنل سازمان‌ها, scope: concept, source: product_knowledge_snapshot}
     domains: [employer]
     visibility: [public, internal, documentation]
     status: draft
@@ -1759,7 +1883,9 @@ terms:
       source: وب‌سایت admin.jvoffice.ir.
     preferred:
       default: پنل ادمین
-    source_forbidden: [بک‌آفیس, پنل مدیریت]
+    forbidden:
+      - {label: بک‌آفیس, scope: concept, source: product_knowledge_snapshot}
+      - {label: پنل مدیریت, scope: concept, source: product_knowledge_snapshot}
     domains: [admin]
     visibility: [internal, documentation]
     status: draft
@@ -1857,6 +1983,29 @@ decision_queue:
       - lifecycle و مدل قیمت‌گذاری
       - نسبت با Premium Insights سمت کارجو
 
+  - id: DEC-008
+    term_ids: [system_operator]
+    question: رابط سیستمی دقیقاً چه رفتاری دارد و آیا کاربر آن را می‌بیند؟
+    recommendation: تا روشن‌شدن رفتار و visibility، فقط برچسب داخلی استفاده و در UI عمومی ادعایی دربارهٔ آن ساخته نشود.
+    impact: medium
+    evidence_needed:
+      - تعریف رفتار نشانگر سیستمی در Product Knowledge
+      - سطح‌هایی که این مفهوم در آن دیده می‌شود
+  - id: DEC-009
+    term_ids: [rejection_queue]
+    question: آیا صف رد هنوز در محصول وجود دارد و به برچسب کاربرپسند نیاز دارد؟
+    recommendation: تا تأیید وضعیت فعلی، فقط برچسب داخلی «صف رد» در سطح داخلی استفاده شود.
+    impact: low
+    evidence_needed:
+      - وضعیت فعلی پردازشگر صف رد در Product Knowledge
+  - id: DEC-010
+    term_ids: [external_ai_screener]
+    question: نام رسمی ابزار غربالگری بیرونی چیست و آیا هنوز در محصول فعال است؟
+    recommendation: تا تأیید نام و وضعیت، عبارت توصیفی داخلی استفاده و نام محصول ساخته نشود.
+    impact: medium
+    evidence_needed:
+      - نام رسمی ابزار
+      - وضعیت فعال‌بودن در محصول
 evals:
   blocking:
     - id: TERM_WRONG_ENTITY_SYNONYM

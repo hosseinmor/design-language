@@ -171,25 +171,51 @@ operational_model:
 rules:
   - id: VOICE-001
     obligation: must
+    dimension: clarity
     statement: پیام باید قبل از هر چیز معنی، وضعیت یا اقدام بعدی را روشن کند.
     evidence: [product_content_decisions]
   - id: VOICE-002
     obligation: must
+    dimension: tone
     statement: متن محصول باید با فارسی معیار نوشتاری و خطاب «شما» نوشته شود.
     evidence: [verbal_identity_v2, product_content_decisions]
   - id: VOICE-003
     obligation: must
+    dimension: product_truth
     statement: ادعای متن باید با product truth و وضعیت واقعی سیستم منطبق باشد.
     evidence: [product_content_decisions]
   - id: VOICE-004
     obligation: must_not
+    dimension: tone
     statement: گرمی نباید به شکسته‌نویسی، لحن بیش‌ازحد خودمانی یا شوخی در وضعیت حساس تبدیل شود.
     evidence: [verbal_identity_v2, product_content_decisions]
   - id: VOICE-005
     obligation: must_not
+    dimension: product_truth
     statement: انگیزش نباید نتیجه، زمان، شانس یا توانایی سیستم را تضمین کند.
     evidence: [product_content_decisions]
   - id: VOICE-006
     obligation: must_not
+    dimension: tone
     statement: بیان برند نباید بازیابی خطا، دسترس‌پذیری یا فهم پیام را تضعیف کند.
     evidence: [accessibility_corpus, product_content_decisions]
+  - id: VOICE-007
+    obligation: must
+    dimension: terminology
+    statement: اصطلاح canonical همان مخاطب و سطح از واژه‌نامه انتخاب شود.
+    evidence: [product_content_decisions]
+  - id: VOICE-008
+    obligation: must
+    dimension: clarity
+    statement: جمله تا جای ممکن کوتاه شود، بدون حذف اطلاعات لازم برای تصمیم یا بازیابی.
+    evidence: [product_content_decisions]
+  - id: VOICE-009
+    obligation: must_not
+    dimension: tone
+    statement: صفت و شعار جای اطلاعات لازم را نگیرد.
+    evidence: [product_content_decisions]
+  - id: VOICE-010
+    obligation: must_not
+    dimension: terminology
+    statement: واژهٔ کدی یا سازمانی فقط به‌دلیل حضور در پیاده‌سازی وارد UI نشود.
+    evidence: [product_content_decisions]

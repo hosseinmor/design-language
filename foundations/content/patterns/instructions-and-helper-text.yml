@@ -61,22 +61,22 @@ rules:
     statement: نقش هر متن به‌عنوان Label، Instruction، Helper، Placeholder، Example، Count یا Error پیش از نوشتن مشخص شود.
   - id: INS-002
     obligation: must
-    dimension: label
+    dimension: clarity
     key: label_identifies_purpose
     statement: Label purpose کنترل یا گروه را مستقل از Placeholder و مقدار ورودی مشخص کند.
   - id: INS-003
     obligation: must
-    dimension: timing
+    dimension: structure
     key: instruction_before_need
     statement: instruction لازم برای تکمیل task پیش از نیاز و تا زمان مرتبط‌بودن در دسترس باشد.
   - id: INS-004
     obligation: must_not
-    dimension: placeholder
+    dimension: structure
     key: placeholder_as_label
     statement: Placeholder جای Label یا accessible name استفاده نشود.
   - id: INS-005
     obligation: must_not
-    dimension: placeholder
+    dimension: structure
     key: essential_info_in_placeholder
     statement: requirement، consequence یا instruction ضروری فقط در Placeholder قرار نگیرد.
   - id: INS-006
@@ -86,27 +86,27 @@ rules:
     statement: قالب، limit، واحد، نوع فایل، دلیل، مقصد و consequence فقط مطابق product truth نوشته شود.
   - id: INS-007
     obligation: must_not
-    dimension: placement
+    dimension: structure
     key: hide_essential_guidance
     statement: requirement، Error، consequence یا policy ضروری فقط پشت Tooltip، Info یا surface گذرا پنهان نشود.
   - id: INS-008
     obligation: must
-    dimension: helper
+    dimension: structure
     key: helper_adds_field_context
     statement: Helper کوتاه، مرتبط با همان field و دارای اطلاعاتی فراتر از Label باشد.
   - id: INS-009
     obligation: must_not
-    dimension: content
+    dimension: structure
     key: duplicate_across_roles
     statement: Label، Placeholder و Helper با یک wording تکراری پر نشوند.
   - id: INS-010
     obligation: must
-    dimension: requiredness
+    dimension: accessibility
     key: communicate_requiredness
     statement: requiredness با convention یکدست، cue دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
   - id: INS-011
     obligation: must
-    dimension: example
+    dimension: clarity
     key: distinguish_example_from_value
     statement: Example وقتی ممکن است با value واقعی اشتباه شود با نشانه‌ای مانند «مثال:» از مقدار جدا شود.
   - id: INS-012
@@ -116,12 +116,12 @@ rules:
     statement: نام field، object، action و واحد با terminology همان surface و audience هماهنگ بماند.
   - id: INS-013
     obligation: must
-    dimension: validation
+    dimension: structure
     key: separate_helper_from_error
     statement: Helper requirement را پیش از failure توضیح دهد و Error پس از validation شرط نقض‌شده و recovery را بیان کند.
   - id: INS-014
     obligation: must
-    dimension: validation
+    dimension: structure
     key: preserve_essential_requirement_on_error
     statement: وقتی Error جای Helper treatment را می‌گیرد، requirement ضروری در Error یا Instruction ماندگار باقی بماند.
   - id: INS-015
@@ -141,7 +141,7 @@ rules:
     statement: Link یا action راهنما purpose یا destination قابل‌فهم داشته باشد.
   - id: INS-018
     obligation: must
-    dimension: count
+    dimension: clarity
     key: count_has_real_limit_and_unit
     statement: Count فقط با limit، واحد و رفتار واقعی استفاده شود و واحد آن در context قابل‌فهم باشد.
   - id: INS-019
@@ -151,9 +151,14 @@ rules:
     statement: Helper، Error و group instruction با کنترل یا گروه مربوط برنامه‌وار مرتبط شوند.
   - id: INS-020
     obligation: must_not
-    dimension: input
+    dimension: interaction
     key: unjustified_paste_or_autofill_restriction
     statement: paste، autofill یا password manager بدون محدودیت مشخص و توجیه‌شده ممنوع معرفی نشود.
+  - id: INS-021
+    obligation: must_not
+    dimension: action
+    key: ambiguous_link_or_action_without_context
+    statement: Link یا action مبهم مانند «بیشتر» یا «ادامه» بدون context کافی برای فهم مقصد یا نتیجه استفاده نشود.
 
 anatomy:
   field:

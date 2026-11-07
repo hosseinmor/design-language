@@ -109,9 +109,43 @@ employer_organization
 | `avoid` | فقط با دلیل معتبر استفاده شود | non-blocking |
 | `forbidden` | در scope مشخص استفاده نشود | blocking |
 
-`forbidden_as_synonym` ممنوعیت مطلق یک عبارت نیست. فقط می‌گوید آن عبارت نباید
-به‌جای concept دیگری استفاده شود. برای مثال «فرصت شغلی» واژه‌ای معتبر است، اما در اشاره به وضعیت انتشار یا
+`forbidden` ممنوعیت مطلق یک عبارت نیست. هر مورد آن سه فیلد دارد:
+
+| فیلد | مقدارها | معنی |
+|---|---|---|
+| `label` | متن | عبارتی که نباید برای این concept به کار رود |
+| `scope` | `concept`، `entity_label`، `feature_name` | ممنوعیت فقط در همین نقش معتبر است؛ مثلاً «ارسال رزومه» به‌عنوان نام عمل مجاز است ولی نام موجودیت نیست |
+| `source` | `design_language`، `product_knowledge_snapshot` | تصمیم Design Language است یا snapshot از Product Knowledge |
+
+برای مثال «فرصت شغلی» واژه‌ای معتبر است، اما در اشاره به وضعیت انتشار یا
 metadata یک JobPost جایگزین دقیق «آگهی شغلی» نیست.
+
+مالک برچسب کاربرپسند Design Language است. اگر snapshot منبع محصولی برچسبی را
+ممنوع کند که Design Language آن را در `preferred`، `contextual_labels` یا
+`allowed` انتخاب کرده، انتخاب Design Language معتبر است. validator این تعارض‌ها
+را گزارش می‌کند تا به‌عنوان درخواست اصلاح به مالک Product Knowledge برسند.
+ممنوعیتی با `source: design_language` نمی‌تواند با برچسب انتخاب‌شدهٔ همان مدخل
+تعارض داشته باشد.
+
+### برچسب‌های قدیمی
+
+`legacy_labels` برچسب‌هایی را نگه می‌دارد که هنوز در محصول دیده می‌شوند ولی جای
+خود را به برچسب مصوب داده‌اند. هر مورد یک `label` و در صورت نیاز `note` دارد.
+AI در محتوای تازه از آن‌ها استفاده نمی‌کند و در آدیت آن‌ها را به برچسب مصوب
+نگاشت می‌کند. فهرست صفحه‌ها یا وضعیت مهاجرت در این فایل نگهداری نمی‌شود.
+
+### ارجاع به مفهوم‌های بدون مدخل
+
+هر هدف در `relations` باید یا مدخل داشته باشد یا در `unregistered_concepts`
+ثبت شود. این فهرست مفهوم‌هایی را نشان می‌دهد که هنوز باید بررسی و در صورت نیاز
+اضافه شوند.
+
+### کلیدهای مجاز
+
+مجموعهٔ کلیدهای هر مدخل، contextهای `preferred` و نوع relationها بسته است و در
+`tooling/validators/check_content_terminology.py` تعریف می‌شود. کلید تازه فقط با
+به‌روزکردن همین سند و validator اضافه شود. ترتیب اولویت قواعد در
+`product-voice.yml` تعریف می‌شود و این فایل فقط به آن ارجاع می‌دهد.
 
 ## تصمیم‌های تثبیت‌شدهٔ اصلی
 
@@ -231,7 +265,8 @@ metadata یک JobPost جایگزین دقیق «آگهی شغلی» نیست.
 4. اگر `contextual_labels` یا `relations.same_entity_as` وجود دارد، مرحلهٔ
    lifecycle و زاویهٔ ارائه را تعیین کن؛ سپس label را انتخاب کن.
 5. در نبود قاعدهٔ زمینه‌ای، label همان مخاطب را از `preferred` انتخاب کن.
-6. `relations.distinct_from` و ممنوعیت‌های synonym را بررسی کن.
+6. `relations.distinct_from` و `forbidden` را با توجه به `scope` بررسی کن؛ از
+   `legacy_labels` در محتوای تازه استفاده نکن.
 7. در وضعیت `needs_decision` ادعای قطعی نساز.
 8. بعد از terminology، قواعد pattern و component مرتبط را اعمال کن.
 
@@ -242,5 +277,6 @@ python tooling/validators/check_content_terminology.py
 ```
 
 این بررسی ساختار فایل، یکتایی شناسه‌ها، statusها، ارجاع‌های evidence،
-`decision_queue` و سازگاری `authority` هر مدخل با نقش منبع Product Knowledge را
-کنترل می‌کند.
+`decision_queue`، سازگاری `authority` هر مدخل با نقش منبع Product Knowledge،
+کلیدهای مجاز، شکل `forbidden` و `legacy_labels`، اهداف `relations` و ثبت هر
+مدخل `needs_decision` در `decision_queue` را کنترل می‌کند.

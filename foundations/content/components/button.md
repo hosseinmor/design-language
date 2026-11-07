@@ -203,25 +203,32 @@ error feedback: تغییرات ذخیره نشد. دوباره تلاش کنید
 
 ## قرارداد قطعی
 
+<!-- generated:content-rules source=button.yml -->
+<!-- این بخش از فایل YAML تولید می‌شود؛ دستی ویرایش نکنید. پس از تغییر قواعد اجرا کنید: python tooling/generate_content_rule_sections.py generate -->
+
 ### باید
 
-- action و نتیجهٔ واقعی activation را نام ببرید.
-- کوتاه‌ترین label دقیق و بدون ابهام را در context انتخاب کنید.
-- object یا scope را هرجا برای تمایز یا فهم consequence لازم است بیاورید.
-- اصطلاح canonical همان audience و surface را حفظ کنید.
-- label دیداری و accessible name را از نظر معنی همسو نگه دارید.
-- در confirmation، action اصلی و خروج امن را صریح بنویسید.
-- هویت label را در Loading ثابت نگه دارید.
+- `BTN-001` label باید action یا نتیجهٔ واقعی activation را روشن کند.
+- `BTN-002` کوتاه‌ترین label دقیق و بدون ابهام در context واقعی انتخاب شود.
+- `BTN-003` object یا scope هرجا برای فهم، تمایز یا consequence لازم است در label بیاید.
+- `BTN-006` Button برای action استفاده شود و navigation مستقل Link semantics داشته باشد.
+- `BTN-007` Brand، Primary و Danger از معنی، hierarchy و consequence تأییدشده انتخاب شوند، نه از شدت واژهٔ label.
+- `BTN-009` object با اصطلاح canonical همان audience و surface نامیده شود.
+- `BTN-011` در Loading هویت label پایه ثابت بماند و با status طولانی جایگزین نشود.
+- `BTN-012` در confirmation، action اصلی و راه خروج امن labelهای صریح و غیرهم‌معنا داشته باشند.
+- `BTN-013` label دیداری و accessible name باید از نظر نتیجهٔ action همسو باشند.
+- `BTN-014` Buttonهای هم‌نام با action یا object متفاوت باید از طریق label یا context برنامه‌وار کافی متمایز شوند.
+- `BTN-015` عدد، identifier و variable پویا در label باید از قرارداد localization و bidi پیروی کند.
 
 ### نباید
 
-- برای action پیامددار به «بله»، «خیر»، «تأیید» یا «انجام» اکتفا کنید.
-- completion، success یا failure را پیش از نتیجهٔ واقعی اعلام کنید.
-- navigation را فقط به‌خاطر ظاهر CTA به action Button تبدیل کنید.
-- Danger یا Brand را از روی واژهٔ label انتخاب کنید.
-- از ادعای تبلیغاتی، فشار احساسی یا فوریت ساختگی استفاده کنید.
-- implementation term یا رفتار تأییدنشده را وارد label کنید.
-- label را هنگام Loading به status طولانی دیگری تبدیل کنید.
+- `BTN-004` در action پیامددار، «بله»، «خیر»، «تأیید» یا «انجام» به‌تنهایی label نباشد.
+- `BTN-005` label پیش از activation نباید completion، success یا failure را اعلام کند.
+- `BTN-008` label نباید ادعای تبلیغاتی، فشار احساسی یا فوریت ساختگی را برای تقویت CTA اضافه کند.
+- `BTN-010` implementation name، API field یا نام داخلی نباید به label کاربر منتقل شود.
+- `BTN-016` label نباید جملهٔ توضیحی، punctuation پایانی، emoji یا تأکید تزئینی باشد.
+
+<!-- /generated:content-rules -->
 
 ## چک‌لیست بازبینی
 

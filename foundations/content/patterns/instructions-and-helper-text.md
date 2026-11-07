@@ -268,24 +268,37 @@ announce نکنید.
 
 ## قرارداد قطعی
 
+<!-- generated:content-rules source=instructions-and-helper-text.yml -->
+<!-- این بخش از فایل YAML تولید می‌شود؛ دستی ویرایش نکنید. پس از تغییر قواعد اجرا کنید: python tooling/generate_content_rule_sections.py generate -->
+
 ### باید
 
-- نقش هر متن را پیش از نوشتن مشخص کنید.
-- Label purpose کنترل یا گروه را نام ببرد.
-- requirement لازم را پیش از نیاز و در محل ماندگار قرار دهید.
-- محدودیت، قالب، مقصد و consequence را فقط از product truth بنویسید.
-- requiredness و رابطهٔ Helper/Error را دیداری و برنامه‌وار قابل‌فهم نگه دارید.
-- اصطلاحات همان surface را حفظ کنید.
+- `INS-001` نقش هر متن به‌عنوان Label، Instruction، Helper، Placeholder، Example، Count یا Error پیش از نوشتن مشخص شود.
+- `INS-002` Label purpose کنترل یا گروه را مستقل از Placeholder و مقدار ورودی مشخص کند.
+- `INS-003` instruction لازم برای تکمیل task پیش از نیاز و تا زمان مرتبط‌بودن در دسترس باشد.
+- `INS-006` قالب، limit، واحد، نوع فایل، دلیل، مقصد و consequence فقط مطابق product truth نوشته شود.
+- `INS-008` Helper کوتاه، مرتبط با همان field و دارای اطلاعاتی فراتر از Label باشد.
+- `INS-010` requiredness با convention یکدست، cue دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
+- `INS-011` Example وقتی ممکن است با value واقعی اشتباه شود با نشانه‌ای مانند «مثال:» از مقدار جدا شود.
+- `INS-012` نام field، object، action و واحد با terminology همان surface و audience هماهنگ بماند.
+- `INS-013` Helper requirement را پیش از failure توضیح دهد و Error پس از validation شرط نقض‌شده و recovery را بیان کند.
+- `INS-014` وقتی Error جای Helper treatment را می‌گیرد، requirement ضروری در Error یا Instruction ماندگار باقی بماند.
+- `INS-017` Link یا action راهنما purpose یا destination قابل‌فهم داشته باشد.
+- `INS-018` Count فقط با limit، واحد و رفتار واقعی استفاده شود و واحد آن در context قابل‌فهم باشد.
+- `INS-019` Helper، Error و group instruction با کنترل یا گروه مربوط برنامه‌وار مرتبط شوند.
 
 ### نباید
 
-- Placeholder را جای Label یا instruction ضروری بگذارید.
-- Label، Placeholder و Helper را با یک متن تکراری پر کنید.
-- requirement حیاتی را فقط پشت Tooltip یا Info قرار دهید.
-- Error را پیشاپیش به‌عنوان Helper نمایش دهید یا Helper را بعد از failure به‌جای
-  Error نگه دارید.
-- محدودیت، دلیل جمع‌آوری، privacy یا رفتار فایل را حدس بزنید.
-- action یا Link مبهم مثل «بیشتر» و «ادامه» را بدون context کافی استفاده کنید.
+- `INS-004` Placeholder جای Label یا accessible name استفاده نشود.
+- `INS-005` requirement، consequence یا instruction ضروری فقط در Placeholder قرار نگیرد.
+- `INS-007` requirement، Error، consequence یا policy ضروری فقط پشت Tooltip، Info یا surface گذرا پنهان نشود.
+- `INS-009` Label، Placeholder و Helper با یک wording تکراری پر نشوند.
+- `INS-015` محدودیت امنیتی، دلیل جمع‌آوری، privacy، storage یا رفتار فایل بدون منبع معتبر ادعا نشود.
+- `INS-016` instruction کاربر را سرزنش نکند و task را با «واضح»، «ساده» یا «فقط کافی است» قضاوت نکند.
+- `INS-020` paste، autofill یا password manager بدون محدودیت مشخص و توجیه‌شده ممنوع معرفی نشود.
+- `INS-021` Link یا action مبهم مانند «بیشتر» یا «ادامه» بدون context کافی برای فهم مقصد یا نتیجه استفاده نشود.
+
+<!-- /generated:content-rules -->
 
 ## چک‌لیست بازبینی
 

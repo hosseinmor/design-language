@@ -119,37 +119,37 @@ rules:
     evidence: [design_system_text_input, instruction_pattern]
   - id: TXT-002
     obligation: must
-    dimension: label
+    dimension: clarity
     key: label_names_purpose
     statement: Label purpose field را با اصطلاح همان surface مستقل از Placeholder و Value نام ببرد.
     evidence: [design_system_text_input, instruction_pattern, terminology]
   - id: TXT-003
     obligation: must_not
-    dimension: placeholder
+    dimension: structure
     key: placeholder_as_label_or_requirement
     statement: Placeholder تنها Label، accessible name یا محل requirement ضروری نباشد.
     evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
   - id: TXT-004
     obligation: must
-    dimension: placeholder
+    dimension: structure
     key: placeholder_adds_optional_context
     statement: Placeholder فقط در صورت افزودن example یا format hint کوتاه و غیرضروری استفاده شود.
     evidence: [design_system_text_input, instruction_pattern]
   - id: TXT-005
     obligation: must
-    dimension: example
+    dimension: clarity
     key: distinguish_example_from_value
     statement: exampleی که ممکن است Value واقعی برداشت شود با contextی مانند «مثال:» مشخص شود.
     evidence: [instruction_pattern, product_content_decisions]
   - id: TXT-006
     obligation: must
-    dimension: helper
+    dimension: structure
     key: helper_adds_verified_field_context
     statement: Helper کوتاه، field-specific، غیرتکراری و شامل context تأییدشده‌ای فراتر از Label باشد.
     evidence: [design_system_text_input, instruction_pattern]
   - id: TXT-007
     obligation: must_not
-    dimension: guidance
+    dimension: structure
     key: hide_required_guidance
     statement: instruction، requirement، Error یا consequence ضروری فقط پشت Info یا Tooltip پنهان نشود.
     evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
@@ -161,25 +161,25 @@ rules:
     evidence: [instruction_pattern, error_pattern, product_content_decisions]
   - id: TXT-009
     obligation: must
-    dimension: requiredness
+    dimension: accessibility
     key: visible_programmatic_requiredness
     statement: requiredness واقعی با convention دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
     evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
   - id: TXT-010
     obligation: must_not
-    dimension: duplication
+    dimension: structure
     key: duplicate_role_wording
     statement: Label، Placeholder و Helper با wording تکراری پر نشوند.
     evidence: [instruction_pattern, product_content_decisions]
   - id: TXT-011
     obligation: must
-    dimension: error
+    dimension: structure
     key: actionable_textual_error
     statement: Error شرط نقض‌شده و اصلاح معلوم را متنی و بدون اتکا به رنگ بیان کند.
     evidence: [design_system_text_input, accessibility_forms, error_pattern]
   - id: TXT-012
     obligation: must
-    dimension: transition
+    dimension: structure
     key: preserve_requirement_on_error
     statement: وقتی Error جای Helper treatment را می‌گیرد، requirement ضروری در Error یا Instruction ماندگار حفظ شود.
     evidence: [design_system_text_input, instruction_pattern]
@@ -197,19 +197,19 @@ rules:
     evidence: [error_pattern, terminology]
   - id: TXT-015
     obligation: must
-    dimension: value
+    dimension: product_truth
     key: preserve_real_value
     statement: Value واقعی کاربر یا سیستم مطابق type field حفظ شود و برای لحن برند بازنویسی نشود.
     evidence: [design_system_text_input, product_content_decisions]
   - id: TXT-016
     obligation: must
-    dimension: state
+    dimension: product_truth
     key: distinguish_disabled_readonly
     statement: Disabled و Read only مطابق state واقعی و semantics متمایز استفاده شوند.
     evidence: [design_system_text_input, accessibility_forms]
   - id: TXT-017
     obligation: must
-    dimension: adornment
+    dimension: accessibility
     key: interactive_trailing_action_name
     statement: Trailing تعاملی action و accessible name معنادار داشته باشد و از icon تزئینی متمایز شود.
     evidence: [design_system_text_input]
@@ -221,19 +221,19 @@ rules:
     evidence: [design_system_text_input, localization]
   - id: TXT-019
     obligation: must_not
-    dimension: component_selection
+    dimension: classification
     key: overload_single_line_input
     statement: متن چندخطی، optionهای ثابت یا رفتار تخصصی به Text Input عمومی تحمیل نشود.
     evidence: [design_system_text_input]
   - id: TXT-020
     obligation: must_not
-    dimension: input_behavior
+    dimension: interaction
     key: unjustified_input_restriction
     statement: paste، autofill یا password manager بدون محدودیت مشخص و تأییدشده ممنوع نشود.
     evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
   - id: TXT-021
     obligation: must_not
-    dimension: state
+    dimension: product_truth
     key: invent_warning_or_normalization_policy
     statement: Warning، normalization، input purpose یا state حل‌نشده به‌عنوان policy قطعی ساخته نشود.
     evidence: [design_system_text_input, localization, product_content_decisions]

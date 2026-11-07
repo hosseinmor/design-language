@@ -106,7 +106,7 @@ state_model:
 rules:
   - id: BTN-001
     obligation: must
-    dimension: meaning
+    dimension: clarity
     key: name_action_result
     statement: label باید action یا نتیجهٔ واقعی activation را روشن کند.
     evidence: [design_system_button, product_content_decisions]
@@ -118,13 +118,13 @@ rules:
     evidence: [design_system_button, product_voice, product_content_decisions]
   - id: BTN-003
     obligation: must
-    dimension: scope
+    dimension: clarity
     key: include_object_when_needed
     statement: object یا scope هرجا برای فهم، تمایز یا consequence لازم است در label بیاید.
     evidence: [confirmation_pattern, product_content_decisions]
   - id: BTN-004
     obligation: must_not
-    dimension: meaning
+    dimension: clarity
     key: generic_consequential_label
     statement: در action پیامددار، «بله»، «خیر»، «تأیید» یا «انجام» به‌تنهایی label نباشد.
     evidence: [confirmation_pattern]
@@ -136,13 +136,13 @@ rules:
     evidence: [loading_pattern, product_content_decisions]
   - id: BTN-006
     obligation: must
-    dimension: component_selection
+    dimension: classification
     key: action_not_navigation
     statement: Button برای action استفاده شود و navigation مستقل Link semantics داشته باشد.
     evidence: [design_system_button]
   - id: BTN-007
     obligation: must
-    dimension: hierarchy
+    dimension: presentation
     key: style_follows_meaning
     statement: Brand، Primary و Danger از معنی، hierarchy و consequence تأییدشده انتخاب شوند، نه از شدت واژهٔ label.
     evidence: [design_system_button, action_hierarchy]
@@ -166,13 +166,13 @@ rules:
     evidence: [terminology, product_content_decisions]
   - id: BTN-011
     obligation: must
-    dimension: loading
+    dimension: action
     key: preserve_loading_identity
     statement: در Loading هویت label پایه ثابت بماند و با status طولانی جایگزین نشود.
     evidence: [design_system_button, loading_pattern]
   - id: BTN-012
     obligation: must
-    dimension: confirmation
+    dimension: action
     key: explicit_safe_exit
     statement: در confirmation، action اصلی و راه خروج امن labelهای صریح و غیرهم‌معنا داشته باشند.
     evidence: [confirmation_pattern]
@@ -196,7 +196,7 @@ rules:
     evidence: [localization]
   - id: BTN-016
     obligation: must_not
-    dimension: form
+    dimension: tone
     key: sentence_punctuation_or_decoration
     statement: label نباید جملهٔ توضیحی، punctuation پایانی، emoji یا تأکید تزئینی باشد.
     evidence: [product_voice, product_content_decisions]

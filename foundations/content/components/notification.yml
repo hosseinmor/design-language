@@ -137,49 +137,49 @@ accessibility_model:
 rules:
   - id: NTC-001
     obligation: must
-    dimension: selection
+    dimension: classification
     key: choose_component_by_persistence
     statement: Inline Notification یا Toast از context، persistence و نیاز به action انتخاب شود، نه فقط severity.
     evidence: [design_system_notification, notification_pattern]
   - id: NTC-002
     obligation: must_not
-    dimension: identity
+    dimension: classification
     key: shared_type_axis
     statement: Inline Notification و Toast یک component با Type axis مشترک فرض نشوند.
     evidence: [design_system_notification]
   - id: NTC-003
     obligation: must
-    dimension: severity
+    dimension: presentation
     key: use_standard_severity
     statement: severity فقط یکی از Info، Success، Warning یا Error و مطابق معنی state باشد.
     evidence: [design_system_notification, notification_pattern]
   - id: NTC-004
     obligation: must_not
-    dimension: severity
+    dimension: presentation
     key: danger_or_contrast_as_severity
     statement: Danger یا High contrast به‌عنوان severity پنجم استفاده نشود.
     evidence: [design_system_notification, notification_pattern, confirmation_pattern]
   - id: NTC-005
     obligation: must
-    dimension: message
+    dimension: clarity
     key: required_independent_message
     statement: Message required باشد و نتیجه یا وضعیت واقعی را مستقل و روشن نام ببرد.
     evidence: [design_system_notification, notification_pattern]
   - id: NTC-006
     obligation: must
-    dimension: inline_description
+    dimension: structure
     key: description_adds_context
     statement: Inline Description فقط context، consequence یا recovery تکمیلی و غیرتکراری اضافه کند.
     evidence: [design_system_notification, product_content_decisions]
   - id: NTC-007
     obligation: must
-    dimension: toast_title
+    dimension: structure
     key: optional_title_adds_context
     statement: Toast Title فقط در صورت افزودن دسته‌بندی یا object تازه استفاده شود و Message را تکرار نکند.
     evidence: [design_system_notification, product_content_decisions]
   - id: NTC-008
     obligation: must_not
-    dimension: content
+    dimension: presentation
     key: long_or_critical_transient_content
     statement: متن بلند، confirmation، instruction حیاتی یا recovery ماندگار در Toast گذرا قرار نگیرد.
     evidence: [design_system_notification, notification_pattern]
@@ -203,7 +203,7 @@ rules:
     evidence: [notification_pattern, dynamic_feedback_accessibility]
   - id: NTC-012
     obligation: must
-    dimension: dismiss
+    dimension: accessibility
     key: accessible_dismiss_name
     statement: Dismiss موجود accessible name و Tooltip فارسی «بستن» داشته باشد.
     evidence: [design_system_notification, notification_pattern]
@@ -215,7 +215,7 @@ rules:
     evidence: [design_system_notification, notification_pattern]
   - id: NTC-014
     obligation: must
-    dimension: timeout
+    dimension: presentation
     key: timeout_indicator_is_lifetime
     statement: Timeout indicator فقط عمر auto-dismiss Toast را نشان دهد و task progress نامیده نشود.
     evidence: [design_system_notification]
@@ -227,7 +227,7 @@ rules:
     evidence: [design_system_notification, dynamic_feedback_accessibility, notification_pattern]
   - id: NTC-016
     obligation: must_not
-    dimension: focus
+    dimension: accessibility
     key: move_focus_to_toast
     statement: focus فقط به‌دلیل ظاهرشدن Toast جابه‌جا نشود و action autofocus نگیرد.
     evidence: [design_system_notification, dynamic_feedback_accessibility]
@@ -245,7 +245,7 @@ rules:
     evidence: [notification_pattern, error_pattern]
   - id: NTC-019
     obligation: must
-    dimension: recovery
+    dimension: presentation
     key: keep_required_recovery_available
     statement: recovery یا action لازم در presentation ماندگار و قابل‌دسترسی باقی بماند.
     evidence: [notification_pattern, error_pattern, dynamic_feedback_accessibility]
