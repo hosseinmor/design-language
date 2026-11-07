@@ -72,7 +72,7 @@ def build_tasks(cases: list[dict[str, Any]], repository_commit: str) -> list[dic
                 "copy": "state -> slot -> text; required when outcome is copy",
                 "checked_rules": "string[]",
                 "open_questions": "[{fact, question}]",
-                "draft_dependencies": "[{fact, slots}]",
+                "draft_dependencies": "[{fact | concept, slots}]",
                 "blocked_reason": "required when outcome is blocked",
             },
         }
@@ -103,11 +103,13 @@ def normalize(response: dict[str, Any]) -> dict[str, Any]:
     lists = {}
     for key in ("open_questions", "draft_dependencies"):
         items = response.get(key) or []
+        ref = "fact" if key == "open_questions" else None
         if not isinstance(items, list) or not all(
-            isinstance(i, dict) and isinstance(i.get("fact"), str) for i in items
+            isinstance(i, dict) and isinstance(i.get(ref) if ref else (i.get("fact") or i.get("concept")), str)
+            for i in items
         ):
-            raise EvalError(f"{case_id}: {key} must be a list of objects with `fact`")
-        lists[key] = {i["fact"] for i in items}
+            raise EvalError(f"{case_id}: {key} must be a list of objects with `fact`" + ("" if ref else " or `concept`"))
+        lists[key] = {i.get("fact") or i.get("concept") for i in items}
     return {
         "case_id": case_id,
         "outcome": outcome,

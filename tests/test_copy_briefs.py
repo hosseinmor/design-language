@@ -94,6 +94,16 @@ class BriefTests(unittest.TestCase):
         fact = {"id": "f", "statement": "x", "status": "draft", "source": {"kind": "slack"}}
         self.assertTrue(any("unknown source kind" in e for e in self.errors(brief(product_facts=[fact]))))
 
+    def test_product_knowledge_concept_must_match_product(self):
+        concept = {"kind": "product_knowledge", "product": "cando", "page": "p", "label": "x"}
+        self.assertTrue(any("cannot label" in e for e in self.errors(brief(concepts=[concept]))))
+
+    def test_new_concept_needs_prd_source_and_no_entry(self):
+        existing = {"kind": "new_concept", "id": "job_post", "source": {"kind": "prd", "ref": "r", "decision": "accepted"}}
+        self.assertTrue(any("already has a terminology entry" in e for e in self.errors(brief(concepts=[existing]))))
+        no_prd = {"kind": "new_concept", "id": "video_call", "source": "source_glossary"}
+        self.assertTrue(any("must be a prd reference" in e for e in self.errors(brief(concepts=[no_prd]))))
+
     def test_anatomy_roles_flatten_nested_lists(self):
         roles, required = anatomy_roles({"required": ["a"], "output": {"conditional": ["b"]}})
         self.assertEqual((roles, required), ({"a", "b"}, {"a"}))
@@ -121,6 +131,13 @@ class CaseTests(unittest.TestCase):
     def test_labels_must_come_from_terminology(self):
         value = case(forbidden_labels=[{"concept": "job_post", "label": "پست"}])
         self.assertTrue(any("not a terminology forbidden label" in e for e in self.errors(value)))
+
+    def test_new_concept_must_be_a_draft_dependency(self):
+        value = case()
+        value["brief"]["concepts"].append(
+            {"kind": "new_concept", "id": "video_call", "source": {"kind": "prd", "ref": "r", "decision": "accepted"}}
+        )
+        self.assertTrue(any("draft_dependencies" in e for e in self.errors(value)))
 
     def test_checked_rules_must_belong_to_contract(self):
         self.assertTrue(any("checked_rules" in e for e in self.errors(case(checked_rules=["ERR-001"]))))

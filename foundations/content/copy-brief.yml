@@ -40,7 +40,10 @@ brief_schema:
     surface: یکی از مقادیر visibility در واژه‌نامه.
     contract: ID یک قرارداد pattern یا component محتوا. tone_profile از همین قرارداد می‌آید و brief آن را تغییر نمی‌دهد.
     states: فهرست {id, slots}. هر slot باید نقشی از anatomy قرارداد باشد و نقش‌های required همان قرارداد حذف نشوند.
-    concepts: فهرست ID مدخل‌های واژه‌نامه که copy دربارهٔ آن‌هاست.
+    concepts: >
+      فهرست مفهوم‌هایی که copy دربارهٔ آن‌هاست؛ هر مورد ID مدخل واژه‌نامه، یا
+      {kind: product_knowledge, product, page, label}، یا {kind: new_concept, id, source}
+      با source از نوع prd است.
     product_facts: فهرست {id, statement, status, source | question}.
     context: توضیح آزاد موقعیت؛ fact محصولی نیست و ادعای محصولی نمی‌سازد.
     constraints: محدودیت‌های دقیق مانند طول، فقط وقتی از Figma یا قرارداد component آمده باشد.
@@ -53,7 +56,10 @@ brief_schema:
     product_knowledge: "{kind: product_knowledge, product, page, state}؛ product همان محصول brief است و بالاترین status همان state صفحه."
     prd: "{kind: prd, ref, decision: accepted | proposed}؛ verified فقط با accepted."
     eval_fixture: فقط در fixtureهای eval مجاز است.
-  answers: پاسخ سؤال دربارهٔ رفتار فعلی به Product Knowledge و دربارهٔ رفتار تازهٔ همین کار به PRD جاری می‌رود.
+  answers: >
+    Product Knowledge از کد پروداکشن استخراج می‌شود و دستی نوشته نمی‌شود. پاسخ دربارهٔ رفتار
+    تازهٔ همین کار به PRD جاری می‌رود و بعد از publish به PK می‌رسد؛ پاسخ دربارهٔ رفتار فعلی
+    که PK ندارد درخواست تغییر برای مالک PK می‌شود.
 
 output_contract:
   required: [brief_id, outcome, checked_rules]
@@ -62,7 +68,7 @@ output_contract:
     copy: نگاشت state → slot → متن؛ فقط وقتی outcome برابر copy است.
     checked_rules: ID قواعدی که copy در برابر آن‌ها نوشته شده است.
     open_questions: فهرست {fact, question} برای هر fact با status برابر unknown.
-    draft_dependencies: فهرست {fact, slots} برای هر slot که به fact با status برابر draft تکیه دارد.
+    draft_dependencies: فهرست {fact | concept, slots} برای هر slot که به fact با status برابر draft یا به مفهوم تازه تکیه دارد.
     blocked_reason: فقط وقتی outcome برابر blocked است.
 
 rules:
@@ -85,7 +91,7 @@ rules:
     obligation: must
     dimension: terminology
     key: labels_from_terminology
-    statement: برچسب هر concept از واژه‌نامه و متناسب با audience و surface انتخاب شود؛ برچسب forbidden یا legacy در copy تازه نیاید.
+    statement: برچسب هر concept متناسب با audience و surface از منبع برچسب آن بیاید (برچسب هدف واژه‌نامه، وگرنه برچسب PK؛ برای مفهوم تازه قواعد نام‌گذاری DL با ثبت در draft_dependencies) و برچسب forbidden یا legacy در copy تازه نیاید.
   - id: BRF-005
     obligation: must_not
     dimension: product_truth

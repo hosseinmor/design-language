@@ -5,6 +5,7 @@ language: fa-IR
 
 # هر case یک copy brief و ویژگی‌های قابل‌سنجش خروجی مورد انتظار است.
 # factهای این فایل آزمایشی‌اند (source: eval_fixture) و product truth نیستند.
+# صفحه‌ها و PRDهایی که با eval_fixture شروع می‌شوند ساختگی‌اند.
 
 cases:
   - id: field_error_with_verified_limit
@@ -215,3 +216,54 @@ cases:
         - {concept: job_position, label: موقعیت شغلی}
       forbidden_labels:
         - {concept: job_application, label: اپلای}
+
+  - id: new_concept_is_flagged
+    brief:
+      id: video_interview_invited
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      contract: content.pattern.notifications
+      states:
+        - id: success
+          slots: [message]
+      concepts:
+        - kind: new_concept
+          id: video_interview_invitation
+          source: {kind: prd, ref: eval_fixture_prd, decision: accepted}
+      context: کارفرما کارجو را به مصاحبهٔ ویدیویی دعوت کرده است؛ این مفهوم هنوز در Product Knowledge نیست.
+      product_facts:
+        - id: invitation_sent_after_employer_action
+          statement: دعوت پس از ثبت اقدام کارفرما برای کارجو ارسال می‌شود.
+          status: verified
+          source: eval_fixture
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-004, NTF-003, NTF-005]
+      required_slots:
+        success: [message]
+      draft_dependencies: [video_interview_invitation]
+
+  - id: product_knowledge_label_without_entry
+    brief:
+      id: empty_saved_jobs
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      contract: content.pattern.empty-states
+      states:
+        - id: empty_list
+          slots: [message]
+      concepts:
+        - kind: product_knowledge
+          product: jobvision
+          page: eval_fixture_saved_jobs
+          label: آگهی‌های ذخیره‌شده
+      context: کارجو هنوز هیچ آگهی‌ای ذخیره نکرده است.
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-004, EST-002, EST-009]
+      required_slots:
+        empty_list: [message]
+      must_use_labels:
+        - {concept: eval_fixture_saved_jobs, label: آگهی‌های ذخیره‌شده}
