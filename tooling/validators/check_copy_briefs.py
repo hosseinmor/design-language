@@ -229,13 +229,45 @@ def validate_brief(brief: Any, ctx: Context, where: str, allow_fixture_source: b
             if not allow_fixture_source:
                 errors.append(f"{at}: `{FIXTURE_SOURCE}` is only allowed in eval fixtures")
             continue
-        if source not in ctx.sources:
-            errors.append(f"{at}: source `{source}` is not a registered terminology source")
+        state, source_errors = source_maturity(source, brief.get("product"), ctx)
+        errors += [f"{at}: {e}" for e in source_errors]
+        if state is None:
+            if not source_errors:
+                errors.append(f"{at}: source `{source}` is not a registered terminology source")
             continue
-        state = ctx.sources[source]
         if status == "verified" and state != "verified":
-            errors.append(f"{at}: status `verified` exceeds source `{source}` state `{state}`")
+            errors.append(f"{at}: status `verified` exceeds source maturity `{state}`")
     return errors
+
+
+def source_maturity(source: Any, product: Any, ctx: Context) -> tuple[str | None, list[str]]:
+    """Return the highest fact status a source supports, plus shape errors."""
+    if isinstance(source, str):
+        return ctx.sources.get(source), []
+    if not isinstance(source, dict):
+        return None, ["source must be a registered id or a mapping"]
+    kind = source.get("kind")
+    if kind == "product_knowledge":
+        errors = [
+            f"product_knowledge source needs `{key}`"
+            for key in ("product", "page", "state")
+            if not (isinstance(source.get(key), str) and source[key].strip())
+        ]
+        if source.get("product") and source.get("product") != product:
+            errors.append(
+                f"product_knowledge source of `{source.get('product')}` cannot support a `{product}` brief"
+            )
+        if source.get("state") not in {"verified", "draft"}:
+            errors.append("product_knowledge source state must be verified or draft")
+        return (None if errors else source["state"]), errors
+    if kind == "prd":
+        errors = []
+        if not (isinstance(source.get("ref"), str) and source["ref"].strip()):
+            errors.append("prd source needs `ref`")
+        if source.get("decision") not in {"accepted", "proposed"}:
+            errors.append("prd source decision must be accepted or proposed")
+        return (None if errors else ("verified" if source["decision"] == "accepted" else "draft")), errors
+    return None, [f"unknown source kind `{kind}`"]
 
 
 def validate_case(case: Any, ctx: Context, where: str) -> tuple[list[str], set[str]]:

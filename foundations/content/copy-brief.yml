@@ -45,12 +45,15 @@ brief_schema:
     context: توضیح آزاد موقعیت؛ fact محصولی نیست و ادعای محصولی نمی‌سازد.
     constraints: محدودیت‌های دقیق مانند طول، فقط وقتی از Figma یا قرارداد component آمده باشد.
   fact_status:
-    verified: منبع ثبت‌شده با state برابر verified لازم است.
-    draft: منبع ثبت‌شده لازم است؛ copy وابسته در draft_dependencies می‌آید.
+    verified: منبعی که خودش verified است لازم است.
+    draft: یک منبع مجاز لازم است؛ copy وابسته در draft_dependencies می‌آید.
     unknown: منبع ندارد؛ question لازم است و copy آن را ادعا نمی‌کند.
-  fact_sources: >
-    source یکی از sourceهای ثبت‌شده در واژه‌نامه است. status یک fact نمی‌تواند از
-    state منبع بالاتر باشد. `eval_fixture` فقط در fixtureهای eval مجاز است.
+  fact_sources:
+    registered: ID یکی از sourceهای واژه‌نامه؛ بالاترین status همان state منبع است.
+    product_knowledge: "{kind: product_knowledge, product, page, state}؛ product همان محصول brief است و بالاترین status همان state صفحه."
+    prd: "{kind: prd, ref, decision: accepted | proposed}؛ verified فقط با accepted."
+    eval_fixture: فقط در fixtureهای eval مجاز است.
+  answers: پاسخ سؤال دربارهٔ رفتار فعلی به Product Knowledge و دربارهٔ رفتار تازهٔ همین کار به PRD جاری می‌رود.
 
 output_contract:
   required: [brief_id, outcome, checked_rules]
