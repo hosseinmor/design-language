@@ -35,7 +35,7 @@ cases:
       safe_exit: انصراف
     expected:
       valid: true
-      checked_rules: [MOD-001, MOD-002, MOD-003, MOD-004, MOD-006, MOD-007, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007, MOD-017, MOD-020]
+      checked_rules: [MOD-001, MOD-002, MOD-003, MOD-004, MOD-006, MOD-007, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, BTN-004, MOD-017, MOD-020]
       violations: []
 
   - id: discard_unsaved_changes
@@ -51,7 +51,7 @@ cases:
       safe_exit: ادامهٔ ویرایش
     expected:
       valid: true
-      checked_rules: [MOD-002, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007, MOD-013]
+      checked_rules: [MOD-002, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, BTN-004, MOD-013]
       violations: []
 
   - id: explicit_acknowledgement
@@ -144,8 +144,8 @@ cases:
       safe_exit: لغو
     expected:
       valid: false
-      checked_rules: [MOD-002, MOD-003, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
-      violations: [MOD-002, MOD-003, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
+      checked_rules: [MOD-002, MOD-003, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, BTN-004]
+      violations: [MOD-002, MOD-003, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, BTN-004]
 
   - id: generic_are_you_sure_title
     context:
@@ -159,8 +159,8 @@ cases:
       safe_exit: خیر
     expected:
       valid: false
-      checked_rules: [MOD-002, MOD-003, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
-      violations: [MOD-002, MOD-003, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
+      checked_rules: [MOD-002, MOD-003, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, BTN-004]
+      violations: [MOD-002, MOD-003, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, BTN-004]
 
   - id: depends_on_obscured_background
     context:
@@ -229,8 +229,8 @@ cases:
       safe_exit: لغو
     expected:
       valid: false
-      checked_rules: [CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
-      violations: [CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
+      checked_rules: [CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, BTN-004]
+      violations: [CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, BTN-004]
 
   - id: dismiss_icon_without_accessible_name
     context:

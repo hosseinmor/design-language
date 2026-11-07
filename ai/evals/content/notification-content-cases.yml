@@ -61,7 +61,7 @@ cases:
         label: تلاش دوباره
     expected:
       valid: true
-      checked_rules: [NTC-003, NTC-005, NTC-006, NTC-010, NTF-005]
+      checked_rules: [NTC-003, NTC-005, NTC-006, NTC-010, NTF-015]
       violations: []
 
   - id: navigation_action_uses_link
