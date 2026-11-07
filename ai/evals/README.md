@@ -8,6 +8,25 @@ Development Harness unless they test a reusable Design Language contract.
 
 **Execution status:** The YAML cases are curated evaluation **fixtures**. The repository now contains a report-only harness that validates fixtures, prepares answer-free model tasks, validates evaluator responses, and produces JSON/Markdown score reports. It does not call a model, store credentials, or run a semantic model evaluation in CI. Therefore no model pass rate exists until a reviewed model adapter executes the prepared tasks and its responses are scored. Existing deterministic content validators remain separate from semantic scoring.
 
+## Copy generation cases
+
+Cases under [`content/generation/`](content/generation/) test copy *generation*
+from a [copy brief](../../foundations/content/copy-brief.md), not
+classification of existing copy. Each case is a brief plus measurable
+expectations: outcome, required and empty slots, open questions, draft
+dependencies, and required or forbidden terminology labels.
+
+```bash
+python tooling/validators/check_copy_briefs.py
+python tooling/evals/run_content_generation_eval.py validate
+python tooling/evals/run_content_generation_eval.py prepare --repository-commit <sha> --output /tmp/generation-tasks.jsonl
+python tooling/evals/run_content_generation_eval.py score --responses <jsonl> --repository-commit <sha> --model <name> --model-version <version> --report-json /tmp/generation-report.json
+```
+
+`score` is deterministic and report-only. Judge the rule quality of produced
+copy separately with the semantic evaluator below. CI runs fixture validation
+and unit tests only, never model inference.
+
 ## Evaluator contract
 
 A future semantic runner must evaluate each fixture independently against the

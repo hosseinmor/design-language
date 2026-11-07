@@ -193,7 +193,8 @@
         "content.pattern.notifications",
         "content.pattern.loading-and-progress",
         "content.pattern.ai-content-and-disclosure",
-        "content.pattern.instructions-and-helper-text"
+        "content.pattern.instructions-and-helper-text",
+        "content.copy-brief"
       ],
       "topics": [
         "content",
@@ -201,6 +202,31 @@
         "content-guidelines"
       ],
       "path": "foundations/content/content-guidelines.md"
+    },
+    {
+      "id": "content.copy-brief",
+      "kind": "content-content-foundation",
+      "title": "Copy Brief",
+      "summary": "Defines the structured input for AI copy generation and its output contract, including how missing or draft product facts and products without a verbal-identity layer are handled.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.content-guidelines",
+        "content.product-voice",
+        "content.terminology",
+        "content.localization"
+      ],
+      "topics": [
+        "ai-generation",
+        "content",
+        "content-content-foundation",
+        "copy-brief",
+        "persian",
+        "product-truth",
+        "ux-writing"
+      ],
+      "path": "foundations/content/copy-brief.md"
     },
     {
       "id": "content.localization",
@@ -3421,10 +3447,10 @@
     }
   ],
   "summary": {
-    "documents": 161,
+    "documents": 162,
     "by_kind": {
       "content-content-component": 4,
-      "content-content-foundation": 1,
+      "content-content-foundation": 2,
       "content-content-guideline": 3,
       "content-content-pattern": 7,
       "design-language-ai-routing": 2,
