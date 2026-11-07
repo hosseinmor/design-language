@@ -1,0 +1,105 @@
+schema_version: "0.1"
+id: content.foundation.copy_audit
+title: قرارداد آدیت copy
+status: draft
+language: fa-IR
+scope:
+  - product-ui
+  - transactional-content
+
+description: >
+  روش آدیت copy فعلی پروداکشن در برابر قواعد Design Language. این قرارداد شکل
+  ورودی، مراحل، شکل finding و اولویت را تعریف می‌کند. موجودی صفحه‌ها، findingهای
+  واقعی و گزارش‌های تاریخ‌دار بیرون از این مخزن نگهداری می‌شوند.
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  copy_brief: content.foundation.copy_brief
+
+goal: >
+  هر finding به قاعدهٔ مالک یا به شکاف مشخص گایدلاین برسد، اصلاح پیشنهادی از همان
+  قراردادهای تولید عبور کند و موردی که context ندارد حدسی قضاوت نشود.
+
+# Context لازم برای قضاوت. همان فیلدهای copy brief، برای یک slot.
+audit_item_schema:
+  required: [id, observed_text, location, captured_on]
+  context: [product, audience, surface, contract, state, slot]
+  optional: [concepts, product_facts, notes]
+  fields:
+    location: شناسهٔ مبهم مورد در موجودی بیرونی؛ URL، تصویر یا دادهٔ کاربر در این مخزن نمی‌آید.
+    captured_on: تاریخ دیده‌شدن copy در محصول، YYYY-MM-DD.
+    observed_text: متن دقیق دیده‌شده.
+
+process:
+  - id: extract
+    description: copy را با context کامل یک slot استخراج کنید.
+  - id: deterministic_check
+    description: برچسب‌های forbidden و legacy مفهوم‌های مورد را از روی واژه‌نامه بیابید.
+  - id: semantic_check
+    description: copy را با evaluator معنایی در برابر قواعد قرارداد مالک بسنجید.
+  - id: prioritize
+    description: اولویت را از priority_model بگیرید؛ بازبین می‌تواند آن را با دلیل تغییر دهد.
+  - id: human_review
+    description: بازبین انسانی finding، اولویت و copy پیشنهادی را تأیید یا رد می‌کند.
+  - id: ticket
+    description: finding تأییدشده در سامانهٔ پیگیری کار ثبت می‌شود، نه در این مخزن.
+  - id: feed_back_gaps
+    description: guideline_gap و برچسب قدیمی تازه از مسیر evolve-the-system به سند مالک برمی‌گردد.
+
+finding_schema:
+  status: [finding, no_issue, needs_context]
+  fields:
+    rule_ids: ID قواعدی که copy نقض می‌کند.
+    guideline_gap: وقتی مشکل واقعی است ولی هیچ قاعده‌ای آن را پوشش نمی‌دهد؛ توضیح شکاف.
+    dimensions: dimension قواعد نقض‌شده.
+    label_findings: "{concept, label, kind: forbidden | legacy, scope, approved_labels, needs_review}"
+    priority: P1 تا P4.
+    rewrite_brief: copy brief ساخته‌شده از context مورد، برای تولید copy پیشنهادی.
+    context_gaps: فیلدهای context غایب، یا product_layer_missing.
+
+# اولویت = رتبهٔ dimension + جابه‌جایی surface، حداکثر P4.
+priority_model:
+  dimension_rank:
+    product_truth: 1
+    accessibility: 1
+    disclosure: 1
+    clarity: 2
+    action: 2
+    structure: 2
+    interaction: 2
+    classification: 2
+    localization: 2
+    terminology: 3
+    tone: 4
+  surface_offset:
+    public: 0
+    documentation: 1
+    internal: 1
+    admin: 1
+    code_only: 1
+  default_rule_for_labels: VOICE-007
+
+rules:
+  - id: AUD-001
+    obligation: must
+    dimension: classification
+    key: finding_cites_owner
+    statement: هر finding یا ID قاعدهٔ نقض‌شده را ذکر کند یا guideline_gap مشخص داشته باشد.
+  - id: AUD-002
+    obligation: must
+    dimension: terminology
+    key: map_labels_from_terminology
+    statement: برچسب forbidden یا legacy فقط به برچسب مصوب همان مفهوم در واژه‌نامه نگاشت شود، نه به برچسب حدسی.
+  - id: AUD-003
+    obligation: must_not
+    dimension: classification
+    key: judge_without_context
+    statement: موردی که context کامل ندارد یا محصولش لایهٔ هویت کلامی ندارد قضاوت نشود و needs_context بگیرد.
+  - id: AUD-004
+    obligation: must
+    dimension: product_truth
+    key: rewrite_through_brief
+    statement: copy پیشنهادی از یک copy brief ساخته شود تا fact نامعلوم به سؤال تبدیل شود، نه به ادعا.
+
+evaluation_source: ../../ai/evals/content/audit/copy-audit-cases.yml

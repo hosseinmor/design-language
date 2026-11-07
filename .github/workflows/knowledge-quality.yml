@@ -70,3 +70,6 @@ jobs:
 
       - name: Validate copy generation fixtures
         run: python tooling/evals/run_content_generation_eval.py validate
+
+      - name: Check copy audit
+        run: python tooling/validators/check_copy_audit.py

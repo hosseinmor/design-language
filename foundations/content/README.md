@@ -7,6 +7,7 @@ content-guidelines.md     Human entry point and routing
 product-voice.*           Shared voice and machine-readable contract
 localization.*            Persian, RTL, formatting, and localization rules
 copy-brief.*              Structured input and output contract for AI copy generation
+copy-audit.*              Method, finding shape and priority model for auditing existing copy
 terminology/              Shared semantic lexicon
 components/               Copy contracts for reusable UI components
 patterns/                 Reusable message and interaction-language patterns
