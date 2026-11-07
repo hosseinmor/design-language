@@ -112,8 +112,37 @@ copy audits can be aggregated across contracts:
 | `localization` | Numbers, dates, variables, units and bidirectional text. |
 | `accessibility` | Programmatic meaning, names, relationships and announcements. |
 | `disclosure` | AI involvement, provenance, limits and status of generated output. |
-| `presentation` | Visual severity, hierarchy or display choice. A content rule with this dimension marks a Design System boundary to review. |
+| `presentation` | Visual severity, hierarchy or display choice. Owned by the Design System; no active content rule uses it. A new rule with this dimension needs an explicit ownership reason. |
 | `interaction` | Interactive behavior such as data preservation and input handling. |
+
+### Ownership and references
+
+Content owns wording and message structure. Severity sets, presentation choice
+(inline, Inline Notification, Toast, Dialog), Button style, action count, focus,
+announcement urgency and programmatic association belong to the Design System
+and Accessibility documents; a content contract references them in
+`depends_on` instead of restating them.
+
+A rule has one owner. When a component would repeat a pattern or voice rule, the
+component inherits it through `depends_on` and adds only its own constraint.
+Eval cases may check their own rules and rules inherited from any content
+contract named in `depends_on`; blocking-rule coverage is still counted per
+owning contract.
+
+### Retired rules
+
+A rule ID is never reused. A removed rule moves to `retired_rules`:
+
+```yaml
+retired_rules:
+  - id: TXT-012
+    superseded_by: [INS-014]      # active rule IDs or registry document IDs
+    reason: ...
+```
+
+Validators reject a retired ID that is active again, an unresolvable owner, and
+any eval that still cites a retired ID. The generated rule section lists retired
+IDs with their current owner.
 
 ## Validation
 

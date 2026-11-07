@@ -15,7 +15,7 @@ cases:
       message: تغییرات رزومه ذخیره شد.
     expected:
       valid: true
-      checked_rules: [NTF-001, NTF-002, NTF-003, NTF-004, NTF-005, NTF-008, NTF-009]
+      checked_rules: [NTF-001, NTF-003, VOICE-007, NTF-005, NTF-008, NTF-009]
       violations: []
 
   - id: confirmed_application_submission
@@ -28,7 +28,7 @@ cases:
       message: درخواست شغلی ارسال شد.
     expected:
       valid: true
-      checked_rules: [NTF-003, NTF-004, NTF-005, NTF-008]
+      checked_rules: [NTF-003, VOICE-007, NTF-005, NTF-008]
       violations: []
 
   - id: persistent_information_inline
@@ -41,7 +41,7 @@ cases:
       message: برای بررسی درخواست جذب، شناسهٔ مالیاتی سازمان لازم است.
     expected:
       valid: true
-      checked_rules: [NTF-001, NTF-002, NTF-003, NTF-004, NTF-006]
+      checked_rules: [NTF-001, NTF-003, VOICE-007, NTF-006]
       violations: []
 
   - id: detected_connection_warning
@@ -54,7 +54,7 @@ cases:
       message: اتصال ناپایدار است؛ ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
     expected:
       valid: true
-      checked_rules: [NTF-001, NTF-002, NTF-003, NTF-006, NTF-010]
+      checked_rules: [NTF-001, NTF-003, NTF-006]
       violations: []
 
   - id: undo_for_removed_saved_job
@@ -69,7 +69,7 @@ cases:
       action: بازگردانی
     expected:
       valid: true
-      checked_rules: [NTF-003, NTF-004, NTF-005, NTF-007]
+      checked_rules: [NTF-003, VOICE-007, NTF-005]
       violations: []
 
   - id: non_interruptive_result_update
@@ -83,7 +83,7 @@ cases:
       message: ۱۲ آگهی شغلی پیدا شد.
     expected:
       valid: true
-      checked_rules: [NTF-002, NTF-003, NTF-004, NTF-011, NTF-012, NTF-013]
+      checked_rules: [NTF-003, VOICE-007]
       violations: []
 
   - id: generic_success_message
@@ -132,8 +132,8 @@ cases:
       message: این آگهی برای همیشه حذف می‌شود.
     expected:
       valid: false
-      checked_rules: [NTF-001, NTF-010]
-      violations: [NTF-001, NTF-010]
+      checked_rules: [NTF-001]
+      violations: [NTF-001]
 
   - id: destructive_warning_as_error
     context:
@@ -144,76 +144,8 @@ cases:
       message: با حذف حساب، همهٔ داده‌ها پاک می‌شوند.
     expected:
       valid: false
-      checked_rules: [NTF-001, NTF-010]
-      violations: [NTF-001, NTF-010]
-
-  - id: long_critical_toast
-    context:
-      persistence_required: true
-      action_required_for_continuation: true
-      presentation: toast
-    content:
-      severity: warning
-      message: برای ادامه باید اطلاعات سازمان را بازبینی کنید و مدارک خواسته‌شده را بارگذاری کنید.
-      action: بازبینی اطلاعات سازمان
-    expected:
-      valid: false
-      checked_rules: [NTF-002, NTF-006, NTF-007]
-      violations: [NTF-002]
-
-  - id: notification_with_two_actions
-    context:
-      presentation: inline_notification
-    content:
-      severity: info
-      message: نسخهٔ جدید رزومه آماده است.
-      primary_action: دانلود رزومه
-      secondary_action: مشاهدهٔ رزومه
-    expected:
-      valid: false
-      checked_rules: [NTF-007]
-      violations: [NTF-007]
-
-  - id: toast_receives_focus
-    context:
-      presentation: toast
-      focus_moved_to_toast: true
-    content:
-      severity: success
-      message: تغییرات ذخیره شد.
-    expected:
-      valid: false
-      checked_rules: [NTF-012]
-      violations: [NTF-012]
-
-  - id: all_errors_are_assertive
-    context:
-      event: recoverable_background_failure
-      visual_severity: error
-      announcement: assertive
-      urgency_justified: false
-    content:
-      severity: error
-      message: به‌روزرسانی انجام نشد. دوباره تلاش کنید.
-    expected:
-      valid: false
-      checked_rules: [NTF-011]
-      violations: [NTF-011]
-
-  - id: duplicate_feedback_channels
-    context:
-      event: save_profile
-      focus_moved_to_status: true
-      live_announcement: true
-      toast_present: true
-      redundancy_justified: false
-    content:
-      severity: success
-      message: پروفایل ذخیره شد.
-    expected:
-      valid: false
-      checked_rules: [NTF-013]
-      violations: [NTF-013]
+      checked_rules: [NTF-001]
+      violations: [NTF-001]
 
   - id: invented_timeout_and_stack
     context:
@@ -236,5 +168,5 @@ cases:
       message: ATS_SUBMIT_422
     expected:
       valid: false
-      checked_rules: [NTF-003, NTF-004, NTF-006]
-      violations: [NTF-003, NTF-004, NTF-006]
+      checked_rules: [NTF-003, VOICE-007, NTF-006]
+      violations: [NTF-003, VOICE-007, NTF-006]

@@ -57,7 +57,7 @@ cases:
       safe_exit_label: انصراف
     expected:
       valid: true
-      checked_rules: [BTN-001, BTN-003, BTN-004, BTN-007, BTN-012]
+      checked_rules: [BTN-001, BTN-003, BTN-004, CNF-005, CNF-006]
       violations: []
 
   - id: cancellation_action_has_distinct_exit
@@ -71,7 +71,7 @@ cases:
       safe_exit_label: بازگشت
     expected:
       valid: true
-      checked_rules: [BTN-001, BTN-003, BTN-004, BTN-012]
+      checked_rules: [BTN-001, BTN-003, BTN-004, CNF-005, CNF-006]
       violations: []
 
   - id: loading_preserves_action_identity
@@ -101,7 +101,7 @@ cases:
       accessible_name: حذف ۳ درخواست شغلی
     expected:
       valid: true
-      checked_rules: [BTN-003, BTN-007, BTN-009, BTN-013, BTN-015]
+      checked_rules: [BTN-003, BTN-009, BTN-013, BTN-015]
       violations: []
 
   - id: repeated_edit_actions_have_programmatic_context
@@ -128,7 +128,7 @@ cases:
       safe_exit_label: لغو
     expected:
       valid: false
-      checked_rules: [BTN-001, BTN-003, BTN-004, BTN-012]
+      checked_rules: [BTN-001, BTN-003, BTN-004, CNF-005, CNF-006]
       violations: [BTN-001, BTN-003, BTN-004]
 
   - id: completion_announced_before_activation
@@ -154,20 +154,6 @@ cases:
       valid: false
       checked_rules: [BTN-006]
       violations: [BTN-006]
-
-  - id: danger_selected_for_reversible_negative_action
-    context:
-      component: Button
-      action: deactivate
-      destructive: false
-      reversible: true
-      treatment: danger-primary
-    content:
-      label: غیرفعال‌کردن آگهی
-    expected:
-      valid: false
-      checked_rules: [BTN-007]
-      violations: [BTN-007]
 
   - id: promotional_pressure_in_cta
     context:
@@ -217,8 +203,8 @@ cases:
       safe_exit_label: لغو
     expected:
       valid: false
-      checked_rules: [BTN-004, BTN-012]
-      violations: [BTN-012]
+      checked_rules: [BTN-004, CNF-005, CNF-006]
+      violations: [CNF-005, CNF-006]
 
   - id: accessible_name_changes_result
     context:

@@ -13,7 +13,7 @@ cases:
     message: در حال ذخیرهٔ تغییرات رزومه…
     expected:
       valid: true
-      checked_rules: [LDP-001, LDP-002, LDP-005, LDP-006, LDP-008, LDP-009, LDP-012]
+      checked_rules: [LDP-001, LDP-002, LDP-005, LDP-006, VOICE-007, LDP-009, LDP-012]
       violations: []
 
   - id: job_ads_region_loading
@@ -24,7 +24,7 @@ cases:
     message: در حال بارگذاری آگهی‌های شغلی…
     expected:
       valid: true
-      checked_rules: [LDP-001, LDP-002, LDP-005, LDP-006, LDP-008, LDP-009]
+      checked_rules: [LDP-001, LDP-002, LDP-005, LDP-006, VOICE-007, LDP-009]
       violations: []
 
   - id: reliable_resume_upload_progress
@@ -37,7 +37,7 @@ cases:
     message: در حال بارگذاری رزومه — ۳ از ۵ مگابایت
     expected:
       valid: true
-      checked_rules: [LDP-001, LDP-002, LDP-003, LDP-004, LDP-008]
+      checked_rules: [LDP-001, LDP-002, LDP-003, LDP-004, VOICE-007]
       violations: []
 
   - id: batch_resume_processing
@@ -50,7 +50,7 @@ cases:
     message: در حال پردازش ۲۴ رزومه — ۱۸ مورد انجام شد
     expected:
       valid: true
-      checked_rules: [LDP-001, LDP-002, LDP-003, LDP-004, LDP-008]
+      checked_rules: [LDP-001, LDP-002, LDP-003, LDP-004, VOICE-007]
       violations: []
 
   - id: preserved_focus_with_status
@@ -63,7 +63,7 @@ cases:
     message: در حال ارسال درخواست شغلی…
     expected:
       valid: true
-      checked_rules: [LDP-002, LDP-008, LDP-012, LDP-013, LDP-014, LDP-015]
+      checked_rules: [LDP-002, VOICE-007, LDP-012, LDP-013, LDP-014, LDP-015]
       violations: []
 
   - id: confirmed_success_transition

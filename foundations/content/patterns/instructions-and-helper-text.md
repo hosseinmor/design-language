@@ -3,7 +3,7 @@ id: content.pattern.instructions-and-helper-text
 collection: content
 type: content-pattern
 title: Instructions and Helper Text
-summary: Defines the roles, timing, placement, wording, validation boundary, and accessibility contract for labels, instructions, helper text, placeholders, examples, and requirement indicators.
+summary: Defines the roles, timing, wording, and validation boundary for labels, instructions, helper text, placeholders, examples, and requirement indicators; programmatic association and required-state semantics are referenced from Accessibility.
 knowledge_state: verified
 document_maturity: draft
 related:
@@ -120,7 +120,8 @@ Placeholder: مثال: طراح محصول
 
 ## Required و Optional
 
-- requiredness باید هم دیداری و هم برنامه‌وار قابل‌فهم باشد.
+- requiredness با wording قابل‌فهم بیان می‌شود؛ semantics برنامه‌وار آن در
+  [Accessibility forms](../../../accessibility/forms.md) تعریف شده است.
 - رنگ یا `*` به‌تنهایی کافی نیست وقتی معنی آن برای کاربر روشن نشده است.
 - در یک form، convention باید یکدست باشد: اگر همهٔ فیلدها الزامی‌اند، optionalها
   را با «اختیاری» مشخص کنید؛ اگر ترکیب فرم ابهام دارد، راهنمای کلی یا marker
@@ -258,13 +259,16 @@ announce نکنید.
 
 ## دسترس‌پذیری
 
-- Label یا accessible name معنادار برای هر کنترل لازم است.
-- instruction ضروری پیش از نیاز در دسترس باشد.
-- Helper، Error و group instruction با کنترل یا گروه مرتبط شوند.
-- requiredness فقط با رنگ یا `*` منتقل نشود و برنامه‌وار هم مشخص باشد.
-- Placeholder تنها label یا تنها carrier requirement نباشد.
-- visible label در accessible name حفظ شود.
-- محتوای ضروری در Tooltip یا surface گذرا پنهان نشود.
+حداقل الزام WCAG برای Label، instruction و link purpose در
+[Accessible content](../../../accessibility/content.md) و ارتباط برنامه‌وار
+Helper، Error و group instruction با کنترل و required state در
+[Accessibility forms](../../../accessibility/forms.md) تعریف شده‌اند. این سند آن‌ها
+را بازتعریف نمی‌کند و فقط wording و توزیع نقش‌ها را مالک است:
+
+- Placeholder تنها label یا تنها carrier requirement نیست (`INS-004`، `INS-005`)؛
+- محتوای ضروری در Tooltip یا surface گذرا پنهان نمی‌شود (`INS-007`)؛
+- requiredness با wording یکدست بیان می‌شود (`INS-010`)؛
+- Link راهنما purpose قابل‌فهم دارد (`INS-017`).
 
 ## قرارداد قطعی
 
@@ -278,14 +282,13 @@ announce نکنید.
 - `INS-003` instruction لازم برای تکمیل task پیش از نیاز و تا زمان مرتبط‌بودن در دسترس باشد.
 - `INS-006` قالب، limit، واحد، نوع فایل، دلیل، مقصد و consequence فقط مطابق product truth نوشته شود.
 - `INS-008` Helper کوتاه، مرتبط با همان field و دارای اطلاعاتی فراتر از Label باشد.
-- `INS-010` requiredness با convention یکدست، cue دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
+- `INS-010` requiredness با wording یکدست و قابل‌فهم، مانند «اختیاری» یا marker توضیح‌داده‌شده، بیان شود؛ semantics برنامه‌وار آن متعلق به accessibility forms است.
 - `INS-011` Example وقتی ممکن است با value واقعی اشتباه شود با نشانه‌ای مانند «مثال:» از مقدار جدا شود.
 - `INS-012` نام field، object، action و واحد با terminology همان surface و audience هماهنگ بماند.
 - `INS-013` Helper requirement را پیش از failure توضیح دهد و Error پس از validation شرط نقض‌شده و recovery را بیان کند.
 - `INS-014` وقتی Error جای Helper treatment را می‌گیرد، requirement ضروری در Error یا Instruction ماندگار باقی بماند.
-- `INS-017` Link یا action راهنما purpose یا destination قابل‌فهم داشته باشد.
+- `INS-017` Link یا action راهنما purpose یا destination قابل‌فهم داشته باشد و «بیشتر»، «اینجا» یا «ادامه» بدون context کافی به‌تنهایی برچسب نباشد.
 - `INS-018` Count فقط با limit، واحد و رفتار واقعی استفاده شود و واحد آن در context قابل‌فهم باشد.
-- `INS-019` Helper، Error و group instruction با کنترل یا گروه مربوط برنامه‌وار مرتبط شوند.
 
 ### نباید
 
@@ -296,7 +299,11 @@ announce نکنید.
 - `INS-015` محدودیت امنیتی، دلیل جمع‌آوری، privacy، storage یا رفتار فایل بدون منبع معتبر ادعا نشود.
 - `INS-016` instruction کاربر را سرزنش نکند و task را با «واضح»، «ساده» یا «فقط کافی است» قضاوت نکند.
 - `INS-020` paste، autofill یا password manager بدون محدودیت مشخص و توجیه‌شده ممنوع معرفی نشود.
-- `INS-021` Link یا action مبهم مانند «بیشتر» یا «ادامه» بدون context کافی برای فهم مقصد یا نتیجه استفاده نشود.
+
+### بازنشسته (مالک فعلی)
+
+- `INS-019` → `design-system.accessibility.forms`: ارتباط برنامه‌وار Helper، Error و group instruction با کنترل سازوکار accessibility است، نه wording.
+- `INS-021` → `INS-017`: نسخهٔ منفی همان قاعدهٔ purpose برای Link و action راهنما؛ در INS-017 ادغام شد.
 
 <!-- /generated:content-rules -->
 
@@ -310,7 +317,6 @@ announce نکنید.
 - [ ] Example با value واقعی اشتباه نمی‌شود.
 - [ ] Helper اطلاعات جدیدی اضافه می‌کند و Label را تکرار نمی‌کند.
 - [ ] Error شرط نقض‌شده را حفظ می‌کند و اطلاعات ضروری ناپدید نمی‌شوند.
-- [ ] Helper/Error با کنترل یا گروه برنامه‌وار مرتبط‌اند.
 - [ ] متن داخلی، سرزنش‌گر یا دارای ادعای privacy/security بی‌منبع نیست.
 
 ## ارزیابی

@@ -187,24 +187,6 @@ rules:
     key: duplicate_title_body_actions
     statement: Title، Body و actionها با wording تکراری پر نشوند.
     evidence: [product_content_decisions]
-  - id: MOD-008
-    obligation: must
-    dimension: action
-    key: confirmation_names_consequence
-    statement: Confirmation باید action، object، consequence، scope و recoverability معلوم را روشن کند.
-    evidence: [confirmation_pattern]
-  - id: MOD-009
-    obligation: must
-    dimension: action
-    key: explicit_primary_and_safe_exit
-    statement: action اصلی نتیجهٔ activation و action ثانویه خروج امن یا بازگشت را صریح نام ببرند.
-    evidence: [confirmation_pattern, button_contract]
-  - id: MOD-010
-    obligation: must_not
-    dimension: action
-    key: generic_decision_actions
-    statement: برای تصمیم پیامددار از «بله»، «خیر»، «تأیید» یا «ادامه» به‌تنهایی استفاده نشود.
-    evidence: [confirmation_pattern, button_contract]
   - id: MOD-011
     obligation: must
     dimension: accessibility
@@ -232,8 +214,8 @@ rules:
   - id: MOD-015
     obligation: must_not
     dimension: product_truth
-    key: announce_or_close_before_outcome
-    statement: success اعلام نشود و Dialog پیش از outcome واقعی و policy تأییدشده بسته نشود.
+    key: announce_before_outcome
+    statement: پیش از outcome واقعی، success اعلام یا القا نشود.
     evidence: [design_system_dialog, loading_pattern]
   - id: MOD-016
     obligation: must
@@ -287,5 +269,16 @@ unknowns:
   - product-specific auto-close policy پس از success
   - مرز Dialog با Drawer یا page در flowهای محصول
   - برنامهٔ مهاجرت مصرف‌کنندگان و ارجاع‌های legacy Modal
+
+retired_rules:
+  - id: MOD-008
+    superseded_by: [CNF-002, CNF-003, CNF-004, CNF-010]
+    reason: تکرار قواعد الگوی confirmation برای action، consequence، بازگشت‌پذیری و دامنه.
+  - id: MOD-009
+    superseded_by: [CNF-005, CNF-006]
+    reason: تکرار قواعد الگوی confirmation برای برچسب action اصلی و خروج امن.
+  - id: MOD-010
+    superseded_by: [CNF-007]
+    reason: عین قاعدهٔ الگوی confirmation دربارهٔ «بله»، «خیر»، «تأیید» و «ادامه».
 
 evaluation_source: ../../../ai/evals/content/modal-content-cases.yml

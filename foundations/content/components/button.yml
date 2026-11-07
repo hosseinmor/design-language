@@ -140,12 +140,6 @@ rules:
     key: action_not_navigation
     statement: Button برای action استفاده شود و navigation مستقل Link semantics داشته باشد.
     evidence: [design_system_button]
-  - id: BTN-007
-    obligation: must
-    dimension: presentation
-    key: style_follows_meaning
-    statement: Brand، Primary و Danger از معنی، hierarchy و consequence تأییدشده انتخاب شوند، نه از شدت واژهٔ label.
-    evidence: [design_system_button, action_hierarchy]
   - id: BTN-008
     obligation: must_not
     dimension: tone
@@ -170,12 +164,6 @@ rules:
     key: preserve_loading_identity
     statement: در Loading هویت label پایه ثابت بماند و با status طولانی جایگزین نشود.
     evidence: [design_system_button, loading_pattern]
-  - id: BTN-012
-    obligation: must
-    dimension: action
-    key: explicit_safe_exit
-    statement: در confirmation، action اصلی و راه خروج امن labelهای صریح و غیرهم‌معنا داشته باشند.
-    evidence: [confirmation_pattern]
   - id: BTN-013
     obligation: must
     dimension: accessibility
@@ -225,5 +213,13 @@ unknowns:
   - policy سراسری برای نام یا count پویا در label تأیید نشده است.
   - مقصد و label دقیق Back/Continue در هر flow باید از همان flow بیاید.
   - label دوزبانه و transliteration به تصمیم Localization و context نیاز دارد.
+
+retired_rules:
+  - id: BTN-007
+    superseded_by: [button, design-system.experience-rule.action-hierarchy]
+    reason: انتخاب Brand، Primary یا Danger تصمیم style و hierarchy در Design System است.
+  - id: BTN-012
+    superseded_by: [CNF-005, CNF-006]
+    reason: تکرار قواعد الگوی confirmation برای برچسب action اصلی و خروج امن.
 
 evaluation_source: ../../../ai/evals/content/button-content-cases.yml

@@ -18,7 +18,7 @@ cases:
       safe_exit: انصراف
     expected:
       valid: true
-      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-007, CNF-009, CNF-011, CNF-012]
+      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-007, CNF-011, CNF-012]
       violations: []
 
   - id: discard_unsaved_changes
@@ -34,7 +34,7 @@ cases:
       safe_exit: ادامهٔ ویرایش
     expected:
       valid: true
-      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-005, CNF-006, CNF-007, CNF-008, CNF-009, CNF-012]
+      checked_rules: [CNF-001, CNF-002, CNF-003, CNF-005, CNF-006, CNF-007, CNF-008, CNF-012]
       violations: []
 
   - id: remove_organization_access
@@ -51,7 +51,7 @@ cases:
       safe_exit: انصراف
     expected:
       valid: true
-      checked_rules: [CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-009, CNF-012]
+      checked_rules: [CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-012]
       violations: []
 
   - id: bulk_delete_with_exact_scope
@@ -83,7 +83,7 @@ cases:
       safe_exit: ""
     expected:
       valid: true
-      checked_rules: [CNF-001, CNF-009]
+      checked_rules: [CNF-001]
       violations: []
 
   - id: generic_yes_no_actions
@@ -130,21 +130,20 @@ cases:
       checked_rules: [CNF-005, CNF-006, CNF-008]
       violations: [CNF-008]
 
-  - id: danger_used_for_reversible_negative_action
+  - id: reversible_deactivation_wording
     context:
       confirmation_needed: true
       destructive: false
       easily_reversible: true
-      treatment: danger-primary
     content:
       title: آگهی را غیرفعال می‌کنید؟
       body: می‌توانید آگهی را بعداً دوباره فعال کنید.
       primary_action: غیرفعال‌کردن آگهی
       safe_exit: انصراف
     expected:
-      valid: false
-      checked_rules: [CNF-004, CNF-005, CNF-006, CNF-009]
-      violations: [CNF-009]
+      valid: true
+      checked_rules: [CNF-004, CNF-005, CNF-006]
+      violations: []
 
   - id: bulk_scope_is_missing
     context:

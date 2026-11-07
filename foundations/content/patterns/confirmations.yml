@@ -17,7 +17,7 @@ depends_on:
     - design-system.pattern.confirmation
     - design-system.pattern.destructive-actions
     - design-system.experience-rule.action-hierarchy
-    - design-system.component.modal
+    - design-system.component.dialog
     - button
 
 goal: >
@@ -91,11 +91,6 @@ rules:
     dimension: tone
     key: emotional_pressure
     statement: با ترساندن، شرم، فوریت ساختگی یا لحن تبلیغاتی کاربر را به تصمیم هل ندهید.
-  - id: CNF-009
-    obligation: must
-    dimension: presentation
-    key: danger_only_for_destructive
-    statement: Danger فقط برای اقدام واقعاً مخرب یا دشواربازگشت استفاده شود.
   - id: CNF-010
     obligation: must
     dimension: clarity
@@ -182,5 +177,10 @@ unknowns:
   - اگر اثر بر objectهای وابسته معلوم نیست، scope را قطعی بیان نکنید.
   - اگر action منفی است اما destructive بودن آن تأیید نشده، Danger انتخاب نکنید.
   - اگر flow الزام تأیید دوباره، ورود عبارت یا احراز هویت ندارد، آن را به متن تحمیل نکنید.
+
+retired_rules:
+  - id: CNF-009
+    superseded_by: [design-system.pattern.destructive-actions]
+    reason: انتخاب Danger برای اقدام مخرب تصمیم presentation و hierarchy در Design System است.
 
 evaluation_source: ../../../ai/evals/content/confirmation-cases.yml

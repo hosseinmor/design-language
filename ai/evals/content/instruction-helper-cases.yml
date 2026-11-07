@@ -67,7 +67,7 @@ cases:
       requirement: الزامی
     expected:
       valid: true
-      checked_rules: [INS-002, INS-010, INS-019]
+      checked_rules: [INS-002, INS-010]
       violations: []
 
   - id: group_instruction_once
@@ -81,7 +81,7 @@ cases:
       instruction: حداقل یک نرم‌افزار را انتخاب کنید.
     expected:
       valid: true
-      checked_rules: [INS-001, INS-002, INS-003, INS-006, INS-009, INS-019]
+      checked_rules: [INS-001, INS-002, INS-003, INS-006, INS-009]
       violations: []
 
   - id: essential_requirement_survives_error
@@ -95,7 +95,7 @@ cases:
       error: رمز عبور باید حداقل ۸ نویسه داشته باشد.
     expected:
       valid: true
-      checked_rules: [INS-006, INS-013, INS-014, INS-019]
+      checked_rules: [INS-006, INS-013, INS-014]
       violations: []
 
   - id: character_count_with_real_unit
@@ -133,8 +133,8 @@ cases:
     message: ایمیل خود را وارد کنید
     expected:
       valid: false
-      checked_rules: [INS-002, INS-004, INS-019]
-      violations: [INS-002, INS-004, INS-019]
+      checked_rules: [INS-002, INS-004]
+      violations: [INS-002, INS-004]
 
   - id: essential_format_only_in_placeholder
     context:
@@ -196,8 +196,8 @@ cases:
       label: شماره موبایل *
     expected:
       valid: false
-      checked_rules: [INS-010, INS-019]
-      violations: [INS-010, INS-019]
+      checked_rules: [INS-010]
+      violations: [INS-010]
 
   - id: unmarked_example_looks_prefilled
     context:
@@ -297,19 +297,6 @@ cases:
       checked_rules: [INS-006, INS-018]
       violations: [INS-006, INS-018]
 
-  - id: helper_not_programmatically_associated
-    context:
-      field: email
-      helper_visible: true
-      helper_association_present: false
-    content:
-      label: ایمیل
-      helper: نتیجهٔ بازیابی حساب به این ایمیل ارسال می‌شود.
-    expected:
-      valid: false
-      checked_rules: [INS-019]
-      violations: [INS-019]
-
   - id: paste_and_password_manager_blocked
     context:
       field: password
@@ -334,8 +321,8 @@ cases:
       link: بیشتر
     expected:
       valid: false
-      checked_rules: [INS-021]
-      violations: [INS-021]
+      checked_rules: [INS-017]
+      violations: [INS-017]
 
   - id: descriptive_link_names_destination
     context:
@@ -347,5 +334,5 @@ cases:
       link: مدارک لازم برای احراز هویت
     expected:
       valid: true
-      checked_rules: [INS-021]
+      checked_rules: [INS-017]
       violations: []

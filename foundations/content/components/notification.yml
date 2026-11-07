@@ -85,7 +85,7 @@ source_boundaries:
     - Inline Message و Toast Message required و بخش‌های دیگر conditional هستند.
     - Notification حداکثر یک action و dismiss label فارسی «بستن» دارد.
     - timeout indicator عمر auto-dismiss است، نه task progress.
-    - severity و announcement urgency مستقل‌اند و Toast focus نمی‌گیرد.
+    - severity و announcement urgency مستقل‌اند و Toast focus نمی‌گیرد (مالک: accessibility).
   product_content_decisions:
     - الگوی فارسی Message، Description، Title و action.
     - جلوگیری از تکرار roleها و mapping recovery به presentation ماندگار.
@@ -105,7 +105,9 @@ component_model:
     optional: [title, action, dismiss, timeout_indicator]
   shared_type_axis: forbidden
 
+# مجموعهٔ severity و treatmentها از Design System خوانده می‌شود (NTC-003 فقط wording).
 severity_model:
+  owner: design-system.pattern.notifications
   allowed: [info, success, warning, error]
   excluded:
     danger: destructive intent before action
@@ -119,7 +121,9 @@ role_model:
   dismiss: پنهان‌کردن feedback با accessible name «بستن»
   timeout_indicator: باقی‌ماندهٔ عمر auto-dismiss Toast
 
+# تعداد action، Link/Button و ماندگاری action متعلق به Design System است.
 action_model:
+  owner: design-system.pattern.notifications
   navigation: Link
   operation: Button
   maximum: 1
@@ -127,20 +131,12 @@ action_model:
   transient_requirement: action ضروری به Toast ناپایدار وابسته نباشد.
   high_toast_button: not_handoff_ready
 
+# urgency، focus، autofocus و بازخورد تکراری متعلق به accessibility و Design System است.
 accessibility_model:
-  urgency: independent_from_visual_severity
-  routine_success: non_interruptive
-  toast_focus: preserve_existing_focus
-  interactive_action: keyboard_accessible_without_autofocus
-  duplicate_feedback: avoid
+  owner: design-system.accessibility.dynamic-content-and-feedback
+  content_scope: accessible name و Tooltip فارسی dismiss («بستن») و متن مستقل از رنگ
 
 rules:
-  - id: NTC-001
-    obligation: must
-    dimension: classification
-    key: choose_component_by_persistence
-    statement: Inline Notification یا Toast از context، persistence و نیاز به action انتخاب شود، نه فقط severity.
-    evidence: [design_system_notification, notification_pattern]
   - id: NTC-002
     obligation: must_not
     dimension: classification
@@ -149,16 +145,10 @@ rules:
     evidence: [design_system_notification]
   - id: NTC-003
     obligation: must
-    dimension: presentation
-    key: use_standard_severity
-    statement: severity فقط یکی از Info، Success، Warning یا Error و مطابق معنی state باشد.
+    dimension: clarity
+    key: wording_matches_severity
+    statement: Message با معنی severity انتخاب‌شده هم‌خوان باشد؛ Warning ریسک را بگوید نه شکست را، و Info نتیجهٔ Success یا Error را القا نکند.
     evidence: [design_system_notification, notification_pattern]
-  - id: NTC-004
-    obligation: must_not
-    dimension: presentation
-    key: danger_or_contrast_as_severity
-    statement: Danger یا High contrast به‌عنوان severity پنجم استفاده نشود.
-    evidence: [design_system_notification, notification_pattern, confirmation_pattern]
   - id: NTC-005
     obligation: must
     dimension: clarity
@@ -179,15 +169,9 @@ rules:
     evidence: [design_system_notification, product_content_decisions]
   - id: NTC-008
     obligation: must_not
-    dimension: presentation
-    key: long_or_critical_transient_content
-    statement: متن بلند، confirmation، instruction حیاتی یا recovery ماندگار در Toast گذرا قرار نگیرد.
-    evidence: [design_system_notification, notification_pattern]
-  - id: NTC-009
-    obligation: must
-    dimension: action
-    key: one_meaningful_action
-    statement: Notification حداکثر یک action معنادار و واقعاً قابل‌استفاده داشته باشد.
+    dimension: structure
+    key: transient_copy_scope
+    statement: متن Toast confirmation، instruction حیاتی یا recovery ماندگار را حمل نکند و فقط بازخورد کوتاه و خودبسنده باشد.
     evidence: [design_system_notification, notification_pattern]
   - id: NTC-010
     obligation: must
@@ -207,48 +191,12 @@ rules:
     key: accessible_dismiss_name
     statement: Dismiss موجود accessible name و Tooltip فارسی «بستن» داشته باشد.
     evidence: [design_system_notification, notification_pattern]
-  - id: NTC-013
-    obligation: must_not
-    dimension: product_truth
-    key: invent_runtime_behavior
-    statement: timing، stacking، queue، placement یا dismissibility تعریف‌نشده ساخته نشود.
-    evidence: [design_system_notification, notification_pattern]
   - id: NTC-014
-    obligation: must
-    dimension: presentation
-    key: timeout_indicator_is_lifetime
-    statement: Timeout indicator فقط عمر auto-dismiss Toast را نشان دهد و task progress نامیده نشود.
+    obligation: must_not
+    dimension: terminology
+    key: timeout_indicator_not_progress
+    statement: Timeout indicator در copy یا accessible name «پیشرفت»، «در حال تکمیل» یا درصد outcome نامیده نشود.
     evidence: [design_system_notification]
-  - id: NTC-015
-    obligation: must
-    dimension: accessibility
-    key: separate_urgency_from_severity
-    statement: announcement urgency مستقل از visual severity و با کم‌مزاحمت‌ترین سازوکار کافی تعیین شود.
-    evidence: [design_system_notification, dynamic_feedback_accessibility, notification_pattern]
-  - id: NTC-016
-    obligation: must_not
-    dimension: accessibility
-    key: move_focus_to_toast
-    statement: focus فقط به‌دلیل ظاهرشدن Toast جابه‌جا نشود و action autofocus نگیرد.
-    evidence: [design_system_notification, dynamic_feedback_accessibility]
-  - id: NTC-017
-    obligation: must_not
-    dimension: accessibility
-    key: duplicate_event_feedback
-    statement: یک event بی‌دلیل با Toast، focus move و live announcement تکرار نشود.
-    evidence: [notification_pattern, dynamic_feedback_accessibility]
-  - id: NTC-018
-    obligation: must
-    dimension: product_truth
-    key: confirmed_outcome_only
-    statement: Success فقط پس از outcome تأییدشده و Error فقط پس از failure واقعی اعلام شود.
-    evidence: [notification_pattern, error_pattern]
-  - id: NTC-019
-    obligation: must
-    dimension: presentation
-    key: keep_required_recovery_available
-    statement: recovery یا action لازم در presentation ماندگار و قابل‌دسترسی باقی بماند.
-    evidence: [notification_pattern, error_pattern, dynamic_feedback_accessibility]
   - id: NTC-020
     obligation: must
     dimension: terminology
@@ -261,12 +209,6 @@ rules:
     key: format_and_isolate_variables
     statement: count، amount، date، identifier، نام و متن دوجهته با formatter و bidi contract معتبر نمایش داده شوند.
     evidence: [localization]
-  - id: NTC-022
-    obligation: must_not
-    dimension: tone
-    key: generic_or_hyped_feedback
-    statement: پیام کلی، تبلیغاتی، هیجانی، ایموجی‌محور یا success زودهنگام نوشته نشود.
-    evidence: [product_voice, notification_pattern]
 
 examples:
   inline_warning:
@@ -292,5 +234,37 @@ unknowns:
   - actionable Toast timing و fallback
   - executable announcement behavior
   - inverse Button و Icon Button treatment برای High Toast
+
+retired_rules:
+  - id: NTC-001
+    superseded_by: [design-system.pattern.notifications]
+    reason: انتخاب Inline Notification یا Toast تصمیم presentation در Design System است.
+  - id: NTC-004
+    superseded_by: [design-system.pattern.notifications, design-system.component.notification]
+    reason: Danger و High contrast به‌عنوان severity را Design System رد کرده است.
+  - id: NTC-009
+    superseded_by: [design-system.pattern.notifications]
+    reason: سقف تعداد action تصمیم composition در Design System است؛ واقعی‌بودن action در NTC-011 می‌ماند.
+  - id: NTC-013
+    superseded_by: [NTF-014]
+    reason: تکرار قاعدهٔ الگو دربارهٔ اختراع‌نکردن timing، stacking و dismissibility.
+  - id: NTC-015
+    superseded_by: [design-system.pattern.notifications, design-system.accessibility.dynamic-content-and-feedback]
+    reason: فوریت announcement سازوکار دسترس‌پذیری است، نه wording.
+  - id: NTC-016
+    superseded_by: [design-system.pattern.notifications, design-system.accessibility.dynamic-content-and-feedback]
+    reason: focus و autofocus در Toast رفتار تعاملی است؛ عین NTF-012.
+  - id: NTC-017
+    superseded_by: [design-system.pattern.notifications, design-system.accessibility.dynamic-content-and-feedback]
+    reason: هماهنگی Toast، focus و live announcement سازوکار تعاملی است.
+  - id: NTC-018
+    superseded_by: [NTF-005]
+    reason: تکرار قاعدهٔ الگو؛ NTF-005 اکنون Success و Error هر دو را پوشش می‌دهد.
+  - id: NTC-019
+    superseded_by: [design-system.pattern.notifications]
+    reason: ماندگاری recovery و action یک شکاف باز presentation در Design System است و در copy پر نمی‌شود.
+  - id: NTC-022
+    superseded_by: [NTF-008, NTF-009]
+    reason: تکرار قواعد الگو دربارهٔ پیام کلی و هیجان‌زده.
 
 evaluation_source: ../../../ai/evals/content/notification-content-cases.yml

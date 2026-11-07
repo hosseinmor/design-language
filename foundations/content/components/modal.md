@@ -2,7 +2,7 @@
 id: content.component.modal
 collection: content
 type: content-component
-title: Modal Content
+title: Dialog Content
 summary: Defines the Persian content contract for focused blocking dialogs across titles, body copy, actions, dismissal wording, confirmations, forms, loading, errors, and accessible naming.
 knowledge_state: verified
 document_maturity: draft
@@ -15,7 +15,7 @@ related:
   - content.pattern.confirmation
   - content.pattern.error
   - content.pattern.loading-and-progress
-  - design-system.component.modal
+  - design-system.component.dialog
   - design-system.accessibility.focus-management
 topics:
   - modal
@@ -30,9 +30,10 @@ topics:
 
 # محتوای Dialog
 
-> برای سازگاری با ارجاع‌های موجود، شناسهٔ `content.component.modal` و نام فایل
-> فعلاً حفظ شده‌اند. نام canonical کامپوننت **Dialog** است؛ **Modal** فقط alias
-> قدیمی و توصیف رفتار blocking است. برای کار جدید از Dialog استفاده کنید.
+> شناسهٔ پایدار `content.component.modal` و نام فایل برای سازگاری حفظ شده‌اند و
+> `content.component.dialog` در `registry/aliases.yaml` به همین سند resolve
+> می‌شود. نام canonical کامپوننت **Dialog** است ([Dialog](../../../design-system/components/dialog.md))؛
+> **Modal** فقط نام قدیمی و توصیف رفتار blocking است.
 
 این سند قرارداد محتوای یک context موقت و blocking است. قواعد machine-readable
 در [`modal.yml`](modal.yml) و نمونه‌های regression در
@@ -140,7 +141,10 @@ Title را با جمله‌ای طولانی‌تر تکرار نکنید. اگ�
 
 ## Confirmation
 
-برای confirmation از pattern مشترک استفاده کنید:
+قواعد confirmation—action، object، consequence، دامنه، بازگشت‌پذیری، برچسب action
+اصلی و خروج امن—مالکشان [الگوی confirmation](../patterns/confirmations.md) است
+(`CNF-002` تا `CNF-007`، `CNF-010`). این بخش فقط جای‌گذاری آن‌ها در anatomy
+Dialog را نشان می‌دهد:
 
 ```text
 Title       → [object] را [action] می‌کنید؟
@@ -156,7 +160,7 @@ Safe exit   → خروج یا بازگشت روشن
 ```
 
 «بله/خیر»، «تأیید/لغو» یا Title «مطمئن هستید؟» تصمیم را بدون context رها
-می‌کنند. Danger فقط برای consequence واقعاً مخرب یا دشواربازگشت است.
+می‌کنند. انتخاب Danger متعلق به [Destructive Actions](../../../design-system/patterns/destructive-actions.md) است.
 
 ## Focused task یا form
 
@@ -254,8 +258,6 @@ flow هستند. متن نباید یک target همیشگی مانند «همی�
 - `MOD-004` Title و content اصلی بدون مراجعه به background پوشیده‌شده قابل‌فهم باشند.
 - `MOD-005` visible Title و accessible name Dialog از نظر معنی همسو و برنامه‌وار مرتبط باشند.
 - `MOD-006` Body فقط context، consequence یا requirement لازم و تأییدشده‌ای فراتر از Title اضافه کند.
-- `MOD-008` Confirmation باید action، object، consequence، scope و recoverability معلوم را روشن کند.
-- `MOD-009` action اصلی نتیجهٔ activation و action ثانویه خروج امن یا بازگشت را صریح نام ببرند.
 - `MOD-011` dismiss control موجود accessible name معنادار داشته باشد و با safe exit متفاوت اشتباه نشود.
 - `MOD-013` اگر خروج باعث data loss می‌شود، consequence و مسیر تصمیم مطابق product truth روشن شوند.
 - `MOD-014` در Loading هویت action و Dialog context تا outcome یا transition تأییدشده حفظ شوند.
@@ -267,11 +269,16 @@ flow هستند. متن نباید یک target همیشگی مانند «همی�
 
 - `MOD-003` «توجه»، «هشدار»، «پیام»، «تأیید» یا «مطمئن هستید؟» به‌تنهایی Title نباشند.
 - `MOD-007` Title، Body و actionها با wording تکراری پر نشوند.
-- `MOD-010` برای تصمیم پیامددار از «بله»، «خیر»، «تأیید» یا «ادامه» به‌تنهایی استفاده نشود.
 - `MOD-012` Escape، backdrop، auto-close، initial focus یا non-dismissible behavior بدون contract معتبر وعده داده نشود.
-- `MOD-015` success اعلام نشود و Dialog پیش از outcome واقعی و policy تأییدشده بسته نشود.
+- `MOD-015` پیش از outcome واقعی، success اعلام یا القا نشود.
 - `MOD-019` task طولانی، چندمرحله‌ای یا navigation-heavy به Dialog عمومی تحمیل نشود.
 - `MOD-020` Title، Body یا actionها با ترس، فوریت ساختگی، فشار احساسی یا success زودهنگام تصمیم را جهت ندهند.
+
+### بازنشسته (مالک فعلی)
+
+- `MOD-008` → `CNF-002`، `CNF-003`، `CNF-004`، `CNF-010`: تکرار قواعد الگوی confirmation برای action، consequence، بازگشت‌پذیری و دامنه.
+- `MOD-009` → `CNF-005`، `CNF-006`: تکرار قواعد الگوی confirmation برای برچسب action اصلی و خروج امن.
+- `MOD-010` → `CNF-007`: عین قاعدهٔ الگوی confirmation دربارهٔ «بله»، «خیر»، «تأیید» و «ادامه».
 
 <!-- /generated:content-rules -->
 

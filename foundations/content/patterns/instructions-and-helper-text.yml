@@ -101,9 +101,9 @@ rules:
     statement: Label، Placeholder و Helper با یک wording تکراری پر نشوند.
   - id: INS-010
     obligation: must
-    dimension: accessibility
+    dimension: clarity
     key: communicate_requiredness
-    statement: requiredness با convention یکدست، cue دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
+    statement: requiredness با wording یکدست و قابل‌فهم، مانند «اختیاری» یا marker توضیح‌داده‌شده، بیان شود؛ semantics برنامه‌وار آن متعلق به accessibility forms است.
   - id: INS-011
     obligation: must
     dimension: clarity
@@ -138,27 +138,17 @@ rules:
     obligation: must
     dimension: action
     key: meaningful_help_action
-    statement: Link یا action راهنما purpose یا destination قابل‌فهم داشته باشد.
+    statement: Link یا action راهنما purpose یا destination قابل‌فهم داشته باشد و «بیشتر»، «اینجا» یا «ادامه» بدون context کافی به‌تنهایی برچسب نباشد.
   - id: INS-018
     obligation: must
     dimension: clarity
     key: count_has_real_limit_and_unit
     statement: Count فقط با limit، واحد و رفتار واقعی استفاده شود و واحد آن در context قابل‌فهم باشد.
-  - id: INS-019
-    obligation: must
-    dimension: accessibility
-    key: associate_guidance
-    statement: Helper، Error و group instruction با کنترل یا گروه مربوط برنامه‌وار مرتبط شوند.
   - id: INS-020
     obligation: must_not
     dimension: interaction
     key: unjustified_paste_or_autofill_restriction
     statement: paste، autofill یا password manager بدون محدودیت مشخص و توجیه‌شده ممنوع معرفی نشود.
-  - id: INS-021
-    obligation: must_not
-    dimension: action
-    key: ambiguous_link_or_action_without_context
-    statement: Link یا action مبهم مانند «بیشتر» یا «ادامه» بدون context کافی برای فهم مقصد یا نتیجه استفاده نشود.
 
 anatomy:
   field:
@@ -252,5 +242,13 @@ unknowns:
   - file type، size، count، storage و processing هر upload
   - رفتار prevention در برابر warning برای عبور از character limit
   - سطح مناسب progressive disclosure برای راهنماهای طولانی هر flow
+
+retired_rules:
+  - id: INS-019
+    superseded_by: [design-system.accessibility.forms]
+    reason: ارتباط برنامه‌وار Helper، Error و group instruction با کنترل سازوکار accessibility است، نه wording.
+  - id: INS-021
+    superseded_by: [INS-017]
+    reason: نسخهٔ منفی همان قاعدهٔ purpose برای Link و action راهنما؛ در INS-017 ادغام شد.
 
 evaluation_source: ../../../ai/evals/content/instruction-helper-cases.yml

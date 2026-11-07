@@ -11,6 +11,9 @@ from typing import Any
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from content_rule_index import inherited_rule_ids  # noqa: E402
+
 
 ROOT = Path(__file__).resolve().parents[2]
 VOICE_PATH = ROOT / "foundations" / "content" / "product-voice.yml"
@@ -466,11 +469,22 @@ def validate_notification_pattern(
         and rule.get("obligation") in VALID_OBLIGATIONS
     }
 
-    for field in ("severity_model", "presentation_model", "action_model"):
+    for field in ("severity_model", "action_model"):
         if not isinstance(data.get(field), dict) or not data[field]:
             errors.append(
                 f"notification pattern: `{field}` must be a non-empty mapping"
             )
+    # Presentation choice is owned by the Design System pattern, not by copy.
+    if "presentation_model" in data:
+        errors.append(
+            "notification pattern: `presentation_model` belongs to "
+            "design-system.pattern.notifications; use `presentation_owner`"
+        )
+    if data.get("presentation_owner") != "design-system.pattern.notifications":
+        errors.append(
+            "notification pattern: `presentation_owner` must be "
+            "`design-system.pattern.notifications`"
+        )
     anatomy = data.get("anatomy")
     if not isinstance(anatomy, dict) or not nonempty_string(
         anatomy.get("message_pattern")
@@ -659,7 +673,8 @@ def validate_evals(
     covered: set[str] = set()
     has_valid = False
     has_invalid = False
-    known_rules = set(obligations)
+    # Own rules plus rules inherited through depends_on; coverage stays own-only.
+    known_rules = set(obligations) | inherited_rule_ids(pattern_id)
 
     for index, case in enumerate(cases):
         location = f"{eval_label}.cases[{index}]"

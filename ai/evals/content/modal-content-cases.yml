@@ -18,7 +18,7 @@ cases:
       close_accessible_name: بستن
     expected:
       valid: true
-      checked_rules: [MOD-001, MOD-002, MOD-004, MOD-005, MOD-006, MOD-007, MOD-009, MOD-011, MOD-017]
+      checked_rules: [MOD-001, MOD-002, MOD-004, MOD-005, MOD-006, MOD-007, CNF-005, CNF-006, MOD-011, MOD-017]
       violations: []
 
   - id: irreversible_job_post_confirmation
@@ -35,7 +35,7 @@ cases:
       safe_exit: انصراف
     expected:
       valid: true
-      checked_rules: [MOD-001, MOD-002, MOD-003, MOD-004, MOD-006, MOD-007, MOD-008, MOD-009, MOD-010, MOD-017, MOD-020]
+      checked_rules: [MOD-001, MOD-002, MOD-003, MOD-004, MOD-006, MOD-007, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007, MOD-017, MOD-020]
       violations: []
 
   - id: discard_unsaved_changes
@@ -51,7 +51,7 @@ cases:
       safe_exit: ادامهٔ ویرایش
     expected:
       valid: true
-      checked_rules: [MOD-002, MOD-004, MOD-008, MOD-009, MOD-010, MOD-013]
+      checked_rules: [MOD-002, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007, MOD-013]
       violations: []
 
   - id: explicit_acknowledgement
@@ -65,7 +65,7 @@ cases:
       acknowledgement: متوجه شدم
     expected:
       valid: true
-      checked_rules: [MOD-001, MOD-002, MOD-004, MOD-006, MOD-009]
+      checked_rules: [MOD-001, MOD-002, MOD-004, MOD-006, CNF-005, CNF-006]
       violations: []
 
   - id: loading_preserves_modal_context
@@ -97,7 +97,7 @@ cases:
       safe_exit: انصراف
     expected:
       valid: true
-      checked_rules: [MOD-009, MOD-015, MOD-016, MOD-017]
+      checked_rules: [CNF-005, CNF-006, MOD-015, MOD-016, MOD-017]
       violations: []
 
   - id: bulk_delete_with_formatted_count
@@ -115,7 +115,7 @@ cases:
       safe_exit: انصراف
     expected:
       valid: true
-      checked_rules: [MOD-004, MOD-008, MOD-009, MOD-017, MOD-018]
+      checked_rules: [MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, MOD-017, MOD-018]
       violations: []
 
   - id: passive_success_forced_into_modal
@@ -144,8 +144,8 @@ cases:
       safe_exit: لغو
     expected:
       valid: false
-      checked_rules: [MOD-002, MOD-003, MOD-008, MOD-009, MOD-010]
-      violations: [MOD-002, MOD-003, MOD-008, MOD-009, MOD-010]
+      checked_rules: [MOD-002, MOD-003, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
+      violations: [MOD-002, MOD-003, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
 
   - id: generic_are_you_sure_title
     context:
@@ -159,8 +159,8 @@ cases:
       safe_exit: خیر
     expected:
       valid: false
-      checked_rules: [MOD-002, MOD-003, MOD-004, MOD-008, MOD-009, MOD-010]
-      violations: [MOD-002, MOD-003, MOD-004, MOD-008, MOD-009, MOD-010]
+      checked_rules: [MOD-002, MOD-003, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
+      violations: [MOD-002, MOD-003, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
 
   - id: depends_on_obscured_background
     context:
@@ -174,8 +174,8 @@ cases:
       safe_exit: انصراف
     expected:
       valid: false
-      checked_rules: [MOD-002, MOD-004, MOD-006, MOD-008, MOD-009]
-      violations: [MOD-002, MOD-004, MOD-006, MOD-008, MOD-009]
+      checked_rules: [MOD-002, MOD-004, MOD-006, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006]
+      violations: [MOD-002, MOD-004, MOD-006, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006]
 
   - id: accessible_title_changes_task
     context:
@@ -215,8 +215,8 @@ cases:
       safe_exit: انصراف
     expected:
       valid: false
-      checked_rules: [MOD-006, MOD-008]
-      violations: [MOD-006, MOD-008]
+      checked_rules: [MOD-006, CNF-002, CNF-003, CNF-004, CNF-010]
+      violations: [MOD-006, CNF-002, CNF-003, CNF-004, CNF-010]
 
   - id: ambiguous_primary_and_exit_actions
     context:
@@ -229,8 +229,8 @@ cases:
       safe_exit: لغو
     expected:
       valid: false
-      checked_rules: [MOD-008, MOD-009, MOD-010]
-      violations: [MOD-008, MOD-009, MOD-010]
+      checked_rules: [CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
+      violations: [CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, CNF-007]
 
   - id: dismiss_icon_without_accessible_name
     context:

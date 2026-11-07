@@ -3,7 +3,7 @@ id: content.pattern.notifications
 collection: content
 type: content-pattern
 title: Notifications and Outcome Feedback
-summary: Defines severity, presentation, content, actions, and accessibility for inline notifications, Toasts, and in-place outcome feedback.
+summary: Defines the wording and message structure of inline notifications, Toasts, and in-place outcome feedback; severity set, presentation choice, actions, focus, and announcements are referenced from the Design System and Accessibility.
 knowledge_state: verified
 document_maturity: draft
 related:
@@ -40,20 +40,27 @@ topics:
 2. نتیجه به کدام object یا action مربوط است؛
 3. اگر نتیجه روی ادامهٔ task اثر دارد، گام بعدی چیست.
 
-## دو تصمیم مستقل
+## مرز مالکیت
 
-شدت و محل نمایش یک تصمیم نیستند:
+این سند فقط **wording و ساختار پیام** را مالک است. تصمیم‌های زیر از منبع مالک
+خوانده می‌شوند و این‌جا تکرار نمی‌شوند:
 
-| تصمیم | گزینه‌ها | بر چه اساسی؟ |
-|---|---|---|
-| شدت معنایی | Info، Success، Warning، Error | معنی وضعیت یا نتیجه |
-| شکل نمایش | درون‌صفحه‌ای، Inline Notification، Toast | زمینه، ماندگاری و نیاز به اقدام |
+| تصمیم | مالک |
+|---|---|
+| مجموعهٔ severityها، کنارگذاشتن Danger و treatment دیداری | [Design System Notifications](../../../design-system/patterns/notifications.md) |
+| انتخاب درون‌صفحه‌ای، Inline Notification، Toast یا Modal | [Design System Notifications](../../../design-system/patterns/notifications.md#presentation-choice) |
+| تعداد action، Link یا Button و ماندگاری action در Toast | [Design System Notifications](../../../design-system/patterns/notifications.md#actions) |
+| anatomy، Action Slot، Dismiss و Timeout indicator | [Notification component](../../../design-system/components/notification.md) |
+| فوریت announcement، focus و جلوگیری از بازخورد تکراری | [Dynamic content and feedback](../../../accessibility/dynamic-content-and-feedback.md) |
 
-برای مثال، Error می‌تواند inline و ماندگار باشد و Success می‌تواند در همان
-ناحیهٔ صفحه نمایش داده شود. نوع severity به‌تنهایی Toast یا Inline Notification
-را تعیین نمی‌کند.
+شکل نمایش ورودی نوشتن است: ابتدا تصمیم presentation را از Design System بگیرید،
+سپس متن را برای همان presentation بنویسید. قرارداد محتوایی anatomy هر component
+در [`../components/notification.md`](../components/notification.md) است.
 
-## مدل شدت
+## معنی severity برای نوشتن
+
+Design System مجموعهٔ severityها را تعیین می‌کند و مالکیت معنی و wording آن‌ها را
+به Content واگذار کرده است. متن باید با معنی severity انتخاب‌شده هم‌خوان باشد:
 
 - **Info:** یک واقعیت یا تغییر وضعیت خنثی که دانستن آن برای task مفید است.
 - **Success:** action واقعاً کامل شده و نتیجهٔ مورد انتظار ثبت یا اعمال شده است.
@@ -62,31 +69,8 @@ topics:
 - **Error:** action یا سیستم شکست خورده است. ساختار و recovery را از
   [`errors.md`](errors.md) بگیرید.
 
-`Danger` شدت پنجم اعلان نیست. Danger نیت مخرب را پیش از action نشان می‌دهد؛
-Error شکست را پس از action گزارش می‌کند. تصمیم‌های مخرب متعلق به
-[`confirmations.md`](confirmations.md) هستند.
-
-## انتخاب شکل نمایش
-
-### بازخورد درون‌صفحه‌ای
-
-وقتی نتیجه مستقیماً به یک کنترل، فیلد، ردیف یا ناحیه مربوط است و همان‌جا بهتر
-فهمیده می‌شود، پیام را نزدیک همان ناحیه نگه دارید. هر تغییر کوچک به container
-اعلان نیاز ندارد.
-
-### Inline Notification
-
-وقتی پیام باید باقی بماند، به یک بخش مشخص مربوط است، خواندنش برای ادامه لازم
-است یا action دارد، Inline Notification را نزدیک محتوای درگیر به کار ببرید.
-
-### Toast
-
-Toast برای بازخورد کوتاه و گذرا مناسب است؛ فقط وقتی زمینهٔ action روشن است و
-از‌دست‌رفتن پیام مانع فهم، بازیابی یا ادامهٔ task نمی‌شود. Toast برای متن طولانی،
-چند اقدام، تصمیم پیش از action یا اطلاعات حیاتی و ماندگار مناسب نیست.
-
-Modal برای بازخورد منفعل استفاده نمی‌شود. Modal وقتی لازم است که کاربر باید
-پیش از ادامه تصمیم بگیرد یا پاسخ دهد.
+هشدار دربارهٔ اقدام مخرب پیش از action در قالب اعلان نوشته نمی‌شود؛ wording آن
+متعلق به [`confirmations.md`](confirmations.md) است.
 
 ## قرارداد قطعی
 
@@ -96,22 +80,25 @@ Modal برای بازخورد منفعل استفاده نمی‌شود. Modal �
 ### باید
 
 - `NTF-001` رویداد، severity معنایی و نیاز به ماندگاری پیش از نوشتن مشخص شود.
-- `NTF-002` شکل نمایش از زمینه، ماندگاری و نیاز به اقدام انتخاب شود، نه فقط از severity.
 - `NTF-003` نتیجه یا وضعیت واقعی با action و object قابل‌فهم نام برده شود.
-- `NTF-004` نام action و object با اصطلاح همان مخاطب و سطح UI هماهنگ بماند.
-- `NTF-005` Success فقط پس از تأیید کامل‌شدن action اعلام شود.
+- `NTF-005` Success فقط پس از تأیید کامل‌شدن action و Error فقط پس از failure واقعی اعلام شود.
 - `NTF-006` اگر نتیجه روی ادامهٔ task اثر دارد، پیامد یا گام بعدی معلوم بیان شود.
-- `NTF-007` حداکثر یک action معنادار و واقعاً در دسترس ارائه شود.
-- `NTF-011` فوریت announcement مستقل از severity بصری و با کم‌مزاحمت‌ترین سازوکار کافی تعیین شود.
 
 ### نباید
 
 - `NTF-008` عبارت کلی مانند «عملیات با موفقیت انجام شد» بدون نام نتیجه کل پیام نباشد.
 - `NTF-009` موفقیت معمولی با تحسین، هیجان، شعار یا ایموجی بزرگ‌نمایی نشود.
-- `NTF-010` Danger به‌عنوان severity اعلان یا Error برای هشدار نیت مخرب پیش از action استفاده نشود.
-- `NTF-012` فوکوس فقط به‌دلیل ظاهرشدن Toast جابه‌جا نشود.
-- `NTF-013` یک رویداد بی‌دلیل با تغییر فوکوس، live announcement و Toast به‌طور تکراری اعلام نشود.
 - `NTF-014` زمان نمایش، محل، stacking یا dismissibility تعریف‌نشده اختراع نشود.
+
+### بازنشسته (مالک فعلی)
+
+- `NTF-002` → `design-system.pattern.notifications`: انتخاب درون‌صفحه‌ای، Inline Notification یا Toast تصمیم presentation در Design System است.
+- `NTF-004` → `VOICE-007`: تکرار قاعدهٔ عمومی اصطلاح canonical در product voice؛ عین LDP-008.
+- `NTF-007` → `design-system.pattern.notifications`: سقف تعداد action تصمیم composition در Design System است.
+- `NTF-010` → `design-system.pattern.notifications`، `content.pattern.confirmation`: کنارگذاشتن Danger از severityها تصمیم Design System است؛ هشدار پیش از action متعلق به confirmation است.
+- `NTF-011` → `design-system.pattern.notifications`، `design-system.accessibility.dynamic-content-and-feedback`: فوریت announcement سازوکار دسترس‌پذیری است، نه wording.
+- `NTF-012` → `design-system.pattern.notifications`، `design-system.accessibility.dynamic-content-and-feedback`: رفتار focus هنگام ظاهرشدن Toast متعلق به Design System و accessibility است.
+- `NTF-013` → `design-system.pattern.notifications`، `design-system.accessibility.dynamic-content-and-feedback`: هماهنگی focus، live announcement و Toast سازوکار تعاملی است، نه wording.
 
 <!-- /generated:content-rules -->
 
@@ -133,14 +120,15 @@ Modal برای بازخورد منفعل استفاده نمی‌شود. Modal �
 بد: درخواست شغلی ارسال شد.   ← وقتی سیستم هنوز نتیجه را تأیید نکرده است
 ```
 
-## Action و Undo
+## برچسب action و Undo
 
-- Notification یا Toast حداکثر یک action دارد.
-- برای رفتن به مقصد از Link و برای انجام operation از Button استفاده کنید.
-- Undo فقط وقتی نوشته شود که بازیابی واقعاً پیاده‌سازی، امن و در بازهٔ لازم
-  قابل‌دسترسی است.
-- action ضروری را به Toast خودکارپنهان‌شونده وابسته نکنید، مگر runtime فرصت
-  کافی و دسترس‌پذیر را تضمین کند.
+تعداد action و انتخاب Link یا Button را Design System تعیین می‌کند. این الگو فقط
+wording را مالک است:
+
+- برچسب action نتیجهٔ واقعی activation را نام می‌برد؛ قواعد برچسب در
+  [`../components/button.md`](../components/button.md) هستند.
+- «بازگردانی» فقط وقتی نوشته شود که بازیابی واقعاً پیاده‌سازی، امن و در بازهٔ
+  لازم قابل‌دسترسی است.
 
 ```text
 پیام: آگهی از ذخیره‌شده‌ها حذف شد.
@@ -153,37 +141,33 @@ Modal برای بازخورد منفعل استفاده نمی‌شود. Modal �
 
 - confirmation پیش از action است؛ اعلان نتیجه پس از action یا هنگام تغییر
   وضعیت ظاهر می‌شود.
-- پیام شکست از قواعد [`errors.md`](errors.md) پیروی می‌کند؛ این سند severity و
-  شکل ارائه را روشن می‌کند.
+- پیام شکست از قواعد [`errors.md`](errors.md) پیروی می‌کند؛ این سند ساختار
+  پیام نتیجه را روشن می‌کند.
 - وضعیت خالی، موفقیت حذف آخرین آیتم نیست. بازخورد action و وضعیت خالی نقش‌های
   جدا دارند و می‌توانند بدون تکرار بیایند.
 - Loading و progress نشان می‌دهند کار هنوز در جریان است؛ Success پایان تأییدشده
   را گزارش می‌کند.
 
-## دسترس‌پذیری و رفتار
+## دسترس‌پذیری
 
-- severity بصری و فوریت announcement مستقل‌اند. Error همیشه `alert` نیست و
-  Success معمولاً نباید مزاحم باشد.
-- مهم‌ترین وضعیت را با کم‌مزاحمت‌ترین سازوکار کافی اعلام کنید.
-- اگر جابه‌جایی منطقی فوکوس خودِ نتیجه و زمینه را روشن می‌کند، announcement
-  جدا ممکن است تکراری باشد.
-- فوکوس فقط به‌دلیل ظاهرشدن Toast منتقل نمی‌شود.
-- پیام گذرای دارای action باید زمان کافی برای خواندن و اقدام فراهم کند.
+فوریت announcement، رفتار focus، زمان‌بندی پیام گذرا و جلوگیری از بازخورد تکراری
+در [Dynamic content and feedback](../../../accessibility/dynamic-content-and-feedback.md)
+و [Design System Notifications](../../../design-system/patterns/notifications.md#accessibility)
+تعریف شده‌اند. سهم محتوا:
+
+- متن پیام بدون اتکا به رنگ یا severity دیداری قابل‌فهم است؛
 - برچسب فارسی dismiss برابر «بستن» است.
 
-مدت دقیق، تعداد هم‌زمان، جای‌گذاری، stacking و dismissibility پیش‌فرض هنوز در
-منابع canonical تثبیت نشده‌اند و باید در Design System یا runtime تعیین شوند،
-نه در copy.
+مدت دقیق، تعداد هم‌زمان، جای‌گذاری، stacking و dismissibility پیش‌فرض شکاف‌های
+باز Design System هستند و در copy پر نمی‌شوند.
 
 ## چک‌لیست بازبینی
 
-- [ ] رویداد، نتیجه و severity درست طبقه‌بندی شده‌اند.
-- [ ] شکل نمایش از زمینه و ماندگاری آمده، نه فقط از severity.
-- [ ] پیام action و object واقعی را نام می‌برد.
-- [ ] Success فقط پس از تأیید نتیجه است.
-- [ ] action واحد، مرتبط و واقعاً در دسترس است.
+- [ ] رویداد، نتیجه و severity درست طبقه‌بندی شده‌اند و presentation از Design System آمده است.
+- [ ] پیام action و object واقعی را با اصطلاح همان surface نام می‌برد.
+- [ ] Success فقط پس از تأیید نتیجه و Error فقط پس از failure واقعی است.
+- [ ] برچسب action نتیجه‌محور است و Undo فقط با بازیابی واقعی آمده است.
 - [ ] متن کلی، تبلیغاتی، کدی یا تکراری نیست.
-- [ ] announcement و focus با کم‌مزاحمت‌ترین قرارداد کافی هماهنگ‌اند.
 - [ ] رفتار تعریف‌نشدهٔ runtime اختراع نشده است.
 
 ## ارزیابی

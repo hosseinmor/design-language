@@ -10,6 +10,8 @@ last_reviewed: 2026-09-19
 related:
 - design-system.accessibility.dynamic-content-and-feedback
 - design-system.component.notification
+- content.pattern.notifications
+- content.component.notification
 ---
 
 # Notifications
@@ -101,7 +103,7 @@ This pattern composes:
 - existing Icon Button for dismissal;
 - semantic Support/Danger tokens according to message meaning.
 
-The components own anatomy and implementation mechanics; this pattern owns **presentation choice and cross-component feedback composition**. Semantic Color and Content System own severity meanings and wording.
+The components own anatomy and implementation mechanics; this pattern owns **presentation choice and cross-component feedback composition**. Semantic Color and Content System own severity meanings and wording: see the [Notifications content pattern](../../foundations/content/patterns/notifications.md) and the [Notification content contract](../../foundations/content/components/notification.md). Those documents reference this pattern for presentation, action count and focus instead of restating them.
 
 ## Accessibility
 
