@@ -191,12 +191,17 @@ def validate_brief(brief: Any, ctx: Context, where: str, allow_fixture_source: b
                 errors.append(f"{at}: slots {bad} must be snake_case")
 
     concepts = brief.get("concepts", [])
-    if not _string_list(concepts):
-        errors.append(f"{where}: concepts must be a list of term ids")
-    else:
-        for item in concepts:
-            if item not in ctx.terms:
-                errors.append(f"{where}: concept `{item}` is not a terminology entry")
+    if not isinstance(concepts, list):
+        errors.append(f"{where}: concepts must be a list")
+        concepts = []
+    seen_concepts: set[str] = set()
+    for index, item in enumerate(concepts):
+        at = f"{where}: concepts[{index}]"
+        errors += [f"{at}: {e}" for e in concept_errors(item, brief.get("product"), ctx)]
+        cid = concept_id(item)
+        if cid in seen_concepts:
+            errors.append(f"{at}: duplicate concept `{cid}`")
+        seen_concepts.add(cid)
 
     facts = brief.get("product_facts", [])
     if not isinstance(facts, list):
@@ -238,6 +243,40 @@ def validate_brief(brief: Any, ctx: Context, where: str, allow_fixture_source: b
         if status == "verified" and state != "verified":
             errors.append(f"{at}: status `verified` exceeds source maturity `{state}`")
     return errors
+
+
+def concept_id(item: Any) -> str:
+    if isinstance(item, dict):
+        return str(item.get("page") if item.get("kind") == "product_knowledge" else item.get("id"))
+    return str(item)
+
+
+def concept_errors(item: Any, product: Any, ctx: Context) -> list[str]:
+    if isinstance(item, str):
+        return [] if item in ctx.terms else [f"concept `{item}` is not a terminology entry"]
+    if not isinstance(item, dict):
+        return ["concept must be a term id or a mapping"]
+    kind = item.get("kind")
+    if kind == "product_knowledge":
+        errors = [
+            f"product_knowledge concept needs `{key}`"
+            for key in ("product", "page", "label")
+            if not (isinstance(item.get(key), str) and item[key].strip())
+        ]
+        if item.get("product") and item["product"] != product:
+            errors.append(f"concept from `{item['product']}` Product Knowledge cannot label a `{product}` brief")
+        return errors
+    if kind == "new_concept":
+        errors = [] if isinstance(item.get("id"), str) and ID_RE.fullmatch(item["id"]) else ["new_concept needs a snake_case id"]
+        if item.get("id") in ctx.terms:
+            errors.append(f"new_concept `{item['id']}` already has a terminology entry")
+        source = item.get("source")
+        if not (isinstance(source, dict) and source.get("kind") == "prd"):
+            errors.append("new_concept source must be a prd reference")
+        else:
+            errors += source_maturity(source, product, ctx)[1]
+        return errors
+    return [f"unknown concept kind `{kind}`"]
 
 
 def source_maturity(source: Any, product: Any, ctx: Context) -> tuple[str | None, list[str]]:
@@ -323,17 +362,34 @@ def validate_case(case: Any, ctx: Context, where: str) -> tuple[list[str], set[s
                 errors.append(f"{where}: a slot cannot be both required and empty in `{state}`")
 
     facts = [f for f in brief.get("product_facts") or [] if isinstance(f, dict)]
+    new_concepts = {
+        concept_id(c) for c in brief.get("concepts") or []
+        if isinstance(c, dict) and c.get("kind") == "new_concept"
+    }
     for key, status in (("required_questions", "unknown"), ("draft_dependencies", "draft")):
         listed = expected.get(key, [])
         wanted = {f.get("id") for f in facts if f.get("status") == status}
+        if key == "draft_dependencies":
+            wanted |= new_concepts
         if outcome == "blocked":
             wanted = set()
         if not _string_list(listed) or set(listed) != wanted:
-            errors.append(f"{where}: {key} must list exactly the {status} facts {sorted(wanted)}")
+            errors.append(f"{where}: {key} must list exactly {sorted(wanted)}")
 
-    concepts = set(brief.get("concepts") or [])
+    by_id = {concept_id(c): c for c in brief.get("concepts") or []}
+    concepts = set(by_id)
+
+    def preferred(cid: str) -> set[str]:
+        item = by_id.get(cid)
+        if isinstance(item, dict):
+            return {item["label"]} if item.get("kind") == "product_knowledge" and item.get("label") else set()
+        return ctx.preferred(cid)
+
+    def forbidden(cid: str) -> set[str]:
+        return ctx.forbidden(cid) if isinstance(by_id.get(cid), str) else set()
+
     must_use: list[str] = []
-    for key, allowed in (("must_use_labels", ctx.preferred), ("forbidden_labels", ctx.forbidden)):
+    for key, allowed in (("must_use_labels", preferred), ("forbidden_labels", forbidden)):
         items = expected.get(key, [])
         if not isinstance(items, list):
             errors.append(f"{where}: {key} must be a list")
