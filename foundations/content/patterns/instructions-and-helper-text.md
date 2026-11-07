@@ -282,7 +282,7 @@ Helper، Error و group instruction با کنترل و required state در
 - `INS-003` instruction لازم برای تکمیل task پیش از نیاز و تا زمان مرتبط‌بودن در دسترس باشد.
 - `INS-006` قالب، limit، واحد، نوع فایل، دلیل، مقصد و consequence فقط مطابق product truth نوشته شود.
 - `INS-008` Helper کوتاه، مرتبط با همان field و دارای اطلاعاتی فراتر از Label باشد.
-- `INS-010` requiredness با wording یکدست و قابل‌فهم، مانند «اختیاری» یا marker توضیح‌داده‌شده، بیان شود؛ semantics برنامه‌وار آن متعلق به accessibility forms است.
+- `INS-010` requiredness با wording یکدست و قابل‌فهم، مانند «اختیاری» یا marker توضیح‌داده‌شده، بیان شود.
 - `INS-011` Example وقتی ممکن است با value واقعی اشتباه شود با نشانه‌ای مانند «مثال:» از مقدار جدا شود.
 - `INS-012` نام field، object، action و واحد با terminology همان surface و audience هماهنگ بماند.
 - `INS-013` Helper requirement را پیش از failure توضیح دهد و Error پس از validation شرط نقض‌شده و recovery را بیان کند.

@@ -258,8 +258,8 @@ retired_rules:
     superseded_by: [design-system.pattern.notifications, design-system.accessibility.dynamic-content-and-feedback]
     reason: هماهنگی Toast، focus و live announcement سازوکار تعاملی است.
   - id: NTC-018
-    superseded_by: [NTF-005]
-    reason: تکرار قاعدهٔ الگو؛ NTF-005 اکنون Success و Error هر دو را پوشش می‌دهد.
+    superseded_by: [NTF-005, NTF-015]
+    reason: تکرار قاعدهٔ الگو؛ NTF-005 برای Success و NTF-015 برای Error.
   - id: NTC-019
     superseded_by: [design-system.pattern.notifications]
     reason: ماندگاری recovery و action یک شکاف باز presentation در Design System است و در copy پر نمی‌شود.
