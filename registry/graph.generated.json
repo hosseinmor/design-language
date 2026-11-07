@@ -8,6 +8,7 @@
     "content.component.notification",
     "content.component.text-input",
     "content.content-guidelines",
+    "content.copy-audit",
     "content.copy-brief",
     "content.localization",
     "content.naming",
@@ -378,6 +379,11 @@
     },
     {
       "from": "content.content-guidelines",
+      "to": "content.copy-audit",
+      "type": "related"
+    },
+    {
+      "from": "content.content-guidelines",
       "to": "content.copy-brief",
       "type": "related"
     },
@@ -433,6 +439,26 @@
     },
     {
       "from": "content.content-guidelines",
+      "to": "content.terminology",
+      "type": "related"
+    },
+    {
+      "from": "content.copy-audit",
+      "to": "content.content-guidelines",
+      "type": "related"
+    },
+    {
+      "from": "content.copy-audit",
+      "to": "content.copy-brief",
+      "type": "related"
+    },
+    {
+      "from": "content.copy-audit",
+      "to": "content.product-voice",
+      "type": "related"
+    },
+    {
+      "from": "content.copy-audit",
       "to": "content.terminology",
       "type": "related"
     },

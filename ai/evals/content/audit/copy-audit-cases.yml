@@ -1,0 +1,122 @@
+schema_version: "0.1"
+id: content.eval.copy_audit_cases
+foundation_id: content.foundation.copy_audit
+language: fa-IR
+
+# هر case یک audit item نمونه و نتیجهٔ مورد انتظار بخش قطعی آدیت است.
+# این‌ها نمونهٔ آزمایشی‌اند، نه finding واقعی پروداکشن؛ موجودی واقعی بیرون از مخزن است.
+
+cases:
+  - id: forbidden_entity_label_is_mapped
+    item:
+      id: employer_new_applications_toast
+      observed_text: ۳ اپلای جدید دارید.
+      location: inv-0001
+      captured_on: "2026-11-01"
+      product: jobvision
+      audience: [employer_actor]
+      surface: public
+      contract: content.pattern.notifications
+      state: info
+      slot: message
+      concepts: [job_application]
+    expected:
+      checked_rules: [AUD-001, AUD-002, AUD-004]
+      status: finding
+      priority: P3
+      label_findings:
+        - {concept: job_application, label: اپلای, kind: forbidden, needs_review: true}
+      rewrite_slots: [message]
+
+  - id: approved_label_is_not_flagged
+    item:
+      id: application_sent_toast
+      observed_text: درخواست شغلی شما ارسال شد.
+      location: inv-0002
+      captured_on: "2026-11-01"
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      contract: content.pattern.notifications
+      state: success
+      slot: message
+      concepts: [job_application]
+    expected:
+      checked_rules: [AUD-002]
+      status: no_issue
+      rewrite_slots: [message]
+
+  - id: internal_surface_has_lower_priority
+    item:
+      id: admin_empty_talent_pool
+      observed_text: آرشیو رزومه خالی است.
+      location: inv-0003
+      captured_on: "2026-11-01"
+      product: jobvision
+      audience: [account_manager]
+      surface: admin
+      contract: content.pattern.empty-states
+      state: empty
+      slot: message
+      concepts: [talent_pool]
+    expected:
+      checked_rules: [AUD-001, AUD-002]
+      status: finding
+      priority: P4
+      label_findings:
+        - {concept: talent_pool, label: آرشیو رزومه, kind: forbidden, needs_review: false}
+      rewrite_slots: [message]
+
+  - id: missing_context_is_not_judged
+    item:
+      id: unknown_button
+      observed_text: تأیید
+      location: inv-0004
+      captured_on: "2026-11-01"
+      product: jobvision
+      audience: [employer_actor]
+      surface: public
+      slot: label
+    expected:
+      checked_rules: [AUD-003]
+      status: needs_context
+      context_gaps: [contract, state]
+
+  - id: product_without_layer_is_not_judged
+    item:
+      id: cando_request_error
+      observed_text: ثبت درخواست ناموفق بود.
+      location: inv-0005
+      captured_on: "2026-11-01"
+      product: cando
+      audience: [employer_actor]
+      surface: public
+      contract: content.pattern.error
+      state: system_failure
+      slot: problem
+      concepts: [hiring_request]
+    expected:
+      checked_rules: [AUD-003]
+      status: needs_context
+      context_gaps: [product_layer_missing]
+
+  - id: rewrite_brief_keeps_required_roles
+    item:
+      id: delete_vacancy_button
+      observed_text: حذف وکنسی
+      location: inv-0006
+      captured_on: "2026-11-01"
+      product: jobvision
+      audience: [employer_actor]
+      surface: public
+      contract: content.pattern.confirmation
+      state: destructive_confirmation
+      slot: primary_action
+      concepts: [job_post]
+    expected:
+      checked_rules: [AUD-001, AUD-002, AUD-004]
+      status: finding
+      priority: P3
+      label_findings:
+        - {concept: job_post, label: وکنسی, kind: forbidden, needs_review: false}
+      rewrite_slots: [primary_action, safe_exit, title]

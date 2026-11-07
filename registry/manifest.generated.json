@@ -195,6 +195,7 @@
         "content.pattern.ai-content-and-disclosure",
         "content.pattern.instructions-and-helper-text",
         "content.copy-brief",
+        "content.copy-audit",
         "content.naming"
       ],
       "topics": [
@@ -203,6 +204,30 @@
         "content-guidelines"
       ],
       "path": "foundations/content/content-guidelines.md"
+    },
+    {
+      "id": "content.copy-audit",
+      "kind": "content-content-foundation",
+      "title": "Copy Audit",
+      "summary": "Defines how existing production copy is audited against Design Language rules, including the audit item and finding shapes, priority model, rewrite through a copy brief, and how gaps return to the owning guideline.",
+      "status": "draft",
+      "owner": null,
+      "last_reviewed": null,
+      "related": [
+        "content.content-guidelines",
+        "content.copy-brief",
+        "content.terminology",
+        "content.product-voice"
+      ],
+      "topics": [
+        "content",
+        "content-content-foundation",
+        "copy-audit",
+        "persian",
+        "terminology",
+        "ux-writing"
+      ],
+      "path": "foundations/content/copy-audit.md"
     },
     {
       "id": "content.copy-brief",
@@ -3473,10 +3498,10 @@
     }
   ],
   "summary": {
-    "documents": 163,
+    "documents": 164,
     "by_kind": {
       "content-content-component": 4,
-      "content-content-foundation": 3,
+      "content-content-foundation": 4,
       "content-content-guideline": 3,
       "content-content-pattern": 7,
       "design-language-ai-routing": 2,
