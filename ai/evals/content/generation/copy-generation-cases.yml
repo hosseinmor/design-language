@@ -55,7 +55,7 @@ cases:
           source: eval_fixture
     expected:
       outcome: copy
-      checked_rules: [BRF-001, BRF-004, CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-007]
+      checked_rules: [BRF-001, BRF-004, CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, BTN-004]
       required_slots:
         destructive_confirmation: [title, consequence, recoverability, primary_action, safe_exit]
       must_use_labels:

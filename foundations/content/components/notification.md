@@ -167,7 +167,7 @@ runtime همان مقدار را به‌صورت معتبر expose کرده با
 ## State truth
 
 - Success فقط پس از outcome تأییدشده و Error فقط پس از failure واقعی نوشته
-  می‌شود (`NTF-005`).
+  می‌شود (`NTF-005`، `NTF-015`).
 - Error از pattern خطا، مشکل و recovery معلوم را می‌گیرد.
 - Loading/Progress با Notification success اشتباه نمی‌شود.
 - هشدار مخرب پیش از action متعلق به [الگوی confirmation](../patterns/confirmations.md) است.
@@ -212,7 +212,7 @@ runtime همان مقدار را به‌صورت معتبر expose کرده با
 - `NTC-015` → `design-system.pattern.notifications`، `design-system.accessibility.dynamic-content-and-feedback`: فوریت announcement سازوکار دسترس‌پذیری است، نه wording.
 - `NTC-016` → `design-system.pattern.notifications`، `design-system.accessibility.dynamic-content-and-feedback`: focus و autofocus در Toast رفتار تعاملی است؛ عین NTF-012.
 - `NTC-017` → `design-system.pattern.notifications`، `design-system.accessibility.dynamic-content-and-feedback`: هماهنگی Toast، focus و live announcement سازوکار تعاملی است.
-- `NTC-018` → `NTF-005`: تکرار قاعدهٔ الگو؛ NTF-005 اکنون Success و Error هر دو را پوشش می‌دهد.
+- `NTC-018` → `NTF-005`، `NTF-015`: تکرار قاعدهٔ الگو؛ NTF-005 برای Success و NTF-015 برای Error.
 - `NTC-019` → `design-system.pattern.notifications`: ماندگاری recovery و action یک شکاف باز presentation در Design System است و در copy پر نمی‌شود.
 - `NTC-022` → `NTF-008`، `NTF-009`: تکرار قواعد الگو دربارهٔ پیام کلی و هیجان‌زده.
 

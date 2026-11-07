@@ -103,7 +103,7 @@ rules:
     obligation: must
     dimension: clarity
     key: communicate_requiredness
-    statement: requiredness با wording یکدست و قابل‌فهم، مانند «اختیاری» یا marker توضیح‌داده‌شده، بیان شود؛ semantics برنامه‌وار آن متعلق به accessibility forms است.
+    statement: requiredness با wording یکدست و قابل‌فهم، مانند «اختیاری» یا marker توضیح‌داده‌شده، بیان شود.
   - id: INS-011
     obligation: must
     dimension: clarity

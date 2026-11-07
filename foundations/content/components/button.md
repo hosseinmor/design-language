@@ -142,8 +142,8 @@ copy نباید با لحن پرهیجان ضعف hierarchy را جبران کن
 ## Confirmation و خروج امن
 
 قواعد برچسب confirmation مالکشان [الگوی confirmation](../patterns/confirmations.md)
-است (`CNF-005`، `CNF-006`، `CNF-007`). `BTN-004` فقط چون هر action پیامددار، نه
-فقط confirmation، را پوشش می‌دهد این‌جا می‌ماند. در confirmation، label اصلی action
+است (`CNF-005`، `CNF-006`). منع برچسب عمومی مانند «بله» یا «تأیید» برای هر action
+پیامددار، از جمله confirmation، مال Button است (`BTN-004`). در confirmation، label اصلی action
 و object را نام می‌برد و label ثانویه راه خروج امن را روشن می‌کند:
 
 ```text
@@ -221,7 +221,7 @@ error feedback: تغییرات ذخیره نشد. دوباره تلاش کنید
 
 ### نباید
 
-- `BTN-004` در action پیامددار، «بله»، «خیر»، «تأیید» یا «انجام» به‌تنهایی label نباشد.
+- `BTN-004` در action پیامددار، «بله»، «خیر»، «تأیید»، «ادامه» یا «انجام» به‌تنهایی label نباشد.
 - `BTN-005` label پیش از activation نباید completion، success یا failure را اعلام کند.
 - `BTN-008` label نباید ادعای تبلیغاتی، فشار احساسی یا فوریت ساختگی را برای تقویت CTA اضافه کند.
 - `BTN-010` implementation name، API field یا نام داخلی نباید به label کاربر منتقل شود.
