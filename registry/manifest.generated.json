@@ -74,7 +74,7 @@
     {
       "id": "content.component.modal",
       "kind": "content-content-component",
-      "title": "Modal Content",
+      "title": "Dialog Content",
       "summary": "Defines the Persian content contract for focused blocking dialogs across titles, body copy, actions, dismissal wording, confirmations, forms, loading, errors, and accessible naming.",
       "status": "draft",
       "owner": null,
@@ -88,7 +88,7 @@
         "content.pattern.confirmation",
         "content.pattern.error",
         "content.pattern.loading-and-progress",
-        "design-system.component.modal",
+        "design-system.component.dialog",
         "design-system.accessibility.focus-management"
       ],
       "topics": [
@@ -110,7 +110,7 @@
       "id": "content.component.notification",
       "kind": "content-content-component",
       "title": "Notification Content",
-      "summary": "Defines how outcome and status content maps into the distinct Inline Notification and Toast anatomies, including severity, message roles, actions, dismissal, timeout indicators, and accessible announcements.",
+      "summary": "Defines how outcome and status wording maps into the distinct Inline Notification and Toast anatomies (message roles, action labels, dismiss wording); presentation, severity set, action count, focus and announcements are referenced from the Design System and Accessibility.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
@@ -334,16 +334,17 @@
       "id": "content.pattern.error",
       "kind": "content-content-pattern",
       "title": "Error Messages",
-      "summary": "Defines the content, tone, recovery, placement, accessibility, and evaluation contract for product error messages.",
+      "summary": "Defines the wording, tone, recovery, and evaluation contract for product error messages; placement, focus, and programmatic error semantics are referenced from the Design System and Accessibility.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
       "related": [
         "content.product-voice",
         "content.terminology",
+        "design-system.accessibility.content",
         "design-system.component.text-input",
         "design-system.component.notification",
-        "design-system.component.modal",
+        "design-system.component.dialog",
         "design-system.pattern.notifications",
         "design-system.accessibility.forms",
         "design-system.accessibility.dynamic-content-and-feedback"
@@ -365,7 +366,7 @@
       "id": "content.pattern.instructions-and-helper-text",
       "kind": "content-content-pattern",
       "title": "Instructions and Helper Text",
-      "summary": "Defines the roles, timing, placement, wording, validation boundary, and accessibility contract for labels, instructions, helper text, placeholders, examples, and requirement indicators.",
+      "summary": "Defines the roles, timing, wording, and validation boundary for labels, instructions, helper text, placeholders, examples, and requirement indicators; programmatic association and required-state semantics are referenced from Accessibility.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
@@ -434,7 +435,7 @@
       "id": "content.pattern.notifications",
       "kind": "content-content-pattern",
       "title": "Notifications and Outcome Feedback",
-      "summary": "Defines severity, presentation, content, actions, and accessibility for inline notifications, Toasts, and in-place outcome feedback.",
+      "summary": "Defines the wording and message structure of inline notifications, Toasts, and in-place outcome feedback; severity set, presentation choice, actions, focus, and announcements are referenced from the Design System and Accessibility.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
@@ -2804,7 +2805,9 @@
       "last_reviewed": "2026-09-19",
       "related": [
         "design-system.accessibility.dynamic-content-and-feedback",
-        "design-system.component.notification"
+        "design-system.component.notification",
+        "content.pattern.notifications",
+        "content.component.notification"
       ],
       "topics": [
         "design-system-pattern",
@@ -3446,6 +3449,7 @@
   },
   "aliases": {
     "content-guidelines": "content.content-guidelines",
+    "content.component.dialog": "content.component.modal",
     "design-language": "design-system.design-language",
     "design-system": "design-system.overview",
     "design-system.token.product-overrides": "design-system.product-variation.theme-context",

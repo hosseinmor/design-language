@@ -123,78 +123,30 @@ rules:
     key: label_names_purpose
     statement: Label purpose field را با اصطلاح همان surface مستقل از Placeholder و Value نام ببرد.
     evidence: [design_system_text_input, instruction_pattern, terminology]
-  - id: TXT-003
-    obligation: must_not
-    dimension: structure
-    key: placeholder_as_label_or_requirement
-    statement: Placeholder تنها Label، accessible name یا محل requirement ضروری نباشد.
-    evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
   - id: TXT-004
     obligation: must
     dimension: structure
     key: placeholder_adds_optional_context
     statement: Placeholder فقط در صورت افزودن example یا format hint کوتاه و غیرضروری استفاده شود.
     evidence: [design_system_text_input, instruction_pattern]
-  - id: TXT-005
-    obligation: must
-    dimension: clarity
-    key: distinguish_example_from_value
-    statement: exampleی که ممکن است Value واقعی برداشت شود با contextی مانند «مثال:» مشخص شود.
-    evidence: [instruction_pattern, product_content_decisions]
   - id: TXT-006
     obligation: must
     dimension: structure
     key: helper_adds_verified_field_context
     statement: Helper کوتاه، field-specific، غیرتکراری و شامل context تأییدشده‌ای فراتر از Label باشد.
     evidence: [design_system_text_input, instruction_pattern]
-  - id: TXT-007
-    obligation: must_not
-    dimension: structure
-    key: hide_required_guidance
-    statement: instruction، requirement، Error یا consequence ضروری فقط پشت Info یا Tooltip پنهان نشود.
-    evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
   - id: TXT-008
     obligation: must
     dimension: product_truth
     key: verified_constraints_only
     statement: limit، format، reason، privacy، storage، consequence و validation فقط از product truth نوشته شوند.
     evidence: [instruction_pattern, error_pattern, product_content_decisions]
-  - id: TXT-009
-    obligation: must
-    dimension: accessibility
-    key: visible_programmatic_requiredness
-    statement: requiredness واقعی با convention دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
-    evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
-  - id: TXT-010
-    obligation: must_not
-    dimension: structure
-    key: duplicate_role_wording
-    statement: Label، Placeholder و Helper با wording تکراری پر نشوند.
-    evidence: [instruction_pattern, product_content_decisions]
   - id: TXT-011
     obligation: must
     dimension: structure
     key: actionable_textual_error
     statement: Error شرط نقض‌شده و اصلاح معلوم را متنی و بدون اتکا به رنگ بیان کند.
     evidence: [design_system_text_input, accessibility_forms, error_pattern]
-  - id: TXT-012
-    obligation: must
-    dimension: structure
-    key: preserve_requirement_on_error
-    statement: وقتی Error جای Helper treatment را می‌گیرد، requirement ضروری در Error یا Instruction ماندگار حفظ شود.
-    evidence: [design_system_text_input, instruction_pattern]
-  - id: TXT-013
-    obligation: must
-    dimension: accessibility
-    key: associate_name_description_error
-    statement: accessible name، Helper و Error با input مربوط برنامه‌وار مرتبط شوند.
-    evidence: [design_system_text_input, accessibility_forms, instruction_pattern, error_pattern]
-  - id: TXT-014
-    obligation: must
-    dimension: terminology
-    key: error_preserves_label_term
-    statement: Error نام field و object را با همان terminology Label و surface حفظ کند.
-    evidence: [error_pattern, terminology]
   - id: TXT-015
     obligation: must
     dimension: product_truth
@@ -225,12 +177,6 @@ rules:
     key: overload_single_line_input
     statement: متن چندخطی، optionهای ثابت یا رفتار تخصصی به Text Input عمومی تحمیل نشود.
     evidence: [design_system_text_input]
-  - id: TXT-020
-    obligation: must_not
-    dimension: interaction
-    key: unjustified_input_restriction
-    statement: paste، autofill یا password manager بدون محدودیت مشخص و تأییدشده ممنوع نشود.
-    evidence: [design_system_text_input, accessibility_forms, instruction_pattern]
   - id: TXT-021
     obligation: must_not
     dimension: product_truth
@@ -260,5 +206,34 @@ unknowns:
   - normalization ارقام، فاصله و حروف عربی/فارسی
   - Warning state تا زمان use case تأییدشده
   - semantics و copy actionهای تخصصی Trailing
+
+retired_rules:
+  - id: TXT-003
+    superseded_by: [INS-004, INS-005]
+    reason: تکرار قواعد الگوی instruction دربارهٔ Placeholder.
+  - id: TXT-005
+    superseded_by: [INS-011]
+    reason: تکرار قاعدهٔ الگوی instruction دربارهٔ جداکردن Example.
+  - id: TXT-007
+    superseded_by: [INS-007]
+    reason: تکرار قاعدهٔ الگوی instruction دربارهٔ پنهان‌نکردن محتوای ضروری.
+  - id: TXT-009
+    superseded_by: [INS-010]
+    reason: تکرار قاعدهٔ الگوی instruction دربارهٔ requiredness.
+  - id: TXT-010
+    superseded_by: [INS-009]
+    reason: عین قاعدهٔ الگوی instruction دربارهٔ تکرار wording.
+  - id: TXT-012
+    superseded_by: [INS-014]
+    reason: عین قاعدهٔ الگوی instruction دربارهٔ حفظ requirement هنگام Error.
+  - id: TXT-013
+    superseded_by: [design-system.accessibility.forms]
+    reason: ارتباط برنامه‌وار name، Helper و Error با input سازوکار accessibility است.
+  - id: TXT-014
+    superseded_by: [ERR-003]
+    reason: تکرار قاعدهٔ الگوی خطا دربارهٔ حفظ اصطلاح Label.
+  - id: TXT-020
+    superseded_by: [INS-020]
+    reason: عین قاعدهٔ الگوی instruction دربارهٔ paste، autofill و password manager.
 
 evaluation_source: ../../../ai/evals/content/text-input-content-cases.yml

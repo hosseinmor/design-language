@@ -15,7 +15,7 @@ cases:
       description: ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
     expected:
       valid: true
-      checked_rules: [NTC-001, NTC-003, NTC-005, NTC-006, NTC-008, NTC-015]
+      checked_rules: [NTC-003, NTC-005, NTC-006, NTC-008]
       violations: []
 
   - id: concise_confirmed_success_toast
@@ -29,7 +29,7 @@ cases:
       message: تغییرات رزومه ذخیره شد.
     expected:
       valid: true
-      checked_rules: [NTC-001, NTC-003, NTC-005, NTC-007, NTC-018, NTC-020, NTC-022]
+      checked_rules: [NTC-003, NTC-005, NTC-007, NTF-005, NTC-020, NTF-008, NTF-009]
       violations: []
 
   - id: toast_title_adds_object_context
@@ -43,7 +43,7 @@ cases:
       message: ذخیره شد.
     expected:
       valid: true
-      checked_rules: [NTC-005, NTC-007, NTC-018, NTC-020]
+      checked_rules: [NTC-005, NTC-007, NTF-005, NTC-020]
       violations: []
 
   - id: inline_error_with_retry
@@ -61,7 +61,7 @@ cases:
         label: تلاش دوباره
     expected:
       valid: true
-      checked_rules: [NTC-001, NTC-003, NTC-005, NTC-006, NTC-009, NTC-010, NTC-018, NTC-019]
+      checked_rules: [NTC-003, NTC-005, NTC-006, NTC-010, NTF-005]
       violations: []
 
   - id: navigation_action_uses_link
@@ -77,7 +77,7 @@ cases:
         label: مشاهدهٔ نتیجه
     expected:
       valid: true
-      checked_rules: [NTC-003, NTC-005, NTC-009, NTC-010]
+      checked_rules: [NTC-003, NTC-005, NTC-010]
       violations: []
 
   - id: confirmed_undo_toast
@@ -94,7 +94,7 @@ cases:
         label: بازگردانی
     expected:
       valid: true
-      checked_rules: [NTC-005, NTC-009, NTC-010, NTC-011, NTC-018]
+      checked_rules: [NTC-005, NTC-010, NTC-011, NTF-005]
       violations: []
 
   - id: persian_dismiss_name
@@ -122,21 +122,7 @@ cases:
       timeout_indicator_meaning: زمان باقی‌مانده تا بسته‌شدن اعلان
     expected:
       valid: true
-      checked_rules: [NTC-013, NTC-014]
-      violations: []
-
-  - id: routine_success_is_non_interruptive
-    context:
-      component: Toast
-      severity: success
-      routine_update: true
-      announcement: polite
-      focus_preserved: true
-    content:
-      message: تغییرات ذخیره شد.
-    expected:
-      valid: true
-      checked_rules: [NTC-015, NTC-016, NTC-017]
+      checked_rules: [NTF-014]
       violations: []
 
   - id: formatted_bulk_result
@@ -149,7 +135,7 @@ cases:
       message: ۳ درخواست شغلی بایگانی شد.
     expected:
       valid: true
-      checked_rules: [NTC-005, NTC-018, NTC-020, NTC-021]
+      checked_rules: [NTC-005, NTF-005, NTC-020, NTC-021]
       violations: []
 
   - id: type_axis_combines_components
@@ -160,8 +146,8 @@ cases:
       message: تغییرات ذخیره شد.
     expected:
       valid: false
-      checked_rules: [NTC-001, NTC-002]
-      violations: [NTC-001, NTC-002]
+      checked_rules: [NTC-002]
+      violations: [NTC-002]
 
   - id: danger_used_as_notification_severity
     context:
@@ -172,8 +158,8 @@ cases:
       message: این اقدام آگهی را حذف می‌کند.
     expected:
       valid: false
-      checked_rules: [NTC-003, NTC-004]
-      violations: [NTC-003, NTC-004]
+      checked_rules: [NTC-003]
+      violations: [NTC-003]
 
   - id: high_contrast_used_as_severity
     context:
@@ -184,8 +170,8 @@ cases:
       message: تغییرات ذخیره شد.
     expected:
       valid: false
-      checked_rules: [NTC-003, NTC-004]
-      violations: [NTC-003, NTC-004]
+      checked_rules: [NTC-003]
+      violations: [NTC-003]
 
   - id: generic_message_without_result
     context:
@@ -196,8 +182,8 @@ cases:
       message: عملیات با موفقیت انجام شد.
     expected:
       valid: false
-      checked_rules: [NTC-005, NTC-022]
-      violations: [NTC-005, NTC-022]
+      checked_rules: [NTC-005, NTF-008, NTF-009]
+      violations: [NTC-005, NTF-008, NTF-009]
 
   - id: inline_description_repeats_message
     context:
@@ -250,23 +236,8 @@ cases:
         label: ثبت درخواست پشتیبانی
     expected:
       valid: false
-      checked_rules: [NTC-001, NTC-008, NTC-011, NTC-019]
-      violations: [NTC-001, NTC-008, NTC-011, NTC-019]
-
-  - id: multiple_notification_actions
-    context:
-      component: Inline Notification
-      severity: error
-      actions_available: 2
-    content:
-      message: رزومه بارگذاری نشد.
-      actions:
-        - تلاش دوباره
-        - تماس با پشتیبانی
-    expected:
-      valid: false
-      checked_rules: [NTC-009]
-      violations: [NTC-009]
+      checked_rules: [NTC-008, NTC-011]
+      violations: [NTC-008, NTC-011]
 
   - id: navigation_uses_button_semantics
     context:
@@ -292,8 +263,8 @@ cases:
       action: بازگردانی
     expected:
       valid: false
-      checked_rules: [NTC-009, NTC-011, NTC-018]
-      violations: [NTC-009, NTC-011]
+      checked_rules: [NTC-011, NTF-005]
+      violations: [NTC-011]
 
   - id: dismiss_tooltip_without_accessible_name
     context:
@@ -317,8 +288,8 @@ cases:
       message: این اعلان دقیقاً ۵ ثانیه نمایش داده می‌شود و بالای اعلان قبلی قرار می‌گیرد.
     expected:
       valid: false
-      checked_rules: [NTC-013]
-      violations: [NTC-013]
+      checked_rules: [NTF-014]
+      violations: [NTF-014]
 
   - id: timeout_indicator_called_progress
     context:
@@ -334,44 +305,6 @@ cases:
       checked_rules: [NTC-014]
       violations: [NTC-014]
 
-  - id: every_error_is_assertive
-    context:
-      component: Toast
-      severity: error
-      urgent: false
-      announcement: assertive
-    content:
-      message: فیلتر ذخیره نشد.
-    expected:
-      valid: false
-      checked_rules: [NTC-015]
-      violations: [NTC-015]
-
-  - id: toast_steals_focus
-    context:
-      component: Toast
-      focus_moved_to_toast: true
-      user_action_required_immediately: false
-    content:
-      message: تغییرات ذخیره شد.
-    expected:
-      valid: false
-      checked_rules: [NTC-016]
-      violations: [NTC-016]
-
-  - id: duplicated_success_feedback
-    context:
-      component: Toast
-      focus_already_moved_to_result: true
-      polite_announcement_present: true
-      toast_duplicates_same_event: true
-    content:
-      message: درخواست شغلی ارسال شد.
-    expected:
-      valid: false
-      checked_rules: [NTC-017]
-      violations: [NTC-017]
-
   - id: optimistic_success_before_response
     context:
       component: Toast
@@ -382,8 +315,8 @@ cases:
       message: درخواست شغلی ارسال شد.
     expected:
       valid: false
-      checked_rules: [NTC-018, NTC-022]
-      violations: [NTC-018, NTC-022]
+      checked_rules: [NTF-005, NTF-008, NTF-009]
+      violations: [NTF-005, NTF-008, NTF-009]
 
   - id: wrong_internal_term
     context:
@@ -421,5 +354,5 @@ cases:
       message: شما فوق‌العاده‌اید؛ تغییرات ذخیره شد!
     expected:
       valid: false
-      checked_rules: [NTC-007, NTC-022]
-      violations: [NTC-007, NTC-022]
+      checked_rules: [NTC-007, NTF-008, NTF-009]
+      violations: [NTC-007, NTF-008, NTF-009]

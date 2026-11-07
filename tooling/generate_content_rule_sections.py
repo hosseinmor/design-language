@@ -26,6 +26,8 @@ GROUPS = (
     ("should", "### بهتر است"),
     ("must_not", "### نباید"),
 )
+# Retired IDs stay reserved; each points to the rule or document that owns it now.
+RETIRED_HEADING = "### بازنشسته (مالک فعلی)"
 
 
 def contract_paths() -> list[Path]:
@@ -52,6 +54,13 @@ def render(yml_path: Path) -> str:
         for rule in group:
             statement = " ".join(str(rule["statement"]).split())
             lines.append(f"- `{rule['id']}` {statement}")
+    retired = [item for item in data.get("retired_rules") or [] if isinstance(item, dict)]
+    if retired:
+        lines += ["", RETIRED_HEADING, ""]
+        for item in retired:
+            owners = "، ".join(f"`{owner}`" for owner in item.get("superseded_by") or [])
+            reason = " ".join(str(item.get("reason", "")).split())
+            lines.append(f"- `{item['id']}` → {owners}: {reason}")
     lines += ["", END]
     return "\n".join(lines)
 

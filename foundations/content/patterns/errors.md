@@ -3,15 +3,16 @@ id: content.pattern.error
 collection: content
 type: content-pattern
 title: Error Messages
-summary: Defines the content, tone, recovery, placement, accessibility, and evaluation contract for product error messages.
+summary: Defines the wording, tone, recovery, and evaluation contract for product error messages; placement, focus, and programmatic error semantics are referenced from the Design System and Accessibility.
 knowledge_state: verified
 document_maturity: draft
 related:
   - content.product-voice
   - content.terminology
+  - design-system.accessibility.content
   - design-system.component.text-input
   - design-system.component.notification
-  - design-system.component.modal
+  - design-system.component.dialog
   - design-system.pattern.notifications
   - design-system.accessibility.forms
   - design-system.accessibility.dynamic-content-and-feedback
@@ -53,7 +54,7 @@ topics:
 - `ERR-003` نام فیلد، شیء یا اقدام را با همان اصطلاحی بنویسید که در UI دیده می‌شود.
 - `ERR-007` علت، نتیجه یا امکان بازیابی را فقط در حدی بیان کنید که محصول تأیید می‌کند.
 - `ERR-009` پس از خطای قابل‌بازیابی، دادهٔ معتبر و نامرتبط کاربر حفظ شود.
-- `ERR-010` خطا در متن بیان، با محل مرتبط برنامه‌وار متصل و از مسیر منطقی قابل‌دسترسی باشد.
+- `ERR-010` خطا در متن بیان شود و مشکل و موضوع آن بدون اتکا به رنگ، آیکن یا محل نمایش قابل‌فهم باشد.
 
 ### نباید
 
@@ -92,19 +93,18 @@ topics:
 نوشتن «سرور پاسخ نداد» فقط وقتی مجاز است که این علت برای محصول قطعی، قابل‌فهم
 و مفید باشد.
 
-## انتخاب محل نمایش
+## wording برای هر scope
 
-| وضعیت | محل مناسب | قاعدهٔ محتوایی |
+محل و شکل نمایش خطا تصمیم این الگو نیست؛ آن را از منبع مالک بگیرید و متن را
+برای همان scope بنویسید:
+
+| scope خطا | مالک محل و رفتار | قاعدهٔ محتوایی |
 |---|---|---|
-| یک ورودی مشخص | پیام inline کنار فیلد | نام فیلد و شرط اصلاح را بگویید. |
-| فرم طولانی یا چند خطا | خلاصه در ابتدای محدوده + خطای هر فیلد | دسترسی به هر خطا را ممکن کنید. |
-| خطای یک بخش یا عملیات که باید باقی بماند | Inline Notification | نتیجه و بازیابی را در همان زمینه نگه دارید. |
-| شکست کوتاه با زمینهٔ روشن | Toast | فقط اگر گذرا بودن مانع بازیابی نیست. |
-| context واقعاً مسدودکننده و نیازمند پاسخ | Modal | Modal را فقط برای برجسته‌کردن خطا باز نکنید. |
-| بارگیری‌نشدن task اصلی | وضعیت خطای صفحه | task ناموفق و مسیر retry یا جایگزین را روشن کنید. |
-
-کامپوننت محل، ظاهر و رفتار پایه را مالک است؛ این pattern معنی، ساختار و متن را
-مالک است.
+| یک ورودی مشخص | [Text Input](../../../design-system/components/text-input.md)، [Accessibility forms](../../../accessibility/forms.md) | نام فیلد و شرط اصلاح را بگویید. |
+| فرم طولانی یا چند خطا | [Accessibility forms](../../../accessibility/forms.md)، [Form submission](../../../design-system/patterns/form-submission.md) | هر خطا را مستقل و با نام همان فیلد بنویسید. |
+| یک بخش یا عملیات | [Design System Notifications](../../../design-system/patterns/notifications.md) | نتیجهٔ ناموفق و بازیابی را در همان زمینه نام ببرید. |
+| context مسدودکننده و نیازمند پاسخ | [Dialog](../../../design-system/components/dialog.md) | مشکل و تصمیم لازم را بدون اتکا به background بنویسید. |
+| بارگیری‌نشدن task اصلی | Product Knowledge و component همان صفحه | task ناموفق و مسیر retry یا جایگزین را روشن کنید. |
 
 ## خطای اعتبارسنجی
 
@@ -152,19 +152,16 @@ topics:
 [`../terminology/terms.yml`](../terminology/terms.yml) پیدا کنید، سپس همان label
 را در مشکل و راه بازیابی نگه دارید.
 
-## دسترس‌پذیری و رفتار
+## دسترس‌پذیری
 
-- رنگ قرمز به‌تنهایی خطا را منتقل نمی‌کند؛ متن لازم است.
-- خطای فیلد باید با کنترل مرتبط باشد و وضعیت invalid برنامه‌وار مشخص شود.
-- در submit ناموفق، کاربر باید بتواند خطاها را پیدا کند. برای فرم بزرگ، خلاصهٔ
-  خطا و تمرکز برنامه‌وار می‌تواند مناسب‌تر از پرش مستقیم به یک فیلد باشد.
-- هر خطا را به‌صورت assertive اعلام نکنید. کم‌مزاحمت‌ترین سازوکار کافی را
-  انتخاب کنید.
-- برای اعلام Toast فوکوس را جابه‌جا نکنید.
-- خطای قابل‌بازیابی نباید داده‌های معتبر و نامرتبط را پاک کند.
+حداقل الزام WCAG برای متن خطا در [Accessible content](../../../accessibility/content.md#form-copy)
+است و ارتباط برنامه‌وار، وضعیت invalid، مسیر focus پس از submit و فوریت
+announcement در [Accessibility forms](../../../accessibility/forms.md) و
+[Dynamic content and feedback](../../../accessibility/dynamic-content-and-feedback.md)
+تعریف شده‌اند. این سند آن‌ها را بازتعریف نمی‌کند. سهم محتوا:
 
-جزئیات برنامه‌وار canonical در اسناد Accessibility مرتبط باقی می‌مانند؛ این
-سند آن‌ها را بازتعریف نمی‌کند.
+- خطا در متن بیان می‌شود و رنگ قرمز یا آیکن به‌تنهایی آن را منتقل نمی‌کند (`ERR-010`)؛
+- خطای قابل‌بازیابی دادهٔ معتبر و نامرتبط را پاک نمی‌کند (`ERR-009`).
 
 ## چک‌لیست بازبینی
 
@@ -173,8 +170,8 @@ topics:
 - [ ] راه بازیابیِ معلوم و امن ذکر شده است.
 - [ ] علت یا نتیجه‌ای حدس زده نشده است.
 - [ ] متن سرزنش‌گر، کلی، تبلیغاتی یا کدی نیست.
-- [ ] محل نمایش و رفتار با scope خطا متناسب است.
-- [ ] ارتباط، اعلام و مسیر تمرکز با Accessibility contract سازگار است.
+- [ ] متن برای scope و محل نمایشِ تعیین‌شده در Design System نوشته شده است.
+- [ ] خطا بدون اتکا به رنگ یا آیکن قابل‌فهم است.
 
 ## ارزیابی
 

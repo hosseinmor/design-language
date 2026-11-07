@@ -11,6 +11,9 @@ from typing import Any
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from content_rule_index import inherited_rule_ids  # noqa: E402
+
 
 ROOT = Path(__file__).resolve().parents[2]
 COMPONENT_DIR = ROOT / "foundations" / "content" / "components"
@@ -359,7 +362,8 @@ def validate_evals(
 
     case_ids: list[str] = []
     covered: set[str] = set()
-    known_rules = set(obligations)
+    # Own rules plus rules inherited through depends_on; coverage stays own-only.
+    known_rules = set(obligations) | inherited_rule_ids(spec["component_id"])
     has_valid = False
     has_invalid = False
 

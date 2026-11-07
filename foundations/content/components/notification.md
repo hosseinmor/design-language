@@ -3,7 +3,7 @@ id: content.component.notification
 collection: content
 type: content-component
 title: Notification Content
-summary: Defines how outcome and status content maps into the distinct Inline Notification and Toast anatomies, including severity, message roles, actions, dismissal, timeout indicators, and accessible announcements.
+summary: Defines how outcome and status wording maps into the distinct Inline Notification and Toast anatomies (message roles, action labels, dismiss wording); presentation, severity set, action count, focus and announcements are referenced from the Design System and Accessibility.
 knowledge_state: verified
 document_maturity: draft
 related:
@@ -34,53 +34,30 @@ regression در
 [`../../../ai/evals/content/notification-content-cases.yml`](../../../ai/evals/content/notification-content-cases.yml)
 قرار دارند.
 
-## مرز Pattern و Component
+## مرز مالکیت
 
-[`../patterns/notifications.md`](../patterns/notifications.md) تعیین می‌کند:
+[`../patterns/notifications.md`](../patterns/notifications.md) wording و ساختار
+پیام نتیجه و معنی هر severity برای نوشتن را تعیین می‌کند. این سند تعیین می‌کند
+همان پیام چگونه در anatomy تأییدشدهٔ Inline Notification یا Toast قرار می‌گیرد.
 
-- آیا رویداد به feedback نیاز دارد؛
-- severity معنایی چیست؛
-- feedback درون‌صفحه‌ای، Inline Notification، Toast یا الگوی پاسخ‌خواه است؛
-- پیام چه نتیجه، object و next stepی را منتقل می‌کند.
+این تصمیم‌ها از منبع مالک خوانده می‌شوند و این‌جا تکرار نمی‌شوند:
 
-این سند تعیین می‌کند همان پیام چگونه در anatomy تأییدشدهٔ Inline Notification
-یا Toast قرار می‌گیرد. runtime timing، stacking، placement، default
-dismissibility و announcement implementation هنوز در منابع canonical کامل
-نیستند و این contract آن‌ها را اختراع نمی‌کند.
+- انتخاب Inline Notification، Toast یا in-place feedback، تعداد action و
+  ماندگاری action → [Design System Notifications](../../../design-system/patterns/notifications.md)؛
+- مجموعهٔ severity، `Danger` و `High`، anatomy، Dismiss و Timeout indicator →
+  [Notification component](../../../design-system/components/notification.md)؛
+- urgency، focus، autofocus و بازخورد تکراری →
+  [Dynamic content and feedback](../../../accessibility/dynamic-content-and-feedback.md).
 
-## دو کامپوننت مستقل
+Inline Notification و Toast دو component مستقل‌اند، نه یک component با axis
+مشترک `Type`. runtime timing، stacking، placement و default dismissibility
+شکاف‌های باز Design System هستند و این contract آن‌ها را اختراع نمی‌کند.
 
-```text
-Inline Notification
-→ persistent contextual feedback inside layout
+## Wording هر severity
 
-Toast
-→ transient floating feedback in a viewport-level region
-```
-
-این دو variant یک کامپوننت با axis مشترک `Type` نیستند. انتخاب آن‌ها از context،
-persistence و نیاز به action می‌آید، نه فقط از severity.
-
-| نیاز | presentation مناسب |
-|---|---|
-| پیام باید بماند یا برای ادامه خوانده شود | Inline Notification |
-| پیام به section مشخص وابسته است | Inline Notification |
-| recovery/action باید در دسترس بماند | Inline Notification یا in-place feedback |
-| feedback کوتاه است و ازدست‌رفتن آن task را مختل نمی‌کند | Toast |
-| تصمیم یا پاسخ پیش از ادامه لازم است | Modal/Confirmation، نه Notification |
-
-## Severity
-
-هر دو کامپوننت چهار severity مشترک دارند:
-
-- `Info` — واقعیت یا تغییر خنثی مفید؛
-- `Success` — outcome تأییدشده؛
-- `Warning` — ریسک یا محدودیت قبل از شکست قطعی؛
-- `Error` — failure واقعی.
-
-`Danger` severity پنجم نیست. Danger نیت مخرب پیش از action را نشان می‌دهد؛ Error
-شکست action را گزارش می‌کند. `High` در Toast نیز severity یا urgency نیست؛ فقط
-contrast treatment است.
+Message باید با معنی severity انتخاب‌شده هم‌خوان باشد (`NTC-003`): Warning ریسک
+یا محدودیت را می‌گوید نه شکست را، و Info نتیجهٔ Success یا Error را القا نمی‌کند.
+معنی severityها در [الگوی اعلان‌ها](../patterns/notifications.md#معنی-severity-برای-نوشتن) است.
 
 ## Inline Notification anatomy
 
@@ -150,24 +127,19 @@ Message: ذخیره شد.
 «موفقیت»، «خطا»، «هشدار» یا «اطلاع» severity را تکرار می‌کنند و context تازه‌ای
 نمی‌دهند.
 
-Toast برای متن بلند، چند action، instruction حیاتی، confirmation یا recoveryای
-که باید باقی بماند مناسب نیست.
+متن Toast فقط بازخورد کوتاه و خودبسنده است و confirmation، instruction حیاتی یا
+recovery ماندگار را حمل نمی‌کند (`NTC-008`). اگر چنین محتوایی لازم است، انتخاب
+presentation ماندگار را از Design System بگیرید.
 
 ## Action
 
-هر Notification حداکثر یک action دارد:
+تعداد action، انتخاب Link یا Button و ماندگاری action در Toast را
+[Design System Notifications](../../../design-system/patterns/notifications.md#actions)
+تعیین می‌کند. سهم محتوا wording است:
 
-- navigation یا مقصد مستقل → Link؛
-- operation یا تغییر state → Button؛
-- Undo → فقط وقتی واقعاً پیاده‌سازی، امن و در بازهٔ لازم در دسترس است.
-
-Action label باید نتیجه را نام ببرد: «تلاش دوباره»، «مشاهدهٔ درخواست»،
-«بازگردانی». از «بیشتر»، «اینجا» یا «کلیک کنید» استفاده نکنید.
-
-Action ضروری را به Toast خودکارپنهان‌شونده وابسته نکنید، مگر runtime زمان کافی،
-pause و دسترسی پایدار را تضمین کند. High Toast فعلاً inverse Button تأییدشده
-ندارد؛ تا رفع gap، action عملیاتی Button در آن handoff-ready نیست و Link
-Inverse تأییدشده باقی می‌ماند.
+- Action label نتیجه را نام می‌برد: «تلاش دوباره»، «مشاهدهٔ درخواست»،
+  «بازگردانی». از «بیشتر»، «اینجا» یا «کلیک کنید» استفاده نکنید.
+- Undo فقط وقتی نوشته می‌شود که واقعاً پیاده‌سازی، امن و در بازهٔ لازم در دسترس است.
 
 ## Dismiss
 
@@ -187,46 +159,22 @@ Tooltip جای accessible name نیست. `Dismissible=False` یعنی کنترل
 
 ## Timeout indicator
 
-Timeout indicator فقط باقی‌ماندهٔ عمر auto-dismiss Toast را نشان می‌دهد؛ progress
-عملیات نیست. متن نباید آن را «پیشرفت»، «در حال تکمیل» یا درصد outcome بنامد.
-
-- Timed Toast می‌تواند indicator داشته باشد.
-- Persistent Toast indicator ندارد.
-- مدت دقیق timeout هنوز runtime-owned و unverified است.
-- content نباید عددی مانند «۵ ثانیه دیگر بسته می‌شود» بسازد مگر runtime همان
-  مقدار را به‌صورت معتبر expose کرده باشد.
-
-## Announcement و focus
-
-visual severity و announcement urgency دو تصمیم مستقل‌اند:
-
-- Error همیشه `alert` نیست.
-- Success معمولی باید non-interruptive بماند.
-- focus فقط به‌دلیل ظاهرشدن Toast جابه‌جا نمی‌شود.
-- action داخل Notification keyboard-accessible است اما autofocus نمی‌گیرد.
-- یک event را بی‌دلیل با Toast، focus move و live announcement تکرار نکنید.
-- اگر پیام خودکار ناپدید می‌شود، runtime باید فرصت کافی برای خواندن و action را
-  فراهم کند.
-
-این سند semantic role یا politeness ثابت برای هر severity تعیین نمی‌کند.
+معنی Timeout indicator در [Notification component](../../../design-system/components/notification.md#timeout-indicator)
+تعریف شده است. سهم محتوا wording است: copy یا accessible name آن را «پیشرفت»،
+«در حال تکمیل» یا درصد outcome نمی‌نامد (`NTC-014`)، و copy نباید عددی مانند «۵ ثانیه دیگر بسته می‌شود» بسازد مگر
+runtime همان مقدار را به‌صورت معتبر expose کرده باشد.
 
 ## State truth
 
-- Success فقط پس از outcome تأییدشده نوشته می‌شود.
-- Warning شکست قطعی نیست و نباید به Error تبدیل شود.
+- Success فقط پس از outcome تأییدشده و Error فقط پس از failure واقعی نوشته
+  می‌شود (`NTF-005`).
 - Error از pattern خطا، مشکل و recovery معلوم را می‌گیرد.
 - Loading/Progress با Notification success اشتباه نمی‌شود.
-- pre-action destructive warning از Danger semantics استفاده می‌کند، نه Error
-  feedback.
-
-```text
-پیش از حذف: این اقدام آگهی را برای همیشه حذف می‌کند. → Danger callout
-پس از شکست: آگهی حذف نشد. دوباره تلاش کنید. → Error notification
-```
+- هشدار مخرب پیش از action متعلق به [الگوی confirmation](../patterns/confirmations.md) است.
 
 ## Terminology و Localization
 
-- action و object را با terminology همان audience و surface نام ببرید.
+- action و object را با terminology همان audience و surface نام ببرید (`NTC-020`).
 - count، amount، date و variable را با formatter معتبر نمایش دهید.
 - identifier، نام کاربر و متن دوجهته را isolate کنید.
 - internal code، raw placeholder یا نام سرویس را جای پیام کاربر نشان ندهید.
@@ -239,43 +187,42 @@ visual severity و announcement urgency دو تصمیم مستقل‌اند:
 
 ### باید
 
-- `NTC-001` Inline Notification یا Toast از context، persistence و نیاز به action انتخاب شود، نه فقط severity.
-- `NTC-003` severity فقط یکی از Info، Success، Warning یا Error و مطابق معنی state باشد.
+- `NTC-003` Message با معنی severity انتخاب‌شده هم‌خوان باشد؛ Warning ریسک را بگوید نه شکست را، و Info نتیجهٔ Success یا Error را القا نکند.
 - `NTC-005` Message required باشد و نتیجه یا وضعیت واقعی را مستقل و روشن نام ببرد.
 - `NTC-006` Inline Description فقط context، consequence یا recovery تکمیلی و غیرتکراری اضافه کند.
 - `NTC-007` Toast Title فقط در صورت افزودن دسته‌بندی یا object تازه استفاده شود و Message را تکرار نکند.
-- `NTC-009` Notification حداکثر یک action معنادار و واقعاً قابل‌استفاده داشته باشد.
 - `NTC-010` navigation از Link و operation از Button با label نتیجه‌محور استفاده کند.
 - `NTC-011` Undo یا action ضروری فقط با behavior تأییدشده و فرصت دسترسی کافی ارائه شود.
 - `NTC-012` Dismiss موجود accessible name و Tooltip فارسی «بستن» داشته باشد.
-- `NTC-014` Timeout indicator فقط عمر auto-dismiss Toast را نشان دهد و task progress نامیده نشود.
-- `NTC-015` announcement urgency مستقل از visual severity و با کم‌مزاحمت‌ترین سازوکار کافی تعیین شود.
-- `NTC-018` Success فقط پس از outcome تأییدشده و Error فقط پس از failure واقعی اعلام شود.
-- `NTC-019` recovery یا action لازم در presentation ماندگار و قابل‌دسترسی باقی بماند.
 - `NTC-020` action و object با terminology همان audience و surface نامیده شوند.
 - `NTC-021` count، amount، date، identifier، نام و متن دوجهته با formatter و bidi contract معتبر نمایش داده شوند.
 
 ### نباید
 
 - `NTC-002` Inline Notification و Toast یک component با Type axis مشترک فرض نشوند.
-- `NTC-004` Danger یا High contrast به‌عنوان severity پنجم استفاده نشود.
-- `NTC-008` متن بلند، confirmation، instruction حیاتی یا recovery ماندگار در Toast گذرا قرار نگیرد.
-- `NTC-013` timing، stacking، queue، placement یا dismissibility تعریف‌نشده ساخته نشود.
-- `NTC-016` focus فقط به‌دلیل ظاهرشدن Toast جابه‌جا نشود و action autofocus نگیرد.
-- `NTC-017` یک event بی‌دلیل با Toast، focus move و live announcement تکرار نشود.
-- `NTC-022` پیام کلی، تبلیغاتی، هیجانی، ایموجی‌محور یا success زودهنگام نوشته نشود.
+- `NTC-008` متن Toast confirmation، instruction حیاتی یا recovery ماندگار را حمل نکند و فقط بازخورد کوتاه و خودبسنده باشد.
+- `NTC-014` Timeout indicator در copy یا accessible name «پیشرفت»، «در حال تکمیل» یا درصد outcome نامیده نشود.
+
+### بازنشسته (مالک فعلی)
+
+- `NTC-001` → `design-system.pattern.notifications`: انتخاب Inline Notification یا Toast تصمیم presentation در Design System است.
+- `NTC-004` → `design-system.pattern.notifications`، `design-system.component.notification`: Danger و High contrast به‌عنوان severity را Design System رد کرده است.
+- `NTC-009` → `design-system.pattern.notifications`: سقف تعداد action تصمیم composition در Design System است؛ واقعی‌بودن action در NTC-011 می‌ماند.
+- `NTC-013` → `NTF-014`: تکرار قاعدهٔ الگو دربارهٔ اختراع‌نکردن timing، stacking و dismissibility.
+- `NTC-015` → `design-system.pattern.notifications`، `design-system.accessibility.dynamic-content-and-feedback`: فوریت announcement سازوکار دسترس‌پذیری است، نه wording.
+- `NTC-016` → `design-system.pattern.notifications`، `design-system.accessibility.dynamic-content-and-feedback`: focus و autofocus در Toast رفتار تعاملی است؛ عین NTF-012.
+- `NTC-017` → `design-system.pattern.notifications`، `design-system.accessibility.dynamic-content-and-feedback`: هماهنگی Toast، focus و live announcement سازوکار تعاملی است.
+- `NTC-018` → `NTF-005`: تکرار قاعدهٔ الگو؛ NTF-005 اکنون Success و Error هر دو را پوشش می‌دهد.
+- `NTC-019` → `design-system.pattern.notifications`: ماندگاری recovery و action یک شکاف باز presentation در Design System است و در copy پر نمی‌شود.
+- `NTC-022` → `NTF-008`، `NTF-009`: تکرار قواعد الگو دربارهٔ پیام کلی و هیجان‌زده.
 
 <!-- /generated:content-rules -->
 
 ## مسائل باز
 
-- exact Toast timeout duration.
-- stacking، queue و maximum simultaneous Toasts.
-- responsive placement.
-- default dismissibility/persistence هر feedback class.
-- actionable Toast timing و fallback behavior.
-- executable live-region/screen-reader tests.
-- inverse Button و Icon Button treatment برای High Toast.
+شکاف‌های timing، stacking، placement، dismissibility، actionable Toast و High
+Toast در [Design System Notifications](../../../design-system/patterns/notifications.md#variations-and-gaps)
+پیگیری می‌شوند و در copy پر نمی‌شوند.
 
 ## ارزیابی
 

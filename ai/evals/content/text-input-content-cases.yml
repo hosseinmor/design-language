@@ -15,7 +15,7 @@ cases:
       placeholder: name@example.com
     expected:
       valid: true
-      checked_rules: [TXT-001, TXT-002, TXT-003, TXT-004, TXT-010, TXT-013, TXT-018]
+      checked_rules: [TXT-001, TXT-002, INS-004, INS-005, TXT-004, INS-009, TXT-018]
       violations: []
 
   - id: marked_job_title_example
@@ -28,7 +28,7 @@ cases:
       placeholder: "مثال: طراح محصول"
     expected:
       valid: true
-      checked_rules: [TXT-002, TXT-004, TXT-005, TXT-010]
+      checked_rules: [TXT-002, TXT-004, INS-011, INS-009]
       violations: []
 
   - id: confirmed_character_limit_helper
@@ -42,7 +42,7 @@ cases:
       helper: حداکثر ۱۰۰ نویسه
     expected:
       valid: true
-      checked_rules: [TXT-002, TXT-006, TXT-008, TXT-010, TXT-013]
+      checked_rules: [TXT-002, TXT-006, TXT-008, INS-009]
       violations: []
 
   - id: required_mobile_is_visible_and_programmatic
@@ -57,7 +57,7 @@ cases:
       required_indicator: الزامی
     expected:
       valid: true
-      checked_rules: [TXT-002, TXT-009, TXT-013]
+      checked_rules: [TXT-002, INS-010]
       violations: []
 
   - id: actionable_email_error
@@ -72,7 +72,7 @@ cases:
       error: ایمیل را با قالب name@example.com وارد کنید.
     expected:
       valid: true
-      checked_rules: [TXT-008, TXT-011, TXT-013, TXT-014]
+      checked_rules: [TXT-008, TXT-011, ERR-003]
       violations: []
 
   - id: essential_job_title_requirement_survives_error
@@ -87,7 +87,7 @@ cases:
       error: عنوان شغلی باید حداکثر ۱۰۰ نویسه داشته باشد.
     expected:
       valid: true
-      checked_rules: [TXT-008, TXT-011, TXT-012, TXT-013, TXT-014]
+      checked_rules: [TXT-008, TXT-011, INS-014, ERR-003]
       violations: []
 
   - id: user_value_preserved
@@ -142,8 +142,8 @@ cases:
       placeholder: ایمیل خود را وارد کنید
     expected:
       valid: false
-      checked_rules: [TXT-002, TXT-003, TXT-013]
-      violations: [TXT-002, TXT-003, TXT-013]
+      checked_rules: [TXT-002, INS-004, INS-005]
+      violations: [TXT-002, INS-004, INS-005]
 
   - id: required_format_only_in_placeholder
     context:
@@ -156,8 +156,8 @@ cases:
       placeholder: ۱۰ رقم، بدون خط تیره
     expected:
       valid: false
-      checked_rules: [TXT-003, TXT-004, TXT-007]
-      violations: [TXT-003, TXT-004, TXT-007]
+      checked_rules: [INS-004, INS-005, TXT-004, INS-007]
+      violations: [INS-004, INS-005, TXT-004, INS-007]
 
   - id: placeholder_repeats_label
     context:
@@ -169,8 +169,8 @@ cases:
       helper: ایمیل خود را وارد کنید.
     expected:
       valid: false
-      checked_rules: [TXT-004, TXT-006, TXT-010]
-      violations: [TXT-004, TXT-006, TXT-010]
+      checked_rules: [TXT-004, TXT-006, INS-009]
+      violations: [TXT-004, TXT-006, INS-009]
 
   - id: unmarked_example_looks_prefilled
     context:
@@ -182,8 +182,8 @@ cases:
       placeholder: طراح محصول
     expected:
       valid: false
-      checked_rules: [TXT-005]
-      violations: [TXT-005]
+      checked_rules: [INS-011]
+      violations: [INS-011]
 
   - id: invented_limit_in_helper
     context:
@@ -222,8 +222,8 @@ cases:
       info: تاریخ را به تقویم شمسی وارد کنید.
     expected:
       valid: false
-      checked_rules: [TXT-007, TXT-008]
-      violations: [TXT-007]
+      checked_rules: [INS-007, TXT-008]
+      violations: [INS-007]
 
   - id: unexplained_visual_required_marker
     context:
@@ -236,8 +236,8 @@ cases:
       label: شماره موبایل *
     expected:
       valid: false
-      checked_rules: [TXT-009, TXT-013]
-      violations: [TXT-009, TXT-013]
+      checked_rules: [INS-010]
+      violations: [INS-010]
 
   - id: generic_color_only_error
     context:
@@ -250,8 +250,8 @@ cases:
       label: ایمیل
     expected:
       valid: false
-      checked_rules: [TXT-011, TXT-013]
-      violations: [TXT-011, TXT-013]
+      checked_rules: [TXT-011]
+      violations: [TXT-011]
 
   - id: generic_invalid_error
     context:
@@ -264,8 +264,8 @@ cases:
       error: نامعتبر است.
     expected:
       valid: false
-      checked_rules: [TXT-011, TXT-014]
-      violations: [TXT-011, TXT-014]
+      checked_rules: [TXT-011, ERR-003]
+      violations: [TXT-011, ERR-003]
 
   - id: helper_requirement_disappears_on_error
     context:
@@ -278,8 +278,8 @@ cases:
       error: عنوان شغلی نامعتبر است.
     expected:
       valid: false
-      checked_rules: [TXT-011, TXT-012]
-      violations: [TXT-011, TXT-012]
+      checked_rules: [TXT-011, INS-014]
+      violations: [TXT-011, INS-014]
 
   - id: error_uses_different_field_term
     context:
@@ -291,8 +291,8 @@ cases:
       error: اپلیکیشن را کامل کنید.
     expected:
       valid: false
-      checked_rules: [TXT-011, TXT-014]
-      violations: [TXT-014]
+      checked_rules: [TXT-011, ERR-003]
+      violations: [ERR-003]
 
   - id: user_value_rewritten_for_tone
     context:
@@ -372,8 +372,8 @@ cases:
       helper: ایمیل را تایپ کنید؛ جای‌گذاری و تکمیل خودکار مجاز نیست.
     expected:
       valid: false
-      checked_rules: [TXT-008, TXT-020]
-      violations: [TXT-008, TXT-020]
+      checked_rules: [TXT-008, INS-020]
+      violations: [TXT-008, INS-020]
 
   - id: invented_warning_state
     context:

@@ -127,14 +127,13 @@ label پیش از activation نباید completion را اعلام کند. «ذ�
 
 ## رابطه با hierarchy و style
 
-copy نباید با لحن پرهیجان ضعف hierarchy را جبران کند. اول action اصلی flow را
-از Product Knowledge و `action-hierarchy` تعیین کنید، سپس label آن را بنویسید.
-
-- Brand به‌معنی «هر CTA مهم» نیست؛ فقط برای لحظهٔ conversion یا ورود
-  محصول‌تعریف‌شده و تأییدشده است.
-- Primary action اصلی operational است.
-- Ghost معمولاً برای خروج‌هایی مانند «انصراف»، «بازگشت» یا «فعلاً نه» است.
-- Danger فقط وقتی consequence مخرب یا دشواربازگشت تأیید شده باشد.
+انتخاب Brand، Primary، Ghost یا Danger تصمیم style و hierarchy است و مالک آن
+[Button](../../../design-system/components/button.md)،
+[Action Hierarchy](../../interaction/action-hierarchy.md) و
+[Destructive Actions](../../../design-system/patterns/destructive-actions.md) هستند.
+copy نباید با لحن پرهیجان ضعف hierarchy را جبران کند و شدت واژهٔ label دلیل
+انتخاب style نیست. اول action اصلی flow را از Product Knowledge و همان منابع
+تعیین کنید، سپس label آن را بنویسید.
 
 از واژه‌هایی مانند «ویژه»، «فوری»، «هوشمند» یا «رایگان» برای قوی‌ترکردن CTA
 استفاده نکنید، مگر همان ادعا بخشی از product truth و برای تصمیم کاربر ضروری
@@ -142,8 +141,10 @@ copy نباید با لحن پرهیجان ضعف hierarchy را جبران کن
 
 ## Confirmation و خروج امن
 
-در confirmation، label اصلی action و object را نام می‌برد و label ثانویه راه
-خروج امن را روشن می‌کند:
+قواعد برچسب confirmation مالکشان [الگوی confirmation](../patterns/confirmations.md)
+است (`CNF-005`، `CNF-006`، `CNF-007`). `BTN-004` فقط چون هر action پیامددار، نه
+فقط confirmation، را پوشش می‌دهد این‌جا می‌ماند. در confirmation، label اصلی action
+و object را نام می‌برد و label ثانویه راه خروج امن را روشن می‌کند:
 
 ```text
 [حذف آگهی] [انصراف]
@@ -212,10 +213,8 @@ error feedback: تغییرات ذخیره نشد. دوباره تلاش کنید
 - `BTN-002` کوتاه‌ترین label دقیق و بدون ابهام در context واقعی انتخاب شود.
 - `BTN-003` object یا scope هرجا برای فهم، تمایز یا consequence لازم است در label بیاید.
 - `BTN-006` Button برای action استفاده شود و navigation مستقل Link semantics داشته باشد.
-- `BTN-007` Brand، Primary و Danger از معنی، hierarchy و consequence تأییدشده انتخاب شوند، نه از شدت واژهٔ label.
 - `BTN-009` object با اصطلاح canonical همان audience و surface نامیده شود.
 - `BTN-011` در Loading هویت label پایه ثابت بماند و با status طولانی جایگزین نشود.
-- `BTN-012` در confirmation، action اصلی و راه خروج امن labelهای صریح و غیرهم‌معنا داشته باشند.
 - `BTN-013` label دیداری و accessible name باید از نظر نتیجهٔ action همسو باشند.
 - `BTN-014` Buttonهای هم‌نام با action یا object متفاوت باید از طریق label یا context برنامه‌وار کافی متمایز شوند.
 - `BTN-015` عدد، identifier و variable پویا در label باید از قرارداد localization و bidi پیروی کند.
@@ -227,6 +226,11 @@ error feedback: تغییرات ذخیره نشد. دوباره تلاش کنید
 - `BTN-008` label نباید ادعای تبلیغاتی، فشار احساسی یا فوریت ساختگی را برای تقویت CTA اضافه کند.
 - `BTN-010` implementation name، API field یا نام داخلی نباید به label کاربر منتقل شود.
 - `BTN-016` label نباید جملهٔ توضیحی، punctuation پایانی، emoji یا تأکید تزئینی باشد.
+
+### بازنشسته (مالک فعلی)
+
+- `BTN-007` → `button`، `design-system.experience-rule.action-hierarchy`: انتخاب Brand، Primary یا Danger تصمیم style و hierarchy در Design System است.
+- `BTN-012` → `CNF-005`، `CNF-006`: تکرار قواعد الگوی confirmation برای برچسب action اصلی و خروج امن.
 
 <!-- /generated:content-rules -->
 

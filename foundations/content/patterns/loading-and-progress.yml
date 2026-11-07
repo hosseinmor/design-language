@@ -25,8 +25,8 @@ source_state:
     - design-system.accessibility.dynamic-content-and-feedback
     - design-system.accessibility.focus-management
     - button
-  scaffold_not_authoritative:
     - design-system.pattern.loading-and-progress
+  scaffold_not_authoritative:
     - design-system.experience-rule.loading
 
 goal: >
@@ -91,11 +91,6 @@ rules:
     dimension: product_truth
     key: promise_time_or_near_completion
     statement: زمان پایان، کوتاه‌بودن انتظار یا نزدیک‌بودن پایان بدون منبع معتبر وعده داده نشود.
-  - id: LDP-008
-    obligation: must
-    dimension: terminology
-    key: preserve_surface_terms
-    statement: نام action و object با اصطلاح همان مخاطب و سطح UI هماهنگ بماند.
   - id: LDP-009
     obligation: must_not
     dimension: product_truth
@@ -138,9 +133,9 @@ rules:
     statement: cancellation، ادامهٔ پس‌زمینه‌ای یا خروج امن بدون رفتار تأییدشده وعده داده نشود.
   - id: LDP-017
     obligation: must_not
-    dimension: presentation
+    dimension: product_truth
     key: invent_timing_or_skeleton_behavior
-    statement: threshold نمایش، timing یا رفتار دقیق Skeleton از scaffoldهای تأییدنشده استنتاج نشود.
+    statement: متن threshold نمایش، timing یا رفتار Skeleton را که Design System تعریف نکرده است وعده ندهد یا توصیف نکند.
 
 anatomy:
   required_when_text_is_needed:
@@ -201,5 +196,10 @@ unknowns:
   - امکان و اثر cancellation در هر operation
   - policy ادامهٔ پس‌زمینه‌ای و notification پس از پایان
   - cadence مناسب announcement برای هر نوع progress
+
+retired_rules:
+  - id: LDP-008
+    superseded_by: [VOICE-007]
+    reason: تکرار قاعدهٔ عمومی اصطلاح canonical در product voice؛ عین NTF-004.
 
 evaluation_source: ../../../ai/evals/content/loading-progress-cases.yml

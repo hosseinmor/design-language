@@ -15,6 +15,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+import json
+
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -46,6 +48,7 @@ RULE_DIMENSIONS = {
     "interaction": "Interactive behavior such as data preservation and input handling.",
 }
 RULES_WITHOUT_KEY = {"product-voice.yml"}
+MANIFEST = ROOT / "registry" / "manifest.generated.json"
 REQUIRED_FIELDS = ("schema_version", "id", "title", "status", "language")
 
 
@@ -62,7 +65,10 @@ def load(path: Path) -> dict[str, Any]:
 
 
 def validate_contract(
-    path: Path, prefixes: dict[str, str], all_ids: dict[str, str]
+    path: Path,
+    prefixes: dict[str, str],
+    all_ids: dict[str, str],
+    retired: dict[str, list[str]] | None = None,
 ) -> list[str]:
     errors: list[str] = []
     label = rel(path)
@@ -114,6 +120,40 @@ def validate_contract(
             else:
                 keys.append(key)
 
+    retired = {} if retired is None else retired
+    retired_items = data.get("retired_rules")
+    if retired_items is not None and not isinstance(retired_items, list):
+        errors.append(f"{label}: `retired_rules` must be a list")
+        retired_items = []
+    active = {r.get("id") for r in rules if isinstance(r, dict)}
+    for index, item in enumerate(retired_items or []):
+        where = f"{label}: retired_rules[{index}]"
+        if not isinstance(item, dict):
+            errors.append(f"{where} must be a mapping")
+            continue
+        rule_id = item.get("id")
+        match = RULE_ID_RE.fullmatch(rule_id) if isinstance(rule_id, str) else None
+        if not match:
+            errors.append(f"{where}: id must match ABC-000")
+            continue
+        where = f"{label}: retired {rule_id}"
+        own_prefixes.add(match.group(1))
+        if rule_id in active:
+            errors.append(f"{where}: a retired id cannot also be an active rule")
+        if rule_id in retired:
+            errors.append(f"{where}: duplicate retired rule id")
+        owners = item.get("superseded_by")
+        if not isinstance(owners, list) or not owners or not all(
+            isinstance(o, str) and o.strip() for o in owners
+        ):
+            errors.append(f"{where}: `superseded_by` must be a non-empty list of ids")
+            owners = []
+        if rule_id in owners:
+            errors.append(f"{where}: cannot supersede itself")
+        if not isinstance(item.get("reason"), str) or not item["reason"].strip():
+            errors.append(f"{where}: missing non-empty `reason`")
+        retired[rule_id] = list(owners)
+
     if len(own_prefixes) > 1:
         errors.append(f"{label}: rules must share one id prefix, found {sorted(own_prefixes)}")
     for prefix in own_prefixes:
@@ -150,14 +190,51 @@ def referenced_rule_ids(value: Any) -> set[str]:
     return found
 
 
-def validate_eval_references(all_ids: dict[str, str]) -> list[str]:
+def validate_eval_references(
+    all_ids: dict[str, str], retired: dict[str, list[str]] | None = None
+) -> list[str]:
     errors: list[str] = []
-    known_prefixes = {RULE_ID_RE.fullmatch(i).group(1) for i in all_ids}
+    retired = retired or {}
+    known_prefixes = {RULE_ID_RE.fullmatch(i).group(1) for i in [*all_ids, *retired]}
     for path in sorted(EVAL_DIR.glob("*.yml")):
         for rule_id in sorted(referenced_rule_ids(load(path))):
             match = RULE_ID_RE.fullmatch(rule_id)
-            if match and match.group(1) in known_prefixes and rule_id not in all_ids:
-                errors.append(f"{path.relative_to(ROOT)}: unknown rule id `{rule_id}`")
+            if rule_id in retired:
+                errors.append(
+                    f"{rel(path)}: retired rule id `{rule_id}`; "
+                    f"check {', '.join(retired[rule_id])} instead"
+                )
+            elif match and match.group(1) in known_prefixes and rule_id not in all_ids:
+                errors.append(f"{rel(path)}: unknown rule id `{rule_id}`")
+    return errors
+
+
+def document_ids() -> set[str]:
+    try:
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return set()
+    return {
+        doc["id"] for doc in manifest.get("documents") or [] if isinstance(doc, dict)
+    } | set((manifest.get("aliases") or {}).keys())
+
+
+def validate_retired_owners(
+    all_ids: dict[str, str], retired: dict[str, list[str]], docs: set[str]
+) -> list[str]:
+    """Each retired id is reserved and resolves to an active rule or a document."""
+    errors: list[str] = []
+    for rule_id, owners in sorted(retired.items()):
+        if rule_id in all_ids:
+            errors.append(f"retired {rule_id}: id is reused by {all_ids[rule_id]}")
+        for owner in owners:
+            if owner in retired:
+                errors.append(f"retired {rule_id}: `{owner}` is itself retired")
+            elif RULE_ID_RE.fullmatch(owner):
+                if owner not in all_ids:
+                    errors.append(f"retired {rule_id}: unknown owner rule `{owner}`")
+            elif owner not in docs:
+                errors.append(f"retired {rule_id}: unknown owner document `{owner}`")
     return errors
 
 
@@ -174,9 +251,11 @@ def main() -> int:
     errors: list[str] = []
     prefixes: dict[str, str] = {}
     all_ids: dict[str, str] = {}
+    retired: dict[str, list[str]] = {}
     for path in contract_paths():
-        errors.extend(validate_contract(path, prefixes, all_ids))
-    errors.extend(validate_eval_references(all_ids))
+        errors.extend(validate_contract(path, prefixes, all_ids, retired))
+    errors.extend(validate_retired_owners(all_ids, retired, document_ids()))
+    errors.extend(validate_eval_references(all_ids, retired))
 
     if errors:
         print("Content contract validation failed:")
@@ -195,7 +274,7 @@ def main() -> int:
     summary = ", ".join(f"{k}={v}" for k, v in sorted(dimensions.items()))
     print(
         f"Content contracts are valid: {len(contract_paths())} contracts, "
-        f"{len(all_ids)} rules; {summary}"
+        f"{len(all_ids)} rules, {len(retired)} retired; {summary}"
     )
     return 0
 

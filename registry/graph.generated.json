@@ -271,7 +271,7 @@
     },
     {
       "from": "content.component.modal",
-      "to": "design-system.component.modal",
+      "to": "design-system.component.dialog",
       "type": "related"
     },
     {
@@ -586,6 +586,11 @@
     },
     {
       "from": "content.pattern.error",
+      "to": "design-system.accessibility.content",
+      "type": "related"
+    },
+    {
+      "from": "content.pattern.error",
       "to": "design-system.accessibility.dynamic-content-and-feedback",
       "type": "related"
     },
@@ -596,7 +601,7 @@
     },
     {
       "from": "content.pattern.error",
-      "to": "design-system.component.modal",
+      "to": "design-system.component.dialog",
       "type": "related"
     },
     {
@@ -2542,6 +2547,16 @@
     {
       "from": "design-system.pattern.loading-and-progress",
       "to": "design-system.reference.component-mapping",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.notifications",
+      "to": "content.component.notification",
+      "type": "related"
+    },
+    {
+      "from": "design-system.pattern.notifications",
+      "to": "content.pattern.notifications",
       "type": "related"
     },
     {

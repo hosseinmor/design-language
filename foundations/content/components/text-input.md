@@ -58,6 +58,17 @@ Content System هستند. این سند مشخص نمی‌کند کدام field
 زمانی اجرا می‌شود یا چه input type و autocomplete tokenی برای یک field واقعی
 درست است.
 
+### قواعد ارثی
+
+قواعد عمومی Label، Placeholder، Helper، Example، requiredness و حفظ requirement
+هنگام Error مالکشان [الگوی دستورالعمل و متن راهنما](../patterns/instructions-and-helper-text.md)
+است (`INS-004`، `INS-005`، `INS-007`، `INS-009`، `INS-010`، `INS-011`، `INS-014`،
+`INS-020`) و حفظ اصطلاح Label در Error مالکش [الگوی خطا](../patterns/errors.md)
+است (`ERR-003`). ارتباط برنامه‌وار accessible name، Helper و Error با input در
+[Accessibility forms](../../../accessibility/forms.md) تعریف شده است. این سند
+فقط قیدهای مخصوص Text Input را اضافه می‌کند؛ بخش‌های زیر نمونه‌های همان قواعد
+در anatomy این component هستند.
+
 ## ابتدا roleها را جدا کنید
 
 ```text
@@ -247,14 +258,9 @@ Placeholder یا copy نباید component اشتباه را قابل‌قبول
 - `TXT-001` نقش Label، Placeholder، Helper، Value و Error پیش از نوشتن مشخص شود.
 - `TXT-002` Label purpose field را با اصطلاح همان surface مستقل از Placeholder و Value نام ببرد.
 - `TXT-004` Placeholder فقط در صورت افزودن example یا format hint کوتاه و غیرضروری استفاده شود.
-- `TXT-005` exampleی که ممکن است Value واقعی برداشت شود با contextی مانند «مثال:» مشخص شود.
 - `TXT-006` Helper کوتاه، field-specific، غیرتکراری و شامل context تأییدشده‌ای فراتر از Label باشد.
 - `TXT-008` limit، format، reason، privacy، storage، consequence و validation فقط از product truth نوشته شوند.
-- `TXT-009` requiredness واقعی با convention دیداری قابل‌فهم و semantics برنامه‌وار منتقل شود.
 - `TXT-011` Error شرط نقض‌شده و اصلاح معلوم را متنی و بدون اتکا به رنگ بیان کند.
-- `TXT-012` وقتی Error جای Helper treatment را می‌گیرد، requirement ضروری در Error یا Instruction ماندگار حفظ شود.
-- `TXT-013` accessible name، Helper و Error با input مربوط برنامه‌وار مرتبط شوند.
-- `TXT-014` Error نام field و object را با همان terminology Label و surface حفظ کند.
 - `TXT-015` Value واقعی کاربر یا سیستم مطابق type field حفظ شود و برای لحن برند بازنویسی نشود.
 - `TXT-016` Disabled و Read only مطابق state واقعی و semantics متمایز استفاده شوند.
 - `TXT-017` Trailing تعاملی action و accessible name معنادار داشته باشد و از icon تزئینی متمایز شود.
@@ -262,12 +268,20 @@ Placeholder یا copy نباید component اشتباه را قابل‌قبول
 
 ### نباید
 
-- `TXT-003` Placeholder تنها Label، accessible name یا محل requirement ضروری نباشد.
-- `TXT-007` instruction، requirement، Error یا consequence ضروری فقط پشت Info یا Tooltip پنهان نشود.
-- `TXT-010` Label، Placeholder و Helper با wording تکراری پر نشوند.
 - `TXT-019` متن چندخطی، optionهای ثابت یا رفتار تخصصی به Text Input عمومی تحمیل نشود.
-- `TXT-020` paste، autofill یا password manager بدون محدودیت مشخص و تأییدشده ممنوع نشود.
 - `TXT-021` Warning، normalization، input purpose یا state حل‌نشده به‌عنوان policy قطعی ساخته نشود.
+
+### بازنشسته (مالک فعلی)
+
+- `TXT-003` → `INS-004`، `INS-005`: تکرار قواعد الگوی instruction دربارهٔ Placeholder.
+- `TXT-005` → `INS-011`: تکرار قاعدهٔ الگوی instruction دربارهٔ جداکردن Example.
+- `TXT-007` → `INS-007`: تکرار قاعدهٔ الگوی instruction دربارهٔ پنهان‌نکردن محتوای ضروری.
+- `TXT-009` → `INS-010`: تکرار قاعدهٔ الگوی instruction دربارهٔ requiredness.
+- `TXT-010` → `INS-009`: عین قاعدهٔ الگوی instruction دربارهٔ تکرار wording.
+- `TXT-012` → `INS-014`: عین قاعدهٔ الگوی instruction دربارهٔ حفظ requirement هنگام Error.
+- `TXT-013` → `design-system.accessibility.forms`: ارتباط برنامه‌وار name، Helper و Error با input سازوکار accessibility است.
+- `TXT-014` → `ERR-003`: تکرار قاعدهٔ الگوی خطا دربارهٔ حفظ اصطلاح Label.
+- `TXT-020` → `INS-020`: عین قاعدهٔ الگوی instruction دربارهٔ paste، autofill و password manager.
 
 <!-- /generated:content-rules -->
 

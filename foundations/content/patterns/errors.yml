@@ -14,6 +14,7 @@ depends_on:
   voice: content.foundation.product_voice
   terminology: content.foundation.terminology
   accessibility:
+    - design-system.accessibility.content
     - design-system.accessibility.forms
     - design-system.accessibility.dynamic-content-and-feedback
 
@@ -71,9 +72,9 @@ rules:
     statement: پس از خطای قابل‌بازیابی، دادهٔ معتبر و نامرتبط کاربر حفظ شود.
   - id: ERR-010
     obligation: must
-    dimension: accessibility
-    key: expose_and_locate_error
-    statement: خطا در متن بیان، با محل مرتبط برنامه‌وار متصل و از مسیر منطقی قابل‌دسترسی باشد.
+    dimension: clarity
+    key: textual_self_contained_error
+    statement: خطا در متن بیان شود و مشکل و موضوع آن بدون اتکا به رنگ، آیکن یا محل نمایش قابل‌فهم باشد.
 
 anatomy:
   required:
