@@ -1,0 +1,269 @@
+schema_version: "0.1"
+id: content.eval.copy_generation_cases
+foundation_id: content.foundation.copy_brief
+language: fa-IR
+
+# هر case یک copy brief و ویژگی‌های قابل‌سنجش خروجی مورد انتظار است.
+# factهای این فایل آزمایشی‌اند (source: eval_fixture) و product truth نیستند.
+# صفحه‌ها و PRDهایی که با eval_fixture شروع می‌شوند ساختگی‌اند.
+
+cases:
+  - id: field_error_with_verified_limit
+    brief:
+      id: cover_note_too_long
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      contract: content.pattern.error
+      states:
+        - id: validation_error
+          slots: [problem, recovery]
+      concepts: [job_application]
+      context: کارجو هنگام ارسال درخواست شغلی متن همراهی بلندتر از حد مجاز نوشته است.
+      product_facts:
+        - id: cover_note_limit
+          statement: متن همراه درخواست شغلی حداکثر ۵۰۰ نویسه است.
+          status: verified
+          source: eval_fixture
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-004, ERR-001, ERR-002, ERR-007]
+      required_slots:
+        validation_error: [problem, recovery]
+      must_use_labels:
+        - {concept: job_application, label: درخواست شغلی}
+      forbidden_labels:
+        - {concept: job_application, label: اپلای}
+        - {concept: job_application, label: تقاضا}
+
+  - id: destructive_delete_job_post
+    brief:
+      id: delete_job_post
+      product: jobvision
+      audience: [employer_actor]
+      surface: public
+      contract: content.pattern.confirmation
+      states:
+        - id: destructive_confirmation
+          slots: [title, consequence, recoverability, primary_action, safe_exit]
+      concepts: [job_post]
+      context: کارفرما در پنل کارفرما آگهی «کارشناس فروش» را حذف می‌کند.
+      product_facts:
+        - id: deleted_job_post_is_permanent
+          statement: آگهی حذف‌شده قابل بازگردانی نیست.
+          status: verified
+          source: eval_fixture
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-004, CNF-002, CNF-003, CNF-004, CNF-005, CNF-006, CNF-007]
+      required_slots:
+        destructive_confirmation: [title, consequence, recoverability, primary_action, safe_exit]
+      must_use_labels:
+        - {concept: job_post, label: آگهی}
+      forbidden_labels:
+        - {concept: job_post, label: آگهی استخدام}
+        - {concept: job_post, label: وکنسی}
+
+  - id: empty_talent_pool
+    brief:
+      id: empty_talent_pool_folder
+      product: jobvision
+      audience: [employer_actor]
+      surface: public
+      contract: content.pattern.empty-states
+      states:
+        - id: empty_folder
+          slots: [message, primary_action]
+      concepts: [talent_pool, talent_search]
+      context: کارفرما تلنت پول را باز کرده و هنوز هیچ رزومه‌ای ذخیره نکرده است.
+      product_facts:
+        - id: save_from_talent_search
+          statement: کارفرما رزومه‌ها را از بانک رزومه در تلنت پول ذخیره می‌کند.
+          status: verified
+          source: eval_fixture
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-004, EST-002, EST-003, EST-004, EST-006]
+      required_slots:
+        empty_folder: [message, primary_action]
+      must_use_labels:
+        - {concept: talent_pool, label: تلنت پول}
+      forbidden_labels:
+        - {concept: talent_pool, label: مخزن استعداد}
+        - {concept: talent_pool, label: آرشیو رزومه}
+
+  - id: package_activated_success
+    brief:
+      id: package_activated
+      product: jobvision
+      audience: [employer_actor]
+      surface: public
+      contract: content.pattern.notifications
+      states:
+        - id: success
+          slots: [message]
+      concepts: [package]
+      context: پرداخت خرید بسته تأیید شده است.
+      product_facts:
+        - id: package_active_after_payment
+          statement: بسته پس از تأیید پرداخت فعال می‌شود.
+          status: verified
+          source: eval_fixture
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-004, NTF-003, NTF-005, NTF-009]
+      required_slots:
+        success: [message]
+      must_use_labels:
+        - {concept: package, label: بسته}
+      forbidden_labels:
+        - {concept: package, label: اشتراک}
+        - {concept: package, label: پلن}
+
+  - id: unknown_fact_becomes_question
+    brief:
+      id: view_contact_details
+      product: jobvision
+      audience: [employer_actor]
+      surface: public
+      contract: content.pattern.confirmation
+      states:
+        - id: consequential_confirmation
+          slots: [title, consequence, primary_action, safe_exit]
+      concepts: [resume_access, package]
+      context: کارفرما می‌خواهد اطلاعات تماس یک رزومه را ببیند.
+      product_facts:
+        - id: contact_view_consumes_balance
+          statement: مشاهدهٔ اطلاعات تماس یک رزومه از ماندهٔ بسته کم می‌کند.
+          status: unknown
+          question: آیا مشاهدهٔ اطلاعات تماس از ماندهٔ بسته کم می‌کند و به چه مقدار؟
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-002, BRF-004, CNF-002, CNF-005, CNF-006]
+      required_slots:
+        consequential_confirmation: [title, primary_action, safe_exit]
+      empty_slots:
+        consequential_confirmation: [consequence]
+      required_questions: [contact_view_consumes_balance]
+      forbidden_labels:
+        - {concept: resume_access, label: رزومهٔ خریده‌شده}
+
+  - id: draft_fact_is_flagged
+    brief:
+      id: resume_suggestions_ready
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      contract: content.pattern.ai-content-and-disclosure
+      states:
+        - id: output_ready
+          slots: [output_status, review_guidance]
+      concepts: [resume_ai_assistant]
+      context: ارزیابی دستیار هوشمند رزومه تمام شده و پیشنهادها آماده‌اند.
+      product_facts:
+        - id: suggestions_follow_resume_language
+          statement: پیشنهادهای دستیار هوشمند رزومه به زبان همان نسخهٔ رزومه ارائه می‌شوند.
+          status: draft
+          source: eval_fixture
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-003, BRF-004, AIC-005, AIC-006, AIC-008]
+      required_slots:
+        output_ready: [output_status, review_guidance]
+      draft_dependencies: [suggestions_follow_resume_language]
+      must_use_labels:
+        - {concept: resume_ai_assistant, label: دستیار هوشمند رزومه}
+
+  - id: product_without_layer_is_blocked
+    brief:
+      id: cando_hiring_request_error
+      product: cando
+      audience: [employer_actor]
+      surface: public
+      contract: content.pattern.error
+      states:
+        - id: validation_error
+          slots: [problem]
+      concepts: [hiring_request]
+      context: خطای ثبت درخواست در Cando.
+    expected:
+      outcome: blocked
+      checked_rules: [BRF-005]
+
+  - id: job_position_label_in_application_context
+    brief:
+      id: application_sent
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      contract: content.pattern.notifications
+      states:
+        - id: success
+          slots: [message]
+      concepts: [job_application, job_position]
+      context: درخواست شغلی کارجو برای موقعیت «کارشناس فروش» با موفقیت ثبت شده است.
+      product_facts:
+        - id: application_sent_after_save
+          statement: درخواست شغلی پس از ثبت موفق برای سازمان ارسال می‌شود.
+          status: verified
+          source: eval_fixture
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-004, NTF-003, NTF-005]
+      required_slots:
+        success: [message]
+      must_use_labels:
+        - {concept: job_position, label: موقعیت شغلی}
+      forbidden_labels:
+        - {concept: job_application, label: اپلای}
+
+  - id: new_concept_is_flagged
+    brief:
+      id: video_interview_invited
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      contract: content.pattern.notifications
+      states:
+        - id: success
+          slots: [message]
+      concepts:
+        - kind: new_concept
+          id: video_interview_invitation
+          source: {kind: prd, ref: eval_fixture_prd, decision: accepted}
+      context: کارفرما کارجو را به مصاحبهٔ ویدیویی دعوت کرده است؛ این مفهوم هنوز در Product Knowledge نیست.
+      product_facts:
+        - id: invitation_sent_after_employer_action
+          statement: دعوت پس از ثبت اقدام کارفرما برای کارجو ارسال می‌شود.
+          status: verified
+          source: eval_fixture
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-004, NTF-003, NTF-005]
+      required_slots:
+        success: [message]
+      draft_dependencies: [video_interview_invitation]
+
+  - id: product_knowledge_label_without_entry
+    brief:
+      id: empty_saved_jobs
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      contract: content.pattern.empty-states
+      states:
+        - id: empty_list
+          slots: [message]
+      concepts:
+        - kind: product_knowledge
+          product: jobvision
+          page: eval_fixture_saved_jobs
+          label: آگهی‌های ذخیره‌شده
+      context: کارجو هنوز هیچ آگهی‌ای ذخیره نکرده است.
+    expected:
+      outcome: copy
+      checked_rules: [BRF-001, BRF-004, EST-002, EST-009]
+      required_slots:
+        empty_list: [message]
+      must_use_labels:
+        - {concept: eval_fixture_saved_jobs, label: آگهی‌های ذخیره‌شده}

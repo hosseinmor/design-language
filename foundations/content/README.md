@@ -6,12 +6,14 @@ This directory contains reusable language decisions for JobVision and Cando:
 content-guidelines.md     Human entry point and routing
 product-voice.*           Shared voice and machine-readable contract
 localization.*            Persian, RTL, formatting, and localization rules
+copy-brief.*              Structured input and output contract for AI copy generation
 terminology/              Shared semantic lexicon
 components/               Copy contracts for reusable UI components
 patterns/                 Reusable message and interaction-language patterns
 ```
 
-Semantic regression cases live under `ai/evals/content/`. Product- and
+Semantic regression cases live under `ai/evals/content/`; copy-generation cases
+live under `ai/evals/content/generation/`. Product- and
 audience-specific business terminology stays in Product Knowledge; it is loaded
 at use time and is not mirrored here.
 

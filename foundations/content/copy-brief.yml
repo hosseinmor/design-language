@@ -1,0 +1,101 @@
+schema_version: "0.1"
+id: content.foundation.copy_brief
+title: قرارداد copy brief
+status: draft
+language: fa-IR
+scope:
+  - product-ui
+  - ai-generated-product-content
+
+description: >
+  ورودی ساخت‌یافتهٔ تولید copy با AI و قرارداد خروجی آن. brief فقط به
+  قراردادهای Design Language، مدخل‌های واژه‌نامه و factهای ثبت‌شده ارجاع می‌دهد؛
+  معنی، رفتار و قواعد محصول را تعریف نمی‌کند.
+
+depends_on:
+  voice: content.foundation.product_voice
+  terminology: content.foundation.terminology
+  localization: content.foundation.localization
+
+goal: >
+  هر copy تولیدشده قابل‌ردیابی به brief، قرارداد مالک و factهای منبع‌دار باشد؛
+  هر fact غایب به سؤال تبدیل شود، نه به حدس.
+
+# لایهٔ هویت کلامی هر محصول. «پایهٔ مشترک + لایهٔ هر محصول».
+# محصولی که لایه ندارد copy نمی‌گیرد (BRF-005).
+product_layers:
+  jobvision:
+    status: available
+    verbal_identity: content.foundation.product_voice
+  cando:
+    status: missing
+    reason: منبع هویت کلامی Cando در این مخزن ثبت نشده است و نباید از حدس ساخته شود.
+
+brief_schema:
+  required: [id, product, audience, surface, contract, states]
+  optional: [concepts, product_facts, context, constraints]
+  fields:
+    product: کلید یکی از product_layers.
+    audience: فهرست ID مدخل‌های واژه‌نامه با concept_kind برابر role، persona یا internal_role.
+    surface: یکی از مقادیر visibility در واژه‌نامه.
+    contract: ID یک قرارداد pattern یا component محتوا. tone_profile از همین قرارداد می‌آید و brief آن را تغییر نمی‌دهد.
+    states: فهرست {id, slots}. هر slot باید نقشی از anatomy قرارداد باشد و نقش‌های required همان قرارداد حذف نشوند.
+    concepts: >
+      فهرست مفهوم‌هایی که copy دربارهٔ آن‌هاست؛ هر مورد ID مدخل واژه‌نامه، یا
+      {kind: product_knowledge, product, page, label}، یا {kind: new_concept, id, source}
+      با source از نوع prd است.
+    product_facts: فهرست {id, statement, status, source | question}.
+    context: توضیح آزاد موقعیت؛ fact محصولی نیست و ادعای محصولی نمی‌سازد.
+    constraints: محدودیت‌های دقیق مانند طول، فقط وقتی از Figma یا قرارداد component آمده باشد.
+  fact_status:
+    verified: منبعی که خودش verified است لازم است.
+    draft: یک منبع مجاز لازم است؛ copy وابسته در draft_dependencies می‌آید.
+    unknown: منبع ندارد؛ question لازم است و copy آن را ادعا نمی‌کند.
+  fact_sources:
+    registered: ID یکی از sourceهای واژه‌نامه؛ بالاترین status همان state منبع است.
+    product_knowledge: "{kind: product_knowledge, product, page, state}؛ product همان محصول brief است و بالاترین status همان state صفحه."
+    prd: "{kind: prd, ref, decision: accepted | proposed}؛ verified فقط با accepted."
+    eval_fixture: فقط در fixtureهای eval مجاز است.
+  answers: >
+    Product Knowledge از کد پروداکشن استخراج می‌شود و دستی نوشته نمی‌شود. پاسخ دربارهٔ رفتار
+    تازهٔ همین کار به PRD جاری می‌رود و بعد از publish به PK می‌رسد؛ پاسخ دربارهٔ رفتار فعلی
+    که PK ندارد درخواست تغییر برای مالک PK می‌شود.
+
+output_contract:
+  required: [brief_id, outcome, checked_rules]
+  outcome: [copy, blocked]
+  fields:
+    copy: نگاشت state → slot → متن؛ فقط وقتی outcome برابر copy است.
+    checked_rules: ID قواعدی که copy در برابر آن‌ها نوشته شده است.
+    open_questions: فهرست {fact, question} برای هر fact با status برابر unknown.
+    draft_dependencies: فهرست {fact | concept, slots} برای هر slot که به fact با status برابر draft یا به مفهوم تازه تکیه دارد.
+    blocked_reason: فقط وقتی outcome برابر blocked است.
+
+rules:
+  - id: BRF-001
+    obligation: must
+    dimension: product_truth
+    key: brief_is_only_source
+    statement: copy فقط از brief، قراردادهای Design Language و factهای ارجاع‌شده ساخته شود؛ هیچ ادعای محصولی دیگری اضافه نشود.
+  - id: BRF-002
+    obligation: must_not
+    dimension: product_truth
+    key: assert_unknown_fact
+    statement: fact با status برابر unknown در copy ادعا یا القا نشود و در open_questions به سؤال تبدیل شود.
+  - id: BRF-003
+    obligation: must
+    dimension: product_truth
+    key: flag_draft_dependency
+    statement: هر slot که به fact با status برابر draft تکیه دارد در draft_dependencies ثبت شود.
+  - id: BRF-004
+    obligation: must
+    dimension: terminology
+    key: labels_from_terminology
+    statement: برچسب هر concept متناسب با audience و surface از منبع برچسب آن بیاید (برچسب هدف واژه‌نامه، وگرنه برچسب PK؛ برای مفهوم تازه قواعد نام‌گذاری DL با ثبت در draft_dependencies) و برچسب forbidden یا legacy در copy تازه نیاید.
+  - id: BRF-005
+    obligation: must_not
+    dimension: product_truth
+    key: write_without_product_layer
+    statement: برای محصولی که لایهٔ هویت کلامی آن موجود نیست copy تولید نشود؛ outcome برابر blocked با دلیل برگردد.
+
+evaluation_source: ../../ai/evals/content/generation/copy-generation-cases.yml

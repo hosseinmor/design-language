@@ -21,6 +21,7 @@ related:
   - content.pattern.loading-and-progress
   - content.pattern.ai-content-and-disclosure
   - content.pattern.instructions-and-helper-text
+  - content.copy-brief
 ---
 
 # Content Guidelines
@@ -60,6 +61,14 @@ source registry instead of hard-coding product URLs here. If the owning source
 is unavailable, record the claim as unknown rather than reconstructing it from
 old repository files or conversation history. Content owns naming and
 communication rules, not product behavior.
+
+## Generating copy with AI
+
+Start every AI copy-generation task from a [copy brief](copy-brief.md). The
+brief names the product, audience, surface, owning contract, states, concepts
+and sourced product facts; the generator returns copy per slot, the rules it
+checked, open questions for unknown facts and draft dependencies. A product
+without a verbal-identity layer returns `blocked` instead of copy.
 
 ## Voice and Tone
 
