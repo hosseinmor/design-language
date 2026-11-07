@@ -278,7 +278,7 @@ retired_rules:
     superseded_by: [CNF-005, CNF-006]
     reason: تکرار قواعد الگوی confirmation برای برچسب action اصلی و خروج امن.
   - id: MOD-010
-    superseded_by: [CNF-007]
-    reason: عین قاعدهٔ الگوی confirmation دربارهٔ «بله»، «خیر»، «تأیید» و «ادامه».
+    superseded_by: [BTN-004]
+    reason: عین قاعدهٔ Button دربارهٔ برچسب عمومی «بله»، «خیر»، «تأیید» و «ادامه».
 
 evaluation_source: ../../../ai/evals/content/modal-content-cases.yml

@@ -135,7 +135,7 @@ rules:
     obligation: must_not
     dimension: product_truth
     key: invent_timing_or_skeleton_behavior
-    statement: متن threshold نمایش، timing یا رفتار Skeleton را که Design System تعریف نکرده است وعده ندهد یا توصیف نکند.
+    statement: متن threshold نمایش، timing یا رفتار Skeleton را فقط وقتی بیان کند که در منبع تأییدشده یا copy brief آمده باشد.
 
 anatomy:
   required_when_text_is_needed:

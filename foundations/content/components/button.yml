@@ -126,7 +126,7 @@ rules:
     obligation: must_not
     dimension: clarity
     key: generic_consequential_label
-    statement: در action پیامددار، «بله»، «خیر»، «تأیید» یا «انجام» به‌تنهایی label نباشد.
+    statement: در action پیامددار، «بله»، «خیر»، «تأیید»، «ادامه» یا «انجام» به‌تنهایی label نباشد.
     evidence: [confirmation_pattern]
   - id: BTN-005
     obligation: must_not
