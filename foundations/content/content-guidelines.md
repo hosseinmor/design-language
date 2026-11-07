@@ -22,6 +22,7 @@ related:
   - content.pattern.ai-content-and-disclosure
   - content.pattern.instructions-and-helper-text
   - content.copy-brief
+  - content.copy-audit
 ---
 
 # Content Guidelines
@@ -69,6 +70,13 @@ brief names the product, audience, surface, owning contract, states, concepts
 and sourced product facts; the generator returns copy per slot, the rules it
 checked, open questions for unknown facts and draft dependencies. A product
 without a verbal-identity layer returns `blocked` instead of copy.
+
+## Auditing existing copy
+
+Audit production copy with the [copy audit](copy-audit.md) method. Every
+finding cites the violated rule or names a guideline gap, rewrites go through a
+copy brief, and items without full context are not judged. Inventories,
+findings and reports stay outside this repository.
 
 ## Voice and Tone
 
