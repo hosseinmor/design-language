@@ -53,6 +53,17 @@ class BriefTests(unittest.TestCase):
         value = brief(states=[{"id": "s", "slots": ["title", "primary_action"]}])
         self.assertTrue(any("required anatomy roles" in e for e in self.errors(value)))
 
+    def test_product_without_terminology_cannot_borrow_terms(self):
+        value = brief(product="cando", audience=["operator"], product_facts=[])
+        errors = self.errors(value)
+        self.assertTrue(any("has no terminology layer" in e for e in errors))
+        pk = {"kind": "product_knowledge", "product": "cando", "page": "p", "label": "x"}
+        self.assertEqual(self.errors(brief(product="cando", audience=["operator"], concepts=[pk], product_facts=[])), [])
+
+    def test_sources_are_scoped_to_the_brief_product(self):
+        value = brief(product="cando", audience=["operator"], concepts=[])
+        self.assertTrue(any("not a registered terminology source" in e for e in self.errors(value)))
+
     def test_audience_must_be_a_role_term(self):
         self.assertTrue(any("audience" in e for e in self.errors(brief(audience=["job_post"]))))
 

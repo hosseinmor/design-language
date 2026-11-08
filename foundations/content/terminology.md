@@ -2,8 +2,8 @@
 id: content.terminology
 collection: content
 type: content-guideline
-title: JobVision Product Terminology
-summary: Defines the semantic terminology model, audience-aware label rules, source boundaries, and machine-readable lexicon for JobVision product content.
+title: Product Terminology
+summary: Defines the semantic terminology model, the shared base and per-product terminology files, the stable and variable layers, production alignment during transition, audience-aware label rules, and source boundaries for product content.
 knowledge_state: unverified
 document_maturity: draft
 related:
@@ -21,10 +21,49 @@ topics:
   - ai-content
 ---
 
-# واژه‌نامهٔ محتوای محصول جاب‌ویژن
+# واژه‌نامهٔ محتوای محصول
 
 این سند قواعد استفاده از واژه‌نامه را برای انسان توضیح می‌دهد. منبع
-machine-readable واژگان در [`terminology/terms.yml`](terminology/terms.yml) است.
+machine-readable دو بخش دارد:
+
+- [`terminology/shared.yml`](terminology/shared.yml): schema، مدل اختیار و
+  قواعد مشترک همهٔ محصول‌ها، و فهرست فایل هر محصول (`products`).
+- یک فایل برای هر محصول، مثل [`terminology/jobvision.yml`](terminology/jobvision.yml):
+  مدخل‌ها، منابع، تصمیم‌ها و evalهای همان محصول.
+
+محصولی که فایل ندارد لایهٔ واژه‌نامه ندارد و برچسب‌هایش فقط از Product
+Knowledge خودش می‌آید. مدخل یک محصول برای محصول دیگر به کار نمی‌رود، حتی اگر
+مفهوم هم‌نام باشد؛ copy brief و آدیت هر مورد را فقط با واژه‌نامهٔ محصول خودش
+می‌سنجند. Cando فعلاً فایل ندارد.
+
+## ثابت و متغیر
+
+| لایه | محتوا | مالک | رفتار در طول توسعه |
+|---|---|---|---|
+| قواعد | قواعد نوشتن، نام‌گذاری ([NAM](naming.md))، policy مشترک | Design Language | ثابت؛ فقط با [فرایند تغییر](../../governance/change-process.md) |
+| راهنمای استفاده | برچسب UI هر مخاطب، قاعدهٔ زمینه، واژهٔ ممنوع، تمایز مفهوم‌ها | Design Language، فایل هر محصول | تقریباً ثابت؛ فقط وقتی مفهومی با مفهوم موجود قاطی شود خطی اضافه می‌شود |
+| واژگان | مفهوم، معنی، رفتار و برچسب فعلی | Product Knowledge | متغیر؛ با هر انتشار از کد استخراج می‌شود |
+
+مفهوم محصولی تازه به واژه‌نامه اضافه نمی‌شود؛ از PRD و
+[قواعد نام‌گذاری](naming.md) به کد و از آنجا به Product Knowledge می‌رسد.
+validator این مرز را نگه می‌دارد: مدخل یا به منبع Product Knowledge وصل است
+(`source_linked`)، یا مفهوم زبانی مال Design Language است (`not_applicable`).
+`needs_product_knowledge_reference` فقط برای فهرست ثابت مدخل‌های قدیمی
+(`UNRESOLVED_BASELINE` در validator) مجاز است و این فهرست فقط کوچک می‌شود.
+
+## دورهٔ گذار و هم‌راستایی
+
+هر مدخل `production_alignment` دارد:
+
+| state | معنی | فیلدهای لازم |
+|---|---|---|
+| `unverified` | برچسب انتخاب‌شده هنوز با پروداکشن مقایسه نشده است | — |
+| `differs` | پروداکشن برچسب دیگری نشان می‌دهد و برچسب این فایل هدف دورهٔ گذار است | `production_label` و `evidence` (ID یکی از `sources`) |
+| `aligned` | پروداکشن، و در نتیجه Product Knowledge، همان برچسب را دارد | — |
+
+`differs` موقت است: بعد از اصلاح پروداکشن، publish و استخراج Product
+Knowledge، مدخل `aligned` می‌شود. بعد از دورهٔ گذار، تغییر برچسب یک تصمیم
+محصولی است و مثل مفهوم تازه از PRD و Design Artifact می‌گذرد، نه از این فایل.
 
 ## مدل
 
@@ -155,7 +194,7 @@ Artifact ثبت می‌شود و بعد از publish از طریق استخرا�
 به‌روزکردن همین سند و validator اضافه شود. ترتیب اولویت قواعد در
 `product-voice.yml` تعریف می‌شود و این فایل فقط به آن ارجاع می‌دهد.
 
-## تصمیم‌های تثبیت‌شدهٔ اصلی
+## تصمیم‌های تثبیت‌شدهٔ اصلی جاب‌ویژن
 
 ### آگهی، موقعیت و فرصت
 

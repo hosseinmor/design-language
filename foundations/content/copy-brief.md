@@ -80,7 +80,7 @@ brief قالب میانی کار AI است، نه سندی که انسان بن�
 |---|---|---|
 | `id` | لازم | شناسهٔ snake_case |
 | `product` | لازم | کلید یکی از `product_layers` |
-| `audience` | لازم | ID مدخل‌های نقش در [واژه‌نامه](terminology/terms.yml) (`role`، `persona`، `internal_role`) |
+| `audience` | لازم | ID مدخل‌های نقش در واژه‌نامهٔ همان محصول (`role`، `persona`، `internal_role`)؛ محصولی که لایهٔ واژه‌نامه ندارد ID نقش را از Product Knowledge خودش می‌آورد |
 | `surface` | لازم | یکی از مقادیر `visibility` در واژه‌نامه |
 | `contract` | لازم | ID قرارداد محتوایی pattern یا component |
 | `states` | لازم | فهرست `{id, slots}`؛ slotها از anatomy همان قرارداد |
@@ -134,7 +134,7 @@ fact یک محصول از Product Knowledge محصول دیگر گرفته نم�
 
 | مفهوم | برچسب از کجا | اثر روی خروجی |
 |---|---|---|
-| مدخل [واژه‌نامهٔ DL](terminology/terms.yml) دارد | برچسب هدف همان مدخل | — |
+| در [واژه‌نامهٔ DL](terminology.md) همان محصول مدخل دارد | برچسب هدف همان مدخل | — |
 | مدخل ندارد ولی در PK هست | `label` ثبت‌شده در PK | — |
 | تازه است (`new_concept`) | نام‌گذاری با [قواعد NAM](naming.md)؛ wording مال Designer است | slot وابسته در `draft_dependencies` با `concept` ثبت می‌شود |
 

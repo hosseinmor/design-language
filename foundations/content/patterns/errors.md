@@ -149,7 +149,7 @@ topics:
 
 متن خطا اصطلاح جدید نمی‌سازد. اگر label فیلد «درخواست شغلی» است، پیام نباید آن
 را «اپلیکیشن» یا «ارسال رزومه» بنامد. ابتدا concept و مخاطب را در
-[`../terminology/terms.yml`](../terminology/terms.yml) پیدا کنید، سپس همان label
+واژه‌نامهٔ همان محصول (مثلاً [`../terminology/jobvision.yml`](../terminology/jobvision.yml)) پیدا کنید، سپس همان label
 را در مشکل و راه بازیابی نگه دارید.
 
 ## دسترس‌پذیری

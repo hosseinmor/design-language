@@ -75,7 +75,7 @@ machine-readable در [`naming.yml`](naming.yml) و caseها در
   این سند فقط برچسب را پوشش می‌دهد.
 - قواعد موجود تکرار نمی‌شوند: واژهٔ کدی
   ([`VOICE-010`](product-voice.md))، شکل کوتاه نام (`policy.context_rules` در
-  [`terms.yml`](terminology/terms.yml))، «دستیار» برای قابلیت ساده
+  [`shared.yml`](terminology/shared.yml))، «دستیار» برای قابلیت ساده
   ([`AIC-002`](patterns/ai-content-and-disclosure.md)) و نام محصول و برند
   ([بومی‌سازی](localization.md)).
 - نام یک محصول به محصول دیگر منتقل نمی‌شود. Cando تا ثبت لایهٔ هویت کلامی آن

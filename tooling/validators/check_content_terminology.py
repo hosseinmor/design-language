@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the machine-readable shared content terminology source."""
+"""Validate the shared terminology base and every per-product terminology file."""
 
 from __future__ import annotations
 
@@ -13,7 +13,16 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[2]
-TERMS_PATH = ROOT / "foundations" / "content" / "terminology" / "terms.yml"
+sys.path.insert(0, str(ROOT))
+
+from tooling.terminology_layers import (  # noqa: E402
+    SHARED_ID,
+    SHARED_KEYS,
+    SHARED_PATH,
+    merge,
+    product_files,
+)
+
 NAMING_PATH = ROOT / "foundations" / "content" / "naming.yml"
 NAMING_CASES_PATH = ROOT / "ai" / "evals" / "content" / "naming-cases.yml"
 ID_RE = re.compile(r"^[a-z][a-z0-9_]*$")
@@ -30,8 +39,15 @@ VALID_AUTHORITY_MIGRATION_STATES = {
     "needs_product_knowledge_reference",
     "not_applicable",
 }
+VALID_ALIGNMENT_STATES = {"unverified", "differs", "aligned"}
+# Product concepts still waiting for a Product Knowledge reference. Design
+# Language does not introduce product concepts, so this list may only shrink:
+# a new entry must link a Product Knowledge source or be language-owned.
+UNRESOLVED_BASELINE: dict[str, set[str]] = {
+    "jobvision": {"recruitment", "hiring", "ats_candidate", "hiring_request"},
+}
 TERM_KEYS = {
-    "id", "concept_kind", "authority", "canonical_internal", "definition",
+    "id", "concept_kind", "authority", "production_alignment", "canonical_internal", "definition",
     "domains", "visibility", "status", "evidence", "code_bindings",
     "preferred", "contextual_labels", "allowed", "action_labels", "avoid",
     "forbidden", "legacy_labels", "use_when", "avoid_when", "examples",
@@ -94,19 +110,43 @@ def nonempty_string(value: Any) -> bool:
     return isinstance(value, str) and bool(value.strip())
 
 
-def load_terms() -> dict[str, Any]:
+def load_yaml(path: Path) -> dict[str, Any]:
     try:
-        loaded = yaml.load(
-            TERMS_PATH.read_text(encoding="utf-8"), Loader=UniqueKeyLoader
-        )
+        loaded = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeyLoader)
     except FileNotFoundError:
-        raise SystemExit(f"ERROR missing terminology source: {TERMS_PATH}")
+        raise SystemExit(f"ERROR missing terminology source: {path}")
     except yaml.YAMLError as exc:
-        raise SystemExit(f"ERROR invalid YAML in {TERMS_PATH}: {exc}") from exc
-
+        raise SystemExit(f"ERROR invalid YAML in {path}: {exc}") from exc
     if not isinstance(loaded, dict):
-        raise SystemExit("ERROR terminology source must be a YAML mapping")
+        raise SystemExit(f"ERROR terminology source must be a YAML mapping: {path}")
     return loaded
+
+
+def layout_errors(shared: dict[str, Any], products: dict[str, dict[str, Any]]) -> list[str]:
+    """Check the split between the shared base and the product files."""
+    errors: list[str] = []
+    if shared.get("id") != SHARED_ID:
+        errors.append(f"shared.yml: id must be `{SHARED_ID}`")
+    for key in ("terms", "sources", "decision_log", "decision_queue", "unregistered_concepts"):
+        if key in shared:
+            errors.append(f"shared.yml: `{key}` belongs to a product file")
+    if not isinstance(shared.get("products"), dict) or not shared["products"]:
+        errors.append("shared.yml: `products` must map each product to its file")
+    for name, data in products.items():
+        where = f"{name} terminology"
+        if data.get("id") != f"{SHARED_ID}.{name}":
+            errors.append(f"{where}: id must be `{SHARED_ID}.{name}`")
+        if data.get("product") != name:
+            errors.append(f"{where}: `product` must be `{name}`")
+        if data.get("extends") != SHARED_ID:
+            errors.append(f"{where}: `extends` must be `{SHARED_ID}`")
+        for key in SHARED_KEYS:
+            if key in data and key != "schema_version" and key != "language":
+                errors.append(f"{where}: `{key}` belongs to shared.yml")
+        for key in ("schema_version", "language"):
+            if data.get(key) != shared.get(key):
+                errors.append(f"{where}: `{key}` must match shared.yml")
+    return errors
 
 
 def as_list(value: Any) -> list[Any]:
@@ -359,6 +399,29 @@ def validate(data: dict[str, Any], overrides: list[str] | None = None) -> list[s
                     "`not_applicable` product source and migration state"
                 )
 
+        if (
+            migration_state == "needs_product_knowledge_reference"
+            and term_id not in UNRESOLVED_BASELINE.get(data.get("product"), set())
+        ):
+            errors.append(
+                f"{location}: a new entry cannot wait for a Product Knowledge reference; "
+                "link its source or name it in the PRD under the naming rules"
+            )
+
+        alignment = term.get("production_alignment")
+        if not isinstance(alignment, dict) or alignment.get("state") not in VALID_ALIGNMENT_STATES:
+            errors.append(
+                f"{location}: production_alignment.state must be one of "
+                f"{sorted(VALID_ALIGNMENT_STATES)}"
+            )
+        elif alignment["state"] == "differs":
+            if not nonempty_string(alignment.get("production_label")):
+                errors.append(f"{location}: differs alignment requires `production_label`")
+            if alignment.get("evidence") not in known_sources:
+                errors.append(f"{location}: differs alignment requires a known `evidence` source")
+        elif set(alignment) - {"state"}:
+            errors.append(f"{location}: only differs alignment records production details")
+
         status = term.get("status")
         if status not in VALID_STATUSES:
             errors.append(
@@ -573,9 +636,14 @@ def naming_coverage_errors(
 
 
 def main() -> int:
-    data = load_terms()
+    shared = load_yaml(SHARED_PATH)
+    files = product_files(shared)
+    products = {name: load_yaml(path) for name, path in files.items()}
+    errors = layout_errors(shared, products) + naming_coverage_errors()
     overrides: list[str] = []
-    errors = validate(data, overrides) + naming_coverage_errors()
+    merged = {name: merge(shared, name, data) for name, data in products.items()}
+    for name, data in merged.items():
+        errors += [f"{name}: {error}" for error in validate(data, overrides)]
     if errors:
         for error in errors:
             print(f"ERROR {error}")
@@ -589,21 +657,21 @@ def main() -> int:
         for item in overrides:
             print(f"  - {item}")
 
-    terms = data["terms"]
-    statuses = Counter(term["status"] for term in terms)
-    authority_states = Counter(
-        term["authority"]["migration_state"] for term in terms
-    )
-    print(
-        "Content terminology is valid: "
-        f"{len(terms)} terms, {len(data['decision_queue'])} open decisions, "
-        f"{len(data['decision_log'])} resolved decisions, "
-        + ", ".join(f"{key}={value}" for key, value in sorted(statuses.items()))
-        + "; authority: "
-        + ", ".join(
-            f"{key}={value}" for key, value in sorted(authority_states.items())
+    for name, data in merged.items():
+        terms = data["terms"]
+        statuses = Counter(term["status"] for term in terms)
+        authority_states = Counter(term["authority"]["migration_state"] for term in terms)
+        alignment = Counter(term["production_alignment"]["state"] for term in terms)
+        print(
+            f"Content terminology `{name}` is valid: "
+            f"{len(terms)} terms, {len(data['decision_queue'])} open decisions, "
+            f"{len(data['decision_log'])} resolved decisions, "
+            + ", ".join(f"{key}={value}" for key, value in sorted(statuses.items()))
+            + "; authority: "
+            + ", ".join(f"{key}={value}" for key, value in sorted(authority_states.items()))
+            + "; production: "
+            + ", ".join(f"{key}={value}" for key, value in sorted(alignment.items()))
         )
-    )
     return 0
 
 

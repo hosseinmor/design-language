@@ -89,12 +89,11 @@ cases:
       location: inv-0005
       captured_on: "2026-11-01"
       product: cando
-      audience: [employer_actor]
+      audience: [operator]
       surface: public
       contract: content.pattern.error
       state: system_failure
       slot: problem
-      concepts: [hiring_request]
     expected:
       checked_rules: [AUD-003]
       status: needs_context

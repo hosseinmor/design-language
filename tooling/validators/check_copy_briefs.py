@@ -2,7 +2,8 @@
 """Validate copy briefs in generation eval fixtures against the copy-brief contract.
 
 A brief may only reference what Design Language already owns: a content
-contract and its anatomy, terminology entries and registered sources. The
+contract and its anatomy, and the terminology entries and registered sources
+of the brief's own product. The
 validator also checks that each case's expectations are consistent with its
 brief and that every blocking `BRF` rule is covered by at least one case.
 """
@@ -11,7 +12,7 @@ from __future__ import annotations
 
 import re
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -25,9 +26,9 @@ from tooling.content_rule_index import (  # noqa: E402
     contracts_by_id,
     inherited_rule_ids,
 )
+from tooling.terminology_layers import load_products  # noqa: E402
 
 BRIEF_CONTRACT = ROOT / "foundations" / "content" / "copy-brief.yml"
-TERMS = ROOT / "foundations" / "content" / "terminology" / "terms.yml"
 GENERATION_DIR = ROOT / "ai" / "evals" / "content" / "generation"
 
 ID_RE = re.compile(r"^[a-z][a-z0-9_]*$")
@@ -93,20 +94,30 @@ class Context:
     contracts: dict[str, dict[str, Any]]
     layers: dict[str, dict[str, Any]]
     brief_rules: dict[str, str] = field(default_factory=dict)
+    # {product: (terms, sources)}; a product without an entry has no terminology layer.
+    products: dict[str, tuple[dict[str, dict[str, Any]], dict[str, str]]] | None = None
 
     @classmethod
     def from_repository(cls) -> "Context":
-        terms_data = load(TERMS)
-        terms = {t["id"]: t for t in terms_data.get("terms") or [] if isinstance(t, dict)}
+        visibility: set[str] = set()
+        products = {
+            name: (
+                {t["id"]: t for t in data.get("terms") or [] if isinstance(t, dict)},
+                {
+                    s["id"]: s.get("state", "")
+                    for s in data.get("sources") or []
+                    if isinstance(s, dict) and "id" in s
+                },
+            )
+            for name, data in load_products().items()
+        }
+        for terms, _ in products.values():
+            visibility |= {v for t in terms.values() for v in t.get("visibility") or []}
         contract = load(BRIEF_CONTRACT)
         return cls(
-            terms=terms,
-            visibility={v for t in terms.values() for v in t.get("visibility") or []},
-            sources={
-                s["id"]: s.get("state", "")
-                for s in terms_data.get("sources") or []
-                if isinstance(s, dict) and "id" in s
-            },
+            terms={},
+            visibility=visibility,
+            sources={},
             contracts=contracts_by_id(),
             layers=contract.get("product_layers") or {},
             brief_rules={
@@ -114,7 +125,15 @@ class Context:
                 for r in contract.get("rules") or []
                 if isinstance(r, dict) and "id" in r
             },
+            products=products,
         )
+
+    def for_product(self, product: Any) -> "Context":
+        """Return this context narrowed to one product's terminology and sources."""
+        if self.products is None:
+            return self
+        terms, sources = self.products.get(product, ({}, {}))
+        return replace(self, terms=terms, sources=sources)
 
     def forbidden(self, term_id: str) -> set[str]:
         term = self.terms.get(term_id, {})
@@ -132,6 +151,7 @@ def _string_list(value: Any) -> bool:
 def validate_brief(brief: Any, ctx: Context, where: str, allow_fixture_source: bool) -> list[str]:
     if not isinstance(brief, dict):
         return [f"{where}: brief must be a mapping"]
+    ctx = ctx.for_product(brief.get("product"))
     errors: list[str] = []
     if unknown := sorted(set(brief) - BRIEF_KEYS):
         errors.append(f"{where}: unknown brief keys {unknown}")
@@ -149,6 +169,10 @@ def validate_brief(brief: Any, ctx: Context, where: str, allow_fixture_source: b
             errors.append(f"{where}: audience must be a non-empty list of term ids")
         else:
             for item in audience:
+                if not ctx.terms:
+                    if not ID_RE.fullmatch(item):
+                        errors.append(f"{where}: audience `{item}` must be a snake_case role id")
+                    continue
                 kind = ctx.terms.get(item, {}).get("concept_kind")
                 if kind not in AUDIENCE_KINDS:
                     errors.append(f"{where}: audience `{item}` is not a role, persona or internal_role term")
@@ -253,7 +277,11 @@ def concept_id(item: Any) -> str:
 
 def concept_errors(item: Any, product: Any, ctx: Context) -> list[str]:
     if isinstance(item, str):
-        return [] if item in ctx.terms else [f"concept `{item}` is not a terminology entry"]
+        if item in ctx.terms:
+            return []
+        if not ctx.terms:
+            return [f"`{product}` has no terminology layer; cite concept `{item}` from its Product Knowledge"]
+        return [f"concept `{item}` is not a terminology entry"]
     if not isinstance(item, dict):
         return ["concept must be a term id or a mapping"]
     kind = item.get("kind")
@@ -314,6 +342,8 @@ def validate_case(case: Any, ctx: Context, where: str) -> tuple[list[str], set[s
         return [f"{where}: case must be a mapping with an id"], set()
     where = f"{where} `{case['id']}`"
     brief = case.get("brief")
+    if isinstance(brief, dict):
+        ctx = ctx.for_product(brief.get("product"))
     errors = validate_brief(brief, ctx, where, allow_fixture_source=True)
     expected = case.get("expected")
     if not isinstance(expected, dict) or not isinstance(brief, dict):

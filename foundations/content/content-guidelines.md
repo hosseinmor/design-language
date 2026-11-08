@@ -30,8 +30,9 @@ related:
 
 This document is the shared human entry point. Detailed voice is owned by
 [`product-voice.md`](product-voice.md), terminology by
-[`terminology.md`](terminology.md), and machine-readable terms by
-[`terminology/terms.yml`](terminology/terms.yml).
+[`terminology.md`](terminology.md), and machine-readable terms by the shared
+base [`terminology/shared.yml`](terminology/shared.yml) and one file per product,
+such as [`terminology/jobvision.yml`](terminology/jobvision.yml).
 
 Persian language, RTL, mixed-direction text, number/date formatting,
 translation, and dynamic variables are owned by

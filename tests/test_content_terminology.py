@@ -5,7 +5,7 @@ import unittest
 import tempfile
 from pathlib import Path
 
-from tooling.validators.check_content_terminology import naming_coverage_errors, validate
+from tooling.validators.check_content_terminology import layout_errors, naming_coverage_errors, validate
 
 
 def authority_model():
@@ -38,6 +38,7 @@ def linked_term():
             "product_source": "product_source",
             "migration_state": "source_linked",
         },
+        "production_alignment": {"state": "unverified"},
         "definition": {"source": "A referenced product definition."},
         "preferred": {"default": "آگهی شغلی"},
         "visibility": ["public"],
@@ -50,6 +51,7 @@ def valid_data():
     return {
         "schema_version": "0.3",
         "id": "content.foundation.terminology",
+        "product": "jobvision",
         "language": "fa-IR",
         "authority_model": authority_model(),
         "sources": [
@@ -111,6 +113,7 @@ class TerminologyAuthorityValidationTest(unittest.TestCase):
     def test_unresolved_product_reference_is_explicit_and_valid(self):
         data = valid_data()
         term = data["terms"][0]
+        term["id"] = "recruitment"
         term["authority"]["product_source"] = "unresolved"
         term["authority"]["migration_state"] = (
             "needs_product_knowledge_reference"
@@ -126,6 +129,82 @@ class TerminologyAuthorityValidationTest(unittest.TestCase):
         )
         errors = " ".join(validate(data))
         self.assertIn("must be `unresolved`", errors)
+
+
+    def test_new_entry_cannot_wait_for_product_knowledge(self):
+        data = valid_data()
+        term = data["terms"][0]
+        term["authority"]["product_source"] = "unresolved"
+        term["authority"]["migration_state"] = "needs_product_knowledge_reference"
+        term["evidence"] = []
+        self.assertIn("cannot wait for a Product Knowledge reference", " ".join(validate(data)))
+
+
+class ProductionAlignmentTest(unittest.TestCase):
+    def test_alignment_is_required(self):
+        data = valid_data()
+        del data["terms"][0]["production_alignment"]
+        self.assertIn("production_alignment.state", " ".join(validate(data)))
+
+    def test_differs_needs_production_label_and_evidence(self):
+        data = valid_data()
+        data["terms"][0]["production_alignment"] = {"state": "differs"}
+        errors = " ".join(validate(data))
+        self.assertIn("requires `production_label`", errors)
+        self.assertIn("requires a known `evidence` source", errors)
+
+    def test_differs_with_label_and_source_is_valid(self):
+        data = valid_data()
+        data["terms"][0]["production_alignment"] = {
+            "state": "differs",
+            "production_label": "آگهی استخدام",
+            "evidence": "product_source",
+        }
+        self.assertEqual(validate(data), [])
+
+    def test_aligned_entry_keeps_no_production_details(self):
+        data = valid_data()
+        data["terms"][0]["production_alignment"] = {"state": "aligned", "production_label": "x"}
+        self.assertIn("only differs alignment", " ".join(validate(data)))
+
+
+class LayoutTest(unittest.TestCase):
+    def shared(self):
+        return {
+            "id": "content.foundation.terminology",
+            "schema_version": "0.7",
+            "language": "fa-IR",
+            "products": {"jobvision": "jobvision.yml"},
+        }
+
+    def product(self):
+        return {
+            "id": "content.foundation.terminology.jobvision",
+            "product": "jobvision",
+            "extends": "content.foundation.terminology",
+            "schema_version": "0.7",
+            "language": "fa-IR",
+        }
+
+    def test_valid_layout(self):
+        self.assertEqual(layout_errors(self.shared(), {"jobvision": self.product()}), [])
+
+    def test_shared_base_cannot_hold_terms(self):
+        shared = self.shared()
+        shared["terms"] = []
+        self.assertIn("`terms` belongs to a product file", " ".join(layout_errors(shared, {})))
+
+    def test_product_file_cannot_redefine_policy(self):
+        product = self.product()
+        product["policy"] = {}
+        errors = " ".join(layout_errors(self.shared(), {"jobvision": product}))
+        self.assertIn("`policy` belongs to shared.yml", errors)
+
+    def test_product_file_must_name_its_product(self):
+        product = self.product()
+        product["product"] = "cando"
+        errors = " ".join(layout_errors(self.shared(), {"jobvision": product}))
+        self.assertIn("`product` must be `jobvision`", errors)
 
 
 class TerminologyLanguageSchemaTest(unittest.TestCase):

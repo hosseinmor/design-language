@@ -1,20 +1,18 @@
-schema_version: "0.6"
-id: content.foundation.terminology
+schema_version: "0.7"
+id: content.foundation.terminology.jobvision
+product: jobvision
 title: واژه‌نامهٔ محتوای محصول جاب‌ویژن
 status: draft
 language: fa-IR
-scope:
-  - product-ui
-  - product-documentation
-  - ai-generated-product-content
+extends: content.foundation.terminology
 
 description: >
-  مدل معنایی زبان محصول جاب‌ویژن. Design Language مالک برچسب‌ها و قواعد
-  استفاده است؛ معنی، رفتار و نگاشت فنی مفهوم‌های محصول در Product Knowledge
-  مرجع می‌ماند. تعریف‌ها و code bindingهای این فایل snapshot ارجاعی‌اند،
-  نه منبع حقیقت مستقل.
+  برچسب‌های UI، قاعدهٔ زمینه و واژه‌های ممنوع جاب‌ویژن. معنی، رفتار و نگاشت فنی
+  مفهوم‌ها در Product Knowledge جاب‌ویژن مرجع می‌ماند؛ definition و code_bindings
+  این فایل snapshot ارجاعی‌اند، نه منبع حقیقت مستقل. production_alignment
+  فاصلهٔ برچسب انتخاب‌شده با پروداکشن را در دورهٔ گذار نشان می‌دهد.
 
-precedence_source: content.foundation.product_voice
+
 sources:
   - id: source_glossary
     title: واژه‌نامهٔ جاب‌ویژن
@@ -63,44 +61,6 @@ sources:
     role: product_knowledge_reference
     reviewed_on: 2026-10-22
 
-authority_model:
-  meaning_owners:
-    - product_knowledge
-    - design_language
-  language_owner: design_language
-  design_language_owned_concept_kinds:
-    - communication_concept
-    - feature_family
-    - persona
-  linked_product_source_role: product_knowledge_reference
-  unresolved_product_source: unresolved
-  not_applicable_product_source: not_applicable
-  migration_states:
-    - source_linked
-    - needs_product_knowledge_reference
-    - not_applicable
-  interpretation:
-    - status میزان بلوغ تصمیم زبانی را نشان می‌دهد، نه اعتبار product truth.
-    - definition.source و code_bindings فقط snapshot ارجاعی برای retrieval و migration هستند.
-    - مدخل محصولی بدون product source معتبر نباید برای ادعای رفتار محصول استفاده شود.
-    - مفهوم ارتباطی یا taxonomy زبانی می‌تواند meaning_owner برابر design_language داشته باشد.
-
-policy:
-  concept_and_label:
-    - هر id یک مفهوم محصولی یا یک قرارداد نام‌گذاری مستقل را نشان می‌دهد، نه صرفاً یک رشتهٔ متنی را.
-    - مدخلی که relations.same_entity_as دارد، برچسب زمینه‌ای همان entity است و موجودیت جداگانه‌ای ایجاد نمی‌کند.
-    - canonical_internal نام مرجع ثبت‌شده برای retrieval و تطبیق مفهوم است؛ نه مالک تعریف محصول.
-    - preferred و contextual_labels برچسب مناسب هر مخاطب، سطح یا مرحلهٔ lifecycle را تعیین می‌کنند.
-  term_severity:
-    allowed: واژهٔ مجاز ولی نه لزوماً انتخاب اول
-    avoid: ترجیحاً استفاده نشود؛ خطای non-blocking
-    forbidden: در scope مشخص استفاده نشود؛ خطای blocking
-  context_rules:
-    - forbidden_as_synonym فقط جایگزینی نادرست یک مفهوم را منع می‌کند و ممنوعیت مطلق واژه نیست.
-    - واژهٔ کوتاه فقط زمانی مجاز است که مفهوم در همان سطح بدون ابهام باشد.
-    - نام‌های code_only نباید مستقیماً وارد UI کارجو یا کارفرما شوند.
-  unresolved_marker: needs_decision
-
 # مفهوم‌هایی که در relations ارجاع داده شده‌اند ولی هنوز مدخل ندارند.
 # هر شناسهٔ تازه در relations باید یا مدخل داشته باشد یا اینجا ثبت شود.
 unregistered_concepts: [application_rejection, business_rule, candidate_profile, company_activation, company_profile, formal_info, generic_request, interview_invitation, job_category, price, proforma_invoice, reactivation, resume_view, seniority_level, services]
@@ -114,6 +74,7 @@ terms:
       language_owner: design_language
       product_source: pk_jobvision_jobpost_overview
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: JobPost
     definition:
       source: آگهی (JobPost) همان موقعیت شغلی در مدل محصول است.
@@ -158,6 +119,7 @@ terms:
       language_owner: design_language
       product_source: not_applicable
       migration_state: not_applicable
+    production_alignment: {state: unverified}
     canonical_internal: موقعیت شغلی
     definition:
       product_content: >
@@ -185,6 +147,7 @@ terms:
       language_owner: design_language
       product_source: not_applicable
       migration_state: not_applicable
+    production_alignment: {state: unverified}
     canonical_internal: فرصت شغلی
     definition:
       product_content: امکان پیدا کردن یا شروع یک شغل؛ نه یک موجودیت دقیق محصول.
@@ -206,6 +169,7 @@ terms:
       language_owner: design_language
       product_source: unresolved
       migration_state: needs_product_knowledge_reference
+    production_alignment: {state: unverified}
     canonical_internal: جذب
     definition:
       product_content: >
@@ -229,6 +193,7 @@ terms:
       language_owner: design_language
       product_source: unresolved
       migration_state: needs_product_knowledge_reference
+    production_alignment: {state: unverified}
     canonical_internal: استخدام
     definition:
       product_content: >
@@ -252,6 +217,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: سازمان
     definition:
       source: کارفرمای ثبت‌شده در سامانه که می‌تواند آگهی منتشر کند.
@@ -281,6 +247,7 @@ terms:
       language_owner: design_language
       product_source: pk_jobvision_glossary_employer_actor
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: کارفرما
     definition:
       product_content: فرد یا نقش انسانی‌ای که از طرف یک سازمان در فرایند جذب نیرو عمل می‌کند.
@@ -301,6 +268,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: رابط
     definition:
       source: کاربری که از طرف یک سازمان در پنل کارفرما کار می‌کند.
@@ -326,6 +294,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: رابط سیستمی
     definition:
       source: رابطی که توسط جاب‌ویژن از طرف سازمان ساخته می‌شود.
@@ -344,6 +313,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: کارجو
     definition:
       source: کاربری که برای یافتن شغل ثبت‌نام کرده است.
@@ -372,6 +342,7 @@ terms:
       language_owner: design_language
       product_source: unresolved
       migration_state: needs_product_knowledge_reference
+    production_alignment: {state: unverified}
     canonical_internal: کاندیدا
     definition:
       product_content: >
@@ -395,6 +366,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: صنعت
     definition:
       source: حوزهٔ فعالیت کسب‌وکار سازمان که از بیس‌دیتا انتخاب می‌شود.
@@ -419,6 +391,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: احراز هویت سازمان
     definition:
       source: >
@@ -445,6 +418,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: سازمان مشابه
     definition:
       source: >
@@ -468,6 +442,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: ادغام سازمان
     definition:
       source: انتقال داده و موجودی یک سازمان به سازمان دیگر و حذف سازمان مبدأ.
@@ -489,6 +464,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: اطلاعات رسمی سازمان
     definition:
       source: هویت فاکتوری سازمان شامل شناسهٔ ملی، عنوان حقوقی، نشانی و کد پستی.
@@ -516,6 +492,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: اکانت‌منیجر
     definition:
       source: کارمند جاب‌ویژن که مسئول مجموعه‌ای از سازمان‌هاست؛ تخصیص بر اساس صنعت.
@@ -538,6 +515,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: آگهی یقه آبی
     definition:
       source: آگهی‌ای که همهٔ دسته‌های شغلی‌اش سطح شغلی پیش‌فرض ۲ دارند.
@@ -562,6 +540,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: رزومه
     definition:
       source: سند مهارت‌ها و سوابق کارجو.
@@ -590,6 +569,7 @@ terms:
       language_owner: design_language
       product_source: pk_jobvision_cv_language_variants
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: نسخهٔ زبانی رزومه
     definition:
       product_content: >
@@ -617,6 +597,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: درصد تکمیل رزومه
     definition:
       source: عدد صفر تا صد برای میزان پرشدن رزومه؛ برای فارسی و انگلیسی جداست.
@@ -642,6 +623,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: رزومهٔ شخصی
     definition:
       source: فایلی که کارجو خودش بارگذاری می‌کند، در برابر رزومهٔ ساختاریافتهٔ جاب‌ویژن.
@@ -664,6 +646,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: توصیه‌نامه
     definition:
       source: متنی که هم‌کار سابق دربارهٔ کارجو می‌نویسد.
@@ -685,6 +668,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: درخواست شغلی
     definition:
       source: اقدام کارجو برای ارسال رزومه به یک آگهی مشخص.
@@ -719,6 +703,7 @@ terms:
       language_owner: design_language
       product_source: unresolved
       migration_state: needs_product_knowledge_reference
+    production_alignment: {state: unverified}
     canonical_internal: درخواست جذب
     definition:
       product_content: درخواست داخلی سازمان برای آغاز یا پیش‌برد جذب نیرو.
@@ -739,6 +724,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: اسنپشات رزومه
     definition:
       source: نسخهٔ کامل و منجمدشدهٔ رزومه در لحظهٔ ارسال درخواست شغلی.
@@ -765,6 +751,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: دستیار کارفرما
     definition:
       source: >
@@ -790,6 +777,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: انصراف
     definition:
       source: پس گرفتن درخواست شغلی توسط کارجو، با یکی از چهار دلیل مشخص.
@@ -813,6 +801,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: صف رد
     definition:
       source: >
@@ -838,6 +827,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: تجربهٔ مصاحبه
     definition:
       source: روایت کارجو از فرایند مصاحبهٔ یک سازمان.
@@ -861,6 +851,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: نظر سازمان
     definition:
       source: امتیاز و نظر کارجو دربارهٔ سازمان.
@@ -883,6 +874,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: دنبال کردن سازمان
     definition:
       source: اقدام کارجو برای باخبر شدن از آگهی‌های تازهٔ یک سازمان.
@@ -905,6 +897,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: مجله شغلی
     definition:
       source: محتوای معرفی مشاغل، مسیر شغلی و آمار حقوق.
@@ -927,6 +920,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: بسته
     definition:
       source: >
@@ -954,6 +948,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: نوع بسته
     definition:
       source: قلم کاتالوگ فروش؛ چیزی که در فروشگاه دکمهٔ خرید دارد.
@@ -979,6 +974,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: کد تخفیف
     definition:
       source: رشته‌ای که هنگام تسویه وارد می‌شود و از مبلغ سفارش کم می‌کند.
@@ -1004,6 +1000,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: جشنواره
     definition:
       source: کمپین فروش زمان‌دار با صفحه و فهرست نوع‌بسته‌های اختصاصی.
@@ -1027,6 +1024,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: سفارش
     definition:
       source: سرآیند یک خرید؛ چه چیزی، با چه قیمت و از چه منابعی تسویه شده است.
@@ -1050,6 +1048,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: فاکتور
     definition:
       source: سند حسابداری سفارش؛ رسمی یا غیررسمی.
@@ -1073,6 +1072,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: کیف پول
     definition:
       source: اعتبار ریالی سازمان نزد جاب‌ویژن.
@@ -1095,6 +1095,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: سامانه مؤدیان
     definition:
       source: سامانه‌ای که فاکتورهای رسمی به آن ارسال می‌شوند تا شمارهٔ مالیاتی بگیرند.
@@ -1116,6 +1117,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: سرویس
     definition:
       source: کوچک‌ترین حقی که می‌توان خرید و مصرف کرد.
@@ -1140,6 +1142,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: سطح
     definition:
       source: >
@@ -1167,6 +1170,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: پلن
     definition:
       source: سطح خدماتی که سازمان برای آگهی می‌خرد.
@@ -1191,6 +1195,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: اشتراک ویژه
     definition:
       source: اصطلاحی ثبت‌شده در کد که تعریف محصول و امکاناتش هنوز مشخص نشده است.
@@ -1218,6 +1223,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: راند فعال‌سازی
     definition:
       source: بازهٔ پیوسته‌ای که آگهی در آن روی سایت بوده است.
@@ -1241,6 +1247,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: تازه‌سازی
     definition:
       source: بازگرداندن آگهی به بالای فهرست‌ها بدون تغییر وضعیت.
@@ -1265,6 +1272,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: انتشار خودکار
     definition:
       source: تأیید و فعال‌سازی آگهی توسط سرویس هوش مصنوعی، بدون دخالت پنل ادمین.
@@ -1289,6 +1297,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: امتیاز سازمان
     definition:
       source: عدد حاصل از محبوبیت، تجربهٔ مصاحبه و تغییر وضعیت درخواست شغلی.
@@ -1312,6 +1321,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: امتیاز محبوبیت
     definition:
       source: میانگین بازخورد کلی کارکنان فعلی و سابق سازمان.
@@ -1335,6 +1345,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: محبوبیت آگهی
     definition:
       source: معیار کدی حاصل از تعداد بازدید آگهی‌ها که اکنون در هیچ امتیازی اثر ندارد.
@@ -1355,6 +1366,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: رتبهٔ سازمان
     definition:
       source: جایگاه سازمان در فهرست کل سازمان‌ها بر اساس امتیاز.
@@ -1378,6 +1390,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: رتبه در صنعت
     definition:
       source: جایگاه سازمان درون هر صنعتی که به آن تعلق دارد.
@@ -1401,6 +1414,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: پاسخ‌گویی به درخواست‌های شغلی
     definition:
       source: سهم درخواست‌های شغلی تعیین‌وضعیت‌شده.
@@ -1422,6 +1436,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: امتیاز تطبیق
     definition:
       source: میزان تناسب یک رزومه با یک آگهی.
@@ -1445,6 +1460,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: بانک رزومه
     definition:
       source: جست‌وجوی فعال کارفرما در میان رزومه‌ها.
@@ -1470,6 +1486,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: تلنت پول
     definition:
       source: مجموعهٔ پوشه‌ها و رزومه‌های ذخیره‌شدهٔ سازمان.
@@ -1494,6 +1511,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: دسترسی به رزومه
     definition:
       source: حق دائمی سازمان برای دیدن اطلاعات تماس یک رزومه.
@@ -1518,6 +1536,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: نشان‌شده‌ها
     definition:
       source: پوشهٔ سیستمی رزومه‌های پسندیده‌شده اما هنوز خریداری‌نشده.
@@ -1539,6 +1558,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: gateway
     definition:
       source: نقطه‌ای در مسیر اجرا که یک قاعده را می‌سنجد و در صورت رد، عمل را متوقف می‌کند.
@@ -1564,6 +1584,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: پایپ‌لاین
     definition:
       source: زنجیرهٔ مرحله‌به‌مرحله‌ای که یک محاسبه در آن انجام می‌شود.
@@ -1584,6 +1605,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: رزومهٔ پیشنهادی
     definition:
       source: رزومه‌هایی که سیستم به سازمان پیشنهاد می‌دهد.
@@ -1607,6 +1629,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: برندینگ کارفرمایی
     definition:
       source: >
@@ -1630,6 +1653,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: نمایشگاه کار
     definition:
       source: رویداد زمان‌دار حضوری یا آنلاین که چند سازمان در آن آگهی ارائه می‌کنند.
@@ -1654,6 +1678,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: آگهی نمایشگاهی
     definition:
       source: آگهی وابسته به نمایشگاه که رایگان است و در جست‌وجوی عادی دیده نمی‌شود.
@@ -1678,6 +1703,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: اپراتور غرفه
     definition:
       source: نقشی که در نمایشگاه حضوری از طرف کارجو درخواست ثبت می‌کند.
@@ -1701,6 +1727,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: آزمون
     definition:
       source: ابزار ارزیابی کارجو.
@@ -1724,6 +1751,7 @@ terms:
       language_owner: design_language
       product_source: pk_jobvision_ai_overview
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: هوش مصنوعی
     definition:
       product_content: فناوری یا سامانه‌ای که از مدل‌های هوش مصنوعی استفاده می‌کند.
@@ -1743,6 +1771,7 @@ terms:
       language_owner: design_language
       product_source: not_applicable
       migration_state: not_applicable
+    production_alignment: {state: unverified}
     canonical_internal: قابلیت‌های هوشمند
     definition:
       product_content: مجموعه‌ای از قابلیت‌های محصول که با هوش مصنوعی تقویت می‌شوند.
@@ -1763,6 +1792,7 @@ terms:
       language_owner: design_language
       product_source: not_applicable
       migration_state: not_applicable
+    production_alignment: {state: unverified}
     canonical_internal: دستیار هوشمند
     definition:
       product_content: >
@@ -1789,6 +1819,7 @@ terms:
       language_owner: design_language
       product_source: pk_jobvision_resume_ai_assistant
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: دستیار هوشمند رزومه
     definition:
       source: >
@@ -1815,6 +1846,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: ابزار غربالگری بیرونی
     definition:
       source: ابزار بیرونی‌ای که در تعریف صف رد، درخواست‌های ضعیف را تشخیص می‌دهد.
@@ -1839,6 +1871,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: پنل کارجو
     definition:
       source: وب‌سایت jobvision.ir.
@@ -1859,6 +1892,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: پنل کارفرما
     definition:
       source: وب‌سایت employer.jobvision.ir.
@@ -1878,6 +1912,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
+    production_alignment: {state: unverified}
     canonical_internal: پنل ادمین
     definition:
       source: وب‌سایت admin.jvoffice.ir.
@@ -2008,10 +2043,6 @@ decision_queue:
       - وضعیت فعال‌بودن در محصول
 evals:
   blocking:
-    - id: TERM_WRONG_ENTITY_SYNONYM
-      rule: یک اصطلاح از forbidden_as_synonym برای نام‌گذاری entity دیگر استفاده شده است.
-    - id: INTERNAL_TERM_EXPOSED
-      rule: اصطلاح code_only یا internal-only در UI عمومی دیده می‌شود.
     - id: RECRUITMENT_HIRING_COLLAPSED
       rule: جذب و استخدام به‌عنوان مترادف استفاده شده‌اند.
     - id: RESUME_LANGUAGE_VARIANT_AS_SEPARATE_ENTITY
@@ -2021,7 +2052,3 @@ evals:
   non_blocking:
     - id: JOB_POST_LABEL_CONTEXT_MISMATCH
       rule: برای entity واحد JobPost برچسبی انتخاب شده که با مرحلهٔ lifecycle یا زاویهٔ ارائه سازگار نیست.
-    - id: TERM_NOT_PREFERRED_FOR_SURFACE
-      rule: واژه مجاز است اما preferred همان سطح نیست.
-    - id: TERM_AMBIGUOUS_WITHOUT_CONTEXT
-      rule: صورت کوتاه اصطلاح بیرون از context روشن استفاده شده است.
