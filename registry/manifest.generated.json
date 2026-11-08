@@ -574,8 +574,8 @@
     {
       "id": "content.terminology",
       "kind": "content-content-guideline",
-      "title": "JobVision Product Terminology",
-      "summary": "Defines the semantic terminology model, audience-aware label rules, source boundaries, and machine-readable lexicon for JobVision product content.",
+      "title": "Product Terminology",
+      "summary": "Defines the semantic terminology model, the shared base and per-product terminology files, the stable and variable layers, production alignment during transition, audience-aware label rules, and source boundaries for product content.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,

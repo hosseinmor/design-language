@@ -178,13 +178,17 @@ cases:
     brief:
       id: cando_hiring_request_error
       product: cando
-      audience: [employer_actor]
+      audience: [operator]
       surface: public
       contract: content.pattern.error
       states:
         - id: validation_error
           slots: [problem]
-      concepts: [hiring_request]
+      concepts:
+        - kind: product_knowledge
+          product: cando
+          page: درخواست استخدام
+          label: درخواست استخدام
       context: خطای ثبت درخواست در Cando.
     expected:
       outcome: blocked

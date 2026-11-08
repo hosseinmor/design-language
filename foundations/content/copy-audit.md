@@ -50,7 +50,7 @@ topics:
 
 1. **استخراج:** هر copy با context کامل یک slot ثبت می‌شود (`audit_item`).
 2. **بررسی قطعی:** برچسب‌های forbidden و legacy مفهوم‌های مورد از روی
-   [واژه‌نامه](terminology/terms.yml) پیدا و به برچسب مصوب نگاشت می‌شوند.
+   واژه‌نامهٔ همان محصول (مثلاً [`jobvision.yml`](terminology/jobvision.yml)) پیدا و به برچسب مصوب نگاشت می‌شوند.
 3. **بررسی معنایی:** copy با [evaluator معنایی](../../ai/evals/README.md) در
    برابر قواعد قرارداد مالک سنجیده می‌شود.
 4. **اولویت‌بندی:** از `priority_model`.

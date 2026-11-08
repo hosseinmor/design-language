@@ -1,0 +1,80 @@
+schema_version: "0.7"
+id: content.foundation.terminology
+title: پایهٔ مشترک واژه‌نامهٔ محتوای محصول
+status: draft
+language: fa-IR
+scope:
+  - product-ui
+  - product-documentation
+  - ai-generated-product-content
+
+description: >
+  schema، مدل اختیار و قواعد مشترک واژه‌نامهٔ همهٔ محصول‌ها. معنی، رفتار و
+  برچسب فعلی هر مفهوم مال Product Knowledge همان محصول است. فایل هر محصول فقط
+  تصمیم‌های زبانی Design Language را نگه می‌دارد: برچسب UI، قاعدهٔ زمینه،
+  واژهٔ ممنوع و فاصلهٔ دورهٔ گذار با پروداکشن. مفهومی از یک محصول به محصول
+  دیگر منتقل نمی‌شود.
+
+precedence_source: content.foundation.product_voice
+
+# فایل واژه‌نامهٔ هر محصول. محصولی که اینجا نیست لایهٔ واژه‌نامه ندارد و
+# برچسب‌هایش فقط از Product Knowledge همان محصول می‌آید.
+products:
+  jobvision: jobvision.yml
+
+
+authority_model:
+  meaning_owners:
+    - product_knowledge
+    - design_language
+  language_owner: design_language
+  design_language_owned_concept_kinds:
+    - communication_concept
+    - feature_family
+    - persona
+  linked_product_source_role: product_knowledge_reference
+  unresolved_product_source: unresolved
+  not_applicable_product_source: not_applicable
+  migration_states:
+    - source_linked
+    - needs_product_knowledge_reference
+    - not_applicable
+  production_alignment_states:
+    - unverified
+    - differs
+    - aligned
+  interpretation:
+    - status میزان بلوغ تصمیم زبانی را نشان می‌دهد، نه اعتبار product truth.
+    - definition.source و code_bindings فقط snapshot ارجاعی برای retrieval و migration هستند.
+    - مدخل محصولی بدون product source معتبر نباید برای ادعای رفتار محصول استفاده شود.
+    - مفهوم ارتباطی یا taxonomy زبانی می‌تواند meaning_owner برابر design_language داشته باشد.
+
+    - production_alignment نشان می‌دهد برچسب انتخاب‌شده با پروداکشن (و در نتیجه با Product Knowledge) یکی است یا نه؛ differs فقط تا publish و استخراج Product Knowledge معتبر است.
+
+policy:
+  concept_and_label:
+    - هر id یک مفهوم محصولی یا یک قرارداد نام‌گذاری مستقل را نشان می‌دهد، نه صرفاً یک رشتهٔ متنی را.
+    - مدخلی که relations.same_entity_as دارد، برچسب زمینه‌ای همان entity است و موجودیت جداگانه‌ای ایجاد نمی‌کند.
+    - canonical_internal نام مرجع ثبت‌شده برای retrieval و تطبیق مفهوم است؛ نه مالک تعریف محصول.
+    - preferred و contextual_labels برچسب مناسب هر مخاطب، سطح یا مرحلهٔ lifecycle را تعیین می‌کنند.
+  term_severity:
+    allowed: واژهٔ مجاز ولی نه لزوماً انتخاب اول
+    avoid: ترجیحاً استفاده نشود؛ خطای non-blocking
+    forbidden: در scope مشخص استفاده نشود؛ خطای blocking
+  context_rules:
+    - forbidden_as_synonym فقط جایگزینی نادرست یک مفهوم را منع می‌کند و ممنوعیت مطلق واژه نیست.
+    - واژهٔ کوتاه فقط زمانی مجاز است که مفهوم در همان سطح بدون ابهام باشد.
+    - نام‌های code_only نباید مستقیماً وارد UI کارجو یا کارفرما شوند.
+  unresolved_marker: needs_decision
+
+evals:
+  blocking:
+    - id: TERM_WRONG_ENTITY_SYNONYM
+      rule: یک اصطلاح از forbidden_as_synonym برای نام‌گذاری entity دیگر استفاده شده است.
+    - id: INTERNAL_TERM_EXPOSED
+      rule: اصطلاح code_only یا internal-only در UI عمومی دیده می‌شود.
+  non_blocking:
+    - id: TERM_NOT_PREFERRED_FOR_SURFACE
+      rule: واژه مجاز است اما preferred همان سطح نیست.
+    - id: TERM_AMBIGUOUS_WITHOUT_CONTEXT
+      rule: صورت کوتاه اصطلاح بیرون از context روشن استفاده شده است.

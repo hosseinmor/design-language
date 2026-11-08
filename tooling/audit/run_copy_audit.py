@@ -140,6 +140,7 @@ def rewrite_brief(item: dict[str, Any], ctx: Context) -> dict[str, Any]:
 
 
 def check_item(item: dict[str, Any], ctx: Context, contract: dict[str, Any]) -> dict[str, Any]:
+    ctx = ctx.for_product(item.get("product"))
     finding: dict[str, Any] = {"item_id": item["id"], "location": item["location"], "surface": item.get("surface")}
     gaps = context_gaps(item, ctx, contract)
     if gaps:
