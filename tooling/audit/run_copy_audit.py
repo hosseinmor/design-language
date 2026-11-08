@@ -82,12 +82,23 @@ def context_gaps(item: dict[str, Any], ctx: Context, contract: dict[str, Any]) -
 def label_findings(item: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
     concepts = [c for c in item.get("concepts") or [] if c in ctx.terms]
     text = str(item.get("observed_text", ""))
-    # Approved labels of every concept are masked first, so a forbidden short
-    # form inside an approved label (درخواست in درخواست شغلی) is not reported.
-    masked = text
-    for concept in concepts:
-        for label in sorted(ctx.preferred(concept), key=len, reverse=True):
-            masked = masked.replace(label, " ")
+    # A forbidden label is skipped only when it lies inside an approved label
+    # (درخواست in درخواست شغلی). Masking approved labels first would also hide a
+    # forbidden phrase that contains a short approved label (آگهی in آگهی استخدام).
+    approved_spans = [
+        (m.start(), m.end())
+        for concept in concepts
+        for label in ctx.preferred(concept)
+        if label
+        for m in re.finditer(re.escape(label), text)
+    ]
+
+    def outside_approved(label: str) -> bool:
+        return any(
+            not any(start <= m.start() and m.end() <= end for start, end in approved_spans)
+            for m in re.finditer(re.escape(label), text)
+        )
+
     found: list[dict[str, Any]] = []
     for concept in concepts:
         term = ctx.terms[concept]
@@ -102,7 +113,7 @@ def label_findings(item: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
             for f in term.get("legacy_labels") or []
         ]
         for kind, label, scope in entries:
-            if label and label in masked:
+            if label and outside_approved(label):
                 found.append({
                     "concept": concept,
                     "label": label,

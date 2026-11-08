@@ -48,6 +48,16 @@ class CheckerTests(unittest.TestCase):
         finding = check_item(item(observed_text="درخواست شغلی ارسال شد."), CTX, CONTRACT)
         self.assertEqual(finding["status"], "no_issue")
 
+    def test_short_approved_label_does_not_hide_forbidden_phrase(self):
+        value = item(
+            observed_text="۵۹٬۷۴۳ آگهی استخدام در ۳۹۱ شهر",
+            audience=["jobseeker"],
+            concepts=["job_post"],
+        )
+        finding = check_item(value, CTX, CONTRACT)
+        self.assertEqual(finding["status"], "finding")
+        self.assertEqual(finding["label_findings"][0]["label"], "آگهی استخدام")
+
     def test_missing_context_is_not_judged(self):
         value = item()
         del value["contract"]
