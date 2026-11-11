@@ -47,11 +47,11 @@ Do not duplicate Menu item behavior inside Menu Button.
 ## Canonical Figma source
 
 - Figma file: `rROD8ctH9UfPGAMrRrOzHe`
-- Component set: `Menu Button / Default`
+- Component set: `Menu Button`
 - Node ID: `22930:811`
 - Component key: `166f62776a8c17f3ccdc9f4891892fcd380be68c`
 - Matrix: `4 Size × 2 Open = 8 variants`
-- Trigger foundation: canonical `Button / Default`
+- Trigger foundation: canonical `Button`
 - Menu composition: native `Menu content` SLOT
 
 ### Figma presentation — verified 2026-10-17

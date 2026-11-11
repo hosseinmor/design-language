@@ -48,7 +48,7 @@ Tooltip must not be used as a hidden replacement for persistent instructions, va
 
 ## Canonical Figma API
 
-Component set: `Tooltip / Default`
+Component set: `Tooltip`
 
 Figma file key: `rROD8ctH9UfPGAMrRrOzHe`
 
@@ -325,7 +325,7 @@ Verify:
 ## Live References
 
 - Figma file: `rROD8ctH9UfPGAMrRrOzHe`
-- Component set: `Tooltip / Default`
+- Component set: `Tooltip`
 - Node: `22773:127299`
 - Component key: `e29f8f48a0b3ec52f9490d4a9c101df5fba9d769`
 - Matrix: 4 Sides × 3 Alignments = 12 variants

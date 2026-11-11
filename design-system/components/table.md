@@ -30,15 +30,15 @@ File: [JV NEXT DS — Data Table / Documentation · canonical sources](https://w
 
 | Source | Figma API | Responsibilities |
 | --- | --- | --- |
-| `Data Table / Default` | `Size: Small / Medium / Large`; `Selection: None / Multiple`; `Rows` SLOT | Shared table width, Header Row, body composition |
-| `Data Table Header Row / Default` | `Size`; booleans for selection/Select all/expansion/actions columns; `Columns` SLOT | Header background, column positions, header select-all |
-| `Data Table Header Cell / Default` | `Sort: None / Unsorted / Ascending / Descending`; `Label` | Column label and sort control; `None` means non-sortable |
-| `Data Table Row / Default` | `Size` × `State: Default / Hover / Selected / Selected Hover`; booleans `Show selection`, `Show expansion`, `Show actions`; `Cells` + `Actions` SLOTs | Row surface, separator, Checkbox, disclosure, data cells, inline actions |
-| `Data Table Row Item / Default` | `Size` × `Expanded: false / true` | Binds a Row and its Expanded Content in one movable unit; synchronizes chevron/detail visibility |
-| `Data Table Cell / Default` | `Size`; `Content` SLOT; legacy convenience `Label` TEXT | Minimum 32/40/48px; padding-block 4/8/12px; width Fill and height Hug |
-| `Data Table Text Content / Default` | `Overflow: Truncate / Wrap`; `Text` | Standard 14/20 text: 1-line ellipsis or max 2-line wrapping with ellipsis |
+| `Data Table` | `Size: Small / Medium / Large`; `Selection: None / Multiple`; `Rows` SLOT | Shared table width, Header Row, body composition |
+| `Data Table Header Row` | `Size`; booleans for selection/Select all/expansion/actions columns; `Columns` SLOT | Header background, column positions, header select-all |
+| `Data Table Header Cell` | `Sort: None / Unsorted / Ascending / Descending`; `Label` | Column label and sort control; `None` means non-sortable |
+| `Data Table Row` | `Size` × `State: Default / Hover / Selected / Selected Hover`; booleans `Show selection`, `Show expansion`, `Show actions`; `Cells` + `Actions` SLOTs | Row surface, separator, Checkbox, disclosure, data cells, inline actions |
+| `Data Table Row Item` | `Size` × `Expanded: false / true` | Binds a Row and its Expanded Content in one movable unit; synchronizes chevron/detail visibility |
+| `Data Table Cell` | `Size`; `Content` SLOT; legacy convenience `Label` TEXT | Minimum 32/40/48px; padding-block 4/8/12px; width Fill and height Hug |
+| `Data Table Text Content` | `Overflow: Truncate / Wrap`; `Text` | Standard 14/20 text: 1-line ellipsis or max 2-line wrapping with ellipsis |
 | `Data Table Cell Content / Text + Description` | `Primary text` and `Description` | 14/20 primary + 4px gap + 12/16 description = 40px content; not a Cell presentation variant |
-| `Data Table Expanded Content / Default` | `Content` SLOT | Optional detail region after owning Row; RTL right-aligned |
+| `Data Table Expanded Content` | `Content` SLOT | Optional detail region after owning Row; RTL right-aligned |
 
 **Default:** Medium, Selection None. The Table has **6 variants**, not a Style axis; Row has **12 variants**. Checkbox is the sole selection control (no Radio). Outer border is not part of the Table shell; use a surrounding Card when a framed surface is required.
 
@@ -58,7 +58,7 @@ Header labels: `Label/SM` (Vazirmatn 14/20, weight 500), neutral secondary foreg
 
 **Default:** one line, ending truncation. Do not automatically wrap every column. Use `Wrap` **only for a meaningful textual field** when showing a second line materially improves understanding. Dates, numeric values, status and concise identifiers normally remain one line. Explanations longer than two lines belong in an expanded detail or dedicated view.
 
-- To wrap text in Figma, select the Cell's **Content Slot**, replace its default Text node with `Data Table Text Content / Default`, and choose `Overflow=Wrap`. The reusable component exposes its own `Text` property. `Truncate` supports one line; `Wrap` supports **at most two lines**, both ending with an ellipsis if longer. **Editing the Cell's old `Label` property alone deliberately remains single-line**: it is preserved for existing instance compatibility.
+- To wrap text in Figma, select the Cell's **Content Slot**, replace its default Text node with `Data Table Text Content`, and choose `Overflow=Wrap`. The reusable component exposes its own `Text` property. `Truncate` supports one line; `Wrap` supports **at most two lines**, both ending with an ellipsis if longer. **Editing the Cell's old `Label` property alone deliberately remains single-line**: it is preserved for existing instance compatibility.
 - For intentional metadata hierarchy, insert `Data Table Cell Content / Text + Description`: primary 14/20 and secondary 12/16 with 4px gap, total content height 40px. It is not the same as automatic word wrapping.
 - The parent Cell is width-Fill and height-Hug, so the Row grows to its tallest Cell. A 40px two-line content region plus Size-dependent 4/8/12px padding on each side yields actual **48px Small, 56px Medium and 64px Large**, *without changing the selected Size*. These are verified Figma pilot measurements, not Carbon/Spectrum token claims.
 - Default Size minimums remain Small=32, Medium=40, Large=48. Adding a separate `Multiline` axis to the Table or Row is unnecessary. Keep selection, disclosure and action controls vertically centered when rows grow.

@@ -26,7 +26,7 @@ Use Link when the primary behavior is navigation. Use dedicated controls for sel
 
 ## Canonical Figma API
 
-Component set: `Button / Default`
+Component set: `Button`
 
 ### Properties
 
@@ -36,11 +36,11 @@ Component set: `Button / Default`
 | `Size` | `Extra Small`, `Small`, `Medium`, `Large` |
 | `State` | `Enabled`, `Hover`, `Active`, `Focus`, `Disabled` |
 | `Loading` | `False`, `True`; independent from interaction `State` |
-| `Button text` | Required visible action label |
-| `Start Icon` | Optional boolean |
-| `End Icon` | Optional boolean |
-| `Swap Start Icon` | Instance swap |
-| `Swap End Icon` | Instance swap |
+| `Label` | Required visible action label |
+| `Show leading icon` | Optional boolean |
+| `Show trailing icon` | Optional boolean |
+| `Leading icon` | Instance swap |
+| `Trailing icon` | Instance swap |
 
 Button always has a visible text label when not loading. Icon-only actions use Icon Button.
 
@@ -280,7 +280,7 @@ Before implementation, align with frontend on whether this remains separate comp
 
 ## Figma Spacing binding QA — 2026-10-20
 
-The canonical Button / Default component set (node `1854:1776`) still has the existing 320 variants. A source-only Figma audit identified 808 correct but unbound effective layout properties. They were rebound **in place** to the existing Spacing variables, without changing values, variant dimensions, component identities or API.
+The canonical Button component set (node `1854:1776`) still has the existing 320 variants. A source-only Figma audit identified 808 correct but unbound effective layout properties. They were rebound **in place** to the existing Spacing variables, without changing values, variant dimensions, component identities or API.
 
 - **244** new content `paddingLeft` bindings and **244** new content `paddingRight` bindings.
 - **320** new content `itemSpacing` bindings, for the real 8px icon–label gap.
@@ -320,8 +320,8 @@ These are implementation-system decisions; the Button visual and behavioral cont
 
 ## Live References
 
-- Figma component set: `Button / Default` in `[DS] Job Vision NEXT`.
-- Figma properties: `Style`, `Size`, `State`, `Loading`, `Button text`, Start/End Icon, Start/End Icon swap.
+- Figma component set: `Button` in `[DS] Job Vision NEXT`.
+- Figma properties: `Style`, `Size`, `State`, `Loading`, `Label`, `Show leading icon`, `Show trailing icon`, `Leading icon`, `Trailing icon`.
 - Loading dependency: direct `Progress Circle / Mode=Indeterminate / Size=Small / State=Active`, with `line/default` track and `line/accent` arc on a neutral `surface/disabled` busy background; see the [Loading pattern](../patterns/loading-and-progress.md) and [Progress Circle](progress-circle.md).
 - Storybook / Code: not yet connected as a canonical live reference.
 
@@ -335,3 +335,19 @@ These are implementation-system decisions; the Button visual and behavioral cont
 - `../patterns/destructive-actions.md`
 - [Brand Variants](../../product-expression/brands/brand-variants.md)
 - `../tokens/color/semantics.md`
+
+## Figma authoring label compatibility
+
+The following Figma authoring labels were renamed in place for library consistency. Property types, identifier suffixes, defaults and component identities are preserved. These are design-tool labels, not new runtime APIs.
+
+| Previous label | Current label |
+| --- | --- |
+| `Button text` | `Label` |
+| `Start Icon` | `Show leading icon` |
+| `End Icon` | `Show trailing icon` |
+| `Swap Start Icon` | `Leading icon` |
+| `Swap End Icon` | `Trailing icon` |
+
+## Open live-source reconciliation gap
+
+The naming audit found 192 live variants at the unchanged `1854:1776` source, with Loading represented in `State` and no independent Loading Boolean. This differs from the independent-Loading contract and the historical 320-variant audit recorded above. The naming cleanup preserved that live construction and did not resolve or approve this discrepancy. Reconcile the owning loading/state decision before treating either representation as verified parity.

@@ -31,7 +31,7 @@ v4 separates two authoring cases.
 
 Use the canonical Figma component when the Link is a standalone or contextual control.
 
-Component set: `Link / Default`
+Component set: `Link`
 
 Standalone Link exposes Style and Size authoring choices. Interaction states are documented in the Figma set, but runtime hover, active, and focus behavior should normally be implemented through CSS/platform states rather than application props.
 
@@ -52,7 +52,7 @@ This keeps inline Links naturally multiline and avoids forcing the standalone Si
 Canonical file: `[DS] Job Vision NEXT`
 
 - Figma file key: `rROD8ctH9UfPGAMrRrOzHe`
-- Component set: `Link / Default`
+- Component set: `Link`
 - Figma node ID: `22920:125581`
 - Figma component key: `f31eac5461a0d8a608089f696b3b1402590be8a9`
 - Variant count: `27`
@@ -73,9 +73,9 @@ Canonical file: `[DS] Job Vision NEXT`
 
 | Property | Behavior |
 |---|---|
-| `Link text` | Visible destination label |
-| `End icon` | Optional boolean |
-| `Swap end icon` | Instance swap |
+| `Label` | Visible destination label |
+| `Show trailing icon` | Optional boolean |
+| `Trailing icon` | Instance swap |
 
 The canonical component intentionally has **no** Underline, Start icon, Visited, Disabled, Bold, or legacy Inline axis/property.
 
@@ -336,7 +336,7 @@ Verify:
 - default is `Default / Medium / Enabled`;
 - Figma States are `Enabled / Hover / Focus`;
 - Active runtime visual matches Hover and is not reintroduced as a duplicate Figma variant;
-- content properties are only `Link text / End icon / Swap end icon`;
+- content properties are only `Label / Show trailing icon / Trailing icon`;
 - Small / Medium / Large use 12/16, 14/20, and 16/24 Regular typography;
 - component and Label wrapper have no background fill or stroke;
 - End icon is 18px with an 8px gap at every size;
@@ -395,7 +395,7 @@ Still requiring runtime verification:
 ## Live References
 
 - Figma file: `[DS] Job Vision NEXT`
-- Figma component set: `Link / Default`
+- Figma component set: `Link`
 - Figma node ID: `22920:125581`
 - Figma component key: `f31eac5461a0d8a608089f696b3b1402590be8a9`
 - Figma default: `Style=Default, Size=Medium, State=Enabled`
@@ -411,3 +411,13 @@ Still requiring runtime verification:
 - `../../foundations/interaction/navigation.md`
 - `../../integrations/component-mapping.md`
 - `../tokens/color/semantics.md`
+
+## Figma authoring label compatibility
+
+The following Figma authoring labels were renamed in place for library consistency. Property types, identifier suffixes, defaults and component identities are preserved. These are design-tool labels, not new runtime APIs.
+
+| Previous label | Current label |
+| --- | --- |
+| `Link text` | `Label` |
+| `End icon` | `Show trailing icon` |
+| `Swap end icon` | `Trailing icon` |
