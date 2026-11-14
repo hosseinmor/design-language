@@ -6,10 +6,13 @@ language: fa-IR
 scope:
   - product-ui
   - transactional-content
+  - marketing-content
+  - legal-content
 
 description: >
   روش آدیت copy فعلی پروداکشن در برابر قواعد Design Language. این قرارداد شکل
-  ورودی، مراحل، شکل finding و اولویت را تعریف می‌کند. موجودی صفحه‌ها، findingهای
+  ورودی، نوع متن و مالک تصمیم، مراحل، شکل finding و اولویت را تعریف می‌کند.
+  محتوای بازاریابی و حقوقی فقط در حد قواعد مجاز نوع خودشان آدیت می‌شوند. موجودی صفحه‌ها، findingهای
   واقعی و گزارش‌های تاریخ‌دار بیرون از این مخزن نگهداری می‌شوند.
 
 depends_on:
@@ -24,16 +27,48 @@ goal: >
 # Context لازم برای قضاوت. همان فیلدهای copy brief، برای یک slot.
 audit_item_schema:
   required: [id, observed_text, location, captured_on]
-  context: [product, audience, surface, contract, state, slot]
-  optional: [concepts, product_facts, notes]
+  # فیلدهای context همهٔ موردها؛ هر نوع متن فیلدهای لازم خودش را در content_types اضافه می‌کند.
+  context: [product, audience, surface, content_type]
+  optional: [contract, state, slot, concepts, product_facts, notes]
   fields:
+    content_type: یکی از کلیدهای content_types؛ ابزار آن را حدس نمی‌زند.
     location: شناسهٔ مبهم مورد در موجودی بیرونی؛ URL، تصویر یا دادهٔ کاربر در این مخزن نمی‌آید.
     captured_on: تاریخ دیده‌شدن copy در محصول، YYYY-MM-DD.
     observed_text: متن دقیق دیده‌شده.
 
+# نوع متن مالک تصمیم و دامنهٔ قضاوت را تعیین می‌کند. اولویت همچنان از priority_model می‌آید.
+# judged_rules: قواعدی که برای این نوع قضاوت می‌شوند؛ «*» یعنی همه و «LOC-*» یعنی همهٔ قواعد بومی‌سازی.
+content_types:
+  interface:
+    label: متن رابط
+    description: دکمه، برچسب، خطا، وضعیت خالی، پیام، راهنمای فیلد و هر متن دیگری که کاربر با آن کار می‌کند.
+    decision_owner: designer
+    required_context: [contract, state, slot]
+    rewrite: true
+    judged_rules: ["*"]
+  marketing:
+    label: محتوای بازاریابی
+    description: تیتر و متن لندینگ، مزیت‌ها، بنر تبلیغی و پرسش‌های متداول سئو.
+    decision_owner: marketing
+    required_context: []
+    rewrite: false
+    judged_rules: ["LOC-*", VOICE-002, VOICE-003, VOICE-005, VOICE-007, VOICE-010]
+  legal:
+    label: متن حقوقی
+    description: قوانین و مقررات، حریم خصوصی، رضایت‌نامه و سلب مسئولیت.
+    decision_owner: legal
+    required_context: []
+    rewrite: false
+    judged_rules: ["LOC-*", VOICE-002, VOICE-007]
+
+# finding با ادعای محصولی بی‌منبع، در هر نوع متن، برای تأیید fact به این مالک می‌رود.
+claim_routing:
+  dimension: product_truth
+  decision_owner: product_manager
+
 process:
   - id: extract
-    description: copy را با context کامل یک slot استخراج کنید.
+    description: copy را با context کامل یک slot و نوع متن استخراج کنید.
   - id: deterministic_check
     description: برچسب‌های forbidden و legacy مفهوم‌های مورد را از روی واژه‌نامه بیابید.
   - id: semantic_check
@@ -50,13 +85,15 @@ process:
 finding_schema:
   status: [finding, no_issue, needs_context]
   fields:
+    content_type: نوع متن مورد.
+    decision_owner: مالک تصمیم؛ از content_types، یا claim_routing برای ادعای بی‌منبع.
     rule_ids: ID قواعدی که copy نقض می‌کند.
     guideline_gap: وقتی مشکل واقعی است ولی هیچ قاعده‌ای آن را پوشش نمی‌دهد؛ توضیح شکاف.
     dimensions: dimension قواعد نقض‌شده.
     label_findings: "{concept, label, kind: forbidden | legacy, scope, approved_labels, needs_review}"
     priority: P1 تا P4.
-    rewrite_brief: copy brief ساخته‌شده از context مورد، برای تولید copy پیشنهادی.
-    context_gaps: فیلدهای context غایب، یا product_layer_missing.
+    rewrite_brief: copy brief ساخته‌شده از context مورد، فقط برای نوع متنی که rewrite دارد.
+    context_gaps: فیلدهای context غایب، product_layer_missing، unknown_content_type یا unknown_contract.
 
 # اولویت = رتبهٔ dimension + جابه‌جایی surface، حداکثر P4.
 priority_model:
@@ -101,5 +138,15 @@ rules:
     dimension: product_truth
     key: rewrite_through_brief
     statement: copy پیشنهادی از یک copy brief ساخته شود تا fact نامعلوم به سؤال تبدیل شود، نه به ادعا.
+  - id: AUD-005
+    obligation: must
+    dimension: classification
+    key: owner_from_content_type
+    statement: هر مورد نوع متن مشخص داشته باشد و مالک تصمیم finding از همان نوع بیاید؛ ادعای محصولی بی‌منبع در هر نوع به PM برود.
+  - id: AUD-006
+    obligation: must_not
+    dimension: classification
+    key: judge_beyond_content_type
+    statement: محتوای بازاریابی یا حقوقی فراتر از قواعد مجاز نوع خودش قضاوت یا بازنویسی نشود.
 
 evaluation_source: ../../ai/evals/content/audit/copy-audit-cases.yml

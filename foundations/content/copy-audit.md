@@ -3,7 +3,7 @@ id: content.copy-audit
 collection: content
 type: content-foundation
 title: Copy Audit
-summary: Defines how existing production copy is audited against Design Language rules, including the audit item and finding shapes, priority model, rewrite through a copy brief, and how gaps return to the owning guideline.
+summary: Defines how existing production copy is audited against Design Language rules, including the audit item and finding shapes, content types and their decision owners, priority model, rewrite through a copy brief, and how gaps return to the owning guideline.
 knowledge_state: unverified
 document_maturity: draft
 related:
@@ -39,22 +39,48 @@ topics:
 - `AUD-001` هر finding یا ID قاعدهٔ نقض‌شده را ذکر کند یا guideline_gap مشخص داشته باشد.
 - `AUD-002` برچسب forbidden یا legacy فقط به برچسب مصوب همان مفهوم در واژه‌نامه نگاشت شود، نه به برچسب حدسی.
 - `AUD-004` copy پیشنهادی از یک copy brief ساخته شود تا fact نامعلوم به سؤال تبدیل شود، نه به ادعا.
+- `AUD-005` هر مورد نوع متن مشخص داشته باشد و مالک تصمیم finding از همان نوع بیاید؛ ادعای محصولی بی‌منبع در هر نوع به PM برود.
 
 ### نباید
 
 - `AUD-003` موردی که context کامل ندارد یا محصولش لایهٔ هویت کلامی ندارد قضاوت نشود و needs_context بگیرد.
+- `AUD-006` محتوای بازاریابی یا حقوقی فراتر از قواعد مجاز نوع خودش قضاوت یا بازنویسی نشود.
 
 <!-- /generated:content-rules -->
 
+## نوع متن و مالک تصمیم
+
+هر مورد یک `content_type` دارد. نوع متن مشخص می‌کند finding پیش چه کسی
+می‌رود و چه اندازه تغییر مجاز است. اولویت همچنان از `priority_model` می‌آید؛
+نوع متن مدل اولویت دوم نمی‌سازد.
+
+| `content_type` | نام | مالک تصمیم | قواعد قضاوت‌شده | بازنویسی |
+|---|---|---|---|---|
+| `interface` | متن رابط | `designer` | همهٔ قواعد | بله، از راه copy brief |
+| `marketing` | محتوای بازاریابی | `marketing` | بومی‌سازی، نگارش (`VOICE-002`)، ادعا (`VOICE-003`، `VOICE-005`) و واژه (`VOICE-007`، `VOICE-010`) | نه؛ برچسب مصوب خودش اصلاح است |
+| `legal` | متن حقوقی | `legal` | بومی‌سازی، نگارش و واژه | نه |
+
+- متن رابط همان دامنهٔ اصلی این گایدلاین است. محتوای بازاریابی و حقوقی مالک
+  دیگری دارند؛ آدیت فقط آنچه را این مخزن مالکش است برایشان گزارش می‌کند.
+- **ادعای محصولی نوع متن نیست.** ادعا در هر نوعی می‌آید، از تیتر لندینگ تا
+  دیالوگ رابط. finding با dimension `product_truth`، یا پاسخ evaluator با
+  `unsupported_product_or_runtime_claim`، در هر نوع متن مالک `product_manager`
+  می‌گیرد تا fact تأیید شود.
+- موردی که نوع متن ندارد یا نوعش ناشناخته است `needs_context` می‌گیرد؛ ابزار
+  نوع را حدس نمی‌زند.
+- متن راهنما (مقاله‌های کمک) هنوز نوع جدا ندارد. پرسش‌های متداول سئو
+  `marketing` است.
+
 ## مراحل
 
-1. **استخراج:** هر copy با context کامل یک slot ثبت می‌شود (`audit_item`).
+1. **استخراج:** هر copy با context کامل و نوع متن ثبت می‌شود (`audit_item`).
 2. **بررسی قطعی:** برچسب‌های forbidden و legacy مفهوم‌های مورد از روی
    واژه‌نامهٔ همان محصول (مثلاً [`jobvision.yml`](terminology/jobvision.yml)) پیدا و به برچسب مصوب نگاشت می‌شوند.
 3. **بررسی معنایی:** copy با [evaluator معنایی](../../ai/evals/README.md) در
    برابر قواعد قرارداد مالک سنجیده می‌شود.
 4. **اولویت‌بندی:** از `priority_model`.
-5. **بازبینی انسانی:** finding، اولویت و copy پیشنهادی تأیید یا رد می‌شود.
+5. **بازبینی انسانی:** مالک تصمیم (`decision_owner`) finding، اولویت و copy
+   پیشنهادی را تأیید یا رد می‌کند.
 6. **تیکت:** finding تأییدشده در سامانهٔ پیگیری کار ثبت می‌شود.
 7. **برگشت شکاف:** هر `guideline_gap` یا برچسب قدیمی تازه از مسیر
    [Evolve the system](../../playbooks/evolve-the-system/README.md) به سند مالک
@@ -68,23 +94,25 @@ topics:
 | `id`، `observed_text` | لازم | شناسه و متن دقیق دیده‌شده |
 | `location` | لازم | شناسهٔ مبهم مورد در موجودی بیرونی؛ URL ممنوع |
 | `captured_on` | لازم | تاریخ دیده‌شدن، `YYYY-MM-DD` |
-| `product`، `audience`، `surface`، `contract`، `state`، `slot` | لازم برای قضاوت | همان واژگان [copy brief](copy-brief.md) |
+| `product`، `audience`، `surface`، `content_type` | لازم برای قضاوت | واژگان [copy brief](copy-brief.md) و جدول نوع متن |
+| `contract`، `state`، `slot` | لازم برای `interface` | همان واژگان copy brief |
 | `concepts`، `product_facts`، `notes` | اختیاری | ID مدخل‌ها و factهای منبع‌دار |
 
-موردی که یکی از فیلدهای context را ندارد، یا محصولش لایهٔ هویت کلامی ندارد،
-`needs_context` می‌گیرد و قضاوت نمی‌شود.
+موردی که یکی از فیلدهای context لازم برای نوع خودش را ندارد، یا محصولش لایهٔ
+هویت کلامی ندارد، `needs_context` می‌گیرد و قضاوت نمی‌شود.
 
 ## خروجی: finding
 
 | فیلد | محتوا |
 |---|---|
 | `status` | `finding`، `no_issue` یا `needs_context` |
+| `content_type`، `decision_owner` | نوع متن و مالک تصمیم؛ ادعای بی‌منبع مالک `product_manager` می‌گیرد |
 | `rule_ids` | قواعد نقض‌شده؛ برچسب نادرست به `VOICE-007` نگاشت می‌شود |
 | `guideline_gap` | مشکل واقعی‌ای که هیچ قاعده‌ای آن را پوشش نمی‌دهد |
 | `label_findings` | برچسب یافته‌شده، نوع (forbidden یا legacy)، برچسب‌های مصوب و `needs_review` |
 | `priority` | `P1` تا `P4` |
-| `rewrite_brief` | copy brief برای تولید copy پیشنهادی |
-| `context_gaps` | فیلدهای غایب یا `product_layer_missing` |
+| `rewrite_brief` | copy brief برای تولید copy پیشنهادی؛ فقط برای `interface` |
+| `context_gaps` | فیلدهای غایب، `product_layer_missing`، `unknown_content_type` یا `unknown_contract` |
 
 `needs_review` یعنی برچسب ممنوع scope محدودتری از concept دارد (مثلاً
 `entity_label`) و فقط بازبین انسانی می‌تواند بگوید در این متن واقعاً نادرست است.
@@ -115,7 +143,9 @@ python tooling/audit/run_copy_audit.py summarize --findings <findings.jsonl> --s
 ```
 
 ورودی و خروجی این دستورها بیرون از مخزن نگهداری می‌شوند. بخش معنایی
-report-only است و پاسخ‌های evaluator را فقط با findingها ادغام می‌کند.
+report-only است و پاسخ‌های evaluator را فقط با findingها ادغام می‌کند. هر
+task معنایی قواعد قضاوت‌شدهٔ نوع متن را در `judged_rules` دارد، و `summarize`
+violation بیرون از آن قواعد را کنار می‌گذارد.
 
 ```bash
 python tooling/validators/check_copy_audit.py

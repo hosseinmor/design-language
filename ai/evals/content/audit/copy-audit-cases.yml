@@ -16,13 +16,15 @@ cases:
       product: jobvision
       audience: [employer_actor]
       surface: public
+      content_type: interface
       contract: content.pattern.notifications
       state: info
       slot: message
       concepts: [job_application]
     expected:
-      checked_rules: [AUD-001, AUD-002, AUD-004]
+      checked_rules: [AUD-001, AUD-002, AUD-004, AUD-005]
       status: finding
+      decision_owner: designer
       priority: P3
       label_findings:
         - {concept: job_application, label: اپلای, kind: forbidden, needs_review: true}
@@ -37,6 +39,7 @@ cases:
       product: jobvision
       audience: [jobseeker]
       surface: public
+      content_type: interface
       contract: content.pattern.notifications
       state: success
       slot: message
@@ -44,6 +47,7 @@ cases:
     expected:
       checked_rules: [AUD-002]
       status: no_issue
+      decision_owner: designer
       rewrite_slots: [message]
 
   - id: internal_surface_has_lower_priority
@@ -55,6 +59,7 @@ cases:
       product: jobvision
       audience: [account_manager]
       surface: admin
+      content_type: interface
       contract: content.pattern.empty-states
       state: empty
       slot: message
@@ -62,6 +67,7 @@ cases:
     expected:
       checked_rules: [AUD-001, AUD-002]
       status: finding
+      decision_owner: designer
       priority: P4
       label_findings:
         - {concept: talent_pool, label: آرشیو رزومه, kind: forbidden, needs_review: false}
@@ -76,6 +82,7 @@ cases:
       product: jobvision
       audience: [employer_actor]
       surface: public
+      content_type: interface
       slot: label
     expected:
       checked_rules: [AUD-003]
@@ -91,6 +98,7 @@ cases:
       product: cando
       audience: [operator]
       surface: public
+      content_type: interface
       contract: content.pattern.error
       state: system_failure
       slot: problem
@@ -108,6 +116,7 @@ cases:
       product: jobvision
       audience: [employer_actor]
       surface: public
+      content_type: interface
       contract: content.pattern.confirmation
       state: destructive_confirmation
       slot: primary_action
@@ -115,7 +124,77 @@ cases:
     expected:
       checked_rules: [AUD-001, AUD-002, AUD-004]
       status: finding
+      decision_owner: designer
       priority: P3
       label_findings:
         - {concept: job_post, label: وکنسی, kind: forbidden, needs_review: false}
       rewrite_slots: [primary_action, safe_exit, title]
+
+  - id: missing_content_type_is_not_judged
+    item:
+      id: home_hero_without_type
+      observed_text: ۵۹٬۷۴۳ آگهی استخدام در ۳۹۱ شهر
+      location: inv-0007
+      captured_on: "2026-11-01"
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      concepts: [job_post]
+    expected:
+      checked_rules: [AUD-003, AUD-005]
+      status: needs_context
+      context_gaps: [content_type]
+
+  - id: unknown_content_type_is_not_judged
+    item:
+      id: home_hero_unknown_type
+      observed_text: ۵۹٬۷۴۳ آگهی استخدام در ۳۹۱ شهر
+      location: inv-0008
+      captured_on: "2026-11-01"
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      content_type: seo
+      concepts: [job_post]
+    expected:
+      checked_rules: [AUD-003, AUD-005]
+      status: needs_context
+      context_gaps: [unknown_content_type]
+
+  - id: marketing_label_is_mapped_without_rewrite
+    item:
+      id: home_hero_marketing
+      observed_text: ۵۹٬۷۴۳ آگهی استخدام در ۳۹۱ شهر
+      location: inv-0009
+      captured_on: "2026-11-01"
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      content_type: marketing
+      concepts: [job_post]
+    expected:
+      checked_rules: [AUD-002, AUD-005, AUD-006]
+      status: finding
+      decision_owner: marketing
+      priority: P3
+      label_findings:
+        - {concept: job_post, label: آگهی استخدام, kind: forbidden, needs_review: false}
+
+  - id: legal_label_is_reported_without_rewrite
+    item:
+      id: employer_terms_vacancy
+      observed_text: انتشار وکنسی به معنی پذیرش قوانین جاب‌ویژن است.
+      location: inv-0010
+      captured_on: "2026-11-01"
+      product: jobvision
+      audience: [employer_actor]
+      surface: public
+      content_type: legal
+      concepts: [job_post]
+    expected:
+      checked_rules: [AUD-002, AUD-005, AUD-006]
+      status: finding
+      decision_owner: legal
+      priority: P3
+      label_findings:
+        - {concept: job_post, label: وکنسی, kind: forbidden, needs_review: false}
