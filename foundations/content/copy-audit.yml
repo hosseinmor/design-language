@@ -29,12 +29,22 @@ audit_item_schema:
   required: [id, observed_text, location, captured_on]
   # فیلدهای context همهٔ موردها؛ هر نوع متن فیلدهای لازم خودش را در content_types اضافه می‌کند.
   context: [product, audience, surface, content_type]
-  optional: [contract, state, slot, concepts, product_facts, notes]
+  optional: [contract, state, slot, source_kind, usages, concepts, product_facts, notes]
   fields:
     content_type: یکی از کلیدهای content_types؛ ابزار آن را حدس نمی‌زند.
-    location: شناسهٔ مبهم مورد در موجودی بیرونی؛ URL، تصویر یا دادهٔ کاربر در این مخزن نمی‌آید.
+    location: >
+      منبع متن. در آدیت کدبیس «فایل و کلید» برای کلید i18n یا «فایل و کامپوننت» برای متن داخل کد؛
+      در غیر این صورت شناسهٔ مبهم موجودی بیرونی. URL، شمارهٔ خط، تصویر یا دادهٔ کاربر نمی‌آید.
+    source_kind: یکی از source_kinds؛ نوع منبع متن در کدبیس.
+    usages: فهرست جاهایی که این منبع نشان داده می‌شود (صفحه یا route)، برای سنجش اثر اصلاح.
     captured_on: تاریخ دیده‌شدن copy در محصول، YYYY-MM-DD.
     observed_text: متن دقیق دیده‌شده.
+
+# منبع متن در کدبیس. اصلاح یک منبع همهٔ usages آن را عوض می‌کند.
+source_kinds:
+  i18n_key: کلید فایل ترجمه؛ اصلاح به همهٔ جاهایی می‌رسد که کلید را می‌خوانند.
+  inline: متن نوشته‌شده در template یا کامپوننت؛ اصلاح به همهٔ جاهایی می‌رسد که کامپوننت را نشان می‌دهند.
+  backend: پیامی که از سرور می‌آید؛ در فرانت اصلاح نمی‌شود و فقط ثبت می‌شود.
 
 # نوع متن مالک تصمیم و دامنهٔ قضاوت را تعیین می‌کند. اولویت همچنان از priority_model می‌آید.
 # judged_rules: قواعدی که برای این نوع قضاوت می‌شوند؛ «*» یعنی همه و «LOC-*» یعنی همهٔ قواعد بومی‌سازی.
@@ -66,6 +76,11 @@ claim_routing:
   dimension: product_truth
   decision_owner: product_manager
 
+# finding که همهٔ قواعدش در این فهرست است اصلاح مکانیکی است: نگارش و قالب، بدون تغییر واژه یا جمله.
+# اصلاح مکانیکی مستقل از تصمیم محتوایی اعمال می‌شود، مگر متن حذف شود، و فهرستی بازبینی می‌شود، نه تک‌تک.
+review_model:
+  mechanical_rules: ["LOC-*", VOICE-002]
+
 process:
   - id: extract
     description: copy را با context کامل یک slot و نوع متن استخراج کنید.
@@ -76,7 +91,9 @@ process:
   - id: prioritize
     description: اولویت را از priority_model بگیرید؛ بازبین می‌تواند آن را با دلیل تغییر دهد.
   - id: human_review
-    description: بازبین انسانی finding، اولویت و copy پیشنهادی را تأیید یا رد می‌کند.
+    description: >
+      مالک تصمیم finding، اولویت و copy پیشنهادی را تأیید یا رد می‌کند. finding مکانیکی فهرستی بازبینی
+      و همیشه اعمال می‌شود، حتی وقتی تصمیم محتوایی همان متن رد یا منتظر fact است، مگر متن حذف شود.
   - id: ticket
     description: finding تأییدشده در سامانهٔ پیگیری کار ثبت می‌شود، نه در این مخزن.
   - id: feed_back_gaps
@@ -86,6 +103,9 @@ finding_schema:
   status: [finding, no_issue, needs_context]
   fields:
     content_type: نوع متن مورد.
+    source_kind: نوع منبع متن، اگر مورد از کدبیس آمده باشد.
+    usages: جاهای استفادهٔ منبع، از audit item.
+    mechanical: true وقتی همهٔ قواعد finding در review_model.mechanical_rules است.
     decision_owner: مالک تصمیم؛ از content_types، یا claim_routing برای ادعای بی‌منبع.
     rule_ids: ID قواعدی که copy نقض می‌کند.
     guideline_gap: وقتی مشکل واقعی است ولی هیچ قاعده‌ای آن را پوشش نمی‌دهد؛ توضیح شکاف.

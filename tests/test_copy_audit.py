@@ -110,6 +110,27 @@ class CheckerTests(unittest.TestCase):
         finding = summarize(findings, [{"case_id": "sample", "violations": ["VOICE-005"]}], CONTRACT)["findings"][0]
         self.assertEqual(finding["decision_owner"], "product_manager")
 
+    def test_codebase_source_is_kept_on_the_finding(self):
+        value = item(location="home-page/complete-resume-dialog", source_kind="inline", usages=["/", "/jobs"])
+        finding = check_item(value, CTX, CONTRACT)
+        self.assertEqual((finding["source_kind"], finding["usages"]), ("inline", ["/", "/jobs"]))
+
+    def test_unknown_source_kind_is_rejected(self):
+        self.assertTrue(validate_item(item(source_kind="figma"), CONTRACT))
+        self.assertTrue(validate_item(item(usages="/"), CONTRACT))
+
+    def test_spelling_only_finding_is_mechanical(self):
+        value = item(observed_text="ثبت نام کنید", concepts=[])
+        findings = [check_item(value, CTX, CONTRACT)]
+        report = summarize(findings, [{"case_id": "sample", "violations": ["VOICE-002", "LOC-007"]}], CONTRACT)
+        self.assertTrue(report["findings"][0]["mechanical"])
+        self.assertEqual(report["mechanical"], ["sample"])
+
+    def test_wording_finding_is_not_mechanical(self):
+        findings = [check_item(item(), CTX, CONTRACT)]
+        report = summarize(findings, [{"case_id": "sample", "violations": ["VOICE-002"]}], CONTRACT)
+        self.assertFalse(report["findings"][0]["mechanical"])
+
     def test_finding_without_rule_or_gap_is_rejected(self):
         broken = {"item_id": "x", "location": "inv", "status": "finding", "rule_ids": []}
         with self.assertRaises(EvalError):
@@ -139,6 +160,11 @@ class ValidatorTests(unittest.TestCase):
         broken = copy.deepcopy(CONTRACT)
         broken["audit_item_schema"]["context"].remove("content_type")
         self.assertTrue(validate_contract(broken, CTX))
+
+    def test_mechanical_rule_must_exist(self):
+        broken = copy.deepcopy(CONTRACT)
+        broken["review_model"]["mechanical_rules"] = ["VOICE-999"]
+        self.assertTrue(any("VOICE-999" in e for e in validate_contract(broken, CTX)))
 
     def test_case_mismatch_is_reported(self):
         case = {

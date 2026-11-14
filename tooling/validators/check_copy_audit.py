@@ -69,6 +69,11 @@ def validate_content_types(contract: dict[str, Any]) -> list[str]:
                 errors.append(f"{where}: judged rule `{pattern}` matches no active rule")
         if spec.get("rewrite") and "*" not in patterns:
             errors.append(f"{where}: a content type with rewrite must judge every rule")
+    for pattern in (contract.get("review_model") or {}).get("mechanical_rules") or []:
+        if not any(judges(rule, {"judged_rules": [pattern]}) for rule in rules):
+            errors.append(f"copy-audit.yml: mechanical rule `{pattern}` matches no active rule")
+    if not contract.get("source_kinds"):
+        errors.append("copy-audit.yml: source_kinds is empty")
     claims = contract.get("claim_routing") or {}
     if claims.get("dimension") not in ((contract.get("priority_model") or {}).get("dimension_rank") or {}):
         errors.append("copy-audit.yml: claim_routing.dimension must be a ranked dimension")
