@@ -3,7 +3,7 @@ id: content.copy-audit
 collection: content
 type: content-foundation
 title: Copy Audit
-summary: Defines how existing production copy is audited against Design Language rules, including the audit item and finding shapes, content types and their decision owners, priority model, rewrite through a copy brief, and how gaps return to the owning guideline.
+summary: Defines how existing production copy is audited against Design Language rules, including running the audit on a frontend codebase, the audit item and finding shapes, content types and their decision owners, priority model, mechanical fixes, rewrite through a copy brief, and how gaps return to the owning guideline.
 knowledge_state: unverified
 document_maturity: draft
 related:
@@ -80,22 +80,81 @@ topics:
    برابر قواعد قرارداد مالک سنجیده می‌شود.
 4. **اولویت‌بندی:** از `priority_model`.
 5. **بازبینی انسانی:** مالک تصمیم (`decision_owner`) finding، اولویت و copy
-   پیشنهادی را تأیید یا رد می‌کند.
+   پیشنهادی را تأیید یا رد می‌کند. finding مکانیکی فهرستی بازبینی می‌شود
+   (بخش [بازبینی و اجرا](#بازبینی-و-اجرا)).
 6. **تیکت:** finding تأییدشده در سامانهٔ پیگیری کار ثبت می‌شود.
 7. **برگشت شکاف:** هر `guideline_gap` یا برچسب قدیمی تازه از مسیر
    [Evolve the system](../../playbooks/evolve-the-system/README.md) به سند مالک
    برمی‌گردد. برچسب قدیمی به `legacy_labels` همان مدخل اضافه می‌شود، نه فهرست
    صفحه‌ها.
 
+## اجرا روی کدبیس
+
+وقتی آدیت مستقیم روی کد فرانت اجرا می‌شود، واحد کار **منبع متن** است: جایی که
+متن نوشته شده و اصلاح در آن انجام می‌شود. همهٔ متن‌ها کلید ترجمه ندارند؛ متن
+داخل کد هم یک منبع است.
+
+| `source_kind` | `location` | اثر اصلاح |
+|---|---|---|
+| `i18n_key` | فایل ترجمه و کلید | همهٔ جاهایی که کلید را می‌خوانند |
+| `inline` | فایل و نام کامپوننت | همهٔ صفحه‌هایی که کامپوننت را نشان می‌دهند |
+| `backend` | سرویس یا endpoint، اگر معلوم است | در فرانت اصلاح نمی‌شود؛ فقط ثبت می‌شود |
+
+1. **پیدا کردن متن‌ها:** فایل‌های ترجمه، متن داخل template و کامپوننت، و
+   پیام‌هایی که از سرور نمایش داده می‌شوند. دادهٔ نمونه و محتوای کاربر آدیت
+   نمی‌شوند.
+2. **ثبت هر منبع یک بار:** با `usages`، یعنی صفحه‌ها یا routeهایی که آن را نشان
+   می‌دهند. شمارهٔ خط در `location` نمی‌آید، چون با هر تغییر کد جابه‌جا می‌شود؛
+   متن فعلی برای پیدا کردن دقیق کافی است.
+3. **متن یکسان در چند منبع** چند ردیف است؛ این ردیف‌ها در سند خروجی کنار هم
+   می‌آیند تا یکدست اصلاح شوند.
+4. **context از روی کد:** `content_type` و برای متن رابط `contract`، `state` و
+   `slot` از کدی تعیین می‌شود که متن را نشان می‌دهد. اگر از کد معلوم نشود، مورد
+   `needs_context` می‌گیرد.
+5. **سنجش اثر:** copy پیشنهادی باید برای همهٔ `usages` منبع درست باشد. اگر
+   نیست، برای آن جا منبع جدا پیشنهاد می‌شود: کلید جدا، یا ورودی جدا برای
+   کامپوننت.
+
+انتقال متن داخل کد به فایل ترجمه جزو آدیت نیست؛ متن در همان منبعی اصلاح
+می‌شود که هست.
+
+### سند خروجی
+
+سند خروجی آدیت کدبیس برای هر finding این ستون‌ها را دارد. ستون‌های تصمیم را
+بازبین پر می‌کند و سند بازبینی‌شده همان فهرست اجرای اصلاح است.
+
+| ستون | از کجا |
+|---|---|
+| منبع | `source_kind` و `location` |
+| جای استفاده | `usages` |
+| متن فعلی | `observed_text` |
+| متن پیشنهادی AI | خروجی copy brief؛ برای سؤال PM، سؤال به‌جای متن |
+| قاعده و دلیل | `rule_ids` یا `guideline_gap`، با یک جمله دلیل |
+| اولویت | `priority` |
+| نوع متن و مالک تصمیم | `content_type` و `decision_owner` |
+| تصمیم | بازبین: تأیید، ویرایش، رد یا سؤال PM |
+| متن نهایی | بازبین، فقط برای «ویرایش» |
+
+### بازبینی و اجرا
+
+- **اصلاح مکانیکی:** finding که همهٔ قواعدش در `review_model.mechanical_rules`
+  است (نگارش و قالب، بدون تغییر واژه یا جمله) `mechanical` می‌گیرد. این
+  findingها فهرستی بازبینی می‌شوند، نه تک‌تک.
+- اصلاح مکانیکی **همیشه اعمال می‌شود**، حتی وقتی تصمیم محتوایی همان متن رد
+  شده یا منتظر fact است. فقط وقتی متن حذف شود اعمال نمی‌شود.
+- «تأیید» یعنی copy پیشنهادی همان‌طور اعمال شود؛ «ویرایش» یعنی متن نهایی
+  بازبین اعمال شود.
+
 ## ورودی: audit item
 
 | فیلد | الزام | مقدار |
 |---|---|---|
 | `id`، `observed_text` | لازم | شناسه و متن دقیق دیده‌شده |
-| `location` | لازم | شناسهٔ مبهم مورد در موجودی بیرونی؛ URL ممنوع |
+| `location` | لازم | منبع متن (فایل و کلید، یا فایل و کامپوننت) یا شناسهٔ مبهم موجودی بیرونی؛ URL و شمارهٔ خط ممنوع |
 | `captured_on` | لازم | تاریخ دیده‌شدن، `YYYY-MM-DD` |
 | `product`، `audience`، `surface`، `content_type` | لازم برای قضاوت | واژگان [copy brief](copy-brief.md) و جدول نوع متن |
 | `contract`، `state`، `slot` | لازم برای `interface` | همان واژگان copy brief |
+| `source_kind`، `usages` | اختیاری؛ در آدیت کدبیس لازم | نوع منبع و جاهای استفاده |
 | `concepts`، `product_facts`، `notes` | اختیاری | ID مدخل‌ها و factهای منبع‌دار |
 
 موردی که یکی از فیلدهای context لازم برای نوع خودش را ندارد، یا محصولش لایهٔ
@@ -106,6 +165,8 @@ topics:
 | فیلد | محتوا |
 |---|---|
 | `status` | `finding`، `no_issue` یا `needs_context` |
+| `source_kind`، `usages` | از audit item، برای سند خروجی |
+| `mechanical` | true وقتی finding فقط اصلاح نگارش و قالب است |
 | `content_type`، `decision_owner` | نوع متن و مالک تصمیم؛ ادعای بی‌منبع مالک `product_manager` می‌گیرد |
 | `rule_ids` | قواعد نقض‌شده؛ برچسب نادرست به `VOICE-007` نگاشت می‌شود |
 | `guideline_gap` | مشکل واقعی‌ای که هیچ قاعده‌ای آن را پوشش نمی‌دهد |

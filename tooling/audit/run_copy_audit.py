@@ -67,7 +67,12 @@ def validate_item(item: Any, contract: dict[str, Any]) -> list[str]:
         errors.append(f"{where}: captured_on must be YYYY-MM-DD")
     location = str(item.get("location", ""))
     if "://" in location or location.startswith("www."):
-        errors.append(f"{where}: location must be an opaque inventory id, not a URL")
+        errors.append(f"{where}: location must be a source or inventory id, not a URL")
+    if "source_kind" in item and item["source_kind"] not in (contract.get("source_kinds") or {}):
+        errors.append(f"{where}: unknown source_kind `{item['source_kind']}`")
+    usages = item.get("usages")
+    if usages is not None and (not isinstance(usages, list) or not all(isinstance(u, str) and u for u in usages)):
+        errors.append(f"{where}: usages must be a list of non-empty strings")
     return errors
 
 
@@ -170,6 +175,7 @@ def check_item(item: dict[str, Any], ctx: Context, contract: dict[str, Any]) -> 
         "location": item["location"],
         "surface": item.get("surface"),
         "content_type": item.get("content_type"),
+        **{key: item[key] for key in ("source_kind", "usages") if key in item},
     }
     gaps = context_gaps(item, ctx, contract)
     if gaps:
@@ -262,9 +268,17 @@ def summarize(findings: list[dict[str, Any]], semantic: list[dict[str, Any]], co
         if gap:
             finding["guideline_gap"] = gap
         finding["priority"] = priority(finding["dimensions"], finding.get("surface"), model) or finding.get("priority")
+    mechanical = {"judged_rules": (contract.get("review_model") or {}).get("mechanical_rules") or []}
     for finding in by_id.values():
-        if finding["status"] == "finding" and claims["dimension"] in (finding.get("dimensions") or []):
+        if finding["status"] != "finding":
+            continue
+        if claims["dimension"] in (finding.get("dimensions") or []):
             finding["decision_owner"] = claims["decision_owner"]  # AUD-005
+        rules = finding.get("rule_ids") or []
+        # Spelling and formatting fixes are applied whatever the content decision (review_model).
+        finding["mechanical"] = bool(rules) and not finding.get("guideline_gap") and all(
+            judges(rule, mechanical) for rule in rules
+        )
     merged = list(by_id.values())
     for finding in merged:
         if finding["status"] == "finding" and not finding.get("rule_ids") and not finding.get("guideline_gap"):
@@ -281,6 +295,7 @@ def summarize(findings: list[dict[str, Any]], semantic: list[dict[str, Any]], co
             Counter(f["decision_owner"] for f in merged if f["status"] == "finding" and f.get("decision_owner")).items()
         )),
         "guideline_gaps": sorted(f["item_id"] for f in merged if f.get("guideline_gap")),
+        "mechanical": sorted(f["item_id"] for f in merged if f.get("mechanical")),
         "context_gaps": dict(sorted(Counter(g for f in merged for g in f.get("context_gaps") or []).items())),
         "findings": merged,
     }
@@ -292,6 +307,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         values = ", ".join(f"{k}: {v}" for k, v in report[key].items()) or "—"
         lines.append(f"- {key.replace('_', ' ').capitalize()}: {values}")
     lines.append(f"- Guideline gaps: {', '.join(report['guideline_gaps']) or '—'}")
+    lines.append(f"- Mechanical fixes (applied as a list): {len(report['mechanical'])}")
     lines += ["", "| Item | Location | Type | Owner | Priority | Rules | Labels |", "|---|---|---|---|---|---|---|"]
     for f in sorted(report["findings"], key=lambda f: (f.get("priority") or "P9", f["item_id"])):
         if f["status"] != "finding":
