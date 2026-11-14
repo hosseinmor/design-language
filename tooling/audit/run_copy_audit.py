@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Deterministic and report-only steps of the copy audit contract.
 
-`check` turns audit items (JSONL) into findings: context gaps, forbidden or
-legacy labels mapped to approved terminology labels, a priority and a rewrite
+`check` turns audit items (JSONL) into findings: context gaps, the decision
+owner of the item's content type, forbidden or legacy labels mapped to approved
+terminology labels, a priority and, for content types that allow it, a rewrite
 copy brief. `prepare` writes semantic-evaluator tasks for items with full
 context. `summarize` aggregates findings, optionally merged with semantic
 evaluator responses, into a report. Inventories, findings and reports are
@@ -12,6 +13,7 @@ inputs and outputs of the tool; they are not stored in this repository.
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
 import re
 import sys
@@ -71,12 +73,23 @@ def validate_item(item: Any, contract: dict[str, Any]) -> list[str]:
 
 def context_gaps(item: dict[str, Any], ctx: Context, contract: dict[str, Any]) -> list[str]:
     gaps = [key for key in contract["audit_item_schema"]["context"] if not item.get(key)]
+    content_type = item.get("content_type")
+    if content_type and content_type not in contract["content_types"]:
+        gaps.append("unknown_content_type")
+    elif content_type:
+        required = contract["content_types"][content_type].get("required_context") or []
+        gaps += [key for key in required if not item.get(key)]
     product = item.get("product")
     if product and ctx.layers.get(product, {}).get("status") != "available":
         gaps.append("product_layer_missing")
     if item.get("contract") and item["contract"] not in ctx.contracts:
         gaps.append("unknown_contract")
     return gaps
+
+
+def judges(rule_id: str, content_type: dict[str, Any]) -> bool:
+    """Whether a rule is judged for a content type (AUD-006)."""
+    return any(fnmatch.fnmatchcase(rule_id, pattern) for pattern in content_type.get("judged_rules") or [])
 
 
 def label_findings(item: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
@@ -152,15 +165,25 @@ def rewrite_brief(item: dict[str, Any], ctx: Context) -> dict[str, Any]:
 
 def check_item(item: dict[str, Any], ctx: Context, contract: dict[str, Any]) -> dict[str, Any]:
     ctx = ctx.for_product(item.get("product"))
-    finding: dict[str, Any] = {"item_id": item["id"], "location": item["location"], "surface": item.get("surface")}
+    finding: dict[str, Any] = {
+        "item_id": item["id"],
+        "location": item["location"],
+        "surface": item.get("surface"),
+        "content_type": item.get("content_type"),
+    }
     gaps = context_gaps(item, ctx, contract)
     if gaps:
         return {**finding, "status": "needs_context", "context_gaps": gaps}
-    labels = label_findings(item, ctx)
+    content_type = contract["content_types"][item["content_type"]]
+    model = contract["priority_model"]
+    finding["decision_owner"] = content_type["decision_owner"]
+    # Only content types that allow a rewrite get a brief (AUD-004, AUD-006); for
+    # the others the approved terminology label is the whole correction.
+    brief = {"rewrite_brief": rewrite_brief(item, ctx)} if content_type.get("rewrite") else {}
+    labels = label_findings(item, ctx) if judges(model["default_rule_for_labels"], content_type) else []
     if not labels:
         # The brief is kept so a later semantic finding can still be rewritten (AUD-004).
-        return {**finding, "status": "no_issue", "rule_ids": [], "dimensions": [], "rewrite_brief": rewrite_brief(item, ctx)}
-    model = contract["priority_model"]
+        return {**finding, "status": "no_issue", "rule_ids": [], "dimensions": [], **brief}
     return {
         **finding,
         "status": "finding",
@@ -168,21 +191,28 @@ def check_item(item: dict[str, Any], ctx: Context, contract: dict[str, Any]) -> 
         "dimensions": ["terminology"],
         "label_findings": labels,
         "priority": priority(["terminology"], item["surface"], model),
-        "rewrite_brief": rewrite_brief(item, ctx),
+        **brief,
     }
 
 
-def semantic_task(item: dict[str, Any], repository_commit: str) -> dict[str, Any]:
+VOICE_CONTRACT = "content.foundation.product_voice"
+
+
+def semantic_task(item: dict[str, Any], repository_commit: str, contract: dict[str, Any]) -> dict[str, Any]:
+    content_type = contract["content_types"][item["content_type"]]
     return {
         "case_id": item["id"],
         "fixture_path": "audit",
         "repository_commit": repository_commit,
         "evaluator_version": EVALUATOR_VERSION,
-        "policy_refs": [item["contract"]],
+        "policy_refs": [item.get("contract") or VOICE_CONTRACT],
+        "judged_rules": list(content_type.get("judged_rules") or []),
         "input": {
-            "context": {k: item[k] for k in ("product", "audience", "surface", "state", "slot") if k in item},
+            "context": {
+                k: item[k] for k in ("product", "audience", "surface", "content_type", "state", "slot") if k in item
+            },
             "concepts": item.get("concepts") or [],
-            "content": {item["slot"]: item["observed_text"]},
+            "content": {item.get("slot") or "text": item["observed_text"]},
         },
         "response_contract": {
             "case_id": "string",
@@ -209,20 +239,32 @@ def summarize(findings: list[dict[str, Any]], semantic: list[dict[str, Any]], co
     by_id = {f["item_id"]: dict(f) for f in findings}
     dims = rule_dimensions()
     model = contract["priority_model"]
+    types = contract["content_types"]
+    claims = contract["claim_routing"]
     for response in semantic:
         finding = by_id.get(response.get("case_id"))
         if finding is None or finding["status"] == "needs_context":
             continue
-        violations = [v for v in response.get("violations") or [] if isinstance(v, str)]
+        content_type = types.get(finding.get("content_type") or "", {})
+        # A violation outside the rules judged for the content type is dropped (AUD-006).
+        violations = [
+            v for v in response.get("violations") or [] if isinstance(v, str) and judges(v, content_type)
+        ]
         gap = str(response.get("guideline_gap") or "").strip()
         if not violations and not gap:
             continue
         finding["status"] = "finding"
+        claim_rules = [r for r, d in dims.items() if d == claims["dimension"] and judges(r, content_type)]
+        if response.get("unsupported_product_or_runtime_claim") is True and claim_rules:
+            finding["decision_owner"] = claims["decision_owner"]  # AUD-005
         finding["rule_ids"] = sorted(set(finding.get("rule_ids") or []) | set(violations))
         finding["dimensions"] = sorted({dims.get(r, "") for r in finding["rule_ids"]} - {""})
         if gap:
             finding["guideline_gap"] = gap
         finding["priority"] = priority(finding["dimensions"], finding.get("surface"), model) or finding.get("priority")
+    for finding in by_id.values():
+        if finding["status"] == "finding" and claims["dimension"] in (finding.get("dimensions") or []):
+            finding["decision_owner"] = claims["decision_owner"]  # AUD-005
     merged = list(by_id.values())
     for finding in merged:
         if finding["status"] == "finding" and not finding.get("rule_ids") and not finding.get("guideline_gap"):
@@ -234,6 +276,10 @@ def summarize(findings: list[dict[str, Any]], semantic: list[dict[str, Any]], co
         "status": dict(sorted(status.items())),
         "priority": dict(sorted(Counter(f["priority"] for f in merged if f.get("priority")).items())),
         "dimensions": dict(sorted(Counter(d for f in merged for d in f.get("dimensions") or []).items())),
+        "content_type": dict(sorted(Counter(f["content_type"] for f in merged if f.get("content_type")).items())),
+        "decision_owner": dict(sorted(
+            Counter(f["decision_owner"] for f in merged if f["status"] == "finding" and f.get("decision_owner")).items()
+        )),
         "guideline_gaps": sorted(f["item_id"] for f in merged if f.get("guideline_gap")),
         "context_gaps": dict(sorted(Counter(g for f in merged for g in f.get("context_gaps") or []).items())),
         "findings": merged,
@@ -242,16 +288,16 @@ def summarize(findings: list[dict[str, Any]], semantic: list[dict[str, Any]], co
 
 def render_markdown(report: dict[str, Any]) -> str:
     lines = ["# Copy audit summary (report-only)", "", f"- Items: {report['items']}"]
-    for key in ("status", "priority", "dimensions", "context_gaps"):
+    for key in ("status", "priority", "dimensions", "content_type", "decision_owner", "context_gaps"):
         values = ", ".join(f"{k}: {v}" for k, v in report[key].items()) or "—"
         lines.append(f"- {key.replace('_', ' ').capitalize()}: {values}")
     lines.append(f"- Guideline gaps: {', '.join(report['guideline_gaps']) or '—'}")
-    lines += ["", "| Item | Location | Priority | Rules | Labels |", "|---|---|---|---|---|"]
+    lines += ["", "| Item | Location | Type | Owner | Priority | Rules | Labels |", "|---|---|---|---|---|---|---|"]
     for f in sorted(report["findings"], key=lambda f: (f.get("priority") or "P9", f["item_id"])):
         if f["status"] != "finding":
             continue
         labels = "، ".join(f"{x['label']} → {' / '.join(x['approved_labels']) or '?'}" for x in f.get("label_findings") or [])
-        lines.append(f"| `{f['item_id']}` | `{f['location']}` | {f.get('priority') or '—'} | {', '.join(f.get('rule_ids') or []) or 'gap'} | {labels or '—'} |")
+        lines.append(f"| `{f['item_id']}` | `{f['location']}` | {f.get('content_type') or '—'} | {f.get('decision_owner') or '—'} | {f.get('priority') or '—'} | {', '.join(f.get('rule_ids') or []) or 'gap'} | {labels or '—'} |")
     return "\n".join(lines) + "\n"
 
 
@@ -278,7 +324,7 @@ def command_check(args: argparse.Namespace) -> int:
 def command_prepare(args: argparse.Namespace) -> int:
     contract, ctx = load_contract(), Context.from_repository()
     items = [i for i in load_items(args.items, contract) if not context_gaps(i, ctx, contract)]
-    write_jsonl([semantic_task(i, args.repository_commit) for i in items], args.output)
+    write_jsonl([semantic_task(i, args.repository_commit, contract) for i in items], args.output)
     print(f"Prepared {len(items)} semantic audit tasks at {args.output}")
     return 0
 

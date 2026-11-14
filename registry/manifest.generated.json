@@ -209,7 +209,7 @@
       "id": "content.copy-audit",
       "kind": "content-content-foundation",
       "title": "Copy Audit",
-      "summary": "Defines how existing production copy is audited against Design Language rules, including the audit item and finding shapes, priority model, rewrite through a copy brief, and how gaps return to the owning guideline.",
+      "summary": "Defines how existing production copy is audited against Design Language rules, including the audit item and finding shapes, content types and their decision owners, priority model, rewrite through a copy brief, and how gaps return to the owning guideline.",
       "status": "draft",
       "owner": null,
       "last_reviewed": null,
