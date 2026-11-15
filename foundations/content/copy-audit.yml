@@ -51,15 +51,33 @@ source_kinds:
 content_types:
   interface:
     label: متن رابط
-    description: دکمه، برچسب، خطا، وضعیت خالی، پیام، راهنمای فیلد و هر متن دیگری که کاربر با آن کار می‌کند.
+    description: >
+      دکمه، برچسب، خطا، وضعیت خالی، پیام، راهنمای فیلد و هر متن دیگری که کاربر با آن کار می‌کند؛
+      همچنین متن، آمار و مزیت‌های صفحهٔ اصلی محصول، جز تیتر h1.
     decision_owner: designer
     required_context: [contract, state, slot]
     rewrite: true
     judged_rules: ["*"]
   marketing:
     label: محتوای بازاریابی
-    description: تیتر و متن لندینگ، مزیت‌ها، بنر تبلیغی و پرسش‌های متداول سئو.
+    description: کمپین، بنر تبلیغی، جشنواره و لندینگ کمپین.
     decision_owner: marketing
+    required_context: []
+    rewrite: false
+    judged_rules: ["LOC-*", VOICE-002, VOICE-003, VOICE-005, VOICE-007, VOICE-010]
+  seo:
+    label: محتوای سئو
+    description: >
+      تیتر h1 و عنوان و توضیح متای هر صفحه، متن لندینگ‌های سئو، پرسش‌های متداول سئو و متن
+      جایگزین تصویر.
+    decision_owner: seo
+    required_context: []
+    rewrite: false
+    judged_rules: ["LOC-*", VOICE-002, VOICE-003, VOICE-005, VOICE-007, VOICE-010]
+  guidance:
+    label: متن راهنما
+    description: مقاله‌های مرکز راهنما و پرسش‌های متداول داخل محصول.
+    decision_owner: seo
     required_context: []
     rewrite: false
     judged_rules: ["LOC-*", VOICE-002, VOICE-003, VOICE-005, VOICE-007, VOICE-010]
