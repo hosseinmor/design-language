@@ -47,6 +47,12 @@ sources:
     state: verified
     role: product_knowledge_reference
     reviewed_on: 2026-10-22
+  - id: pk_jobvision_jobpost_entities
+    title: موجودیت‌های آگهی
+    url: https://docs-jv.jvoffice.ir/contents/jobpost/entity-jobpost/
+    state: verified
+    role: product_knowledge_reference
+    reviewed_on: 2026-11-15
   - id: pk_jobvision_cv_language_variants
     title: قابلیت رزومهٔ فارسی و انگلیسی
     url: https://docs-jv.jvoffice.ir/contents/cv/capability-fa-en-cv/
@@ -68,7 +74,7 @@ sources:
 
 # مفهوم‌هایی که در relations ارجاع داده شده‌اند ولی هنوز مدخل ندارند.
 # هر شناسهٔ تازه در relations باید یا مدخل داشته باشد یا اینجا ثبت شود.
-unregistered_concepts: [application_rejection, business_rule, candidate_profile, company_activation, company_profile, formal_info, generic_request, interview_invitation, job_category, price, proforma_invoice, reactivation, resume_view, seniority_level, services]
+unregistered_concepts: [application_rejection, business_rule, candidate_profile, company_activation, company_profile, formal_info, generic_request, interview_invitation, price, proforma_invoice, reactivation, resume_view, seniority_level, services]
 
 terms:
   # Core employment concepts
@@ -396,6 +402,34 @@ terms:
     notes:
       - پیشنهاد آینده: یک برچسب واحد برای همهٔ سطح‌ها.
     evidence: [source_glossary, jobvision_builder_designs]
+
+  - id: job_category
+    concept_kind: taxonomy
+    authority:
+      meaning_owner: product_knowledge
+      language_owner: design_language
+      product_source: pk_jobvision_jobpost_entities
+      migration_state: source_linked
+    production_alignment: {state: aligned}
+    canonical_internal: دستهٔ شغلی
+    definition:
+      source: >
+        دسته‌های شغلی آگهی که از فهرست بیس‌دیتا انتخاب می‌شوند؛ هر آگهی دقیقاً
+        یک دستهٔ اصلی دارد.
+    preferred:
+      default: گروه شغلی
+    forbidden:
+      - {label: حوزهٔ شغلی, scope: concept, source: design_language}
+      - {label: دستهٔ شغلی, scope: concept, source: design_language}
+    rules:
+      - «دستهٔ شغلی» نام این مفهوم در Product Knowledge است؛ در متن کاربر «گروه شغلی» به کار می‌رود.
+    relations:
+      distinct_from: [industry]
+    code_bindings: [JobPostJobCategory]
+    domains: [jobseeker, employer, jobpost]
+    visibility: [public, internal]
+    status: draft
+    evidence: [pk_jobvision_jobpost_entities, jobvision_builder_designs]
 
   - id: company_authentication
     concept_kind: process
@@ -1685,14 +1719,15 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
-    canonical_internal: برندینگ کارفرمایی
+    production_alignment: {state: aligned}
+    canonical_internal: برند کارفرمایی
     definition:
       source: >
         صفحهٔ معرفی کامل سازمان برای کارجو شامل رسانه، اعضای تیم، داستان موفقیت،
         مراحل استخدام، ارزش‌ها و گزارش‌های نیروی انسانی.
     preferred:
-      default: برندینگ کارفرمایی
+      default: برند کارفرمایی
+    avoid: [برندینگ کارفرمایی]
     forbidden:
       - {label: امپلویر برندینگ, scope: concept, source: product_knowledge_snapshot}
       - {label: صفحهٔ اختصاصی سازمان, scope: concept, source: product_knowledge_snapshot}
@@ -1700,7 +1735,7 @@ terms:
     visibility: [public, internal]
     code_bindings: [CompanyBranding]
     status: draft
-    evidence: [source_glossary]
+    evidence: [source_glossary, jobvision_builder_designs]
 
   - id: job_fair
     concept_kind: event
@@ -2074,13 +2109,13 @@ decision_log:
       مشخصی دارند و ممنوع بودنشان اصلاح بی‌دلیل محصول را لازم می‌کرد.
 
   - id: DEC-012
-    term_ids: [job_application, application_withdrawal, company_review, application_responsiveness, matching_score, talent_pool]
+    term_ids: [job_application, application_withdrawal, company_review, application_responsiveness, matching_score, talent_pool, employer_branding]
     decided_on: 2026-11-15
     outcome: >
       برچسب این مفهوم‌ها از پروداکشن گرفته شد: «ارسال رزومه» و «رزومه‌های
       دریافتی/ارسالی»، «انصراف از درخواست»، «امتیاز و نظر»، «پاسخ‌گویی به
       رزومه‌های دریافتی»، «انطباق» در پنل کارفرما و «تناسب با موقعیت شغلی»
-      در پنل کارجو، و «پوشه‌های رزومه». برچسب‌های قبلی که پروداکشن به کار
+      در پنل کارجو، «پوشه‌های رزومه» و «برند کارفرمایی». برچسب‌های قبلی که پروداکشن به کار
       نمی‌برد کنار رفتند یا داخلی ماندند.
     rationale: >
       وقتی تغییر برچسب در پروداکشن پرهزینه است، برچسب پروداکشن مرجع می‌شود
@@ -2096,6 +2131,17 @@ decision_log:
     rationale: >
       اشتراک در پنل کارجو دیده می‌شود و برچسبش لازم است، ولی تعریف امکانات
       مال Product Knowledge است.
+
+  - id: DEC-014
+    term_ids: [job_category, industry]
+    decided_on: 2026-11-15
+    outcome: >
+      برچسب کاربر دستهٔ شغلی آگهی «گروه شغلی» است؛ «حوزهٔ شغلی» و «دستهٔ
+      شغلی» در متن کاربر به کار نمی‌روند. گروه شغلی ویژگی آگهی است و با صنعت،
+      که ویژگی سازمان است، یکی نیست.
+    rationale: >
+      پروداکشن بیشتر «گروه شغلی» می‌گوید و «حوزه شغلی» هم در پنل کارجو آمده؛
+      یک برچسب واحد ابهام میان دو پنل را برمی‌دارد.
 
 decision_queue:
 
