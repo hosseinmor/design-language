@@ -51,13 +51,12 @@ class CheckerTests(unittest.TestCase):
 
     def test_short_approved_label_does_not_hide_forbidden_phrase(self):
         value = item(
-            observed_text="۵۹٬۷۴۳ آگهی استخدام در ۳۹۱ شهر",
-            audience=["jobseeker"],
-            concepts=["job_post"],
+            observed_text="بستهٔ فروش ویژه برای سازمان شما فعال شد.",
+            concepts=["package_type"],
         )
         finding = check_item(value, CTX, CONTRACT)
         self.assertEqual(finding["status"], "finding")
-        self.assertEqual(finding["label_findings"][0]["label"], "آگهی استخدام")
+        self.assertEqual(finding["label_findings"][0]["label"], "بستهٔ فروش")
 
     def test_missing_context_is_not_judged(self):
         value = item()
@@ -80,7 +79,7 @@ class CheckerTests(unittest.TestCase):
         self.assertIn("NTF-005", report["findings"][0]["rule_ids"])
 
     def test_marketing_finding_has_owner_and_no_rewrite(self):
-        value = item(content_type="marketing", observed_text="۵۹٬۷۴۳ آگهی استخدام در ۳۹۱ شهر", concepts=["job_post"])
+        value = item(content_type="marketing", observed_text="بیش از ۵ میلیون جویای کار در جاب‌ویژن", concepts=["jobseeker"])
         for key in ("contract", "state", "slot"):
             del value[key]
         finding = check_item(value, CTX, CONTRACT)

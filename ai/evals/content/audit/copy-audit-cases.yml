@@ -164,9 +164,28 @@ cases:
   - id: marketing_label_is_mapped_without_rewrite
     item:
       id: home_hero_marketing
-      observed_text: ۵۹٬۷۴۳ آگهی استخدام در ۳۹۱ شهر
+      observed_text: بیش از ۵ میلیون جویای کار در جاب‌ویژن
       location: inv-0009
       captured_on: "2026-11-01"
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      content_type: marketing
+      concepts: [jobseeker]
+    expected:
+      checked_rules: [AUD-002, AUD-005, AUD-006]
+      status: finding
+      decision_owner: marketing
+      priority: P3
+      label_findings:
+        - {concept: jobseeker, label: جویای کار, kind: forbidden, needs_review: false}
+
+  - id: marketing_job_ad_phrase_is_allowed
+    item:
+      id: home_hero_job_count
+      observed_text: ۵۹٬۷۴۳ آگهی استخدام در ۳۹۱ شهر
+      location: inv-0011
+      captured_on: "2026-11-15"
       product: jobvision
       audience: [jobseeker]
       surface: public
@@ -174,11 +193,7 @@ cases:
       concepts: [job_post]
     expected:
       checked_rules: [AUD-002, AUD-005, AUD-006]
-      status: finding
-      decision_owner: marketing
-      priority: P3
-      label_findings:
-        - {concept: job_post, label: آگهی استخدام, kind: forbidden, needs_review: false}
+      status: no_issue
 
   - id: legal_label_is_reported_without_rewrite
     item:
