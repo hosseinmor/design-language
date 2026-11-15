@@ -11,8 +11,8 @@ cases:
     context:
       product: jobvision
       concept: پوشه‌های رزومهٔ ذخیره‌شدهٔ سازمان
-      existing_label_for_same_meaning: پوشه‌های رزومه
-    proposed_name: پوشه‌های رزومه
+      existing_label_for_same_meaning: پوشه
+    proposed_name: پوشه
     expected:
       valid: true
       checked_rules: [NAM-001]
@@ -22,7 +22,7 @@ cases:
     context:
       product: jobvision
       concept: پوشه‌های رزومهٔ ذخیره‌شدهٔ سازمان
-      existing_label_for_same_meaning: پوشه‌های رزومه
+      existing_label_for_same_meaning: پوشه
     proposed_name: مخزن رزومه
     expected:
       valid: false
