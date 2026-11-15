@@ -154,7 +154,7 @@ cases:
       product: jobvision
       audience: [jobseeker]
       surface: public
-      content_type: seo
+      content_type: blog
       concepts: [job_post]
     expected:
       checked_rules: [AUD-003, AUD-005]
@@ -180,7 +180,7 @@ cases:
       label_findings:
         - {concept: jobseeker, label: جویای کار, kind: forbidden, needs_review: false}
 
-  - id: marketing_job_ad_phrase_is_allowed
+  - id: seo_heading_job_ad_phrase_is_allowed
     item:
       id: home_hero_job_count
       observed_text: ۵۹٬۷۴۳ آگهی استخدام در ۳۹۱ شهر
@@ -189,11 +189,30 @@ cases:
       product: jobvision
       audience: [jobseeker]
       surface: public
-      content_type: marketing
+      content_type: seo
       concepts: [job_post]
     expected:
       checked_rules: [AUD-002, AUD-005, AUD-006]
       status: no_issue
+
+  - id: guidance_label_goes_to_seo_without_rewrite
+    item:
+      id: help_faq_candidate_term
+      observed_text: جویای کار چطور رزومه‌اش را کامل کند؟
+      location: inv-0012
+      captured_on: "2026-11-15"
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      content_type: guidance
+      concepts: [jobseeker]
+    expected:
+      checked_rules: [AUD-002, AUD-005, AUD-006]
+      status: finding
+      decision_owner: seo
+      priority: P3
+      label_findings:
+        - {concept: jobseeker, label: جویای کار, kind: forbidden, needs_review: false}
 
   - id: legal_label_is_reported_without_rewrite
     item:
