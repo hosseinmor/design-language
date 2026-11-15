@@ -61,7 +61,6 @@ cases:
       must_use_labels:
         - {concept: job_post, label: آگهی}
       forbidden_labels:
-        - {concept: job_post, label: آگهی استخدام}
         - {concept: job_post, label: وکنسی}
 
   - id: empty_talent_pool
@@ -75,10 +74,10 @@ cases:
         - id: empty_folder
           slots: [message, primary_action]
       concepts: [talent_pool, talent_search]
-      context: کارفرما تلنت پول را باز کرده و هنوز هیچ رزومه‌ای ذخیره نکرده است.
+      context: کارفرما پوشه‌های رزومه را باز کرده و هنوز هیچ رزومه‌ای ذخیره نکرده است.
       product_facts:
         - id: save_from_talent_search
-          statement: کارفرما رزومه‌ها را از بانک رزومه در تلنت پول ذخیره می‌کند.
+          statement: کارفرما رزومه‌ها را از بانک رزومه در پوشه‌های رزومه ذخیره می‌کند.
           status: verified
           source: eval_fixture
     expected:
@@ -87,7 +86,7 @@ cases:
       required_slots:
         empty_folder: [message, primary_action]
       must_use_labels:
-        - {concept: talent_pool, label: تلنت پول}
+        - {concept: talent_pool, label: پوشه‌های رزومه}
       forbidden_labels:
         - {concept: talent_pool, label: مخزن استعداد}
         - {concept: talent_pool, label: آرشیو رزومه}

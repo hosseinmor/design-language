@@ -30,6 +30,11 @@ sources:
     state: observed
     role: runtime_product_evidence
     reviewed_on: 2026-09-23
+  - id: jobvision_builder_designs
+    title: طراحی صفحه‌های پنل کارجو و پنل کارفرمای جاب‌ویژن (داده‌های Karbon Builder)
+    state: observed
+    role: runtime_product_evidence
+    reviewed_on: 2026-11-15
   - id: pk_jobvision_glossary_employer_actor
     title: تمایز سازمان و نقش انسانی کارفرما
     url: https://docs-jv.jvoffice.ir/contents/00-glossary/#سازمان-company
@@ -42,6 +47,12 @@ sources:
     state: verified
     role: product_knowledge_reference
     reviewed_on: 2026-10-22
+  - id: pk_jobvision_jobpost_entities
+    title: موجودیت‌های آگهی
+    url: https://docs-jv.jvoffice.ir/contents/jobpost/entity-jobpost/
+    state: verified
+    role: product_knowledge_reference
+    reviewed_on: 2026-11-15
   - id: pk_jobvision_cv_language_variants
     title: قابلیت رزومهٔ فارسی و انگلیسی
     url: https://docs-jv.jvoffice.ir/contents/cv/capability-fa-en-cv/
@@ -63,7 +74,7 @@ sources:
 
 # مفهوم‌هایی که در relations ارجاع داده شده‌اند ولی هنوز مدخل ندارند.
 # هر شناسهٔ تازه در relations باید یا مدخل داشته باشد یا اینجا ثبت شود.
-unregistered_concepts: [application_rejection, business_rule, candidate_profile, company_activation, company_profile, formal_info, generic_request, interview_invitation, job_category, price, proforma_invoice, reactivation, resume_view, seniority_level, services]
+unregistered_concepts: [application_rejection, business_rule, candidate_profile, company_activation, company_profile, formal_info, generic_request, interview_invitation, price, proforma_invoice, reactivation, resume_view, seniority_level, services]
 
 terms:
   # Core employment concepts
@@ -74,7 +85,7 @@ terms:
       language_owner: design_language
       product_source: pk_jobvision_jobpost_overview
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: JobPost
     definition:
       source: آگهی (JobPost) همان موقعیت شغلی در مدل محصول است.
@@ -101,8 +112,10 @@ terms:
           - تصمیم‌ها و گفتگوهای جذب دربارهٔ نقش
     forbidden:
       - {label: فرصت شغلی, scope: concept, source: design_language}
-      - {label: آگهی استخدام, scope: concept, source: design_language}
       - {label: وکنسی, scope: concept, source: design_language}
+    avoid: [آگهی استخدام]
+    rules:
+      - «آگهی استخدام» در متن رابط به کار نرود؛ در محتوای بازاریابی و سئو مجاز است.
     domains: [jobseeker, employer, ats, admin]
     visibility: [public, internal]
     relations:
@@ -119,7 +132,7 @@ terms:
       language_owner: design_language
       product_source: not_applicable
       migration_state: not_applicable
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: موقعیت شغلی
     definition:
       product_content: >
@@ -147,7 +160,7 @@ terms:
       language_owner: design_language
       product_source: not_applicable
       migration_state: not_applicable
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: فرصت شغلی
     definition:
       product_content: امکان پیدا کردن یا شروع یک شغل؛ نه یک موجودیت دقیق محصول.
@@ -169,7 +182,7 @@ terms:
       language_owner: design_language
       product_source: unresolved
       migration_state: needs_product_knowledge_reference
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: جذب
     definition:
       product_content: >
@@ -193,7 +206,7 @@ terms:
       language_owner: design_language
       product_source: unresolved
       migration_state: needs_product_knowledge_reference
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: استخدام
     definition:
       product_content: >
@@ -217,7 +230,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: سازمان
     definition:
       source: کارفرمای ثبت‌شده در سامانه که می‌تواند آگهی منتشر کند.
@@ -247,7 +260,7 @@ terms:
       language_owner: design_language
       product_source: pk_jobvision_glossary_employer_actor
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: کارفرما
     definition:
       product_content: فرد یا نقش انسانی‌ای که از طرف یک سازمان در فرایند جذب نیرو عمل می‌کند.
@@ -268,7 +281,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: رابط
     definition:
       source: کاربری که از طرف یک سازمان در پنل کارفرما کار می‌کند.
@@ -279,7 +292,7 @@ terms:
       - {label: کاربر سازمان, scope: concept, source: product_knowledge_snapshot}
       - {label: نمایندهٔ کارفرما, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, admin]
-    visibility: [internal, admin]
+    visibility: [public, internal, admin]
     relations:
       acts_for: employer_organization
       distinct_from: [employer_actor, job_fair_applier]
@@ -313,7 +326,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: کارجو
     definition:
       source: کاربری که برای یافتن شغل ثبت‌نام کرده است.
@@ -322,11 +335,13 @@ terms:
         درخواست شغلی فرستاده است.
     preferred:
       default: کارجو
-    avoid: [متقاضی, داوطلب]
+    avoid: [داوطلب]
     forbidden:
       - {label: کاندید, scope: concept, source: design_language}
       - {label: کاندیدا, scope: concept, source: design_language}
       - {label: جویای کار, scope: concept, source: design_language}
+    rules:
+      - «متقاضی» فقط برای مقایسه و آمار کارجوهای یک آگهی مجاز است، مثل «سایر متقاضیان» و «جنسیت متقاضیان».
     domains: [jobseeker, employer]
     visibility: [public, internal]
     relations:
@@ -366,23 +381,55 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: صنعت
     definition:
       source: حوزهٔ فعالیت کسب‌وکار سازمان که از بیس‌دیتا انتخاب می‌شود.
     preferred:
       default: صنعت
+    allowed: [حوزهٔ فعالیت, صنعت شرکت]
     forbidden:
-      - {label: حوزهٔ فعالیت, scope: concept, source: product_knowledge_snapshot}
       - {label: زمینهٔ کاری, scope: concept, source: product_knowledge_snapshot}
       - {label: رستهٔ شغلی, scope: concept, source: product_knowledge_snapshot}
+    rules:
+      - فیلد صنعتِ شرکت در سوابق شغلی رزومه «صنعت شرکت» است.
     relations:
       distinct_from: [job_category]
     code_bindings: [CompanyIndustry]
     domains: [jobseeker, employer, admin]
     visibility: [public, internal]
     status: draft
-    evidence: [source_glossary]
+    notes:
+      - پیشنهاد آینده: یک برچسب واحد برای همهٔ سطح‌ها.
+    evidence: [source_glossary, jobvision_builder_designs]
+
+  - id: job_category
+    concept_kind: taxonomy
+    authority:
+      meaning_owner: product_knowledge
+      language_owner: design_language
+      product_source: pk_jobvision_jobpost_entities
+      migration_state: source_linked
+    production_alignment: {state: aligned}
+    canonical_internal: دستهٔ شغلی
+    definition:
+      source: >
+        دسته‌های شغلی آگهی که از فهرست بیس‌دیتا انتخاب می‌شوند؛ هر آگهی دقیقاً
+        یک دستهٔ اصلی دارد.
+    preferred:
+      default: گروه شغلی
+    forbidden:
+      - {label: حوزهٔ شغلی, scope: concept, source: design_language}
+      - {label: دستهٔ شغلی, scope: concept, source: design_language}
+    rules:
+      - «دستهٔ شغلی» نام این مفهوم در Product Knowledge است؛ در متن کاربر «گروه شغلی» به کار می‌رود.
+    relations:
+      distinct_from: [industry]
+    code_bindings: [JobPostJobCategory]
+    domains: [jobseeker, employer, jobpost]
+    visibility: [public, internal]
+    status: draft
+    evidence: [pk_jobvision_jobpost_entities, jobvision_builder_designs]
 
   - id: company_authentication
     concept_kind: process
@@ -391,7 +438,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: احراز هویت سازمان
     definition:
       source: >
@@ -464,7 +511,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: اطلاعات رسمی سازمان
     definition:
       source: هویت فاکتوری سازمان شامل شناسهٔ ملی، عنوان حقوقی، نشانی و کد پستی.
@@ -516,11 +563,11 @@ terms:
       product_source: source_glossary
       migration_state: source_linked
     production_alignment: {state: unverified}
-    canonical_internal: آگهی یقه آبی
+    canonical_internal: آگهی یقه‌آبی
     definition:
       source: آگهی‌ای که همهٔ دسته‌های شغلی‌اش سطح شغلی پیش‌فرض ۲ دارند.
     preferred:
-      default: آگهی یقه آبی
+      default: آگهی یقه‌آبی
     forbidden:
       - {label: آگهی کارگری, scope: concept, source: product_knowledge_snapshot}
       - {label: آگهی سطح پایین, scope: concept, source: product_knowledge_snapshot}
@@ -540,7 +587,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: رزومه
     definition:
       source: سند مهارت‌ها و سوابق کارجو.
@@ -623,7 +670,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: رزومهٔ شخصی
     definition:
       source: فایلی که کارجو خودش بارگذاری می‌کند، در برابر رزومهٔ ساختاریافتهٔ جاب‌ویژن.
@@ -646,7 +693,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: توصیه‌نامه
     definition:
       source: متنی که هم‌کار سابق دربارهٔ کارجو می‌نویسد.
@@ -668,24 +715,26 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: درخواست شغلی
     definition:
       source: اقدام کارجو برای ارسال رزومه به یک آگهی مشخص.
     preferred:
       full: درخواست شغلی
       contextual: درخواست
+      employer: رزومه‌های دریافتی
+      jobseeker: رزومه‌های ارسالی
     action_labels:
       allowed: [ارسال رزومه]
     forbidden:
       - {label: اپلای, scope: entity_label, source: product_knowledge_snapshot}
-      - {label: ارسال رزومه, scope: entity_label, source: product_knowledge_snapshot}
       - {label: تقاضا, scope: entity_label, source: product_knowledge_snapshot}
       - {label: درخواست, scope: entity_label, source: product_knowledge_snapshot}
     rules:
-      - در متن مستقل، notification و متن چنددامنه‌ای همیشه «درخواست شغلی» نوشته شود.
+      - «ارسال رزومه» نام اقدام است، برای دکمه و فعل.
+      - فهرست درخواست‌ها در پنل کارفرما «رزومه‌های دریافتی» و در پنل کارجو «رزومه‌های ارسالی» است.
+      - «درخواست شغلی» برای جایی است که خود موجودیت نام برده می‌شود، مثل notification و متن چنددامنه‌ای.
       - «درخواست» فقط در سطحی مجاز است که موضوع از عنوان یا ساختار صفحه روشن باشد.
-      - «ارسال رزومه» نام عمل است، نه نام موجودیت.
     domains: [jobseeker, employer, ats]
     visibility: [public, internal]
     relations:
@@ -694,7 +743,9 @@ terms:
     status: draft
     eval_rules:
       - TERM_AMBIGUOUS_WITHOUT_CONTEXT
-    evidence: [source_glossary, product_content_decisions]
+    notes:
+      - پیشنهاد آینده: «درخواست شغلی» برای همهٔ سطح‌ها.
+    evidence: [source_glossary, product_content_decisions, jobvision_builder_designs]
 
   - id: hiring_request
     concept_kind: entity
@@ -777,22 +828,24 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
-    canonical_internal: انصراف
+    production_alignment: {state: aligned}
+    canonical_internal: انصراف از درخواست
     definition:
       source: پس گرفتن درخواست شغلی توسط کارجو، با یکی از چهار دلیل مشخص.
     preferred:
-      default: انصراف
+      default: انصراف از درخواست
     forbidden:
       - {label: کنسل, scope: concept, source: product_knowledge_snapshot}
       - {label: لغو درخواست شغلی, scope: concept, source: product_knowledge_snapshot}
+    rules:
+      - «انصراف» تنها برای دکمهٔ خروج از دیالوگ است، نه برای پس گرفتن درخواست.
     domains: [jobseeker, application]
     visibility: [public, internal]
     relations:
       distinct_from: [application_rejection]
     code_bindings: [IsCanceled, ApplicationCancellationReasonEnum]
     status: draft
-    evidence: [source_glossary]
+    evidence: [source_glossary, jobvision_builder_designs]
 
   - id: rejection_queue
     concept_kind: application_status
@@ -801,7 +854,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: صف رد
     definition:
       source: >
@@ -827,7 +880,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: تجربهٔ مصاحبه
     definition:
       source: روایت کارجو از فرایند مصاحبهٔ یک سازمان.
@@ -851,21 +904,25 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
-    canonical_internal: نظر سازمان
+    production_alignment: {state: aligned}
+    canonical_internal: امتیاز و نظر
     definition:
       source: امتیاز و نظر کارجو دربارهٔ سازمان.
     preferred:
-      default: نظر سازمان
+      default: امتیاز و نظر
+      contextual: نظرات
       jobseeker: نظر دربارهٔ شرکت
+    avoid: [نظر سازمان]
     forbidden:
       - {label: ریویو, scope: concept, source: product_knowledge_snapshot}
       - {label: نقد سازمان, scope: concept, source: product_knowledge_snapshot}
+    rules:
+      - «امتیاز و نظر» برای اقدام است، مثل «ثبت نظر و امتیاز»؛ «نظرات» برای فهرست.
     domains: [jobseeker, company]
     visibility: [public, internal]
     code_bindings: [CompanyReview]
     status: draft
-    evidence: [source_glossary]
+    evidence: [source_glossary, jobvision_builder_designs]
 
   - id: follow_company
     concept_kind: user_action
@@ -897,7 +954,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: مجله شغلی
     definition:
       source: محتوای معرفی مشاغل، مسیر شغلی و آمار حقوق.
@@ -920,7 +977,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: بسته
     definition:
       source: >
@@ -974,7 +1031,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: کد تخفیف
     definition:
       source: رشته‌ای که هنگام تسویه وارد می‌شود و از مبلغ سفارش کم می‌کند.
@@ -1000,7 +1057,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: جشنواره
     definition:
       source: کمپین فروش زمان‌دار با صفحه و فهرست نوع‌بسته‌های اختصاصی.
@@ -1024,7 +1081,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: سفارش
     definition:
       source: سرآیند یک خرید؛ چه چیزی، با چه قیمت و از چه منابعی تسویه شده است.
@@ -1048,7 +1105,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: فاکتور
     definition:
       source: سند حسابداری سفارش؛ رسمی یا غیررسمی.
@@ -1072,7 +1129,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: کیف پول
     definition:
       source: اعتبار ریالی سازمان نزد جاب‌ویژن.
@@ -1195,26 +1252,43 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
-    canonical_internal: اشتراک ویژه
+    production_alignment:
+      state: differs
+      production_label: اشتراک پریمیوم
+      evidence: jobvision_builder_designs
+    canonical_internal: اشتراک جاب‌ویژن پرو
     definition:
       source: اصطلاحی ثبت‌شده در کد که تعریف محصول و امکاناتش هنوز مشخص نشده است.
-    domains: [unknown]
-    visibility: [code_only, internal]
+      product_content: >
+        اشتراکی که کارجو برای جاب‌ویژن پرو می‌خرد. امکانات، مدت و تمدید آن
+        هنوز در Product Knowledge تعریف نشده است.
+    preferred:
+      default: اشتراک جاب‌ویژن پرو
+      contextual: اشتراک پرو
+    action_labels:
+      allowed: [خرید اشتراک, ارتقای اشتراک, تمدید اشتراک, مدیریت اشتراک]
+    forbidden:
+      - {label: پرمیوم, scope: concept, source: design_language}
+      - {label: پریمیوم, scope: concept, source: design_language}
+      - {label: اشتراک ویژه, scope: concept, source: design_language}
+      - {label: حساب ویژه, scope: concept, source: design_language}
+    rules:
+      - «اشتراک» به‌تنهایی فقط داخل صفحه‌های جاب‌ویژن پرو به کار برود.
+      - نام محصول «جاب‌ویژن پرو» است و ترجمه نمی‌شود.
+      - سطح‌ها «اشتراک برنزی»، «اشتراک نقره‌ای» و «اشتراک طلایی» هستند.
+      - کاربر دارای اشتراک «کارجوی پرو» است.
+      - تا تعریف امکانات در Product Knowledge، دربارهٔ امکانات، مدت یا تمدید اشتراک ادعایی ساخته نشود.
+    domains: [jobseeker]
+    visibility: [public, internal]
     relations:
       distinct_from: [package, plan, paid_service]
     code_bindings: [PremiumSubscription]
-    status: needs_decision
-    avoid_when:
-      - در هر محتوای کاربر-facing تا زمان مشخص شدن مالک، مزایا و lifecycle محصول.
+    status: draft
     open_questions:
-      - برای کارجوست یا سازمان؟
       - چه امکاناتی ارائه می‌کند؟
       - آیا با Premium Insights سمت کارجو ارتباط دارد یا concept مستقلی است؟
-      - lifecycle، قیمت‌گذاری و وضعیت‌های فعال، منقضی و لغوشده چیست؟
-    notes:
-      - وجود نام کدی برای اثبات محصول فعال یا label عمومی کافی نیست.
-    evidence: [source_glossary]
+      - مدت، تمدید، قیمت‌گذاری و وضعیت‌های فعال، منقضی و لغوشده چیست؟
+    evidence: [source_glossary, product_content_decisions, jobvision_builder_designs]
 
   - id: activation_round
     concept_kind: internal_lifecycle_interval
@@ -1247,7 +1321,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: تازه‌سازی
     definition:
       source: بازگرداندن آگهی به بالای فهرست‌ها بدون تغییر وضعیت.
@@ -1297,7 +1371,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: امتیاز سازمان
     definition:
       source: عدد حاصل از محبوبیت، تجربهٔ مصاحبه و تغییر وضعیت درخواست شغلی.
@@ -1414,12 +1488,16 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
-    canonical_internal: پاسخ‌گویی به درخواست‌های شغلی
+    production_alignment:
+      state: differs
+      production_label: پاسخگویی به رزومه‌های دریافتی
+      evidence: jobvision_builder_designs
+    canonical_internal: پاسخ‌گویی به رزومه‌های دریافتی
     definition:
       source: سهم درخواست‌های شغلی تعیین‌وضعیت‌شده.
     preferred:
-      default: پاسخ‌گویی به درخواست‌های شغلی
+      default: پاسخ‌گویی به رزومه‌های دریافتی
+    allowed: [کارفرمای پاسخ‌گو]
     forbidden:
       - {label: نرخ پاسخ, scope: concept, source: product_knowledge_snapshot}
       - {label: ریسپانسیونس, scope: concept, source: product_knowledge_snapshot}
@@ -1427,7 +1505,9 @@ terms:
     visibility: [public, internal]
     code_bindings: [ApplicationChangeStatus_Score]
     status: draft
-    evidence: [source_glossary]
+    notes:
+      - پروداکشن «پاسخگویی» را بدون نیم‌فاصله می‌نویسد؛ تفاوت فقط نگارشی است.
+    evidence: [source_glossary, jobvision_builder_designs]
 
   - id: matching_score
     concept_kind: metric
@@ -1436,21 +1516,27 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
-    canonical_internal: امتیاز تطبیق
+    production_alignment: {state: aligned}
+    canonical_internal: انطباق
     definition:
       source: میزان تناسب یک رزومه با یک آگهی.
     preferred:
-      default: امتیاز تطبیق
+      employer: نمرهٔ انطباق
+      jobseeker: تناسب با موقعیت شغلی
     forbidden:
-      - {label: نمرهٔ تطابق, scope: concept, source: product_knowledge_snapshot}
       - {label: امتیاز همخوانی, scope: concept, source: product_knowledge_snapshot}
-      - {label: انطباق, scope: concept, source: product_knowledge_snapshot}
+    rules:
+      - در پنل کارفرما «انطباق» به کار می‌رود، مثل «شاخص‌های انطباق»، «جزئیات انطباق» و «نمرهٔ انطباق».
+      - در پنل کارجو «تناسب با موقعیت شغلی» به کار می‌رود.
     domains: [resume, jobpost, matching]
     visibility: [public, internal]
     code_bindings: [MatchingScore]
     status: draft
-    evidence: [source_glossary]
+    open_questions:
+      - ماندن «هوشمند» در نام «سیستم هوشمند انطباق» با تیم مارکتینگ.
+    notes:
+      - پیشنهاد آینده: یک برچسب برای هر دو پنل.
+    evidence: [source_glossary, jobvision_builder_designs]
 
   # Employer tools
   - id: talent_search
@@ -1460,7 +1546,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: بانک رزومه
     definition:
       source: جست‌وجوی فعال کارفرما در میان رزومه‌ها.
@@ -1486,23 +1572,27 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: تلنت پول
     definition:
       source: مجموعهٔ پوشه‌ها و رزومه‌های ذخیره‌شدهٔ سازمان.
     preferred:
-      default: تلنت پول
+      default: پوشه‌های رزومه
+      contextual: پوشه
+      internal: تلنت پول
     forbidden:
       - {label: مخزن استعداد, scope: concept, source: product_knowledge_snapshot}
       - {label: استخر استعداد, scope: concept, source: product_knowledge_snapshot}
       - {label: آرشیو رزومه, scope: concept, source: product_knowledge_snapshot}
+    rules:
+      - «تلنت پول» فقط داخلی است و در متن کاربر نمی‌آید.
     domains: [employer, resume]
     visibility: [public, internal]
     relations:
       distinct_from: [talent_search]
     code_bindings: [Folder, FolderCv]
     status: draft
-    evidence: [source_glossary]
+    evidence: [source_glossary, jobvision_builder_designs]
 
   - id: resume_access
     concept_kind: entitlement
@@ -1536,7 +1626,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: نشان‌شده‌ها
     definition:
       source: پوشهٔ سیستمی رزومه‌های پسندیده‌شده اما هنوز خریداری‌نشده.
@@ -1558,7 +1648,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: gateway
     definition:
       source: نقطه‌ای در مسیر اجرا که یک قاعده را می‌سنجد و در صورت رد، عمل را متوقف می‌کند.
@@ -1605,7 +1695,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: رزومهٔ پیشنهادی
     definition:
       source: رزومه‌هایی که سیستم به سازمان پیشنهاد می‌دهد.
@@ -1629,14 +1719,15 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
-    canonical_internal: برندینگ کارفرمایی
+    production_alignment: {state: aligned}
+    canonical_internal: برند کارفرمایی
     definition:
       source: >
         صفحهٔ معرفی کامل سازمان برای کارجو شامل رسانه، اعضای تیم، داستان موفقیت،
         مراحل استخدام، ارزش‌ها و گزارش‌های نیروی انسانی.
     preferred:
-      default: برندینگ کارفرمایی
+      default: برند کارفرمایی
+    avoid: [برندینگ کارفرمایی]
     forbidden:
       - {label: امپلویر برندینگ, scope: concept, source: product_knowledge_snapshot}
       - {label: صفحهٔ اختصاصی سازمان, scope: concept, source: product_knowledge_snapshot}
@@ -1644,7 +1735,7 @@ terms:
     visibility: [public, internal]
     code_bindings: [CompanyBranding]
     status: draft
-    evidence: [source_glossary]
+    evidence: [source_glossary, jobvision_builder_designs]
 
   - id: job_fair
     concept_kind: event
@@ -1653,7 +1744,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: نمایشگاه کار
     definition:
       source: رویداد زمان‌دار حضوری یا آنلاین که چند سازمان در آن آگهی ارائه می‌کنند.
@@ -1727,7 +1818,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: آزمون
     definition:
       source: ابزار ارزیابی کارجو.
@@ -1751,7 +1842,7 @@ terms:
       language_owner: design_language
       product_source: pk_jobvision_ai_overview
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: هوش مصنوعی
     definition:
       product_content: فناوری یا سامانه‌ای که از مدل‌های هوش مصنوعی استفاده می‌کند.
@@ -1792,7 +1883,7 @@ terms:
       language_owner: design_language
       product_source: not_applicable
       migration_state: not_applicable
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: دستیار هوشمند
     definition:
       product_content: >
@@ -1871,7 +1962,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: پنل کارجو
     definition:
       source: وب‌سایت jobvision.ir.
@@ -1892,7 +1983,7 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment: {state: aligned}
     canonical_internal: پنل کارفرما
     definition:
       source: وب‌سایت employer.jobvision.ir.
@@ -2005,12 +2096,59 @@ decision_log:
       موقعیت دو entity مستقل نیستند. تفاوت واژه‌ها زاویهٔ ارائه و مرحلهٔ
       lifecycle را روشن می‌کند، بدون اینکه مدل دامنهٔ کاذب بسازد.
 
+  - id: DEC-011
+    term_ids: [job_post, jobseeker, industry, operator]
+    decided_on: 2026-11-15
+    outcome: >
+      «آگهی استخدام» در متن رابط به کار نمی‌رود و در محتوای بازاریابی و سئو
+      مجاز است. «متقاضی» فقط برای مقایسه و آمار کارجوهای یک آگهی مجاز است.
+      «حوزهٔ فعالیت» و «صنعت شرکت» برای صنعت مجازند. «رابط» برای کاربران
+      پنل کارفرما قابل دیدن است.
+    rationale: >
+      بازبینی واژه‌نامه با شواهد پروداکشن: این برچسب‌ها در محصول کاربرد
+      مشخصی دارند و ممنوع بودنشان اصلاح بی‌دلیل محصول را لازم می‌کرد.
+
+  - id: DEC-012
+    term_ids: [job_application, application_withdrawal, company_review, application_responsiveness, matching_score, talent_pool, employer_branding]
+    decided_on: 2026-11-15
+    outcome: >
+      برچسب این مفهوم‌ها از پروداکشن گرفته شد: «ارسال رزومه» و «رزومه‌های
+      دریافتی/ارسالی»، «انصراف از درخواست»، «امتیاز و نظر»، «پاسخ‌گویی به
+      رزومه‌های دریافتی»، «انطباق» در پنل کارفرما و «تناسب با موقعیت شغلی»
+      در پنل کارجو، «پوشه‌های رزومه» و «برند کارفرمایی». برچسب‌های قبلی که پروداکشن به کار
+      نمی‌برد کنار رفتند یا داخلی ماندند.
+    rationale: >
+      وقتی تغییر برچسب در پروداکشن پرهزینه است، برچسب پروداکشن مرجع می‌شود
+      و برچسب بهتر به‌عنوان پیشنهاد آینده در notes مدخل ثبت می‌شود.
+
+  - id: DEC-013
+    term_ids: [premium_subscription]
+    decided_on: 2026-11-15
+    outcome: >
+      برچسب کاربر «اشتراک جاب‌ویژن پرو» و صورت کوتاه «اشتراک پرو» است؛
+      سطح‌ها، اقدام‌ها و واژه‌های ممنوع در مدخل ثبت شدند. امکانات، مدت و
+      تمدید اشتراک در DEC-004 باز می‌ماند.
+    rationale: >
+      اشتراک در پنل کارجو دیده می‌شود و برچسبش لازم است، ولی تعریف امکانات
+      مال Product Knowledge است.
+
+  - id: DEC-014
+    term_ids: [job_category, industry]
+    decided_on: 2026-11-15
+    outcome: >
+      برچسب کاربر دستهٔ شغلی آگهی «گروه شغلی» است؛ «حوزهٔ شغلی» و «دستهٔ
+      شغلی» در متن کاربر به کار نمی‌روند. گروه شغلی ویژگی آگهی است و با صنعت،
+      که ویژگی سازمان است، یکی نیست.
+    rationale: >
+      پروداکشن بیشتر «گروه شغلی» می‌گوید و «حوزه شغلی» هم در پنل کارجو آمده؛
+      یک برچسب واحد ابهام میان دو پنل را برمی‌دارد.
+
 decision_queue:
 
   - id: DEC-004
     term_ids: [premium_subscription]
-    question: مخاطب، امکانات و مدل محصول اشتراک ویژه چیست؟
-    recommendation: تا دریافت product truth در محتوای جدید استفاده نشود.
+    question: امکانات، مدت، تمدید و مدل قیمت‌گذاری اشتراک جاب‌ویژن پرو چیست؟
+    recommendation: برچسب‌ها در DEC-013 تصمیم گرفته شد؛ تا دریافت product truth دربارهٔ امکانات و مدت اشتراک ادعایی ساخته نشود.
     impact: high
     evidence_needed:
       - مالک و مخاطب اشتراک
