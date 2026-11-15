@@ -30,6 +30,31 @@ cases:
         - {concept: job_application, label: اپلای, kind: forbidden, needs_review: true}
       rewrite_slots: [message]
 
+  - id: backend_message_is_judged_with_rewrite
+    item:
+      id: server_apply_error
+      observed_text: اپلای شما ثبت نشد. دوباره تلاش کنید.
+      location: application-api / ApplyAsync
+      source_kind: backend
+      usages: [/jobs/:jobPostId/:jobPostTitle]
+      captured_on: "2026-11-15"
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      content_type: interface
+      contract: content.pattern.error
+      state: error
+      slot: problem
+      concepts: [job_application]
+    expected:
+      checked_rules: [AUD-001, AUD-002, AUD-004, AUD-005]
+      status: finding
+      decision_owner: designer
+      priority: P3
+      label_findings:
+        - {concept: job_application, label: اپلای, kind: forbidden, needs_review: true}
+      rewrite_slots: [problem]
+
   - id: approved_label_is_not_flagged
     item:
       id: application_sent_toast
