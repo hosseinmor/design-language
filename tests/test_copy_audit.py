@@ -9,6 +9,7 @@ from tooling.audit.run_copy_audit import (
     load_contract,
     priority,
     summarize,
+    tag_item,
     validate_item,
 )
 from tooling.validators.check_copy_audit import validate_case, validate_contract
@@ -134,6 +135,42 @@ class CheckerTests(unittest.TestCase):
         broken = {"item_id": "x", "location": "inv", "status": "finding", "rule_ids": []}
         with self.assertRaises(EvalError):
             summarize([broken], [], CONTRACT)
+
+
+class TaggingTests(unittest.TestCase):
+    EMPLOYER = {"employer", "ats", "billing", "jobpost"}
+
+    def toast(self, **overrides):
+        value = item(**{"observed_text": "فرصت شغلی مورد نظر تازه‌سازی شد.", **overrides})
+        value.pop("concepts")
+        return value
+
+    def test_domain_filter_keeps_forbidden_label_visible(self):
+        # job_opportunity («فرصت شغلی» approved) is a jobseeker concept; tagged here it would mask job_post.
+        tagged = tag_item(self.toast(), CTX, self.EMPLOYER)
+        self.assertIn("job_post", tagged["concepts"])
+        self.assertNotIn("job_opportunity", tagged["concepts"])
+        self.assertEqual(tagged["concept_source"], "lexical")
+        finding = check_item(tagged, CTX, CONTRACT)
+        self.assertEqual(finding["status"], "finding")
+        self.assertEqual(finding["label_findings"][0]["label"], "فرصت شغلی")
+
+    def test_lexical_label_finding_needs_review(self):
+        tagged = tag_item(self.toast(), CTX, self.EMPLOYER)
+        finding = check_item(tagged, CTX, CONTRACT)
+        self.assertTrue(all(f["needs_review"] for f in finding["label_findings"]))
+
+    def test_context_concepts_are_kept(self):
+        value = item()
+        self.assertIs(tag_item(value, CTX, self.EMPLOYER), value)
+
+    def test_text_without_labels_is_untagged(self):
+        value = self.toast(observed_text="لینک کپی شد.")
+        self.assertNotIn("concepts", tag_item(value, CTX, self.EMPLOYER))
+
+    def test_unknown_concept_source_is_rejected(self):
+        errors = validate_item(item(concept_source="guess"), CONTRACT)
+        self.assertTrue(any("concept_source" in e for e in errors))
 
 
 class ValidatorTests(unittest.TestCase):

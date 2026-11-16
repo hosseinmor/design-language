@@ -257,3 +257,28 @@ cases:
       priority: P3
       label_findings:
         - {concept: job_post, label: وکنسی, kind: forbidden, needs_review: false}
+
+  - id: lexical_concept_label_needs_review
+    item:
+      id: employer_refresh_toast
+      observed_text: فرصت شغلی مورد نظر تازه‌سازی شد.
+      location: Employer-UI:src/app/modules/jobs/jobs-list › Jobs
+      usages: [/jobs]
+      captured_on: "2026-11-12"
+      product: jobvision
+      audience: [employer_actor]
+      surface: public
+      content_type: interface
+      contract: content.pattern.notifications
+      state: success
+      slot: message
+      concepts: [job_post, reshot]
+      concept_source: lexical
+    expected:
+      checked_rules: [AUD-001, AUD-002, AUD-007]
+      status: finding
+      decision_owner: designer
+      priority: P3
+      label_findings:
+        - {concept: job_post, label: فرصت شغلی, kind: forbidden, needs_review: true}
+      rewrite_slots: [message]

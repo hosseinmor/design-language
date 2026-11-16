@@ -3,7 +3,7 @@ id: content.copy-audit
 collection: content
 type: content-foundation
 title: Copy Audit
-summary: Defines how existing production copy is audited against Design Language rules, including running the audit on a frontend codebase, the audit item and finding shapes, content types and their decision owners, priority model, mechanical fixes, rewrite through a copy brief, and how gaps return to the owning guideline.
+summary: Defines how existing production copy is audited against Design Language rules, including running the audit on a frontend codebase or on a Karbon Builder design export, lexical concept tagging, the audit item and finding shapes, content types and their decision owners, priority model, mechanical fixes, rewrite through a copy brief, and how gaps return to the owning guideline.
 knowledge_state: unverified
 document_maturity: draft
 related:
@@ -45,6 +45,7 @@ topics:
 
 - `AUD-003` موردی که context کامل ندارد یا محصولش لایهٔ هویت کلامی ندارد قضاوت نشود و needs_context بگیرد.
 - `AUD-006` محتوای بازاریابی یا حقوقی فراتر از قواعد مجاز نوع خودش قضاوت یا بازنویسی نشود.
+- `AUD-007` label finding مفهومی که فقط با تطبیق لغوی پیدا شده بدون بازبینی انسانی قطعی گزارش نشود.
 
 <!-- /generated:content-rules -->
 
@@ -83,6 +84,8 @@ topics:
 1. **استخراج:** هر copy با context کامل و نوع متن ثبت می‌شود (`audit_item`).
 2. **بررسی قطعی:** برچسب‌های forbidden و legacy مفهوم‌های مورد از روی
    واژه‌نامهٔ همان محصول (مثلاً [`jobvision.yml`](terminology/jobvision.yml)) پیدا و به برچسب مصوب نگاشت می‌شوند.
+   بررسی فقط مفهوم‌های `concepts` هر مورد را می‌سنجد؛ موردی که `concepts` ندارد
+   پیش از آن با دستور `tag` برچسب می‌خورد (بخش [برچسب لغوی مفهوم](#برچسب-لغوی-مفهوم)).
 3. **بررسی معنایی:** copy با [evaluator معنایی](../../ai/evals/README.md) در
    برابر قواعد قرارداد مالک سنجیده می‌شود.
 4. **اولویت‌بندی:** از `priority_model`.
@@ -155,6 +158,48 @@ topics:
 - «تأیید» یعنی copy پیشنهادی همان‌طور اعمال شود؛ «ویرایش» یعنی متن نهایی
   بازبین اعمال شود.
 
+## اجرا روی خروجی Builder
+
+وقتی کد در دسترس نیست، آدیت روی طرح صفحه‌های Karbon Builder اجرا می‌شود:
+پوشهٔ داده‌ای که Builder از مخزن محصول در یک commit مشخص ساخته است. هر طرح
+صفحه بلوک‌ها را با نوع، props و حالت صفحه دارد، پس `contract`، `slot`، `state` و
+`usages` از خود طرح تعیین می‌شوند. ابزار تبدیل طرح به audit item مال Builder
+است و در این مخزن نیست.
+
+| فیلد | مقدار |
+|---|---|
+| `location` | مخزن، پوشهٔ کد صفحه و نام لایهٔ طرح، مثل `Employer-UI:src/app/modules/jobs/jobs-list › Jobs › Filters` |
+| `source_kind` | خالی؛ کلید ترجمه یا متن داخل کد از طرح معلوم نیست. فقط وقتی طرح صریحاً می‌گوید متن از سرور می‌آید `backend` است |
+| `usages` | route صفحه، یا route پنجره‌ای که در صفحه رسم شده |
+| `captured_on` | تاریخ همگام‌سازی پوشه با مخزن محصول |
+
+- **آدیت نمی‌شود:** ردیف‌های نمونهٔ جدول و فهرست، مقدار نمونهٔ فیلدها، نام و
+  محتوای نمونه، فهرست‌های داده مثل شهر و رشته، یادداشت‌های Builder، و دکمه‌هایی
+  که طرح می‌گوید فقط برای نمایش پنجره در طرح‌اند. پیامی که آن دکمه نشان می‌دهد
+  متن محصول است و آدیت می‌شود.
+- **یادداشت Builder:** فقط پیام خطایی که در یادداشت نقل شده و جای دیگری از طرح
+  نیامده استخراج می‌شود. بقیهٔ متن‌های نقل‌شده در یادداشت آدیت نمی‌شوند و سند
+  خروجی این را در پوشش می‌گوید.
+- **تطبیق پیش از تیکت:** متن طرح بازسازی محصول است، نه خود محصول. هر finding
+  پیش از ثبت تیکت با محصول یا کد تطبیق داده می‌شود.
+- **پوشش:** سند خروجی commit منبع، صفحه‌های آدیت‌شده و تعداد هر دستهٔ
+  کنارگذاشته را دارد.
+
+## برچسب لغوی مفهوم
+
+دستور `tag` به هر موردی که `concepts` ندارد مفهوم‌هایی را نسبت می‌دهد که یکی از
+برچسب‌هایشان (مصوب، زمینه‌ای، forbidden یا legacy) در متن آمده است، و
+`concept_source: lexical` می‌گذارد.
+
+- **دامنه لازم است:** فقط مفهوم‌هایی برچسب می‌خورند که `domains` آن‌ها با
+  دامنه‌های داده‌شده هم‌پوشانی دارد. بدون این فیلتر، مفهومی از محصول یا مخاطب
+  دیگر برچسب ممنوع را می‌پوشاند؛ مثلاً «فرصت شغلی» برچسب مصوب `job_opportunity`
+  در دامنهٔ کارجوست و همان برچسب برای `job_post` در پنل کارفرما ممنوع است. ابزار
+  دامنه را حدس نمی‌زند.
+- **بازبینی لازم است:** برچسب یافته‌شده ممکن است به مفهوم دیگری اشاره کند، مثل
+  «ارزیابی» در «ارزیابی هوش مصنوعی» که آزمون نیست. هر label finding مفهوم لغوی
+  `needs_review` می‌گیرد (`AUD-007`).
+
 ## ورودی: audit item
 
 | فیلد | الزام | مقدار |
@@ -166,6 +211,7 @@ topics:
 | `contract`، `state`، `slot` | لازم برای `interface` | همان واژگان copy brief |
 | `source_kind`، `usages` | اختیاری؛ در آدیت کدبیس لازم | نوع منبع و جاهای استفاده |
 | `concepts`، `product_facts`، `notes` | اختیاری | ID مدخل‌ها و factهای منبع‌دار |
+| `concept_source` | اختیاری | `context` (پیش‌فرض) یا `lexical` برای مفهومی که دستور `tag` پیدا کرده |
 
 موردی که یکی از فیلدهای context لازم برای نوع خودش را ندارد، یا محصولش لایهٔ
 هویت کلامی ندارد، `needs_context` می‌گیرد و قضاوت نمی‌شود.
@@ -186,7 +232,8 @@ topics:
 | `context_gaps` | فیلدهای غایب، `product_layer_missing`، `unknown_content_type` یا `unknown_contract` |
 
 `needs_review` یعنی برچسب ممنوع scope محدودتری از concept دارد (مثلاً
-`entity_label`) و فقط بازبین انسانی می‌تواند بگوید در این متن واقعاً نادرست است.
+`entity_label`)، یا مفهوم مورد لغوی پیدا شده است، و فقط بازبین انسانی می‌تواند
+بگوید در این متن واقعاً نادرست است.
 برچسب‌های مصوب هر مفهوم پیش از جست‌وجو حذف می‌شوند، تا «درخواست» داخل «درخواست
 شغلی» گزارش نشود.
 
@@ -208,6 +255,7 @@ surface برابر `public` جابه‌جایی صفر دارد و بقیهٔ su
 ## ابزار
 
 ```bash
+python tooling/audit/run_copy_audit.py tag --items <items.jsonl> --domains <domain,...> --output <tagged.jsonl>
 python tooling/audit/run_copy_audit.py check --items <items.jsonl> --output <findings.jsonl>
 python tooling/audit/run_copy_audit.py prepare --items <items.jsonl> --repository-commit <sha> --output <tasks.jsonl>
 python tooling/audit/run_copy_audit.py summarize --findings <findings.jsonl> --semantic <responses.jsonl> --report-json <report.json> --report-markdown <report.md>

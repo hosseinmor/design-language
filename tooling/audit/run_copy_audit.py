@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Deterministic and report-only steps of the copy audit contract.
 
-`check` turns audit items (JSONL) into findings: context gaps, the decision
+`tag` gives items without concepts the terminology concepts, within the given
+domains, whose labels appear in their text (`concept_source: lexical`). `check` turns audit items (JSONL) into findings: context gaps, the decision
 owner of the item's content type, forbidden or legacy labels mapped to approved
 terminology labels, a priority and, for content types that allow it, a rewrite
 copy brief. `prepare` writes semantic-evaluator tasks for items with full
@@ -70,6 +71,8 @@ def validate_item(item: Any, contract: dict[str, Any]) -> list[str]:
         errors.append(f"{where}: location must be a source or inventory id, not a URL")
     if "source_kind" in item and item["source_kind"] not in (contract.get("source_kinds") or {}):
         errors.append(f"{where}: unknown source_kind `{item['source_kind']}`")
+    if "concept_source" in item and item["concept_source"] not in (contract.get("concept_sources") or {}):
+        errors.append(f"{where}: unknown concept_source `{item['concept_source']}`")
     usages = item.get("usages")
     if usages is not None and (not isinstance(usages, list) or not all(isinstance(u, str) and u for u in usages)):
         errors.append(f"{where}: usages must be a list of non-empty strings")
@@ -99,6 +102,8 @@ def judges(rule_id: str, content_type: dict[str, Any]) -> bool:
 
 def label_findings(item: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
     concepts = [c for c in item.get("concepts") or [] if c in ctx.terms]
+    # A concept found only by matching its labels may be another concept that shares the word (AUD-007).
+    lexical = item.get("concept_source") == "lexical"
     text = str(item.get("observed_text", ""))
     # A forbidden label is skipped only when it lies inside an approved label
     # (درخواست in درخواست شغلی). Masking approved labels first would also hide a
@@ -138,9 +143,40 @@ def label_findings(item: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
                     "kind": kind,
                     "scope": scope,
                     "approved_labels": approved,
-                    "needs_review": scope != "concept",
+                    "needs_review": scope != "concept" or lexical,
                 })
     return found
+
+
+def _normalize(text: str) -> str:
+    return text.replace("\u200c", " ").replace("ي", "ی").replace("ك", "ک")
+
+
+def concept_labels(term: dict[str, Any]) -> set[str]:
+    """Every label of a concept: preferred, contextual, forbidden and legacy."""
+    labels = set(_labels(term.get("preferred"))) | set(_labels(term.get("contextual_labels")))
+    labels |= set(_labels(term.get("forbidden"))) | set(_labels(term.get("legacy_labels")))
+    return {label for label in labels if len(label) > 1}
+
+
+def tag_item(item: dict[str, Any], ctx: Context, domains: set[str]) -> dict[str, Any]:
+    """Give an item without concepts the in-domain concepts whose labels appear in its text."""
+    if item.get("concepts"):
+        return item
+    ctx = ctx.for_product(item.get("product"))
+    text = _normalize(str(item.get("observed_text", "")))
+    found = sorted(
+        concept
+        for concept, term in ctx.terms.items()
+        if set(term.get("domains") or []) & domains
+        and any(
+            re.search(rf"(?<!\w){re.escape(_normalize(label))}(?!\w)", text)
+            for label in concept_labels(term)
+        )
+    )
+    if not found:
+        return item
+    return {**item, "concepts": found, "concept_source": "lexical"}
 
 
 def priority(dimensions: list[str], surface: str | None, model: dict[str, Any]) -> str | None:
@@ -328,6 +364,22 @@ def load_items(path: Path, contract: dict[str, Any]) -> list[dict[str, Any]]:
     return items
 
 
+def command_tag(args: argparse.Namespace) -> int:
+    contract, ctx = load_contract(), Context.from_repository()
+    domains = {d.strip() for d in args.domains.split(",") if d.strip()}
+    if not domains:
+        raise EvalError("--domains needs at least one terminology domain")
+    every_terms = [terms for terms, _ in (ctx.products or {}).values()] or [ctx.terms]
+    known = {d for terms in every_terms for term in terms.values() for d in term.get("domains") or []}
+    if unknown := sorted(domains - known):
+        raise EvalError(f"unknown terminology domains {unknown}")
+    items = [tag_item(item, ctx, domains) for item in load_items(args.items, contract)]
+    write_jsonl(items, args.output)
+    tagged = sum(1 for item in items if item.get("concept_source") == "lexical")
+    print(f"Tagged {tagged} of {len(items)} audit items with lexical concepts")
+    return 0
+
+
 def command_check(args: argparse.Namespace) -> int:
     contract, ctx = load_contract(), Context.from_repository()
     findings = [check_item(item, ctx, contract) for item in load_items(args.items, contract)]
@@ -359,6 +411,11 @@ def command_summarize(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = parser.add_subparsers(dest="command", required=True)
+    tag = sub.add_parser("tag")
+    tag.add_argument("--items", type=Path, required=True)
+    tag.add_argument("--domains", required=True, help="comma-separated terminology domains of the audited product area")
+    tag.add_argument("--output", type=Path, required=True)
+    tag.set_defaults(func=command_tag)
     check = sub.add_parser("check")
     check.add_argument("--items", type=Path, required=True)
     check.add_argument("--output", type=Path, required=True)
