@@ -180,6 +180,12 @@ language_model:
   writing_register: standard_written_persian
   address: شما
   language_change: mark_when_meaningful_for_processing
+  # املای ثابت واژه‌هایی که در copy محصول دو صورت رایج دارند. فقط copy محصول؛ نثر خود اسناد را شامل نمی‌شود.
+  spelling:
+    - use: تایید
+      instead_of: تأیید
+      covers: همهٔ صورت‌های این ریشه، مثل «تاییدشده»، «تایید نشده» و «تاییدیه»
+      decided_on: 2026-11-16
 
 directionality_model:
   layout: logical_start_end

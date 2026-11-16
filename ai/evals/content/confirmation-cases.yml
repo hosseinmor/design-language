@@ -108,7 +108,7 @@ cases:
     content:
       title: حذف آگهی
       body: آگهی حذف می‌شود.
-      primary_action: تأیید
+      primary_action: تایید
       safe_exit: انصراف
     expected:
       valid: false

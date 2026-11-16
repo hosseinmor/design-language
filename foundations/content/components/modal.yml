@@ -161,7 +161,7 @@ rules:
     obligation: must_not
     dimension: clarity
     key: generic_title
-    statement: «توجه»، «هشدار»، «پیام»، «تأیید» یا «مطمئن هستید؟» به‌تنهایی Title نباشند.
+    statement: «توجه»، «هشدار»، «پیام»، «تایید» یا «مطمئن هستید؟» به‌تنهایی Title نباشند.
     evidence: [confirmation_pattern, product_content_decisions]
   - id: MOD-004
     obligation: must
@@ -279,6 +279,6 @@ retired_rules:
     reason: تکرار قواعد الگوی confirmation برای برچسب action اصلی و خروج امن.
   - id: MOD-010
     superseded_by: [BTN-004]
-    reason: عین قاعدهٔ Button دربارهٔ برچسب عمومی «بله»، «خیر»، «تأیید» و «ادامه».
+    reason: عین قاعدهٔ Button دربارهٔ برچسب عمومی «بله»، «خیر»، «تایید» و «ادامه».
 
 evaluation_source: ../../../ai/evals/content/modal-content-cases.yml

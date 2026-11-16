@@ -124,7 +124,7 @@ cases:
       destructive: true
       object: آگهی
     content:
-      primary_label: تأیید
+      primary_label: تایید
       safe_exit_label: لغو
     expected:
       valid: false
