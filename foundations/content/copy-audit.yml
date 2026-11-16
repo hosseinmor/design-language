@@ -29,7 +29,7 @@ audit_item_schema:
   required: [id, observed_text, location, captured_on]
   # فیلدهای context همهٔ موردها؛ هر نوع متن فیلدهای لازم خودش را در content_types اضافه می‌کند.
   context: [product, audience, surface, content_type]
-  optional: [contract, state, slot, source_kind, usages, concepts, product_facts, notes]
+  optional: [contract, state, slot, source_kind, usages, concepts, concept_source, product_facts, notes]
   fields:
     content_type: یکی از کلیدهای content_types؛ ابزار آن را حدس نمی‌زند.
     location: >
@@ -39,6 +39,23 @@ audit_item_schema:
     usages: فهرست جاهایی که این منبع نشان داده می‌شود (صفحه یا route)، برای سنجش اثر اصلاح.
     captured_on: تاریخ دیده‌شدن copy در محصول، YYYY-MM-DD.
     observed_text: متن دقیق دیده‌شده.
+    concepts: ID مدخل‌های واژه‌نامه که copy دربارهٔ آن‌هاست؛ بررسی قطعی فقط برچسب‌های همین مفهوم‌ها را می‌سنجد.
+    concept_source: یکی از concept_sources؛ پیش‌فرض context.
+
+# concepts از کجا آمده‌اند.
+concept_sources:
+  context: مفهوم از context متن تعیین شده است، مثلاً توسط بازبین یا از کد.
+  lexical: >
+    مفهوم با تطبیق برچسب‌های واژه‌نامه در خود متن پیدا شده است (دستور tag). فقط مفهوم‌هایی پیدا می‌شوند
+    که دامنه‌شان با دامنه‌های داده‌شده هم‌پوشانی دارد. برچسب یافته‌شده ممکن است به مفهوم دیگری اشاره کند،
+    پس هر label finding آن needs_review می‌گیرد.
+
+# ورودی‌هایی که آدیت روی آن‌ها اجرا می‌شود. شیوهٔ استخراج هر ورودی در copy-audit.md آمده است.
+input_kinds:
+  codebase: کد فرانت، فایل‌های ترجمه و پیام‌های سرور.
+  builder_export: >
+    طرح صفحه‌های Karbon Builder که از مخزن محصول در یک commit مشخص ساخته شده‌اند. منبع دقیق متن
+    معلوم نیست و متن بازسازی محصول است، پس هر finding پیش از تیکت با محصول یا کد تطبیق داده می‌شود.
 
 # منبع متن در کدبیس. اصلاح یک منبع همهٔ usages آن را عوض می‌کند.
 source_kinds:
@@ -106,7 +123,9 @@ process:
   - id: extract
     description: copy را با context کامل یک slot و نوع متن استخراج کنید.
   - id: deterministic_check
-    description: برچسب‌های forbidden و legacy مفهوم‌های مورد را از روی واژه‌نامه بیابید.
+    description: >
+      برچسب‌های forbidden و legacy مفهوم‌های مورد را از روی واژه‌نامه بیابید. موردی که concepts ندارد
+      پیش از آن با دستور tag و دامنه‌های محصول برچسب می‌خورد؛ بدون concepts بررسی قطعی چیزی نمی‌یابد.
   - id: semantic_check
     description: copy را با evaluator معنایی در برابر قواعد قرارداد مالک بسنجید.
   - id: prioritize
@@ -189,5 +208,10 @@ rules:
     dimension: classification
     key: judge_beyond_content_type
     statement: محتوای بازاریابی یا حقوقی فراتر از قواعد مجاز نوع خودش قضاوت یا بازنویسی نشود.
+  - id: AUD-007
+    obligation: must_not
+    dimension: classification
+    key: lexical_concept_without_review
+    statement: label finding مفهومی که فقط با تطبیق لغوی پیدا شده بدون بازبینی انسانی قطعی گزارش نشود.
 
 evaluation_source: ../../ai/evals/content/audit/copy-audit-cases.yml
