@@ -53,6 +53,12 @@ sources:
     state: verified
     role: product_knowledge_reference
     reviewed_on: 2026-11-15
+  - id: pk_jobvision_operator_notification_settings
+    title: قابلیت تنظیمات اعلان رابط
+    url: https://docs-jv.jvoffice.ir/contents/operator/capability-notification-settings/
+    state: verified
+    role: product_knowledge_reference
+    reviewed_on: 2026-11-16
   - id: pk_jobvision_cv_language_variants
     title: قابلیت رزومهٔ فارسی و انگلیسی
     url: https://docs-jv.jvoffice.ir/contents/cv/capability-fa-en-cv/
@@ -447,7 +453,7 @@ terms:
     preferred:
       default: احراز هویت سازمان
     forbidden:
-      - {label: تأیید سازمان, scope: concept, source: product_knowledge_snapshot}
+      - {label: تایید سازمان, scope: concept, source: product_knowledge_snapshot}
       - {label: وریفای سازمان, scope: concept, source: product_knowledge_snapshot}
       - {label: احراز شاهکار, scope: concept, source: product_knowledge_snapshot}
     relations:
@@ -1339,6 +1345,58 @@ terms:
     status: draft
     evidence: [source_glossary]
 
+  - id: workplace_type_hybrid
+    concept_kind: catalog_item
+    authority:
+      meaning_owner: product_knowledge
+      language_owner: design_language
+      product_source: pk_jobvision_jobpost_entities
+      migration_state: source_linked
+    production_alignment:
+      state: differs
+      production_label: هیبرید
+      evidence: jobvision_builder_designs
+    canonical_internal: ترکیبی
+    definition:
+      source: یکی از سه مقدار نوع محل کار آگهی (WorkplaceTypeId)، کنار حضوری و دورکاری.
+    preferred:
+      default: ترکیبی
+    forbidden:
+      - {label: هیبرید, scope: concept, source: design_language}
+    domains: [jobpost, employer, jobseeker]
+    visibility: [public, internal]
+    code_bindings: [WorkPlaceTypeEnum]
+    status: stable
+    evidence: [pk_jobvision_jobpost_entities, jobvision_builder_designs, product_content_decisions]
+
+  - id: notification
+    concept_kind: event_message
+    authority:
+      meaning_owner: product_knowledge
+      language_owner: design_language
+      product_source: pk_jobvision_operator_notification_settings
+      migration_state: source_linked
+    production_alignment:
+      state: differs
+      production_label: نوتیفیکیشن
+      evidence: jobvision_builder_designs
+    canonical_internal: اعلان
+    definition:
+      source: >
+        خبری که سامانه دربارهٔ یک رویداد به رابط یا کارجو می‌فرستد. کانال‌های رابط
+        اعلان داخل سایت، ایمیل و پیامک‌اند.
+    preferred:
+      default: اعلان
+    forbidden:
+      - {label: نوتیفیکیشن, scope: concept, source: design_language}
+    domains: [employer, jobseeker]
+    visibility: [public, internal]
+    code_bindings: [EventNotificationType]
+    status: stable
+    open_questions:
+      - برچسب کانال push، که در آمار اطلاع‌رسانی آگهی «پوش نوتیفیکیشن» آمده، تصمیم نشده است.
+    evidence: [pk_jobvision_operator_notification_settings, jobvision_builder_designs, product_content_decisions]
+
   - id: auto_publish
     concept_kind: internal_automation
     authority:
@@ -1354,7 +1412,7 @@ terms:
       internal: انتشار خودکار
     forbidden:
       - {label: اتوپابلیش, scope: concept, source: product_knowledge_snapshot}
-      - {label: تأیید هوشمند, scope: concept, source: product_knowledge_snapshot}
+      - {label: تایید هوشمند, scope: concept, source: product_knowledge_snapshot}
     domains: [jobpost, admin, ai]
     visibility: [internal, admin]
     relations:
@@ -2141,6 +2199,26 @@ decision_log:
     rationale: >
       پروداکشن بیشتر «گروه شغلی» می‌گوید و «حوزه شغلی» هم در پنل کارجو آمده؛
       یک برچسب واحد ابهام میان دو پنل را برمی‌دارد.
+
+  - id: DEC-015
+    term_ids: [workplace_type_hybrid]
+    decided_on: 2026-11-16
+    outcome: >
+      برچسب کاربر نوع محل کار ترکیبی «ترکیبی» است؛ «هیبرید» در متن کاربر به کار
+      نمی‌رود.
+    rationale: >
+      آدیت پنل کارفرما هر دو برچسب را در فرم‌های آگهی دید. Product Knowledge همین
+      مقدار را «ترکیبی» می‌نامد و واژهٔ فارسی کنار «حضوری» و «دورکاری» یکدست است.
+
+  - id: DEC-016
+    term_ids: [notification]
+    decided_on: 2026-11-16
+    outcome: >
+      برچسب کاربر «اعلان» است؛ «نوتیفیکیشن» در متن کاربر به کار نمی‌رود. برچسب
+      کانال push هنوز تصمیم نشده است.
+    rationale: >
+      آدیت پنل کارفرما «نوتیفیکیشن وبسایت» را در پیام‌های درخواست از کارجو دید.
+      Product Knowledge همین مفهوم و کانال‌هایش را «اعلان» می‌نامد.
 
 decision_queue:
 
