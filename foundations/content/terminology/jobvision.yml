@@ -122,6 +122,31 @@ terms:
     status: stable
     evidence: [verbal_identity_v2, jobvision_builder_designs, product_content_decisions]
 
+  # Web link
+  - id: link
+    concept_kind: communication_concept
+    authority:
+      meaning_owner: design_language
+      language_owner: design_language
+      product_source: not_applicable
+      migration_state: not_applicable
+    production_alignment:
+      state: differs
+      production_label: پیوند
+      evidence: jobvision_builder_designs
+    canonical_internal: لینک
+    definition:
+      product_content: نشانی اینترنتی یک صفحه یا محتوا که کاربر می‌تواند باز، کپی یا ارسال کند.
+    preferred:
+      default: لینک
+    forbidden:
+      - {label: پیوند, scope: concept, source: design_language}
+    examples: [کپی لینک آگهی, لینک آگهی کپی شد]
+    domains: [jobseeker, employer, ats, admin]
+    visibility: [public, internal]
+    status: stable
+    evidence: [jobvision_builder_designs, product_content_decisions]
+
   # Core employment concepts
   - id: job_post
     concept_kind: entity
@@ -852,7 +877,12 @@ terms:
       snapshot_of: resume
     code_bindings: [ApplicationCandidate]
     status: draft
-    evidence: [source_glossary]
+    notes:
+      - >
+        هنوز در محصول فعال نیست و بعداً اضافه می‌شود. تا آن زمان متن رابط بر اساس رفتار
+        فعلی نوشته می‌شود، که در آن کارفرما رزومه به‌روزشده را می‌بیند، و با این مدخل
+        خطا گرفته نمی‌شود.
+    evidence: [source_glossary, product_content_decisions]
 
   - id: employer_assistant
     concept_kind: automation
@@ -2037,6 +2067,8 @@ terms:
       instance_of: ai_assistant
       uses: ai_technology
       distinct_from: [employer_assistant, external_ai_screener]
+    rules:
+      - بازنویسی متن سابقه شغلی در فرم رزومه بخشی از همین دستیار است و با همین نام معرفی می‌شود.
     status: stable
     evidence: [pk_jobvision_resume_ai_assistant, candidate_runtime_review, product_content_decisions]
 
@@ -2312,6 +2344,18 @@ decision_log:
       هر دو فیلد «زمینه فعالیت» نام داشتند و فرم برای فهم تفاوت به مثال تکیه می‌کرد.
       PM تایید کرد که گزینه‌ها از فهرست گروه شغلی و صنعت می‌آیند (DEC-014). این
       قاعدهٔ تازه یا استثنا نیست؛ برچسب از واژه‌نامه و توضیح از راهنمای فیلد می‌آید.
+
+  - id: DEC-020
+    term_ids: [link, resume_snapshot, resume_ai_assistant]
+    decided_on: 2026-11-19
+    outcome: >
+      برچسب نشانی اینترنتی «لینک» است و «پیوند» به کار نمی‌رود. نسخه منجمد رزومه در
+      لحظه ارسال هنوز در محصول فعال نیست. بازنویسی متن سابقه شغلی بخشی از دستیار
+      هوشمند رزومه است.
+    rationale: >
+      آدیت صفحه جزئیات آگهی «کپی پیوند آگهی» را کنار «لینک کپی شد» دید؛ «لینک» برای
+      این مخاطب جاافتاده است (NAM-004). متن بعد از ارسال رزومه با مدخل resume_snapshot
+      ناهمخوان به نظر می‌رسید، ولی PM تایید کرد که این قابلیت هنوز اضافه نشده است.
 
 decision_queue:
 
