@@ -438,6 +438,9 @@ terms:
       - {label: رسته شغلی, scope: concept, source: product_knowledge_snapshot}
     rules:
       - فیلد صنعتِ شرکت در سوابق شغلی رزومه «صنعت شرکت» است.
+      - >
+        وقتی صنعت و گروه شغلی در یک فرم کنار هم‌اند، راهنمای هر فیلد تفاوت را با یک
+        مثال روشن می‌کند: صنعت زمینهٔ فعالیت خود شرکت است، نه شغل کارجو.
     relations:
       distinct_from: [job_category]
     code_bindings: [CompanyIndustry]
@@ -468,13 +471,17 @@ terms:
       - {label: دسته شغلی, scope: concept, source: design_language}
     rules:
       - «دسته شغلی» نام این مفهوم در Product Knowledge است؛ در متن کاربر «گروه شغلی» به کار می‌رود.
+      - فیلد گروه شغلیِ نقش کارجو در سوابق شغلی رزومه «گروه شغلی شما در این شرکت» است.
+      - >
+        وقتی گروه شغلی و صنعت در یک فرم کنار هم‌اند، راهنمای هر فیلد تفاوت را با یک
+        مثال روشن می‌کند: گروه شغلی دسته‌ای است که شغل کارجو در آن قرار می‌گیرد.
     relations:
       distinct_from: [industry]
     code_bindings: [JobPostJobCategory]
-    domains: [jobseeker, employer, jobpost]
+    domains: [jobseeker, employer, jobpost, resume]
     visibility: [public, internal]
     status: draft
-    evidence: [pk_jobvision_jobpost_entities, jobvision_builder_designs]
+    evidence: [pk_jobvision_jobpost_entities, jobvision_builder_designs, product_content_decisions]
 
   - id: company_authentication
     concept_kind: process
@@ -641,10 +648,17 @@ terms:
         و انگلیسی داشته باشد.
     preferred:
       default: رزومه
+    contextual_labels:
+      - label: رزومه جاب‌ویژن
+        use_when:
+          - کنار «رزومه شخصی»، وقتی باید رزومه‌ای که کارجو در جاب‌ویژن ساخته از فایل خودش متمایز شود
     avoid: [CV, سی‌وی]
     forbidden:
       - {label: پروفایل کاری, scope: concept, source: design_language}
       - {label: پروفایل کارجو, scope: concept, source: design_language}
+      - {label: رزومه جاب‌ویژنی, scope: concept, source: design_language}
+    rules:
+      - جایی که تمایز با رزومه شخصی لازم نیست، همان «رزومه» به کار می‌رود.
     domains: [jobseeker, employer, ats]
     visibility: [public, internal]
     relations:
@@ -2274,6 +2288,30 @@ decision_log:
       نمی‌شود؛ حرف اول طبق قاعدهٔ نگارش انگلیسی برای اسم خاص بزرگ است، و حروف کوچک
       لوگو فقط سبک بصری است. Chicago و AP هم نام برندی را که لوگویش با حروف کوچک
       است در متن با حرف اول بزرگ می‌نویسند.
+
+  - id: DEC-018
+    term_ids: [resume, personal_resume_file]
+    decided_on: 2026-11-19
+    outcome: >
+      رزومه‌ای که کارجو در جاب‌ویژن می‌سازد، کنار «رزومه شخصی»، «رزومه جاب‌ویژن»
+      نامیده می‌شود؛ «رزومه جاب‌ویژنی» به کار نمی‌رود. بیرون از این مقایسه همان
+      «رزومه» کافی است.
+    rationale: >
+      آدیت صفحهٔ اصلی پنل کارجو هر دو شکل را دید. «جاب‌ویژنی» غیررسمی است و
+      «رزومه جاب‌ویژن» مثل «رزومه شخصی» دوکلمه‌ای است. «رزومه آنلاین» و «رزومه
+      استاندارد» گمراه‌کننده‌اند، چون رزومه شخصی هم آنلاین است و غیراستاندارد نیست.
+
+  - id: DEC-019
+    term_ids: [job_category, industry]
+    decided_on: 2026-11-19
+    outcome: >
+      در سوابق شغلی رزومه، فیلد نقش کارجو «گروه شغلی شما در این شرکت» و فیلد شرکت
+      «صنعت شرکت» است، هر دو از همان فهرست‌های گروه شغلی و صنعت. چون این دو مفهوم
+      سخت‌اند، راهنمای هر فیلد تفاوت را با یک مثال توضیح می‌دهد.
+    rationale: >
+      هر دو فیلد «زمینه فعالیت» نام داشتند و فرم برای فهم تفاوت به مثال تکیه می‌کرد.
+      PM تایید کرد که گزینه‌ها از فهرست گروه شغلی و صنعت می‌آیند (DEC-014). این
+      قاعدهٔ تازه یا استثنا نیست؛ برچسب از واژه‌نامه و توضیح از راهنمای فیلد می‌آید.
 
 decision_queue:
 
