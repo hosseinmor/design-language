@@ -166,7 +166,7 @@ class TaggingTests(unittest.TestCase):
         self.assertIs(tag_item(value, CTX, self.EMPLOYER), value)
 
     def test_text_without_labels_is_untagged(self):
-        value = self.toast(observed_text="لینک کپی شد.")
+        value = self.toast(observed_text="تغییرات ذخیره شد.")
         self.assertNotIn("concepts", tag_item(value, CTX, self.EMPLOYER))
 
     def test_unknown_concept_source_is_rejected(self):
