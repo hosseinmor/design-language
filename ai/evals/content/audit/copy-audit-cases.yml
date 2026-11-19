@@ -55,6 +55,29 @@ cases:
         - {concept: job_application, label: اپلای, kind: forbidden, needs_review: true}
       rewrite_slots: [problem]
 
+  - id: spaced_product_name_is_mapped
+    item:
+      id: resume_saved_toast
+      observed_text: رزومهٔ شما در جاب ویژن ذخیره شد.
+      location: inv-0013
+      captured_on: "2026-11-19"
+      product: jobvision
+      audience: [jobseeker]
+      surface: public
+      content_type: interface
+      contract: content.pattern.notifications
+      state: success
+      slot: message
+      concepts: [jobvision_brand]
+    expected:
+      checked_rules: [AUD-001, AUD-002, AUD-004, AUD-005]
+      status: finding
+      decision_owner: designer
+      priority: P3
+      label_findings:
+        - {concept: jobvision_brand, label: جاب ویژن, kind: forbidden, needs_review: false}
+      rewrite_slots: [message]
+
   - id: approved_label_is_not_flagged
     item:
       id: application_sent_toast
