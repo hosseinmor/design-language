@@ -38,7 +38,7 @@ cases:
       presentation: inline_notification
     content:
       severity: info
-      message: برای بررسی درخواست جذب، شناسهٔ مالیاتی سازمان لازم است.
+      message: برای بررسی درخواست جذب، شناسه مالیاتی سازمان لازم است.
     expected:
       valid: true
       checked_rules: [NTF-001, NTF-003, VOICE-007, NTF-006]
@@ -51,7 +51,7 @@ cases:
       presentation: inline_notification
     content:
       severity: warning
-      message: اتصال ناپایدار است؛ ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
+      message: اتصال ناپایدار است؛ ممکن است ذخیره تغییرات بیشتر طول بکشد.
     expected:
       valid: true
       checked_rules: [NTF-001, NTF-003, NTF-006]
@@ -167,7 +167,7 @@ cases:
       action_not_started: true
     content:
       severity: error
-      message: با حذف حساب، همهٔ داده‌ها پاک می‌شوند.
+      message: با حذف حساب، همه داده‌ها پاک می‌شوند.
     expected:
       valid: false
       checked_rules: [NTF-001]

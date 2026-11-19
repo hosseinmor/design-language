@@ -251,7 +251,7 @@ rules:
 examples:
   focused_form:
     title: ویرایش اطلاعات تماس
-    primary_action: ذخیرهٔ تغییرات
+    primary_action: ذخیره تغییرات
     safe_exit: انصراف
   destructive_confirmation:
     title: آگهی را حذف می‌کنید؟

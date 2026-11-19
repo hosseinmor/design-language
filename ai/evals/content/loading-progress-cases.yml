@@ -10,7 +10,7 @@ cases:
       progress_type: indeterminate
       operation_in_progress: true
       duplicate_activation_prevented: true
-    message: در حال ذخیرهٔ تغییرات رزومه…
+    message: در حال ذخیره تغییرات رزومه…
     expected:
       valid: true
       checked_rules: [LDP-001, LDP-002, LDP-005, LDP-006, VOICE-007, LDP-009, LDP-012]
@@ -133,7 +133,7 @@ cases:
     context:
       progress_type: indeterminate
       eta_source_available: false
-    message: رزومه تا ۳۰ ثانیهٔ دیگر بارگذاری می‌شود.
+    message: رزومه تا ۳۰ ثانیه دیگر بارگذاری می‌شود.
     expected:
       valid: false
       checked_rules: [LDP-004, LDP-005, LDP-007]
@@ -143,7 +143,7 @@ cases:
     context:
       progress_type: indeterminate
       remaining_work_known: false
-    message: تقریباً تمام شد؛ فقط چند لحظهٔ دیگر.
+    message: تقریباً تمام شد؛ فقط چند لحظه دیگر.
     expected:
       valid: false
       checked_rules: [LDP-005, LDP-007]
@@ -164,7 +164,7 @@ cases:
       operation_in_progress: true
       action_permission_changed: false
       visual_state: disabled
-    message: ذخیرهٔ رزومه غیرفعال است.
+    message: ذخیره رزومه غیرفعال است.
     expected:
       valid: false
       checked_rules: [LDP-009, LDP-012]

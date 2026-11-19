@@ -12,7 +12,7 @@ cases:
     content:
       title: هنوز آگهی‌ای ذخیره نکرده‌اید
       explanation: آگهی‌های شغلی موردنظرتان را ذخیره کنید تا بعداً دوباره بررسی‌شان کنید.
-      primary_action: مشاهدهٔ آگهی‌های شغلی
+      primary_action: مشاهده آگهی‌های شغلی
     expected:
       valid: true
       checked_rules: [EST-001, EST-002, EST-003, EST-004, EST-005, EST-006, EST-007, EST-008, EST-009, EST-011]
@@ -79,7 +79,7 @@ cases:
       focus_target: empty_state_action
     content:
       title: دیگر آگهی ذخیره‌شده‌ای ندارید
-      primary_action: مشاهدهٔ آگهی‌های شغلی
+      primary_action: مشاهده آگهی‌های شغلی
     expected:
       valid: true
       checked_rules: [EST-002, EST-004, EST-005, EST-012]

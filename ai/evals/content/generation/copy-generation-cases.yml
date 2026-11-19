@@ -145,7 +145,7 @@ cases:
         consequential_confirmation: [consequence]
       required_questions: [contact_view_consumes_balance]
       forbidden_labels:
-        - {concept: resume_access, label: رزومهٔ خریده‌شده}
+        - {concept: resume_access, label: رزومه خریده‌شده}
 
   - id: draft_fact_is_flagged
     brief:

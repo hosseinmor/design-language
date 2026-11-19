@@ -141,7 +141,7 @@ action_labels:
     - لغو مصاحبه
   safe_exit_examples:
     - انصراف
-    - ادامهٔ ویرایش
+    - ادامه ویرایش
     - بازگشت
   ambiguity_rule: >
     وقتی اقدام اصلی خود «لغو» است، دکمهٔ خروج از confirmation را «لغو» ننامید؛
@@ -162,7 +162,7 @@ templates:
     title: تغییرات ذخیره‌نشده را کنار می‌گذارید؟
     body: اگر خارج شوید، تغییرات این صفحه ذخیره نمی‌شود.
     primary_action: خروج بدون ذخیره
-    safe_exit: ادامهٔ ویرایش
+    safe_exit: ادامه ویرایش
   bulk_action:
     title: "{count} {object_plural} را {action} می‌کنید؟"
     body: "این اقدام روی {count} {object_plural} اثر می‌گذارد. {consequence}."

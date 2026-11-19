@@ -157,7 +157,7 @@ examples:
   saved_jobs_first_use:
     title: هنوز آگهی‌ای ذخیره نکرده‌اید
     explanation: آگهی‌های شغلی موردنظرتان را ذخیره کنید تا بعداً دوباره بررسی‌شان کنید.
-    primary_action: مشاهدهٔ آگهی‌های شغلی
+    primary_action: مشاهده آگهی‌های شغلی
   saved_searches_first_use:
     title: هنوز جست‌وجویی ذخیره نکرده‌اید
     explanation: جست‌وجوی خود را ذخیره کنید تا بعداً با همان شرایط به نتایج برگردید.

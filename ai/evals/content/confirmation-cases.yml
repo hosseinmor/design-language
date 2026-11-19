@@ -31,7 +31,7 @@ cases:
       title: تغییرات ذخیره‌نشده را کنار می‌گذارید؟
       body: اگر خارج شوید، تغییرات این صفحه ذخیره نمی‌شود.
       primary_action: خروج بدون ذخیره
-      safe_exit: ادامهٔ ویرایش
+      safe_exit: ادامه ویرایش
     expected:
       valid: true
       checked_rules: [CNF-001, CNF-002, CNF-003, CNF-005, CNF-006, BTN-004, CNF-008, CNF-012]
@@ -122,8 +122,8 @@ cases:
       treatment: primary
     content:
       title: واقعاً می‌خواهید فرصت‌های طلایی را از دست بدهید؟
-      body: با لغو اشتراک، آیندهٔ شغلی خود را به خطر می‌اندازید.
-      primary_action: با تأسف لغو می‌کنم
+      body: با لغو اشتراک، آینده شغلی خود را به خطر می‌اندازید.
+      primary_action: با تاسف لغو می‌کنم
       safe_exit: حفظ فرصت‌های من
     expected:
       valid: false
@@ -211,7 +211,7 @@ cases:
       easily_reversible: true
     content:
       title: فیلتر را پاک می‌کنید؟
-      body: همهٔ فیلترها پاک می‌شوند.
+      body: همه فیلترها پاک می‌شوند.
       primary_action: پاک‌کردن فیلترها
       safe_exit: انصراف
     expected:

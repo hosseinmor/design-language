@@ -57,7 +57,8 @@ class CheckerTests(unittest.TestCase):
         )
         finding = check_item(value, CTX, CONTRACT)
         self.assertEqual(finding["status"], "finding")
-        self.assertEqual(finding["label_findings"][0]["label"], "بستهٔ فروش")
+        # The copy keeps the ezafe mark; the label is written without it.
+        self.assertEqual(finding["label_findings"][0]["label"], "بسته فروش")
 
     def test_missing_context_is_not_judged(self):
         value = item()

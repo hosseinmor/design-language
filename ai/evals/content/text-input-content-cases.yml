@@ -38,7 +38,7 @@ cases:
       max_characters: 100
       limit_confirmed: true
     content:
-      label: دربارهٔ من
+      label: درباره من
       helper: حداکثر ۱۰۰ نویسه
     expected:
       valid: true
@@ -353,7 +353,7 @@ cases:
       component: Text Input
       expected_content: multi_line_biography
     content:
-      label: دربارهٔ من
+      label: درباره من
       helper: چند پاراگراف دربارهٔ تجربه‌های خود بنویسید.
     expected:
       valid: false

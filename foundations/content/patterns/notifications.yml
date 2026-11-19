@@ -137,7 +137,7 @@ examples:
   unstable_connection:
     severity: warning
     presentation: inline_notification
-    message: اتصال ناپایدار است؛ ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
+    message: اتصال ناپایدار است؛ ممکن است ذخیره تغییرات بیشتر طول بکشد.
   saved_job_removed_with_undo:
     severity: success
     presentation: toast

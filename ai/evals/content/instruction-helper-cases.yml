@@ -35,7 +35,7 @@ cases:
       max_size_mb: 5
       constraints_confirmed: true
     content:
-      label: رزومهٔ شخصی
+      label: رزومه شخصی
       helper: فقط فایل PDF، حداکثر ۵ مگابایت
     expected:
       valid: true
@@ -105,7 +105,7 @@ cases:
       max_characters: 100
       hard_limit_confirmed: true
     content:
-      label: دربارهٔ من
+      label: درباره من
       helper: حداکثر ۱۰۰ نویسه
       count: ۲۴ از ۱۰۰ نویسه
     expected:
@@ -166,7 +166,7 @@ cases:
       field: personal_resume
       max_size_confirmed: false
     content:
-      label: رزومهٔ شخصی
+      label: رزومه شخصی
       helper: حداکثر ۲ مگابایت
     expected:
       valid: false
@@ -277,7 +277,7 @@ cases:
     context:
       multiple_help_links_on_page: true
     content:
-      label: رزومهٔ شخصی
+      label: رزومه شخصی
       help_link: بیشتر
     expected:
       valid: false
@@ -290,7 +290,7 @@ cases:
       max_limit_confirmed: false
       unit_visible: false
     content:
-      label: دربارهٔ من
+      label: درباره من
       count: ۲۴/۱۰۰
     expected:
       valid: false
