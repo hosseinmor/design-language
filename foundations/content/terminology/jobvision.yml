@@ -77,12 +77,50 @@ sources:
     state: verified
     role: product_knowledge_reference
     reviewed_on: 2026-10-22
+  - id: verbal_identity_v2
+    title: کلید کلام برند، نسخهٔ ۲، پاییز ۱۴۰۴
+    state: reviewed_source
+    role: user_facing_language
 
 # مفهوم‌هایی که در relations ارجاع داده شده‌اند ولی هنوز مدخل ندارند.
 # هر شناسهٔ تازه در relations باید یا مدخل داشته باشد یا اینجا ثبت شود.
 unregistered_concepts: [application_rejection, business_rule, candidate_profile, company_activation, company_profile, formal_info, generic_request, interview_invitation, price, proforma_invoice, reactivation, resume_view, seniority_level, services]
 
 terms:
+  # Product name
+  - id: jobvision_brand
+    concept_kind: communication_concept
+    authority:
+      meaning_owner: design_language
+      language_owner: design_language
+      product_source: not_applicable
+      migration_state: not_applicable
+    production_alignment:
+      state: differs
+      production_label: جاب ویژن
+      evidence: jobvision_builder_designs
+    canonical_internal: جاب‌ویژن
+    definition:
+      product_content: نام رسمی محصول در متن فارسی.
+    preferred:
+      default: جاب‌ویژن
+      english: Jobvision
+    forbidden:
+      - {label: جاب ویژن, scope: concept, source: design_language}
+      - {label: جابویژن, scope: concept, source: design_language}
+      - {label: JobVision, scope: concept, source: design_language}
+      - {label: Job Vision, scope: concept, source: design_language}
+    rules:
+      - نام در متن فارسی همیشه «جاب‌ویژن» با نیم‌فاصله است و کشیده نمی‌گیرد.
+      - نام لاتین «Jobvision» است، یک اسم خاص و نه ترکیب دو کلمه؛ مثل هر اسم خاص انگلیسی حرف اولش بزرگ است و بقیه کوچک. فقط در متن لاتین می‌آید و در متن فارسی به‌جای «جاب‌ویژن» نمی‌آید.
+      - حروف کوچک لوگو سبک بصری است و به متن منتقل نمی‌شود.
+      - نشانی دامنه، مثل jobvision.ir، شناسه است و تغییر نمی‌کند.
+      - نام‌های ترکیبی همین شکل را نگه می‌دارند، مثل «جاب‌ویژن پرو»، «درباره جاب‌ویژن» و «رزومه‌ساز جاب‌ویژن».
+    domains: [jobseeker, employer, ats, admin, marketing, content]
+    visibility: [public, internal]
+    status: stable
+    evidence: [verbal_identity_v2, jobvision_builder_designs, product_content_decisions]
+
   # Core employment concepts
   - id: job_post
     concept_kind: entity
@@ -2219,6 +2257,22 @@ decision_log:
     rationale: >
       آدیت پنل کارفرما «نوتیفیکیشن وبسایت» را در پیام‌های درخواست از کارجو دید.
       Product Knowledge همین مفهوم و کانال‌هایش را «اعلان» می‌نامد.
+
+  - id: DEC-017
+    term_ids: [jobvision_brand]
+    decided_on: 2026-11-19
+    outcome: >
+      نام محصول در متن فارسی «جاب‌ویژن» است؛ «جاب ویژن» و «جابویژن» به کار نمی‌روند.
+      نام لاتین «Jobvision» است و فقط در متن لاتین می‌آید؛ «JobVision» و «Job Vision»
+      به کار نمی‌روند. دامنهٔ jobvision.ir تغییر نمی‌کند.
+    rationale: >
+      کلید کلام برند نام را «جاب‌ویژن» می‌نویسد، ولی طرح‌های Karbon Builder در یک
+      صفحه هر دو شکل را دارند، مثلاً «درباره جاب ویژن» کنار «جاب‌ویژن» در فوتر.
+      بدون برچسب ممنوع، آدیت شکل نادرست را پیدا نمی‌کرد. هیچ گایدلاینی شکل لاتین را
+      تعیین نکرده بود. جاب‌ویژن یک اسم خاص است، نه ترکیب دو کلمه، پس V بزرگ
+      نمی‌شود؛ حرف اول طبق قاعدهٔ نگارش انگلیسی برای اسم خاص بزرگ است، و حروف کوچک
+      لوگو فقط سبک بصری است. Chicago و AP هم نام برندی را که لوگویش با حروف کوچک
+      است در متن با حرف اول بزرگ می‌نویسند.
 
 decision_queue:
 
