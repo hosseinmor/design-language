@@ -12,7 +12,7 @@ cases:
       risk_confirmed: true
     content:
       message: اتصال ناپایدار است
-      description: ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
+      description: ممکن است ذخیره تغییرات بیشتر طول بکشد.
     expected:
       valid: true
       checked_rules: [NTC-003, NTC-005, NTC-006, NTC-008]
@@ -71,10 +71,10 @@ cases:
       action_behavior: navigate
       destination_available: true
     content:
-      message: نتیجهٔ بررسی رزومه آماده است
+      message: نتیجه بررسی رزومه آماده است
       action:
         type: link
-        label: مشاهدهٔ نتیجه
+        label: مشاهده نتیجه
     expected:
       valid: true
       checked_rules: [NTC-003, NTC-005, NTC-010]
@@ -245,8 +245,8 @@ cases:
       action_behavior: navigate
       action_component: Button
     content:
-      message: نتیجهٔ بررسی آماده است.
-      action: مشاهدهٔ نتیجه
+      message: نتیجه بررسی آماده است.
+      action: مشاهده نتیجه
     expected:
       valid: false
       checked_rules: [NTC-010]

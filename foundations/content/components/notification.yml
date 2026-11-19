@@ -214,7 +214,7 @@ examples:
   inline_warning:
     severity: warning
     message: اتصال ناپایدار است
-    description: ممکن است ذخیرهٔ تغییرات بیشتر طول بکشد.
+    description: ممکن است ذخیره تغییرات بیشتر طول بکشد.
   success_toast:
     severity: success
     message: تغییرات رزومه ذخیره شد.

@@ -104,7 +104,8 @@ def label_findings(item: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
     concepts = [c for c in item.get("concepts") or [] if c in ctx.terms]
     # A concept found only by matching its labels may be another concept that shares the word (AUD-007).
     lexical = item.get("concept_source") == "lexical"
-    text = str(item.get("observed_text", ""))
+    # Spelling the house rules drop (ezafe mark, hamza seats) must not hide a label.
+    text = _fold(str(item.get("observed_text", "")))
     # A forbidden label is skipped only when it lies inside an approved label
     # (درخواست in درخواست شغلی). Masking approved labels first would also hide a
     # forbidden phrase that contains a short approved label (آگهی in آگهی استخدام).
@@ -113,13 +114,13 @@ def label_findings(item: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
         for concept in concepts
         for label in ctx.preferred(concept)
         if label
-        for m in re.finditer(re.escape(label), text)
+        for m in re.finditer(re.escape(_fold(label)), text)
     ]
 
     def outside_approved(label: str) -> bool:
         return any(
             not any(start <= m.start() and m.end() <= end for start, end in approved_spans)
-            for m in re.finditer(re.escape(label), text)
+            for m in re.finditer(re.escape(_fold(label)), text)
         )
 
     found: list[dict[str, Any]] = []
@@ -148,8 +149,13 @@ def label_findings(item: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
     return found
 
 
+def _fold(text: str) -> str:
+    """Drop the ezafe mark and hamza seats that product copy no longer writes."""
+    return text.replace("\u0654", "").replace("أ", "ا").replace("ؤ", "و")
+
+
 def _normalize(text: str) -> str:
-    return text.replace("\u200c", " ").replace("ي", "ی").replace("ك", "ک")
+    return _fold(text).replace("\u200c", " ").replace("ي", "ی").replace("ك", "ک")
 
 
 def concept_labels(term: dict[str, Any]) -> set[str]:

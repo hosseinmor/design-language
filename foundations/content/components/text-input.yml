@@ -192,7 +192,7 @@ examples:
     label: عنوان شغلی
     placeholder: "مثال: طراح محصول"
   character_limit:
-    label: دربارهٔ من
+    label: درباره من
     helper: حداکثر ۱۰۰ نویسه
     condition: limit_confirmed
   invalid_email:

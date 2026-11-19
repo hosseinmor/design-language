@@ -13,7 +13,7 @@ cases:
     content:
       title: ویرایش اطلاعات تماس
       fields: [ایمیل, شماره موبایل]
-      primary_action: ذخیرهٔ تغییرات
+      primary_action: ذخیره تغییرات
       safe_exit: انصراف
       close_accessible_name: بستن
     expected:
@@ -48,7 +48,7 @@ cases:
       title: تغییرات ذخیره‌نشده را کنار می‌گذارید؟
       body: اگر خارج شوید، تغییرات این صفحه ذخیره نمی‌شود.
       primary_action: خروج بدون ذخیره
-      safe_exit: ادامهٔ ویرایش
+      safe_exit: ادامه ویرایش
     expected:
       valid: true
       checked_rules: [MOD-002, MOD-004, CNF-002, CNF-003, CNF-004, CNF-010, CNF-005, CNF-006, BTN-004, MOD-013]
@@ -61,7 +61,7 @@ cases:
       explicit_response_required: true
     content:
       title: تغییرات شرایط استفاده
-      body: برای ادامه، نسخهٔ جدید شرایط استفاده را بررسی کنید.
+      body: برای ادامه، نسخه جدید شرایط استفاده را بررسی کنید.
       acknowledgement: متوجه شدم
     expected:
       valid: true
@@ -77,7 +77,7 @@ cases:
       modal_remains_open: true
     content:
       title: ویرایش اطلاعات تماس
-      primary_action: ذخیرهٔ تغییرات
+      primary_action: ذخیره تغییرات
     expected:
       valid: true
       checked_rules: [MOD-014, MOD-015]
@@ -195,9 +195,9 @@ cases:
       modal_type: focused_task
       additional_context_needed: false
     content:
-      title: افزودن سابقهٔ شغلی
-      body: سابقهٔ شغلی خود را اضافه کنید.
-      primary_action: افزودن سابقهٔ شغلی
+      title: افزودن سابقه شغلی
+      body: سابقه شغلی خود را اضافه کنید.
+      primary_action: افزودن سابقه شغلی
     expected:
       valid: false
       checked_rules: [MOD-006, MOD-007]
@@ -365,8 +365,8 @@ cases:
       urgency_confirmed: false
     content:
       title: واقعاً می‌خواهید این فرصت طلایی را از دست بدهید؟
-      body: با خروج، آیندهٔ شغلی خود را به خطر می‌اندازید.
-      primary_action: با تأسف خارج می‌شوم
+      body: با خروج، آینده شغلی خود را به خطر می‌اندازید.
+      primary_action: با تاسف خارج می‌شوم
       safe_exit: حفظ فرصت من
     expected:
       valid: false

@@ -178,7 +178,7 @@ cases:
     context:
       output_type: generated
       human_expert_involved: false
-    message: متن تأییدشدهٔ کارشناس منابع انسانی
+    message: متن تاییدشده کارشناس منابع انسانی
     expected:
       valid: false
       checked_rules: [AIC-005, AIC-011]
@@ -196,7 +196,7 @@ cases:
   - id: unverified_confidentiality_claim
     context:
       confidentiality_policy_confirmed: false
-    message: محتوای رزومهٔ شما کاملاً محرمانه می‌ماند.
+    message: محتوای رزومه شما کاملاً محرمانه می‌ماند.
     expected:
       valid: false
       checked_rules: [AIC-012]

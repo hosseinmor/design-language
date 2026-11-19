@@ -226,11 +226,11 @@ examples:
     label: عنوان شغلی
     placeholder: "مثال: طراح محصول"
   resume_upload:
-    label: رزومهٔ شخصی
+    label: رزومه شخصی
     helper: فقط فایل PDF، حداکثر ۵ مگابایت
     condition: file_policy_confirmed
   biography:
-    label: دربارهٔ من
+    label: درباره من
     helper: حداکثر ۱۰۰ نویسه
     count: ۲۴ از ۱۰۰ نویسه
     condition: character_limit_confirmed

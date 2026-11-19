@@ -179,7 +179,7 @@ examples:
   save_resume:
     type: local_control
     progress: indeterminate
-    message: در حال ذخیرهٔ تغییرات رزومه…
+    message: در حال ذخیره تغییرات رزومه…
   load_job_ads:
     type: region_busy
     progress: indeterminate

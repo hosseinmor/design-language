@@ -38,8 +38,8 @@ cases:
       destination: صفحهٔ رزومه
       semantics: link
     content:
-      label: مشاهدهٔ رزومه
-      accessible_name: مشاهدهٔ رزومه
+      label: مشاهده رزومه
+      accessible_name: مشاهده رزومه
     expected:
       valid: true
       checked_rules: [BTN-001, BTN-006, BTN-013]
@@ -78,11 +78,11 @@ cases:
     context:
       component: Button
       state: loading
-      base_label: ذخیرهٔ تغییرات
+      base_label: ذخیره تغییرات
       duplicate_activation_prevented: true
     content:
-      label: ذخیرهٔ تغییرات
-      separate_status: در حال ذخیرهٔ تغییرات…
+      label: ذخیره تغییرات
+      separate_status: در حال ذخیره تغییرات…
     expected:
       valid: true
       checked_rules: [BTN-001, BTN-005, BTN-011]
@@ -149,7 +149,7 @@ cases:
       destination: صفحهٔ رزومه
       semantics: button
     content:
-      label: مشاهدهٔ رزومه
+      label: مشاهده رزومه
     expected:
       valid: false
       checked_rules: [BTN-006]
@@ -184,9 +184,9 @@ cases:
     context:
       component: Button
       state: loading
-      base_label: ذخیرهٔ تغییرات
+      base_label: ذخیره تغییرات
     content:
-      label: لطفاً صبر کنید، در حال ذخیرهٔ تغییرات شما هستیم…
+      label: لطفاً صبر کنید، در حال ذخیره تغییرات شما هستیم…
     expected:
       valid: false
       checked_rules: [BTN-002, BTN-011, BTN-016]
@@ -211,7 +211,7 @@ cases:
       component: Button
       action: save_draft
     content:
-      label: ذخیرهٔ پیش‌نویس
+      label: ذخیره پیش‌نویس
       accessible_name: انتشار آگهی
     expected:
       valid: false

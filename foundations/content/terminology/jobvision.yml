@@ -60,7 +60,7 @@ sources:
     role: product_knowledge_reference
     reviewed_on: 2026-11-16
   - id: pk_jobvision_cv_language_variants
-    title: قابلیت رزومهٔ فارسی و انگلیسی
+    title: قابلیت رزومه فارسی و انگلیسی
     url: https://docs-jv.jvoffice.ir/contents/cv/capability-fa-en-cv/
     state: verified
     role: product_knowledge_reference
@@ -335,7 +335,7 @@ terms:
     forbidden:
       - {label: اپراتور, scope: concept, source: product_knowledge_snapshot}
       - {label: کاربر سازمان, scope: concept, source: product_knowledge_snapshot}
-      - {label: نمایندهٔ کارفرما, scope: concept, source: product_knowledge_snapshot}
+      - {label: نماینده کارفرما, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, admin]
     visibility: [public, internal, admin]
     relations:
@@ -429,13 +429,13 @@ terms:
     production_alignment: {state: aligned}
     canonical_internal: صنعت
     definition:
-      source: حوزهٔ فعالیت کسب‌وکار سازمان که از بیس‌دیتا انتخاب می‌شود.
+      source: حوزه فعالیت کسب‌وکار سازمان که از بیس‌دیتا انتخاب می‌شود.
     preferred:
       default: صنعت
-    allowed: [حوزهٔ فعالیت, صنعت شرکت]
+    allowed: [حوزه فعالیت, صنعت شرکت]
     forbidden:
-      - {label: زمینهٔ کاری, scope: concept, source: product_knowledge_snapshot}
-      - {label: رستهٔ شغلی, scope: concept, source: product_knowledge_snapshot}
+      - {label: زمینه کاری, scope: concept, source: product_knowledge_snapshot}
+      - {label: رسته شغلی, scope: concept, source: product_knowledge_snapshot}
     rules:
       - فیلد صنعتِ شرکت در سوابق شغلی رزومه «صنعت شرکت» است.
     relations:
@@ -456,7 +456,7 @@ terms:
       product_source: pk_jobvision_jobpost_entities
       migration_state: source_linked
     production_alignment: {state: aligned}
-    canonical_internal: دستهٔ شغلی
+    canonical_internal: دسته شغلی
     definition:
       source: >
         دسته‌های شغلی آگهی که از فهرست بیس‌دیتا انتخاب می‌شوند؛ هر آگهی دقیقاً
@@ -464,10 +464,10 @@ terms:
     preferred:
       default: گروه شغلی
     forbidden:
-      - {label: حوزهٔ شغلی, scope: concept, source: design_language}
-      - {label: دستهٔ شغلی, scope: concept, source: design_language}
+      - {label: حوزه شغلی, scope: concept, source: design_language}
+      - {label: دسته شغلی, scope: concept, source: design_language}
     rules:
-      - «دستهٔ شغلی» نام این مفهوم در Product Knowledge است؛ در متن کاربر «گروه شغلی» به کار می‌رود.
+      - «دسته شغلی» نام این مفهوم در Product Knowledge است؛ در متن کاربر «گروه شغلی» به کار می‌رود.
     relations:
       distinct_from: [industry]
     code_bindings: [JobPostJobCategory]
@@ -662,16 +662,16 @@ terms:
       product_source: pk_jobvision_cv_language_variants
       migration_state: source_linked
     production_alignment: {state: unverified}
-    canonical_internal: نسخهٔ زبانی رزومه
+    canonical_internal: نسخه زبانی رزومه
     definition:
       product_content: >
         بازنمایی فارسی یا انگلیسی همان رزومه که محتوای زبانی و شاخص تکمیل
         مخصوص خود را دارد، اما در مدل محتوایی رزومهٔ مستقل دیگری نیست.
     preferred:
-      default: نسخهٔ زبانی رزومه
-      persian: رزومهٔ فارسی
+      default: نسخه زبانی رزومه
+      persian: رزومه فارسی
       english: رزومهٔ انگلیسی
-    avoid: [رزومهٔ دوم, رزومهٔ جداگانه]
+    avoid: [رزومه دوم, رزومه جداگانه]
     domains: [jobseeker, employer, application]
     visibility: [public, internal]
     relations:
@@ -716,13 +716,13 @@ terms:
       product_source: source_glossary
       migration_state: source_linked
     production_alignment: {state: aligned}
-    canonical_internal: رزومهٔ شخصی
+    canonical_internal: رزومه شخصی
     definition:
       source: فایلی که کارجو خودش بارگذاری می‌کند، در برابر رزومهٔ ساختاریافتهٔ جاب‌ویژن.
     preferred:
-      default: رزومهٔ شخصی
+      default: رزومه شخصی
     forbidden:
-      - {label: رزومهٔ آپلودی, scope: concept, source: product_knowledge_snapshot}
+      - {label: رزومه آپلودی, scope: concept, source: product_knowledge_snapshot}
       - {label: فایل رزومه, scope: concept, source: product_knowledge_snapshot}
     domains: [jobseeker, employer]
     visibility: [public, internal]
@@ -826,12 +826,12 @@ terms:
       source: نسخهٔ کامل و منجمدشدهٔ رزومه در لحظهٔ ارسال درخواست شغلی.
     preferred:
       internal: اسنپشات رزومه
-      user_facing_explanation: نسخهٔ رزومه در زمان ارسال درخواست شغلی
+      user_facing_explanation: نسخه رزومه در زمان ارسال درخواست شغلی
     forbidden:
       - {label: عکس فوری, scope: concept, source: product_knowledge_snapshot}
       - {label: اسنپ‌شات, scope: concept, source: product_knowledge_snapshot}
-      - {label: نسخهٔ رزومه, scope: concept, source: product_knowledge_snapshot}
-      - {label: رزومهٔ ذخیره‌شده, scope: concept, source: product_knowledge_snapshot}
+      - {label: نسخه رزومه, scope: concept, source: product_knowledge_snapshot}
+      - {label: رزومه ذخیره‌شده, scope: concept, source: product_knowledge_snapshot}
     domains: [application, employer, admin]
     visibility: [internal, admin]
     relations:
@@ -926,11 +926,11 @@ terms:
       product_source: source_glossary
       migration_state: source_linked
     production_alignment: {state: aligned}
-    canonical_internal: تجربهٔ مصاحبه
+    canonical_internal: تجربه مصاحبه
     definition:
       source: روایت کارجو از فرایند مصاحبهٔ یک سازمان.
     preferred:
-      default: تجربهٔ مصاحبه
+      default: تجربه مصاحبه
     forbidden:
       - {label: نظر مصاحبه, scope: concept, source: product_knowledge_snapshot}
       - {label: بازخورد مصاحبه, scope: concept, source: product_knowledge_snapshot}
@@ -956,7 +956,7 @@ terms:
     preferred:
       default: امتیاز و نظر
       contextual: نظرات
-      jobseeker: نظر دربارهٔ شرکت
+      jobseeker: نظر درباره شرکت
     avoid: [نظر سازمان]
     forbidden:
       - {label: ریویو, scope: concept, source: product_knowledge_snapshot}
@@ -1058,7 +1058,7 @@ terms:
       internal: نوع بسته
       store: بسته
     forbidden:
-      - {label: بستهٔ فروش, scope: concept, source: product_knowledge_snapshot}
+      - {label: بسته فروش, scope: concept, source: product_knowledge_snapshot}
       - {label: محصول, scope: concept, source: product_knowledge_snapshot}
       - {label: آیتم فروشگاه, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, store, admin]
@@ -1198,11 +1198,11 @@ terms:
       product_source: source_glossary
       migration_state: source_linked
     production_alignment: {state: unverified}
-    canonical_internal: سامانه مؤدیان
+    canonical_internal: سامانه مودیان
     definition:
       source: سامانه‌ای که فاکتورهای رسمی به آن ارسال می‌شوند تا شمارهٔ مالیاتی بگیرند.
     preferred:
-      default: سامانه مؤدیان
+      default: سامانه مودیان
     forbidden:
       - {label: سامانه مالیاتی, scope: concept, source: product_knowledge_snapshot}
       - {label: مودیان, scope: concept, source: product_knowledge_snapshot}
@@ -1248,13 +1248,13 @@ terms:
     canonical_internal: سطح
     definition:
       source: >
-        بازهٔ قیمتی آگهی از ۱ تا ۸ که سیستم از دستهٔ شغلی، ارشدیت،
+        بازهٔ قیمتی آگهی از ۱ تا ۸ که سیستم از دسته شغلی، ارشدیت،
         شهر و گروه سازمان تشخیص می‌دهد و سازمان آن را نمی‌بیند.
     preferred:
       internal: سطح
     forbidden:
       - {label: تیر, scope: concept, source: product_knowledge_snapshot}
-      - {label: ردهٔ قیمت, scope: concept, source: product_knowledge_snapshot}
+      - {label: رده قیمت, scope: concept, source: product_knowledge_snapshot}
       - {label: سطح سرویس, scope: concept, source: product_knowledge_snapshot}
     domains: [billing, jobpost]
     visibility: [internal, admin]
@@ -1350,7 +1350,7 @@ terms:
       internal: راند فعال‌سازی
     forbidden:
       - {label: دور فعال‌سازی, scope: concept, source: product_knowledge_snapshot}
-      - {label: دورهٔ انتشار, scope: concept, source: product_knowledge_snapshot}
+      - {label: دوره انتشار, scope: concept, source: product_knowledge_snapshot}
     domains: [jobpost, analytics]
     visibility: [internal, admin]
     relations:
@@ -1471,12 +1471,12 @@ terms:
     production_alignment: {state: aligned}
     canonical_internal: امتیاز سازمان
     definition:
-      source: عدد حاصل از محبوبیت، تجربهٔ مصاحبه و تغییر وضعیت درخواست شغلی.
+      source: عدد حاصل از محبوبیت، تجربه مصاحبه و تغییر وضعیت درخواست شغلی.
     preferred:
       default: امتیاز سازمان
     forbidden:
-      - {label: رتبهٔ سازمان, scope: concept, source: product_knowledge_snapshot}
-      - {label: نمرهٔ کارفرما, scope: concept, source: product_knowledge_snapshot}
+      - {label: رتبه سازمان, scope: concept, source: product_knowledge_snapshot}
+      - {label: نمره کارفرما, scope: concept, source: product_knowledge_snapshot}
     domains: [company, scoring]
     visibility: [public, internal]
     relations:
@@ -1538,11 +1538,11 @@ terms:
       product_source: source_glossary
       migration_state: source_linked
     production_alignment: {state: unverified}
-    canonical_internal: رتبهٔ سازمان
+    canonical_internal: رتبه سازمان
     definition:
       source: جایگاه سازمان در فهرست کل سازمان‌ها بر اساس امتیاز.
     preferred:
-      default: رتبهٔ سازمان
+      default: رتبه سازمان
     forbidden:
       - {label: رنک, scope: concept, source: product_knowledge_snapshot}
       - {label: جایگاه سازمان, scope: concept, source: product_knowledge_snapshot}
@@ -1568,7 +1568,7 @@ terms:
     preferred:
       default: رتبه در صنعت
     forbidden:
-      - {label: رتبهٔ صنعتی, scope: concept, source: product_knowledge_snapshot}
+      - {label: رتبه صنعتی, scope: concept, source: product_knowledge_snapshot}
       - {label: رنک صنعت, scope: concept, source: product_knowledge_snapshot}
     domains: [company, scoring]
     visibility: [public, internal]
@@ -1618,12 +1618,12 @@ terms:
     definition:
       source: میزان تناسب یک رزومه با یک آگهی.
     preferred:
-      employer: نمرهٔ انطباق
+      employer: نمره انطباق
       jobseeker: تناسب با موقعیت شغلی
     forbidden:
       - {label: امتیاز همخوانی, scope: concept, source: product_knowledge_snapshot}
     rules:
-      - در پنل کارفرما «انطباق» به کار می‌رود، مثل «شاخص‌های انطباق»، «جزئیات انطباق» و «نمرهٔ انطباق».
+      - در پنل کارفرما «انطباق» به کار می‌رود، مثل «شاخص‌های انطباق»، «جزئیات انطباق» و «نمره انطباق».
       - در پنل کارجو «تناسب با موقعیت شغلی» به کار می‌رود.
     domains: [resume, jobpost, matching]
     visibility: [public, internal]
@@ -1703,10 +1703,10 @@ terms:
       source: حق دائمی سازمان برای دیدن اطلاعات تماس یک رزومه.
     preferred:
       employer: دسترسی به رزومه
-      user_facing_explanation: امکان مشاهدهٔ اطلاعات تماس
+      user_facing_explanation: امکان مشاهده اطلاعات تماس
     forbidden:
       - {label: مالکیت رزومه, scope: concept, source: product_knowledge_snapshot}
-      - {label: رزومهٔ خریده‌شده, scope: concept, source: product_knowledge_snapshot}
+      - {label: رزومه خریده‌شده, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, resume, billing]
     visibility: [public, internal]
     relations:
@@ -1792,11 +1792,11 @@ terms:
       product_source: source_glossary
       migration_state: source_linked
     production_alignment: {state: aligned}
-    canonical_internal: رزومهٔ پیشنهادی
+    canonical_internal: رزومه پیشنهادی
     definition:
       source: رزومه‌هایی که سیستم به سازمان پیشنهاد می‌دهد.
     preferred:
-      default: رزومهٔ پیشنهادی
+      default: رزومه پیشنهادی
     forbidden:
       - {label: رزومه پیشنهاد شده, scope: concept, source: product_knowledge_snapshot}
       - {label: سرچ خودکار, scope: concept, source: product_knowledge_snapshot}
@@ -1826,7 +1826,7 @@ terms:
     avoid: [برندینگ کارفرمایی]
     forbidden:
       - {label: امپلویر برندینگ, scope: concept, source: product_knowledge_snapshot}
-      - {label: صفحهٔ اختصاصی سازمان, scope: concept, source: product_knowledge_snapshot}
+      - {label: صفحه اختصاصی سازمان, scope: concept, source: product_knowledge_snapshot}
     domains: [employer, jobseeker, company]
     visibility: [public, internal]
     code_bindings: [CompanyBranding]
@@ -2150,7 +2150,7 @@ decision_log:
     term_ids: [resume, resume_language_variant, resume_completion_percentage]
     decided_on: 2026-09-23
     outcome: >
-      در مدل محتوایی، رزومهٔ فارسی و رزومهٔ انگلیسی دو نسخهٔ زبانی از concept
+      در مدل محتوایی، رزومه فارسی و رزومهٔ انگلیسی دو نسخهٔ زبانی از concept
       رزومه‌اند و به‌عنوان دو نوع entity مستقل شمرده نمی‌شوند.
     rationale: >
       واژه‌نامه یک concept کدی `Cv` را ثبت می‌کند، در حالی که شاخص‌های
@@ -2198,7 +2198,7 @@ decision_log:
     outcome: >
       «آگهی استخدام» در متن رابط به کار نمی‌رود و در محتوای بازاریابی و سئو
       مجاز است. «متقاضی» فقط برای مقایسه و آمار کارجوهای یک آگهی مجاز است.
-      «حوزهٔ فعالیت» و «صنعت شرکت» برای صنعت مجازند. «رابط» برای کاربران
+      «حوزه فعالیت» و «صنعت شرکت» برای صنعت مجازند. «رابط» برای کاربران
       پنل کارفرما قابل دیدن است.
     rationale: >
       بازبینی واژه‌نامه با شواهد پروداکشن: این برچسب‌ها در محصول کاربرد
@@ -2232,7 +2232,7 @@ decision_log:
     term_ids: [job_category, industry]
     decided_on: 2026-11-15
     outcome: >
-      برچسب کاربر دستهٔ شغلی آگهی «گروه شغلی» است؛ «حوزهٔ شغلی» و «دستهٔ
+      برچسب کاربر دسته شغلی آگهی «گروه شغلی» است؛ «حوزه شغلی» و «دستهٔ
       شغلی» در متن کاربر به کار نمی‌روند. گروه شغلی ویژگی آگهی است و با صنعت،
       که ویژگی سازمان است، یکی نیست.
     rationale: >
