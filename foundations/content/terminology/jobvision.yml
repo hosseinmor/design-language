@@ -104,14 +104,15 @@ terms:
       product_content: نام رسمی محصول در متن فارسی.
     preferred:
       default: جاب‌ویژن
-      english: JobVision
+      english: jobvision
     forbidden:
       - {label: جاب ویژن, scope: concept, source: design_language}
       - {label: جابویژن, scope: concept, source: design_language}
+      - {label: JobVision, scope: concept, source: design_language}
     rules:
       - نام در متن فارسی همیشه «جاب‌ویژن» با نیم‌فاصله است و کشیده نمی‌گیرد.
-      - «JobVision» فقط در متن لاتین می‌آید.
-      - نشانی دامنه، مثل jobvision.ir، شناسه است و تغییر نمی‌کند؛ «jobvision» با حروف کوچک در متن فارسی به‌جای نام نمی‌آید.
+      - نام لاتین، مثل لوگو، همه با حروف کوچک است («jobvision») و فقط در متن لاتین می‌آید؛ در متن فارسی به‌جای «جاب‌ویژن» نمی‌آید.
+      - نشانی دامنه، مثل jobvision.ir، شناسه است و تغییر نمی‌کند.
       - نام‌های ترکیبی همین شکل را نگه می‌دارند، مثل «جاب‌ویژن پرو»، «درباره جاب‌ویژن» و «رزومه‌ساز جاب‌ویژن».
     domains: [jobseeker, employer, ats, admin, marketing, content]
     visibility: [public, internal]
@@ -2260,11 +2261,13 @@ decision_log:
     decided_on: 2026-11-19
     outcome: >
       نام محصول در متن فارسی «جاب‌ویژن» است؛ «جاب ویژن» و «جابویژن» به کار نمی‌روند.
-      «JobVision» فقط در متن لاتین می‌آید و دامنهٔ jobvision.ir تغییر نمی‌کند.
+      نام لاتین «jobvision» با حروف کوچک است و فقط در متن لاتین می‌آید؛ «JobVision»
+      به کار نمی‌رود. دامنهٔ jobvision.ir تغییر نمی‌کند.
     rationale: >
       کلید کلام برند نام را «جاب‌ویژن» می‌نویسد، ولی طرح‌های Karbon Builder در یک
       صفحه هر دو شکل را دارند، مثلاً «درباره جاب ویژن» کنار «جاب‌ویژن» در فوتر.
-      بدون برچسب ممنوع، آدیت شکل نادرست را پیدا نمی‌کرد.
+      بدون برچسب ممنوع، آدیت شکل نادرست را پیدا نمی‌کرد. هیچ گایدلاینی شکل لاتین را
+      تعیین نکرده بود؛ لوگو نام را با حروف کوچک می‌نویسد.
 
 decision_queue:
 
