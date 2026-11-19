@@ -3,7 +3,7 @@ id: design-system.overview
 collection: design-system
 type: overview
 title: Design Language Scope
-summary: Defines the purpose, scope, boundaries, and operating model of the shared JobVision and Cando Design Language.
+summary: Defines the purpose, scope, boundaries, and operating model of the shared Jobvision and Cando Design Language.
 knowledge_state: canonical
 document_maturity: reviewed
 related:
@@ -16,7 +16,7 @@ related:
 
 ## Purpose
 
-The shared Design Language gives JobVision and Cando a common visual, content,
+The shared Design Language gives Jobvision and Cando a common visual, content,
 interaction, component, and accessibility language so teams can design and
 implement consistent product experiences without re-solving common decisions.
 
@@ -63,7 +63,7 @@ Product-specific behavior
 
 ## Supported products
 
-The system is shared by JobVision and Cando. Shared semantic meaning should remain stable across products. Product-specific Brand values or approved variations may differ without forking the full component model.
+The system is shared by Jobvision and Cando. Shared semantic meaning should remain stable across products. Product-specific Brand values or approved variations may differ without forking the full component model.
 
 ## Documentation principle
 

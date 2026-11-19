@@ -3,7 +3,7 @@ id: design-system.integration.figma-component-presentation
 collection: design-system
 type: integration
 title: Figma Component Presentation
-summary: Defines a consistent, AI-readable presentation layout for JobVision Design System component pages without duplicating canonical component or runtime contracts.
+summary: Defines a consistent, AI-readable presentation layout for Jobvision Design System component pages without duplicating canonical component or runtime contracts.
 knowledge_state: draft
 document_maturity: draft
 owner: Design System team

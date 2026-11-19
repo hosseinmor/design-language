@@ -323,7 +323,7 @@ Indentation may be added later if a real shared product requirement is validated
 
 ## RTL
 
-The component is RTL-first for current JobVision / CanDo products.
+The component is RTL-first for current Jobvision / CanDo products.
 
 Toolbar group order is anchored to the RTL starting edge. Text direction is a content-formatting action; it does not flip the Design System component layout itself.
 

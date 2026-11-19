@@ -40,7 +40,7 @@ This document owns the **Product ↔ Theme relationship and intended variation p
 Current intended application-to-package selection:
 
 ```text
-JobVision application → JobVision Theme package
+Jobvision application → Jobvision Theme package
 Cando application     → Cando Theme package
 ```
 
@@ -64,7 +64,7 @@ Figma currently exposes independent authoring choices for **Product** (JobVision
 
 ## Brand versus Theme
 
-Brand is **semantic design meaning** used for Product identity and approved key conversion moments; it is **not** a required independent runtime Brand alias layer. For example, JobVision and Cando Themes can resolve `surface/brand` and `fg/on-brand` from their own internal palettes while preserving one shared Semantic meaning.
+Brand is **semantic design meaning** used for Product identity and approved key conversion moments; it is **not** a required independent runtime Brand alias layer. For example, Jobvision and Cando Themes can resolve `surface/brand` and `fg/on-brand` from their own internal palettes while preserving one shared Semantic meaning.
 
 The choice to **use** a Brand Button follows [Brand Variants](brand-variants.md) and [Button](../../design-system/components/button.md); it is not an automatic consequence of installing a Product Theme. Actual palette values and accessible foreground mappings belong to Color/Figma, not this file.
 

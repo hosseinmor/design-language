@@ -74,7 +74,7 @@ Each Theme package owns:
 Current products are expected to select:
 
 ```text
-JobVision → JobVision Theme
+Jobvision → Jobvision Theme
 Cando     → Cando Theme
 ```
 
@@ -109,7 +109,7 @@ are shared Semantic roles whose values are supplied by each Theme.
 Example:
 
 ```text
-JobVision Theme → Brand semantics resolve from JobVision-local Blue values
+Jobvision Theme → Brand semantics resolve from Jobvision-local Blue values
 Cando Theme     → Brand semantics resolve from Cando-local Yellow values
 ```
 

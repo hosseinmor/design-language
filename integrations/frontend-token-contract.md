@@ -44,7 +44,7 @@ Product identity and Theme identity are related but not the same architectural c
 Current intended mapping:
 
 ```text
-JobVision application → JobVision Theme package
+Jobvision application → Jobvision Theme package
 Cando application     → Cando Theme package
 ```
 
@@ -137,7 +137,7 @@ Product code and ordinary component code must not depend on Theme-local Primitiv
 Conceptually:
 
 ```text
-JobVision Theme local blue → surface/brand
+Jobvision Theme local blue → surface/brand
 Cando Theme local yellow   → surface/brand
 ```
 
@@ -273,7 +273,7 @@ From that classification, tooling may generate registries, framework adapters, l
 
 Tailwind consumes the stable Product-facing Design System contract, not Theme-local Primitives or private Component Tokens.
 
-Changing from JobVision Theme to another compatible Theme must not require changing ordinary semantic Tailwind utility names.
+Changing from Jobvision Theme to another compatible Theme must not require changing ordinary semantic Tailwind utility names.
 
 Exact Tailwind configuration remains HOS-8.
 

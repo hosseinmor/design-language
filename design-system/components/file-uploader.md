@@ -156,7 +156,7 @@ Original component identities and authoring API remain intact: **15 public varia
 
 ### Contrast checks and restrictions
 
-Computed from actual JobVision/Cando x Light/Dark Figma alias values on surface/muted:
+Computed from actual Jobvision/Cando x Light/Dark Figma alias values on surface/muted:
 
 | Role | Light | Dark |
 |---|---:|---:|

@@ -147,7 +147,7 @@ fact یک محصول از Product Knowledge محصول دیگر گرفته نم�
 
 ساختار «پایهٔ مشترک + لایهٔ هر محصول» است. `product_layers` در
 [`copy-brief.yml`](copy-brief.yml) نشان می‌دهد کدام محصول لایهٔ هویت کلامی دارد.
-JobVision از [`product-voice.md`](product-voice.md) استفاده می‌کند. Cando لایه
+Jobvision از [`product-voice.md`](product-voice.md) استفاده می‌کند. Cando لایه
 ندارد و تا ثبت منبع آن، تولید با `outcome: blocked` متوقف می‌شود.
 
 ## خروجی

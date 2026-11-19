@@ -576,7 +576,7 @@ when applicable.
 **SHOULD**
 be rare in form-heavy products unless they provide substantial repeated-user value.
 
-JobVision/Cando include dense data-entry and operational contexts; global single-letter shortcuts can easily conflict with typing.
+Jobvision/Cando include dense data-entry and operational contexts; global single-letter shortcuts can easily conflict with typing.
 
 ---
 

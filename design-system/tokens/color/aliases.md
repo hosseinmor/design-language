@@ -62,7 +62,7 @@ Product and Appearance are independent Figma mode axes. `02 Product` selects the
 
 `01 Primitives` is the raw authoring palette. `04 Component Tokens` remains Product-independent and currently contains Tag Color tokens.
 
-Most non-Brand Semantic values currently resolve identically in JobVision and Cando, so their tables show Light/Dark once and apply to both Themes. Tag Component Tokens are explicitly Product-independent. Transparent Semantic interaction colors and overlay intentionally store resolved RGBA directly.
+Most non-Brand Semantic values currently resolve identically in Jobvision and Cando, so their tables show Light/Dark once and apply to both Themes. Tag Component Tokens are explicitly Product-independent. Transparent Semantic interaction colors and overlay intentionally store resolved RGBA directly.
 
 ## 02 Product
 

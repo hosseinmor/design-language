@@ -1,6 +1,6 @@
 # Content semantic evaluator prompt — v1
 
-Evaluate exactly one JobVision content case against the supplied Design Language
+Evaluate exactly one Jobvision content case against the supplied Design Language
 policy context from the repository commit named in the task.
 
 ## Boundaries

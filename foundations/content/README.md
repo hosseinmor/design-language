@@ -1,6 +1,6 @@
 # Content foundation
 
-This directory contains reusable language decisions for JobVision and Cando:
+This directory contains reusable language decisions for Jobvision and Cando:
 
 ```text
 content-guidelines.md     Human entry point and routing
@@ -34,7 +34,7 @@ Karbon / Storybook
 
 ## Registered Product Knowledge sources
 
-- JobVision: https://docs-jv.jvoffice.ir/
+- Jobvision: https://docs-jv.jvoffice.ir/
 - Cando / HrCando: https://docs-cd.jvoffice.ir/
 
 These are separate product sources. Retrieve the source for the product in scope;

@@ -56,7 +56,7 @@ A Radio item contains:
 
 The source icon components remain unchanged at their library size; the nested instance is resized proportionally to 20×20 inside Radio.
 
-The canonical control must use the exact local JobVision icon-library components:
+The canonical control must use the exact local Jobvision icon-library components:
 - `Icon/radio_button_unchecked` — node `15087:365350`, key `c8005abc2598ad492de5ac17df5cfb9dc1a4509b`;
 - `Icon/radio_button_checked` — node `15087:365346`, key `5acf2d061791622a49c9826cd671f165d6648f73`.
 
@@ -186,7 +186,7 @@ RTL/LTR is a layout direction, not a Radio variant axis.
 
 - The control sits at logical inline-start.
 - The label sits at logical inline-end.
-- In JobVision's RTL authoring examples, this renders as control on the right and label on the left.
+- In Jobvision's RTL authoring examples, this renders as control on the right and label on the left.
 - Runtime LTR layouts mirror through logical layout/CSS direction rather than using a `Position=Start|End` component variant.
 - Do not blindly reverse Arrow-key behavior; preserve native/platform Radio Group behavior.
 
@@ -222,7 +222,7 @@ External systems are references, not owning runtime sources for JV.
 
 ## Product Variations
 
-Radio is a shared JobVision/Cando component.
+Radio is a shared Jobvision/Cando component.
 
 Product and Appearance differences resolve through the Theme/Semantic token architecture. Do not create product-specific Radio variants.
 
@@ -266,7 +266,7 @@ Do not infer exact DOM structure, event names, prop names, or implementation API
 
 The legacy Figma model was reconciled in place to preserve component identity.
 
-The canonical visual control uses the exact local JobVision icon-library components `Icon/radio_button_unchecked` and `Icon/radio_button_checked` from the Icons page. These are nested directly; no cloned internal Radio asset is maintained.
+The canonical visual control uses the exact local Jobvision icon-library components `Icon/radio_button_unchecked` and `Icon/radio_button_checked` from the Icons page. These are nested directly; no cloned internal Radio asset is maintained.
 
 Removed legacy axes/states:
 

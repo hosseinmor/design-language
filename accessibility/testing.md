@@ -173,7 +173,7 @@ Verify:
 - non-color cues for state/meaning;
 - focus indicator contrast;
 - composited alpha/transparent values;
-- JobVision/Cando Brand differences;
+- Jobvision/Cando Brand differences;
 - Light/Dark/Inverse contexts.
 
 Disabled controls do not receive an invented hard WCAG contrast ratio; test their distinguishability/clarity under the component contract.
@@ -265,7 +265,7 @@ When changing this accessibility corpus, run these repository/content gates befo
 - Apply/Screening product policy is not invented inside specialized accessibility docs.
 
 ### Gate 5 — repository stress tests
-Run Button, Text Input, Modal, Data Table/Interactive Grid, and JobVision Apply + Screening Questions through the actual Router. Record retrieval path, component/pattern maturity, specialized escalation, ambiguity/conflict, and final verdict.
+Run Button, Text Input, Modal, Data Table/Interactive Grid, and Jobvision Apply + Screening Questions through the actual Router. Record retrieval path, component/pattern maturity, specialized escalation, ambiguity/conflict, and final verdict.
 
 ## 19. AI contract
 
