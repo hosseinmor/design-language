@@ -2,8 +2,8 @@
 id: content.product-voice
 collection: content
 type: content-foundation
-title: JobVision Product Voice
-summary: Defines the evidence-backed product voice, operational tone dimensions, precedence, and surface profiles for JobVision UI content.
+title: Jobvision Product Voice
+summary: Defines the evidence-backed product voice, operational tone dimensions, precedence, and surface profiles for Jobvision UI content.
 knowledge_state: verified
 document_maturity: draft
 related:

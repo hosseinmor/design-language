@@ -45,7 +45,7 @@ Theme selection/import is an application/deployment concern.
 - A compatible Theme package must be available before DS-governed UI is styled.
 - The Design System does not define a fallback Theme package.
 - Missing/incompatible Theme integration is a configuration/build/integration error; do not silently fall back to another Product Theme.
-- Current intended application mapping is JobVision → JobVision Theme and Cando → Cando Theme, but this is not a permanent Product=Theme identity rule.
+- Current intended application mapping is Jobvision → Jobvision Theme and Cando → Cando Theme, but this is not a permanent Product=Theme identity rule.
 
 How the package is imported, bundled, lazy/eager loaded, versioned, or injected is Frontend-owned as long as the first-paint invariant is met.
 

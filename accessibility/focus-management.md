@@ -32,7 +32,7 @@ Never leave the user with focus lost, hidden, or trapped unintentionally.
 
 # 1. Shared Focus Visibility Contract
 
-This section is the canonical owner for the **shared visible-focus treatment** used by reusable JobVision/Cando UI.
+This section is the canonical owner for the **shared visible-focus treatment** used by reusable Jobvision/Cando UI.
 
 Component and Pattern guidelines MUST NOT redefine the default Focus ring geometry, token selection, or web trigger. They only document:
 - whether and where the component can receive focus;
@@ -719,7 +719,7 @@ Use the dedicated component contract rather than implementing ad hoc focus behav
 
 # 14. Sticky/fixed product UI
 
-JobVision/Cando contain dense operational interfaces where sticky/fixed controls may be useful.
+Jobvision/Cando contain dense operational interfaces where sticky/fixed controls may be useful.
 
 Sticky UI is allowed.
 

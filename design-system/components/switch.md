@@ -172,7 +172,7 @@ Exact DOM element choice, event API, prop names, and ARIA implementation are **u
 
 ## Product Variations
 
-JobVision and Cando share the same component contract and public Semantic roles. Product and Appearance differences resolve through the Theme/token architecture rather than through Toggle variants.
+Jobvision and Cando share the same component contract and public Semantic roles. Product and Appearance differences resolve through the Theme/token architecture rather than through Toggle variants.
 
 ## Figma Reference
 

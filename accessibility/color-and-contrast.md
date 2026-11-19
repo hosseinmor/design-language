@@ -103,7 +103,7 @@ Validate independently:
 ```text
 fg/on-brand
 → surface/brand*
-→ separately for JobVision and Cando
+→ separately for Jobvision and Cando
 
 fg/on-color
 → Neutral / Danger / Accent / Magic strong surfaces where used
@@ -286,7 +286,7 @@ Validate contrast separately in every supported context.
 
 Do not assume:
 - Light values can be mathematically mirrored into Dark;
-- the same on-color foreground works on JobVision Blue and Cando Yellow;
+- the same on-color foreground works on Jobvision Blue and Cando Yellow;
 - Inverse can be inferred from Dark mode;
 - a pairing that passes on `surface/default` also passes on `surface/muted`, `surface/raised`, or another supported surface.
 
@@ -413,7 +413,7 @@ For Neutral, also verify candidate values for:
 - inverse surface/content;
 - disabled pairings.
 
-For Brand, validate both JobVision and Cando actual Brand mappings rather than assuming one Brand foreground contract works for both.
+For Brand, validate both Jobvision and Cando actual Brand mappings rather than assuming one Brand foreground contract works for both.
 
 For alpha families, validate representative composited outputs rather than the alpha swatch alone.
 
@@ -456,7 +456,7 @@ notes
 At minimum, Palette Pass should test the actual Semantic pairings required by:
 
 - Text Input;
-- Button presets, including JobVision/Cando Brand;
+- Button presets, including Jobvision/Cando Brand;
 - Link;
 - Checkbox / Radio / Selection;
 - Focus Default and Focus Inverse;

@@ -315,7 +315,7 @@ Example distinction:
 
 ## Current Contrast Validation
 
-The current semantic pairings were regression-checked in Figma for JobVision and Cando across Light and Dark on 2026-09-19.
+The current semantic pairings were regression-checked in Figma for Jobvision and Cando across Light and Dark on 2026-09-19.
 
 Verified text/action/status foreground pairings used by these components meet at least 4.5:1 in the current token values. Re-run this check when semantic aliases change.
 

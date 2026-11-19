@@ -166,7 +166,7 @@ requiredness باید هم دیداری و هم برنامه‌وار قابل�
 - optional بودن را وقتی بنویسید که به تصمیم کاربر کمک می‌کند؛ همهٔ fieldها را
   با metadata غیرضروری شلوغ نکنید.
 
-policy سراسری JobVision/Cando برای «همهٔ requiredها را mark کنیم یا فقط
+policy سراسری Jobvision/Cando برای «همهٔ requiredها را mark کنیم یا فقط
 optionalها» هنوز تأیید نشده است.
 
 ## Value

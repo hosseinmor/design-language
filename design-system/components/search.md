@@ -115,7 +115,7 @@ Legacy Large was only present in test-oriented usage during the HOS-16 audit. Ca
 
 ## RTL and Directionality
 
-Search is RTL-first for current JobVision/Cando products.
+Search is RTL-first for current Jobvision/Cando products.
 
 In RTL:
 

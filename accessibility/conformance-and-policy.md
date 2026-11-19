@@ -15,7 +15,7 @@ last_reviewed: '2026-09-02'
 
 # Accessibility Conformance and Policy
 
-This document defines how JobVision and Cando interpret and operationalize accessibility requirements for web Design System work, Product Design, frontend implementation, testing, and accessibility reporting.
+This document defines how Jobvision and Cando interpret and operationalize accessibility requirements for web Design System work, Product Design, frontend implementation, testing, and accessibility reporting.
 
 It intentionally separates:
 
@@ -35,7 +35,7 @@ These are not interchangeable.
 
 This policy applies to:
 
-- JobVision web products;
+- Jobvision web products;
 - Cando web products;
 - shared web Design System components and patterns;
 - Product Design and frontend implementation;

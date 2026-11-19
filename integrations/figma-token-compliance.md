@@ -30,7 +30,7 @@ Include actively maintained public Component Sets, their owned variant layers an
 - Differentiate surface/default, muted, inset, raised, neutral-muted, selected and interactive/chromatic surface states by role, not hue.
 - Raw colors require review. Legacy Paint Styles are a migration candidate, not automatically semantically correct.
 - Fixed Primitive palette/bw/white is an explicitly documented exception for Toggle Thumb.
-- Verify JobVision/Cando x Light/Dark, meaningful hover/active/selected/focus/error states, and contrast separately. A binding scan cannot prove semantic correctness or accessibility.
+- Verify Jobvision/Cando x Light/Dark, meaningful hover/active/selected/focus/error states, and contrast separately. A binding scan cannot prove semantic correctness or accessibility.
 
 ## Spacing
 

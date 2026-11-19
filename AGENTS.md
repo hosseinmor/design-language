@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository is the canonical decision layer for the shared JobVision and
+This repository is the canonical decision layer for the shared Jobvision and
 Cando design language. Prefer repository evidence over assumptions.
 
 ## Source boundaries

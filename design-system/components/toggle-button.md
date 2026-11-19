@@ -54,7 +54,7 @@ Disabled filled control
 → surface/disabled + fg/disabled
 ```
 
-Do not use Brand semantics to represent selected/on state merely because Brand and Accent share Blue in JobVision.
+Do not use Brand semantics to represent selected/on state merely because Brand and Accent share Blue in Jobvision.
 
 The exact default mapping for Toggle Button remains a component-level design decision and must be validated with the final anatomy rather than inferred from the old v3 Selected matrix.
 

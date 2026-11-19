@@ -236,7 +236,7 @@ The exact browser/runtime rendering of a native textarea resize handle is user-a
 
 ## RTL and Directionality
 
-Textarea is RTL-first for the current JobVision/Cando context.
+Textarea is RTL-first for the current Jobvision/Cando context.
 
 Rules:
 

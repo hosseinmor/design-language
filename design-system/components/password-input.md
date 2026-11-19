@@ -166,7 +166,7 @@ Shared geometry:
 
 ## RTL and Directionality
 
-Password Input is RTL-first for the current JobVision/Cando context.
+Password Input is RTL-first for the current Jobvision/Cando context.
 
 In RTL:
 

@@ -53,7 +53,7 @@ Tabs and Content Switcher are both single-current-choice controls, but they answ
 | Tabs | Which peer content section is visible? |
 | Content Switcher / Segmented Control | How is the same content represented or viewed? |
 
-JobVision's canonical Content Switcher owns the connected segmented / pill-like mode-switching treatment.
+Jobvision's canonical Content Switcher owns the connected segmented / pill-like mode-switching treatment.
 
 For this reason, canonical Tabs v1 intentionally supports **Line only**. The legacy Chip and Contained Tab appearances are not part of the public contract. A future pill-style Tab appearance requires a validated product use case that is semantically Tabs and cannot be served by Content Switcher.
 

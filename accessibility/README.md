@@ -1,6 +1,6 @@
 # Accessibility
 
-This directory contains the operational accessibility knowledge for the JobVision/Cando Design System.
+This directory contains the operational accessibility knowledge for the Jobvision/Cando Design System.
 
 ## Retrieval
 

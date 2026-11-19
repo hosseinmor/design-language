@@ -1,6 +1,6 @@
 # JV Design Language
 
-This repository is the canonical decision layer for the shared JobVision and
+This repository is the canonical decision layer for the shared Jobvision and
 Cando design language. It contains durable visual, content, interaction,
 accessibility, component, pattern, and product-expression rules.
 

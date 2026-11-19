@@ -36,7 +36,7 @@ Product-specific public Primitive families remain prohibited. A Theme may define
 Current brand color anchors:
 
 ```text
-JobVision blue  → #0053FF
+Jobvision blue  → #0053FF
 Cando yellow    → #FFC400
 ```
 

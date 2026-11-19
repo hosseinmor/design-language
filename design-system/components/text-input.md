@@ -150,7 +150,7 @@ The shared control-size foundation also contains `Extra Small = 28px` for compon
 
 ## RTL and Directionality
 
-Text Input is RTL-first for the current JobVision/Cando context.
+Text Input is RTL-first for the current Jobvision/Cando context.
 
 In RTL:
 
@@ -336,7 +336,7 @@ Do not assume an arbitrary trailing glyph inside a native `<input>` is automatic
 - Preserve native single-line input editing behavior.
 - Do not introduce a component-specific Active/Pressed state.
 - Do not use Skeleton as a Text Input state; loading placeholders belong to the relevant loading/content pattern.
-- Do not add Warning until a validated JobVision/Cando use case requires a distinct Warning semantic contract.
+- Do not add Warning until a validated Jobvision/Cando use case requires a distinct Warning semantic contract.
 - Interaction states must not change control dimensions, padding, gap, or label layout.
 - Long content must not cause the single-line control to grow vertically.
 - Autofill is a runtime/browser scenario, not a Figma component state.

@@ -59,7 +59,7 @@ A Checkbox item contains:
 
 The source icon components remain unchanged at their library size; the nested instance is resized proportionally to 20×20 inside Checkbox.
 
-The canonical control must use the exact local JobVision icon-library components:
+The canonical control must use the exact local Jobvision icon-library components:
 
 - `Icon/check_box_outline_blank` — node `15087:365340`, key `b4b5e8aad25d7be4009568638bc86a3b85a6a185`;
 - `Icon/check_box` — node `15087:365337`, key `a9b3101d611597626af94d5f3a63a08058bbceab`;
@@ -207,7 +207,7 @@ RTL/LTR is a layout direction, not a Checkbox variant axis.
 
 - The control sits at logical inline-start.
 - The label sits at logical inline-end.
-- In JobVision's RTL authoring examples, this renders as control on the right and label on the left.
+- In Jobvision's RTL authoring examples, this renders as control on the right and label on the left.
 - Runtime LTR layouts mirror through logical layout/CSS direction rather than using a `Position=Start|End` component variant.
 - Group Direction remains `Vertical` or `Horizontal`; it does not encode RTL/LTR.
 
@@ -241,7 +241,7 @@ Do not add a separate `Select all` visual variant to the base Checkbox.
 
 ## Product Variations
 
-Checkbox is a shared JobVision/Cando component.
+Checkbox is a shared Jobvision/Cando component.
 
 Product and Appearance differences resolve through the Theme/Semantic token architecture. Do not create product-specific Checkbox variants.
 
@@ -286,7 +286,7 @@ Do not infer exact DOM structure, event names, prop names, or implementation API
 
 The legacy Checkbox component set was reconciled in place to preserve its stable component identity.
 
-The canonical visual control now uses the exact local JobVision icon-library components `Icon/check_box_outline_blank`, `Icon/check_box`, and `Icon/indeterminate_check_box`. These are nested directly at 20px; no custom Checkbox box or hand-drawn check/indeterminate artwork is maintained.
+The canonical visual control now uses the exact local Jobvision icon-library components `Icon/check_box_outline_blank`, `Icon/check_box`, and `Icon/indeterminate_check_box`. These are nested directly at 20px; no custom Checkbox box or hand-drawn check/indeterminate artwork is maintained.
 
 Removed legacy structures/axes:
 

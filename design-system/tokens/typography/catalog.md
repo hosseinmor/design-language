@@ -16,10 +16,10 @@ These are the reviewed design-side recipe definitions. Figma owns editable Text 
 
 ## Product-aware font family
 
-The semantic recipes are shared between JobVision and Cando.
+The semantic recipes are shared between Jobvision and Cando.
 
 ```text
-JobVision → Vazirmatn
+Jobvision → Vazirmatn
 Cando     → IRANYekanX
 ```
 

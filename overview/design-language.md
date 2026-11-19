@@ -14,7 +14,7 @@ related:
 
 # JV Design Language
 
-Use this file as the compact design-language entry point for JobVision and Cando UI work. It describes durable design intent; it is **not** a catalog of every token, component, accessibility rule, or implementation API.
+Use this file as the compact design-language entry point for Jobvision and Cando UI work. It describes durable design intent; it is **not** a catalog of every token, component, accessibility rule, or implementation API.
 
 ## Design character
 
@@ -26,7 +26,7 @@ Use this file as the compact design-language entry point for JobVision and Cando
 
 ## Shared system, product identity
 
-JobVision and Cando share component semantics, interaction rules, and most Design System foundations.
+Jobvision and Cando share component semantics, interaction rules, and most Design System foundations.
 
 Product identity may change Brand values and approved product variations without changing the meaning of shared Semantic roles. Brand is product identity; it is not a generic synonym for interaction, selection, focus, feedback, or every primary action.
 

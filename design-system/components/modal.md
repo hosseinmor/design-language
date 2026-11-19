@@ -13,7 +13,7 @@ related:
 
 # Modal — legacy alias
 
-**The canonical JobVision Design System component is now [Dialog](dialog.md).** Modal is the behavior (a blocking, inert background); Dialog is the component name. Do not implement or maintain two independent components.
+**The canonical Jobvision Design System component is now [Dialog](dialog.md).** Modal is the behavior (a blocking, inert background); Dialog is the component name. Do not implement or maintain two independent components.
 
 The previous Modal Figma Component Set (node `4080:55366`, key `dbb168637e13405605604dd1ca479f298735c348`) remains archived/unchanged for existing consumers and migration. The **new, handoff-ready Figma Dialog** master is node `24036:267`. Do not silently swap or detach legacy consumers without migration review.
 

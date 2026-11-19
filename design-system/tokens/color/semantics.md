@@ -244,7 +244,7 @@ Brand  → Product identity + approved key conversion moments
 Accent → general chromatic interaction / affordance
 ```
 
-The JobVision Theme may map Brand and Accent to Blue while the Cando Theme maps Brand to Yellow and Accent to Blue. Shared hue does not merge semantic meaning.
+The Jobvision Theme may map Brand and Accent to Blue while the Cando Theme maps Brand to Yellow and Accent to Blue. Shared hue does not merge semantic meaning.
 
 An actionable Accent banner or applied filter may use Accent Muted. A passive informational/system message uses Support Info.
 

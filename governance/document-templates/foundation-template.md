@@ -29,7 +29,7 @@ Document foundation-specific accessibility implications only; reference the Acce
 
 ## Product Variations
 
-Include only when an approved JobVision/Cando difference exists.
+Include only when an approved Jobvision/Cando difference exists.
 
 ## Live References
 
