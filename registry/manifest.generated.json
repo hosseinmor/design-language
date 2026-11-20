@@ -2024,9 +2024,9 @@
       "kind": "design-system-component",
       "title": "Tooltip",
       "summary": "Tooltip provides brief, passive, non-interactive supplementary information on hover or keyboard focus.",
-      "status": "draft",
+      "status": "reviewed",
       "owner": "Design System team",
-      "last_reviewed": null,
+      "last_reviewed": "2026-11-20",
       "related": [
         "design-system.component.icon-button",
         "design-system.component.toggletip",

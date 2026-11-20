@@ -4,8 +4,9 @@ collection: design-system
 type: component
 title: Tooltip
 summary: Tooltip provides brief, passive, non-interactive supplementary information on hover or keyboard focus.
-knowledge_state: verified
-document_maturity: draft
+knowledge_state: canonical
+document_maturity: reviewed
+last_reviewed: '2026-11-20'
 related:
   - design-system.component.icon-button
   - design-system.component.toggletip
@@ -48,7 +49,7 @@ Tooltip must not be used as a hidden replacement for persistent instructions, va
 
 ## Canonical Figma API
 
-Component set: `Tooltip / Default`
+Component set: `Tooltip`
 
 Figma file key: `rROD8ctH9UfPGAMrRrOzHe`
 
@@ -295,6 +296,10 @@ Runtime must handle:
 - RTL logical Start/End;
 - no Tooltip-specific tap/long-press contract.
 
+## Design verification scope
+
+The live Figma master (`22773:127299`) was inspected on 2026-11-20: 12 Side × Align variants, a single Text property, token-bound inverse Surface, right-aligned RTL text, and four anchored Playground examples including multiline wrapping. The canonical visual decisions are preserved; the master description now reflects the approved 300ms show / 100ms pointer close behavior. This is design and authoring evidence only, **not** a claim of implemented runtime behavior, screen-reader conformance, or completed browser-level QA.
+
 ## QA Checklist
 
 Verify:
@@ -325,7 +330,7 @@ Verify:
 ## Live References
 
 - Figma file: `rROD8ctH9UfPGAMrRrOzHe`
-- Component set: `Tooltip / Default`
+- Component set: `Tooltip`
 - Node: `22773:127299`
 - Component key: `e29f8f48a0b3ec52f9490d4a9c101df5fba9d769`
 - Matrix: 4 Sides × 3 Alignments = 12 variants
