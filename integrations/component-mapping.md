@@ -330,7 +330,7 @@ The Combo Button design identity, shared Wrapper + semantic Divider architecture
 |---|---|
 | DS component | Tooltip |
 | Figma file key | `rROD8ctH9UfPGAMrRrOzHe` |
-| Figma component set | `Tooltip / Default` |
+| Figma component set | `Tooltip` |
 | Figma component key | `e29f8f48a0b3ec52f9490d4a9c101df5fba9d769` |
 | Figma node ID | `22773:127299` |
 | Figma variant properties | `Side / Align` |
@@ -344,9 +344,9 @@ The Combo Button design identity, shared Wrapper + semantic Divider architecture
 | Property mapping | **Unverified** — do not infer code prop names from Figma property names |
 | Storybook | **Unregistered** |
 | Code Connect | **No registered mapping** |
-| Last Figma verification | 2026-09-19 |
+| Last Figma verification | 2026-11-20 |
 
-Tooltip design identity, arrowless anatomy, placement matrix, RTL mapping, 2px anchor offset, and Icon Button consumer contract are verified. Runtime delay, collision/flip, portal/layering, package/API identity, Storybook identity, and Figma-to-code mapping remain deliberately unverified until the owning runtime source is registered.
+Tooltip design identity, arrowless anatomy, placement matrix, RTL mapping, 2px anchor offset, and Icon Button consumer contract are verified. The **300ms show / 100ms pointer-close behavior is canonical in Design Language**; runtime timer mechanics, collision/flip, portal/layering, package/API identity, Storybook identity, assistive-technology behavior, and Figma-to-code mapping remain unverified until the owning runtime source is registered.
 
 
 ### Accordion
