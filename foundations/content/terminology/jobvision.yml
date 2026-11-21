@@ -221,6 +221,7 @@ terms:
     avoid: [آگهی استخدام]
     rules:
       - «آگهی استخدام» در متن رابط به کار نرود؛ در محتوای بازاریابی و سئو مجاز است.
+      - زمان باقی‌مانده تا پایان انتشار آگهی «پایان انتشار» نامیده می‌شود، مثل «۱۸ روز تا پایان انتشار»؛ «پایان اعتبار» به کار نمی‌رود، چون «اعتبار» برچسب ممنوع کیف پول است.
     domains: [jobseeker, employer, ats, admin]
     visibility: [public, internal]
     relations:
@@ -248,6 +249,7 @@ terms:
     use_when:
       - اشاره به نقش، مسئولیت‌ها، شرایط یا تناسب شغلی
       - اقدام کارجو برای ارسال درخواست یا تصمیم جذب دربارهٔ نقش
+      - انتخاب آن آگهی به‌عنوان اولویت استخدام کارجو، مثل «کارجو موقعیت شغلی شما را … انتخاب کرده است»
     avoid_when:
       - ثبت، ویرایش، انتشار، وضعیت، انقضا، سهمیه یا metadata آگهی
     domains: [jobseeker, employer, ats]
@@ -1466,11 +1468,41 @@ terms:
       - {label: بامپ, scope: concept, source: product_knowledge_snapshot}
     domains: [jobpost, employer, admin]
     visibility: [public, internal]
+    rules:
+      - «تمدید» برای تازه‌سازی به کار نمی‌رود، چون مدت انتشار را بیشتر نمی‌کند؛ بیشتر شدن مدت انتشار «تمدید آگهی» است.
     relations:
-      distinct_from: [reactivation, activation_round]
+      distinct_from: [reactivation, activation_round, job_post_extension]
     code_bindings: [Reshot]
     status: draft
     evidence: [source_glossary]
+
+  - id: job_post_extension
+    concept_kind: communication_concept
+    authority:
+      meaning_owner: design_language
+      language_owner: design_language
+      product_source: not_applicable
+      migration_state: not_applicable
+    production_alignment: {state: aligned}
+    canonical_internal: تمدید آگهی
+    definition:
+      product_content: >
+        بیشتر شدن مدت انتشار آگهی، مثل «تمدید نوروزی آگهی» که آگهی را ۷ روز بیشتر
+        روی وب‌سایت فعال نگه می‌دارد. جایگاه آگهی در فهرست‌ها را تغییر نمی‌دهد.
+    preferred:
+      default: تمدید آگهی
+    contextual_labels:
+      - label: تمدید
+        use_when:
+          - وقتی آگهی از متن روشن است، مثل «تمدید نوروزی آگهی»
+    rules:
+      - «تمدید» فقط وقتی به کار می‌رود که مدت انتشار واقعاً بیشتر شود؛ بالا آوردن آگهی در فهرست‌ها «تازه‌سازی» است.
+    domains: [jobpost, employer]
+    visibility: [public]
+    relations:
+      distinct_from: [reshot]
+    status: draft
+    evidence: [jobvision_builder_designs]
 
   - id: workplace_type_hybrid
     concept_kind: catalog_item
@@ -2420,6 +2452,19 @@ decision_log:
     rationale: >
       آدیت صفحه ثبت آگهی «صف رد» را در توضیح دستیار کارفرما دید و PM تایید کرد که این
       وضعیت به کاربر نمایش داده می‌شود؛ مدخل آن را فقط داخلی ثبت کرده بود.
+
+  - id: DEC-023
+    term_ids: [job_post_extension, reshot, job_post, job_position, wallet]
+    decided_on: 2026-11-21
+    outcome: >
+      بیشتر شدن مدت انتشار آگهی «تمدید آگهی» نام دارد و «تمدید» برای تازه‌سازی ممنوع
+      می‌ماند. زمان باقی‌مانده تا پایان انتشار «پایان انتشار» نامیده می‌شود، نه «پایان
+      اعتبار». وقتی کارجو آگهی مشخصی را اولویت می‌دهد، برچسب آن «موقعیت شغلی» است.
+    rationale: >
+      آدیت صفحه رزومه‌های دریافتی «تمدید نوروزی آگهی» را دید که واقعاً مدت انتشار را
+      بیشتر می‌کند، و «۱۸ روز تا پایان اعتبار» را که با اعتبار ریالی کیف پول در همان
+      پنل اشتباه می‌شود. tooltip اولویت استخدام «فرصت شغلی» را برای یک آگهی مشخص به کار
+      برده بود که طبق DEC-007 نام موجودیت نیست.
 
 decision_queue:
 
