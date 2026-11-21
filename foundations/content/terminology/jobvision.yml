@@ -147,6 +147,41 @@ terms:
     status: stable
     evidence: [jobvision_builder_designs, product_content_decisions]
 
+  # Inclusive language
+  - id: person_with_disability
+    concept_kind: communication_concept
+    authority:
+      meaning_owner: design_language
+      language_owner: design_language
+      product_source: not_applicable
+      migration_state: not_applicable
+    production_alignment:
+      state: differs
+      production_label: معلولین
+      evidence: jobvision_builder_designs
+    canonical_internal: افراد دارای معلولیت
+    definition:
+      product_content: اشاره به کارجویانی که معلولیت دارند، با نام بردن فرد پیش از معلولیت.
+    preferred:
+      default: افراد دارای معلولیت
+    contextual_labels:
+      - label: دارای معلولیت
+        use_when:
+          - صفت یا وضعیت خود کاربر، مثل «دارای معلولیت هستم»
+      - label: مناسب افراد دارای معلولیت
+        use_when:
+          - برچسب کوتاه فیلتر یا نشان آگهی‌هایی که امکان استخدام افراد دارای معلولیت را دارند
+    forbidden:
+      - {label: معلولین, scope: concept, source: design_language}
+      - {label: معلولان, scope: concept, source: design_language}
+      - {label: افراد معلول, scope: concept, source: design_language}
+    rules:
+      - «معلول» به‌تنهایی برای نامیدن فرد به کار نمی‌رود؛ «نوع معلولیت» و «دارای معلولیت» درست‌اند.
+    domains: [jobseeker, employer, admin]
+    visibility: [public, internal]
+    status: stable
+    evidence: [jobvision_builder_designs, product_content_decisions]
+
   # Core employment concepts
   - id: job_post
     concept_kind: entity
@@ -2356,6 +2391,17 @@ decision_log:
       آدیت صفحه جزئیات آگهی «کپی پیوند آگهی» را کنار «لینک کپی شد» دید؛ «لینک» برای
       این مخاطب جاافتاده است (NAM-004). متن بعد از ارسال رزومه با مدخل resume_snapshot
       ناهمخوان به نظر می‌رسید، ولی PM تایید کرد که این قابلیت هنوز اضافه نشده است.
+
+  - id: DEC-021
+    term_ids: [person_with_disability]
+    decided_on: 2026-11-19
+    outcome: >
+      برای اشاره به افراد، «افراد دارای معلولیت» به کار می‌رود و «معلولین»، «معلولان» و
+      «افراد معلول» به کار نمی‌روند. برچسب کوتاه فیلتر جست‌وجو «مناسب افراد دارای
+      معلولیت» است.
+    rationale: >
+      آدیت صفحه جست‌وجوی آگهی‌ها فیلتر «امکان استخدام معلولین» را دید، در حالی که فرم
+      رزومه «دارای معلولیت هستم» می‌گوید. زبان فراگیر فرد را پیش از معلولیت نام می‌برد.
 
 decision_queue:
 
