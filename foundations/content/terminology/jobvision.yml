@@ -926,7 +926,10 @@ terms:
       language_owner: design_language
       product_source: source_glossary
       migration_state: source_linked
-    production_alignment: {state: unverified}
+    production_alignment:
+      state: differs
+      production_label: دستیار هوشمند کارفرما
+      evidence: jobvision_builder_designs
     canonical_internal: دستیار کارفرما
     definition:
       source: >
@@ -943,7 +946,11 @@ terms:
       distinct_from: [ai_assistant, external_ai_screener]
     code_bindings: [EmployerAssistantSilentDays]
     status: draft
-    evidence: [source_glossary]
+    rules:
+      - >
+        «دستیار هوشمند کارفرما» در پنل کارفرما نام یک سرویس است و مثل اسم خاص با آن رفتار
+        می‌شود. تا تصمیم DEC-022 تغییر داده نمی‌شود و با AIC-002 خطا گرفته نمی‌شود.
+    evidence: [source_glossary, jobvision_builder_designs, product_content_decisions]
 
   - id: application_withdrawal
     concept_kind: user_action
@@ -985,17 +992,19 @@ terms:
         وضعیت درخواست‌هایی که دستیار هوشمند بیرونی ضعیف تشخیص داده
         تا سازمان آن‌ها را مرور کند.
     preferred:
-      internal: صف رد
+      default: صف رد
     forbidden:
       - {label: صف حذف, scope: concept, source: product_knowledge_snapshot}
       - {label: لیست رد, scope: concept, source: product_knowledge_snapshot}
     domains: [application, employer]
-    visibility: [internal, admin]
+    visibility: [public, internal, admin]
     code_bindings: [ApplicationStatusEnum.RejectionQueue]
-    status: needs_decision
+    status: draft
     notes:
-      - طبق منبع، پردازشگر این وضعیت اکنون غیرفعال است.
-    evidence: [source_glossary]
+      - >
+        صف رد در پنل کارفرما به کاربر نمایش داده می‌شود (DEC-009). یادداشت پیشین منبع که
+        پردازشگر را غیرفعال می‌دانست با وضعیت فعلی محصول نمی‌خواند.
+    evidence: [source_glossary, jobvision_builder_designs, product_content_decisions]
 
   - id: interview_experience
     concept_kind: user_generated_content
@@ -2403,6 +2412,15 @@ decision_log:
       آدیت صفحه جست‌وجوی آگهی‌ها فیلتر «امکان استخدام معلولین» را دید، در حالی که فرم
       رزومه «دارای معلولیت هستم» می‌گوید. زبان فراگیر فرد را پیش از معلولیت نام می‌برد.
 
+  - id: DEC-009
+    term_ids: [rejection_queue]
+    decided_on: 2026-11-21
+    outcome: >
+      صف رد در پنل کارفرما به کاربر نمایش داده می‌شود و برچسب کاربرش «صف رد» است.
+    rationale: >
+      آدیت صفحه ثبت آگهی «صف رد» را در توضیح دستیار کارفرما دید و PM تایید کرد که این
+      وضعیت به کاربر نمایش داده می‌شود؛ مدخل آن را فقط داخلی ثبت کرده بود.
+
 decision_queue:
 
   - id: DEC-004
@@ -2424,13 +2442,16 @@ decision_queue:
     evidence_needed:
       - تعریف رفتار نشانگر سیستمی در Product Knowledge
       - سطح‌هایی که این مفهوم در آن دیده می‌شود
-  - id: DEC-009
-    term_ids: [rejection_queue]
-    question: آیا صف رد هنوز در محصول وجود دارد و به برچسب کاربرپسند نیاز دارد؟
-    recommendation: تا تأیید وضعیت فعلی، فقط برچسب داخلی «صف رد» در سطح داخلی استفاده شود.
-    impact: low
+  - id: DEC-022
+    term_ids: [employer_assistant]
+    question: >
+      نام سرویس «دستیار هوشمند کارفرما» مناسب است؟ این سرویس هم رد پس از مهلت و هم
+      تشخیص انطباق کم را در بر می‌گیرد؛ آیا همان employer_assistant است؟
+    recommendation: تا تصمیم، نام فعلی مثل اسم خاص حفظ شود و تغییر داده نشود.
+    impact: medium
     evidence_needed:
-      - وضعیت فعلی پردازشگر صف رد در Product Knowledge
+      - دامنهٔ سرویس در Product Knowledge
+      - تصمیم محصول دربارهٔ نام
   - id: DEC-010
     term_ids: [external_ai_screener]
     question: نام رسمی ابزار غربالگری بیرونی چیست و آیا هنوز در محصول فعال است؟
